@@ -1,0 +1,1029 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.seqquest_io.geom.geom &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.seqquest.seqquest_io.geom.geom</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.seqquest.seqquest_io.geom.geom</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Object and functions for handling atom geometries &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">#pylint: disable=too-many-lines</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">..species</span> <span class="k">import</span> <span class="n">species_settings</span>
+<span class="kn">from</span> <span class="nn">..seq_exceptions</span> <span class="k">import</span> <span class="n">SiteError</span><span class="p">,</span> <span class="n">CellError</span><span class="p">,</span> <span class="n">GeomError</span><span class="p">,</span> <span class="n">POSError</span>
+
+<div class="viewcode-block" id="Site"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Site.html#casm.seqquest.seqquest_io.Site">[docs]</a><span class="k">class</span> <span class="nc">Site</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="c1">#pylint: disable=too-few-public-methods</span>
+    <span class="sd">&quot;&quot;&quot; Site in a basis.</span>
+
+<span class="sd">        Contains:</span>
+<span class="sd">            self.occupant = CASM specie name, empty string by default</span>
+<span class="sd">            self.occ_alias = alias (atom file) name, empty string by default</span>
+<span class="sd">            self.position = vec of float</span>
+<span class="sd">            self.charge = charge at this coordinate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Site.__init__"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Site.html#casm.seqquest.seqquest_io.Site.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">occupant</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">occ_alias</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Site constructor &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occupant</span> <span class="o">=</span> <span class="n">occupant</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_alias</span> <span class="o">=</span> <span class="n">occ_alias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="n">charge</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SiteError</span><span class="p">(</span><span class="s2">&quot;Position </span><span class="si">%s</span><span class="s2"> could not be cast to a triplet of floats&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Site.write"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Site.html#casm.seqquest.seqquest_io.Site.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write this Site to a file or string &quot;&quot;&quot;</span>
+        <span class="n">arg_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">arg_string</span> <span class="o">+=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">occupant</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;    &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_alias</span> <span class="o">+</span> <span class="s2">&quot;    &quot;</span> <span class="o">+</span>
+                           <span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]))</span>
+            <span class="c1"># stream.write(self.occupant + &quot;_&quot; + str(index) + &quot;    &quot; +</span>
+            <span class="c1">#              self.occ_alias + &quot;    &quot; +</span>
+            <span class="c1">#              (&quot;  &quot;).join([str(x) for x in self.position]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">arg_string</span> <span class="o">+=</span> <span class="p">((</span><span class="s2">&quot;  &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">])</span> <span class="o">+</span>
+                           <span class="s2">&quot;    &quot;</span> <span class="o">+</span>  <span class="bp">self</span><span class="o">.</span><span class="n">occupant</span><span class="p">)</span>
+            <span class="c1"># stream.write((&quot;  &quot;).join([str(x) for x in self.position]) +</span>
+            <span class="c1">#              &quot;    &quot; +  self.occupant)</span>
+        <span class="n">arg_string</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">arg_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arg_string</span></div>
+
+<div class="viewcode-block" id="Site.write_charge"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Site.html#casm.seqquest.seqquest_io.Site.write_charge">[docs]</a>    <span class="k">def</span> <span class="nf">write_charge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">total_charge</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write a charge at a site &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">total_charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">total_charge</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;No charge on site and no charge supplied, can&#39;t print charge!&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total_charge</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">total_charge</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;charge</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%g</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">total_charge</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;location of charge</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot;  &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">occupant</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="Cell"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell">[docs]</a><span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="c1">#pylint: disable=too-many-instance-attributes</span>
+    <span class="sd">&quot;&quot;&quot; Container  class for cell data</span>
+
+<span class="sd">        Contains:</span>
+<span class="sd">            self._lattice (matrix of float): primative lattice vectors</span>
+<span class="sd">            self.coord_mode (str): LATTICE or CARTESIAN; value of &quot;coordinate&quot; keyword in lcao.in,</span>
+<span class="sd">                default LATTICE</span>
+<span class="sd">            self._scale (float): scale factor for cell, default 1.0</span>
+<span class="sd">                default 1.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Cell.POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.POS">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">POS</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">POS</span><span class="p">):</span>    <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Shorthand for POS construction &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">POS</span><span class="o">=</span><span class="n">POS</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.seq"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.seq">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">seq</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Shorthand for SeqQuest construction &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">seqfile</span><span class="o">=</span><span class="n">seqfile</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.mini"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.mini">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">mini</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mini_POS</span><span class="p">):</span>    <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Construction from partial POS &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">POS</span><span class="o">=</span><span class="n">mini_POS</span><span class="p">,</span> <span class="n">mini</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a copy of the lattice &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[:]]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reciprocal_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a copy of the reciprocal lattice &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span><span class="p">[:]]</span>
+
+<div class="viewcode-block" id="Cell.__init__"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">POS</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seqfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mini</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Construct a Cell object from &#39;cell&#39; file</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                POS (string): Path to a POS file</span>
+<span class="sd">                seqfile (string or buffer): Path to a lcao.in, lcao.out, or lcao.geom file OR an</span>
+<span class="sd">                    open file or buffer object. Info suppliments and overrides POS file &quot;&quot;&quot;</span>
+        <span class="c1">### Initialize ###</span>
+        <span class="c1"># Set to default values, if such things exist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="n">mini</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">POS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Need a (mini)POS for mini mode&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_mini_POS</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">POS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_POS</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">seqfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_seq</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">seqfile</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">POS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;Neither POS nor lcao.* provided, aborting!&quot;</span><span class="p">)</span>
+
+        <span class="c1">### Reciprocal lattice ###</span>
+        <span class="n">r_1</span> <span class="o">=</span> <span class="n">_div</span><span class="p">(</span><span class="n">_cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                                    <span class="n">_cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                                           <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
+        <span class="n">r_2</span> <span class="o">=</span> <span class="n">_div</span><span class="p">(</span><span class="n">_cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                                    <span class="n">_cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                                           <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+        <span class="n">r_3</span> <span class="o">=</span> <span class="n">_div</span><span class="p">(</span><span class="n">_cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                                    <span class="n">_cross</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                                           <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="p">[</span><span class="n">r_1</span><span class="p">[:],</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">r_3</span><span class="p">]</span></div>
+
+        <span class="c1"># ### Ensuring &#39;scale&#39; is always 1.0 ###</span>
+        <span class="c1"># self.scale(scale=self._scale)</span>
+        <span class="c1"># self._scale = 1.0</span>
+
+<div class="viewcode-block" id="Cell.read_POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.read_POS">[docs]</a>    <span class="k">def</span> <span class="nf">read_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">POS</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Read a POS and construct lattice coords in a Cell object &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_lattice</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.read_mini_POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.read_mini_POS">[docs]</a>    <span class="k">def</span> <span class="nf">read_mini_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mini_POS</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Read a POS and construct lattice coords in a Cell object &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">mini_POS</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_lattice</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.read_seq"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.read_seq">[docs]</a>    <span class="k">def</span> <span class="nf">read_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Read a seqquest file (or a buffer containing info from a file) and construct or amend</span>
+<span class="sd">                a Cell object &quot;&quot;&quot;</span>
+        <span class="c1"># Check if we&#39;re a stream</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">seqfile</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_stream</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_file</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell._read_seq_file"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell._read_seq_file">[docs]</a>    <span class="k">def</span> <span class="nf">_read_seq_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">):</span>    <span class="c1">#pylint: disable=too-many-branches, too-many-statements, too-many-locals</span>
+        <span class="sd">&quot;&quot;&quot; Read a seqquest file (or a buffer containing info from a file) and construct or amend</span>
+<span class="sd">                a Cell object &quot;&quot;&quot;</span>
+        <span class="c1">### Initialize ###</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">inner</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="c1"># for line in stream:</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;cellfile&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="n">inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_file</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;scale\s+&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="n">scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;primitive&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                            <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                                <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Error reading lattice vector </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span>
+
+        <span class="c1">### Check validity ###</span>
+        <span class="k">if</span> <span class="n">inner</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># copy/deepcopy would preserve internal structure; we want an unshared true copy</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Something went wrong, </span><span class="si">%s</span><span class="s2"> could not be read&quot;</span> <span class="o">%</span> <span class="n">seqfile</span><span class="p">)</span>
+
+            <span class="c1"># &#39;scale&#39; keyword is optional</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="n">scale</span>
+
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Cell._read_seq_stream"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell._read_seq_stream">[docs]</a>    <span class="k">def</span> <span class="nf">_read_seq_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">):</span>    <span class="c1">#pylint: disable=too-many-branches, too-many-statements</span>
+        <span class="sd">&quot;&quot;&quot; Read a seqquest file (or a buffer containing info from a file) and construct or amend</span>
+<span class="sd">                a Cell object &quot;&quot;&quot;</span>
+        <span class="c1">### Initialize ###</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">inner</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Check if we&#39;re a stream</span>
+        <span class="n">current_pos</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="c1"># for line in seqfile:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;cellfile&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_file</span><span class="p">(</span><span class="n">seqfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;grid dimensions&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*&gt;&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;scale\s+&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">seqfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;primitive&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="c1"># We were passed the stream with &#39;primitive&#39; already consumed!</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                        <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Error reading lattice vector </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span>
+            <span class="n">current_pos</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+
+        <span class="c1"># Rewind the stream before passing control back</span>
+        <span class="n">seqfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">current_pos</span><span class="p">)</span>
+
+        <span class="c1">### Check validity ###</span>
+        <span class="k">if</span> <span class="n">inner</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># copy/deepcopy would preserve internal structure; we want an unshared true copy</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Something went wrong, </span><span class="si">%s</span><span class="s2"> could not be read&quot;</span> <span class="o">%</span> <span class="n">seqfile</span><span class="p">)</span>
+
+            <span class="c1"># &#39;scale&#39; keyword is optional</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="n">scale</span>
+
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Cell._read_lattice"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell._read_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">_read_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read_POS() to read a lattice into self._lattice</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                stream (buffer): an open POS being read from</span>
+
+<span class="sd">            self._lattice contains lattice vectors stored as rows in a numpy array (easy inversion)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice scaling: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">lat</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice vector: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">lat</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Lattice shape error: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Lattice shape error: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.write_POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.write_POS">[docs]</a>    <span class="k">def</span> <span class="nf">write_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>  <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Write POS to filename &quot;&quot;&quot;</span>
+        <span class="c1"># If a &quot;Geom&quot; has already written here:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="n">mini_geom</span> <span class="o">=</span> <span class="n">Geom</span><span class="o">.</span><span class="n">mini</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">write_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mini_geom</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scale</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                    <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;     &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;     &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span>
+                                                           <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.get_lattice"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.get_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">get_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the lattice, or lattice vector &#39;index&#39;, as listed list&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="n">index</span><span class="p">][:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">[:]]</span></div>
+
+<div class="viewcode-block" id="Cell.get_reciprocal_lattice"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.get_reciprocal_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">get_reciprocal_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the reciprocal lattice vector &#39;index&#39;, as numpy array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span><span class="p">[</span><span class="n">index</span><span class="p">][:]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span></div>
+
+<div class="viewcode-block" id="Cell.volume"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.volume">[docs]</a>    <span class="k">def</span> <span class="nf">volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns scalar triple product of lattice vectors &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">)</span></div>
+        <span class="c1"># return abs(_dot(self._lattice[0], _cross(self._lattice[1], self._lattice[2])))</span>
+
+<div class="viewcode-block" id="Cell.reciprocal_volume"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.reciprocal_volume">[docs]</a>    <span class="k">def</span> <span class="nf">reciprocal_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns scalar triple product of reciprocal lattice vector &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">volume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span><span class="p">)</span></div>
+        <span class="c1"># return abs(_dot(self._reciprocal_lattice[0], _cross(self._reciprocal_lattice[1],</span>
+        <span class="c1">#                                                     self._reciprocal_lattice[2])))</span>
+
+<div class="viewcode-block" id="Cell.scale"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.scale">[docs]</a>    <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scalez</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>    <span class="c1">#pylint: disable=too-many-arguments</span>
+        <span class="sd">&quot;&quot;&quot; Applies scale settings &quot;&quot;&quot;</span>
+        <span class="c1"># Point structures don&#39;t get any cell dimensions scaled!</span>
+        <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Handling of ndim != 0 or 3 is not yet implemented!&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="n">scale</span> <span class="o">*</span> <span class="p">[</span><span class="n">scalex</span><span class="p">,</span> <span class="n">scaley</span><span class="p">,</span> <span class="n">scalez</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Invalid ndim value </span><span class="si">%r</span><span class="s2"> encountered!&quot;</span> <span class="o">%</span> <span class="n">ndim</span><span class="p">)</span>
+        <span class="c1"># Now our scale is 1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="mf">1.0</span></div>
+
+<div class="viewcode-block" id="Cell.scalex"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.scalex">[docs]</a>    <span class="k">def</span> <span class="nf">scalex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Alias for global scale &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scalex</span><span class="o">=</span><span class="n">scalex</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.scaley"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.scaley">[docs]</a>    <span class="k">def</span> <span class="nf">scaley</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Alias for global scale &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scaley</span><span class="o">=</span><span class="n">scaley</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cell.scalez"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Cell.html#casm.seqquest.seqquest_io.Cell.scalez">[docs]</a>    <span class="k">def</span> <span class="nf">scalez</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalez</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Alias for global scale &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scalez</span><span class="o">=</span><span class="n">scalez</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="Geom"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom">[docs]</a><span class="k">class</span> <span class="nc">Geom</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="c1">#pylint: disable=too-many-instance-attributes</span>
+    <span class="sd">&quot;&quot;&quot; Container class for geometry data</span>
+
+<span class="sd">        Contains:</span>
+<span class="sd">            self.natoms (int): no of atoms in the unit cell</span>
+<span class="sd">            self.basis (list of Sites): atoms in the crystal/molecule/etc</span>
+<span class="sd">            self.type_atoms (list of str): lists the specie names as in the POS (ex. [Mn3 Mn4])</span>
+<span class="sd">            self.type_atoms_alias (list of str): lists the *atm file names for the species</span>
+<span class="sd">            self.num_atoms (list of int): lists the atoms as in the POS (ex. [1 1])</span>
+<span class="sd">            *self.charge (float): net charge of the geom, if any</span>
+<span class="sd">            *self.charge_loc (vec of float): location of the point charge, if any</span>
+<span class="sd">            self.coord_mode (string): coord mode of POS/geom</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Geom.POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.POS">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">POS</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">POS</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>    <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Shorthand for POS construction &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">POS</span><span class="o">=</span><span class="n">POS</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.seq"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.seq">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">seq</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Shorthand for SeqQuest construction &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">seqfile</span><span class="o">=</span><span class="n">seqfile</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.geom"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.geom">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">geom</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Shorthand for geom construction &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">seqfile</span><span class="o">=</span><span class="n">seqfile</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.mini"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.mini">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">mini</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mini_POS</span><span class="p">):</span>    <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Construction from partial POS &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">POS</span><span class="o">=</span><span class="n">mini_POS</span><span class="p">,</span> <span class="n">mini</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.__init__"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">POS</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seqfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mini</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Construct a Geom object from &#39;geom&#39; file</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                POS (string): Path to a POS file</span>
+<span class="sd">                seqfile (string or buffer): Path to a lcao.in, lcao.out, or lcao.geom file OR an</span>
+<span class="sd">                    open file or buffer object. Info suppliments and overrides POS file</span>
+<span class="sd">                species (dict of IndividualSpecies): Species info for atoms in the</span>
+<span class="sd">                    crystal/molecule/etc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">### Initialize ###</span>
+        <span class="c1"># Set to default values, if such things exist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># self.lattice = [[0 for _ in range(3)] for _ in range(3)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge_loc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">mini</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">POS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Need a (mini)POS for mini mode&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_mini_POS</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">POS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_POS</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">seqfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_seq</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">seqfile</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">POS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;Neither POS nor lcao.* provided, aborting!&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">species</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">species</span> <span class="o">=</span> <span class="n">species_settings</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.read_POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.read_POS">[docs]</a>    <span class="k">def</span> <span class="nf">read_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">POS</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Read a POS and construct atom coords in a Geom object &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+            <span class="c1"># self._read_lattice(stream)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_atominfo</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_basis</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.read_mini_POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.read_mini_POS">[docs]</a>    <span class="k">def</span> <span class="nf">read_mini_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mini_POS</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Read a POS and construct atom coords in a Geom object &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">mini_POS</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="c1"># _ = [stream.readline() for _ in range(4)]</span>
+            <span class="c1"># self._read_lattice(stream)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_atominfo</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_basis</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom._read_atominfo"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom._read_atominfo">[docs]</a>    <span class="k">def</span> <span class="nf">_read_atominfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read_POS() to read the lines that correspond to the num_atoms and</span>
+<span class="sd">            type_atoms in a CASM style POS</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                stream (buffer): an open POS being read from</span>
+
+<span class="sd">            self.type_atoms is a list of strings corresponding to atom names</span>
+<span class="sd">            self.num_atoms is a list of int corresponding to the number of each atom type</span>
+<span class="sd">            self.type_atoms_alias is set from self.type_atoms</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">numline</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numline</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Could not read number of each atom type: &#39;&quot;</span> <span class="o">+</span> <span class="n">numline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="c1"># self.type_atoms = [int(x) for x in range(len(self.num_atoms))]</span>
+        <span class="c1"># self.type_atoms = map(int, range(len(self.num_atoms)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom._read_basis"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom._read_basis">[docs]</a>    <span class="k">def</span> <span class="nf">_read_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read_POS() to read basis of POSCAR file into self.basis</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                stream (buffer): an open POSCAR being read from</span>
+
+<span class="sd">            self.basis is a list of Site objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">coord_mode</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">coord_mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;cartesian&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s2">&quot;CARTESIAN&quot;</span>
+        <span class="k">elif</span> <span class="n">coord_mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;direct&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s2">&quot;LATTICE&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Invalid coordinate mode </span><span class="si">%s</span><span class="s2"> found in POS!&quot;</span> <span class="o">%</span> <span class="n">coord_mode</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Error reading basis: insufficient number of atoms&quot;</span><span class="p">)</span>
+                <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]]</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Error reading basis coordinate: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">pos</span><span class="p">[:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Geom.read_seq"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.read_seq">[docs]</a>    <span class="k">def</span> <span class="nf">read_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Read a seqquest file (or a buffer containing info from a file) and construct or amend</span>
+<span class="sd">                a Geom object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="c1"># Check if we&#39;re a stream</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">seqfile</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_stream</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_file</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom._read_seq_file"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom._read_seq_file">[docs]</a>    <span class="k">def</span> <span class="nf">_read_seq_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">):</span>    <span class="c1">#pylint: disable=too-many-branches, too-many-statements</span>
+        <span class="sd">&quot;&quot;&quot; Read a seqquest file (or a buffer containing info from a file) and construct or amend</span>
+<span class="sd">                a Geom object &quot;&quot;&quot;</span>
+        <span class="c1">### Initialize ###</span>
+        <span class="n">num_atoms</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">inner</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">seqfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="c1"># for line in stream:</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;geomfile&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="c1"># inner = self._read_seq_file(stream.readline().strip())</span>
+                    <span class="n">inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_file</span><span class="p">(</span><span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;atom, type, position&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                            <span class="k">break</span>
+                    <span class="c1"># for line in stream:</span>
+                        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;kgrid&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                            <span class="k">break</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">atom_id</span><span class="p">,</span> <span class="n">atom_alias</span><span class="p">,</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;Error reading basis site: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span>
+                        <span class="n">atom_type</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">atom_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">]</span>
+
+                        <span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">pos</span><span class="p">[:],</span> <span class="n">atom_type</span><span class="p">,</span> <span class="n">atom_alias</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">atom_type</span> <span class="ow">in</span> <span class="n">type_atoms</span><span class="p">:</span>
+                            <span class="n">type_atoms</span> <span class="o">+=</span> <span class="p">[</span><span class="n">atom_type</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">atom_alias</span> <span class="ow">in</span> <span class="n">type_atoms_alias</span><span class="p">:</span>
+                            <span class="n">type_atoms_alias</span> <span class="o">+=</span> <span class="p">[</span><span class="n">atom_alias</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">atom_type</span> <span class="ow">in</span> <span class="n">num_atoms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="n">num_atoms</span><span class="p">[</span><span class="n">atom_type</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">num_atoms</span><span class="p">[</span><span class="n">atom_type</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;kgrid&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="k">break</span>
+
+        <span class="c1">### Check validity ###</span>
+        <span class="k">if</span> <span class="n">inner</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;Something went wrong, </span><span class="si">%s</span><span class="s2"> could not be read&quot;</span> <span class="o">%</span> <span class="n">seqfile</span><span class="p">)</span>
+
+        <span class="c1"># Want a sorted num_atoms list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">type_atoms</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="n">type_atoms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="n">type_atoms_alias</span>
+
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Geom._read_seq_stream"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom._read_seq_stream">[docs]</a>    <span class="k">def</span> <span class="nf">_read_seq_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqfile</span><span class="p">):</span>    <span class="c1">#pylint: disable=too-many-branches, too-many-statements</span>
+        <span class="sd">&quot;&quot;&quot; Read a seqquest file (or a buffer containing info from a file) and construct or amend</span>
+<span class="sd">                a Geom object &quot;&quot;&quot;</span>
+        <span class="c1">### Initialize ###</span>
+        <span class="n">num_atoms</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">inner</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">current_pos</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="c1"># for line in seqfile:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;geomfile&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="c1"># inner = self._read_seq_file(seqfile.readline().strip())</span>
+                <span class="n">inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_seq_file</span><span class="p">(</span><span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;kgrid&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">seqfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">current_pos</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;atom, type, position&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">atom_id</span><span class="p">,</span> <span class="n">atom_alias</span><span class="p">,</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;Error reading basis site: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span>
+                    <span class="n">atom_type</span> <span class="o">=</span> <span class="n">atom_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">]</span>
+
+                    <span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">pos</span><span class="p">[:],</span> <span class="n">atom_type</span><span class="p">,</span> <span class="n">atom_alias</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">atom_type</span> <span class="ow">in</span> <span class="n">type_atoms</span><span class="p">:</span>
+                        <span class="n">type_atoms</span> <span class="o">+=</span> <span class="p">[</span><span class="n">atom_type</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">atom_alias</span> <span class="ow">in</span> <span class="n">type_atoms_alias</span><span class="p">:</span>
+                        <span class="n">type_atoms_alias</span> <span class="o">+=</span> <span class="p">[</span><span class="n">atom_alias</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">atom_type</span> <span class="ow">in</span> <span class="n">num_atoms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">num_atoms</span><span class="p">[</span><span class="n">atom_type</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">num_atoms</span><span class="p">[</span><span class="n">atom_type</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="c1"># Rewind the stream before passing control back</span>
+                <span class="n">current_pos</span> <span class="o">=</span> <span class="n">seqfile</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
+
+        <span class="c1">### Check validity ###</span>
+        <span class="k">if</span> <span class="n">inner</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">GeomError</span><span class="p">(</span><span class="s2">&quot;Something went wrong, </span><span class="si">%s</span><span class="s2"> could not be read&quot;</span> <span class="o">%</span> <span class="n">seqfile</span><span class="p">)</span>
+
+        <span class="c1"># Want a sorted num_atoms list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">type_atoms</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="n">type_atoms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="n">type_atoms_alias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Geom.update"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set self.type_atoms_alias and self.basis[x].alias according to Species dict.</span>
+
+<span class="sd">            Warning: Not sure we want to check equivalence regardless of atom name case</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>   <span class="c1">#pylint: disable=invalid-name</span>
+                <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">atom</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">alias</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">charge_loc</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># We need to RESET charge before accumulating in it</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">occ_alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">species</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">occupant</span><span class="p">]</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="mf">0.0</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span>
+                        <span class="n">species</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">occupant</span><span class="p">]</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">species</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">occupant</span><span class="p">]</span><span class="o">.</span><span class="n">charge_loc</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">charge_loc</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">charge_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">position</span>
+                            <span class="n">charge_loc</span> <span class="o">=</span> <span class="kc">True</span>
+                            <span class="n">old_charge_loc</span> <span class="o">=</span> <span class="n">index</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">POSError</span><span class="p">(</span><span class="s2">&quot;Multiple locations for the charge center supplied:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                           <span class="s2">&quot;     site </span><span class="si">%i</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> at </span><span class="si">%s</span><span class="s2"> in the POS</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                           <span class="s2">&quot;     site </span><span class="si">%i</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> at </span><span class="si">%s</span><span class="s2"> in the POS&quot;</span>
+                                           <span class="o">%</span> <span class="p">(</span><span class="n">old_charge_loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">old_charge_loc</span><span class="p">]</span><span class="o">.</span><span class="n">occupant</span><span class="p">,</span>
+                                              <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">old_charge_loc</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
+                                              <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">occupant</span><span class="p">,</span>
+                                              <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="p">))</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Geom.write_geom"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.write_geom">[docs]</a>    <span class="k">def</span> <span class="nf">write_geom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write geom to filename or string&quot;&quot;&quot;</span>
+        <span class="c1"># with open(filename, &quot;w&quot;) as stream:</span>
+        <span class="c1">#     stream.write(&quot;atom, type, position; %s\n&quot; % self.title)</span>
+        <span class="c1">#     for i, site in enumerate(self.basis):</span>
+        <span class="c1">#         site.write(stream, i)</span>
+        <span class="n">arg_string</span> <span class="o">=</span> <span class="s2">&quot;atom, type, position; </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+            <span class="n">arg_string</span> <span class="o">+=</span> <span class="s2">&quot;  &quot;</span> <span class="o">+</span> <span class="n">site</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">arg_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arg_string</span></div>
+
+<div class="viewcode-block" id="Geom.write_POS"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.write_POS">[docs]</a>    <span class="k">def</span> <span class="nf">write_POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>  <span class="c1">#pylint: disable=invalid-name</span>
+        <span class="sd">&quot;&quot;&quot; Write POS to filename &quot;&quot;&quot;</span>
+        <span class="c1"># If a &quot;Cell&quot; has already written here:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="n">mini_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="o">.</span><span class="n">mini</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">write_POS</span><span class="p">(</span><span class="n">mini_cell</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="ow">is</span> <span class="s2">&quot;lattice&quot;</span><span class="p">:</span>
+                    <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Direct&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                    <span class="n">site</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.basis_dict"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.basis_dict">[docs]</a>    <span class="k">def</span> <span class="nf">basis_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return a dictionary where keys are unique specie &#39;alias&#39; and values are lists of</span>
+<span class="sd">            atoms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">basis_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">:(</span><span class="n">i</span><span class="p">)])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">atom</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">basis_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">basis_dict</span></div>
+
+<div class="viewcode-block" id="Geom.unsort_dict"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.unsort_dict">[docs]</a>    <span class="k">def</span> <span class="nf">unsort_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">             Returns &#39;unsort_dict&#39;, for which: unsorted_dict[orig_index] == sorted_index;</span>
+
+<span class="sd">             unsorted_dict[sorted_index] == orig_index</span>
+
+<span class="sd">             For example, &#39;unsort_dict[0]&#39; returns the index into the unsorted POSCAR of the first</span>
+<span class="sd">                atom in the sorted POSCAR</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+
+        <span class="c1"># create basis_dict, but with initial position in POSCAR instead of coordinate</span>
+        <span class="n">basis_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">:(</span><span class="n">i</span><span class="p">)])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">atom</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">basis_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">basis_dict</span><span class="p">)</span>
+
+        <span class="n">orig_pos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">basis_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">orig_pos</span> <span class="o">+=</span> <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">orig_pos</span><span class="p">)</span>
+
+        <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="n">orig_pos</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Geom.scale"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.scale">[docs]</a>    <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scalez</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>    <span class="c1">#pylint: disable=too-many-arguments</span>
+        <span class="sd">&quot;&quot;&quot; Applies scale settings &quot;&quot;&quot;</span>
+        <span class="c1"># Lattice coord-mode doesn&#39;t need scaling!</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">==</span> <span class="s2">&quot;lattice&quot;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="c1"># Point structures don&#39;t get any cell dimensions scaled!</span>
+        <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Handling of ndim != 0 or 3 is not yet implemented!&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                    <span class="n">site</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="n">scale</span> <span class="o">*</span> <span class="p">[</span><span class="n">scalex</span><span class="p">,</span> <span class="n">scaley</span><span class="p">,</span> <span class="n">scalez</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CellError</span><span class="p">(</span><span class="s2">&quot;Invalid ndim value </span><span class="si">%r</span><span class="s2"> encountered!&quot;</span> <span class="o">%</span> <span class="n">ndim</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.scalex"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.scalex">[docs]</a>    <span class="k">def</span> <span class="nf">scalex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Alias for global scale &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scalex</span><span class="o">=</span><span class="n">scalex</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.scaley"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.scaley">[docs]</a>    <span class="k">def</span> <span class="nf">scaley</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Alias for global scale &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scaley</span><span class="o">=</span><span class="n">scaley</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.scalez"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.scalez">[docs]</a>    <span class="k">def</span> <span class="nf">scalez</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalez</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Alias for global scale &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scalez</span><span class="o">=</span><span class="n">scalez</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Geom.to_cart"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.Geom.html#casm.seqquest.seqquest_io.Geom.to_cart">[docs]</a>    <span class="k">def</span> <span class="nf">to_cart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Switch the mode to &#39;cartesian&#39;, taking an input cell for scale &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">==</span> <span class="s2">&quot;CARTESIAN&quot;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="n">site</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">([</span><span class="n">site</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">cell</span><span class="o">.</span><span class="n">lattice</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)][:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s2">&quot;CARTESIAN&quot;</span></div></div>
+
+<span class="k">def</span> <span class="nf">write_POS</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">geom</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>    <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="sd">&quot;&quot;&quot; Writes a POS file using a Cell and Geom object together &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">_scale</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;     &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;     &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cell</span><span class="o">.</span><span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geom</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">geom</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">==</span> <span class="s2">&quot;LATTICE&quot;</span><span class="p">:</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Direct&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">geom</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+            <span class="n">site</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">volume</span><span class="p">(</span><span class="n">lattice</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Volume of a generic list-of-vecs &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">_dot</span><span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">_cross</span><span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
+
+<span class="k">def</span> <span class="nf">_cross</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="sd">&quot;&quot;&quot; Calculates the cross product of 2 vector-lists to avoid importing numpy &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>   <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="sd">&quot;&quot;&quot; Calculates the dot product of 2 vector-lists to avoid importing numpy &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="c1">#pylint: disable=invalid-name</span>
+    <span class="sd">&quot;&quot;&quot; Calculates the division of a vector-list by a scalar to avoid importing numpy &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">b</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

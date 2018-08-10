@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.seqquest_io.Geom &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.seqquest.seqquest_io.Site" href="casm.seqquest.seqquest_io.Site.html" />
+    <link rel="prev" title="casm.seqquest.seqquest_io.Cell" href="casm.seqquest.seqquest_io.Cell.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.Cell.html">casm.seqquest.seqquest_io.Cell</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.seqquest.seqquest_io.Geom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.Site.html">casm.seqquest.seqquest_io.Site</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.LcaoIN.html">casm.seqquest.seqquest_io.LcaoIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.LcaoOUT.html">casm.seqquest.seqquest_io.LcaoOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.DEFAULT_QUEST_MOVE_LIST.html">casm.seqquest.seqquest_io.DEFAULT_QUEST_MOVE_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.DEFAULT_QUEST_COPY_LIST.html">casm.seqquest.seqquest_io.DEFAULT_QUEST_COPY_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.DEFAULT_QUEST_REMOVE_LIST.html">casm.seqquest.seqquest_io.DEFAULT_QUEST_REMOVE_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.QUEST_INPUT_FILE_LIST.html">casm.seqquest.seqquest_io.QUEST_INPUT_FILE_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.SeqquestIO.html">casm.seqquest.seqquest_io.SeqquestIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.get_lcao_tag.html">casm.seqquest.seqquest_io.get_lcao_tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.job_complete.html">casm.seqquest.seqquest_io.job_complete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.species_settings.html">casm.seqquest.seqquest_io.species_settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.seqquest.seqquest_io.Geom</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.seqquest.seqquest_io.Geom.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-seqquest-seqquest-io-geom">
+<h1>casm.seqquest.seqquest_io.Geom<a class="headerlink" href="#casm-seqquest-seqquest-io-geom" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.seqquest.seqquest_io.Geom">
+<em class="property">class </em><code class="descclassname">casm.seqquest.seqquest_io.</code><code class="descname">Geom</code><span class="sig-paren">(</span><em>POS=None</em>, <em>seqfile=None</em>, <em>species=None</em>, <em>mini=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container class for geometry data</p>
+<dl class="docutils">
+<dt>Contains:</dt>
+<dd>self.natoms (int): no of atoms in the unit cell
+self.basis (list of Sites): atoms in the crystal/molecule/etc
+self.type_atoms (list of str): lists the specie names as in the POS (ex. [Mn3 Mn4])
+self.type_atoms_alias (list of str): lists the <a href="#id1"><span class="problematic" id="id2">*</span></a>atm file names for the species
+self.num_atoms (list of int): lists the atoms as in the POS (ex. [1 1])
+<a href="#id3"><span class="problematic" id="id4">*</span></a>self.charge (float): net charge of the geom, if any
+<a href="#id5"><span class="problematic" id="id6">*</span></a>self.charge_loc (vec of float): location of the point charge, if any
+self.coord_mode (string): coord mode of POS/geom</dd>
+</dl>
+<p>Construct a Geom object from ‘geom’ file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">POS (string): Path to a POS file
+seqfile (string or buffer): Path to a lcao.in, lcao.out, or lcao.geom file OR an</p>
+<blockquote>
+<div>open file or buffer object. Info suppliments and overrides POS file</div></blockquote>
+<dl class="last docutils">
+<dt>species (dict of IndividualSpecies): Species info for atoms in the</dt>
+<dd>crystal/molecule/etc</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>POS=None</em>, <em>seqfile=None</em>, <em>species=None</em>, <em>mini=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Geom object from ‘geom’ file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">POS (string): Path to a POS file
+seqfile (string or buffer): Path to a lcao.in, lcao.out, or lcao.geom file OR an</p>
+<blockquote>
+<div>open file or buffer object. Info suppliments and overrides POS file</div></blockquote>
+<dl class="last docutils">
+<dt>species (dict of IndividualSpecies): Species info for atoms in the</dt>
+<dd>crystal/molecule/etc</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.POS" title="casm.seqquest.seqquest_io.Geom.POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">POS</span></code></a>(POS[,&nbsp;species])</td>
+<td>Shorthand for POS construction</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.__init__" title="casm.seqquest.seqquest_io.Geom.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([POS,&nbsp;seqfile,&nbsp;species,&nbsp;mini])</td>
+<td>Construct a Geom object from ‘geom’ file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.basis_dict" title="casm.seqquest.seqquest_io.Geom.basis_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis_dict</span></code></a>()</td>
+<td>Return a dictionary where keys are unique specie ‘alias’ and values are lists of atoms.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.geom" title="casm.seqquest.seqquest_io.Geom.geom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geom</span></code></a>(seqfile[,&nbsp;species])</td>
+<td>Shorthand for geom construction</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.mini" title="casm.seqquest.seqquest_io.Geom.mini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mini</span></code></a>(mini_POS)</td>
+<td>Construction from partial POS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.read_POS" title="casm.seqquest.seqquest_io.Geom.read_POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_POS</span></code></a>(POS)</td>
+<td>Read a POS and construct atom coords in a Geom object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.read_mini_POS" title="casm.seqquest.seqquest_io.Geom.read_mini_POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_mini_POS</span></code></a>(mini_POS)</td>
+<td>Read a POS and construct atom coords in a Geom object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.read_seq" title="casm.seqquest.seqquest_io.Geom.read_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_seq</span></code></a>(seqfile[,&nbsp;title])</td>
+<td>Read a seqquest file (or a buffer containing info from a file) and construct or amend a Geom object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.scale" title="casm.seqquest.seqquest_io.Geom.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a>([scale,&nbsp;scalex,&nbsp;scaley,&nbsp;scalez,&nbsp;ndim])</td>
+<td>Applies scale settings</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.scalex" title="casm.seqquest.seqquest_io.Geom.scalex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalex</span></code></a>([scalex])</td>
+<td>Alias for global scale</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.scaley" title="casm.seqquest.seqquest_io.Geom.scaley"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaley</span></code></a>([scaley])</td>
+<td>Alias for global scale</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.scalez" title="casm.seqquest.seqquest_io.Geom.scalez"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalez</span></code></a>([scalez])</td>
+<td>Alias for global scale</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.seq" title="casm.seqquest.seqquest_io.Geom.seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq</span></code></a>(seqfile[,&nbsp;species])</td>
+<td>Shorthand for SeqQuest construction</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.to_cart" title="casm.seqquest.seqquest_io.Geom.to_cart"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_cart</span></code></a>(cell)</td>
+<td>Switch the mode to ‘cartesian’, taking an input cell for scale</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.unsort_dict" title="casm.seqquest.seqquest_io.Geom.unsort_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsort_dict</span></code></a>()</td>
+<td>Returns ‘unsort_dict’, for which: unsorted_dict[orig_index] == sorted_index;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.update" title="casm.seqquest.seqquest_io.Geom.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(species)</td>
+<td>Set self.type_atoms_alias and self.basis[x].alias according to Species dict.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.write_POS" title="casm.seqquest.seqquest_io.Geom.write_POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_POS</span></code></a>(filename)</td>
+<td>Write POS to filename</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Geom.write_geom" title="casm.seqquest.seqquest_io.Geom.write_geom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_geom</span></code></a>([filename])</td>
+<td>Write geom to filename or string</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Geom.POS">
+<em class="property">classmethod </em><code class="descname">POS</code><span class="sig-paren">(</span><em>POS</em>, <em>species=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorthand for POS construction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom._read_atominfo">
+<code class="descname">_read_atominfo</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom._read_atominfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom._read_atominfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read_POS() to read the lines that correspond to the num_atoms and
+type_atoms in a CASM style POS</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>stream (buffer): an open POS being read from</dd>
+</dl>
+<p>self.type_atoms is a list of strings corresponding to atom names
+self.num_atoms is a list of int corresponding to the number of each atom type
+self.type_atoms_alias is set from self.type_atoms</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom._read_basis">
+<code class="descname">_read_basis</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom._read_basis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom._read_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read_POS() to read basis of POSCAR file into self.basis</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>stream (buffer): an open POSCAR being read from</dd>
+</dl>
+<p>self.basis is a list of Site objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom._read_seq_file">
+<code class="descname">_read_seq_file</code><span class="sig-paren">(</span><em>seqfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom._read_seq_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom._read_seq_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a seqquest file (or a buffer containing info from a file) and construct or amend
+a Geom object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom._read_seq_stream">
+<code class="descname">_read_seq_stream</code><span class="sig-paren">(</span><em>seqfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom._read_seq_stream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom._read_seq_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a seqquest file (or a buffer containing info from a file) and construct or amend
+a Geom object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.basis_dict">
+<code class="descname">basis_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.basis_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.basis_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary where keys are unique specie ‘alias’ and values are lists of
+atoms.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Geom.geom">
+<em class="property">classmethod </em><code class="descname">geom</code><span class="sig-paren">(</span><em>seqfile</em>, <em>species=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.geom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.geom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorthand for geom construction</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Geom.mini">
+<em class="property">classmethod </em><code class="descname">mini</code><span class="sig-paren">(</span><em>mini_POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.mini"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.mini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construction from partial POS</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.read_POS">
+<code class="descname">read_POS</code><span class="sig-paren">(</span><em>POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.read_POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.read_POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a POS and construct atom coords in a Geom object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.read_mini_POS">
+<code class="descname">read_mini_POS</code><span class="sig-paren">(</span><em>mini_POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.read_mini_POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.read_mini_POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a POS and construct atom coords in a Geom object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.read_seq">
+<code class="descname">read_seq</code><span class="sig-paren">(</span><em>seqfile</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.read_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.read_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a seqquest file (or a buffer containing info from a file) and construct or amend
+a Geom object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.scale">
+<code class="descname">scale</code><span class="sig-paren">(</span><em>scale=1.0</em>, <em>scalex=1.0</em>, <em>scaley=1.0</em>, <em>scalez=1.0</em>, <em>ndim=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.scale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies scale settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.scalex">
+<code class="descname">scalex</code><span class="sig-paren">(</span><em>scalex=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.scalex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.scalex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for global scale</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.scaley">
+<code class="descname">scaley</code><span class="sig-paren">(</span><em>scaley=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.scaley"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.scaley" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for global scale</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.scalez">
+<code class="descname">scalez</code><span class="sig-paren">(</span><em>scalez=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.scalez"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.scalez" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for global scale</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Geom.seq">
+<em class="property">classmethod </em><code class="descname">seq</code><span class="sig-paren">(</span><em>seqfile</em>, <em>species=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorthand for SeqQuest construction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.to_cart">
+<code class="descname">to_cart</code><span class="sig-paren">(</span><em>cell</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.to_cart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.to_cart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch the mode to ‘cartesian’, taking an input cell for scale</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.unsort_dict">
+<code class="descname">unsort_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.unsort_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.unsort_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns ‘unsort_dict’, for which: unsorted_dict[orig_index] == sorted_index;</p>
+<p>unsorted_dict[sorted_index] == orig_index</p>
+<dl class="docutils">
+<dt>For example, ‘unsort_dict[0]’ returns the index into the unsorted POSCAR of the first</dt>
+<dd>atom in the sorted POSCAR</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>species</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set self.type_atoms_alias and self.basis[x].alias according to Species dict.</p>
+<p>Warning: Not sure we want to check equivalence regardless of atom name case</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.write_POS">
+<code class="descname">write_POS</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.write_POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.write_POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write POS to filename</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Geom.write_geom">
+<code class="descname">write_geom</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Geom.write_geom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Geom.write_geom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write geom to filename or string</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.seqquest.seqquest_io.Site.html" class="btn btn-neutral float-right" title="casm.seqquest.seqquest_io.Site" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.seqquest.seqquest_io.Cell.html" class="btn btn-neutral" title="casm.seqquest.seqquest_io.Cell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

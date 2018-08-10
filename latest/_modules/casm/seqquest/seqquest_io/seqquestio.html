@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.seqquest_io.seqquestio &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.seqquest.seqquest_io.seqquestio</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.seqquest.seqquest_io.seqquestio</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Class for creating seqquest i/o files &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">.lcao_in</span> <span class="k">import</span> <span class="n">LcaoIN</span>
+<span class="kn">from</span> <span class="nn">.lcao_out</span> <span class="k">import</span> <span class="n">LcaoOUT</span>
+<span class="kn">from</span> <span class="nn">.species</span> <span class="k">import</span> <span class="n">species_settings</span>
+
+<span class="n">QUEST_INPUT_FILE_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lcao.in&quot;</span><span class="p">,</span> <span class="s2">&quot;lcao.in_geom&quot;</span><span class="p">]</span>
+<span class="n">DEFAULT_QUEST_MOVE_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">DEFAULT_QUEST_COPY_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lcao.in&quot;</span><span class="p">]</span>
+<span class="n">DEFAULT_QUEST_REMOVE_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="job_complete"><a class="viewcode-back" href="../../../../python/casm.seqquest.seqquest_io.job_complete.html#casm.seqquest.seqquest_io.job_complete">[docs]</a><span class="k">def</span> <span class="nf">job_complete</span><span class="p">(</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;return True if the seqquest job at path &#39;jobdir&#39; is complete&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;lcao.out&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">outfile</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">outfile</span><span class="o">+</span><span class="s2">&quot;.gz&quot;</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">LcaoOUT</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="get_lcao_tag"><a class="viewcode-back" href="../../../../python/casm.seqquest.seqquest_io.get_lcao_tag.html#casm.seqquest.seqquest_io.get_lcao_tag">[docs]</a><span class="k">def</span> <span class="nf">get_lcao_tag</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Opens lcao.in in &#39;jobdir&#39; and returns &#39;key&#39; value &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">tlcaoin</span> <span class="o">=</span> <span class="n">LcaoIN</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">tlcaoin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SeqquestIO"><a class="viewcode-back" href="../../../../python/casm.seqquest.seqquest_io.SeqquestIO.html#casm.seqquest.seqquest_io.SeqquestIO">[docs]</a><span class="k">class</span> <span class="nc">SeqquestIO</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Generate a set of SeqQuest input files from settings files</span>
+
+<span class="sd">        Contains:</span>
+<span class="sd">            self.geom: Geometry object</span>
+<span class="sd">            self.lcao_in: LcaoIN object</span>
+<span class="sd">            self.species: Species dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SeqquestIO.__init__"><a class="viewcode-back" href="../../../../python/casm.seqquest.seqquest_io.SeqquestIO.html#casm.seqquest.seqquest_io.SeqquestIO.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lcao_in_file</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">,</span> <span class="n">extra_input_files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Construct a Seqquest IO object</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                lcao_in_file:  path to lcao.in template file</span>
+<span class="sd">                super_poscarfile: path to POS for this configuration</span>
+<span class="sd">                speciesfile: path to SPECIES file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">species</span> <span class="o">=</span> <span class="n">species_settings</span><span class="p">(</span><span class="n">speciesfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcao_in</span> <span class="o">=</span> <span class="n">LcaoIN</span><span class="p">(</span><span class="n">lcao_in_file</span><span class="p">,</span> <span class="n">speciesfile</span><span class="o">=</span><span class="n">speciesfile</span><span class="p">,</span> <span class="n">POS</span><span class="o">=</span><span class="n">super_poscarfile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">extra_input_files</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extra_input_files</span> <span class="o">=</span> <span class="n">extra_input_files</span></div>
+
+<div class="viewcode-block" id="SeqquestIO.write_atomfile"><a class="viewcode-back" href="../../../../python/casm.seqquest.seqquest_io.SeqquestIO.html#casm.seqquest.seqquest_io.SeqquestIO.write_atomfile">[docs]</a>    <span class="k">def</span> <span class="nf">write_atomfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write symlinks to the atom files &quot;&quot;&quot;</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Get all the unique *.atm files</span>
+        <span class="k">for</span> <span class="n">indiv_spec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">indiv_spec</span><span class="o">.</span><span class="n">atm_location</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+                <span class="n">links</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indiv_spec</span><span class="o">.</span><span class="n">atm_location</span><span class="p">)</span>
+        <span class="c1"># Create symlinks</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+            <span class="n">my_link</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">atm_dir</span><span class="p">,</span> <span class="n">link</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">my_link</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">link</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SeqquestIO.write"><a class="viewcode-back" href="../../../../python/casm.seqquest.seqquest_io.SeqquestIO.html#casm.seqquest.seqquest_io.SeqquestIO.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write SeqQuest input files in directory &#39;dirpath&#39; &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_atomfile</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcao_in</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">),</span>
+                           <span class="n">geom_filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">))</span>
+
+
+        <span class="c1"># copy extra input files</span>
+        <span class="k">for</span> <span class="n">e_file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_input_files</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">e_file</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

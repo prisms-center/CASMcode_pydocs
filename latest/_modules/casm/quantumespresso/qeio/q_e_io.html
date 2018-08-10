@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.quantumespresso.qeio.q_e_io &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.quantumespresso.qeio.q_e_io</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.quantumespresso.qeio.q_e_io</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">casm.quantumespresso.qeio</span> <span class="k">import</span> <span class="n">infile</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">poscar</span>
+
+<span class="c1">#VASP_INPUT_FILE_LIST = [&quot;INCAR&quot;, &quot;STOPCAR&quot;, &quot;POTCAR&quot;, &quot;KPOINTS&quot;, &quot;POSCAR&quot;,\</span>
+<span class="c1">#                        &quot;EXHCAR&quot;, &quot;CHGCAR&quot;, &quot;WAVECAR&quot;, &quot;TMPCAR&quot;]</span>
+
+<span class="n">DEFAULT_QE_MOVE_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">DEFAULT_QE_COPY_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">DEFAULT_QE_REMOVE_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<div class="viewcode-block" id="QuantumEspressoIOError"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.QuantumEspressoIOError.html#casm.quantumespresso.qeio.QuantumEspressoIOError">[docs]</a><span class="k">class</span> <span class="nc">QuantumEspressoIOError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="job_complete"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.job_complete.html#casm.quantumespresso.qeio.job_complete">[docs]</a><span class="k">def</span> <span class="nf">job_complete</span><span class="p">(</span><span class="n">outfilename</span><span class="p">,</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return True if Quantum Espresso job at path &#39;jobdir&#39; is complete&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+    <span class="n">myoutfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">myoutfile</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">myoutfile</span><span class="o">+</span><span class="s2">&quot;.gz&quot;</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">outfile</span><span class="o">.</span><span class="n">Outfile</span><span class="p">(</span><span class="n">myoutfile</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="get_infile_tag"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.get_infile_tag.html#casm.quantumespresso.qeio.get_infile_tag">[docs]</a><span class="k">def</span> <span class="nf">get_infile_tag</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">infilename</span><span class="p">,</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Opens Infile in &#39;jobdir&#39; and returns &#39;key&#39; value.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">tinfile</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">Infile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">infilename</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;CONTROL&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;CONTROL&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CONTROL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CONTROL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;SYSTEM&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;ELECTRONS&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;ELECTRONS&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;ELECTRONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;ELECTRONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;IONS&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;IONS&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;IONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;IONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;CELL&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;CELL&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CELL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CELL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>    
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="set_infile_tag"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.set_infile_tag.html#casm.quantumespresso.qeio.set_infile_tag">[docs]</a><span class="k">def</span> <span class="nf">set_infile_tag</span><span class="p">(</span><span class="n">tag_dict</span><span class="p">,</span><span class="n">infilename</span><span class="p">,</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Opens Infile in &#39;jobdir&#39;, sets &#39;key&#39; value, and writes Infile</span>
+<span class="sd">        If &#39;val&#39; == None, the tag is removed from the Infile.</span>
+<span class="sd">        DOES NOT TYPE CHECK THE TAGS IN TAG_DICT</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">myinfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">infilename</span><span class="p">)</span>
+    <span class="n">tinfile</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">Infile</span><span class="p">(</span><span class="n">myinfile</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">tag_dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;CONTROL&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;CONTROL&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CONTROL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">del</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CONTROL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CONTROL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;SYSTEM&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">del</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;ELECTRONS&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;ELECTRONS&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;ELECTRONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">del</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;ELECTRONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;ELECTRONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;IONS&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;IONS&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;IONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">del</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;IONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;IONS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">infile</span><span class="o">.</span><span class="n">QUANTUM_ESPRESSO_TOTAL_LIST</span><span class="p">[</span><span class="s1">&#39;CELL&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;CELL&quot;</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CELL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="k">del</span> <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CELL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tinfile</span><span class="o">.</span><span class="n">namelists</span><span class="p">[</span><span class="s2">&quot;CELL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">tinfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">myinfile</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ionic_steps"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.ionic_steps.html#casm.quantumespresso.qeio.ionic_steps">[docs]</a><span class="k">def</span> <span class="nf">ionic_steps</span><span class="p">(</span><span class="n">outfilename</span><span class="p">,</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the number of ionic steps completed in &#39;jobdir&#39;&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">toutfile</span> <span class="o">=</span> <span class="n">outfile</span><span class="o">.</span><span class="n">Outfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">outfilename</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">toutfile</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">QuantumEspressoIOError</span><span class="p">(</span><span class="s2">&quot;Could not read number of ionic steps from &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">outfilename</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="write_quantum_espresso_input"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.write_quantum_espresso_input.html#casm.quantumespresso.qeio.write_quantum_espresso_input">[docs]</a><span class="k">def</span> <span class="nf">write_quantum_espresso_input</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">infilename</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra_input_files</span><span class="o">=</span><span class="p">[],</span> <span class="n">strict_kpoints</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Write Quantum Espresso input files in directory &#39;dirpath&#39; &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting up Quantum Espresso input files:&quot;</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">)</span>
+
+
+    <span class="c1"># read Infile for K_POINTS, CELL_PARAMETERS, and generate super kpoints</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading Infile:&quot;</span><span class="p">,</span> <span class="n">infilename</span><span class="p">)</span>
+    <span class="n">myinfile</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">Infile</span><span class="p">(</span><span class="n">infilename</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading SPECIES:&quot;</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">)</span>
+    <span class="n">species_settings</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">species_settings</span><span class="p">(</span><span class="n">speciesfile</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading K_POINTS from:&quot;</span><span class="p">,</span> <span class="n">infilename</span><span class="p">)</span>
+    <span class="n">prim_kpoints</span> <span class="o">=</span> <span class="n">myinfile</span><span class="o">.</span><span class="n">cards</span><span class="p">[</span><span class="s2">&quot;K_POINTS&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading K_POINTS reference positions from CELL_PARAMETERS:&quot;</span><span class="p">,</span> <span class="n">infilename</span><span class="p">)</span>
+    <span class="n">prim</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">infilename</span><span class="p">,</span><span class="n">species_settings</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading supercell POS:&quot;</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">)</span>
+    <span class="nb">super</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">species_settings</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Generating supercell KPOINTS&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strict_kpoints</span><span class="p">:</span>
+        <span class="n">super_kpoints</span> <span class="o">=</span> <span class="n">prim_kpoints</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">super_kpoints</span> <span class="o">=</span> <span class="n">prim_kpoints</span><span class="o">.</span><span class="n">super_kpoints</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="nb">super</span><span class="p">)</span>
+
+    <span class="c1">#get raw infile name (without directories)</span>
+    <span class="n">directories</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="n">infilename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">directories</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">infilename</span><span class="o">=</span><span class="n">directories</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># write main input file</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Writing supercell positions to Infile&quot;</span><span class="p">)</span>
+    <span class="n">myinfile</span><span class="o">.</span><span class="n">rewrite_poscar_info</span><span class="p">(</span><span class="nb">super</span><span class="p">,</span><span class="n">species_settings</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Writing supercell K_POINTS to Infile&quot;</span><span class="p">)</span>
+    <span class="n">myinfile</span><span class="o">.</span><span class="n">cards</span><span class="p">[</span><span class="s2">&quot;K_POINTS&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">super_kpoints</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Writing Infile:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="n">infilename</span><span class="p">))</span>
+    <span class="n">myinfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="n">infilename</span><span class="p">))</span>
+
+    <span class="c1"># copy extra input files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Copying extra input files&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">extra_input_files</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">dirpath</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantum Espresso input files complete</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.project.DirectoryStructure &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.project.Project" href="casm.project.Project.html" />
+    <link rel="prev" title="casm.project.ProjectSettings" href="casm.project.ProjectSettings.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-project">casm.project</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.project.project_path.html">casm.project.project_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.html">casm.project.ClexDescription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.html">casm.project.ProjectSettings</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.project.DirectoryStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.html">casm.project.Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Prim.html">casm.project.Prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Selection.html">casm.project.Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.query.html">casm.project.query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.write_eci.html">casm.project.write_eci</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.project.DirectoryStructure</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.project.DirectoryStructure.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-project-directorystructure">
+<h1>casm.project.DirectoryStructure<a class="headerlink" href="#casm-project-directorystructure" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.project.DirectoryStructure">
+<em class="property">class </em><code class="descclassname">casm.project.</code><code class="descname">DirectoryStructure</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Standard file and directory locations for a CASM project</p>
+<p>Construct a CASM Project DirectoryStructure representation.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>path: path to CASM project (Default=None, uses project containing current directory).</dd>
+</dl>
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a CASM Project DirectoryStructure representation.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>path: path to CASM project (Default=None, uses project containing current directory).</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.POS" title="casm.project.DirectoryStructure.POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">POS</span></code></a>(configname)</td>
+<td>Return path to POS file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.__init__" title="casm.project.DirectoryStructure.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([path])</td>
+<td>Construct a CASM Project DirectoryStructure representation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.all_bset" title="casm.project.DirectoryStructure.all_bset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_bset</span></code></a>()</td>
+<td>Check filesystem directory structure and return list of all basis set names</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.all_calctype" title="casm.project.DirectoryStructure.all_calctype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_calctype</span></code></a>()</td>
+<td>Check filesystem directory structure and return list of all calctype names</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.all_clex_name" title="casm.project.DirectoryStructure.all_clex_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_clex_name</span></code></a>()</td>
+<td>Check filesystem directory structure and return list of all cluster expansion names</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.all_eci" title="casm.project.DirectoryStructure.all_eci"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_eci</span></code></a>(property,&nbsp;calctype,&nbsp;ref,&nbsp;bset)</td>
+<td>Check filesystem directory structure and return list of all eci names</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.all_ref" title="casm.project.DirectoryStructure.all_ref"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_ref</span></code></a>(calctype)</td>
+<td>Check filesystem directory structure and return list of all ref names for a given calctype</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.basis" title="casm.project.DirectoryStructure.basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">basis</span></code></a>(clex)</td>
+<td>Returns path to the basis.json file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.bset_dir" title="casm.project.DirectoryStructure.bset_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bset_dir</span></code></a>(clex)</td>
+<td>Return path to directory contain basis set info</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.bspecs" title="casm.project.DirectoryStructure.bspecs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bspecs</span></code></a>(clex)</td>
+<td>Return basis function specs (bspecs.json) file path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.calc_settings_dir" title="casm.project.DirectoryStructure.calc_settings_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_settings_dir</span></code></a>(clex)</td>
+<td>Return calculation settings directory path, for global settings</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.calctype_dir" title="casm.project.DirectoryStructure.calctype_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calctype_dir</span></code></a>(configname,&nbsp;clex)</td>
+<td>Return calctype directory path (e.g.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.calculated_properties" title="casm.project.DirectoryStructure.calculated_properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculated_properties</span></code></a>(configname,&nbsp;clex)</td>
+<td>Return calculated properties file path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.casm_dir" title="casm.project.DirectoryStructure.casm_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">casm_dir</span></code></a>()</td>
+<td>Return hidden .casm dir path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.chemical_reference" title="casm.project.DirectoryStructure.chemical_reference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chemical_reference</span></code></a>(clex)</td>
+<td>Return chemical reference file path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.clexulator_dir" title="casm.project.DirectoryStructure.clexulator_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clexulator_dir</span></code></a>(clex)</td>
+<td>Returns path to directory containing global clexulator</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.clexulator_o" title="casm.project.DirectoryStructure.clexulator_o"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clexulator_o</span></code></a>(project,&nbsp;clex)</td>
+<td>Returns path to global clexulator.o file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.clexulator_so" title="casm.project.DirectoryStructure.clexulator_so"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clexulator_so</span></code></a>(project,&nbsp;clex)</td>
+<td>Returns path to global clexulator so file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.clexulator_src" title="casm.project.DirectoryStructure.clexulator_src"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clexulator_src</span></code></a>(project,&nbsp;clex)</td>
+<td>Returns path to global clexulator source file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.clust" title="casm.project.DirectoryStructure.clust"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clust</span></code></a>(clex)</td>
+<td>Returns path to the clust.json file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.composition_axes" title="casm.project.DirectoryStructure.composition_axes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">composition_axes</span></code></a>()</td>
+<td>Return composition axes file path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.config_list" title="casm.project.DirectoryStructure.config_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">config_list</span></code></a>()</td>
+<td>Return master config_list.json file path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.configuration_calc_settings_dir" title="casm.project.DirectoryStructure.configuration_calc_settings_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration_calc_settings_dir</span></code></a>(configname,&nbsp;clex)</td>
+<td>Return calculation settings directory path, for configuration specific settings</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.configuration_dir" title="casm.project.DirectoryStructure.configuration_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration_dir</span></code></a>(configname)</td>
+<td>Return configuration directory path (configname has format SCELV_A_B_C_D_E_F/I)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.crystal_point_group" title="casm.project.DirectoryStructure.crystal_point_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crystal_point_group</span></code></a>()</td>
+<td>Return crystal_point_group.json path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.eci" title="casm.project.DirectoryStructure.eci"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eci</span></code></a>(clex)</td>
+<td>Returns path to eci.json</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.eci_dir" title="casm.project.DirectoryStructure.eci_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eci_dir</span></code></a>(clex)</td>
+<td>Returns path to eci directory</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.factor_group" title="casm.project.DirectoryStructure.factor_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor_group</span></code></a>()</td>
+<td>Return factor_group.json path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.lattice_point_group" title="casm.project.DirectoryStructure.lattice_point_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lattice_point_group</span></code></a>()</td>
+<td>Return lattice_point_group.json path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.prim" title="casm.project.DirectoryStructure.prim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prim</span></code></a>()</td>
+<td>Return prim.json path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.project_settings" title="casm.project.DirectoryStructure.project_settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_settings</span></code></a>()</td>
+<td>Return project_settings.json path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.property_dir" title="casm.project.DirectoryStructure.property_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property_dir</span></code></a>(clex)</td>
+<td>Returns path to eci directory</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.ref_dir" title="casm.project.DirectoryStructure.ref_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ref_dir</span></code></a>(clex)</td>
+<td>Return calculation reference settings directory path, for global settings</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.root_dir" title="casm.project.DirectoryStructure.root_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root_dir</span></code></a>()</td>
+<td>Return casm project directory path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.scel_list" title="casm.project.DirectoryStructure.scel_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scel_list</span></code></a>(scelname)</td>
+<td>Return master scel_list.json path</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.settings_path_crawl" title="casm.project.DirectoryStructure.settings_path_crawl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">settings_path_crawl</span></code></a>(filename,&nbsp;configname,&nbsp;clex)</td>
+<td>Returns the path to the first file named ‘filename’ found in the settings directories.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.supercell_calc_settings_dir" title="casm.project.DirectoryStructure.supercell_calc_settings_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">supercell_calc_settings_dir</span></code></a>(scelname,&nbsp;clex)</td>
+<td>Return calculation settings directory path, for supercell specific settings</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.DirectoryStructure.supercell_dir" title="casm.project.DirectoryStructure.supercell_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">supercell_dir</span></code></a>(scelname)</td>
+<td>Return supercell directory path (scelname has format SCELV_A_B_C_D_E_F)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.DirectoryStructure.symmetry_dir" title="casm.project.DirectoryStructure.symmetry_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetry_dir</span></code></a>()</td>
+<td>Return symmetry directory path</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.POS">
+<code class="descname">POS</code><span class="sig-paren">(</span><em>configname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return path to POS file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure._DirectoryStructure__all_settings">
+<code class="descname">_DirectoryStructure__all_settings</code><span class="sig-paren">(</span><em>pattern</em>, <em>location</em><span class="sig-paren">)</span><a class="headerlink" href="#casm.project.DirectoryStructure._DirectoryStructure__all_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all directories at ‘location’ that match ‘pattern.something’
+and return a std::vector of the ‘something’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.all_bset">
+<code class="descname">all_bset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.all_bset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.all_bset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check filesystem directory structure and return list of all basis set names</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.all_calctype">
+<code class="descname">all_calctype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.all_calctype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.all_calctype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check filesystem directory structure and return list of all calctype names</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.all_clex_name">
+<code class="descname">all_clex_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.all_clex_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.all_clex_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check filesystem directory structure and return list of all cluster expansion names</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.all_eci">
+<code class="descname">all_eci</code><span class="sig-paren">(</span><em>property</em>, <em>calctype</em>, <em>ref</em>, <em>bset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.all_eci"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.all_eci" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check filesystem directory structure and return list of all eci names</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.all_ref">
+<code class="descname">all_ref</code><span class="sig-paren">(</span><em>calctype</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.all_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.all_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check filesystem directory structure and return list of all ref names for a given calctype</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.basis">
+<code class="descname">basis</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.basis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to the basis.json file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.bset_dir">
+<code class="descname">bset_dir</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.bset_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.bset_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return path to directory contain basis set info</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.bspecs">
+<code class="descname">bspecs</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.bspecs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.bspecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return basis function specs (bspecs.json) file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.calc_settings_dir">
+<code class="descname">calc_settings_dir</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.calc_settings_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.calc_settings_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return calculation settings directory path, for global settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.calctype_dir">
+<code class="descname">calctype_dir</code><span class="sig-paren">(</span><em>configname</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.calctype_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.calctype_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return calctype directory path (e.g. training_data/<a href="#id1"><span class="problematic" id="id2">SCEL_</span></a>…../0/calctype.default</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.calculated_properties">
+<code class="descname">calculated_properties</code><span class="sig-paren">(</span><em>configname</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.calculated_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.calculated_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return calculated properties file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.casm_dir">
+<code class="descname">casm_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.casm_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.casm_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return hidden .casm dir path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.chemical_reference">
+<code class="descname">chemical_reference</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.chemical_reference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.chemical_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return chemical reference file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.clexulator_dir">
+<code class="descname">clexulator_dir</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.clexulator_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.clexulator_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to directory containing global clexulator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.clexulator_o">
+<code class="descname">clexulator_o</code><span class="sig-paren">(</span><em>project</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.clexulator_o"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.clexulator_o" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to global clexulator.o file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.clexulator_so">
+<code class="descname">clexulator_so</code><span class="sig-paren">(</span><em>project</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.clexulator_so"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.clexulator_so" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to global clexulator so file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.clexulator_src">
+<code class="descname">clexulator_src</code><span class="sig-paren">(</span><em>project</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.clexulator_src"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.clexulator_src" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to global clexulator source file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.clust">
+<code class="descname">clust</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.clust"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.clust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to the clust.json file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.composition_axes">
+<code class="descname">composition_axes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.composition_axes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.composition_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return composition axes file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.config_list">
+<code class="descname">config_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.config_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.config_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return master config_list.json file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.configuration_calc_settings_dir">
+<code class="descname">configuration_calc_settings_dir</code><span class="sig-paren">(</span><em>configname</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.configuration_calc_settings_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.configuration_calc_settings_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return calculation settings directory path, for configuration specific settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.configuration_dir">
+<code class="descname">configuration_dir</code><span class="sig-paren">(</span><em>configname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.configuration_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.configuration_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return configuration directory path (configname has format SCELV_A_B_C_D_E_F/I)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.crystal_point_group">
+<code class="descname">crystal_point_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.crystal_point_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.crystal_point_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return crystal_point_group.json path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.eci">
+<code class="descname">eci</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.eci"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.eci" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to eci.json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clex</strong> (<em>a casm.project.ClexDescription instance</em>) – Specifies the cluster expansion to get the eci.json for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>p</strong> (<em>str</em>) – Path to the eci directory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.eci_dir">
+<code class="descname">eci_dir</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.eci_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.eci_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to eci directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clex</strong> (<em>a casm.project.ClexDescription instance</em>) – Specifies the cluster expansion to get the eci directory for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>p</strong> (<em>str</em>) – Path to the eci directory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.factor_group">
+<code class="descname">factor_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.factor_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.factor_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return factor_group.json path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.lattice_point_group">
+<code class="descname">lattice_point_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.lattice_point_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.lattice_point_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return lattice_point_group.json path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.prim">
+<code class="descname">prim</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.prim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.prim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return prim.json path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.project_settings">
+<code class="descname">project_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.project_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.project_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return project_settings.json path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.property_dir">
+<code class="descname">property_dir</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.property_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.property_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to eci directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.ref_dir">
+<code class="descname">ref_dir</code><span class="sig-paren">(</span><em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.ref_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.ref_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return calculation reference settings directory path, for global settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.root_dir">
+<code class="descname">root_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.root_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.root_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return casm project directory path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.scel_list">
+<code class="descname">scel_list</code><span class="sig-paren">(</span><em>scelname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.scel_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.scel_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return master scel_list.json path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.settings_path_crawl">
+<code class="descname">settings_path_crawl</code><span class="sig-paren">(</span><em>filename</em>, <em>configname</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.settings_path_crawl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.settings_path_crawl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the path to the first file named ‘filename’ found in the settings
+directories.</p>
+<dl class="docutils">
+<dt>Searches:</dt>
+<dd><ol class="first arabic simple">
+<li>self.configuration_calc_settings_dir(configname, clex)</li>
+<li>self.supercell_calc_settings_dir(scelname, clex)</li>
+</ol>
+<p class="last">3) self.calc_settings_dir(clex)
+DirectoryStructure.configuration_calc_settings_dir(configname, clex)Crawl casm directory structure starting at configdir and moving upwards</p>
+</dd>
+</dl>
+<p>Returns None if file named ‘filename’ not found in any of the three directories.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – The name of the file being searched for</li>
+<li><strong>configname</strong> (<em>str</em>) – The name of the configuration</li>
+<li><strong>clex</strong> (<em>a casm.project.ClexDescription instance</em>) – Used to specify the calctype to find settings for</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>filepath</strong> (<em>str or None</em>) – The path to the first file named ‘filename’ found in the settings
+directories, or None if not found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.supercell_calc_settings_dir">
+<code class="descname">supercell_calc_settings_dir</code><span class="sig-paren">(</span><em>scelname</em>, <em>clex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.supercell_calc_settings_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.supercell_calc_settings_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return calculation settings directory path, for supercell specific settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.supercell_dir">
+<code class="descname">supercell_dir</code><span class="sig-paren">(</span><em>scelname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.supercell_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.supercell_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return supercell directory path (scelname has format SCELV_A_B_C_D_E_F)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.DirectoryStructure.symmetry_dir">
+<code class="descname">symmetry_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#DirectoryStructure.symmetry_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.DirectoryStructure.symmetry_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symmetry directory path</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.project.Project.html" class="btn btn-neutral float-right" title="casm.project.Project" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.project.ProjectSettings.html" class="btn btn-neutral" title="casm.project.ProjectSettings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

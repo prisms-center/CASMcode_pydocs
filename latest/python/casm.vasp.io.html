@@ -1,0 +1,945 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.vasp.io &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.vasp.VaspError" href="casm.vasp.VaspError.html" />
+    <link rel="prev" title="casm.seqquest.seqquest_io.species_settings" href="casm.seqquest.seqquest_io.species_settings.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.vasp.io</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.VaspError.html">casm.vasp.VaspError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.VaspWarning.html">casm.vasp.VaspWarning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.continue_job.html">casm.vasp.continue_job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.IbzkptError.html">casm.vasp.IbzkptError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.FEXCFError.html">casm.vasp.FEXCFError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.SubSpaceMatrixError.html">casm.vasp.SubSpaceMatrixError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.InisymError.html">casm.vasp.InisymError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.SgrconError.html">casm.vasp.SgrconError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.WavecarError.html">casm.vasp.WavecarError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.NbandsError.html">casm.vasp.NbandsError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.NoConvergeError.html">casm.vasp.NoConvergeError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.FreezeError.html">casm.vasp.FreezeError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.error_check.html">casm.vasp.error_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.crash_check.html">casm.vasp.crash_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.complete_job.html">casm.vasp.complete_job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.run.html">casm.vasp.run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.Relax.html">casm.vasp.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.Converge.html">casm.vasp.Converge</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.vasp.io</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.vasp.io.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-casm.vasp.io">
+<span id="casm-vasp-io"></span><h1>casm.vasp.io<a class="headerlink" href="#module-casm.vasp.io" title="Permalink to this headline">¶</a></h1>
+<p>Tools for VASP input and output</p>
+<dl class="exception">
+<dt id="casm.vasp.io.VaspIOError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">VaspIOError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#VaspIOError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.VaspIOError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.VaspIOError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.VaspIOError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.job_complete">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">job_complete</code><span class="sig-paren">(</span><em>jobdir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#job_complete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.job_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if vasp job at path ‘jobdir’ is complete</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.get_incar_tag">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">get_incar_tag</code><span class="sig-paren">(</span><em>key</em>, <em>jobdir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#get_incar_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.get_incar_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens INCAR in ‘jobdir’ and returns ‘key’ value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.set_incar_tag">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">set_incar_tag</code><span class="sig-paren">(</span><em>tag_dict</em>, <em>jobdir=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#set_incar_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.set_incar_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens INCAR in ‘jobdir’, sets ‘key’ value, and writes INCAR
+If ‘val’ is None, the tag is removed from the INCAR.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.ionic_steps">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">ionic_steps</code><span class="sig-paren">(</span><em>jobdir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#ionic_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.ionic_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the number of ionic steps completed in ‘jobdir’</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.write_potcar">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">write_potcar</code><span class="sig-paren">(</span><em>filename</em>, <em>poscar</em>, <em>species</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#write_potcar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.write_potcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write an appropriate POTCAR</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.write_stopcar">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">write_stopcar</code><span class="sig-paren">(</span><em>mode='e'</em>, <em>jobdir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#write_stopcar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.write_stopcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write STOPCAR file with two modes:
+mode = ‘e’ for ‘VASP stops at the next electronic step’
+mode = ‘i’ for ‘VASP stops at the next ionic step’</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.write_vasp_input">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">write_vasp_input</code><span class="sig-paren">(</span><em>dirpath</em>, <em>incarfile</em>, <em>prim_kpointsfile</em>, <em>prim_poscarfile</em>, <em>super_poscarfile</em>, <em>speciesfile</em>, <em>sort=True</em>, <em>extra_input_files=[]</em>, <em>strict_kpoints=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/io.html#write_vasp_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.write_vasp_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write VASP input files in directory ‘dirpath’</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.IncarError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">IncarError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#IncarError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.IncarError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.IncarError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.IncarError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Incar">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Incar</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em>, <em>poscar=None</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#Incar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Incar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>The INCAR class contains:</dt>
+<dd>tags: a dict of all INCAR settings</dd>
+</dl>
+<p>All input tags and associated values are stored as key-value pairs in the dicionary called ‘tags’.</p>
+<p>Construct an Incar object from ‘filename’</p>
+<dl class="method">
+<dt id="casm.vasp.io.Incar._check_string_tag">
+<code class="descname">_check_string_tag</code><span class="sig-paren">(</span><em>tag</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#Incar._check_string_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Incar._check_string_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that string-valued tags are allowed values</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Incar._make_natural_type">
+<code class="descname">_make_natural_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#Incar._make_natural_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Incar._make_natural_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert self.tags values from strings into their ‘natural type’ (int, float, etc.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Incar._verify_tags">
+<code class="descname">_verify_tags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#Incar._verify_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Incar._verify_tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that only allowed INCAR tags are in self.tags</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Incar.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em>, <em>poscar=None</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#Incar.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Incar.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read an INCAR file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Incar.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>species</em>, <em>poscar</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/incar.html#Incar.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Incar.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update Incar object to reflect Species settings</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.KpointsError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">KpointsError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/kpoints.html#KpointsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.KpointsError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.KpointsError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.KpointsError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Kpoints">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Kpoints</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/kpoints.html#Kpoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Kpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>The Kpoints class contains:</dt>
+<dd><p class="first">self.header: (str) the first line from the KPOINTS file being read
+self.num_points: (int) contains the value in the second line (0=&gt;automatic)
+self.subdivisions: (list of int) the number of kpoints along each of the vectors in reciprocal space</p>
+<blockquote>
+<div>or the kpoint total “length” if the mode is Automatic</div></blockquote>
+<p class="last">self.automode: (str) Gamma/Monkhorst-Pack/Automatic
+self.shift: (list of float) the shifts that are added to the automatically generated points</p>
+</dd>
+</dl>
+<p>Constructs a Kpoints object from a KPOINTS file</p>
+<dl class="method">
+<dt id="casm.vasp.io.Kpoints.density">
+<code class="descname">density</code><span class="sig-paren">(</span><em>poscar</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/kpoints.html#Kpoints.density"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Kpoints.density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the kpoint density with respect to a Poscar.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>poscar: a Poscar object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Kpoints.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/kpoints.html#Kpoints.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Kpoints.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a KPOINTS file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Kpoints.super_kpoints">
+<code class="descname">super_kpoints</code><span class="sig-paren">(</span><em>prim</em>, <em>super</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/kpoints.html#Kpoints.super_kpoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Kpoints.super_kpoints" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Assuming ‘self’ is the kpoints associated with a PRIM, it uses a scaling method to calculate</dt>
+<dd>the kpoint-mesh for a supercell, such that it has a equal or greater kpoint
+density than the prim. If the kpoints associated with a PRIM are mode ‘a’ then this
+process is bypassed: VASP will correctly scale the kpoints by the supercell reciprocal
+lattice at runtime.</dd>
+<dt>Returns:</dt>
+<dd>super_kpoints: a Kpoints object for the supercell</dd>
+<dt>Args:</dt>
+<dd>prim: Poscar object for the prim OR None (if self.automode = ‘a’)
+super: a Poscar object for the supercell (not used if self.automode = ‘a’)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Kpoints.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/kpoints.html#Kpoints.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Kpoints.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a KPOINTS file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.OutcarError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">OutcarError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/outcar.html#OutcarError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.OutcarError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.OutcarError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.OutcarError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Outcar">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Outcar</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/outcar.html#Outcar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Outcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parse OUTCAR files.</p>
+<dl class="docutils">
+<dt>Currently, just contains:</dt>
+<dd>self.complete = True/False
+self.slowest_loop = float
+self.kpoints = list of int, or none</dd>
+</dl>
+<dl class="method">
+<dt id="casm.vasp.io.Outcar.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/outcar.html#Outcar.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Outcar.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse OUTCAR file.  Currently checks for:
+completion
+loop time
+kpoints
+lorbit (LORBIT value from INCAR)
+ispin (ISPIN value from INCAR)
+magnetization (if LORBIT = 1, 2, 11, 12)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.OszicarError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">OszicarError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/oszicar.html#OszicarError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.OszicarError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.OszicarError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.OszicarError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Oszicar">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Oszicar</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/oszicar.html#Oszicar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Oszicar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parse OSZICAR files.</p>
+<dl class="docutils">
+<dt>Currently, just contains:</dt>
+<dd>self.E = list of ionic step E0 values
+self.mag = list of ionic step magnetic moment values</dd>
+</dl>
+<dl class="method">
+<dt id="casm.vasp.io.Oszicar.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/oszicar.html#Oszicar.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Oszicar.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse OSZICAR file. Currently just collects E0 as list ‘self.E’</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Site">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Site</code><span class="sig-paren">(</span><em>cart</em>, <em>position</em>, <em>SD_FLAG=''</em>, <em>occupant=''</em>, <em>occ_alias=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Site"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Site in a basis.</p>
+<dl class="docutils">
+<dt>Contains:</dt>
+<dd>self.cart = True if cartesian coordinate
+self.SD_FLAG = string for selective dynamics description, empty string by default (ex. “T F F”).
+self.occupant = CASM specie name, empty string by default
+self.occ_alias = alias (POTCAR) name, empty string by default
+self.position = np.array coordinate</dd>
+</dl>
+<p>Site constructor</p>
+<dl class="method">
+<dt id="casm.vasp.io.Site.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Site.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Site.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write this Site to a file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.PoscarError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">PoscarError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#PoscarError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.PoscarError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.PoscarError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.PoscarError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Poscar">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Poscar</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em>, <em>legacy_support=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>The Poscar class contains:</dt>
+<dd>self.header: Contains POSCAR header line with whitespace stripped from beginning and end
+self.scaling: lattice scale
+self._lattice: the lattice; lattice vectors are stored as rows in a numpy array
+self._reciprocal_lattice: the reciprocal lattice; lattice vectors are stored as rows in a numpy array
+self.SD_FLAG: True or False, Selective Dynamics Flag
+self.type_atoms: lists the specie names as in the POS (ex. [Mn3 Mn4])
+self.type_atoms_alias: lists the POTCAR names for the species
+self.num_atoms: lists the atoms as in the POS (ex. [1 1])
+self.coord_mode: Contains the coordinate mode text from POSCAR, with whitespace stripped from beginning and end
+self.basis: a list of Site objects</dd>
+</dl>
+<p>Construct a Poscar object from ‘filename’</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename = POS/POSCAR file to read
+species = (default None) If given a Species dict, it is used to set self.type_atoms_alias for determining which POTCARs to use</dd>
+</dl>
+<dl class="method">
+<dt id="casm.vasp.io.Poscar._read_atominfo">
+<code class="descname">_read_atominfo</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar._read_atominfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar._read_atominfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read() to read the 2 lines that correspond to the num_atoms and type_atoms
+in a VASP5 style POSCAR</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file: an open POSCAR being read from</dd>
+</dl>
+<p>self.type_atoms is a list of strings corresponding to atom names
+self.num_atoms is a list of int corresponding to the number of each atom type
+self.type_atoms_alias is set from self.type_atoms</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar._read_atominfo_legacy">
+<code class="descname">_read_atominfo_legacy</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar._read_atominfo_legacy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar._read_atominfo_legacy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read() to read the lines that correspond to the num_atoms and type_atoms
+in a VASP4 style POSCAR</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file: an open POSCAR being read from</dd>
+</dl>
+<p>self.type_atoms is a list of strings corresponding to atom names
+self.num_atoms is a list of int corresponding to the number of each atom type
+self.type_atoms_alias is set from self.type_atoms</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar._read_basis">
+<code class="descname">_read_basis</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar._read_basis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar._read_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read() to read basis of POSCAR file into self.basis</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file: an open POSCAR being read from</dd>
+</dl>
+<p>self.basis is a list of Site objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar._read_basis_legacy">
+<code class="descname">_read_basis_legacy</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar._read_basis_legacy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar._read_basis_legacy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read() to read basis of VASP4  POSCAR file into self.basis</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file: an open POSCAR being read from</dd>
+</dl>
+<p>self.basis is a list of Site objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar._read_flags">
+<code class="descname">_read_flags</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar._read_flags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar._read_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read() to read POSCAR flags: Selective Dynamics, and Coord Mode</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file: an open POSCAR being read from</dd>
+</dl>
+<p>self.SD_FLAG = True/False if selective dynamics on
+self.coord_mode = Contains the coordinate mode text, with whitespace stripped from beginning and end</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar._read_lattice">
+<code class="descname">_read_lattice</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar._read_lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar._read_lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read() to read the lattice into self._lattice</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file: an open POSCAR being read from</dd>
+</dl>
+<p>self._lattice contains lattice vectors stored as rows in a numpy array (easy inversion)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.basis_dict">
+<code class="descname">basis_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.basis_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.basis_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary where keys are unique specie ‘alias’ and values are lists of atoms.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.lattice">
+<code class="descname">lattice</code><span class="sig-paren">(</span><em>index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lattice, or lattice vector ‘index’, as numpy array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>filename</em>, <em>species=None</em>, <em>legacy_support=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a POS/POSCAR from ‘filename’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.reciprocal_lattice">
+<code class="descname">reciprocal_lattice</code><span class="sig-paren">(</span><em>index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.reciprocal_lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.reciprocal_lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reciprocal lattice vector ‘index’, as numpy array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.reciprocal_volume">
+<code class="descname">reciprocal_volume</code><span class="sig-paren">(</span><em>reciprocal_lattice=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.reciprocal_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.reciprocal_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns scalar triple product of reciprocal lattice vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.unsort_dict">
+<code class="descname">unsort_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.unsort_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.unsort_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dict to unsort atom order.</p>
+<p>Returns ‘unsort_dict’, for which: unsorted_dict[orig_index] == sorted_index;</p>
+<p>unsorted_dict[sorted_index] == orig_index</p>
+<dl class="docutils">
+<dt>For example:</dt>
+<dd>‘unsort_dict[0]’ returns the index into the unsorted POSCAR of the first atom in the sorted POSCAR</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>species</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set self.type_atoms_alias and self.basis[x].alias according to Species dict.</p>
+<p>Warning: Not sure we want to check equivalence regardless of atom name case</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.volume">
+<code class="descname">volume</code><span class="sig-paren">(</span><em>lattice=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns scalar triple product of lattice vectors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Poscar.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>filename</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/poscar.html#Poscar.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Poscar.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write Poscar to ‘filename’.</p>
+<p>If ‘sort’ = True, sort basis sites to minimize number of POTCARs</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.SpeciesError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">SpeciesError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#SpeciesError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.SpeciesError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.SpeciesError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.SpeciesDict">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">SpeciesDict</code><a class="reference internal" href="../_modules/casm/vasp/io/species.html#SpeciesDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.SpeciesDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dl class="docutils">
+<dt>SpeciesDict subclasses dict so it can hold additional metadata without disrupting routines that</dt>
+<dd>rely on species_setting containing <em>only</em> key/value pairs corresponding to IndividualSpecies</dd>
+</dl>
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None.  Remove all items from D.<a class="headerlink" href="#casm.vasp.io.SpeciesDict.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; a shallow copy of D<a class="headerlink" href="#casm.vasp.io.SpeciesDict.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.fromkeys">
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.SpeciesDict.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new dict with keys from iterable and values equal to value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; D[k] if k in D, else d.  d defaults to None.<a class="headerlink" href="#casm.vasp.io.SpeciesDict.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; a set-like object providing a view on D's items<a class="headerlink" href="#casm.vasp.io.SpeciesDict.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; a set-like object providing a view on D's keys<a class="headerlink" href="#casm.vasp.io.SpeciesDict.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; v, remove specified key and return the corresponding value.<a class="headerlink" href="#casm.vasp.io.SpeciesDict.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.popitem">
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; (k, v), remove and return some (key, value) pair as a<a class="headerlink" href="#casm.vasp.io.SpeciesDict.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>2-tuple; but raise KeyError if D is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.set_available_tags">
+<code class="descname">set_available_tags</code><span class="sig-paren">(</span><em>tags</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#SpeciesDict.set_available_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.SpeciesDict.set_available_tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a metadata member that lists the available tags listed in a SPECIES file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.setdefault">
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; D.get(k,d), also set D[k]=d if k not in D<a class="headerlink" href="#casm.vasp.io.SpeciesDict.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &#x2192; None.  Update D from dict/iterable E and F.<a class="headerlink" href="#casm.vasp.io.SpeciesDict.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.SpeciesDict.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an object providing a view on D's values<a class="headerlink" href="#casm.vasp.io.SpeciesDict.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.IndividualSpecies">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">IndividualSpecies</code><span class="sig-paren">(</span><em>values</em>, <em>tags</em>, <em>potcardir_base</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#IndividualSpecies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.IndividualSpecies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>The IndividualSpecies class contains:</dt>
+<dd><p class="first">self.name: the name as listed in the POS file
+self.alias: the species file lists the name, POSCAR printing uses this string
+self.tags: (dict) the tags that need to be modified in the INCAR for this specie (ex. MAGMOM = -1)</p>
+<blockquote>
+<div>All values are stored as strings.</div></blockquote>
+<dl class="docutils">
+<dt>self.write_potcar: decides if a POTCAR file needs to be written for this specie</dt>
+<dd><dl class="first last docutils">
+<dt>(for example, you have Mn3 and Mn4 but want to write only one POTCAR, set</dt>
+<dd>one of them to true and the other to false)</dd>
+</dl>
+</dd>
+</dl>
+<p class="last">self.potcardir_base: common directory for all POTCARs
+self.potcar_location: location of POTCAR directory relative to self.potcardir_base
+self.potcardir: directory containing particular POTCAR (self.potcardir_base joined with self.potcar_location)</p>
+</dd>
+</dl>
+<p>Construct an IndividualSpecies.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>values: (str list) entries in SPECIES file row
+tags: (str list) column names 4+ in SPECIES file, INCAR tags that need to be modified
+potcardir_base: (str) common directory for all POTCARs</dd>
+</dl>
+<dl class="method">
+<dt id="casm.vasp.io.IndividualSpecies.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#IndividualSpecies.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.IndividualSpecies.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write IndividualSpecies line</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.IndividualSpecies.write_header">
+<code class="descname">write_header</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#IndividualSpecies.write_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.IndividualSpecies.write_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write header to a file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.species_settings">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">species_settings</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#species_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.species_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a SpeciesDict of IndividualSpecies objects, with keys equal to their names.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="casm.vasp.io.write_species_settings">
+<code class="descclassname">casm.vasp.io.</code><code class="descname">write_species_settings</code><span class="sig-paren">(</span><em>species</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/species.html#write_species_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.write_species_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a SPECIES file from a species dict</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.VaspIO">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">VaspIO</code><span class="sig-paren">(</span><em>incarfile</em>, <em>prim_kpointsfile</em>, <em>prim_poscarfile</em>, <em>super_poscarfile</em>, <em>speciesfile</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vaspio.html#VaspIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.VaspIO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Generate a set of VASP input files from settings files</p>
+<dl class="docutils">
+<dt>Contains:</dt>
+<dd>self.incar: Incar object
+self.poscar: Poscar object
+self.kpoints: Kpoints object
+self.species: Species dict</dd>
+</dl>
+<p>Construct a VaspIO object</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>incarfile:  path to INCAR file
+prim_kpointsfile: path to primitive KPOINTS file
+prim_poscarfile: path to primitive POSCAR file
+super_poscarfile: path to POSCAR file for this configuration
+speciesfile: path to SPECIES file</dd>
+</dl>
+<p>This functions reads the input files and generates self.kpoints appropriate for self.poscar
+given that ‘prim_kpointsfile’ is for ‘prim_poscarfile’.</p>
+<dl class="method">
+<dt id="casm.vasp.io.VaspIO.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>dirpath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vaspio.html#VaspIO.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.VaspIO.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write VASP input files in directory ‘dirpath’</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.VaspIO.write_potcar">
+<code class="descname">write_potcar</code><span class="sig-paren">(</span><em>filename</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vaspio.html#VaspIO.write_potcar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.VaspIO.write_potcar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write an appropriate POTCAR</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="casm.vasp.io.VasprunError">
+<em class="property">exception </em><code class="descclassname">casm.vasp.io.</code><code class="descname">VasprunError</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vasprun.html#VasprunError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.VasprunError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="casm.vasp.io.VasprunError.with_traceback">
+<code class="descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.io.VasprunError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="casm.vasp.io.Vasprun">
+<em class="property">class </em><code class="descclassname">casm.vasp.io.</code><code class="descname">Vasprun</code><span class="sig-paren">(</span><em>filename</em>, <em>DOS=False</em>, <em>Band=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vasprun.html#Vasprun"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Vasprun" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An object containing values read from vasprun.xml</p>
+<dl class="docutils">
+<dt>The Vasprun class contains:</dt>
+<dd>self.total_energy: final total energy (‘e_wo_entrp’)
+self.forces: final forces on atoms (2d list of double)
+self.atom_type: list of atom types (list of str)
+self.atoms_per_type: list of number of atoms for each atom type (list of int)
+self.lattice:  final lattice (2d list of double)
+self.rec_lat: final reciprocal lattice (2d list of double)
+self.basis: final basis (2d list of double)
+self.coord_mode: coordinate mode for basis (always ‘direct’)
+self.is_complete: did the VASP calculation run to completion? (bool)
+self.dos: Basic DOS output (3d list of double or bool)
+self.dos_efermi: Fermi level for DOS use (double)
+self.dos_lm: l or lm-projected DOS output (4d list of double or bool)
+self.eigenvalues: eigenvalues and energies for doing band structure plots (list of 2d list of double)
+self.all_e_0: energy (e_0_energy) for each electronic step of each ionic step
+self.nelm: NELM (max. number of electronic steps)</dd>
+</dl>
+<p>Create a Vasprun object from a vasprun.xml file with name ‘filename’</p>
+<dl class="method">
+<dt id="casm.vasp.io.Vasprun.is_complete">
+<code class="descname">is_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vasprun.html#Vasprun.is_complete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Vasprun.is_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if VASP calculation ran to completion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vasp.io.Vasprun.iter_read">
+<code class="descname">iter_read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vasp/io/vasprun.html#Vasprun.iter_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vasp.io.Vasprun.iter_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Vasprun object from a vasprun.xml file with name ‘filename’</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.vasp.VaspError.html" class="btn btn-neutral float-right" title="casm.vasp.VaspError" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.seqquest.seqquest_io.species_settings.html" class="btn btn-neutral" title="casm.seqquest.seqquest_io.species_settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

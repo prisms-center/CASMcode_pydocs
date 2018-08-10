@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.relax &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.seqquest.relax</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.seqquest.relax</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Relax class &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="c1"># import math</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">seqquest</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">seqquest_io</span>
+
+<div class="viewcode-block" id="RelaxError"><a class="viewcode-back" href="../../../python/casm.seqquest.RelaxError.html#casm.seqquest.RelaxError">[docs]</a><span class="k">class</span> <span class="nc">RelaxError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Relax-specific errors &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Relax"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax">[docs]</a><span class="k">class</span> <span class="nc">Relax</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The Relax class contains functions for setting up, executing, and parsing a seqquest calc.</span>
+
+<span class="sd">        The relaxation is initialized in a directory containing seqquest files, called &#39;relaxdir&#39;.</span>
+<span class="sd">        It then creates the following directory structure:</span>
+<span class="sd">        .../relaxdir/</span>
+<span class="sd">            run.0/</span>
+<span class="sd">            run.1/</span>
+<span class="sd">            ...</span>
+<span class="sd">            run.final/</span>
+
+<span class="sd">        &#39;run.i&#39; directories are only created when ready.</span>
+<span class="sd">	&#39;run.final&#39; is a final constant volume run</span>
+
+<span class="sd">        Contains:</span>
+<span class="sd">            self.relaxdir  (.../relax)</span>
+<span class="sd">            self.rundir    (list of .../relax/run.i)</span>
+<span class="sd">            self.finaldir (.../relax/run.final)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Relax.__init__"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relaxdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a seqquest relaxation job object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            configdir:  path to seqquest relaxation directory</span>
+<span class="sd">            settings:   dictionary-like object containing settings, or if None, it reads</span>
+<span class="sd">                        the json file: .../relaxdir/relax.json</span>
+
+<span class="sd">                possible settings keys are:</span>
+<span class="sd">                    used by seqquest.run() function:</span>
+<span class="sd">                        &quot;ncpus&quot;: number of ncpus to run mpi on</span>
+<span class="sd">                        &quot;run_cmd&quot;: (default, see seqquest.run) shell command to execute seqquest,</span>
+<span class="sd">                            or None to use default mpirun</span>
+<span class="sd">                    used by not_converging():</span>
+<span class="sd">                        &quot;run_limit&quot;: (default 10) maximum number of runs to allow before setting</span>
+<span class="sd">                            status to &quot;not_converging&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Constructing a VASP Relax object&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="c1"># store path to .../relaxdir, and create if not existing</span>
+        <span class="k">if</span> <span class="n">relaxdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">relaxdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">relaxdir</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Relax directory:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="c1"># find existing .../relaxdir/run.run_index directories, store paths in self.rundir list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errdir</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_rundir</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="s2">&quot;run.final&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">settings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span>
+
+        <span class="c1"># set default settings:</span>
+        <span class="k">if</span> <span class="s2">&quot;run_cmd&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;vasp_cmd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s2">&quot;ncpus&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s2">&quot;run_limit&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">if</span> <span class="s2">&quot;compress&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s2">&quot;err_types&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;err_types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SubSpaceMatrixError&#39;</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SeqQuest Relax object constructed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Relax.add_rundir"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.add_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">add_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make a new run.i directory&quot;&quot;&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">))))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_rundir</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Relax.update_rundir"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.update_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">update_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find all .../config/calctype.CALC/relax/run.i directories, store paths in</span>
+<span class="sd">            self.rundir list&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">run_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">run_index</span><span class="p">))):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">run_index</span><span class="p">)))</span>
+            <span class="n">run_index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="Relax.add_errdir"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.add_errdir">[docs]</a>    <span class="k">def</span> <span class="nf">add_errdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move run.i to run.i_err.j directory&quot;&quot;&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Relax.update_errdir"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.update_errdir">[docs]</a>    <span class="k">def</span> <span class="nf">update_errdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find all .../config/calctype.CALC/relax/run.i_err.j directories, store paths in</span>
+<span class="sd">            self.errdir list&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errdir</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">err_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err_index</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err_index</span><span class="p">))</span>
+                <span class="n">err_index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="Relax.setup"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initdir</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; mv all files and directories (besides initdir) into initdir &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moving files into initial run directory:&quot;</span><span class="p">,</span> <span class="n">initdir</span><span class="p">)</span>
+        <span class="n">initdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">initdir</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ifile</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">ifile</span> <span class="ow">in</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">QUEST_INPUT_FILE_LIST</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">])</span>
+                    <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">)</span> <span class="o">!=</span> <span class="n">initdir</span><span class="p">)):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*\.atm&quot;</span><span class="p">,</span> <span class="n">ifile</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">readlink</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">)),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">ifile</span> <span class="o">==</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="n">ifile</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="c1"># Keep a backup copy of the base lcao.in</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="s2">&quot;lcao.in.base&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Initial lcao.in files are NOT yet supported!</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RelaxError</span><span class="p">(</span><span class="s2">&quot;the &#39;initial&#39; keyword in relax/converge.json is not yet supported for</span><span class="se">\</span>
+<span class="s2">                             SeqQuest!&quot;</span><span class="p">)</span></div>
+
+        <span class="c1"># # If an initial incar is called for, copy it in and set the appropriate flag</span>
+        <span class="c1"># if ((self.settings[&quot;initial&quot;] != None) and</span>
+        <span class="c1">#       (os.path.isfile(os.path.join(self.relaxdir,self.settings[&quot;initial&quot;])))):</span>
+        <span class="c1">#     new_values = io.Incar(os.path.join(self.relaxdir,self.settings[&quot;initial&quot;])).tags</span>
+        <span class="c1">#     io.set_incar_tag(new_values, initdir)</span>
+        <span class="c1">#     print &quot;  Set INCAR tags:&quot;, new_values, &quot;\n&quot;</span>
+        <span class="c1">#     sys.stdout.flush()</span>
+
+<div class="viewcode-block" id="Relax.complete"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.complete">[docs]</a>    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the seqquest relaxation is complete.</span>
+
+<span class="sd">           Completion criteria: .../config/calctype.CALC/relax/run.final/lcao.out exists</span>
+<span class="sd">            and is complete</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">,</span> <span class="s2">&quot;lcao.out&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">outfile</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">LcaoOUT</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Relax.converged"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.converged">[docs]</a>    <span class="k">def</span> <span class="nf">converged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># def converged(self):</span>
+        <span class="sd">&quot;&quot;&quot;Check if configuration is relaxed.</span>
+
+<span class="sd">           For now, this always returns True, as SeqQuest doesn&#39;t have the anisotropic basis</span>
+<span class="sd">           set problem that VASP has.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;lcao.out&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">LcaoOUT</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span></div>
+
+           <span class="c1"># This is called when self.rundir[-1] is complete and not a constant volume job.</span>
+
+           <span class="c1"># Convergence criteria is: at least 2 relaxation jobs are complete, and:</span>
+           <span class="c1">#                          1) the last job completed with &lt;= 3 ionic steps</span>
+           <span class="c1">#                          or 2) the last two jobs had final E0 differ by less than</span>
+           <span class="c1">#                                self.settings[&quot;nrg_convergence&quot;]</span>
+        <span class="c1">#&quot;&quot;&quot;</span>
+        <span class="c1"># if len(self.rundir) &gt;= 2:</span>
+        <span class="c1">#     if io.ionic_steps(self.rundir[-1]) &lt;= 3:</span>
+        <span class="c1">#         return True</span>
+        <span class="c1">#     if self.settings[&quot;nrg_convergence&quot;] != None:</span>
+        <span class="c1">#         if io.job_complete(self.rundir[-1]) and io.job_complete(self.rundir[-2]):</span>
+        <span class="c1">#             o1 = io.Oszicar(os.path.join(self.rundir[-1],&quot;OSZICAR&quot;))</span>
+        <span class="c1">#             o2 = io.Oszicar(os.path.join(self.rundir[-2],&quot;OSZICAR&quot;))</span>
+        <span class="c1">#             if abs( o1.E[-1] - o2.E[-1]) &lt; self.settings[&quot;nrg_convergence&quot;]:</span>
+        <span class="c1">#                 return True</span>
+
+        <span class="c1"># return False</span>
+
+
+<div class="viewcode-block" id="Relax.not_converging"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.not_converging">[docs]</a>    <span class="k">def</span> <span class="nf">not_converging</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if configuration is not converging.</span>
+
+<span class="sd">           This is called when self.rundir[-1] is complete and not a constant volume job and</span>
+<span class="sd">            self.converged() == False.</span>
+
+<span class="sd">           Not converging criteria: &gt;= 10 runs without completion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;lcao.out&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">LcaoOUT</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span><span class="o">.</span><span class="n">converged</span><span class="p">:</span>
+            <span class="c1"># This indicates that we have an electronic step problem, which, for now, we do NOT know how to solve</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Relax.run"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1">#pylint: disable=too-many-branches, too-many-statements</span>
+        <span class="sd">&quot;&quot;&quot; Perform a seqquest jobs to relax a structure. Then performs a final run, using settings</span>
+<span class="sd">            in lcao.in file pointed to by &quot;final&quot; if present.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Begin SeqQuest relaxation run&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="c1"># get current status of the relaxation:</span>
+        <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">++  status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="s2">&quot;  next task:&quot;</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;incomplete&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_rundir</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;relax&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_rundir</span><span class="p">()</span>
+                <span class="n">seqquest</span><span class="o">.</span><span class="n">continue_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relaxdir</span><span class="p">,</span> <span class="s2">&quot;lcao.in.base&quot;</span><span class="p">),</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;constant&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_rundir</span><span class="p">()</span>
+                <span class="n">seqquest</span><span class="o">.</span><span class="n">continue_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+
+                <span class="c1"># set INCAR to ISIF = 2, ISMEAR = -5, NSW = 0, IBRION = -1</span>
+                <span class="c1"># Implement final settings, if present</span>
+                <span class="c1"># Final settings not yet implemented for seqquest!!!</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">RelaxError</span><span class="p">(</span><span class="s2">&quot;the &#39;final&#39; keyword in relax/converge.json is not yet</span><span class="se">\</span>
+<span class="s2">                                     supported for SeqQuest!&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                <span class="c1"># if (self.settings[&quot;final&quot;] != None) and (os.path.isfile(os.path.join(self.relaxdir</span>
+                <span class="c1">#                                                           ,self.settings[&quot;final&quot;]</span>
+                <span class="c1">#                                                           ))):</span>
+                <span class="c1">#     new_values = io.Incar(os.path.join(self.relaxdir,</span>
+                <span class="c1">#                                        self.settings[&quot;final&quot;])).tags</span>
+                <span class="c1"># else:</span>
+                <span class="c1">#     new_values = {&quot;ISIF&quot;:2, &quot;ISMEAR&quot;:-5, &quot;NSW&quot;:0, &quot;IBRION&quot;:-1}</span>
+
+                <span class="c1"># set lcao.in notes system tag to denote &#39;final&#39;</span>
+                <span class="n">final_lcao</span> <span class="o">=</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">LcaoIN</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">))</span>
+                <span class="c1"># notes_value = seqquest_io.get_lcao_tag([&#39;setup&#39;, &#39;notes&#39;], self.rundir[-1])</span>
+                <span class="k">if</span> <span class="n">final_lcao</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">final_lcao</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">final_lcao</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">],</span> <span class="n">final_lcao</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">])</span>
+                                   <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">])</span>
+                <span class="n">new_values</span><span class="p">[(</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span>
+
+                <span class="n">final_lcao</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">))</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set lcao.in tags:&quot;</span><span class="p">,</span> <span class="n">new_values</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># probably hit walltime</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_rundir</span><span class="p">()</span>
+                <span class="n">seqquest</span><span class="o">.</span><span class="n">continue_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># run vasp</span>
+                <span class="c1"># result = seqquest.run(self.rundir[-1], command=self.settings[&quot;run_cmd&quot;],</span>
+                <span class="c1">#           ncpus=self.settings[&quot;ncpus&quot;],err_types=self.settings[&quot;err_types&quot;])</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">seqquest</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_cmd&quot;</span><span class="p">],</span>    <span class="c1">#pylint: disable=assignment-from-none</span>
+                                      <span class="n">ncpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">],</span>
+                                      <span class="n">err_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;err_types&quot;</span><span class="p">])</span>
+
+                <span class="c1"># if no errors, continue</span>
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">not_converging</span><span class="p">():</span>
+                    <span class="k">break</span>
+
+                <span class="c1"># else, attempt to fix first error</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_errdir</span><span class="p">()</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="c1"># self.add_rundir()</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">++  status:&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;  next task:&quot;</span><span class="p">,</span> <span class="s2">&quot;fix_error&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Attempting to fix error:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+                <span class="n">err</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                <span class="c1"># backup files are NOT yet supported!</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">RelaxError</span><span class="p">(</span><span class="s2">&quot;the &#39;backup&#39; keyword in relax/converge.json is not yet</span><span class="se">\</span>
+<span class="s2">                                      supported for SeqQuest!&quot;</span><span class="p">)</span>
+                <span class="c1"># if (self.settings[&quot;backup&quot;] != None) and len(self.rundir) &gt; 1:</span>
+                <span class="c1">#     print &quot;Restoring from backups:&quot;</span>
+                <span class="c1">#     for f in self.settings[&quot;backup&quot;]:</span>
+                <span class="c1">#         if os.path.isfile(os.path.join(self.rundir[-2], f + &quot;_BACKUP.gz&quot;)):</span>
+                <span class="c1">#            f_in = gzip.open(os.path.join(self.rundir[-2], f + &quot;_BACKUP.gz&quot;, &#39;rb&#39;))</span>
+                <span class="c1">#             f_out = open(os.path.join(self.rundir[-1], f, &#39;wb&#39;))</span>
+                <span class="c1">#             f_out.write(f_in.read())</span>
+                <span class="c1">#             f_in.close()</span>
+                <span class="c1">#             f_out.close()</span>
+                <span class="c1">#             print f, &quot; restored!&quot;</span>
+                <span class="c1">#     sys.stdout.flush()</span>
+
+            <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">++  status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="s2">&quot;  next task:&quot;</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">):</span>
+                <span class="c1"># mv final results to relax.final</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mv&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">))</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">seqquest</span><span class="o">.</span><span class="n">complete_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Relax.status"><a class="viewcode-back" href="../../../python/casm.seqquest.Relax.html#casm.seqquest.Relax.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1">#pylint: disable=too-many-return-statements</span>
+        <span class="sd">&quot;&quot;&quot; Determine the status of a quest relaxation series of runs. Individual runs in the series</span>
+<span class="sd">            are in directories labeled &quot;run.0&quot;, &quot;run.1&quot;, etc.</span>
+
+<span class="sd">            Returns a tuple: (status = &quot;incomplete&quot; or &quot;complete&quot; or &quot;not_converging&quot;,</span>
+<span class="sd">                                task = continuedir or &quot;relax&quot; or &quot;constant&quot; or None)</span>
+
+<span class="sd">            The first value is the status of the entire relaxation.</span>
+
+<span class="sd">            The second value is the current task, where &#39;continuedir&#39; is the path to a</span>
+<span class="sd">            quest job directory that is not yet completed, &quot;relax&quot; indicates another</span>
+<span class="sd">            volume relaxation job is required, and &quot;constant&quot; that a constant volume run is required</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># check if all complete</span>
+        <span class="k">if</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">job_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;complete&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># check status of relaxation runs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_rundir</span><span class="p">()</span>
+
+        <span class="c1"># if not yet started</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;setup&quot;</span><span class="p">)</span>
+
+        <span class="c1"># if the latest run is complete:</span>
+        <span class="k">if</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">job_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+
+            <span class="c1"># if it is a final constant volume run</span>
+            <span class="n">final_lcao</span> <span class="o">=</span> <span class="n">seqquest_io</span><span class="o">.</span><span class="n">LcaoIN</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;lcao.in&quot;</span><span class="p">))</span>
+            <span class="c1"># notes_value = seqquest_io.get_lcao_tag([&#39;setup&#39;, &#39;notes&#39;], self.rundir[-1])</span>
+            <span class="k">if</span> <span class="n">final_lcao</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;final&quot;</span> <span class="ow">in</span> <span class="n">final_lcao</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;notes&#39;</span><span class="p">]):</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;complete&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="c1"># elif convergence criteria met</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">converged</span><span class="p">():</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;constant&quot;</span><span class="p">)</span>
+
+            <span class="c1"># elif not converging, return &#39;not_converging&#39; error</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">not_converging</span><span class="p">():</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;not_converging&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="c1"># else continue relaxing</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;relax&quot;</span><span class="p">)</span>
+
+        <span class="c1"># elif not converging, return &#39;not_converging&#39; error</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">not_converging</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;not_converging&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># else if the latest run is not complete, continue running it</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.plotting.ConvexHullPlot &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.plotting.GridPlot" href="casm.plotting.GridPlot.html" />
+    <link rel="prev" title="casm.learn.direct_fit" href="casm.learn.direct_fit.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.plotting.ConvexHullPlot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.GridPlot.html">casm.plotting.GridPlot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.Histogram.html">casm.plotting.Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.PlottingData.html">casm.plotting.PlottingData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.RankPlot.html">casm.plotting.RankPlot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.Scatter.html">casm.plotting.Scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.TapAction.html">casm.plotting.TapAction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.add_src_data.html">casm.plotting.add_src_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.clex_hull_style.html">casm.plotting.clex_hull_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.default_clex_hull_style.html">casm.plotting.default_clex_hull_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.default_dft_hull_style.html">casm.plotting.default_dft_hull_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.default_figure_kwargs.html">casm.plotting.default_figure_kwargs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.default_scatter_style.html">casm.plotting.default_scatter_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.dft_hull_style.html">casm.plotting.dft_hull_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.rankplot_style.html">casm.plotting.rankplot_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.rank_select_cutoff_style.html">casm.plotting.rank_select_cutoff_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.scatter_series_style.html">casm.plotting.scatter_series_style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.update_clex_hull_glyphs.html">casm.plotting.update_clex_hull_glyphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.update_dft_hull_glyphs.html">casm.plotting.update_dft_hull_glyphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.update_scatter_glyphs.html">casm.plotting.update_scatter_glyphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.view_on_tap.html">casm.plotting.view_on_tap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.plotting.PlotTypeCommand.html">casm.plotting.PlotTypeCommand</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.plotting.ConvexHullPlot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.plotting.ConvexHullPlot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-plotting-convexhullplot">
+<h1>casm.plotting.ConvexHullPlot<a class="headerlink" href="#casm-plotting-convexhullplot" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.plotting.ConvexHullPlot">
+<em class="property">class </em><code class="descclassname">casm.plotting.</code><code class="descname">ConvexHullPlot</code><span class="sig-paren">(</span><em>data=None</em>, <em>project=None</em>, <em>selection='MASTER'</em>, <em>hull_selection=None</em>, <em>x='comp(a)'</em>, <em>y='formation_energy'</em>, <em>tooltips=[]</em>, <em>dft_style={}</em>, <em>clex_style={}</em>, <em>hull_tol=1e-08</em>, <em>index=0</em>, <em>series_name=None</em>, <em>type=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/plotting/plotting.html#ConvexHullPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.plotting.ConvexHullPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>data
+sel
+hull_sel
+hull_sel_calculated
+dft_hull_sel
+is_comp, is_comp_n, is_atom_frac
+x, x_all, y, y_clex
+hull_tol
+dft_style, clex_style
+tooltips, tooltips_exclude
+r_dft, r_dft_hull_line
+r_clex, r_clex_hull_line, r_clex_of_dft_hull_line
+renderers
+sorted_dft_hull
+sorted_clex_hull
+sorted_clex_of_dft_hull</dd>
+<dt>Arguments:</dt>
+<dd>data: PlottingData object
+project: path to CASM project (optional, default=casm.project.project_path())
+selection: path for CASM Selection
+hull_selection: path for CASM Selection to use for the hull. Default uses selection.
+x: (str) column name to use as x axis. Default=’comp(a)’. Must be ‘comp(x)’, ‘comp_n(X)’, or ‘atom_frac(X)’.
+y: (str) column name to use as y axis. Default=’formation_energy’. Must be ‘formation_energy’ or ‘formation_energy_per_atom’.
+tooltips:
+dft_style:
+clex_style:
+hull_tol: (number, default 1e-8) tolerance to decide if configuration is on the hull</dd>
+</dl>
+<dl class="method">
+<dt id="casm.plotting.ConvexHullPlot.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>project=None</em>, <em>selection='MASTER'</em>, <em>hull_selection=None</em>, <em>x='comp(a)'</em>, <em>y='formation_energy'</em>, <em>tooltips=[]</em>, <em>dft_style={}</em>, <em>clex_style={}</em>, <em>hull_tol=1e-08</em>, <em>index=0</em>, <em>series_name=None</em>, <em>type=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/plotting/plotting.html#ConvexHullPlot.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.plotting.ConvexHullPlot.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Arguments:</dt>
+<dd>data: PlottingData object
+project: path to CASM project (optional, default=casm.project.project_path())
+selection: path for CASM Selection
+hull_selection: path for CASM Selection to use for the hull. Default uses selection.
+x: (str) column name to use as x axis. Default=’comp(a)’. Must be ‘comp(x)’, ‘comp_n(X)’, or ‘atom_frac(X)’.
+y: (str) column name to use as y axis. Default=’formation_energy’. Must be ‘formation_energy’ or ‘formation_energy_per_atom’.
+tooltips:
+dft_style:
+clex_style:
+hull_tol: (number, default 1e-8) tolerance to decide if configuration is on the hull</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.plotting.ConvexHullPlot.__init__" title="casm.plotting.ConvexHullPlot.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([data,&nbsp;project,&nbsp;selection,&nbsp;…])</td>
+<td>Arguments:</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code>([fig,&nbsp;tap_action])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">query</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_clex_hull_line</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_clex_of_dft_hull_line</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.plotting.ConvexHullPlot.sort_dft_hull_line" title="casm.plotting.ConvexHullPlot.sort_dft_hull_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_dft_hull_line</span></code></a>()</td>
+<td>sort dft hull line data</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.plotting.ConvexHullPlot._set_on_hull">
+<code class="descname">_set_on_hull</code><span class="sig-paren">(</span><em>sel</em>, <em>on_hull_label</em>, <em>hull_dist_label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/plotting/plotting.html#ConvexHullPlot._set_on_hull"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.plotting.ConvexHullPlot._set_on_hull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the ‘hull_dist_label’ column, and self.hull_tol to create the boolean
+column ‘on_hull_label’ indicating which configurations are on the hull.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.plotting.ConvexHullPlot._sort_hull_line">
+<code class="descname">_sort_hull_line</code><span class="sig-paren">(</span><em>sel</em>, <em>on_hull_label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/plotting/plotting.html#ConvexHullPlot._sort_hull_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.plotting.ConvexHullPlot._sort_hull_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return x,y data where ‘on_hull_label’==True, sorted by x</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.plotting.ConvexHullPlot.sort_dft_hull_line">
+<code class="descname">sort_dft_hull_line</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/plotting/plotting.html#ConvexHullPlot.sort_dft_hull_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.plotting.ConvexHullPlot.sort_dft_hull_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>sort dft hull line data</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.plotting.GridPlot.html" class="btn btn-neutral float-right" title="casm.plotting.GridPlot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.learn.direct_fit.html" class="btn btn-neutral" title="casm.learn.direct_fit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.seqquest_io.lcao_in.lcao_in &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.seqquest.seqquest_io.lcao_in.lcao_in</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.seqquest.seqquest_io.lcao_in.lcao_in</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; lcaoIN class and associated functions, methods, and error class &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">.setup</span> <span class="k">import</span> <span class="n">Setup</span>
+<span class="kn">from</span> <span class="nn">.run</span> <span class="k">import</span> <span class="n">Run</span>
+<span class="kn">from</span> <span class="nn">.commands</span> <span class="k">import</span> <span class="n">Commands</span>
+<span class="kn">from</span> <span class="nn">..species</span> <span class="k">import</span> <span class="n">species_settings</span>
+<span class="kn">from</span> <span class="nn">..geom</span> <span class="k">import</span> <span class="n">Geom</span><span class="p">,</span> <span class="n">Cell</span>
+
+<span class="k">class</span> <span class="nc">Neb</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  <span class="c1">#pylint: disable=too-few-public-methods</span>
+    <span class="sd">&quot;&quot;&quot; Container for Neb part of Lcao.in &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="LcaoIN"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN">[docs]</a><span class="k">class</span> <span class="nc">LcaoIN</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>   <span class="c1">#pylint: disable=too-many-instance-attributes</span>
+    <span class="sd">&quot;&quot;&quot; Container object for reading, parsing, and writing lcao.in files &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LcaoIN.__getitem__"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Giving dict-like access to props &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;commands&quot;</span><span class="p">,</span> <span class="s2">&quot;setup&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;neb&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LcaoIN.__init__"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;lcao.in&quot;</span><span class="p">,</span> <span class="n">speciesfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">POS</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="n">Commands</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span> <span class="o">=</span> <span class="n">Setup</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neb</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">POS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span> <span class="o">=</span> <span class="n">Geom</span><span class="o">.</span><span class="n">POS</span><span class="p">(</span><span class="n">POS</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="o">.</span><span class="n">POS</span><span class="p">(</span><span class="n">POS</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">to_cart</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">cell</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;coordinate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;CARTESIAN&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;atom types&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;atom types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">natoms</span>
+        <span class="k">if</span> <span class="n">speciesfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">speciesfile</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LcaoIN.read"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;lcao.in&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Reads a lcao.in file and parses all the tags &quot;&quot;&quot;</span>
+        <span class="c1">### Read some sort of file ###</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">lcao</span><span class="p">:</span>
+            <span class="c1"># Parse command block, always comes first</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">read_stream</span><span class="p">(</span><span class="n">lcao</span><span class="p">)</span>
+            <span class="c1"># Enter setup block, always comes second</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">read_stream</span><span class="p">(</span><span class="n">lcao</span><span class="p">)</span>
+            <span class="c1"># Now we have optional sections</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">lcao</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="c1"># for line in lcao:</span>
+                <span class="c1"># Enter run block</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;run\s*phase&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">read_stream</span><span class="p">(</span><span class="n">lcao</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LcaoIN.write"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;lcao.in&quot;</span><span class="p">,</span> <span class="n">geom_in_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">geom_filename</span><span class="o">=</span><span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Writes the lcaoIN object as filename &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">construct_args</span><span class="p">())</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">construct_args</span><span class="p">(</span><span class="n">geom_in_file</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">construct_args</span><span class="p">())</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">neb</span><span class="o">.</span><span class="n">construct_args</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">geom_in_file</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">write_geom</span><span class="p">(</span><span class="n">geom_filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LcaoIN.update"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Updates lcao.in and geom with info from a speciesfile &quot;&quot;&quot;</span>
+        <span class="n">species</span> <span class="o">=</span> <span class="n">species_settings</span><span class="p">(</span><span class="n">speciesfile</span><span class="p">)</span>
+        <span class="c1"># Update atom files, if not present</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;atom file&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">atom_files</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">indiv_spec</span> <span class="ow">in</span> <span class="n">species</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">indiv_spec</span><span class="o">.</span><span class="n">alias</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="n">indiv_spec</span><span class="o">.</span><span class="n">atm_location</span> <span class="ow">in</span> <span class="n">atom_files</span><span class="p">:</span>
+                    <span class="n">atom_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indiv_spec</span><span class="o">.</span><span class="n">alias</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="n">indiv_spec</span><span class="o">.</span><span class="n">atm_location</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">indiv_spec</span><span class="o">.</span><span class="n">nrg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indiv_spec</span><span class="o">.</span><span class="n">nrg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;atom file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atom_files</span><span class="p">[:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">atom_files</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;energies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">energies</span><span class="p">[:]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;atom types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s2">&quot;atom file&quot;</span><span class="p">])</span>
+        <span class="c1"># Update the geom, if available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+            <span class="c1"># Update gfixed, if now available</span>
+            <span class="n">site_idx</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">gfixed_sites</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">occ</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">):</span>   <span class="c1">#pylint: disable=invalid-name</span>
+                <span class="k">if</span> <span class="n">species</span><span class="p">[</span><span class="n">occ</span><span class="p">]</span><span class="o">.</span><span class="n">gfixed</span><span class="p">:</span>
+                    <span class="n">gfixed_sites</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">site_idx</span><span class="p">,</span> <span class="n">site_idx</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">site_idx</span> <span class="o">+=</span> <span class="n">n</span>
+            <span class="k">if</span> <span class="n">gfixed_sites</span> <span class="o">!=</span> <span class="p">[]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="s2">&quot;gfixed&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="s2">&quot;gfixed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">gfixed_sites</span><span class="p">]</span> <span class="c1"># Ensure copy via slices</span>
+
+
+        <span class="c1"># Update charge, if now available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;charge&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">charge</span> <span class="o">!=</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">charge</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">charge_loc</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;ionopt&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">[</span><span class="s1">&#39;ionopt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span></div>
+
+<div class="viewcode-block" id="LcaoIN.get"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Crawl down object tree to get self[key[0]][key[1]][key[2]]... etc from lcao.in &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">ikey</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="n">ikey</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="LcaoIN.set"><a class="viewcode-back" href="../../../../../python/casm.seqquest.seqquest_io.LcaoIN.html#casm.seqquest.seqquest_io.LcaoIN.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Crawl down object tree to set self[key[0]][key[1]][key[2]]... etc from lcao.in &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">ikey</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="n">ikey</span><span class="p">]</span>
+        <span class="n">obj</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

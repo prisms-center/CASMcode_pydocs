@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.questwrapper.read_settings &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.questwrapper.write_settings" href="casm.questwrapper.write_settings.html" />
+    <link rel="prev" title="casm.questwrapper.QuestWrapperError" href="casm.questwrapper.QuestWrapperError.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.questwrapper.Relax.html">casm.questwrapper.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.questwrapper.QuestWrapperError.html">casm.questwrapper.QuestWrapperError</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.questwrapper.read_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.questwrapper.write_settings.html">casm.questwrapper.write_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.questwrapper.quest_input_file_names.html">casm.questwrapper.quest_input_file_names</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.questwrapper.read_settings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.questwrapper.read_settings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-questwrapper-read-settings">
+<h1>casm.questwrapper.read_settings<a class="headerlink" href="#casm-questwrapper-read-settings" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="casm.questwrapper.read_settings">
+<code class="descclassname">casm.questwrapper.</code><code class="descname">read_settings</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/questwrapper/questwrapper.html#read_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.questwrapper.read_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a JSON object reading JSON files containing settings for seqquest cluster jobs.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><blockquote class="first">
+<div><dl class="docutils">
+<dt>settings = a JSON object containing the settings file contents</dt>
+<dd>This can be accessed like a dict: settings[“account”], etc.
+** All values are expected to be ‘str’ type. **</dd>
+</dl>
+</div></blockquote>
+<dl class="last docutils">
+<dt>The required keys are:</dt>
+<dd>“queue”: queue to submit job in
+“ppn”: processors (cores) per node to request
+“atom_per_proc”: max number of atoms per processor (core)
+“walltime”: walltime to request (ex. “48:00:00”)</dd>
+<dt>The optional keys are:</dt>
+<dd>“account”: account to submit job under (default None)
+“pmem”: string for requested memory (default None)
+“priority”: requested job priority (default “0”)
+“message”: when to send messages about jobs (ex. “abe”, default “a”)
+“email”: where to send messages (ex. “<a class="reference external" href="mailto:me&#37;&#52;&#48;fake&#46;com">me<span>&#64;</span>fake<span>&#46;</span>com</a>”, default None)
+“qos”: quality of service, ‘qos’ option (ex. “fluxoe”)
+“run_cmd”: quest execution command (default is “vasp” (ncpus=1) or “mpirun -np {NCPUS} vasp” (ncpus!=1))
+“ncpus”: number of cpus (cores) to run on (default $PBS_NP)
+“run_limit”: number of vasp runs until “not_converging” (default 10)
+“nrg_convergence”: converged if last two runs complete and differ in energy by less than this amount (default None)
+“move”: files to move at the end of a run (ex. [“POTCAR”, “WAVECAR”], default [“POTCAR”])
+“copy”: files to copy from run to run (ex. [“INCAR”, “KPOINTS”], default [“INCAR, KPOINTS”])
+“remove”: files to remove at the end of a run (ex. [“IBZKPT”, “CHGCAR”], default [“IBKZPT”, “CHG”, “CHGCAR”, “WAVECAR”, “TMPCAR”, “EIGENVAL”, “DOSCAR”, “PROCAR”, “PCDAT”, “XDATCAR”, “LOCPOT”, “ELFCAR”, “PROOUT”]
+“compress”: files to compress at the end of a run (ex. [“OUTCAR”, “vasprun.xml”], default [])
+“backup”: files to compress to backups at the end of a run, used in conjunction with move (ex. [“WAVECAR”])
+“cont_relax”: name of a calctype to initialize a calculation from, using the lcao.geom from ../calctype.cont_relax/run.final (ex. “default”)
+“extra_input_files”: extra input files to be copied from the settings directory, e.g., a vdW kernel file.
+“initial” : location of INCAR with tags for the initial run, if desired (e.g. to generate a PBE WAVECAR for use with M06-L)
+“final” : location of INCAR with tags for the final run, if desired (e.g. “ISMEAR = -5”, etc). Otherwise, the settings enforced are (“ISMEAR = -5”, “NSW = 0”, “IBRION = -1”, “ISIF = 2”)
+“err_types” : list of errors to check for. Allowed entries are “IbzkptError” and “SubSpaceMatrixError”. Default: [“SubSpaceMatrixError”]
+“preamble” : a text file containing anything that MUST be run before python is invoked (e.g. module.txt which contains “module load python”, or “source foo”)
+“prop”: USED IN vasp.converge ONLY. Property to converge with respect to (current options are “KPOINT” and “ENCUT”)
+“prerun” : bash commands to run before vasp.Relax.run (default None)
+“postrun” : bash commands to run after vasp.Relax.run completes (default None)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.questwrapper.write_settings.html" class="btn btn-neutral float-right" title="casm.questwrapper.write_settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.questwrapper.QuestWrapperError.html" class="btn btn-neutral" title="casm.questwrapper.QuestWrapperError" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

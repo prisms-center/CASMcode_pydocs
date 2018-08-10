@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.learn &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.learn</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.learn</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;CASM machine learning tools&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">## This part needs to be in global scope for parallization #####################  </span>
+<span class="kn">from</span> <span class="nn">deap</span> <span class="k">import</span> <span class="n">creator</span>
+<span class="kn">from</span> <span class="nn">deap</span> <span class="k">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">deap.tools</span> <span class="k">import</span> <span class="n">HallOfFame</span>
+
+<span class="c1"># we&#39;ll want to minimize a cv score</span>
+<span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;FitnessMin&quot;</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Fitness</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,))</span>
+
+<span class="c1"># each individual is a list of True or False indicating if each basis function should </span>
+<span class="c1"># be included in the model</span>
+<span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;Individual&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">fitness</span><span class="o">=</span><span class="n">creator</span><span class="o">.</span><span class="n">FitnessMin</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<div class="viewcode-block" id="empty_individual"><a class="viewcode-back" href="../../python/casm.learn.empty_individual.html#casm.learn.empty_individual">[docs]</a><span class="k">def</span> <span class="nf">empty_individual</span><span class="p">(</span><span class="n">n_features</span><span class="p">):</span>
+  <span class="n">selected</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_features</span>
+  <span class="n">indiv</span> <span class="o">=</span> <span class="n">creator</span><span class="o">.</span><span class="n">Individual</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">indiv</span></div>
+
+<div class="viewcode-block" id="EqualIndividual"><a class="viewcode-back" href="../../python/casm.learn.EqualIndividual.html#casm.learn.EqualIndividual">[docs]</a><span class="k">class</span> <span class="nc">EqualIndividual</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">  Functor class for checking equivalence of individuals in a HallOfFame.</span>
+<span class="sd">    </span>
+<span class="sd">  Attributes</span>
+<span class="sd">  ----------</span>
+<span class="sd">    </span>
+<span class="sd">    rel_tol: number</span>
+<span class="sd">      Individuals are considered equal if features selected are equal and </span>
+<span class="sd">      abs((A.fitness.values[0] - B.fitness.values[0]) / A.fitness.values[0] ) &lt; rel_tol</span>
+<span class="sd">    </span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  
+<div class="viewcode-block" id="EqualIndividual.__init__"><a class="viewcode-back" href="../../python/casm.learn.EqualIndividual.html#casm.learn.EqualIndividual.__init__">[docs]</a>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    </span>
+<span class="sd">      rel_tol: number, optional, default=1e-6</span>
+<span class="sd">        Individuals are considered equal if features selected are equal and </span>
+<span class="sd">        abs((A.fitness.values[0] - B.fitness.values[0]) / A.fitness.values[0] ) &lt; rel_tol</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">rel_tol</span> <span class="o">=</span> <span class="n">rel_tol</span></div>
+  
+<div class="viewcode-block" id="EqualIndividual.__call__"><a class="viewcode-back" href="../../python/casm.learn.EqualIndividual.html#casm.learn.EqualIndividual.__call__">[docs]</a>  <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    </span>
+<span class="sd">      A, B: Individuals to be compared</span>
+<span class="sd">        Individuals are considered equal if features selected are equal and </span>
+<span class="sd">        abs((A.fitness.values[0] - B.fitness.values[0]) / A.fitness.values[0] ) &lt; rel_tol</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    ---------</span>
+<span class="sd">      result: boolean</span>
+<span class="sd">        True if A and B compare equal, False otherwise</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">B</span><span class="p">:</span>
+      <span class="k">if</span> <span class="nb">abs</span><span class="p">((</span><span class="n">A</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">B</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">A</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rel_tol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div></div>
+
+<div class="viewcode-block" id="create_halloffame"><a class="viewcode-back" href="../../python/casm.learn.create_halloffame.html#casm.learn.create_halloffame">[docs]</a><span class="k">def</span> <span class="nf">create_halloffame</span><span class="p">(</span><span class="n">maxsize</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">HallOfFame</span><span class="p">(</span><span class="n">maxsize</span><span class="p">,</span> <span class="n">similar</span><span class="o">=</span><span class="n">EqualIndividual</span><span class="p">(</span><span class="n">rel_tol</span><span class="p">))</span></div>
+
+<span class="c1">################################################################################  </span>
+
+
+<span class="kn">from</span> <span class="nn">casm.learn.fit</span> <span class="k">import</span> <span class="n">example_input_Lasso</span><span class="p">,</span> <span class="n">example_input_LassoCV</span><span class="p">,</span> <span class="n">example_input_RFE</span><span class="p">,</span> \
+ <span class="n">example_input_GeneticAlgorithm</span><span class="p">,</span> <span class="n">example_input_IndividualBestFirst</span><span class="p">,</span> \
+ <span class="n">example_input_PopulationBestFirst</span><span class="p">,</span> <span class="n">example_input_DirectSelection</span><span class="p">,</span> \
+ <span class="n">open_input</span><span class="p">,</span> <span class="n">set_input_defaults</span><span class="p">,</span> \
+ <span class="n">FittingData</span><span class="p">,</span> <span class="n">TrainingData</span><span class="p">,</span> \
+ <span class="n">print_input_help</span><span class="p">,</span> <span class="n">print_individual</span><span class="p">,</span> <span class="n">print_population</span><span class="p">,</span> <span class="n">print_halloffame</span><span class="p">,</span> <span class="n">print_eci</span><span class="p">,</span> \
+ <span class="n">to_json</span><span class="p">,</span> <span class="n">open_halloffame</span><span class="p">,</span> <span class="n">save_halloffame</span><span class="p">,</span> \
+ <span class="n">checkspecs</span><span class="p">,</span> <span class="n">checkhull</span>
+
+<span class="kn">from</span> <span class="nn">casm.learn.feature_selection</span> <span class="k">import</span> <span class="n">fit_and_select</span>
+<span class="kn">from</span> <span class="nn">casm.learn.direct_selection</span> <span class="k">import</span> <span class="n">direct_fit</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">&#39;create_halloffame&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;EqualIndividual&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;empty_individual&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;example_input_Lasso&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;example_input_LassoCV&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;example_input_RFE&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;example_input_GeneticAlgorithm&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;example_input_IndividualBestFirst&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;example_input_PopulationBestFirst&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;example_input_DirectSelection&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;open_input&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;set_input_defaults&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;FittingData&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;TrainingData&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;print_input_help&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;print_individual&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;print_population&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;print_halloffame&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;print_eci&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;to_json&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;open_halloffame&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;save_halloffame&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;checkspecs&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;checkhull&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;fit_and_select&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;direct_fit&#39;</span>
+<span class="p">]</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.vaspwrapper.Relax &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.vaspwrapper.Converge" href="casm.vaspwrapper.Converge.html" />
+    <link rel="prev" title="casm.vasp.io.Vasprun" href="casm.vasp.io.Vasprun.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.vaspwrapper.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.Converge.html">casm.vaspwrapper.Converge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.VaspWrapperError.html">casm.vaspwrapper.VaspWrapperError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.read_settings.html">casm.vaspwrapper.read_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.write_settings.html">casm.vaspwrapper.write_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.vasp_input_file_names.html">casm.vaspwrapper.vasp_input_file_names</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.vaspwrapper.Relax</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.vaspwrapper.Relax.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-vaspwrapper-relax">
+<h1>casm.vaspwrapper.Relax<a class="headerlink" href="#casm-vaspwrapper-relax" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.vaspwrapper.Relax">
+<em class="property">class </em><code class="descclassname">casm.vaspwrapper.</code><code class="descname">Relax</code><span class="sig-paren">(</span><em>configdir=None</em>, <em>auto=True</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Relax class contains functions for setting up, executing, and parsing a VASP relaxation.</p>
+<blockquote>
+<div><p>The relaxation creates the following directory structure:
+config/</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>calctype.name/</dt>
+<dd>run.0/
+run.1/
+…
+run.final/</dd>
+</dl>
+</div></blockquote>
+<p>‘run.i’ directories are only created when ready.
+‘run.final’ is a final constant volume run {“ISIF”:2, “ISMEAR”:-5, “NSW”:0, “IBRION”:-1}</p>
+<dl class="docutils">
+<dt>This automatically looks for VASP settings files using:</dt>
+<dd>casm.project.DirectoryStructure.settings_path_crawl</dd>
+</dl>
+</div></blockquote>
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.casm_settings">
+<code class="descname">casm_settings</code><a class="headerlink" href="#casm.vaspwrapper.Relax.casm_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.ProjectSettings instance</em> – CASM project settings</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.casm_directories">
+<code class="descname">casm_directories</code><a class="headerlink" href="#casm.vaspwrapper.Relax.casm_directories" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.DirectoryStructure instance</em> – CASM project directory hierarchy</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.settings">
+<code class="descname">settings</code><a class="headerlink" href="#casm.vaspwrapper.Relax.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Settings for job submission and the relaxation, see vaspwrapper.read_settings</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.configdir">
+<code class="descname">configdir</code><a class="headerlink" href="#casm.vaspwrapper.Relax.configdir" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> –</p>
+<dl class="docutils">
+<dt>Directory where configuration results are stored. The result of:</dt>
+<dd>casm.project.DirectoryStructure.configuration_dir(self.configname)</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.configname">
+<code class="descname">configname</code><a class="headerlink" href="#casm.vaspwrapper.Relax.configname" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – The name of the configuration to be calculated</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.auto">
+<code class="descname">auto</code><a class="headerlink" href="#casm.vaspwrapper.Relax.auto" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>boolean</em> – True if using prisms_jobs module’s JobDB to manage jobs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.sort">
+<code class="descname">sort</code><a class="headerlink" href="#casm.vaspwrapper.Relax.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>boolean</em> – True if sorting atoms in POSCAR by type</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.vaspwrapper.Relax.clex">
+<code class="descname">clex</code><a class="headerlink" href="#casm.vaspwrapper.Relax.clex" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.ClexDescription instance</em> – The cluster expansion being worked on. Used for the ‘calctype’ settings.
+Currently, fixed to self.casm_settings.default_clex.</p>
+</dd></dl>
+
+<p>Construct a VASP relaxation job object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>configdir</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Path to configuration directory. If None, uses the current working
+directory</li>
+<li><strong>auto</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to use the prisms_jobs module’s JobDB to manage jobs</li>
+<li><strong>sort</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to sort atoms in POSCAR by type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.vaspwrapper.Relax.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>configdir=None</em>, <em>auto=True</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a VASP relaxation job object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>configdir</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Path to configuration directory. If None, uses the current working
+directory</li>
+<li><strong>auto</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to use the prisms_jobs module’s JobDB to manage jobs</li>
+<li><strong>sort</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to sort atoms in POSCAR by type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.__init__" title="casm.vaspwrapper.Relax.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([configdir,&nbsp;auto,&nbsp;sort])</td>
+<td>Construct a VASP relaxation job object.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">finalize</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_converged</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.properties" title="casm.vaspwrapper.Relax.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a>(vaspdir[,&nbsp;super_poscarfile,&nbsp;…])</td>
+<td>Report results to properties.calc.json file in configuration directory, after checking for electronic convergence.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.report_status" title="casm.vaspwrapper.Relax.report_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report_status</span></code></a>(status[,&nbsp;failure_type])</td>
+<td>Report calculation status to status.json file in configuration directory.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.run" title="casm.vaspwrapper.Relax.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</td>
+<td>Setup input files, run a vasp relaxation, and report results</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.run_settings" title="casm.vaspwrapper.Relax.run_settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_settings</span></code></a>()</td>
+<td>Set default values based on runtime environment</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.setup" title="casm.vaspwrapper.Relax.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span></code></a>()</td>
+<td>Setup initial relaxation run</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.submit" title="casm.vaspwrapper.Relax.submit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">submit</span></code></a>()</td>
+<td>Submit a job for this VASP relaxation</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.vaspwrapper.Relax.configdir" title="casm.vaspwrapper.Relax.configdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configdir</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="casm.vaspwrapper.Relax.properties">
+<em class="property">static </em><code class="descname">properties</code><span class="sig-paren">(</span><em>vaspdir</em>, <em>super_poscarfile=None</em>, <em>speciesfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report results to properties.calc.json file in configuration directory, after checking for electronic convergence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vaspwrapper.Relax.report_status">
+<code class="descname">report_status</code><span class="sig-paren">(</span><em>status</em>, <em>failure_type=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.report_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.report_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report calculation status to status.json file in configuration directory.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>status: string describing calculation status. Currently used values are</dt>
+<dd><blockquote class="first">
+<div>not_submitted
+submitted
+complete
+failed</div></blockquote>
+<dl class="last docutils">
+<dt>failure_type: optional string describing reason for failure. Currently used values are</dt>
+<dd>unknown
+electronic_convergence
+run_limit</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vaspwrapper.Relax.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup input files, run a vasp relaxation, and report results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vaspwrapper.Relax.run_settings">
+<code class="descname">run_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.run_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.run_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set default values based on runtime environment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vaspwrapper.Relax.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup initial relaxation run</p>
+<dl class="docutils">
+<dt>Uses the following files from the most local …/settings/calctype.name directory:</dt>
+<dd>INCAR: VASP input settings
+KPOINTS: VASP kpoints settings
+POSCAR: reference for KPOINTS if KPOINTS mode is not A/AUTO/Automatic
+SPECIES: info for each species such as which POTCAR files to use, MAGMOM, GGA+U, etc.</dd>
+<dt>Uses the following files from the …/config directory:</dt>
+<dd>POS: structure of the configuration to be relaxed</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.vaspwrapper.Relax.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/relax.html#Relax.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.vaspwrapper.Relax.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a job for this VASP relaxation</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.vaspwrapper.Converge.html" class="btn btn-neutral float-right" title="casm.vaspwrapper.Converge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.vasp.io.Vasprun.html" class="btn btn-neutral" title="casm.vasp.io.Vasprun" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

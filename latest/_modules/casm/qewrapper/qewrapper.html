@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.qewrapper.qewrapper &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.qewrapper.qewrapper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.qewrapper.qewrapper</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">six</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">subprocess</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">casm.quantumespresso.qeio</span> <span class="k">as</span> <span class="nn">qeio</span>
+
+<div class="viewcode-block" id="QEWrapperError"><a class="viewcode-back" href="../../../python/casm.qewrapper.QEWrapperError.html#casm.qewrapper.QEWrapperError">[docs]</a><span class="k">class</span> <span class="nc">QEWrapperError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="read_settings"><a class="viewcode-back" href="../../../python/casm.qewrapper.read_settings.html#casm.qewrapper.read_settings">[docs]</a><span class="k">def</span> <span class="nf">read_settings</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a JSON object reading JSON files containing settings for Quantum Espresso PBS jobs.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">        settings = a JSON object containing the settings file contents</span>
+<span class="sd">                     This can be accessed like a dict: settings[&quot;account&quot;], etc.</span>
+<span class="sd">                     ** All values are expected to be &#39;str&#39; type. **</span>
+
+<span class="sd">    The required keys are:</span>
+<span class="sd">        &quot;queue&quot;: queue to submit job in</span>
+<span class="sd">        &quot;ppn&quot;: processors (cores) per node to request</span>
+<span class="sd">        &quot;atom_per_proc&quot;: max number of atoms per processor (core)   &lt;--- is this a vasp parsing field or pbs?</span>
+<span class="sd">        &quot;walltime&quot;: walltime to request (ex. &quot;48:00:00&quot;)</span>
+
+<span class="sd">    The optional keys are:</span>
+<span class="sd">        &quot;account&quot;: account to submit job under (default None)</span>
+<span class="sd">        &quot;pmem&quot;: string for requested memory (default None)</span>
+<span class="sd">        &quot;priority&quot;: requested job priority (default &quot;0&quot;)</span>
+<span class="sd">        &quot;message&quot;: when to send messages about jobs (ex. &quot;abe&quot;, default &quot;a&quot;)</span>
+<span class="sd">        &quot;email&quot;: where to send messages (ex. &quot;me@fake.com&quot;, default None)</span>
+<span class="sd">        &quot;qos&quot;: quality of service, &#39;qos&#39; option (ex. &quot;fluxoe&quot;)</span>
+<span class="sd">        &quot;quantumespresso_cmd&quot;: quantum espresso execution command (default is &quot;pw.x &lt; infilename &gt; outfilename&quot; (ncpus=1) or &quot;mpirun -np {NCPUS} pw.x &lt; infilename &gt; outfilename&quot; (ncpus!=1))</span>
+<span class="sd">        &quot;ncpus&quot;: number of cpus (cores) to run on (default $PBS_NP)</span>
+<span class="sd">        &quot;run_limit&quot;: number of quantum espresso runs until &quot;not_converging&quot; (default 10)</span>
+<span class="sd">        &quot;nrg_convergence&quot;: converged if last two runs complete and differ in energy by less than this amount (default None)</span>
+<span class="sd">        &quot;move&quot;: files to move at the end of a run (ex. [ &quot;.wfc&quot;], default [])</span>
+<span class="sd">        &quot;copy&quot;: files to copy from run to run ( default [infilename])</span>
+<span class="sd">        &quot;remove&quot;: files to remove at the end of a run ( default [&quot;.wfc&quot;,&quot;.igk&quot;,&quot;.save&quot;]</span>
+<span class="sd">        &quot;compress&quot;: files to compress at the end of a run (ex. [outfilename], default [])</span>
+<span class="sd">        &quot;backup&quot;: files to compress to backups at the end of a run, used in conjunction with move (ex. [&quot;.wfc&quot;])</span>
+
+<span class="sd">        &quot;encut&quot;: [START, STOP, STEP] values for converging ecutwfc to within nrg_convergence (ex. [&quot;450&quot;, &quot;Auto&quot;, &quot;10&quot;],</span>
+<span class="sd">                 default [&quot;Auto&quot;, &quot;Auto&quot;, &quot;10&quot;] where &quot;Auto&quot; is either the largest ENMAX in all UPFS called in SPECIES for START,</span>
+<span class="sd">                 or 2.0 * largest ENMAX for STOP)</span>
+<span class="sd">        &quot;kpoints&quot;: [start, stop, step] values for converging KPOINTS to within nrg_convergence (ex. [&quot;5&quot;, &quot;50&quot;, &quot;1&quot;],</span>
+<span class="sd">                 default [&quot;5&quot;, &quot;Auto&quot;, &quot;1&quot;] &lt;---- Needs to be adjusted for grid convergence</span>
+<span class="sd">        &quot;extra_input_files&quot;: extra input files to be copied from the settings directory, e.g., OCCUPATIONS file.</span>
+<span class="sd">        &quot;initial&quot; : location of infile with tags for the initial run, if desired </span>
+<span class="sd">        &quot;final&quot; : location of infile with tags for the final run, if desired </span>
+<span class="sd">        &quot;err_types&quot; : list of errors to check for. Allowed entries are &quot;IbzkptError&quot; and &quot;SubSpaceMatrixError&quot;. Default: [&quot;SubSpaceMatrixError&quot;] &lt;---- STILL NEED TO IMPLEMENT</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error reading settings file:&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">e</span>
+
+    <span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="s2">&quot;ppn&quot;</span><span class="p">,</span> <span class="s2">&quot;atom_per_proc&quot;</span><span class="p">,</span> <span class="s2">&quot;walltime&quot;</span><span class="p">]</span>
+
+
+    <span class="n">optional</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;account&quot;</span><span class="p">,</span><span class="s2">&quot;pmem&quot;</span><span class="p">,</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span><span class="s2">&quot;message&quot;</span><span class="p">,</span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="s2">&quot;qos&quot;</span><span class="p">,</span><span class="s2">&quot;npar&quot;</span><span class="p">,</span><span class="s2">&quot;ncore&quot;</span><span class="p">,</span> <span class="s2">&quot;kpar&quot;</span><span class="p">,</span> <span class="s2">&quot;ncpus&quot;</span><span class="p">,</span><span class="s2">&quot;vasp_cmd&quot;</span><span class="p">,</span><span class="s2">&quot;qe_cmd&quot;</span><span class="p">,</span><span class="s2">&quot;run_limit&quot;</span><span class="p">,</span><span class="s2">&quot;nrg_convergence&quot;</span><span class="p">,</span> \
+                <span class="s2">&quot;encut&quot;</span><span class="p">,</span> <span class="s2">&quot;kpoints&quot;</span><span class="p">,</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">,</span> <span class="s2">&quot;move&quot;</span><span class="p">,</span> <span class="s2">&quot;copy&quot;</span><span class="p">,</span> <span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;compress&quot;</span><span class="p">,</span> <span class="s2">&quot;backup&quot;</span><span class="p">,</span> <span class="s2">&quot;initial&quot;</span><span class="p">,</span> <span class="s2">&quot;final&quot;</span><span class="p">,</span> <span class="s2">&quot;strict_kpoints&quot;</span><span class="p">,</span> <span class="s2">&quot;err_types&quot;</span><span class="p">,</span> \
+                <span class="s2">&quot;infilename&quot;</span><span class="p">,</span><span class="s2">&quot;outfilename&quot;</span><span class="p">,</span><span class="s2">&quot;software&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QEWrapperError</span><span class="p">(</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;&#39; missing from: &#39;&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">,</span> <span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;compress&quot;</span><span class="p">,</span> <span class="s2">&quot;backup&quot;</span><span class="p">,</span><span class="s2">&quot;move&quot;</span><span class="p">,</span><span class="s2">&quot;copy&quot;</span><span class="p">]:</span>
+                <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]:</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">qeio</span><span class="o">.</span><span class="n">DEFAULT_QE_REMOVE_LIST</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qeio</span><span class="o">.</span><span class="n">DEFAULT_QE_REMOVE_LIST</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;strict_kpoints&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;strict_kpoints&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">QEWrapperError</span><span class="p">(</span><span class="s2">&quot;unknown key &#39;&quot;</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;&#39; found in: &#39;&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">settings</span></div>
+
+
+<div class="viewcode-block" id="write_settings"><a class="viewcode-back" href="../../../python/casm.qewrapper.write_settings.html#casm.qewrapper.write_settings">[docs]</a><span class="k">def</span> <span class="nf">write_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Write &#39;settings&#39; as json file, &#39;filename&#39; &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span> <span class="n">settings</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+
+      
+<div class="viewcode-block" id="qe_input_file_names"><a class="viewcode-back" href="../../../python/casm.qewrapper.qe_input_file_names.html#casm.qewrapper.qe_input_file_names">[docs]</a><span class="k">def</span> <span class="nf">qe_input_file_names</span><span class="p">(</span><span class="n">dirstruc</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">infilename</span><span class="p">):</span>
+    <span class="c1"># Find required input files in CASM project directory tree</span>
+
+    <span class="n">myinfile</span> <span class="o">=</span> <span class="n">dirstruc</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="n">infilename</span><span class="p">,</span><span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">)</span>
+    <span class="n">super_poscarfile</span> <span class="o">=</span> <span class="n">dirstruc</span><span class="o">.</span><span class="n">POS</span><span class="p">(</span><span class="n">configname</span><span class="p">)</span>
+    <span class="n">speciesfile</span> <span class="o">=</span> <span class="n">dirstruc</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;SPECIES&quot;</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">)</span>
+
+    <span class="c1"># Verify that required input files exist</span>
+    <span class="k">if</span> <span class="n">myinfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">quantumespresso</span><span class="o">.</span><span class="n">QuantumEspressoError</span><span class="p">(</span><span class="s2">&quot;qe_input_file_names failed. No file found in CASM project matching: &quot;</span> <span class="o">+</span> <span class="n">infilename</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="n">super_poscarfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">quantumespresso</span><span class="o">.</span><span class="n">QuantumEspressoError</span><span class="p">(</span><span class="s2">&quot;qe_input_file_names failed. No POS file found for this configuration.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">speciesfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">quantumespresso</span><span class="o">.</span><span class="n">QuantumEspressoError</span><span class="p">(</span><span class="s2">&quot;qe_input_file_names failed. No SPECIES file found in CASM project.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">myinfile</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

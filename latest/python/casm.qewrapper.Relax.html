@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.qewrapper.Relax &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.qewrapper.qe_input_file_names" href="casm.qewrapper.qe_input_file_names.html" />
+    <link rel="prev" title="casm.qewrapper.QEWrapperError" href="casm.qewrapper.QEWrapperError.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.qewrapper.QEWrapperError.html">casm.qewrapper.QEWrapperError</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.qewrapper.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.qewrapper.qe_input_file_names.html">casm.qewrapper.qe_input_file_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.qewrapper.read_settings.html">casm.qewrapper.read_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.qewrapper.write_settings.html">casm.qewrapper.write_settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.qewrapper.Relax</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.qewrapper.Relax.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-qewrapper-relax">
+<h1>casm.qewrapper.Relax<a class="headerlink" href="#casm-qewrapper-relax" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.qewrapper.Relax">
+<em class="property">class </em><code class="descclassname">casm.qewrapper.</code><code class="descname">Relax</code><span class="sig-paren">(</span><em>configdir=None</em>, <em>auto=True</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Relax class contains functions for setting up, executing, and parsing a Quantum Espresso relaxation.</p>
+<p>The relaxation creates the following directory structure:
+config/</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>calctype.name/</dt>
+<dd>run.0/
+run.1/
+…
+run.final/</dd>
+</dl>
+</div></blockquote>
+<p>‘run.i’ directories are only created when ready.
+‘run.final’ is a final constant volume run {“calculation”:’relax’}</p>
+<p>This automatically looks for Quantum Espresso settings files in …/settings/calctype.name,
+where ‘…’ is the nearest parent directory of ‘self.configdir’ in the CASM project repository</p>
+<dl class="docutils">
+<dt>Contains:</dt>
+<dd><p class="first">self.configdir (…/config)
+self.calcdir   (…/config/calctype.name)</p>
+<p>self.settings = dictionary of settings for job submission and the relaxation, see qewrapper.read_settings</p>
+<p class="last">self.auto = True if using prisms_jobs module’s JobDB to manage jobs
+self.sort = True if sorting atoms in POSCAR by type</p>
+</dd>
+</dl>
+<p>Construct a Quantum Espresso relaxation job object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>configdir: path to configuration
+auto: True if using prisms_jobs module’s JobDB to manage jobs</dd>
+</dl>
+<dl class="method">
+<dt id="casm.qewrapper.Relax.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>configdir=None</em>, <em>auto=True</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Quantum Espresso relaxation job object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>configdir: path to configuration
+auto: True if using prisms_jobs module’s JobDB to manage jobs</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.qewrapper.Relax.__init__" title="casm.qewrapper.Relax.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([configdir,&nbsp;auto,&nbsp;sort])</td>
+<td>Construct a Quantum Espresso relaxation job object.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">finalize</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_converged</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.qewrapper.Relax.properties" title="casm.qewrapper.Relax.properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code></a>(qedir,&nbsp;outfilename)</td>
+<td>Report results to properties.calc.json file in configuration directory, after checking for electronic convergence.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.qewrapper.Relax.report_status" title="casm.qewrapper.Relax.report_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report_status</span></code></a>(status[,&nbsp;failure_type])</td>
+<td>Report calculation status to status.json file in configuration directory.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.qewrapper.Relax.run" title="casm.qewrapper.Relax.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</td>
+<td>Setup input files, run a qe relaxation, and report results</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.qewrapper.Relax.run_settings" title="casm.qewrapper.Relax.run_settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_settings</span></code></a>()</td>
+<td>Set default values based on runtime environment</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.qewrapper.Relax.setup" title="casm.qewrapper.Relax.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span></code></a>()</td>
+<td>Setup initial relaxation run</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.qewrapper.Relax.submit" title="casm.qewrapper.Relax.submit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">submit</span></code></a>()</td>
+<td>Submit a PBS job for this Quantum Espresso relaxation</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="casm.qewrapper.Relax.properties">
+<em class="property">static </em><code class="descname">properties</code><span class="sig-paren">(</span><em>qedir</em>, <em>outfilename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report results to properties.calc.json file in configuration directory, after checking for electronic convergence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.qewrapper.Relax.report_status">
+<code class="descname">report_status</code><span class="sig-paren">(</span><em>status</em>, <em>failure_type=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.report_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.report_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report calculation status to status.json file in configuration directory.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>status: string describing calculation status. Currently used values are</dt>
+<dd><blockquote class="first">
+<div>not_submitted
+submitted
+complete
+failed</div></blockquote>
+<dl class="last docutils">
+<dt>failure_type: optional string describing reason for failure. Currently used values are</dt>
+<dd>unknown
+electronic_convergence
+run_limit</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.qewrapper.Relax.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup input files, run a qe relaxation, and report results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.qewrapper.Relax.run_settings">
+<code class="descname">run_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.run_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.run_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set default values based on runtime environment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.qewrapper.Relax.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup initial relaxation run</p>
+<dl class="docutils">
+<dt>Uses the following files from the most local …/settings/calctype.name directory:</dt>
+<dd>infile: Quantum Espresso input settings
+SPECIES: info for each species such as which UPF files to use, atomic specific tags etc GGA+U, etc.</dd>
+<dt>Uses the following files from the …/config directory:</dt>
+<dd>POS: structure of the configuration to be relaxed</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.qewrapper.Relax.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/qewrapper/relax.html#Relax.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.qewrapper.Relax.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a PBS job for this Quantum Espresso relaxation</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.qewrapper.qe_input_file_names.html" class="btn btn-neutral float-right" title="casm.qewrapper.qe_input_file_names" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.qewrapper.QEWrapperError.html" class="btn btn-neutral" title="casm.qewrapper.QEWrapperError" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

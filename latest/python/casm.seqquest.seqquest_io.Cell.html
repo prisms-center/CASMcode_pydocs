@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.seqquest_io.Cell &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.seqquest.seqquest_io.Geom" href="casm.seqquest.seqquest_io.Geom.html" />
+    <link rel="prev" title="casm.seqquest.run" href="casm.seqquest.run.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.seqquest.seqquest_io.Cell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.Geom.html">casm.seqquest.seqquest_io.Geom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.Site.html">casm.seqquest.seqquest_io.Site</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.LcaoIN.html">casm.seqquest.seqquest_io.LcaoIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.LcaoOUT.html">casm.seqquest.seqquest_io.LcaoOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.DEFAULT_QUEST_MOVE_LIST.html">casm.seqquest.seqquest_io.DEFAULT_QUEST_MOVE_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.DEFAULT_QUEST_COPY_LIST.html">casm.seqquest.seqquest_io.DEFAULT_QUEST_COPY_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.DEFAULT_QUEST_REMOVE_LIST.html">casm.seqquest.seqquest_io.DEFAULT_QUEST_REMOVE_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.QUEST_INPUT_FILE_LIST.html">casm.seqquest.seqquest_io.QUEST_INPUT_FILE_LIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.SeqquestIO.html">casm.seqquest.seqquest_io.SeqquestIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.get_lcao_tag.html">casm.seqquest.seqquest_io.get_lcao_tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.job_complete.html">casm.seqquest.seqquest_io.job_complete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.seqquest.seqquest_io.species_settings.html">casm.seqquest.seqquest_io.species_settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.seqquest.seqquest_io.Cell</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.seqquest.seqquest_io.Cell.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-seqquest-seqquest-io-cell">
+<h1>casm.seqquest.seqquest_io.Cell<a class="headerlink" href="#casm-seqquest-seqquest-io-cell" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.seqquest.seqquest_io.Cell">
+<em class="property">class </em><code class="descclassname">casm.seqquest.seqquest_io.</code><code class="descname">Cell</code><span class="sig-paren">(</span><em>POS=None</em>, <em>seqfile=None</em>, <em>mini=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container  class for cell data</p>
+<dl class="docutils">
+<dt>Contains:</dt>
+<dd><p class="first">self._lattice (matrix of float): primative lattice vectors
+self.coord_mode (str): LATTICE or CARTESIAN; value of “coordinate” keyword in lcao.in,</p>
+<blockquote>
+<div>default LATTICE</div></blockquote>
+<dl class="last docutils">
+<dt>self._scale (float): scale factor for cell, default 1.0</dt>
+<dd>default 1.0</dd>
+</dl>
+</dd>
+</dl>
+<p>Construct a Cell object from ‘cell’ file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">POS (string): Path to a POS file
+seqfile (string or buffer): Path to a lcao.in, lcao.out, or lcao.geom file OR an</p>
+<blockquote class="last">
+<div>open file or buffer object. Info suppliments and overrides POS file</div></blockquote>
+</dd>
+</dl>
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>POS=None</em>, <em>seqfile=None</em>, <em>mini=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Cell object from ‘cell’ file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">POS (string): Path to a POS file
+seqfile (string or buffer): Path to a lcao.in, lcao.out, or lcao.geom file OR an</p>
+<blockquote class="last">
+<div>open file or buffer object. Info suppliments and overrides POS file</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.POS" title="casm.seqquest.seqquest_io.Cell.POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">POS</span></code></a>(POS)</td>
+<td>Shorthand for POS construction</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.__init__" title="casm.seqquest.seqquest_io.Cell.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([POS,&nbsp;seqfile,&nbsp;mini])</td>
+<td>Construct a Cell object from ‘cell’ file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.get_lattice" title="casm.seqquest.seqquest_io.Cell.get_lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lattice</span></code></a>([index])</td>
+<td>Returns the lattice, or lattice vector ‘index’, as listed list</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.get_reciprocal_lattice" title="casm.seqquest.seqquest_io.Cell.get_reciprocal_lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_reciprocal_lattice</span></code></a>([index])</td>
+<td>Returns the reciprocal lattice vector ‘index’, as numpy array</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.mini" title="casm.seqquest.seqquest_io.Cell.mini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mini</span></code></a>(mini_POS)</td>
+<td>Construction from partial POS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.read_POS" title="casm.seqquest.seqquest_io.Cell.read_POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_POS</span></code></a>(POS)</td>
+<td>Read a POS and construct lattice coords in a Cell object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.read_mini_POS" title="casm.seqquest.seqquest_io.Cell.read_mini_POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_mini_POS</span></code></a>(mini_POS)</td>
+<td>Read a POS and construct lattice coords in a Cell object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.read_seq" title="casm.seqquest.seqquest_io.Cell.read_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_seq</span></code></a>(seqfile)</td>
+<td>Read a seqquest file (or a buffer containing info from a file) and construct or amend a Cell object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.reciprocal_volume" title="casm.seqquest.seqquest_io.Cell.reciprocal_volume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal_volume</span></code></a>()</td>
+<td>Returns scalar triple product of reciprocal lattice vector</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.scale" title="casm.seqquest.seqquest_io.Cell.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a>([scale,&nbsp;scalex,&nbsp;scaley,&nbsp;scalez,&nbsp;ndim])</td>
+<td>Applies scale settings</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.scalex" title="casm.seqquest.seqquest_io.Cell.scalex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalex</span></code></a>([scalex])</td>
+<td>Alias for global scale</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.scaley" title="casm.seqquest.seqquest_io.Cell.scaley"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaley</span></code></a>([scaley])</td>
+<td>Alias for global scale</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.scalez" title="casm.seqquest.seqquest_io.Cell.scalez"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalez</span></code></a>([scalez])</td>
+<td>Alias for global scale</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.seq" title="casm.seqquest.seqquest_io.Cell.seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq</span></code></a>(seqfile)</td>
+<td>Shorthand for SeqQuest construction</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.volume" title="casm.seqquest.seqquest_io.Cell.volume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">volume</span></code></a>()</td>
+<td>Returns scalar triple product of lattice vectors</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.write_POS" title="casm.seqquest.seqquest_io.Cell.write_POS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_POS</span></code></a>(filename)</td>
+<td>Write POS to filename</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.lattice" title="casm.seqquest.seqquest_io.Cell.lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lattice</span></code></a></td>
+<td>Returns a copy of the lattice</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.seqquest.seqquest_io.Cell.reciprocal_lattice" title="casm.seqquest.seqquest_io.Cell.reciprocal_lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal_lattice</span></code></a></td>
+<td>Returns a copy of the reciprocal lattice</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Cell.POS">
+<em class="property">classmethod </em><code class="descname">POS</code><span class="sig-paren">(</span><em>POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorthand for POS construction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell._read_lattice">
+<code class="descname">_read_lattice</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell._read_lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell._read_lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by self.read_POS() to read a lattice into self._lattice</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>stream (buffer): an open POS being read from</dd>
+</dl>
+<p>self._lattice contains lattice vectors stored as rows in a numpy array (easy inversion)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell._read_seq_file">
+<code class="descname">_read_seq_file</code><span class="sig-paren">(</span><em>seqfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell._read_seq_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell._read_seq_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a seqquest file (or a buffer containing info from a file) and construct or amend
+a Cell object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell._read_seq_stream">
+<code class="descname">_read_seq_stream</code><span class="sig-paren">(</span><em>seqfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell._read_seq_stream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell._read_seq_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a seqquest file (or a buffer containing info from a file) and construct or amend
+a Cell object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.get_lattice">
+<code class="descname">get_lattice</code><span class="sig-paren">(</span><em>index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.get_lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.get_lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lattice, or lattice vector ‘index’, as listed list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.get_reciprocal_lattice">
+<code class="descname">get_reciprocal_lattice</code><span class="sig-paren">(</span><em>index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.get_reciprocal_lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.get_reciprocal_lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the reciprocal lattice vector ‘index’, as numpy array</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.seqquest.seqquest_io.Cell.lattice">
+<code class="descname">lattice</code><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the lattice</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Cell.mini">
+<em class="property">classmethod </em><code class="descname">mini</code><span class="sig-paren">(</span><em>mini_POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.mini"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.mini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construction from partial POS</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.read_POS">
+<code class="descname">read_POS</code><span class="sig-paren">(</span><em>POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.read_POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.read_POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a POS and construct lattice coords in a Cell object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.read_mini_POS">
+<code class="descname">read_mini_POS</code><span class="sig-paren">(</span><em>mini_POS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.read_mini_POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.read_mini_POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a POS and construct lattice coords in a Cell object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.read_seq">
+<code class="descname">read_seq</code><span class="sig-paren">(</span><em>seqfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.read_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.read_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a seqquest file (or a buffer containing info from a file) and construct or amend
+a Cell object</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.seqquest.seqquest_io.Cell.reciprocal_lattice">
+<code class="descname">reciprocal_lattice</code><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.reciprocal_lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the reciprocal lattice</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.reciprocal_volume">
+<code class="descname">reciprocal_volume</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.reciprocal_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.reciprocal_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns scalar triple product of reciprocal lattice vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.scale">
+<code class="descname">scale</code><span class="sig-paren">(</span><em>scale=1.0</em>, <em>scalex=1.0</em>, <em>scaley=1.0</em>, <em>scalez=1.0</em>, <em>ndim=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.scale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies scale settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.scalex">
+<code class="descname">scalex</code><span class="sig-paren">(</span><em>scalex=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.scalex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.scalex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for global scale</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.scaley">
+<code class="descname">scaley</code><span class="sig-paren">(</span><em>scaley=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.scaley"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.scaley" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for global scale</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.scalez">
+<code class="descname">scalez</code><span class="sig-paren">(</span><em>scalez=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.scalez"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.scalez" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for global scale</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="casm.seqquest.seqquest_io.Cell.seq">
+<em class="property">classmethod </em><code class="descname">seq</code><span class="sig-paren">(</span><em>seqfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorthand for SeqQuest construction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.volume">
+<code class="descname">volume</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns scalar triple product of lattice vectors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.seqquest.seqquest_io.Cell.write_POS">
+<code class="descname">write_POS</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/seqquest/seqquest_io/geom/geom.html#Cell.write_POS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.seqquest.seqquest_io.Cell.write_POS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write POS to filename</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.seqquest.seqquest_io.Geom.html" class="btn btn-neutral float-right" title="casm.seqquest.seqquest_io.Geom" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.seqquest.run.html" class="btn btn-neutral" title="casm.seqquest.run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

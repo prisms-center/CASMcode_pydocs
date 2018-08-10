@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.project.Selection &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.project.query" href="casm.project.query.html" />
+    <link rel="prev" title="casm.project.Prim" href="casm.project.Prim.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-project">casm.project</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.project.project_path.html">casm.project.project_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.html">casm.project.ClexDescription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.html">casm.project.ProjectSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.html">casm.project.DirectoryStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.html">casm.project.Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Prim.html">casm.project.Prim</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.project.Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.query.html">casm.project.query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.write_eci.html">casm.project.write_eci</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.project.Selection</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.project.Selection.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-project-selection">
+<h1>casm.project.Selection<a class="headerlink" href="#casm-project-selection" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.project.Selection">
+<em class="property">class </em><code class="descclassname">casm.project.</code><code class="descname">Selection</code><span class="sig-paren">(</span><em>proj=None</em>, <em>path='MASTER'</em>, <em>all=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Selection object contains information about a CASM project</p>
+<dl class="attribute">
+<dt id="casm.project.Selection.proj">
+<code class="descname">proj</code><a class="headerlink" href="#casm.project.Selection.proj" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.Project, optional, default=Project containing the current working directory</em> – the CASM project the selection belongs to</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Selection.path">
+<code class="descname">path</code><a class="headerlink" href="#casm.project.Selection.path" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string, optional, default=”MASTER”</em> – path to selection file, or “MASTER” (Default=”MASTER”)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Selection.all">
+<code class="descname">all</code><a class="headerlink" href="#casm.project.Selection.all" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool, optional, default=True</em> – if True, self.data will include all configurations, whether selected or
+not. If False, only selected configurations will be included.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Selection.data">
+<code class="descname">data</code><a class="headerlink" href="#casm.project.Selection.data" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>pandas.DataFrame</em> – A pandas.DataFrame describing the selected configurations. Has at least
+‘configname’ and ‘selected’ (as bool) columns.</p>
+</dd></dl>
+
+<p>Construct a CASM Project representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>proj</strong> (<em>casm.Project</em><em>, </em><em>optional</em><em>, </em><em>default=Project containing the current working directory</em>) – the CASM project the selection belongs to</li>
+<li><strong>path</strong> (<em>string</em><em>, </em><em>optional</em><em>, </em><em>default=&quot;MASTER&quot;</em>) – path to selection file, or “MASTER” (Default=”MASTER”)</li>
+<li><strong>all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – if True, self.data will include all configurations, whether selected or
+not. If False, only selected configurations will be included.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.project.Selection.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>proj=None</em>, <em>path='MASTER'</em>, <em>all=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a CASM Project representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>proj</strong> (<em>casm.Project</em><em>, </em><em>optional</em><em>, </em><em>default=Project containing the current working directory</em>) – the CASM project the selection belongs to</li>
+<li><strong>path</strong> (<em>string</em><em>, </em><em>optional</em><em>, </em><em>default=&quot;MASTER&quot;</em>) – path to selection file, or “MASTER” (Default=”MASTER”)</li>
+<li><strong>all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – if True, self.data will include all configurations, whether selected or
+not. If False, only selected configurations will be included.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Selection.__init__" title="casm.project.Selection.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([proj,&nbsp;path,&nbsp;all])</td>
+<td>Construct a CASM Project representation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.Selection.add_data" title="casm.project.Selection.add_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data</span></code></a>(name[,&nbsp;data,&nbsp;force])</td>
+<td>Equivalent to: if name not in sel.data.columns or force == True:   if data is None:     sel.query([name], force)   else:     sel.data.loc[:,name] = data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Selection.query" title="casm.project.Selection.query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query</span></code></a>(columns[,&nbsp;force,&nbsp;verbose])</td>
+<td>Query requested columns and store them in ‘data’.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.Selection.save" title="casm.project.Selection.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>([data,&nbsp;force])</td>
+<td>Save the current selection.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Selection.saveas" title="casm.project.Selection.saveas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveas</span></code></a>(path[,&nbsp;force])</td>
+<td>Create a new Selection from this one, save and return it</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.Selection.write_pos" title="casm.project.Selection.write_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_pos</span></code></a>([all])</td>
+<td>Write POS file for configurations</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Selection.data" title="casm.project.Selection.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></td>
+<td>Get Selection data as a pandas.DataFrame</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.project.Selection.add_data">
+<code class="descname">add_data</code><span class="sig-paren">(</span><em>name</em>, <em>data=None</em>, <em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection.add_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection.add_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent to:
+if name not in sel.data.columns or force == True:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if data is None:</dt>
+<dd>sel.query([name], force)</dd>
+<dt>else:</dt>
+<dd>sel.data.loc[:,name] = data</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">data</code></dt>
+<dd><p>Get Selection data as a pandas.DataFrame</p>
+<p>If the data is modified, ‘save’ must be called for CASM to use the modified selection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Selection.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>columns</em>, <em>force=False</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query requested columns and store them in ‘data’. Will not overwrite
+columns that already exist, unless ‘force’==True.</p>
+<p>Will query data for all configurations, whether selected or not, if
+self.all == True.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Selection.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>data=None</em>, <em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current selection. Also allows completely replacing the ‘data’
+describing the selected configurations.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first docutils">
+<dt>data: None (default), or pandas.DataFrame describing the Selection with</dt>
+<dd>‘configname’ and ‘selected’ columns. If path==”MASTER”, Configurations
+not included in ‘data’ will be set to not selected.</dd>
+</dl>
+<p class="last">force: Boolean, force overwrite existing files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Selection.saveas">
+<code class="descname">saveas</code><span class="sig-paren">(</span><em>path</em>, <em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection.saveas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection.saveas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Selection from this one, save and return it</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>path: path to selection file (Default=”MASTER”)
+force: Boolean, force overwrite existing files</dd>
+<dt>Returns:</dt>
+<dd>sel: the new Selection created from this one</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Selection.write_pos">
+<code class="descname">write_pos</code><span class="sig-paren">(</span><em>all=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/selection.html#Selection.write_pos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Selection.write_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write POS file for configurations</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – if True, will write POS file for all configurations in the selection
+whether selected or not. If False, only write POS file for selected
+configurations.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.project.query.html" class="btn btn-neutral float-right" title="casm.project.query" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.project.Prim.html" class="btn btn-neutral" title="casm.project.Prim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

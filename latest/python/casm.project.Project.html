@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.project.Project &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.project.Prim" href="casm.project.Prim.html" />
+    <link rel="prev" title="casm.project.DirectoryStructure" href="casm.project.DirectoryStructure.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-project">casm.project</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.project.project_path.html">casm.project.project_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.html">casm.project.ClexDescription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.html">casm.project.ProjectSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.html">casm.project.DirectoryStructure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.project.Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Prim.html">casm.project.Prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Selection.html">casm.project.Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.query.html">casm.project.query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.write_eci.html">casm.project.write_eci</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.project.Project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.project.Project.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-project-project">
+<h1>casm.project.Project<a class="headerlink" href="#casm-project-project" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.project.Project">
+<em class="property">class </em><code class="descclassname">casm.project.</code><code class="descname">Project</code><span class="sig-paren">(</span><em>path=None</em>, <em>casm_exe=None</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Project class contains information about a CASM project</p>
+<dl class="attribute">
+<dt id="casm.project.Project.path">
+<code class="descname">path</code><a class="headerlink" href="#casm.project.Project.path" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – Path to project root directory</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.name">
+<code class="descname">name</code><a class="headerlink" href="#casm.project.Project.name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – Project name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.settings">
+<code class="descname">settings</code><a class="headerlink" href="#casm.project.Project.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.ProjectSettings instance</em> – Contains project settings</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.dir">
+<code class="descname">dir</code><a class="headerlink" href="#casm.project.Project.dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.DirectoryStructure instance</em> – Provides file and directory locations within the project</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.prim">
+<code class="descname">prim</code><a class="headerlink" href="#casm.project.Project.prim" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.Prim instance</em> – Represents the primitive crystal structure</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.composition_axes">
+<code class="descname">composition_axes</code><a class="headerlink" href="#casm.project.Project.composition_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.project.CompositionAxes</em> – Currently selected composition axes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.all_composition_axes">
+<code class="descname">all_composition_axes</code><a class="headerlink" href="#casm.project.Project.all_composition_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict(str:casm.project.CompositionAxes)</em> – Dict containing name:CompositionAxes pairs, including both standard and
+custom composition axes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.casm_exe">
+<code class="descname">casm_exe</code><a class="headerlink" href="#casm.project.Project.casm_exe" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – The casm CLI executable to use when necessary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Project.verbose">
+<code class="descname">verbose</code><a class="headerlink" href="#casm.project.Project.verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> – How much to print to stdout</p>
+</dd></dl>
+
+<p>Construct a CASM Project representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Path to project root directory. Default=None uses project containing
+current working directory</li>
+<li><strong>casm_exe</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – CASM executable to use for command line interface. Default
+uses $CASM if it exists in the environment, else “casm”.</li>
+<li><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – How much to print to stdout</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.project.Project.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>path=None</em>, <em>casm_exe=None</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Project.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Project.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a CASM Project representation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Path to project root directory. Default=None uses project containing
+current working directory</li>
+<li><strong>casm_exe</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – CASM executable to use for command line interface. Default
+uses $CASM if it exists in the environment, else “casm”.</li>
+<li><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – How much to print to stdout</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Project.__init__" title="casm.project.Project.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([path,&nbsp;casm_exe,&nbsp;verbose])</td>
+<td>Construct a CASM Project representation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.Project.command" title="casm.project.Project.command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">command</span></code></a>(args)</td>
+<td>Execute a command via the c api.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Project.data" title="casm.project.Project.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a>()</td>
+<td>Returns a ‘ctypes.c_void_p’ that points to a CASM project.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.Project.refresh" title="casm.project.Project.refresh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refresh</span></code></a>([read_settings,&nbsp;read_composition,&nbsp;…])</td>
+<td>Refresh PrimClex properties to reflect changes to CASM project files.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Project.name" title="casm.project.Project.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.project.Project.prim" title="casm.project.Project.prim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prim</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.project.Project._Project__load">
+<code class="descname">_Project__load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.project.Project._Project__load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicitly load CASM project into memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Project._Project__refresh">
+<code class="descname">_Project__refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.project.Project._Project__refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reload self.settings and self.dir</p>
+<p>Use this after adding or modifying files in the CASM project but no
+special call to refresh PrimClex properties is required</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Project._Project__unload">
+<code class="descname">_Project__unload</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.project.Project._Project__unload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicitly unload CASM project from memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Project._command_via_capi">
+<code class="descname">_command_via_capi</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Project._command_via_capi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Project._command_via_capi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a command via the c api.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>args: A string containing the command to be executed. Ex: “select –set-on -o /abspath/to/my_selection”</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>(stdout, stderr, returncode): The result of running the command via the</dt>
+<dd>command line iterface. ‘stdout’ and ‘stderr’ are in text type (‘unicode’/’str’).</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Project.command">
+<code class="descname">command</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Project.command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Project.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a command via the c api.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>args: A string containing the command to be executed. Ex: “select –set-on -o /abspath/to/my_selection”</dd>
+<dt>Returns:</dt>
+<dd>(stdout, stderr, returncode): The result of running the command via the command line iterface</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Project.data">
+<code class="descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Project.data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Project.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a ‘ctypes.c_void_p’ that points to a CASM project. (PrimClex)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.project.Project.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><em>read_settings=False</em>, <em>read_composition=False</em>, <em>read_chem_ref=False</em>, <em>read_configs=False</em>, <em>clear_clex=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Project.refresh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Project.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refresh PrimClex properties to reflect changes to CASM project files.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.project.Prim.html" class="btn btn-neutral float-right" title="casm.project.Prim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.project.DirectoryStructure.html" class="btn btn-neutral" title="casm.project.DirectoryStructure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

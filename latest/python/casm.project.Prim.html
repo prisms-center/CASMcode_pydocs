@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.project.Prim &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.project.Selection" href="casm.project.Selection.html" />
+    <link rel="prev" title="casm.project.Project" href="casm.project.Project.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-project">casm.project</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.project.project_path.html">casm.project.project_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.html">casm.project.ClexDescription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.html">casm.project.ProjectSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.html">casm.project.DirectoryStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.html">casm.project.Project</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.project.Prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Selection.html">casm.project.Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.query.html">casm.project.query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.write_eci.html">casm.project.write_eci</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.project.Prim</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.project.Prim.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-project-prim">
+<h1>casm.project.Prim<a class="headerlink" href="#casm-project-prim" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.project.Prim">
+<em class="property">class </em><code class="descclassname">casm.project.</code><code class="descname">Prim</code><span class="sig-paren">(</span><em>proj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Prim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Prim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Primitive Crystal Structure</p>
+<dl class="attribute">
+<dt id="casm.project.Prim.proj">
+<code class="descname">proj</code><a class="headerlink" href="#casm.project.Prim.proj" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>casm.Project</em> – the CASM project the Prim belongs to</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.lattice_matrix">
+<code class="descname">lattice_matrix</code><a class="headerlink" href="#casm.project.Prim.lattice_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>np.array of shape (3, 3)</em> – lattice vectors as matrix columns</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.lattice_parameters">
+<code class="descname">lattice_parameters</code><a class="headerlink" href="#casm.project.Prim.lattice_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> –</p>
+<dl class="docutils">
+<dt>Lattice parameters and angles (in degrees), as:</dt>
+<dd>{‘a’:a, ‘b’:b, ‘c’:c, ‘alpha’:alpha, ‘beta’:beta, ‘gamma’:gamma}</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.basis">
+<code class="descname">basis</code><a class="headerlink" href="#casm.project.Prim.basis" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>List(dict)</em> – crystal basis, as read directly from prim.json (format may change)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.coordinate_mode">
+<code class="descname">coordinate_mode</code><a class="headerlink" href="#casm.project.Prim.coordinate_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – crystal basis coordinate_mode, as read directly from prim.json (format
+may change)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.lattice_symmetry_s">
+<code class="descname">lattice_symmetry_s</code><a class="headerlink" href="#casm.project.Prim.lattice_symmetry_s" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – lattice point group, in Schoenflies notation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.lattice_symmetry_hm">
+<code class="descname">lattice_symmetry_hm</code><a class="headerlink" href="#casm.project.Prim.lattice_symmetry_hm" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – lattice point group, in Hermann-Mauguin notation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.lattice_system">
+<code class="descname">lattice_system</code><a class="headerlink" href="#casm.project.Prim.lattice_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – lattice system name, (‘cubic’, ‘hexagonal’, ‘rhombohedral’, etc.)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.crystal_symmetry_s">
+<code class="descname">crystal_symmetry_s</code><a class="headerlink" href="#casm.project.Prim.crystal_symmetry_s" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – crystal point group, in Schoenflies notation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.crystal_symmetry_hm">
+<code class="descname">crystal_symmetry_hm</code><a class="headerlink" href="#casm.project.Prim.crystal_symmetry_hm" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – crystal point group, in Hermann-Mauguin notation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.crystal_system">
+<code class="descname">crystal_system</code><a class="headerlink" href="#casm.project.Prim.crystal_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – crystal system name, (‘cubic’, ‘hexagonal’, ‘trigonal’, etc.)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.crystal_family">
+<code class="descname">crystal_family</code><a class="headerlink" href="#casm.project.Prim.crystal_family" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – crystal family name, (‘cubic’, ‘hexagonal’, etc.)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.space_group_number">
+<code class="descname">space_group_number</code><a class="headerlink" href="#casm.project.Prim.space_group_number" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – range of possible space group number</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.components">
+<code class="descname">components</code><a class="headerlink" href="#casm.project.Prim.components" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>List[str]</em> – occupational components</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.elements">
+<code class="descname">elements</code><a class="headerlink" href="#casm.project.Prim.elements" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>List[str]</em> – all allowed elements</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.n_independent_compositions">
+<code class="descname">n_independent_compositions</code><a class="headerlink" href="#casm.project.Prim.n_independent_compositions" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> – number of independent composition axes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="casm.project.Prim.degrees_of_freedom">
+<code class="descname">degrees_of_freedom</code><a class="headerlink" href="#casm.project.Prim.degrees_of_freedom" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>List[str]</em> –</p>
+<dl class="docutils">
+<dt>allowed degrees of freedom, from:</dt>
+<dd>‘occupation’</dd>
+</dl>
+</dd></dl>
+
+<p>Construct a CASM Prim</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>proj</strong> (<em>casm.Project</em><em>, </em><em>optional</em><em>, </em><em>default=Project containing the current working directory</em>) – the CASM project the Prim belongs to</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.project.Prim.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>proj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/project.html#Prim.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.project.Prim.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a CASM Prim</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>proj</strong> (<em>casm.Project</em><em>, </em><em>optional</em><em>, </em><em>default=Project containing the current working directory</em>) – the CASM project the Prim belongs to</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.project.Prim.__init__" title="casm.project.Prim.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(proj)</td>
+<td>Construct a CASM Prim</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.project.Selection.html" class="btn btn-neutral float-right" title="casm.project.Selection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.project.Project.html" class="btn btn-neutral" title="casm.project.Project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

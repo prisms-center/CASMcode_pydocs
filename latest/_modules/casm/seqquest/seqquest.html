@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.seqquest.seqquest &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.seqquest.seqquest</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.seqquest.seqquest</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; FIXME &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">seqquest_io</span>
+<span class="kn">from</span> <span class="nn">.seqquest_io</span> <span class="k">import</span> <span class="p">(</span><span class="n">QUEST_INPUT_FILE_LIST</span><span class="p">,</span> <span class="n">DEFAULT_QUEST_MOVE_LIST</span><span class="p">,</span>
+                          <span class="n">DEFAULT_QUEST_COPY_LIST</span><span class="p">,</span> <span class="n">DEFAULT_QUEST_REMOVE_LIST</span><span class="p">)</span>
+<div class="viewcode-block" id="SeqQuestError"><a class="viewcode-back" href="../../../python/casm.seqquest.SeqQuestError.html#casm.seqquest.SeqQuestError">[docs]</a><span class="k">class</span> <span class="nc">SeqQuestError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Class for SeqQuest errors &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="SeqQuestWarning"><a class="viewcode-back" href="../../../python/casm.seqquest.SeqQuestWarning.html#casm.seqquest.SeqQuestWarning">[docs]</a><span class="k">class</span> <span class="nc">SeqQuestWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Class for SeqQuest warnings &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="continue_job"><a class="viewcode-back" href="../../../python/casm.seqquest.continue_job.html#casm.seqquest.continue_job">[docs]</a><span class="k">def</span> <span class="nf">continue_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">contdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Use the files in seqquest job directory &#39;jobdir&#39;, to setup a seqquest job in directory</span>
+<span class="sd">        &#39;contdir&#39;.</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">         jobdir: path to current job directory</span>
+<span class="sd">         contdir: path to new directory to continue the job</span>
+<span class="sd">       Settings:</span>
+<span class="sd">         copy: Files copied from &#39;jobdir&#39; to &#39;contdir&#39;</span>
+<span class="sd">                    It also copies either CONTCAR, or if that does not exist POSCAR.</span>
+<span class="sd">         move: Files moved from &#39;jobdir&#39; to &#39;contdir&#39;</span>
+<span class="sd">         keep: Files (along with those in &#39;copy&#39;) to keep in &#39;jobdir&#39;. The rest are removed.</span>
+
+<span class="sd">         Do not include &quot;POSCAR&quot; or &quot;CONTCAR&quot; in &#39;move&#39; or &#39;copy&#39;. jobdir/CONTCAR is copied</span>
+<span class="sd">         to contdir/POSCAR, unless it does not exist, in which case jobdir/POSCAR is copied</span>
+<span class="sd">         to contdir/POSCAR. jobdir/POSCAR and jobdir/CONTCAR are always kept.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Continue SeqQuest job:</span><span class="se">\n</span><span class="s2">  Original: &quot;</span> <span class="o">+</span> <span class="n">jobdir</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Continuation: &quot;</span> <span class="o">+</span> <span class="n">contdir</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="c1"># remove duplicates</span>
+    <span class="n">move</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;move&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">DEFAULT_QUEST_MOVE_LIST</span><span class="o">+</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;extra_input_files&#39;</span><span class="p">]))</span>
+    <span class="n">copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;copy&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">DEFAULT_QUEST_COPY_LIST</span><span class="p">))</span>
+    <span class="n">remove</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;remove&#39;</span><span class="p">]))</span>
+    <span class="n">compress</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;compress&#39;</span><span class="p">]))</span>
+    <span class="n">backup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;backup&#39;</span><span class="p">]))</span>
+
+    <span class="c1"># Check that necessary files are being moved/copied: lcao.in, lcao.geom_in</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;lcao.in&quot;</span> <span class="ow">in</span> <span class="n">move</span> <span class="o">+</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: lcao.in not found in either &#39;move&#39; or &#39;copy&#39;.</span><span class="se">\</span>
+<span class="s2">                       Moving POTCAR by default&quot;</span><span class="p">,</span> <span class="n">SeqQuestWarning</span><span class="p">)</span>
+        <span class="n">move</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;lcao.in&quot;</span><span class="p">]</span>
+
+    <span class="c1"># make the new contdir</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">contdir</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># make compressed backups of files sensitive to corruption (e.g. WAVECAR)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; backup:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">backup</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="c1"># Open target file, target file.gz</span>
+            <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_BACKUP.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="c1"># Compress, close files</span>
+            <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
+            <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># copy geom/lcao.in/etc</span>
+    <span class="c1"># if os.path.isfile(os.path.join(jobdir, &quot;lcao.geom&quot;)) and os.path.getsize(os.path.join(jobdir, &quot;lcao.geom&quot;)) &gt; 0:</span>
+    <span class="k">if</span> <span class="s2">&quot;lcao.geom&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  cp lcao.geom -&gt; lcao.geom_in&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  no lcao.geom : cp lcao.geom_in -&gt; lcao.geom_in&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;lcao.geom_in&quot;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  no lcao.geom : cp lcao.geom_in -&gt; lcao.geom_in&quot;</span><span class="p">)</span>
+
+    <span class="c1"># copy .atm files</span>
+    <span class="k">for</span> <span class="n">atm</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*\.atm&quot;</span><span class="p">,</span> <span class="n">atm</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">atm</span><span class="p">)):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">readlink</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">atm</span><span class="p">)),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">atm</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">atm</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">atm</span><span class="p">))</span>
+
+    <span class="c1"># move files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mv:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="c1"># for file in move:</span>
+    <span class="c1">#     print file,</span>
+    <span class="c1">#     os.rename(os.path.join(jobdir, file), os.path.join(contdir, file))</span>
+    <span class="k">for</span> <span class="n">mname</span> <span class="ow">in</span> <span class="n">move</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mfile</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">mname</span><span class="p">,</span> <span class="n">mfile</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">mfile</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">mfile</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">mfile</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># copy files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  cp:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="c1"># for file in copy:</span>
+    <span class="c1">#     print file,</span>
+    <span class="c1">#     shutil.copyfile(os.path.join(jobdir, file), os.path.join(contdir, file))</span>
+    <span class="k">for</span> <span class="n">cname</span> <span class="ow">in</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">cfile</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">cname</span><span class="p">,</span> <span class="n">cfile</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">cfile</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">cfile</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">cfile</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># remove files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  rm:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="c1"># for file in remove:</span>
+    <span class="c1">#     if os.path.isfile(os.path.join(jobdir, file)):</span>
+    <span class="c1">#         print file,</span>
+    <span class="c1">#         os.remove(os.path.join(jobdir, file))</span>
+    <span class="k">for</span> <span class="n">rname</span> <span class="ow">in</span> <span class="n">remove</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">rfile</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">rname</span><span class="p">,</span> <span class="n">rfile</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">rfile</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">rfile</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># compress files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; gzip:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="c1"># for file in compress:</span>
+    <span class="c1">#     if os.path.isfile(os.path.join(jobdir, file)):</span>
+    <span class="c1">#         print file,</span>
+    <span class="c1">#         # Open target file, target file.gz</span>
+    <span class="c1">#         f_in = open(os.path.join(jobdir, file), &#39;rb&#39;)</span>
+    <span class="c1">#         f_out = gzip.open(os.path.join(jobdir, file)+&#39;.gz&#39;, &#39;wb&#39;)</span>
+    <span class="c1">#         # Compress, close files</span>
+    <span class="c1">#         f_out.writelines(f_in)</span>
+    <span class="c1">#         f_out.close()</span>
+    <span class="c1">#         f_in.close()</span>
+    <span class="c1">#         # Remove original target file</span>
+    <span class="c1">#         os.remove(os.path.join(jobdir, file))</span>
+    <span class="k">for</span> <span class="n">cname</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">cfile</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">cname</span><span class="p">,</span> <span class="n">cfile</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">cfile</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="c1"># Open target file, target file.gz</span>
+                <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">cfile</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+                <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">cfile</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+                <span class="c1"># Compress, close files</span>
+                <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
+                <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="c1"># Remove original target file</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">cfile</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="complete_job"><a class="viewcode-back" href="../../../python/casm.seqquest.complete_job.html#casm.seqquest.complete_job">[docs]</a><span class="k">def</span> <span class="nf">complete_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+<span class="c1"># def complete_job(jobdir,\</span>
+<span class="c1">#                  remove = io.DEFAULT_VASP_REMOVE_LIST + [&quot;POTCAR&quot;],\</span>
+<span class="c1">#                  compress = []):</span>
+    <span class="sd">&quot;&quot;&quot;Remove files from a quest job directory</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">         jobdir: path to current job directory</span>
+<span class="sd">       Settings:</span>
+<span class="sd">         copy: Does nothing</span>
+<span class="sd">         move: Does nothing</span>
+<span class="sd">         compress: Compresses listed files</span>
+<span class="sd">         backup: Does nothing</span>
+<span class="sd">         remove: Deletes listed files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complete SeqQuest job: &quot;</span> <span class="o">+</span> <span class="n">jobdir</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="c1"># remove files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  rm:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">f</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">f</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">f</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># compress files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; gzip:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">file</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="c1"># Open target file, target file.gz</span>
+            <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="c1"># Compress, close files</span>
+            <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
+            <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="c1"># Remove original target file</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">file</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../python/casm.seqquest.run.html#casm.seqquest.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;std.out&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;std.err&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ncpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">poll_check_time</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">err_check_time</span><span class="o">=</span><span class="mf">60.0</span><span class="p">,</span> <span class="n">err_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Run seqquest using subprocess.</span>
+
+<span class="sd">        The &#39;command&#39; is executed in the directory &#39;jobdir&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            jobdir:     directory to run vasp.  If jobdir == None, the current directory is used.</span>
+<span class="sd">            stdout:     filename to write to.  If stdout == None, &quot;std.out&quot; is used.</span>
+<span class="sd">            stderr:     filename to write to.  If stderr == None, &quot;std.err&quot; is used.</span>
+<span class="sd">            command:    (str or None) vasp execution command</span>
+<span class="sd">                        If command != None: then &#39;command&#39; is run in a subprocess</span>
+<span class="sd">                        Else, if ncpus == 1, then command = &quot;quest&quot;</span>
+<span class="sd">                        Else, command = &quot;mpirun -np {NCPUS} quest&quot;</span>
+<span class="sd">            ncpus:      (int) if &#39;{NCPUS}&#39; is in &#39;command&#39; string, then &#39;ncpus&#39; is substituted in the command.</span>
+<span class="sd">                        if ncpus==None, $PBS_NP is used if it exists, else 1</span>
+<span class="sd">            poll_check_time: how frequently to check if the vasp job is completed</span>
+<span class="sd">            err_check_time: how frequently to parse vasp output to check for errors</span>
+<span class="sd">            err_types:  List of error types to check for. Supported errors: &#39;IbzkptError&#39;, &#39;SubSpaceMatrixError&#39;. Default: None, in which case only SubSpaceMatrixErrors are checked.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Begin quest run:&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+    <span class="n">currdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ncpus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;PBS_NP&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PBS_NP&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s2">&quot;SLURM_NTASKS&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SLURM_NTASKS&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ncpus</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;quest&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;mpirun -np </span><span class="si">{NCPUS}</span><span class="s2"> quest&quot;</span>
+
+    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{NCPUS\}&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">NCPUS</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ncpus</span><span class="p">))</span>
+
+    <span class="c1">### Expand remaining environment variables</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  jobdir:&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  exec:&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">serr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stderr</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">sout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">serr</span><span class="p">)</span>
+
+    <span class="c1"># wait for process to end, and periodically check for errors</span>
+    <span class="n">poll</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+    <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># stopcar_time = None</span>
+    <span class="k">while</span> <span class="n">poll</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_check_time</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_check</span> <span class="o">&gt;</span> <span class="n">err_check_time</span><span class="p">:</span>
+            <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="c1"># Error handling not yet implemented</span>
+            <span class="c1"># err = error_check(jobdir, os.path.join(jobdir,stdout), err_types)</span>
+            <span class="c1"># if err != None:</span>
+            <span class="c1">#     # FreezeErrors are fatal and usually not helped with STOPCAR</span>
+            <span class="c1">#     if &quot;FreezeError&quot; in err.keys():</span>
+            <span class="c1">#         print &quot;  VASP is frozen, killing job&quot;</span>
+            <span class="c1">#         sys.stdout.flush()</span>
+            <span class="c1">#         # Sometimes p.kill doesn&#39;t work if the process is on multiple nodes</span>
+            <span class="c1">#         os.kill(p.pid, signal.SIGKILL)</span>
+            <span class="c1">#         p.kill()</span>
+            <span class="c1">#         # If the job is re-invoked (e.g. via mpirun or srun) too quickly</span>
+            <span class="c1">#         #   after the previous job ended, infinitiband clusters can have</span>
+            <span class="c1">#         #   some issues with resource allocation. A 30s sleep solves this.</span>
+            <span class="c1">#         time.sleep(60)</span>
+            <span class="c1">#     # Other errors can be killed with STOPCAR, which is safer</span>
+            <span class="c1">#     elif stopcar_time == None:</span>
+            <span class="c1">#         print &quot;  Found errors:&quot;,</span>
+            <span class="c1">#         for e in err:</span>
+            <span class="c1">#             print e,</span>
+            <span class="c1">#         print &quot;\n  Killing job with STOPCAR&quot;</span>
+            <span class="c1">#         sys.stdout.flush()</span>
+            <span class="c1">#         io.write_stopcar(&#39;e&#39;, jobdir)</span>
+            <span class="c1">#         stopcar_time = time.time()</span>
+            <span class="c1">#         time.sleep(60)</span>
+            <span class="c1">#     # If the STOPCAR exists, wait 5 min before manually killing the job</span>
+            <span class="c1">#     elif time.time() - stopcar_time &gt; 300:</span>
+            <span class="c1">#         print &quot;  VASP is non-responsive, killing job&quot;</span>
+            <span class="c1">#         sys.stdout.flush()</span>
+            <span class="c1">#         os.kill(p.pid, signal.SIGKILL)</span>
+            <span class="c1">#         p.kill()</span>
+            <span class="c1">#         # If the job is re-invoked (e.g. via mpirun or srun) too quickly</span>
+            <span class="c1">#         #   after the previous job ended, infinitiband clusters can have</span>
+            <span class="c1">#         #   some issues with resource allocation. A 30s sleep solves this.</span>
+            <span class="c1">#         time.sleep(60)</span>
+
+        <span class="n">poll</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+
+    <span class="c1"># close output files</span>
+    <span class="n">sout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">serr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currdir</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run complete&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="c1"># check finished job for errors</span>
+    <span class="c1"># if err == None:</span>
+    <span class="c1">#     err = error_check(jobdir, os.path.join(jobdir,stdout), err_types)</span>
+    <span class="c1">#     if err != None:</span>
+    <span class="c1">#         print &quot;  Found errors:&quot;,</span>
+    <span class="c1">#         for e in err:</span>
+    <span class="c1">#             print e,</span>
+    <span class="c1">#     print &quot;\n&quot;</span>
+
+    <span class="c1"># return err</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

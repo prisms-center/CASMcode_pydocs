@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.quantumespresso.Relax &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.quantumespresso.error_check" href="casm.quantumespresso.error_check.html" />
+    <link rel="prev" title="casm.quantumespresso.QuantumEspressoWarning" href="casm.quantumespresso.QuantumEspressoWarning.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CASM Python packages documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-plotting">casm.plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-qewrapper">casm.qewrapper</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-quantumespresso">casm.quantumespresso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.quantumespresso.FreezeError.html">casm.quantumespresso.FreezeError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.quantumespresso.NbandsError.html">casm.quantumespresso.NbandsError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.quantumespresso.QuantumEspressoError.html">casm.quantumespresso.QuantumEspressoError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.quantumespresso.QuantumEspressoWarning.html">casm.quantumespresso.QuantumEspressoWarning</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.quantumespresso.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.quantumespresso.error_check.html">casm.quantumespresso.error_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.quantumespresso.run.html">casm.quantumespresso.run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-quantumespresso-qeio">casm.quantumespresso.qeio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-questwrapper">casm.questwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest">casm.seqquest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-seqquest-seqquest-io">casm.seqquest.seqquest_io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">CASM Python packages documentation</a> &raquo;</li>
+        
+      <li>casm.quantumespresso.Relax</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/casm.quantumespresso.Relax.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="casm-quantumespresso-relax">
+<h1>casm.quantumespresso.Relax<a class="headerlink" href="#casm-quantumespresso-relax" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="casm.quantumespresso.Relax">
+<em class="property">class </em><code class="descclassname">casm.quantumespresso.</code><code class="descname">Relax</code><span class="sig-paren">(</span><em>relaxdir=None</em>, <em>settings=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Relax class contains functions for setting up, executing, and parsing a Quantum Espresso relaxation.</p>
+<p>The relaxation is initialized in a directory containing Quantum Espresso input files, called ‘relaxdir’.
+It then creates the following directory structure:
+…/relaxdir/</p>
+<blockquote>
+<div>run.0/
+run.1/
+…
+run.final/</div></blockquote>
+<p>‘run.i’ directories are only created when ready.
+‘run.final’ is a final constant volume run</p>
+<dl class="docutils">
+<dt>Contains:</dt>
+<dd>self.relaxdir  (…/relax)
+self.rundir    (list of …/relax/run.i)
+self.finaldir (…/relax/run.final)</dd>
+</dl>
+<p>Construct a Quantum Espresso relaxation job object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">relaxdir:  path to quantum espresso relaxation directory
+settings:   dictionary-like object containing settings, or if None, it reads</p>
+<blockquote class="last">
+<div><blockquote>
+<div>the json file: …/relaxdir/relax.json</div></blockquote>
+<dl class="docutils">
+<dt>possible settings keys are:</dt>
+<dd><dl class="first last docutils">
+<dt>used by casm.quantumespresso.run() function:</dt>
+<dd>“ncpus”: number of ncpus to run mpi on
+“npar” or “ncore”: number of ways to parallelize
+“kpar”: number of ways to parallelize k-points
+“qe_cmd”: (default, see quantumespresso.run) shell command to execute quantumespresso, or None to use default mpirun
+“strict_kpoint”: force strict copying of KPOINTS file, otherwise kpoints are scaled based on supercell size</dd>
+<dt>used by not_converging():</dt>
+<dd>“run_limit”: (default 10) maximum number of runs to allow before setting status to “not_converging”</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>relaxdir=None</em>, <em>settings=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Quantum Espresso relaxation job object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">relaxdir:  path to quantum espresso relaxation directory
+settings:   dictionary-like object containing settings, or if None, it reads</p>
+<blockquote class="last">
+<div><blockquote>
+<div>the json file: …/relaxdir/relax.json</div></blockquote>
+<dl class="docutils">
+<dt>possible settings keys are:</dt>
+<dd><dl class="first last docutils">
+<dt>used by casm.quantumespresso.run() function:</dt>
+<dd>“ncpus”: number of ncpus to run mpi on
+“npar” or “ncore”: number of ways to parallelize
+“kpar”: number of ways to parallelize k-points
+“qe_cmd”: (default, see quantumespresso.run) shell command to execute quantumespresso, or None to use default mpirun
+“strict_kpoint”: force strict copying of KPOINTS file, otherwise kpoints are scaled based on supercell size</dd>
+<dt>used by not_converging():</dt>
+<dd>“run_limit”: (default 10) maximum number of runs to allow before setting status to “not_converging”</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#casm.quantumespresso.Relax.__init__" title="casm.quantumespresso.Relax.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([relaxdir,&nbsp;settings])</td>
+<td>Construct a Quantum Espresso relaxation job object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.quantumespresso.Relax.add_errdir" title="casm.quantumespresso.Relax.add_errdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_errdir</span></code></a>()</td>
+<td>Move run.i to run.i_err.j directory</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.quantumespresso.Relax.add_rundir" title="casm.quantumespresso.Relax.add_rundir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_rundir</span></code></a>()</td>
+<td>Make a new run.i directory</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.quantumespresso.Relax.complete" title="casm.quantumespresso.Relax.complete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">complete</span></code></a>()</td>
+<td>Check if the Quantum Espresso relaxation is complete.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.quantumespresso.Relax.converged" title="casm.quantumespresso.Relax.converged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">converged</span></code></a>()</td>
+<td>Check if configuration is relaxed.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.quantumespresso.Relax.not_converging" title="casm.quantumespresso.Relax.not_converging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">not_converging</span></code></a>()</td>
+<td>Check if configuration is not converging.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.quantumespresso.Relax.run" title="casm.quantumespresso.Relax.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</td>
+<td>Perform a series of quantum espresso jobs to relax a structure.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.quantumespresso.Relax.setup" title="casm.quantumespresso.Relax.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span></code></a>(initdir,&nbsp;settings)</td>
+<td>mv all files and directories (besides initdir) into initdir</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.quantumespresso.Relax.status" title="casm.quantumespresso.Relax.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a>()</td>
+<td>Determine the status of a quantum espresso relaxation series of runs.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#casm.quantumespresso.Relax.update_errdir" title="casm.quantumespresso.Relax.update_errdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_errdir</span></code></a>()</td>
+<td>Find all …/config/qe/relax/run.i_err.j directories, store paths in self.errdir list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#casm.quantumespresso.Relax.update_rundir" title="casm.quantumespresso.Relax.update_rundir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_rundir</span></code></a>()</td>
+<td>Find all …/config/qe/relax/run.i directories, store paths in self.rundir list</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.add_errdir">
+<code class="descname">add_errdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.add_errdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.add_errdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move run.i to run.i_err.j directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.add_rundir">
+<code class="descname">add_rundir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.add_rundir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.add_rundir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a new run.i directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.complete">
+<code class="descname">complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.complete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the Quantum Espresso relaxation is complete.</p>
+<p>Completion criteria: …/config/qe/relax/run.final/outfilename exists and is complete</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.converged">
+<code class="descname">converged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.converged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.converged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if configuration is relaxed.</p>
+<p>This is called when self.rundir[-1] is complete and not a constant volume job.</p>
+<dl class="docutils">
+<dt>Convergence criteria is: at least 2 relaxation jobs are complete, and:</dt>
+<dd><p class="first">1) the last job completed with &lt;= 3 ionic steps
+or 2) the last two jobs had final E0 differ by less than</p>
+<blockquote class="last">
+<div>self.settings[“nrg_convergence”]</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.not_converging">
+<code class="descname">not_converging</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.not_converging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.not_converging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if configuration is not converging.</p>
+<p>This is called when self.rundir[-1] is complete and not a constant volume job and self.converged() == False.</p>
+<p>Not converging criteria: &gt;= 10 runs without completion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a series of quantum espresso jobs to relax a structure. Performs a series of quantum espresso calculations until
+convergence is reached according to the criteria in ‘status()’. Then performs a final constant volume run</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><em>initdir</em>, <em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>mv all files and directories (besides initdir) into initdir</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.status">
+<code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the status of a quantum espresso relaxation series of runs. Individual runs in the series
+are in directories labeled “run.0”, “run.1”, etc.</p>
+<dl class="docutils">
+<dt>Returns a tuple: (status = “incomplete” or “complete” or “not_converging”,</dt>
+<dd>task = continuedir or “relax” or “constant” or None)</dd>
+</dl>
+<p>The first value is the status of the entire relaxation.</p>
+<p>The second value is the current task, where ‘continuedir’ is the path to a
+quantum espresso job directory that is not yet completed, “relax” indicates another
+volume relaxation job is required, and “constant” that a constant volume run is required.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.update_errdir">
+<code class="descname">update_errdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.update_errdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.update_errdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all …/config/qe/relax/run.i_err.j directories, store paths in self.errdir list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="casm.quantumespresso.Relax.update_rundir">
+<code class="descname">update_rundir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/quantumespresso/relax.html#Relax.update_rundir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#casm.quantumespresso.Relax.update_rundir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all …/config/qe/relax/run.i directories, store paths in self.rundir list</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="casm.quantumespresso.error_check.html" class="btn btn-neutral float-right" title="casm.quantumespresso.error_check" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="casm.quantumespresso.QuantumEspressoWarning.html" class="btn btn-neutral" title="casm.quantumespresso.QuantumEspressoWarning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

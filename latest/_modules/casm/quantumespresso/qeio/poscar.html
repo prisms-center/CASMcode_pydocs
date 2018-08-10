@@ -1,0 +1,905 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.quantumespresso.qeio.poscar &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.quantumespresso.qeio.poscar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.quantumespresso.qeio.poscar</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span><span class="o">,</span><span class="nn">re</span>
+
+<div class="viewcode-block" id="PoscarError"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.PoscarError.html#casm.quantumespresso.qeio.PoscarError">[docs]</a><span class="k">class</span> <span class="nc">PoscarError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="Site"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Site.html#casm.quantumespresso.qeio.Site">[docs]</a><span class="k">class</span> <span class="nc">Site</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Site in a basis.</span>
+
+<span class="sd">        Contains:</span>
+<span class="sd">            self.cart = True if cartesian coordinate</span>
+<span class="sd">            self.SD_FLAG = string for selective dynamics description, empty string by default (ex. &quot;T F F&quot;).</span>
+<span class="sd">            self.occupant = CASM specie name, empty string by default</span>
+<span class="sd">            self.occ_alias = alias (POTCAR) name, empty string by default</span>
+<span class="sd">            self.position = np.array coordinate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Site.__init__"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Site.html#casm.quantumespresso.qeio.Site.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cart</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">occupant</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">occ_alias</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Site constructor &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cart</span> <span class="o">=</span> <span class="n">cart</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span> <span class="o">=</span> <span class="n">SD_FLAG</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occupant</span> <span class="o">=</span> <span class="n">occupant</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_alias</span> <span class="o">=</span> <span class="n">occ_alias</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Attempting to construct a Site and &#39;position&#39; is not a numpy ndarray&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span></div>
+
+
+<div class="viewcode-block" id="Site.write"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Site.html#casm.quantumespresso.qeio.Site.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write this Site to a file &quot;&quot;&quot;</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.8f</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;    &#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">occupant</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Poscar"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar">[docs]</a><span class="k">class</span> <span class="nc">Poscar</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Poscar class contains:</span>
+<span class="sd">        self.header: Contains POSCAR header line with whitespace stripped from beginning and end</span>
+<span class="sd">        self.scaling: lattice scale</span>
+<span class="sd">        self._lattice: the lattice; lattice vectors are stored as rows in a numpy array</span>
+<span class="sd">        self._reciprocal_lattice: the reciprocal lattice; lattice vectors are stored as rows in a numpy array</span>
+<span class="sd">        self.SD_FLAG: True or False, Selective Dynamics Flag</span>
+<span class="sd">        self.type_atoms: lists the specie names as in the POS (ex. [Mn3 Mn4])</span>
+<span class="sd">        self.type_atoms_alias: lists the POTCAR names for the species</span>
+<span class="sd">        self.num_atoms: lists the atoms as in the POS (ex. [1 1])</span>
+<span class="sd">        self.coord_mode: Contains the coordinate mode text from POSCAR, with whitespace stripped from beginning and end</span>
+<span class="sd">        self.basis: a list of Site objects</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Poscar.__init__"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Construct a Poscar object from &#39;filename&#39;</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                filename = POS/POSCAR file to read</span>
+<span class="sd">                species = (default None) If given a Species dict, it is used to set self.type_atoms_alias for determining which POTCARs to use</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;.*POS.*&quot;</span><span class="p">,</span><span class="n">filename</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">species</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>    
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_from_infile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">species</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">PoscarError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">read_from_outfile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">species</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">PoscarError</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">f</span></div>
+
+
+
+<div class="viewcode-block" id="Poscar.read"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Reads a POS/POSCAR from &#39;filename&#39;&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read file: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_lattice</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_atominfo</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_flags</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_basis</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PoscarError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># set type alias</span>
+        <span class="k">if</span> <span class="n">species</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">species</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Poscar.read_from_infile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.read_from_infile">[docs]</a>    <span class="k">def</span> <span class="nf">read_from_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Reads a POS/POSCAR from &#39;filename&#39;&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read file: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_lattice_from_infile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_atominfo_from_infile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_basis_from_infile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PoscarError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># set type alias</span>
+        <span class="k">if</span> <span class="n">species</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">species</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Poscar.read_from_outfile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.read_from_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">read_from_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Reads a POS/POSCAR from &#39;filename&#39;&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read file: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_lattice_from_outfile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_basis_atominfo_from_outfile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PoscarError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># set type alias</span>
+        <span class="k">if</span> <span class="n">species</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">species</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Poscar.write"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write Poscar to &#39;filename&#39;.</span>
+
+<span class="sd">            If &#39;sort&#39; = True, sort basis sites to minimize number of POTCARs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not write: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">,</span> <span class="n">newline</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.8f</span><span class="s1">&#39;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sort</span><span class="p">:</span>
+            <span class="n">type_line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">num_line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_dict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">type_line</span> <span class="o">=</span> <span class="n">type_line</span><span class="o">+</span><span class="s1">&#39;   &#39;</span><span class="o">+</span><span class="n">atom</span>
+                <span class="n">num_line</span> <span class="o">=</span> <span class="n">num_line</span> <span class="o">+</span> <span class="s1">&#39;   &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">atom</span><span class="p">]))</span>
+            <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span><span class="p">):</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Selective Dynamics</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">type_line</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">num_line</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">for</span> <span class="n">tb</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">atom</span><span class="p">]:</span>
+                    <span class="n">tb</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span><span class="p">):</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Selective Dynamics</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Poscar.lattice"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.lattice">[docs]</a>    <span class="k">def</span> <span class="nf">lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the lattice, or lattice vector &#39;index&#39;, as numpy array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="n">index</span><span class="p">,:]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span></div>
+
+
+<div class="viewcode-block" id="Poscar.reciprocal_lattice"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.reciprocal_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">reciprocal_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the reciprocal lattice vector &#39;index&#39;, as numpy array&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span><span class="p">[</span><span class="n">index</span><span class="p">,:]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span></div>
+
+
+<div class="viewcode-block" id="Poscar.volume"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.volume">[docs]</a>    <span class="k">def</span> <span class="nf">volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lattice</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot; Returns scalar triple product of lattice vectors &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">lattice</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span><span class="n">lattice</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]))</span></div>
+
+
+<div class="viewcode-block" id="Poscar.reciprocal_volume"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.reciprocal_volume">[docs]</a>    <span class="k">def</span> <span class="nf">reciprocal_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reciprocal_lattice</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot; Returns scalar triple product of reciprocal lattice vector &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reciprocal_lattice</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">reciprocal_lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">(</span><span class="n">reciprocal_lattice</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Poscar.basis_dict"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.basis_dict">[docs]</a>    <span class="k">def</span> <span class="nf">basis_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return a dictionary where keys are unique specie &#39;alias&#39; and values are lists of atoms.&quot;&quot;&quot;</span>
+        <span class="n">basis_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">atom</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">basis_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">occ_alias</span><span class="o">==</span><span class="n">atom</span><span class="p">:</span>
+                    <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">site</span><span class="p">]</span>
+                
+        <span class="k">return</span> <span class="n">basis_dict</span></div>
+
+
+<div class="viewcode-block" id="Poscar.unsort_dict"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.unsort_dict">[docs]</a>    <span class="k">def</span> <span class="nf">unsort_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return a dict to unsort atom order.</span>
+
+<span class="sd">            Returns &#39;unsort_dict&#39;, for which: unsorted_dict[orig_index] == sorted_index;</span>
+
+<span class="sd">            unsorted_dict[sorted_index] == orig_index</span>
+
+<span class="sd">            For example:</span>
+<span class="sd">              &#39;unsort_dict[0]&#39; returns the index into the unsorted POSCAR of the first atom in the sorted POSCAR</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># create basis_dict, but with initial position in POSCAR instead of coordinate</span>
+        <span class="n">basis_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">:(</span><span class="n">i</span><span class="p">)])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">atom</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">basis_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">basis_dict</span><span class="p">)</span>
+
+        <span class="n">orig_pos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">basis_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">orig_pos</span> <span class="o">+=</span> <span class="n">basis_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">orig_pos</span><span class="p">)</span>
+
+        <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="n">orig_pos</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Poscar._read_lattice"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">_read_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read() to read the lattice into self._lattice</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open POSCAR being read from</span>
+
+<span class="sd">            self._lattice contains lattice vectors stored as rows in a numpy array (easy inversion)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice scaling: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="n">lat</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">lat</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice vector: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="o">.</span><span class="n">shape</span><span class="o">!=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Lattice shape error: &quot;</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">=</span><span class="mf">1.0</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Poscar._read_lattice_from_infile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_lattice_from_infile">[docs]</a>    <span class="k">def</span> <span class="nf">_read_lattice_from_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read_from_infile() to read the lattice into self._lattice</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open Infile being read from</span>
+
+<span class="sd">            self._lattice contains lattice vectors stored as rows in a numpy array (easy inversion)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;CELL_PARAMETERS\s*.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+               <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding CELL_PARAMETERS&quot;</span><span class="p">)</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+               <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;CELL_PARAMETERS\s*.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">=</span><span class="s2">&quot;alat&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;alat&#39;</span><span class="p">,</span><span class="s1">&#39;bohr&#39;</span><span class="p">,</span><span class="s1">&#39;angstrom&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Read invalid CELL_PARAMETERS units: &#39;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="n">lat</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">lat</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice vector: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="o">.</span><span class="n">shape</span><span class="o">!=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Lattice shape error: &quot;</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">==</span> <span class="s2">&quot;alat&quot;</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;.*celldm.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                   <span class="c1">#print line</span>
+                   <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding celldm(1)&quot;</span><span class="p">)</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                   <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;.*celldm.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">celldm</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Poscar._read_lattice_from_outfile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_lattice_from_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">_read_lattice_from_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read_from_outfile() to read the lattice into self._lattice</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open Outfile being read from</span>
+
+<span class="sd">            self._lattice contains lattice vectors stored as rows in a numpy array (easy inversion)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Begin final coordinates.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+               <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding Begin final coordinates&quot;</span><span class="p">)</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+               <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Begin final coordinates.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="n">line</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;CELL_PARAMETERS.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;lattice parameter.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                   <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding lattice parameter&quot;</span><span class="p">)</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                   <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;lattice parameter.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">alat</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Searched top of outfile for alat and was unable to convert to float&quot;</span><span class="p">)</span>
+
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;crystal axes:.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                   <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding crystal axes:&quot;</span><span class="p">)</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                   <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;crystal axes:.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">lat</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">lat</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">5</span><span class="p">])])</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice vector: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="n">alat</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="s1">&#39;bohr&#39;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="o">.</span><span class="n">shape</span><span class="o">!=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Lattice shape error: &quot;</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+            
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Begin final coordinates.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                   <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding Begin final coordinates&quot;</span><span class="p">)</span>
+                   <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                   <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Begin final coordinates.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">m</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">alat</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;alat&#39;</span><span class="p">:</span>
+            <span class="n">alat</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;alat&#39;</span><span class="p">,</span><span class="s1">&#39;bohr&#39;</span><span class="p">,</span><span class="s1">&#39;angstrom&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Read invalid CELL_PARAMETERS units: &#39;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="n">lat</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">lat</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read lattice vector: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;alat&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="n">alat</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="s1">&#39;bohr&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="o">.</span><span class="n">shape</span><span class="o">!=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Lattice shape error: &quot;</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reciprocal_lattice</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">))</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="Poscar._read_atominfo"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_atominfo">[docs]</a>    <span class="k">def</span> <span class="nf">_read_atominfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read() to read the 2 lines that correspond to the num_atoms and type_atoms</span>
+<span class="sd">            in a VASP5 style POSCAR</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open POSCAR being read from</span>
+
+<span class="sd">            self.type_atoms is a list of strings corresponding to atom names</span>
+<span class="sd">            self.num_atoms is a list of int corresponding to the number of each atom type</span>
+<span class="sd">            self.type_atoms_alias is set from self.type_atoms</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">typeline</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">numline</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">=</span> <span class="n">typeline</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;No atom names found: &#39;&quot;</span> <span class="o">+</span> <span class="n">typeline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numline</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read number of each atom type: &#39;&quot;</span> <span class="o">+</span> <span class="n">numline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Atom type and number lists are not the same length: </span><span class="se">\n</span><span class="s2">&#39;&quot;</span> <span class="o">+</span> <span class="n">typeline</span> <span class="o">+</span> <span class="s2">&quot;&#39;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">numline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Poscar._read_atominfo_from_infile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_atominfo_from_infile">[docs]</a>    <span class="k">def</span> <span class="nf">_read_atominfo_from_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read_from_infile() to read num_atoms and type_atoms</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open Infile being read from</span>
+
+<span class="sd">            self.type_atoms is a list of strings corresponding to atom names</span>
+<span class="sd">            self.num_atoms is a list of int corresponding to the number of each atom type</span>
+<span class="sd">            self.type_atoms_alias is set from self.type_atoms</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;ATOMIC_POSITIONS\s*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+               <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding ATOMIC_POSITIONS&quot;</span><span class="p">)</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+               <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;ATOMIC_POSITIONS\s*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">atom_list</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="n">atom_list</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">atom_list</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">atom_list</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span><span class="o">=</span><span class="mi">1</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">atom_list</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">+</span> <span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">+</span> <span class="p">[</span><span class="n">atom_list</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;No atom names found: &#39;&quot;</span> <span class="o">+</span> <span class="n">typeline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Atom type and number lists are not the same length: </span><span class="se">\n</span><span class="s2">&#39;&quot;</span> <span class="o">+</span> <span class="n">typeline</span> <span class="o">+</span> <span class="s2">&quot;&#39;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">numline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Poscar._read_flags"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_flags">[docs]</a>    <span class="k">def</span> <span class="nf">_read_flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read() to read POSCAR flags: Selective Dynamics, and Coord Mode</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open POSCAR being read from</span>
+
+<span class="sd">            self.SD_FLAG = True/False if selective dynamics on</span>
+<span class="sd">            self.coord_mode = Contains the coordinate mode text, with whitespace stripped from beginning and end</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Could not read Select Dynamics or Coord Mode line&quot;</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Read Select Dynamics, but could not read Coord Mode line&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="n">line</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Read invalid coord mode: &#39;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Poscar._read_basis"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_basis">[docs]</a>    <span class="k">def</span> <span class="nf">_read_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read() to read basis of POSCAR file into self.basis</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open POSCAR being read from</span>
+
+<span class="sd">            self.basis is a list of Site objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cart</span> <span class="o">=</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis: insufficient number of atoms&quot;</span><span class="p">)</span>
+                <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SD_FLAG</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis: insufficient number of SD tags&quot;</span><span class="p">)</span>
+                    <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">words</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">words</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]]</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis coordinate: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">cart</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">SD_FLAG</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Poscar._read_basis_from_infile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_basis_from_infile">[docs]</a>    <span class="k">def</span> <span class="nf">_read_basis_from_infile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read() to read basis of Infile file into self.basis</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open Infile being read from</span>
+
+<span class="sd">            self.basis is a list of Site objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;ATOMIC_POSITIONS\s*.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+               <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding ATOMIC_POSITIONS&quot;</span><span class="p">)</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+               <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;ATOMIC_POSITIONS\s*.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">=</span><span class="s2">&quot;alat&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cart</span> <span class="o">=</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis: insufficient number of atoms&quot;</span><span class="p">)</span>
+                
+                <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+                    <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]]</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis coordinate: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+                <span class="n">alias</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">cart</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">SD_FLAG</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alias</span><span class="p">))</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Poscar._read_basis_atominfo_from_outfile"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar._read_basis_atominfo_from_outfile">[docs]</a>    <span class="k">def</span> <span class="nf">_read_basis_atominfo_from_outfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Called by self.read() to read basis of Outfile file into self.basis</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                file: an open Outfile being read from</span>
+
+<span class="sd">            self.basis is a list of Site objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;ATOMIC_POSITIONS.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+               <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+               
+               <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;EOF reach without finding ATOMIC_POSITIONS&quot;</span><span class="p">)</span>
+               <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+               <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;ATOMIC_POSITIONS.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">atom_list</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="n">cart</span> <span class="o">=</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+        <span class="n">line</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">while</span> <span class="ow">not</span><span class="p">(</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;End final coordinates.*&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis: insufficient number of atoms&quot;</span><span class="p">)</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SD_FLAG</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Error reading basis coordinate: &#39;&quot;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="n">alias</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">atom_list</span><span class="p">:</span>
+                <span class="n">atom_list</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">atom_list</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span><span class="s1">&#39;alat&#39;</span><span class="p">:</span>
+                <span class="n">alat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mf">0.5</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">cart</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">*</span><span class="n">alat</span><span class="p">,</span> <span class="n">SD_FLAG</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alias</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="n">cart</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">SD_FLAG</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alias</span><span class="p">))</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;alat&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coord_mode</span> <span class="o">=</span> <span class="s1">&#39;bohr&#39;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">atom_list</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span> <span class="o">+</span> <span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span> <span class="o">+</span> <span class="p">[</span><span class="n">atom_list</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;No atom names found: &#39;&quot;</span> <span class="o">+</span> <span class="n">typeline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PoscarError</span><span class="p">(</span><span class="s2">&quot;Atom type and number lists are not the same length: </span><span class="se">\n</span><span class="s2">&#39;&quot;</span> <span class="o">+</span> <span class="n">typeline</span> <span class="o">+</span> <span class="s2">&quot;&#39;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">numline</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Poscar.update"><a class="viewcode-back" href="../../../../python/casm.quantumespresso.qeio.Poscar.html#casm.quantumespresso.qeio.Poscar.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set self.type_atoms_alias and self.basis[x].alias according to Species dict.</span>
+
+<span class="sd">            Warning: Not sure we want to check equivalence regardless of atom name case</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">atom</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">alias</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">occ_alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_atoms_alias</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
