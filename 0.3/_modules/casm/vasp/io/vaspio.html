@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>casm.vasp.io.vaspio &mdash; CASM 0.3.dev documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.vasp.io.vaspio</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.vasp.io.vaspio</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">casm.vasp.io</span> <span class="k">import</span> <span class="n">poscar</span><span class="p">,</span> <span class="n">kpoints</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">incar</span>
+
+<div class="viewcode-block" id="VaspIO"><a class="viewcode-back" href="../../../../python/casm.vasp.io.VaspIO.html#casm.vasp.io.VaspIO">[docs]</a><span class="k">class</span> <span class="nc">VaspIO</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Generate a set of VASP input files from settings files</span>
+<span class="sd">       </span>
+<span class="sd">        Contains:</span>
+<span class="sd">            self.incar: Incar object</span>
+<span class="sd">            self.poscar: Poscar object</span>
+<span class="sd">            self.kpoints: Kpoints object</span>
+<span class="sd">            self.species: Species dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="VaspIO.__init__"><a class="viewcode-back" href="../../../../python/casm.vasp.io.VaspIO.html#casm.vasp.io.VaspIO.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">incarfile</span><span class="p">,</span> <span class="n">prim_kpointsfile</span><span class="p">,</span> <span class="n">prim_poscarfile</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Construct a VaspIO object</span>
+<span class="sd">           </span>
+<span class="sd">            Args:</span>
+<span class="sd">                incarfile:  path to INCAR file</span>
+<span class="sd">                prim_kpointsfile: path to primitive KPOINTS file</span>
+<span class="sd">                prim_poscarfile: path to primitive POSCAR file</span>
+<span class="sd">                super_poscarfile: path to POSCAR file for this configuration</span>
+<span class="sd">                speciesfile: path to SPECIES file</span>
+<span class="sd">             </span>
+<span class="sd">            This functions reads the input files and generates self.kpoints appropriate for self.poscar </span>
+<span class="sd">            given that &#39;prim_kpointsfile&#39; is for &#39;prim_poscarfile&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prim</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">prim_poscarfile</span><span class="p">)</span>
+        <span class="n">prim_kpoints</span> <span class="o">=</span> <span class="n">kpoints</span><span class="o">.</span><span class="n">Kpoints</span><span class="p">(</span><span class="n">prim_kpointsfile</span><span class="p">)</span>
+        
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">species</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">species_settings</span><span class="p">(</span><span class="n">speciesfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">super_poscarfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incar</span> <span class="o">=</span> <span class="n">incar</span><span class="o">.</span><span class="n">Incar</span><span class="p">(</span><span class="n">incarfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kpoints</span> <span class="o">=</span> <span class="n">prim_kpoints</span><span class="o">.</span><span class="n">super_kpoints</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span><span class="p">)</span></div>
+    
+
+<div class="viewcode-block" id="VaspIO.write_potcar"><a class="viewcode-back" href="../../../../python/casm.vasp.io.VaspIO.html#casm.vasp.io.VaspIO.write_potcar">[docs]</a>    <span class="k">def</span> <span class="nf">write_potcar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write an appropriate POTCAR &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sort</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">VaspIOError</span><span class="p">(</span><span class="s2">&quot;Could not open file for writing: &#39;&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span><span class="o">.</span><span class="n">type_atoms</span><span class="p">:</span>
+                <span class="n">potcar</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">potcardir</span><span class="p">,</span><span class="s1">&#39;POTCAR&#39;</span><span class="p">))</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">potcar</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="n">potcar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># new code</span>
+                
+                <span class="c1"># dict: key = alias, value = list of Sites</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span><span class="o">.</span><span class="n">basis_dict</span><span class="p">()</span>
+                
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                    <span class="c1"># for each alias</span>
+                    <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                        <span class="c1"># find matching IndividualSpecies with write_potcar == True</span>
+                        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">alias</span> <span class="o">==</span> <span class="n">alias</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">write_potcar</span><span class="p">:</span>
+                                <span class="c1"># add to POTCAR file</span>
+                                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">potcardir</span><span class="p">,</span><span class="s1">&#39;POTCAR&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">potcar</span><span class="p">:</span>
+                                    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">potcar</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                                <span class="k">break</span>
+                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># original code:</span>
+            
+                <span class="c1"># dict: key = alias, value = list of Sites</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span><span class="o">.</span><span class="n">basis_dict</span><span class="p">()</span>
+                
+                <span class="c1"># list of unique basis occupants</span>
+                <span class="n">basis</span> <span class="o">=</span> <span class="p">[]</span>
+                
+                <span class="c1"># dict: key = alias, value = list of Site occupants (? why not just use pos ?)</span>
+                <span class="n">alias</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="n">alias</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">occupant</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">:</span>
+                            <span class="n">basis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">occupant</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">occupant</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">alias</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                            <span class="n">alias</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">occupant</span><span class="p">)</span>
+                
+                <span class="c1"># list of IndividualSpecies names</span>
+                <span class="n">specie</span> <span class="o">=</span> <span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">]</span>
+                
+                <span class="c1"># list of potcardir</span>
+                <span class="n">potcar_list</span> <span class="o">=</span> <span class="p">[]</span>
+                
+                <span class="c1"># loop over unique basis occupants</span>
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">write_potcar</span><span class="p">):</span>
+                            <span class="n">potcar_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">potcardir</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c1"># ? don&#39;t understand this ?</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">alias</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">alias</span><span class="p">])</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">potcar_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">potcardir</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                
+                <span class="c1"># write POTCAR</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outFile</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">potcar_list</span><span class="p">:</span>
+                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;POTCAR&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">inFile</span><span class="p">:</span>
+                            <span class="n">outFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inFile</span><span class="o">.</span><span class="n">read</span><span class="p">())</span></div>
+    
+            
+<div class="viewcode-block" id="VaspIO.write"><a class="viewcode-back" href="../../../../python/casm.vasp.io.VaspIO.html#casm.vasp.io.VaspIO.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dirpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write VASP input files in directory &#39;dirpath&#39; &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="s1">&#39;POSCAR&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="s1">&#39;INCAR&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kpoints</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="s1">&#39;KPOINTS&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_potcar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="s1">&#39;POTCAR&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort</span><span class="p">)</span></div></div>
+        
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.3.dev',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

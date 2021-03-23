@@ -1,49 +1,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>casm.project.project &mdash; CASM 0.3.dev documentation</title>
-  
-
-  
-  
-  
+  <title>casm.project.project &mdash; CASM 1.0.0 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +62,7 @@
             
             
               <div class="version">
-                0.3
+                1.0
               </div>
             
           
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +89,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">CASM Python packages documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,11 +131,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -148,23 +157,25 @@
            <div itemprop="articleBody">
             
   <h1>Source code for casm.project.project</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">join</span>
-<span class="kn">from</span> <span class="nn">string</span> <span class="k">import</span> <span class="n">ascii_lowercase</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">six</span>
 
-<span class="kn">from</span> <span class="nn">casm.project</span> <span class="k">import</span> <span class="n">syminfo</span>
-<span class="kn">from</span> <span class="nn">casm.api</span> <span class="k">import</span> <span class="n">API</span>
+<span class="kn">from</span> <span class="nn">casm.project</span> <span class="kn">import</span> <span class="n">syminfo</span>
+<span class="kn">from</span> <span class="nn">casm.api</span> <span class="kn">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">casm_command</span><span class="p">,</span> <span class="n">casm_capture</span>
 
-<div class="viewcode-block" id="project_path"><a class="viewcode-back" href="../../../python/casm.project.project_path.html#casm.project.project_path">[docs]</a><span class="k">def</span> <span class="nf">project_path</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="project_path"><a class="viewcode-back" href="../../../reference/casm.project.project_path.html#casm.project.project_path">[docs]</a><span class="k">def</span> <span class="nf">project_path</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Crawl up from dir to find &#39;.casm&#39;. If found returns the directory containing the &#39;.casm&#39; directory.</span>
 <span class="sd">    If not found, return None.</span>
@@ -173,15 +184,15 @@
 <span class="sd">    If dir == None, set to os.getcwd()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-      <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
-      <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error, no directory named: &quot;</span> <span class="o">+</span> <span class="nb">dir</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error, no directory named: &quot;</span> <span class="o">+</span> <span class="nb">dir</span><span class="p">)</span>
     <span class="n">curr</span> <span class="o">=</span> <span class="nb">dir</span>
     <span class="n">cont</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">while</span> <span class="n">cont</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">test_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span><span class="s2">&quot;.casm&quot;</span><span class="p">)</span>
+        <span class="n">test_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="s2">&quot;.casm&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">test_path</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">curr</span>
         <span class="k">elif</span> <span class="n">curr</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">curr</span><span class="p">):</span>
@@ -190,7 +201,8 @@
             <span class="n">curr</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="ClexDescription"><a class="viewcode-back" href="../../../python/casm.project.ClexDescription.html#casm.project.ClexDescription">[docs]</a><span class="k">class</span> <span class="nc">ClexDescription</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ClexDescription"><a class="viewcode-back" href="../../../reference/casm.project.ClexDescription.html#casm.project.ClexDescription">[docs]</a><span class="k">class</span> <span class="nc">ClexDescription</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Settings for a cluster expansion</span>
 
@@ -216,16 +228,16 @@
 <span class="sd">        ECI set name</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ClexDescription.__init__"><a class="viewcode-back" href="../../../python/casm.project.ClexDescription.html#casm.project.ClexDescription.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">property</span><span class="p">,</span> <span class="n">calctype</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">bset</span><span class="p">,</span> <span class="n">eci</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="nb">property</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">calctype</span> <span class="o">=</span> <span class="n">calctype</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">bset</span> <span class="o">=</span> <span class="n">bset</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">eci</span> <span class="o">=</span> <span class="n">eci</span></div></div>
+<div class="viewcode-block" id="ClexDescription.__init__"><a class="viewcode-back" href="../../../reference/casm.project.ClexDescription.html#casm.project.ClexDescription.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">property</span><span class="p">,</span> <span class="n">calctype</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">bset</span><span class="p">,</span> <span class="n">eci</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="nb">property</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calctype</span> <span class="o">=</span> <span class="n">calctype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bset</span> <span class="o">=</span> <span class="n">bset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eci</span> <span class="o">=</span> <span class="n">eci</span></div></div>
 
 
-<div class="viewcode-block" id="ProjectSettings"><a class="viewcode-back" href="../../../python/casm.project.ProjectSettings.html#casm.project.ProjectSettings">[docs]</a><span class="k">class</span> <span class="nc">ProjectSettings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectSettings"><a class="viewcode-back" href="../../../reference/casm.project.ProjectSettings.html#casm.project.ProjectSettings">[docs]</a><span class="k">class</span> <span class="nc">ProjectSettings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Settings for a CASM project</span>
 
@@ -234,7 +246,7 @@
 <span class="sd">      data: Dict storing contents of project_settings.json</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="ProjectSettings.__init__"><a class="viewcode-back" href="../../../python/casm.project.ProjectSettings.html#casm.project.ProjectSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectSettings.__init__"><a class="viewcode-back" href="../../../reference/casm.project.ProjectSettings.html#casm.project.ProjectSettings.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a CASM ProjectSettings representation.</span>
 
@@ -243,26 +255,31 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="nb">dir</span> <span class="o">=</span> <span class="n">DirectoryStructure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="nb">dir</span><span class="o">.</span><span class="n">project_settings</span><span class="p">()))</span>
 
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_expansions&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;default_clex&quot;</span><span class="p">]]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_default_clex</span> <span class="o">=</span> <span class="n">ClexDescription</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;calctype&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;bset&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;eci&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_clex</span> <span class="o">=</span> <span class="n">ClexDescription</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;property&quot;</span><span class="p">],</span>
+                                             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;calctype&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span>
+                                             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;bset&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;eci&quot;</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_clex</span> <span class="o">=</span> <span class="p">[</span>
-          <span class="n">ClexDescription</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;calctype&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bset&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;eci&quot;</span><span class="p">])</span>
-          <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_expansions&quot;</span><span class="p">])</span>
+            <span class="n">ClexDescription</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;calctype&quot;</span><span class="p">],</span>
+                            <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bset&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;eci&quot;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_expansions&quot;</span><span class="p">])</span>
         <span class="p">]</span>
 
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_expansions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;formation_energy&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_formation_energy_clex</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">_formation_energy_clex</span> <span class="o">=</span> <span class="n">ClexDescription</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;calctype&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;bset&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;eci&quot;</span><span class="p">])</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_formation_energy_clex</span> <span class="o">=</span> <span class="n">ClexDescription</span><span class="p">(</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;property&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;calctype&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;bset&quot;</span><span class="p">],</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;eci&quot;</span><span class="p">])</span></div>
 
     <span class="c1"># -- Accessors --</span>
 
@@ -279,9 +296,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_formation_energy_clex</span></div>
 
 
-<div class="viewcode-block" id="DirectoryStructure"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure">[docs]</a><span class="k">class</span> <span class="nc">DirectoryStructure</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryStructure"><a class="viewcode-back" href="../../../reference/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure">[docs]</a><span class="k">class</span> <span class="nc">DirectoryStructure</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Standard file and directory locations for a CASM project&quot;&quot;&quot;</span>
-<div class="viewcode-block" id="DirectoryStructure.__init__"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryStructure.__init__"><a class="viewcode-back" href="../../../reference/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a CASM Project DirectoryStructure representation.</span>
 
@@ -290,131 +307,151 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__casm_dir</span> <span class="o">=</span> <span class="s2">&quot;.casm&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__casmdb_dir</span> <span class="o">=</span> <span class="s2">&quot;jsonDB&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span> <span class="o">=</span> <span class="s2">&quot;basis_sets&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span> <span class="o">=</span> <span class="s2">&quot;training_data&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span> <span class="o">=</span> <span class="s2">&quot;settings&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__sym_dir</span> <span class="o">=</span> <span class="s2">&quot;symmetry&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span> <span class="o">=</span> <span class="s2">&quot;cluster_expansions&quot;</span></div>
 
-
     <span class="c1"># ** Query filesystem **</span>
 
-<div class="viewcode-block" id="DirectoryStructure.all_bset"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.all_bset">[docs]</a>    <span class="k">def</span> <span class="nf">all_bset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all basis set names&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;bset&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">all_bset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all basis set names&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;bset&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.all_calctype"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.all_calctype">[docs]</a>    <span class="k">def</span> <span class="nf">all_calctype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all calctype names&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;calctype&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">all_calctype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all calctype names&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span>
+            <span class="s2">&quot;calctype&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.all_ref"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.all_ref">[docs]</a>    <span class="k">def</span> <span class="nf">all_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calctype</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all ref names for a given calctype&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">calctype</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">all_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calctype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all ref names for a given calctype&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">calctype</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.all_clex_name"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.all_clex_name">[docs]</a>    <span class="k">def</span> <span class="nf">all_clex_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all cluster expansion names&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;clex&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">all_clex_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all cluster expansion names&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;clex&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.all_eci"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.all_eci">[docs]</a>    <span class="k">def</span> <span class="nf">all_eci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">property</span><span class="p">,</span> <span class="n">calctype</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">bset</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all eci names&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;eci&quot;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_name</span><span class="p">(</span><span class="nb">property</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">ref</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset</span><span class="p">(</span><span class="n">bset</span><span class="p">)))</span></div>
-
+    <span class="k">def</span> <span class="nf">all_eci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">property</span><span class="p">,</span> <span class="n">calctype</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">bset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all eci names&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span>
+            <span class="s2">&quot;eci&quot;</span><span class="p">,</span>
+            <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_name</span><span class="p">(</span><span class="nb">property</span><span class="p">),</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">ref</span><span class="p">),</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">__bset</span><span class="p">(</span><span class="n">bset</span><span class="p">)))</span>
 
     <span class="c1"># ** File and Directory paths **</span>
 
-
     <span class="c1"># -- Project directory --------</span>
 
-<div class="viewcode-block" id="DirectoryStructure.root_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.root_dir">[docs]</a>    <span class="k">def</span> <span class="nf">root_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return casm project directory path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span></div>
+    <span class="k">def</span> <span class="nf">root_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return casm project directory path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
 
-<div class="viewcode-block" id="DirectoryStructure.prim"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.prim">[docs]</a>    <span class="k">def</span> <span class="nf">prim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return prim.json path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;prim.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">prim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return prim.json path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;prim.json&quot;</span><span class="p">)</span>
 
     <span class="c1"># -- Hidden .casm directory --------</span>
 
-<div class="viewcode-block" id="DirectoryStructure.casm_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.casm_dir">[docs]</a>    <span class="k">def</span> <span class="nf">casm_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return hidden .casm dir path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__casm_dir</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">casm_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return hidden .casm dir path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__casm_dir</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.project_settings"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.project_settings">[docs]</a>    <span class="k">def</span> <span class="nf">project_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return project_settings.json path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">(),</span> <span class="s2">&quot;project_settings.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">casmdb_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return .casm/jsonDB path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__casmdb_dir</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.scel_list"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.scel_list">[docs]</a>    <span class="k">def</span> <span class="nf">scel_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scelname</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return master scel_list.json path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">(),</span> <span class="s2">&quot;scel_list.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">project_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return project_settings.json path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">(),</span> <span class="s2">&quot;project_settings.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.config_list"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.config_list">[docs]</a>    <span class="k">def</span> <span class="nf">config_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return master config_list.json file path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">(),</span> <span class="s2">&quot;config_list.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">scel_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scelname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return master scel_list.json path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casmdb_dir</span><span class="p">(),</span> <span class="s2">&quot;scel_list.json&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">config_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return master config_list.json file path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dbdir</span><span class="p">(),</span> <span class="s2">&quot;config_list.json&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">master_selection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return location of MASTER selection file</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        type: str</span>
+<span class="sd">            One of &quot;config&quot; or &quot;scel&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">querydir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casmdb_dir</span><span class="p">(),</span> <span class="s2">&quot;query&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;config&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="n">querydir</span><span class="p">,</span> <span class="s2">&quot;Configuration&quot;</span><span class="p">,</span> <span class="s2">&quot;master_selection&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;scel&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="n">querydir</span><span class="p">,</span> <span class="s2">&quot;Supercell&quot;</span><span class="p">,</span> <span class="s2">&quot;master_selection&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unsupported type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span>
 
     <span class="c1"># -- Symmetry --------</span>
 
-<div class="viewcode-block" id="DirectoryStructure.symmetry_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.symmetry_dir">[docs]</a>    <span class="k">def</span> <span class="nf">symmetry_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return symmetry directory path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sym_dir</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">symmetry_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return symmetry directory path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sym_dir</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.lattice_point_group"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.lattice_point_group">[docs]</a>    <span class="k">def</span> <span class="nf">lattice_point_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return lattice_point_group.json path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetry_dir</span><span class="p">(),</span> <span class="s2">&quot;lattice_point_group.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">lattice_point_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return lattice_point_group.json path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetry_dir</span><span class="p">(),</span> <span class="s2">&quot;lattice_point_group.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.factor_group"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.factor_group">[docs]</a>    <span class="k">def</span> <span class="nf">factor_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return factor_group.json path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetry_dir</span><span class="p">(),</span> <span class="s2">&quot;factor_group.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">factor_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return factor_group.json path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetry_dir</span><span class="p">(),</span> <span class="s2">&quot;factor_group.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.crystal_point_group"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.crystal_point_group">[docs]</a>    <span class="k">def</span> <span class="nf">crystal_point_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return crystal_point_group.json path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetry_dir</span><span class="p">(),</span> <span class="s2">&quot;crystal_point_group.json&quot;</span><span class="p">)</span></div>
-
+    <span class="k">def</span> <span class="nf">crystal_point_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return crystal_point_group.json path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetry_dir</span><span class="p">(),</span> <span class="s2">&quot;crystal_point_group.json&quot;</span><span class="p">)</span>
 
     <span class="c1"># -- Basis sets --------</span>
 
-<div class="viewcode-block" id="DirectoryStructure.bset_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.bset_dir">[docs]</a>    <span class="k">def</span> <span class="nf">bset_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return path to directory contain basis set info&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">bset</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">bset_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return path to directory contain basis set info&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">bset</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.bspecs"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.bspecs">[docs]</a>    <span class="k">def</span> <span class="nf">bspecs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return basis function specs (bspecs.json) file path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;bspecs.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">bspecs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return basis function specs (bspecs.json) file path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;bspecs.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.clust"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.clust">[docs]</a>    <span class="k">def</span> <span class="nf">clust</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to the clust.json file&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;clust.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">clust</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to the clust.json file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;clust.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.basis"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.basis">[docs]</a>    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to the basis.json file&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;basis.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to the basis.json file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;basis.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.clexulator_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.clexulator_dir">[docs]</a>    <span class="k">def</span> <span class="nf">clexulator_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to directory containing global clexulator&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">clexulator_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to directory containing global clexulator&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.clexulator_src"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.clexulator_src">[docs]</a>    <span class="k">def</span> <span class="nf">clexulator_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to global clexulator source file&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="p">(</span><span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;_Clexulator.cc&quot;</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">clexulator_src</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to global clexulator source file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="p">(</span><span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;_Clexulator.cc&quot;</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.clexulator_o"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.clexulator_o">[docs]</a>    <span class="k">def</span> <span class="nf">clexulator_o</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to global clexulator.o file&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="p">(</span><span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;_Clexulator.o&quot;</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">clexulator_o</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to global clexulator.o file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="p">(</span><span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;_Clexulator.o&quot;</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.clexulator_so"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.clexulator_so">[docs]</a>    <span class="k">def</span> <span class="nf">clexulator_so</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to global clexulator so file&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="p">(</span><span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;_Clexulator.so&quot;</span><span class="p">))</span></div>
-
+    <span class="k">def</span> <span class="nf">clexulator_so</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to global clexulator so file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="p">(</span><span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;_Clexulator.so&quot;</span><span class="p">))</span>
 
     <span class="c1"># -- Calculations and reference --------</span>
 
-<div class="viewcode-block" id="DirectoryStructure.settings_path_crawl"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.settings_path_crawl">[docs]</a>    <span class="k">def</span> <span class="nf">settings_path_crawl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">settings_path_crawl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the path to the first file named &#39;filename&#39; found in the settings</span>
 <span class="sd">        directories.</span>
@@ -447,75 +484,102 @@
 <span class="sd">            directories, or None if not found.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_calc_settings_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">configuration_calc_settings_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span>
+                                                 <span class="n">calc_subdir</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-          <span class="k">return</span> <span class="n">filepath</span>
+            <span class="k">return</span> <span class="n">filepath</span>
 
         <span class="n">scelname</span> <span class="o">=</span> <span class="n">configname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_calc_settings_dir</span><span class="p">(</span><span class="n">scelname</span><span class="p">,</span> <span class="n">clex</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">supercell_calc_settings_dir</span><span class="p">(</span><span class="n">scelname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span>
+            <span class="n">filename</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-          <span class="k">return</span> <span class="n">filepath</span>
+            <span class="k">return</span> <span class="n">filepath</span>
 
         <span class="n">filepath</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-          <span class="k">return</span> <span class="n">filepath</span>
+            <span class="k">return</span> <span class="n">filepath</span>
 
-        <span class="k">return</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="DirectoryStructure.supercell_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.supercell_dir">[docs]</a>    <span class="k">def</span> <span class="nf">supercell_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scelname</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return supercell directory path (scelname has format SCELV_A_B_C_D_E_F)&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="n">scelname</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">supercell_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scelname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return supercell directory path (scelname has format SCELV_A_B_C_D_E_F)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">,</span> <span class="n">scelname</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.configuration_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.configuration_dir">[docs]</a>    <span class="k">def</span> <span class="nf">configuration_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return configuration directory path (configname has format SCELV_A_B_C_D_E_F/I)&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="n">configname</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">configuration_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return configuration directory path (configname has format SCELV_A_B_C_D_E_F/I)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">,</span> <span class="n">configname</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.POS"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.POS">[docs]</a>    <span class="k">def</span> <span class="nf">POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return path to POS file&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">),</span> <span class="s2">&quot;POS&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">POS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return path to POS file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span> <span class="s2">&quot;POS&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.calctype_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.calctype_dir">[docs]</a>    <span class="k">def</span> <span class="nf">calctype_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return calctype directory path (e.g. training_data/SCEL_...../0/calctype.default&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">config_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return path to structure.json file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span>
+                    <span class="s2">&quot;structure.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.calc_settings_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.calc_settings_dir">[docs]</a>    <span class="k">def</span> <span class="nf">calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for global settings&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">structure_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return path to structure.json file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span>
+                    <span class="s2">&quot;structure.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.supercell_calc_settings_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.supercell_calc_settings_dir">[docs]</a>    <span class="k">def</span> <span class="nf">supercell_calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scelname</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for supercell specific settings&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_dir</span><span class="p">(</span><span class="n">scelname</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">calctype_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calctype directory path (e.g. training_data/$(calc_subdir)/SCEL_...../0/calctype.default&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.configuration_calc_settings_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.configuration_calc_settings_dir">[docs]</a>    <span class="k">def</span> <span class="nf">configuration_calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for configuration specific settings&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for global settings from clex&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.calculated_properties"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.calculated_properties">[docs]</a>    <span class="k">def</span> <span class="nf">calculated_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return calculated properties file path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">),</span> <span class="s2">&quot;properties.calc.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">calctype_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calctype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for global settings from calctype&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">))</span>
 
+    <span class="k">def</span> <span class="nf">supercell_calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scelname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for supercell specific settings&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_dir</span><span class="p">(</span><span class="n">scelname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.ref_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.ref_dir">[docs]</a>    <span class="k">def</span> <span class="nf">ref_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return calculation reference settings directory path, for global settings&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">ref</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">configuration_calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                        <span class="n">configname</span><span class="p">,</span>
+                                        <span class="n">clex</span><span class="p">,</span>
+                                        <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for configuration specific settings&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.composition_axes"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.composition_axes">[docs]</a>    <span class="k">def</span> <span class="nf">composition_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return composition axes file path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">(),</span> <span class="s2">&quot;composition_axes.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">calculated_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calculated properties file path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">),</span> <span class="s2">&quot;properties.calc.json&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryStructure.chemical_reference"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.chemical_reference">[docs]</a>    <span class="k">def</span> <span class="nf">chemical_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Return chemical reference file path&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;chemical_reference.json&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">ref_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return calculation reference settings directory path, for global settings&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">ref</span><span class="p">))</span>
 
+    <span class="k">def</span> <span class="nf">composition_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return composition axes file path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_dir</span><span class="p">(),</span> <span class="s2">&quot;composition_axes.json&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">chemical_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return chemical reference file path&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;chemical_reference.json&quot;</span><span class="p">)</span>
 
     <span class="c1"># -- Cluster expansions --------</span>
 
-<div class="viewcode-block" id="DirectoryStructure.property_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.property_dir">[docs]</a>    <span class="k">def</span> <span class="nf">property_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;Returns path to eci directory&quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_name</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">property</span><span class="p">))</span></div>
+    <span class="k">def</span> <span class="nf">property_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns path to eci directory&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__clex_name</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">property</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.eci_dir"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.eci_dir">[docs]</a>    <span class="k">def</span> <span class="nf">eci_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">eci_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      Returns path to eci directory</span>
 
 <span class="sd">      Arguments</span>
@@ -528,10 +592,12 @@
 <span class="sd">        p: str</span>
 <span class="sd">          Path to the eci directory</span>
 <span class="sd">      &quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">property_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">ref</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">bset</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eci</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">eci</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">property_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">ref</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">bset</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__eci</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">eci</span><span class="p">))</span>
 
-<div class="viewcode-block" id="DirectoryStructure.eci"><a class="viewcode-back" href="../../../python/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure.eci">[docs]</a>    <span class="k">def</span> <span class="nf">eci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">eci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      Returns path to eci.json</span>
 
 <span class="sd">      Arguments</span>
@@ -544,48 +610,46 @@
 <span class="sd">        p: str</span>
 <span class="sd">          Path to the eci directory</span>
 <span class="sd">      &quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eci_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;eci.json&quot;</span><span class="p">)</span></div>
-
+        <span class="k">return</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eci_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">),</span> <span class="s2">&quot;eci.json&quot;</span><span class="p">)</span>
 
     <span class="c1"># private:</span>
 
     <span class="k">def</span> <span class="nf">__bset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bset</span><span class="p">):</span>
-      <span class="k">return</span> <span class="s2">&quot;bset.&quot;</span> <span class="o">+</span> <span class="n">bset</span>
+        <span class="k">return</span> <span class="s2">&quot;bset.&quot;</span> <span class="o">+</span> <span class="n">bset</span>
 
     <span class="k">def</span> <span class="nf">__calctype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calctype</span><span class="p">):</span>
-      <span class="k">return</span> <span class="s2">&quot;calctype.&quot;</span> <span class="o">+</span> <span class="n">calctype</span>
+        <span class="k">return</span> <span class="s2">&quot;calctype.&quot;</span> <span class="o">+</span> <span class="n">calctype</span>
 
     <span class="k">def</span> <span class="nf">__ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref</span><span class="p">):</span>
-      <span class="k">return</span> <span class="s2">&quot;ref.&quot;</span> <span class="o">+</span> <span class="n">ref</span>
+        <span class="k">return</span> <span class="s2">&quot;ref.&quot;</span> <span class="o">+</span> <span class="n">ref</span>
 
     <span class="k">def</span> <span class="nf">__clex_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clex_name</span><span class="p">):</span>
-      <span class="k">return</span> <span class="s2">&quot;clex.&quot;</span> <span class="o">+</span> <span class="n">clex_name</span>
+        <span class="k">return</span> <span class="s2">&quot;clex.&quot;</span> <span class="o">+</span> <span class="n">clex_name</span>
 
     <span class="k">def</span> <span class="nf">__eci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eci</span><span class="p">):</span>
-      <span class="k">return</span> <span class="s2">&quot;eci.&quot;</span> <span class="o">+</span> <span class="n">eci</span>
-
+        <span class="k">return</span> <span class="s2">&quot;eci.&quot;</span> <span class="o">+</span> <span class="n">eci</span>
 
     <span class="k">def</span> <span class="nf">__all_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      Find all directories at &#39;location&#39; that match &#39;pattern.something&#39;</span>
 <span class="sd">      and return a std::vector of the &#39;something&#39;</span>
 <span class="sd">      &quot;&quot;&quot;</span>
 
-      <span class="nb">all</span> <span class="o">=</span> <span class="p">[];</span>
-      <span class="n">pattern</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span><span class="p">;</span>
+        <span class="nb">all</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pattern</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
 
-      <span class="c1"># get all</span>
-      <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">all</span>
+        <span class="c1"># get all</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">all</span>
 
-      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">location</span><span class="p">,</span><span class="n">item</span><span class="p">))</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">:</span>
-          <span class="nb">all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):])</span>
-      <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">all</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">location</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">:</span>
+                <span class="nb">all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):])</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">all</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="Project"><a class="viewcode-back" href="../../../python/casm.project.Project.html#casm.project.Project">[docs]</a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Project"><a class="viewcode-back" href="../../../reference/casm.project.Project.html#casm.project.Project">[docs]</a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The Project class contains information about a CASM project</span>
 
 <span class="sd">    Attributes</span>
@@ -606,120 +670,123 @@
 <span class="sd">      prim: casm.project.Prim instance</span>
 <span class="sd">        Represents the primitive crystal structure</span>
 
-<span class="sd">      composition_axes: casm.project.CompositionAxes</span>
-<span class="sd">        Currently selected composition axes</span>
+<span class="sd">      composition_axes: casm.project.CompositionAxes or None</span>
+<span class="sd">        Currently selected composition axes, or None</span>
 
 <span class="sd">      all_composition_axes: dict(str:casm.project.CompositionAxes)</span>
-<span class="sd">        Dict containing name:CompositionAxes pairs, including both standard and</span>
-<span class="sd">        custom composition axes</span>
-
-<span class="sd">      casm_exe: str</span>
-<span class="sd">        The casm CLI executable to use when necessary</span>
+<span class="sd">        Dict containing name:CompositionAxes pairs, including both standard and custom composition axes</span>
 
 <span class="sd">      verbose: bool</span>
 <span class="sd">        How much to print to stdout</span>
 
+<span class="sd">      out: str or None</span>
+<span class="sd">        Contains last output of Project.command calls if capturing output. Use Project.command_options to set options.</span>
+
+<span class="sd">      err: str or None</span>
+<span class="sd">        Contains last error output of Project.command calls if capturing output. Use Project.command_options to set options.</span>
+
+<span class="sd">      code: int or None</span>
+<span class="sd">        Contains last return code of Project.command calls.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Project.__init__"><a class="viewcode-back" href="../../../python/casm.project.Project.html#casm.project.Project.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">casm_exe</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Construct a CASM Project representation.</span>
+<div class="viewcode-block" id="Project.__init__"><a class="viewcode-back" href="../../../reference/casm.project.Project.html#casm.project.Project.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a CASM Project representation.</span>
 
-<span class="sd">      Arguments</span>
-<span class="sd">      ----------</span>
+<span class="sd">        Arguments</span>
+<span class="sd">        ----------</span>
 
-<span class="sd">        path: str, optional, default=None</span>
-<span class="sd">          Path to project root directory. Default=None uses project containing</span>
-<span class="sd">          current working directory</span>
+<span class="sd">          path: str, optional, default=None</span>
+<span class="sd">            Path to project root directory. Default=None uses project containing</span>
+<span class="sd">            current working directory</span>
 
-<span class="sd">        casm_exe: str, optional, default=None</span>
-<span class="sd">          CASM executable to use for command line interface. Default</span>
-<span class="sd">          uses $CASM if it exists in the environment, else &quot;casm&quot;.</span>
+<span class="sd">          verbose: bool, optional, default=True</span>
+<span class="sd">            How much to print to stdout</span>
 
-<span class="sd">        verbose: bool, optional, default=True</span>
-<span class="sd">          How much to print to stdout</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
-<span class="sd">      &quot;&quot;&quot;</span>
-
-      <span class="c1"># will hold a ctypes.c_void_p when loading CASM project into memory</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="o">=</span> <span class="kc">None</span>
-
-      <span class="c1"># will keep a casm.API instance</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="kc">None</span>
-
-      <span class="c1"># set path to this CASM project</span>
-      <span class="k">if</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-          <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
-
-      <span class="c1"># set executable name</span>
-      <span class="k">if</span> <span class="n">casm_exe</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="s2">&quot;CASM&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-          <span class="n">casm_exe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CASM&quot;</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-          <span class="n">casm_exe</span> <span class="o">=</span> <span class="s2">&quot;casm&quot;</span>
-
-      <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">__refresh</span><span class="p">()</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">casm_exe</span> <span class="o">=</span> <span class="n">casm_exe</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-
-      <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span> <span class="o">=</span> <span class="p">{}</span>
-      <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">composition_axes</span><span class="p">()):</span>
-          <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">composition_axes</span><span class="p">(),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-              <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-              <span class="k">if</span> <span class="s2">&quot;standard_axes&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-                  <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;standard_axes&quot;</span><span class="p">]):</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">CompositionAxes</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
-              <span class="k">if</span> <span class="s2">&quot;custom_axes&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-                  <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;custom_axes&quot;</span><span class="p">]):</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">CompositionAxes</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
-              <span class="bp">self</span><span class="o">.</span><span class="n">composition_axes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;current_axes&quot;</span><span class="p">]]</span></div>
-
-
-    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">__unload</span><span class="p">()</span>
-
-
-    <span class="k">def</span> <span class="nf">__load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Explicitly load CASM project into memory.</span>
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-          <span class="n">streamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">stdout</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-          <span class="n">streamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">nullstream</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-          <span class="n">errstreamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">stderr</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-          <span class="n">errstreamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">nullstream</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">primclex_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">streamptr</span><span class="p">,</span> <span class="n">streamptr</span><span class="p">,</span> <span class="n">errstreamptr</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">__unload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Explicitly unload CASM project from memory.</span>
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">primclex_delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">)</span>
+        <span class="c1"># will hold a ctypes.c_void_p when loading CASM project into memory</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="o">=</span> <span class="kc">None</span>
 
+        <span class="c1"># will keep a casm.API instance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># set path to this CASM project</span>
+        <span class="k">if</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No CASM project found using &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">project_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__refresh</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_streamptr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_errstreamptr</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># set default command output options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">command_options</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__unload</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Explicitly load CASM project into memory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_streamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">stdout</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_streamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">nullstream</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_errstreamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">stderr</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_errstreamptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">nullstream</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">primclex_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_streamptr</span><span class="p">,</span>
+                                               <span class="bp">self</span><span class="o">.</span><span class="n">_errstreamptr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Explicitly unload CASM project from memory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">primclex_delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">__refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Reload self.settings and self.dir</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reload self.settings and self.dir</span>
 
-<span class="sd">      Use this after adding or modifying files in the CASM project but no</span>
-<span class="sd">      special call to refresh PrimClex properties is required</span>
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="n">DirectoryStructure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">ProjectSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="sd">        Use this after adding or modifying files in the CASM project but no</span>
+<span class="sd">        special call to refresh PrimClex properties is required</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="n">DirectoryStructure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">ProjectSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">composition_axes</span><span class="p">()):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">composition_axes</span><span class="p">(),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;possible_axes&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;possible_axes&quot;</span><span class="p">]):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">CompositionAxes</span><span class="p">(</span>
+                            <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;custom_axes&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;custom_axes&quot;</span><span class="p">]):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">CompositionAxes</span><span class="p">(</span>
+                            <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">composition_axes</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="s2">&quot;current_axes&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">composition_axes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_composition_axes</span><span class="p">[</span>
+                        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;current_axes&quot;</span><span class="p">]]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">prim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -731,79 +798,167 @@
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
 
-<div class="viewcode-block" id="Project.refresh"><a class="viewcode-back" href="../../../python/casm.project.Project.html#casm.project.Project.refresh">[docs]</a>    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_settings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_composition</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_chem_ref</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_configs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear_clex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Refresh PrimClex properties to reflect changes to CASM project files.</span>
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="k">if</span> <span class="n">read_settings</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">read_settings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">read_composition</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">read_chem_ref</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">read_configs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">clear_clex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Refresh PrimClex properties to reflect changes to CASM project files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">read_settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__refresh</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">primclex_refresh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_streamptr</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_errstreamptr</span><span class="p">,</span> <span class="n">read_settings</span><span class="p">,</span>
+                                       <span class="n">read_composition</span><span class="p">,</span> <span class="n">read_chem_ref</span><span class="p">,</span>
+                                       <span class="n">read_configs</span><span class="p">,</span> <span class="n">clear_clex</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a &#39;ctypes.c_void_p&#39; that points to a CASM project. (PrimClex)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__load</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span>
+
+    <span class="k">def</span> <span class="nf">command_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">capture</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">print_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">combine_output</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set options for Project.command</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        capture: bool</span>
+<span class="sd">            If True, capture stdout, stderr, and return code in self.out and self.err, and self.code. If False, will print to stdout and stderr directrly (if self.verbose==True), or to nullstream (if self.verbose==False).</span>
+
+<span class="sd">        print_ouput: bool</span>
+<span class="sd">            If print_output==True and capture==True, then print self.out after executing.</span>
+
+<span class="sd">        combine_output: bool</span>
+<span class="sd">            If combine_output==true, err stream is set equal to out stream.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_capture</span> <span class="o">=</span> <span class="n">capture</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_print_output</span> <span class="o">=</span> <span class="n">print_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_combine_output</span> <span class="o">=</span> <span class="n">combine_output</span>
+
+    <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute a command via the c api, writing output to stdout/stderr.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          args: A string containing the command to be executed.</span>
+<span class="sd">            Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          returncode: The returncode of the command via the CASM C API.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># this also ensures self._api is not None</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_capture</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_output</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">err</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print_output</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">capi</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_streamptr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errstreamptr</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__refresh</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute a command via the c api and store stdout/stderr result as str.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          args: A string containing the command to be executed.</span>
+<span class="sd">            Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          (stdout, stderr, returncode): The result of running the command via the</span>
+<span class="sd">            command line iterface. &#39;stdout&#39; and &#39;stderr&#39; are in text type (&#39;unicode&#39;/&#39;str&#39;). If</span>
+<span class="sd">            &#39;combine_output&#39; is True, then returns (combined_output, returncode).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># this also ensures self._api is not None</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+
+        <span class="c1"># construct stringstream objects to capture stdout, debug, stderr</span>
+        <span class="n">ss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">combine_output</span><span class="p">:</span>
+            <span class="n">ss_err</span> <span class="o">=</span> <span class="n">ss</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ss_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
+
+        <span class="n">returncode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">capi</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">ss_err</span><span class="p">)</span>
+
+        <span class="c1"># copy strings and delete stringstreams</span>
+        <span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">combine_output</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">returncode</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ss_err</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss_err</span><span class="p">)</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">returncode</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">__refresh</span><span class="p">()</span>
-      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">primclex_refresh</span><span class="p">(</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span>
-          <span class="n">read_settings</span><span class="p">,</span>
-          <span class="n">read_composition</span><span class="p">,</span>
-          <span class="n">read_chem_ref</span><span class="p">,</span>
-          <span class="n">read_configs</span><span class="p">,</span>
-          <span class="n">clear_clex</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prim_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Calls `casm init` to create a new CASM project in the given directory</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          root: str (optional, default=os.getcwd())</span>
+<span class="sd">            A string giving the path to the root directory of the new CASM project.</span>
+
+<span class="sd">          prim_path: str (optional, default=&quot;prim.json&quot;)</span>
+<span class="sd">            A string giving the path to a `prim.json` file to initialize the CASM project with.</span>
+
+<span class="sd">          verbose: bool (optional, default=True)</span>
+<span class="sd">            Passed to casm.project.Project constructor. How much to print to stdout.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          proj: A casm.project.Project instance for the new CASM project. The new project has composition axes calculated and the first axes choice selected.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">          An exception is raised if a new project could not be initialized. This could be due to an already existing project, bad or missing input file, or other cause.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">prim_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prim_path</span> <span class="o">=</span> <span class="s2">&quot;prim.json&quot;</span>
+
+        <span class="k">def</span> <span class="nf">raise_on_fail</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">returncode</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Could not initialize the project&quot;</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="s2">&quot;init --path=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; --prim=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">prim_path</span><span class="p">)</span>
+        <span class="n">raise_on_fail</span><span class="p">(</span><span class="o">*</span><span class="n">casm_capture</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">proj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="n">raise_on_fail</span><span class="p">(</span><span class="o">*</span><span class="n">proj</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="s2">&quot;composition --calc&quot;</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">raise_on_fail</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">proj</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="s2">&quot;composition --select 0&quot;</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">proj</span></div>
 
 
-<div class="viewcode-block" id="Project.data"><a class="viewcode-back" href="../../../python/casm.project.Project.html#casm.project.Project.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Returns a &#39;ctypes.c_void_p&#39; that points to a CASM project. (PrimClex)</span>
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">__load</span><span class="p">()</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span></div>
-
-
-<div class="viewcode-block" id="Project.command"><a class="viewcode-back" href="../../../python/casm.project.Project.html#casm.project.Project.command">[docs]</a>    <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Execute a command via the c api.</span>
-
-<span class="sd">      Args:</span>
-<span class="sd">        args: A string containing the command to be executed. Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
-
-<span class="sd">      Returns:</span>
-<span class="sd">        (stdout, stderr, returncode): The result of running the command via the command line iterface</span>
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_via_capi</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Project._command_via_capi"><a class="viewcode-back" href="../../../python/casm.project.Project.html#casm.project.Project._command_via_capi">[docs]</a>    <span class="k">def</span> <span class="nf">_command_via_capi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-      <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">      Execute a command via the c api.</span>
-
-<span class="sd">      Args:</span>
-<span class="sd">        args: A string containing the command to be executed. Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
-
-<span class="sd">      Returns:</span>
-<span class="sd">        (stdout, stderr, returncode): The result of running the command via the</span>
-<span class="sd">            command line iterface. &#39;stdout&#39; and &#39;stderr&#39; are in text type (&#39;unicode&#39;/&#39;str&#39;).</span>
-
-<span class="sd">      &quot;&quot;&quot;</span>
-      <span class="c1"># this also ensures self._api is not None</span>
-      <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-
-      <span class="c1"># construct stringstream objects to capture stdout, debug, stderr</span>
-      <span class="n">ss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
-      <span class="n">ss_debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
-      <span class="n">ss_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
-
-      <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">ss_debug</span><span class="p">,</span> <span class="n">ss_err</span><span class="p">)</span>
-
-      <span class="c1"># copy strings and delete stringstreams</span>
-      <span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
-
-      <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss_debug</span><span class="p">)</span>
-
-      <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ss_err</span><span class="p">)</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss_err</span><span class="p">)</span>
-
-      <span class="bp">self</span><span class="o">.</span><span class="n">__refresh</span><span class="p">()</span>
-      <span class="k">return</span> <span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">res</span><span class="p">)</span></div></div>
-
-
-<div class="viewcode-block" id="Prim"><a class="viewcode-back" href="../../../python/casm.project.Prim.html#casm.project.Prim">[docs]</a><span class="k">class</span> <span class="nc">Prim</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Prim"><a class="viewcode-back" href="../../../reference/casm.project.Prim.html#casm.project.Prim">[docs]</a><span class="k">class</span> <span class="nc">Prim</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The Primitive Crystal Structure</span>
 
 <span class="sd">    Attributes</span>
@@ -849,23 +1004,23 @@
 
 <span class="sd">        space_group_number: str</span>
 <span class="sd">          range of possible space group number</span>
-
-<span class="sd">        components: List[str]</span>
-<span class="sd">          occupational components</span>
-
-<span class="sd">        elements: List[str]</span>
-<span class="sd">          all allowed elements</span>
-
-<span class="sd">        n_independent_compositions: int</span>
-<span class="sd">          number of independent composition axes</span>
-
-<span class="sd">        degrees_of_freedom: List[str]</span>
-<span class="sd">          allowed degrees of freedom, from:</span>
-<span class="sd">            &#39;occupation&#39;</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Prim.__init__"><a class="viewcode-back" href="../../../python/casm.project.Prim.html#casm.project.Prim.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">):</span>
+    <span class="c1"># TODO: update prim composition info</span>
+    <span class="c1">#</span>
+    <span class="c1"># components: List[str]</span>
+    <span class="c1">#   occupational components</span>
+    <span class="c1">#</span>
+    <span class="c1"># elements: List[str]</span>
+    <span class="c1">#   all allowed elements</span>
+    <span class="c1">#</span>
+    <span class="c1"># n_independent_compositions: int</span>
+    <span class="c1">#   number of independent composition axes</span>
+    <span class="c1">#</span>
+    <span class="c1"># degrees_of_freedom: List[str]</span>
+    <span class="c1">#   allowed degrees of freedom, from:</span>
+    <span class="c1">#     &#39;occupation&#39;</span>
+<div class="viewcode-block" id="Prim.__init__"><a class="viewcode-back" href="../../../reference/casm.project.Prim.html#casm.project.Prim.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a CASM Prim</span>
 
@@ -879,7 +1034,8 @@
         <span class="k">if</span> <span class="n">proj</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">proj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">Project</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error constructing Prim: proj argument is not a CASM Project&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Error constructing Prim: proj argument is not a CASM Project&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span>
 
         <span class="c1"># raw prim.json (for some properties not yet supported in the API)</span>
@@ -890,21 +1046,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">coordinate_mode</span> <span class="o">=</span> <span class="n">raw_prim</span><span class="p">[</span><span class="s1">&#39;coordinate_mode&#39;</span><span class="p">]</span>
 
         <span class="k">def</span> <span class="nf">_angle</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-            <span class="p">))</span>
+            <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span>
+                <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))))</span>
 
         <span class="k">def</span> <span class="nf">_lattice_parameters</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">alpha</span> <span class="o">=</span> <span class="n">_angle</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">L</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">beta</span> <span class="o">=</span> <span class="n">_angle</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">L</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">gamma</span> <span class="o">=</span> <span class="n">_angle</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">L</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="n">b</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="n">c</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">alpha</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">beta</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span><span class="n">gamma</span><span class="p">}</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="n">_angle</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">L</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="n">_angle</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">L</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+            <span class="n">gamma</span> <span class="o">=</span> <span class="n">_angle</span><span class="p">(</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">L</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span>
+                <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">b</span><span class="p">,</span>
+                <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+                <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
+                <span class="s1">&#39;beta&#39;</span><span class="p">:</span> <span class="n">beta</span><span class="p">,</span>
+                <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">gamma</span>
+            <span class="p">}</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">lattice_parameters</span> <span class="o">=</span> <span class="n">_lattice_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice_matrix</span><span class="p">)</span>
 
-        <span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">returncode</span><span class="p">)</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;sym&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">returncode</span><span class="p">)</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="s2">&quot;sym&quot;</span><span class="p">)</span>
 
         <span class="c1"># lattice symmetry</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lattice_symmetry_s</span> <span class="o">=</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">lattice_symmetry</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
@@ -916,16 +1080,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">crystal_symmetry_hm</span> <span class="o">=</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">hm_symmetry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crystal_symmetry_s</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crystal_system</span> <span class="o">=</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">crystal_system</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crystal_symmetry_s</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crystal_family</span> <span class="o">=</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">crystal_family</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crystal_symmetry_s</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">space_group_number</span> <span class="o">=</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">space_group_number_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">crystal_symmetry_s</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">space_group_number</span> <span class="o">=</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">space_group_number_map</span><span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">crystal_symmetry_s</span><span class="p">]</span></div></div>
 
-        <span class="c1"># composition (v0.2.X: elements and components are identical, only &#39;occupation&#39; allowed)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">composition_axes</span><span class="p">())</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">raw_composition_axes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">raw_composition_axes</span><span class="p">[</span><span class="s1">&#39;standard_axes&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;components&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_independent_compositions</span> <span class="o">=</span> <span class="n">raw_composition_axes</span><span class="p">[</span><span class="s1">&#39;standard_axes&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;independent_compositions&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">degrees_of_freedom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;occupation&#39;</span><span class="p">]</span></div></div>
+        <span class="c1"># # composition (v0.2.X: elements and components are identical, only &#39;occupation&#39; allowed)</span>
+        <span class="c1"># with open(self.proj.dir.composition_axes()) as f:</span>
+        <span class="c1">#     raw_composition_axes = json.load(f)</span>
+        <span class="c1">#</span>
+        <span class="c1"># print(raw_composition_axes)</span>
+        <span class="c1">#</span>
+        <span class="c1"># self.components = raw_composition_axes[&#39;possible_axes&#39;][&#39;0&#39;][</span>
+        <span class="c1">#     &#39;components&#39;]</span>
+        <span class="c1"># self.elements = self.components</span>
+        <span class="c1"># self.n_independent_compositions = raw_composition_axes[</span>
+        <span class="c1">#     &#39;possible_axes&#39;][&#39;0&#39;][&#39;independent_compositions&#39;]</span>
+        <span class="c1"># self.degrees_of_freedom = [&#39;occupation&#39;]</span>
 
 
 <span class="k">class</span> <span class="nc">CompositionAxes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -956,17 +1125,17 @@
 
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_end_members</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ascii_lowercase</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">end_members</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">c</span><span class="p">])[:,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">end_members</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">c</span><span class="p">])[:,</span> <span class="mi">0</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">break</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_end_members</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">])[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_end_members</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">])[:,</span> <span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1001,20 +1170,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, CASM Developers.
+        &#169; Copyright 2018, CASM Developers.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -1023,33 +1197,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'0.3.dev',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

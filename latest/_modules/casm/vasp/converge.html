@@ -1,49 +1,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>casm.vasp.converge &mdash; CASM 0.3.dev documentation</title>
-  
-
-  
-  
-  
+  <title>casm.vasp.converge &mdash; CASM 1.0.0 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +62,7 @@
             
             
               <div class="version">
-                0.3
+                1.0
               </div>
             
           
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +89,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">CASM Python packages documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,11 +131,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -149,8 +158,9 @@
             
   <h1>Source code for casm.vasp.converge</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; Converge class, methods, and errors &quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># External</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -159,13 +169,14 @@
 <span class="kn">import</span> <span class="nn">gzip</span>
 
 <span class="c1"># Internal</span>
-<span class="kn">from</span> <span class="nn">casm.vasp.error</span> <span class="k">import</span> <span class="n">continue_job</span>
-<span class="kn">from</span> <span class="nn">casm.vasp.run</span> <span class="k">import</span> <span class="n">complete_job</span><span class="p">,</span> <span class="n">run</span>
-<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="k">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">casm.vasp.error</span> <span class="kn">import</span> <span class="n">continue_job</span>
+<span class="kn">from</span> <span class="nn">casm.vasp.run</span> <span class="kn">import</span> <span class="n">complete_job</span><span class="p">,</span> <span class="n">run</span>
+<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="kn">import</span> <span class="n">io</span>
 
 <span class="c1">#pylint: disable=line-too-long, too-many-statements, too-many-branches, too-many-return-statements</span>
 
-<div class="viewcode-block" id="Converge"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge">[docs]</a><span class="k">class</span> <span class="nc">Converge</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Converge"><a class="viewcode-back" href="../../../reference/casm.vasp.Converge.html#casm.vasp.Converge">[docs]</a><span class="k">class</span> <span class="nc">Converge</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The Converge class contains functions for setting up, executing, and parsing a VASP convergence.</span>
 
 <span class="sd">        The convergence is initialized in a directory containing VASP input files, named after the value</span>
@@ -187,7 +198,7 @@
 <span class="sd">            self.rundir    (list of .../prop/prop_value/run.i)</span>
 <span class="sd">            self.finaldir (.../prop/prop_value/run.final)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Converge.__init__"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">propdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Converge.__init__"><a class="viewcode-back" href="../../../reference/casm.vasp.Converge.html#casm.vasp.Converge.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">propdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a VASP convergence job object.</span>
 
@@ -199,7 +210,7 @@
 <span class="sd">                possible settings keys are:</span>
 <span class="sd">                    used by casm.vasp.run() function:</span>
 <span class="sd">                        &quot;ncpus&quot;: number of ncpus to run mpi on</span>
-<span class="sd">			&quot;npar&quot; or &quot;ncore&quot;: number of ways to parallelize</span>
+<span class="sd">                        &quot;npar&quot; or &quot;ncore&quot;: number of ways to parallelize</span>
 <span class="sd">                        &quot;kpar&quot;: number of ways to parallelize k-points</span>
 <span class="sd">                        &quot;vasp_cmd&quot;: (default, see casm.vasp.run) shell command to execute vasp, or None to use default mpirun</span>
 <span class="sd">                        &quot;strict_kpoint&quot;: force strict copying of KPOINTS file, otherwise kpoints are scaled based on supercell size</span>
@@ -257,30 +268,29 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VASP Converge object constructed</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="Converge.add_rundir"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.add_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">add_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make a new run.i directory&quot;&quot;&quot;</span>
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">))))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_rundir</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span>
 
-
-<div class="viewcode-block" id="Converge.update_rundir"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.update_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">update_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Find all .../config/calctype/prop/prop_value/run.i directories, store paths in self.rundir list&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">run_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">run_index</span><span class="p">))):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">run_index</span><span class="p">)))</span>
-            <span class="n">run_index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+        <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span>
+                                         <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">run_index</span><span class="p">))):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;run.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">run_index</span><span class="p">)))</span>
+            <span class="n">run_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-
-<div class="viewcode-block" id="Converge.add_errdir"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.add_errdir">[docs]</a>    <span class="k">def</span> <span class="nf">add_errdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_errdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Move run.i to run.i_err.j directory&quot;&quot;&quot;</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span></div>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_errdir</span><span class="p">()</span>
 
-
-<div class="viewcode-block" id="Converge.update_errdir"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.update_errdir">[docs]</a>    <span class="k">def</span> <span class="nf">update_errdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update_errdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Find all .../config/calctype/prop/prop_value/run.i_err.j directories, store paths in self.errdir list&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">errdir</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -289,31 +299,36 @@
             <span class="n">err_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="p">)</span>
             <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err_index</span><span class="p">)):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">errdir</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_err.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err_index</span><span class="p">))</span>
-                <span class="n">err_index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+                <span class="n">err_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-
-<div class="viewcode-block" id="Converge.setup"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initdir</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initdir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; mv all files and directories (besides initdir) into initdir &quot;&quot;&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moving files into initial run directory:&quot;</span><span class="p">,</span> <span class="n">initdir</span><span class="p">)</span>
         <span class="n">initdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">initdir</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">my_prop</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">my_prop</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">VASP_INPUT_FILE_LIST</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="n">my_prop</span><span class="p">)</span> <span class="o">!=</span> <span class="n">initdir</span><span class="p">):</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="n">my_prop</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="n">my_prop</span><span class="p">))</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">my_prop</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">VASP_INPUT_FILE_LIST</span> <span class="o">+</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="n">my_prop</span><span class="p">)</span> <span class="o">!=</span> <span class="n">initdir</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="n">my_prop</span><span class="p">),</span>
+                          <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="n">my_prop</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="c1"># Keep a backup copy of the base INCAR</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="s2">&quot;INCAR&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;INCAR.base&quot;</span><span class="p">))</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">initdir</span><span class="p">,</span> <span class="s2">&quot;INCAR&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;INCAR.base&quot;</span><span class="p">))</span>
 
         <span class="c1"># If an initial incar is called for, copy it in and set the appropriate flag</span>
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]))):</span>
-            <span class="n">new_values</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Incar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]))</span><span class="o">.</span><span class="n">tags</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]))):</span>
+            <span class="n">new_values</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Incar</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]))</span><span class="o">.</span><span class="n">tags</span>
             <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">(</span><span class="n">new_values</span><span class="p">,</span> <span class="n">initdir</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set INCAR tags:&quot;</span><span class="p">,</span> <span class="n">new_values</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Converge.complete"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.complete">[docs]</a>    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if the VASP convergence is complete.</span>
 
 <span class="sd">           Completion criteria: .../config/calctype/prop/prop_value/run.final/OUTCAR exists and is complete</span>
@@ -323,10 +338,9 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">io</span><span class="o">.</span><span class="n">Outcar</span><span class="p">(</span><span class="n">outcarfile</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">():</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+        <span class="k">return</span> <span class="kc">True</span>
 
-
-<div class="viewcode-block" id="Converge.converged"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.converged">[docs]</a>    <span class="k">def</span> <span class="nf">converged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">converged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if configuration is relaxed.</span>
 
 <span class="sd">           This is called when self.rundir[-1] is complete and not a constant volume job.</span>
@@ -340,16 +354,19 @@
             <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;nrg_convergence&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">job_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">io</span><span class="o">.</span><span class="n">job_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]):</span>
-                    <span class="n">osz_1</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">))</span>
-                    <span class="n">osz_2</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">))</span>
-                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">osz_1</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">osz_2</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;nrg_convergence&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">job_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">io</span><span class="o">.</span><span class="n">job_complete</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]):</span>
+                    <span class="n">osz_1</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="s2">&quot;OSZICAR&quot;</span><span class="p">))</span>
+                    <span class="n">osz_2</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+                                                    <span class="s2">&quot;OSZICAR&quot;</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">osz_1</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span>
+                           <span class="n">osz_2</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;nrg_convergence&quot;</span><span class="p">]:</span>
                         <span class="k">return</span> <span class="kc">True</span>
 
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-
-<div class="viewcode-block" id="Converge.not_converging"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.not_converging">[docs]</a>    <span class="k">def</span> <span class="nf">not_converging</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">not_converging</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if configuration is not converging.</span>
 
 <span class="sd">           This is called when self.rundir[-1] is complete and not a constant volume job and self.converged() == False.</span>
@@ -358,10 +375,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]):</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-
-<div class="viewcode-block" id="Converge.run"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Perform a series of vasp jobs to relax a structure. Performs a series of vasp calculations until</span>
 <span class="sd">            convergence is reached according to the criteria in &#39;status()&#39;. Then performs a final constant volume run</span>
 <span class="sd">            {&quot;ISIF&quot;:2, &quot;ISMEAR&quot;:-5, &quot;NSW&quot;:0, &quot;IBRION&quot;:-1}.</span>
@@ -383,23 +399,33 @@
             <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;relax&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_rundir</span><span class="p">()</span>
                 <span class="n">continue_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;INCAR.base&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;INCAR&quot;</span><span class="p">))</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;INCAR.base&quot;</span><span class="p">),</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;INCAR&quot;</span><span class="p">))</span>
 
             <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;constant&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_rundir</span><span class="p">()</span>
                 <span class="n">continue_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
 
                 <span class="c1"># set INCAR to ISIF = 2, ISMEAR = -5, NSW = 0, IBRION = -1</span>
-                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]))):</span>
-                    <span class="n">new_values</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Incar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]))</span><span class="o">.</span><span class="n">tags</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]))):</span>
+                    <span class="n">new_values</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Incar</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]))</span><span class="o">.</span><span class="n">tags</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">new_values</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ISIF&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;NSW&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+                    <span class="n">new_values</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;ISIF&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                        <span class="s2">&quot;ISMEAR&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+                    <span class="p">}</span>
 
                 <span class="c1"># set INCAR system tag to denote &#39;final&#39;</span>
                 <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">new_values</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;final&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">new_values</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; final&quot;</span>
+                    <span class="n">new_values</span><span class="p">[</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span>
+                        <span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; final&quot;</span>
 
                 <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">(</span><span class="n">new_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set INCAR tags:&quot;</span><span class="p">,</span> <span class="n">new_values</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -412,14 +438,21 @@
 
             <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="c1"># run vasp</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">npar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">],</span> <span class="n">ncore</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">],</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;vasp_cmd&quot;</span><span class="p">],</span> <span class="n">ncpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">],</span> <span class="n">kpar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;kpar&quot;</span><span class="p">],</span> <span class="n">err_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;err_types&quot;</span><span class="p">])</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="n">npar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">],</span>
+                             <span class="n">ncore</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">],</span>
+                             <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;vasp_cmd&quot;</span><span class="p">],</span>
+                             <span class="n">ncpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">],</span>
+                             <span class="n">kpar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;kpar&quot;</span><span class="p">],</span>
+                             <span class="n">err_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;err_types&quot;</span><span class="p">])</span>
 
                 <span class="c1"># if no errors, continue</span>
                 <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">not_converging</span><span class="p">():</span>
                     <span class="c1"># Check for actions that should be taken after the initial run</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;fine_ngx&quot;</span><span class="p">]:</span>
-                            <span class="n">outcarfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">)</span>
+                            <span class="n">outcarfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                                      <span class="s2">&quot;OUTCAR&quot;</span><span class="p">)</span>
                             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">outcarfile</span><span class="p">):</span>
                                 <span class="c1"># This is an error but I&#39;m not sure what to do about it</span>
                                 <span class="k">pass</span>
@@ -428,18 +461,20 @@
                                 <span class="k">if</span> <span class="ow">not</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
                                     <span class="c1"># This is an error but I&#39;m not sure what to do about it</span>
                                     <span class="k">pass</span>
-                                <span class="k">elif</span> <span class="p">(</span><span class="n">init_outcar</span><span class="o">.</span><span class="n">ngx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span>
-                                      <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngy</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span>
-                                      <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngz</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                                <span class="k">elif</span> <span class="p">(</span><span class="n">init_outcar</span><span class="o">.</span><span class="n">ngx</span> <span class="ow">is</span> <span class="kc">None</span>
+                                      <span class="ow">or</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngy</span> <span class="ow">is</span> <span class="kc">None</span>
+                                      <span class="ow">or</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngz</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
                                     <span class="c1"># This is an error but I&#39;m not sure what to do about it</span>
                                     <span class="k">pass</span>
                                 <span class="k">else</span><span class="p">:</span>
                                     <span class="n">ng_tags</span> <span class="o">=</span> <span class="p">{</span>
-                                        <span class="s2">&quot;ngx&quot;</span> <span class="p">:</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngx</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
-                                        <span class="s2">&quot;ngy&quot;</span> <span class="p">:</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngy</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
-                                        <span class="s2">&quot;ngz&quot;</span> <span class="p">:</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngz</span><span class="o">*</span><span class="mi">2</span><span class="p">}</span>
+                                        <span class="s2">&quot;ngx&quot;</span><span class="p">:</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngx</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                                        <span class="s2">&quot;ngy&quot;</span><span class="p">:</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngy</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                                        <span class="s2">&quot;ngz&quot;</span><span class="p">:</span> <span class="n">init_outcar</span><span class="o">.</span><span class="n">ngz</span> <span class="o">*</span> <span class="mi">2</span>
+                                    <span class="p">}</span>
                                     <span class="nb">print</span><span class="p">(</span><span class="n">ng_tags</span><span class="p">)</span>
-                                    <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">(</span><span class="n">ng_tags</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span> <span class="s2">&quot;INCAR.base&quot;</span><span class="p">)</span>
+                                    <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">(</span><span class="n">ng_tags</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">propdir</span><span class="p">,</span>
+                                                     <span class="s2">&quot;INCAR.base&quot;</span><span class="p">)</span>
 
                     <span class="k">break</span>
 
@@ -447,7 +482,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_errdir</span><span class="p">()</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
                 <span class="c1"># self.add_rundir()</span>
-                <span class="n">err</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+                <span class="c1"># err = result.itervalues().next()</span>
 
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">++  status:&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;  next task:&quot;</span><span class="p">,</span> <span class="s2">&quot;fix_error&quot;</span><span class="p">)</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
@@ -460,9 +496,14 @@
                 <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Restoring from backups:&quot;</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">my_file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]:</span>
-                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">my_file</span> <span class="o">+</span> <span class="s2">&quot;_BACKUP.gz&quot;</span><span class="p">)):</span>
-                            <span class="n">f_in</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">my_file</span> <span class="o">+</span> <span class="s2">&quot;_BACKUP.gz&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
-                            <span class="n">f_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">my_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+                                             <span class="n">my_file</span> <span class="o">+</span> <span class="s2">&quot;_BACKUP.gz&quot;</span><span class="p">)):</span>
+                            <span class="n">f_in</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+                                             <span class="n">my_file</span> <span class="o">+</span> <span class="s2">&quot;_BACKUP.gz&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+                            <span class="n">f_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">my_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
                             <span class="n">f_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_in</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
                             <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                             <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -476,16 +517,16 @@
         <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">):</span>
                 <span class="c1"># mv final results to relax.final</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mv&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mv&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+                      <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">))</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
                 <span class="n">complete_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finaldir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="Converge.status"><a class="viewcode-back" href="../../../python/casm.vasp.Converge.html#casm.vasp.Converge.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Determine the status of a vasp convergence series of runs. Individual runs in the series</span>
 <span class="sd">            are in directories labeled &quot;run.0&quot;, &quot;run.1&quot;, etc.</span>
 
@@ -515,16 +556,21 @@
 
             <span class="c1"># if it is a final constant volume run</span>
             <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;final&quot;</span><span class="p">:</span>
-                <span class="c1"># if io.get_incar_tag(&quot;ISIF&quot;, self.rundir[-1]) == 2 and \</span>
-                <span class="c1">#    io.get_incar_tag(&quot;NSW&quot;, self.rundir[-1]) == 0 and \</span>
-                <span class="c1">#    io.get_incar_tag(&quot;ISMEAR&quot;, self.rundir[-1]) == -5:</span>
+                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span>
+                                    <span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;final&quot;</span><span class="p">:</span>
+                    <span class="c1"># if io.get_incar_tag(&quot;ISIF&quot;, self.rundir[-1]) == 2 and \</span>
+                    <span class="c1">#    io.get_incar_tag(&quot;NSW&quot;, self.rundir[-1]) == 0 and \</span>
+                    <span class="c1">#    io.get_incar_tag(&quot;ISMEAR&quot;, self.rundir[-1]) == -5:</span>
                     <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;complete&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
             <span class="c1"># elif constant volume run (but not the final one)</span>
             <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ISIF&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
-                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">E</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;relax&quot;</span><span class="p">)</span>      <span class="c1"># static run hit NSW limit and so isn&#39;t &quot;done&quot;</span>
+                <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span>
+                        <span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                                <span class="s2">&quot;OSZICAR&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">E</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;relax&quot;</span>
+                            <span class="p">)</span>  <span class="c1"># static run hit NSW limit and so isn&#39;t &quot;done&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;constant&quot;</span><span class="p">)</span>
 
@@ -545,27 +591,32 @@
             <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;not_converging&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
         <span class="c1"># else if the latest run is not complete, continue running it</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div></div>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;incomplete&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, CASM Developers.
+        &#169; Copyright 2018, CASM Developers.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -574,33 +625,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'0.3.dev',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

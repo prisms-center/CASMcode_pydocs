@@ -1,49 +1,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>casm.vasp.error &mdash; CASM 0.3.dev documentation</title>
-  
-
-  
-  
-  
+  <title>casm.vasp.error &mdash; CASM 1.0.0 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +62,7 @@
             
             
               <div class="version">
-                0.3
+                1.0
               </div>
             
           
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +89,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">CASM Python packages documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,11 +131,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -149,8 +158,9 @@
             
   <h1>Source code for casm.vasp.error</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; Job manipuation routines for VASP&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">abc</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -159,21 +169,24 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="k">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="kn">import</span> <span class="n">io</span>
 
-<div class="viewcode-block" id="VaspError"><a class="viewcode-back" href="../../../python/casm.vasp.VaspError.html#casm.vasp.VaspError">[docs]</a><span class="k">class</span> <span class="nc">VaspError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+<div class="viewcode-block" id="VaspError"><a class="viewcode-back" href="../../../reference/casm.vasp.VaspError.html#casm.vasp.VaspError">[docs]</a><span class="k">class</span> <span class="nc">VaspError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; VASP related errors &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="VaspWarning"><a class="viewcode-back" href="../../../python/casm.vasp.VaspWarning.html#casm.vasp.VaspWarning">[docs]</a><span class="k">class</span> <span class="nc">VaspWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
+
+<div class="viewcode-block" id="VaspWarning"><a class="viewcode-back" href="../../../reference/casm.vasp.VaspWarning.html#casm.vasp.VaspWarning">[docs]</a><span class="k">class</span> <span class="nc">VaspWarning</span><span class="p">(</span><span class="ne">Warning</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; VASP related warnings&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span></div>
 
-<div class="viewcode-block" id="continue_job"><a class="viewcode-back" href="../../../python/casm.vasp.continue_job.html#casm.vasp.continue_job">[docs]</a><span class="k">def</span> <span class="nf">continue_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">contdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+
+<div class="viewcode-block" id="continue_job"><a class="viewcode-back" href="../../../reference/casm.vasp.continue_job.html#casm.vasp.continue_job">[docs]</a><span class="k">def</span> <span class="nf">continue_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">contdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Use the files in vasp job directory &#39;jobdir&#39;, to setup a vasp job in directory &#39;contdir&#39;.</span>
 
 <span class="sd">       Args:</span>
@@ -190,76 +203,117 @@
 <span class="sd">         to contdir/POSCAR. jobdir/POSCAR and jobdir/CONTCAR are always kept.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Continue VASP job:</span><span class="se">\n</span><span class="s2">  Original: &quot;</span> <span class="o">+</span> <span class="n">jobdir</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Continuation: &quot;</span> <span class="o">+</span> <span class="n">contdir</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Continue VASP job:</span><span class="se">\n</span><span class="s2">  Original: &quot;</span> <span class="o">+</span> <span class="n">jobdir</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Continuation: &quot;</span> <span class="o">+</span>
+          <span class="n">contdir</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
     <span class="c1"># remove duplicates</span>
-    <span class="n">move</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;move&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_MOVE_LIST</span><span class="o">+</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;extra_input_files&#39;</span><span class="p">]))</span>
-    <span class="n">copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;copy&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_COPY_LIST</span><span class="p">))</span>
+    <span class="n">move</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;move&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_MOVE_LIST</span> <span class="o">+</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;extra_input_files&#39;</span><span class="p">]))</span>
+    <span class="n">copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;copy&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_COPY_LIST</span><span class="p">))</span>
     <span class="n">remove</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;remove&#39;</span><span class="p">]))</span>
     <span class="n">compress</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;compress&#39;</span><span class="p">]))</span>
     <span class="n">backup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;backup&#39;</span><span class="p">]))</span>
-    
+
     <span class="c1"># Check that necessary files are being moved/copied: INCAR, POTCAR, KPOINTS</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;POTCAR&quot;</span> <span class="ow">in</span> <span class="p">(</span><span class="n">move</span> <span class="o">+</span> <span class="n">copy</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: POTCAR not found in either &#39;move&#39; or &#39;copy&#39;. Moving POTCAR by default&quot;</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Warning: POTCAR not found in either &#39;move&#39; or &#39;copy&#39;. Moving POTCAR by default&quot;</span><span class="p">,</span>
+            <span class="n">VaspWarning</span><span class="p">)</span>
         <span class="n">move</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;POTCAR&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;INCAR&quot;</span> <span class="ow">in</span> <span class="p">(</span><span class="n">move</span> <span class="o">+</span> <span class="n">copy</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: INCAR not found in either &#39;move&#39; or &#39;copy&#39;. Copying INCAR by default&quot;</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Warning: INCAR not found in either &#39;move&#39; or &#39;copy&#39;. Copying INCAR by default&quot;</span><span class="p">,</span>
+            <span class="n">VaspWarning</span><span class="p">)</span>
         <span class="n">copy</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;KPOINTS&quot;</span> <span class="ow">in</span> <span class="p">(</span><span class="n">move</span> <span class="o">+</span> <span class="n">copy</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: KPOINTS not found in either &#39;move&#39; or &#39;copy&#39;. Copying KPOINTS by default&quot;</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Warning: KPOINTS not found in either &#39;move&#39; or &#39;copy&#39;. Copying KPOINTS by default&quot;</span><span class="p">,</span>
+            <span class="n">VaspWarning</span><span class="p">)</span>
         <span class="n">copy</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;KPOINTS&quot;</span><span class="p">]</span>
 
     <span class="c1"># Check that the user isn&#39;t being contradictory or silly</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">move</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;POSCAR&quot;</span> <span class="ow">or</span> <span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Error in casm.vasp.general.continue_job().  Do not include POSCAR or CONTCAR in &#39;move&#39;; use &#39;backup&#39; if you want a backup&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in casm.vasp.general.continue_job().  Do not include POSCAR or CONTCAR in &#39;move&#39;; use &#39;backup&#39; if you want a backup&quot;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">remove</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_MOVE_LIST</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Error in casm.vasp.general.continue_job(). </span><span class="si">%s</span><span class="s2"> cannot be removed, VASP will not run!!!&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in casm.vasp.general.continue_job(). </span><span class="si">%s</span><span class="s2"> cannot be removed, VASP will not run!!!&quot;</span>
+                    <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;remove&#39;. The file will not be removed.&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;remove&#39;. The file will not be removed.&quot;</span>
+                    <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
                 <span class="n">remove</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">remove</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">copy</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_MOVE_LIST</span><span class="p">:</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;copy&#39;. The fill will be moved only.&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;copy&#39;. The fill will be moved only.&quot;</span>
+                    <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
                 <span class="n">copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">copy</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;copy&#39;. The file will be copied only.&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;copy&#39;. The file will be copied only.&quot;</span>
+                    <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
                 <span class="n">move</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">move</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_MOVE_LIST</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Error in casm.vasp.general.continue_job(). </span><span class="si">%s</span><span class="s2"> cannot be compressed, VASP will not run!!!&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in casm.vasp.general.continue_job(). </span><span class="si">%s</span><span class="s2"> cannot be compressed, VASP will not run!!!&quot;</span>
+                    <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Error in casm.vasp.general.continue_job(). </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;compress&#39;, but these options contradict. Did you mean &#39;backup&#39;?&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in casm.vasp.general.continue_job(). </span><span class="si">%s</span><span class="s2"> found in both &#39;move&#39; and &#39;compress&#39;, but these options contradict. Did you mean &#39;backup&#39;?&quot;</span>
+                    <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">copy</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;POSCAR&quot;</span> <span class="ow">or</span> <span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Error in casm.vasp.general.continue_job().  Do not include POSCAR or CONTCAR in &#39;copy&#39;; use &#39;backup&#39; if you want a backup&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in casm.vasp.general.continue_job().  Do not include POSCAR or CONTCAR in &#39;copy&#39;; use &#39;backup&#39; if you want a backup&quot;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;WAVECAR&quot;</span> <span class="ow">or</span> <span class="n">f</span> <span class="o">==</span> <span class="s2">&quot;CHGCAR&quot;</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> can be rather huge. It is suggested to include </span><span class="si">%s</span><span class="s2"> in &#39;move&#39;, rather than &#39;copy&#39;. If you&#39;re worried about corruption due to interrupted runs, add </span><span class="si">%s</span><span class="s2"> to &#39;backup&#39; as well.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> can be rather huge. It is suggested to include </span><span class="si">%s</span><span class="s2"> in &#39;move&#39;, rather than &#39;copy&#39;. If you&#39;re worried about corruption due to interrupted runs, add </span><span class="si">%s</span><span class="s2"> to &#39;backup&#39; as well.&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="n">VaspWarning</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">remove</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2">found in &#39;copy&#39; and &#39;remove&#39;, which is the same as &#39;move&#39;.&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2">found in &#39;copy&#39; and &#39;remove&#39;, which is the same as &#39;move&#39;.&quot;</span>
+                <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
             <span class="n">move</span> <span class="o">+=</span> <span class="n">f</span>
             <span class="n">copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">copy</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
             <span class="n">remove</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">copy</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in &#39;copy&#39; and &#39;compress&#39;. It is suggested to include </span><span class="si">%s</span><span class="s2"> in &#39;move&#39; and &#39;backup&#39; instead.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in &#39;copy&#39; and &#39;compress&#39;. It is suggested to include </span><span class="si">%s</span><span class="s2"> in &#39;move&#39; and &#39;backup&#39; instead.&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="n">VaspWarning</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">backup</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in &#39;copy&#39; and &#39;backup&#39;. This will result in three copies of your file being made (old, old_BACKUP.gz, and copy)!&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in &#39;copy&#39; and &#39;backup&#39;. This will result in three copies of your file being made (old, old_BACKUP.gz, and copy)!&quot;</span>
+                <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">remove</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;compress&#39; and &#39;remove&#39;. Defaulting to &#39;compress&#39; only!&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in both &#39;compress&#39; and &#39;remove&#39;. Defaulting to &#39;compress&#39; only!&quot;</span>
+                <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
             <span class="n">remove</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">remove</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">backup</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in &#39;compress&#39; and &#39;backup&#39;. Defaulting to ompressing only!&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> found in &#39;compress&#39; and &#39;backup&#39;. Defaulting to ompressing only!&quot;</span>
+                <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
             <span class="n">backup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">backup</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">f</span><span class="p">]))</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">backup</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">move</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">f</span> <span class="ow">in</span> <span class="n">remove</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: &#39;backup&#39; is meant for files being moved, but </span><span class="si">%s</span><span class="s2"> is found under &#39;remove&#39; only. Did you maybe mean &#39;compress&#39;?&quot;</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: &#39;backup&#39; is meant for files being moved, but </span><span class="si">%s</span><span class="s2"> is found under &#39;remove&#39; only. Did you maybe mean &#39;compress&#39;?&quot;</span><span class="p">,</span>
+                <span class="n">VaspWarning</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">move</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> not found in &#39;move&#39;, so you&#39;ll just end up with 2 copies of the file...&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Warning: </span><span class="si">%s</span><span class="s2"> not found in &#39;move&#39;, so you&#39;ll just end up with 2 copies of the file...&quot;</span>
+                <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">)</span>
 
     <span class="c1"># make the new contdir</span>
     <span class="k">try</span><span class="p">:</span>
@@ -274,7 +328,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="c1"># Open target file, target file.gz</span>
             <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_BACKUP.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_BACKUP.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
             <span class="c1"># Compress, close files</span>
             <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
             <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -282,12 +336,19 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
     <span class="c1"># copy CONTCAR/POSCAR/etc</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  cp CONTCAR -&gt; POSCAR&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">)):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  no CONTCAR: cp POSCAR -&gt; POSCAR&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="s2">&quot;n_images&quot;</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>  <span class="c1">#raise error if its not an Neb run</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="n">VaspError</span><span class="p">(</span>
+                <span class="s2">&quot;no CONTCAR or POSCAR avaiable for continuation of the job</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
 
     <span class="c1"># move files</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mv:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
@@ -306,7 +367,8 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="c1"># This prevents a missing file from crashing the vasprun (e.g. a missing WAVECAR)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find file </span><span class="si">%s</span><span class="s2">, skipping!&quot;</span> <span class="o">%</span> <span class="n">file</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -322,19 +384,91 @@
     <span class="c1"># compress files</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; gzip:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">file</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="c1"># Open target file, target file.gz</span>
             <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
             <span class="c1"># Compress, close files</span>
             <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
             <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="c1"># Remove original target file</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">file</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># check if the run is a neb job and copy the image CONTCAR to POSCAR</span>
+    <span class="c1"># if &quot;n_images&quot; is a key available to the settings then it is assumed that its a neb run</span>
+    <span class="k">if</span> <span class="s2">&quot;n_images&quot;</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="c1"># go through each image folder, make a new image folder in contdir and copy CONTCAR</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">))):</span>
+            <span class="n">img_dir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image directory: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">img_dir</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;CONTCAR&quot;</span><span class="p">),</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  cp </span><span class="si">{0}</span><span class="s2">/CONTCAR -&gt; </span><span class="si">{0}</span><span class="s2">/POSCAR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">img_dir</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">),</span>
+                                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  no </span><span class="si">{0}</span><span class="s2">/CONTCAR: cp </span><span class="si">{0}</span><span class="s2">/POSCAR -&gt; </span><span class="si">{0}</span><span class="s2">/POSCAR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">img_dir</span><span class="p">))</span>
+
+            <span class="c1"># move files</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mv:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">move</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="c1"># This prevents a missing file from crashing the vasprun (e.g. a missing WAVECAR)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span>
+                              <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">file</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;POTCAR&quot;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find file </span><span class="si">%s</span><span class="s2">, skipping!&quot;</span> <span class="o">%</span> <span class="n">file</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="c1"># copy files</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  cp:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">copy</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="c1"># This prevents a missing file from crashing the vasprun (e.g. a missing WAVECAR)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span>
+                                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">file</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find file </span><span class="si">%s</span><span class="s2">, skipping!&quot;</span> <span class="o">%</span> <span class="n">file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="c1"># remove files</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  rm:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">remove</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="c1"># compress files</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; gzip:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="c1"># Open target file, target file.gz</span>
+                    <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+                    <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+                    <span class="c1"># Compress, close files</span>
+                    <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
+                    <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="c1"># Remove original target file</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
 
@@ -354,8 +488,9 @@
     <span class="k">def</span> <span class="nf">pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; The pattern the Class matches to &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
+
 
 <span class="k">class</span> <span class="nc">_CrashError</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Template class for all crash-related errors to be caught &quot;&quot;&quot;</span>
@@ -373,8 +508,9 @@
     <span class="k">def</span> <span class="nf">pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; The pattern the Class matches to &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
+
 
 <span class="k">class</span> <span class="nc">_FreezeError</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Template class for all crash-related errors to be caught &quot;&quot;&quot;</span>
@@ -392,10 +528,11 @@
     <span class="k">def</span> <span class="nf">pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; The pattern the Class matches to &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
 
-<div class="viewcode-block" id="IbzkptError"><a class="viewcode-back" href="../../../python/casm.vasp.IbzkptError.html#casm.vasp.IbzkptError">[docs]</a><span class="k">class</span> <span class="nc">IbzkptError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IbzkptError"><a class="viewcode-back" href="../../../reference/casm.vasp.IbzkptError.html#casm.vasp.IbzkptError">[docs]</a><span class="k">class</span> <span class="nc">IbzkptError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; VERY BAD NEWS! internal error in subroutine IBZKPT</span>
 
 <span class="sd">        This is not necessarily a fatal error.  Also, these fixes are not working.</span>
@@ -403,12 +540,10 @@
     <span class="c1"># This should be a class member: all IbzkptErrors have it</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;VERY BAD NEWS! internal error in subroutine IBZKPT&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
 
-
-
-<div class="viewcode-block" id="IbzkptError.error"><a class="viewcode-back" href="../../../python/casm.vasp.IbzkptError.html#casm.vasp.IbzkptError.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Check if pattern found in line, and KPOINTS subdivisions are odd or not Gamma&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
             <span class="n">kpt</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Kpoints</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">))</span>
@@ -418,9 +553,9 @@
                     <span class="n">odd</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">odd</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">kpt</span><span class="o">.</span><span class="n">automode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="IbzkptError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.IbzkptError.html#casm.vasp.IbzkptError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Try to fix by making kpoints subdivisions odd or changing kpoint length&quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
         <span class="n">kpt</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Kpoints</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">))</span>
@@ -432,7 +567,8 @@
             <span class="n">kpt</span><span class="o">.</span><span class="n">automode</span> <span class="o">=</span> <span class="s2">&quot;GAMMA&quot;</span>
             <span class="n">kpt</span><span class="o">.</span><span class="n">subdivisions</span> <span class="o">=</span> <span class="p">[</span><span class="n">max_k</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">max_k</span><span class="p">]</span>
             <span class="n">kpt</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Changed KPOINTS from AUTO (</span><span class="si">%s</span><span class="s2">) to GAMMA (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">old_kpt</span><span class="p">,</span> <span class="n">kpt</span><span class="o">.</span><span class="n">subdivisions</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Changed KPOINTS from AUTO (</span><span class="si">%s</span><span class="s2">) to GAMMA (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span>
+                  <span class="p">(</span><span class="n">old_kpt</span><span class="p">,</span> <span class="n">kpt</span><span class="o">.</span><span class="n">subdivisions</span><span class="p">))</span>
             <span class="n">kpt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">))</span>
 
         <span class="k">else</span><span class="p">:</span>
@@ -443,9 +579,12 @@
                     <span class="n">kpt</span><span class="o">.</span><span class="n">subdivisions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="k">if</span> <span class="n">odd</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set KPOINTS subdivision to be odd:&quot;</span><span class="p">,</span> <span class="n">kpt</span><span class="o">.</span><span class="n">subdivisions</span><span class="p">,</span> <span class="s2">&quot;and mode to Gamma&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set KPOINTS subdivision to be odd:&quot;</span><span class="p">,</span> <span class="n">kpt</span><span class="o">.</span><span class="n">subdivisions</span><span class="p">,</span>
+                      <span class="s2">&quot;and mode to Gamma&quot;</span><span class="p">)</span>
                 <span class="n">kpt</span><span class="o">.</span><span class="n">automode</span> <span class="o">=</span> <span class="s2">&quot;Gamma&quot;</span>
-                <span class="n">kpt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">))</span></div></div>
+                <span class="n">kpt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">))</span></div>
+
+
 <span class="c1">#        else:</span>
 <span class="c1">#            symprec = io.get_incar_tag(&quot;SYMPREC&quot;, jobdir = new_jobdir)</span>
 <span class="c1">#            if symprec is None or symprec &lt; 1.1e-8:</span>
@@ -455,21 +594,22 @@
 <span class="c1">#                print &quot;  Set ISYM = 0&quot;</span>
 <span class="c1">#                io.set_incar_tag({&quot;ISYM&quot;: 0}, jobdir = new_jobdir)</span>
 
-<div class="viewcode-block" id="FEXCFError"><a class="viewcode-back" href="../../../python/casm.vasp.FEXCFError.html#casm.vasp.FEXCFError">[docs]</a><span class="k">class</span> <span class="nc">FEXCFError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FEXCFError"><a class="viewcode-back" href="../../../reference/casm.vasp.FEXCFError.html#casm.vasp.FEXCFError">[docs]</a><span class="k">class</span> <span class="nc">FEXCFError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;ERROR FEXCF: supplied exchange-correlation table&quot;&quot;&quot;</span>
 
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;ERROR FEXCF: supplied exchange-correlation table&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
 
-<div class="viewcode-block" id="FEXCFError.error"><a class="viewcode-back" href="../../../python/casm.vasp.FEXCFError.html#casm.vasp.FEXCFError.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Check if pattern found in line &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="FEXCFError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.FEXCFError.html#casm.vasp.FEXCFError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; First attempt:</span>
 <span class="sd">                Set IBRION = 2</span>
 <span class="sd">            Second attempt:</span>
@@ -480,32 +620,32 @@
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;IBRION&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set IBRION = 2&quot;</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;IBRION&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;POTIM&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set POTIM = 0.1&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;POTIM&quot;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;POTIM&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;POTIM&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set POTIM = 0.01&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;POTIM&quot;</span><span class="p">:</span><span class="mf">0.01</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span></div></div>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;POTIM&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SubSpaceMatrixError"><a class="viewcode-back" href="../../../python/casm.vasp.SubSpaceMatrixError.html#casm.vasp.SubSpaceMatrixError">[docs]</a><span class="k">class</span> <span class="nc">SubSpaceMatrixError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
+<div class="viewcode-block" id="SubSpaceMatrixError"><a class="viewcode-back" href="../../../reference/casm.vasp.SubSpaceMatrixError.html#casm.vasp.SubSpaceMatrixError">[docs]</a><span class="k">class</span> <span class="nc">SubSpaceMatrixError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;WARNING: Sub-Space-Matrix is not hermitian&quot;&quot;&quot;</span>
 
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;WARNING: Sub-Space-Matrix is not hermitian&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
 
-<div class="viewcode-block" id="SubSpaceMatrixError.error"><a class="viewcode-back" href="../../../python/casm.vasp.SubSpaceMatrixError.html#casm.vasp.SubSpaceMatrixError.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Check if pattern found in line &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="SubSpaceMatrixError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.SubSpaceMatrixError.html#casm.vasp.SubSpaceMatrixError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; First attempt:</span>
 <span class="sd">                Set ALGO = VeryFast</span>
 <span class="sd">                Unset IALGO</span>
@@ -517,109 +657,127 @@
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ALGO&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;VeryFast&quot;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set Algo = VeryFast, and Unset IALGO&quot;</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;IALGO&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span><span class="s2">&quot;VeryFast&quot;</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span>
+                <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;VeryFast&quot;</span>
+            <span class="p">},</span>
+                             <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;IBRION&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set IBRION = 1 and POTIM = 0.1&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;IBRION&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;POTIM&quot;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;POTIM&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;LREAL&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;False&quot;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set LREAL = .FALSE.&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;LREAL&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set Algo = Normal, and Unset IALGO&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;IALGO&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span><span class="s2">&quot;Normal&quot;</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span></div></div>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span>
+                <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Normal&quot;</span>
+            <span class="p">},</span>
+                             <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="InisymError"><a class="viewcode-back" href="../../../python/casm.vasp.InisymError.html#casm.vasp.InisymError">[docs]</a><span class="k">class</span> <span class="nc">InisymError</span><span class="p">(</span><span class="n">_CrashError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="InisymError"><a class="viewcode-back" href="../../../reference/casm.vasp.InisymError.html#casm.vasp.InisymError">[docs]</a><span class="k">class</span> <span class="nc">InisymError</span><span class="p">(</span><span class="n">_CrashError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; VASP can&#39;t figure out the (magnetic) symmetry &quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot; INISYM: ERROR: Unable to resolve symmetry &quot;</span>
 
-<div class="viewcode-block" id="InisymError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.InisymError.html#casm.vasp.InisymError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Up symprec, or turn off symmetry&quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
-        <span class="n">symprec</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">,</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span>
+        <span class="n">symprec</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">symprec</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">symprec</span> <span class="o">&gt;</span> <span class="mf">1.1e-8</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set SYMPREC = 1e-8&quot;</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">},</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ISYM&quot;</span><span class="p">,</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ISYM&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set ISYM = 0&quot;</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ISYM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span></div></div>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ISYM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SgrconError"><a class="viewcode-back" href="../../../python/casm.vasp.SgrconError.html#casm.vasp.SgrconError">[docs]</a><span class="k">class</span> <span class="nc">SgrconError</span><span class="p">(</span><span class="n">_CrashError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SgrconError"><a class="viewcode-back" href="../../../reference/casm.vasp.SgrconError.html#casm.vasp.SgrconError">[docs]</a><span class="k">class</span> <span class="nc">SgrconError</span><span class="p">(</span><span class="n">_CrashError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; VASP is having yet another symmetry problem &quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;VERY BAD NEWS! internal error in subroutine SGRCON:&quot;</span>
 
-<div class="viewcode-block" id="SgrconError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.SgrconError.html#casm.vasp.SgrconError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Up symprec, or turn off symmetry&quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
-        <span class="n">symprec</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">,</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span>
+        <span class="n">symprec</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">symprec</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">symprec</span> <span class="o">&gt;</span> <span class="mf">1.1e-8</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set SYMPREC = 1e-8&quot;</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">},</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ISYM&quot;</span><span class="p">,</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;SYMPREC&quot;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ISYM&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set ISYM = 0&quot;</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ISYM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">jobdir</span> <span class="o">=</span> <span class="n">new_jobdir</span><span class="p">)</span></div></div>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ISYM&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="WavecarError"><a class="viewcode-back" href="../../../python/casm.vasp.WavecarError.html#casm.vasp.WavecarError">[docs]</a><span class="k">class</span> <span class="nc">WavecarError</span><span class="p">(</span><span class="n">_CrashError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="WavecarError"><a class="viewcode-back" href="../../../reference/casm.vasp.WavecarError.html#casm.vasp.WavecarError">[docs]</a><span class="k">class</span> <span class="nc">WavecarError</span><span class="p">(</span><span class="n">_CrashError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; A bad WAVECAR is causing the job to crash/abort &quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;  ERROR: while reading WAVECAR, plane wave coefficients changed&quot;</span>
 
-<div class="viewcode-block" id="WavecarError.error"><a class="viewcode-back" href="../../../python/casm.vasp.WavecarError.html#casm.vasp.WavecarError.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Check if pattern found in line &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="WavecarError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.WavecarError.html#casm.vasp.WavecarError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Delete WAVECAR and retry &quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;WAVECAR&quot;</span><span class="p">)):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;WAECAR&quot;</span><span class="p">))</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;WAVECAR&quot;</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">pass</span></div></div>
+            <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="NbandsError"><a class="viewcode-back" href="../../../python/casm.vasp.NbandsError.html#casm.vasp.NbandsError">[docs]</a><span class="k">class</span> <span class="nc">NbandsError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NbandsError"><a class="viewcode-back" href="../../../reference/casm.vasp.NbandsError.html#casm.vasp.NbandsError">[docs]</a><span class="k">class</span> <span class="nc">NbandsError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Your highest band is occupied at some k-points! Unless you are&quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;Your highest band is occupied at some k-points! Unless you are&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span>
 
-<div class="viewcode-block" id="NbandsError.error"><a class="viewcode-back" href="../../../python/casm.vasp.NbandsError.html#casm.vasp.NbandsError.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Check if pattern found in line &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="NbandsError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.NbandsError.html#casm.vasp.NbandsError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Try to fix the error by increasing the number of bands&quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span><span class="s1">&#39;OUTCAR&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="s1">&#39;OUTCAR&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">err_outcar</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
         <span class="n">nbands_line</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">err_outcar</span><span class="p">:</span>
             <span class="k">if</span> <span class="s2">&quot;NBANDS&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                 <span class="n">nbands_line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nbands_line</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nbands_line</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SERIOUS WARNING :  &quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;        Couldn&#39;t find any reference to nbands in the OUTCAR. Continuing without fixing&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;        Couldn&#39;t find any reference to nbands in the OUTCAR. Continuing without fixing&quot;</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">nbands_line</span><span class="p">:</span>
                 <span class="k">if</span> <span class="s1">&#39;k-points&#39;</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set NBANDS = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set NBANDS = &quot;</span> <span class="o">+</span>
+                          <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))))</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-                    <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;NBANDS&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
-                    <span class="k">break</span></div></div>
+                    <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">(</span>
+                        <span class="p">{</span><span class="s2">&quot;NBANDS&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.1</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))},</span>
+                        <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+                    <span class="k">break</span></div>
 
-<div class="viewcode-block" id="NoConvergeError"><a class="viewcode-back" href="../../../python/casm.vasp.NoConvergeError.html#casm.vasp.NoConvergeError">[docs]</a><span class="k">class</span> <span class="nc">NoConvergeError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NoConvergeError"><a class="viewcode-back" href="../../../reference/casm.vasp.NoConvergeError.html#casm.vasp.NoConvergeError">[docs]</a><span class="k">class</span> <span class="nc">NoConvergeError</span><span class="p">(</span><span class="n">_RunError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An ionic step was performed without a fully-converged density&quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[A-Za-z]+:\s+</span><span class="si">%i</span><span class="s2">\s+&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;VASP ran out of electronic steps before convergence was achieved!&quot;</span>
 
-<div class="viewcode-block" id="NoConvergeError.error"><a class="viewcode-back" href="../../../python/casm.vasp.NoConvergeError.html#casm.vasp.NoConvergeError.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Check if pattern found in line &quot;&quot;&quot;</span>
         <span class="c1"># I don&#39;t like having to open the INCAR every time...</span>
         <span class="n">nelm</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;NELM&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">jobdir</span><span class="p">)</span>
@@ -633,38 +791,48 @@
             <span class="c1"># This may not be a SCF line at all, so pass to-float errors</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># Determining if the SCF came *close* to converging</span>
-                <span class="k">if</span> <span class="n">ediff</span><span class="o">*</span><span class="mf">10.</span> <span class="o">&lt;=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">ediff</span> <span class="o">*</span> <span class="mf">10.</span> <span class="o">&lt;=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">]):</span>
                     <span class="k">return</span> <span class="kc">True</span>
                 <span class="k">return</span> <span class="kc">False</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">False</span></div>
+                <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="NoConvergeError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.NoConvergeError.html#casm.vasp.NoConvergeError.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Try to fix the error by changing the algo&quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
         <span class="c1"># Replace the potentially bad POSCAR</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_jobdir</span><span class="p">,</span> <span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
         <span class="c1"># First, see if a change of ALGO helps</span>
         <span class="n">curr_algo</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_incar_tag</span><span class="p">(</span><span class="s2">&quot;ALGO&quot;</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">curr_algo</span> <span class="o">==</span> <span class="s1">&#39;FAST&#39;</span><span class="p">:</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ALGO&quot;</span><span class="p">:</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span>
+                <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Normal&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span> <span class="kc">None</span>
+            <span class="p">},</span>
+                             <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set ALGO = Normal&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">curr_algo</span> <span class="o">==</span> <span class="s1">&#39;NORMAL&#39;</span><span class="p">:</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ALGO&quot;</span><span class="p">:</span><span class="s2">&quot;All&quot;</span><span class="p">,</span> <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;All&quot;</span><span class="p">,</span> <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set ALGO = All&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">curr_algo</span> <span class="o">==</span> <span class="s1">&#39;ALL&#39;</span><span class="p">:</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;ALGO&quot;</span><span class="p">:</span><span class="s2">&quot;Damped&quot;</span><span class="p">,</span> <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
-            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;TIME&quot;</span><span class="p">:</span><span class="s2">&quot;0.4&quot;</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set ALGO = Damped, TIME = 0.4&quot;</span><span class="p">)</span></div></div>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span>
+                <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Damped&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;IALGO&quot;</span><span class="p">:</span> <span class="kc">None</span>
+            <span class="p">},</span>
+                             <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;TIME&quot;</span><span class="p">:</span> <span class="s2">&quot;0.4&quot;</span><span class="p">},</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">new_jobdir</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Set ALGO = Damped, TIME = 0.4&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FreezeError"><a class="viewcode-back" href="../../../python/casm.vasp.FreezeError.html#casm.vasp.FreezeError">[docs]</a><span class="k">class</span> <span class="nc">FreezeError</span><span class="p">(</span><span class="n">_FreezeError</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FreezeError"><a class="viewcode-back" href="../../../reference/casm.vasp.FreezeError.html#casm.vasp.FreezeError">[docs]</a><span class="k">class</span> <span class="nc">FreezeError</span><span class="p">(</span><span class="n">_FreezeError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;VASP appears frozen&quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;VASP appears to have frozen&quot;</span>
 
-<div class="viewcode-block" id="FreezeError.error"><a class="viewcode-back" href="../../../python/casm.vasp.FreezeError.html#casm.vasp.FreezeError.error">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1">#pylint: disable=unused-argument</span>
         <span class="sd">&quot;&quot;&quot; Check if VASP appears frozen</span>
 
@@ -686,7 +854,8 @@
                 <span class="n">most_recent</span> <span class="o">=</span> <span class="n">t</span>
                 <span class="n">most_recent_file</span> <span class="o">=</span> <span class="n">f</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most recent file output (&quot;</span> <span class="o">+</span> <span class="n">most_recent_file</span> <span class="o">+</span> <span class="s2">&quot;):&quot;</span><span class="p">,</span> <span class="n">most_recent</span><span class="p">,</span> <span class="s2">&quot; seconds ago.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most recent file output (&quot;</span> <span class="o">+</span> <span class="n">most_recent_file</span> <span class="o">+</span> <span class="s2">&quot;):&quot;</span><span class="p">,</span>
+              <span class="n">most_recent</span><span class="p">,</span> <span class="s2">&quot; seconds ago.&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -696,22 +865,23 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;outcar.complete:&quot;</span><span class="p">,</span> <span class="n">outcar</span><span class="o">.</span><span class="n">complete</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">elif</span> <span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">most_recent</span> <span class="o">&gt;</span> <span class="mf">5.0</span><span class="o">*</span><span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">most_recent</span> <span class="o">&gt;</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slowest_loop:&quot;</span><span class="p">,</span> <span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5.0*slowest_loop:&quot;</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">*</span><span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5.0*slowest_loop:&quot;</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">outcar</span><span class="o">.</span><span class="n">slowest_loop</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;most_recent:&quot;</span><span class="p">,</span> <span class="n">most_recent</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="FreezeError.fix"><a class="viewcode-back" href="../../../python/casm.vasp.FreezeError.html#casm.vasp.FreezeError.fix">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Fix by killing the job and resubmitting.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">continue_job</span><span class="p">(</span><span class="n">err_jobdir</span><span class="p">,</span> <span class="n">new_jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Kill job and try to continue&quot;</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Kill job and try to continue&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="error_check"><a class="viewcode-back" href="../../../python/casm.vasp.error_check.html#casm.vasp.error_check">[docs]</a><span class="k">def</span> <span class="nf">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdoutfile</span><span class="p">,</span> <span class="n">err_types</span><span class="p">):</span>
+
+<div class="viewcode-block" id="error_check"><a class="viewcode-back" href="../../../reference/casm.vasp.error_check.html#casm.vasp.error_check">[docs]</a><span class="k">def</span> <span class="nf">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdoutfile</span><span class="p">,</span> <span class="n">err_types</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Check vasp stdout for errors &quot;&quot;&quot;</span>
     <span class="n">err</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">err_objs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -723,7 +893,7 @@
         <span class="c1"># err_objs = {&#39;IbzkptError&#39; : IbzkptError(), &#39;SubSpaceMatrixError&#39; : SubSpaceMatrixError(), &#39;NbandsError&#39; : NbandsError()}</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">err_types</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">s</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">err_objs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s1">&#39;Invalid err_type: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">s</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s1">&#39;Invalid err_type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span>
         <span class="n">possible</span> <span class="o">=</span> <span class="p">[</span><span class="n">err_objs</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">err_types</span><span class="p">]</span>
 
     <span class="c1"># Error to check line by line, only look for first of each type</span>
@@ -732,13 +902,13 @@
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">possible</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">jobdir</span><span class="p">):</span>
-                    <span class="n">err</span><span class="p">[</span> <span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+                    <span class="n">err</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
 
     <span class="c1"># Error to check for once</span>
     <span class="n">possible</span> <span class="o">=</span> <span class="p">[</span><span class="n">i_err</span><span class="p">()</span> <span class="k">for</span> <span class="n">i_err</span> <span class="ow">in</span> <span class="n">_FreezeError</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()]</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">possible</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">jobdir</span><span class="p">):</span>
-            <span class="n">err</span><span class="p">[</span> <span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="n">err</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
 
     <span class="n">sout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -746,7 +916,56 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">err</span></div>
 
-<div class="viewcode-block" id="crash_check"><a class="viewcode-back" href="../../../python/casm.vasp.crash_check.html#casm.vasp.crash_check">[docs]</a><span class="k">def</span> <span class="nf">crash_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdoutfile</span><span class="p">,</span> <span class="n">crash_types</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">error_check_neb</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdoutfile</span><span class="p">,</span> <span class="n">err_types</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Check vasp stdout for errors in a neb calculation&quot;&quot;&quot;</span>
+    <span class="n">image_folders</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span>
+                                       <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">err_objs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i_err</span> <span class="ow">in</span> <span class="n">_RunError</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+        <span class="n">err_objs</span><span class="p">[</span><span class="n">i_err</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">i_err</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">err_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">possible</span> <span class="o">=</span> <span class="p">[</span><span class="n">SubSpaceMatrixError</span><span class="p">()]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># err_objs = {&#39;IbzkptError&#39; : IbzkptError(), &#39;SubSpaceMatrixError&#39; : SubSpaceMatrixError(), &#39;NbandsError&#39; : NbandsError()}</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">err_types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">err_objs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">VaspError</span><span class="p">(</span><span class="s1">&#39;Invalid err_type: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">possible</span> <span class="o">=</span> <span class="p">[</span><span class="n">err_objs</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">err_types</span><span class="p">]</span>
+
+    <span class="c1"># Error to check line by line, only look for first of each type</span>
+    <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">stdoutfile</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sout</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">possible</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">jobdir</span><span class="p">):</span>
+                    <span class="n">err</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+
+    <span class="c1"># Error to check for once</span>
+    <span class="n">possible</span> <span class="o">=</span> <span class="p">[</span><span class="n">i_err</span><span class="p">()</span> <span class="k">for</span> <span class="n">i_err</span> <span class="ow">in</span> <span class="n">_FreezeError</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">possible</span><span class="p">:</span>
+        <span class="n">freeze_error</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">image_folders</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jobdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">img</span><span class="p">)):</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">freeze_error</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">freeze_error</span><span class="p">:</span>
+            <span class="n">err</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+
+    <span class="n">sout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">err</span>
+
+
+<div class="viewcode-block" id="crash_check"><a class="viewcode-back" href="../../../reference/casm.vasp.crash_check.html#casm.vasp.crash_check">[docs]</a><span class="k">def</span> <span class="nf">crash_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdoutfile</span><span class="p">,</span> <span class="n">crash_types</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Check vasp stdout for evidence of a crash &quot;&quot;&quot;</span>
     <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">possible</span> <span class="o">=</span> <span class="p">[</span><span class="n">i_err</span><span class="p">()</span> <span class="k">for</span> <span class="n">i_err</span> <span class="ow">in</span> <span class="n">_CrashError</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()]</span>
@@ -765,26 +984,200 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">err</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">err</span><span class="p">}</span></div>
 
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;std.out&quot;</span><span class="p">,</span>
+        <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;std.err&quot;</span><span class="p">,</span>
+        <span class="n">npar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ncore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ncpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">kpar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">poll_check_time</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+        <span class="n">err_check_time</span><span class="o">=</span><span class="mf">60.0</span><span class="p">,</span>
+        <span class="n">err_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">is_neb</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Run vasp using subprocess.</span>
+
+<span class="sd">        The &#39;command&#39; is executed in the directory &#39;jobdir&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            jobdir:     directory to run vasp.  If jobdir is None, the current directory is used.</span>
+<span class="sd">            stdout:     filename to write to.  If stdout is None, &quot;std.out&quot; is used.</span>
+<span class="sd">            stderr:     filename to write to.  If stderr is None, &quot;std.err&quot; is used.</span>
+<span class="sd">            npar:       (int or None) VASP INCAR NPAR setting. If npar is None, then NPAR is removed from INCAR</span>
+<span class="sd">            kpar:       (int or None) VASP INCAR KPAR setting. If kpar is None, then KPAR is removed from INCAR</span>
+<span class="sd">            ncore:      (int or None) VASP INCAR NCORE setting. If not npar is None or ncore is None, then NCORE is removed from INCAR</span>
+<span class="sd">            command:    (str or None) vasp execution command</span>
+<span class="sd">                        If command != None: then &#39;command&#39; is run in a subprocess</span>
+<span class="sd">                        Else, if ncpus == 1, then command = &quot;vasp&quot;</span>
+<span class="sd">                        Else, command = &quot;mpirun -np {NCPUS} vasp&quot;</span>
+<span class="sd">            ncpus:      (int) if &#39;{NCPUS}&#39; is in &#39;command&#39; string, then &#39;ncpus&#39; is substituted in the command.</span>
+<span class="sd">                        if ncpus==None, $PBS_NP is used if it exists, else 1</span>
+<span class="sd">            poll_check_time: how frequently to check if the vasp job is completed</span>
+<span class="sd">            err_check_time: how frequently to parse vasp output to check for errors</span>
+<span class="sd">            err_types:  List of error types to check for. Supported errors: &#39;IbzkptError&#39;, &#39;SubSpaceMatrixError&#39;, &#39;NbandsError&#39;. Default: None, in which case only SubSpaceMatrixErrors are checked.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Begin vasp run:&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+    <span class="n">currdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ncpus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;PBS_NP&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PBS_NP&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s2">&quot;SLURM_NTASKS&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SLURM_NTASKS&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ncpus</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;vasp&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;mpirun -np </span><span class="si">{NCPUS}</span><span class="s2"> vasp&quot;</span>
+
+    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;\{NCPUS\}&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">NCPUS</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ncpus</span><span class="p">))</span>
+
+    <span class="c1">### Expand remaining environment variables</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">npar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ncore</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">npar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ncore</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;NPAR&quot;</span><span class="p">:</span> <span class="n">npar</span><span class="p">,</span> <span class="s2">&quot;NCORE&quot;</span><span class="p">:</span> <span class="n">ncore</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">kpar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;KPAR&quot;</span><span class="p">:</span> <span class="n">kpar</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  jobdir:&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  exec:&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">is_neb</span><span class="p">:</span>
+        <span class="c1"># checkdir = os.path.join(jobdir, &quot;01&quot;)</span>
+        <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># checkdir = jobdir</span>
+        <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">serr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stderr</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">sout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">serr</span><span class="p">)</span>
+
+    <span class="c1"># wait for process to end, and periodically check for errors</span>
+    <span class="n">poll</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+    <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">stopcar_time</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">poll</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_check_time</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_check</span> <span class="o">&gt;</span> <span class="n">err_check_time</span><span class="p">:</span>
+            <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">is_neb</span><span class="p">:</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="n">error_check_neb</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span>
+                                      <span class="n">err_types</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="n">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span>
+                                  <span class="n">err_types</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># FreezeErrors are fatal and usually not helped with STOPCAR</span>
+                <span class="k">if</span> <span class="s2">&quot;FreezeError&quot;</span> <span class="ow">in</span> <span class="n">err</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  VASP is frozen, killing job&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                    <span class="c1"># Sometimes p.kill doesn&#39;t work if the process is on multiple nodes</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+                    <span class="n">p</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+                    <span class="c1"># If the job is re-invoked (e.g. via mpirun or srun) too quickly</span>
+                    <span class="c1">#   after the previous job ended, infinitiband clusters can have</span>
+                    <span class="c1">#   some issues with resource allocation. A 30s sleep solves this.</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+                <span class="c1"># Other errors can be killed with STOPCAR, which is safer</span>
+                <span class="k">elif</span> <span class="n">stopcar_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Found errors:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Killing job with STOPCAR&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                    <span class="n">io</span><span class="o">.</span><span class="n">write_stopcar</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">jobdir</span><span class="p">)</span>
+                    <span class="n">stopcar_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+                <span class="c1"># If the STOPCAR exists, wait 5 min before manually killing the job</span>
+                <span class="k">elif</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stopcar_time</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  VASP is non-responsive, killing job&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+                    <span class="n">p</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+                    <span class="c1"># If the job is re-invoked (e.g. via mpirun or srun) too quickly</span>
+                    <span class="c1">#   after the previous job ended, infinitiband clusters can have</span>
+                    <span class="c1">#   some issues with resource allocation. A 30s sleep solves this.</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+        <span class="n">poll</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+
+    <span class="c1"># close output files</span>
+    <span class="n">sout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">serr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currdir</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run complete&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="c1"># check finished job for errors</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Crash-type errors take priority over any other error that may show up</span>
+        <span class="k">if</span> <span class="n">is_neb</span><span class="p">:</span>  <span class="c1">#if its neb it checks for crashes in the first image</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">crash_check</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="s2">&quot;01&quot;</span><span class="p">),</span>
+                              <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">crash_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_neb</span><span class="p">:</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="n">error_check_neb</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span>
+                                      <span class="n">err_types</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="n">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span>
+                                  <span class="n">err_types</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Found errors:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">err</span>
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, CASM Developers.
+        &#169; Copyright 2018, CASM Developers.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -793,33 +1186,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'0.3.dev',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

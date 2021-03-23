@@ -1,49 +1,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>casm.project.selection &mdash; CASM 0.3.dev documentation</title>
-  
-
-  
-  
-  
+  <title>casm.project.selection &mdash; CASM 1.0.0 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +62,7 @@
             
             
               <div class="version">
-                0.3
+                1.0
               </div>
             
           
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +89,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">CASM Python packages documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,11 +131,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -148,8 +157,9 @@
            <div itemprop="articleBody">
             
   <h1>Source code for casm.project.selection</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># conda&#39;s current version of pandas raises these warnings, but they are safe</span>
 <span class="c1"># see: https://stackoverflow.com/questions/40845304</span>
@@ -158,7 +168,7 @@
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;numpy.ufunc size changed&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
@@ -167,11 +177,12 @@
 <span class="kn">import</span> <span class="nn">pandas</span>
 <span class="kn">import</span> <span class="nn">six</span>
 
-<span class="kn">from</span> <span class="nn">casm.project.project</span> <span class="k">import</span> <span class="n">Project</span>
-<span class="kn">from</span> <span class="nn">casm.project.query</span> <span class="k">import</span> <span class="n">query</span>
-<span class="kn">from</span> <span class="nn">casm.misc</span> <span class="k">import</span> <span class="n">compat</span>
+<span class="kn">from</span> <span class="nn">casm.project.project</span> <span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span> <span class="nn">casm.project.query</span> <span class="kn">import</span> <span class="n">query</span>
+<span class="kn">from</span> <span class="nn">casm.misc</span> <span class="kn">import</span> <span class="n">compat</span>
 
-<div class="viewcode-block" id="Selection"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection">[docs]</a><span class="k">class</span> <span class="nc">Selection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Selection"><a class="viewcode-back" href="../../../reference/casm.project.Selection.html#casm.project.Selection">[docs]</a><span class="k">class</span> <span class="nc">Selection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Selection object contains information about a CASM project</span>
 
@@ -184,16 +195,19 @@
 <span class="sd">      path: string, optional, default=&quot;MASTER&quot;</span>
 <span class="sd">        path to selection file, or &quot;MASTER&quot; (Default=&quot;MASTER&quot;)</span>
 
+<span class="sd">      type: string, optional, default=&quot;config&quot;</span>
+<span class="sd">        type of selected object: &quot;config&quot; or &quot;scel&quot;</span>
+
 <span class="sd">      all: bool, optional, default=True</span>
 <span class="sd">        if True, self.data will include all configurations, whether selected or</span>
 <span class="sd">        not. If False, only selected configurations will be included.</span>
 
 <span class="sd">      data: pandas.DataFrame</span>
 <span class="sd">        A pandas.DataFrame describing the selected configurations. Has at least</span>
-<span class="sd">        &#39;configname&#39; and &#39;selected&#39; (as bool) columns.</span>
+<span class="sd">        &#39;configname&#39; and &#39;selected&#39; (automatically converted to bool) columns.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Selection.__init__"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;MASTER&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Selection.__init__"><a class="viewcode-back" href="../../../reference/casm.project.Selection.html#casm.project.Selection.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;MASTER&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a CASM Project representation.</span>
 
@@ -206,6 +220,9 @@
 <span class="sd">          path: string, optional, default=&quot;MASTER&quot;</span>
 <span class="sd">            path to selection file, or &quot;MASTER&quot; (Default=&quot;MASTER&quot;)</span>
 
+<span class="sd">          type: string, optional, default=&quot;config&quot;</span>
+<span class="sd">            type of selected object: &quot;config&quot; or &quot;scel&quot;</span>
+
 <span class="sd">          all: bool, optional, default=True</span>
 <span class="sd">            if True, self.data will include all configurations, whether selected or</span>
 <span class="sd">            not. If False, only selected configurations will be included.</span>
@@ -213,22 +230,24 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">proj</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="n">proj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
+            <span class="n">proj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">Project</span><span class="p">):</span>
-          <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error constructing Selection: proj argument is not a CASM project&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Error constructing Selection: proj argument is not a CASM project&quot;</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">all</span> <span class="o">=</span> <span class="nb">all</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># reserved for use by casm.plotting</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">src</span> <span class="o">=</span> <span class="kc">None</span></div>
-
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -238,211 +257,259 @@
 <span class="sd">        If the data is modified, &#39;save&#39; must be called for CASM to use the modified selection.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;MASTER&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;CALCULATED&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;configname&#39;</span><span class="p">,</span> <span class="s1">&#39;selected&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">)</span>
-          <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_json</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">compat</span><span class="o">.</span><span class="n">pandas_rmode</span><span class="p">())</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">compat</span><span class="o">.</span><span class="n">peek</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span><span class="p">:</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">compat</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;MASTER&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;CALCULATED&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;selected&#39;</span><span class="p">],</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                                   <span class="n">verbatim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="nb">all</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_json</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">compat</span><span class="o">.</span><span class="n">pandas_rmode</span><span class="p">())</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">compat</span><span class="o">.</span><span class="n">peek</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span><span class="p">:</span>
+                        <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span>
+                                                 <span class="n">sep</span><span class="o">=</span><span class="n">compat</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">),</span>
+                                                 <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
 
-          <span class="bp">self</span><span class="o">.</span><span class="n">_clean_data</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean_data</span><span class="p">()</span>
 
-          <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s1">&#39;selected&#39;</span><span class="p">]</span><span class="o">==</span><span class="kc">True</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s1">&#39;selected&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 
+    <span class="nd">@data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="nb">input</span>
 
-<div class="viewcode-block" id="Selection.save"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Save the current selection. Also allows completely replacing the &#39;data&#39;</span>
-<span class="sd">        describing the selected configurations.</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1">#make it generalized ##todo</span>
+        <span class="sd">&quot;&quot;&quot;Save the current selection.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">          data: None (default), or pandas.DataFrame describing the Selection with</span>
-<span class="sd">            &#39;configname&#39; and &#39;selected&#39; columns. If path==&quot;MASTER&quot;, Configurations</span>
-<span class="sd">            not included in &#39;data&#39; will be set to not selected.</span>
-<span class="sd">          force: Boolean, force overwrite existing files</span>
+<span class="sd">        This method also allows completely replacing the &#39;data&#39; describing the selected configurations.</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        data: pandas.DataFrame</span>
+<span class="sd">            If provided, it replaces `self.data` before writing. It must have `&quot;name&quot;` and `&quot;selected&quot;` columns to be opened later.</span>
+
+<span class="sd">        force: bool</span>
+<span class="sd">            Force overwrite existing files</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        Exception</span>
+<span class="sd">            - If attempting to overwrite an existing file and `force==False`</span>
+<span class="sd">            - If `self.path in [&quot;ALL&quot;, &quot;CALCULATED&quot;]`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;MASTER&quot;</span><span class="p">:</span>
 
-          <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_clean_data</span><span class="p">()</span>
-
-          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span>
-
-          <span class="n">clist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">config_list</span><span class="p">()</span>
-          <span class="n">backup</span> <span class="o">=</span> <span class="n">clist</span> <span class="o">+</span> <span class="s2">&quot;.tmp&quot;</span>
-          <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">backup</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;File: &quot;</span> <span class="o">+</span> <span class="n">backup</span> <span class="o">+</span> <span class="s2">&quot; already exists&quot;</span><span class="p">)</span>
-
-          <span class="c1"># read</span>
-          <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">clist</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-              <span class="n">j</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-
-          <span class="k">for</span> <span class="n">sk</span><span class="p">,</span> <span class="n">sv</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s2">&quot;supercells&quot;</span><span class="p">]):</span>
-            <span class="k">for</span> <span class="n">ck</span><span class="p">,</span> <span class="n">cv</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">sv</span><span class="p">):</span>
-              <span class="n">sv</span><span class="p">[</span><span class="n">ck</span><span class="p">][</span><span class="s2">&quot;selected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-
-          <span class="c1"># set selection</span>
-          <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-            <span class="n">scelname</span><span class="p">,</span> <span class="n">configid</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;configname&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-            <span class="n">j</span><span class="p">[</span><span class="s2">&quot;supercells&quot;</span><span class="p">][</span><span class="n">scelname</span><span class="p">][</span><span class="n">configid</span><span class="p">][</span><span class="s2">&quot;selected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;selected&quot;</span><span class="p">]</span>
-
-          <span class="c1"># write</span>
-          <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-              <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-          <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="n">clist</span><span class="p">)</span>
-
-          <span class="c1"># refresh proj config list</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">read_configs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">master_selection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;MASTER&quot;</span>
 
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;CALCULATED&quot;</span><span class="p">]:</span>
-          <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Cannot save the &#39;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;&#39; Selection&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Cannot save the &#39;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;&#39; Selection&quot;</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
 
-          <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_clean_data</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_clean_data</span><span class="p">()</span>
 
-          <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;File: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot; already exists&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;The first column in Selection.data must be &#39;name&#39;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;selected&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;The second column in Selection.data must be &#39;selected&#39;&quot;</span><span class="p">)</span>
 
-          <span class="n">backup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;.tmp&quot;</span>
-          <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">backup</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;File: &quot;</span> <span class="o">+</span> <span class="n">backup</span> <span class="o">+</span> <span class="s2">&quot; already exists&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;File: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot; already exists&quot;</span><span class="p">)</span>
 
-          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_json</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;selected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;selected&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="n">compat</span><span class="o">.</span><span class="n">pandas_wmode</span><span class="p">())</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# &#39;</span><span class="p">)</span>  <span class="c1"># will make this optional in a future version</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">compat</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-          <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
+            <span class="n">backup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;.tmp&quot;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">backup</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;File: &quot;</span> <span class="o">+</span> <span class="n">backup</span> <span class="o">+</span> <span class="s2">&quot; already exists&quot;</span><span class="p">)</span>
 
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_json</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="n">compat</span><span class="o">.</span><span class="n">pandas_wmode</span><span class="p">())</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# &#39;</span><span class="p">)</span>  <span class="c1"># TODO: make this optional</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">compat</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">backup</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Selection.saveas"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection.saveas">[docs]</a>    <span class="k">def</span> <span class="nf">saveas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">saveas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;MASTER&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new Selection from this one, save and return it</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">          path: path to selection file (Default=&quot;MASTER&quot;)</span>
-<span class="sd">          force: Boolean, force overwrite existing files</span>
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        path: str</span>
+<span class="sd">            Path to a selection file or standard selection name.</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">          sel: the new Selection created from this one</span>
+<span class="sd">        force: bool</span>
+<span class="sd">            Force overwrite existing files</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sel: Selection</span>
+<span class="sd">            The new Selection created from this one</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">sel</span> <span class="o">=</span> <span class="n">Selection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">)</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="n">Selection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">)</span>
         <span class="n">sel</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">sel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sel</span></div>
-
+        <span class="k">return</span> <span class="n">sel</span>
 
     <span class="k">def</span> <span class="nf">_is_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.json&quot;</span>
 
+    <span class="k">def</span> <span class="nf">astype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columnname</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a column to another type</span>
+
+<span class="sd">        Example: Convert column of int (0 / 1) to bool:</span>
+
+<span class="sd">            selection.astype(&#39;selected&#39;, bool)</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        columns: List(str)</span>
+<span class="sd">            Data requested, will be added as columns in `self.data`. This corresponds to the `-k` option of `casm query`. A list of options can be obtained from `casm query --help properties`.</span>
+
+<span class="sd">        force: bool</span>
+<span class="sd">            If `force==False`, input `columns` that already exist in `self.data.columns` will be ignored and those columns will not be updated. If `force==True`, those columns will be overwritten with new data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span>
+                       <span class="n">columnname</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span>
+                                                    <span class="n">columnname</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_clean_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;selected&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;selected&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;selected&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Query requested columns and store them in &#39;data&#39;.</span>
 
-<div class="viewcode-block" id="Selection.query"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Query requested columns and store them in &#39;data&#39;. Will not overwrite</span>
-<span class="sd">        columns that already exist, unless &#39;force&#39;==True.</span>
+<span class="sd">        Will not overwrite columns that already exist, unless &#39;force&#39;==True. Will query data for all configurations, whether selected or not, if `self.all == True`.</span>
 
-<span class="sd">        Will query data for all configurations, whether selected or not, if</span>
-<span class="sd">        self.all == True.</span>
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        columns: List(str)</span>
+<span class="sd">            Data requested, will be added as columns in `self.data`. This corresponds to the `-k` option of `casm query`. A list of options can be obtained from `casm query --help properties`.</span>
+
+<span class="sd">        force: bool</span>
+<span class="sd">            If `force==False`, input `columns` that already exist in `self.data.columns` will be ignored and those columns will not be updated. If `force==True`, those columns will be overwritten with new data.</span>
+
+<span class="sd">        verbose: bool</span>
+<span class="sd">            How much to print to stdout.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-          <span class="n">_col</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+            <span class="n">_col</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-          <span class="n">_col</span> <span class="o">=</span> <span class="n">columns</span>
+            <span class="n">_col</span> <span class="o">=</span> <span class="n">columns</span>
 
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Query requested:&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
-          <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Use existing:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Overwrite existing:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
-          <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_col</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# No query necessary&quot;</span><span class="p">)</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Querying:&quot;</span><span class="p">,</span> <span class="n">_col</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Query requested:&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Use existing:&quot;</span><span class="p">,</span>
+                      <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Overwrite existing:&quot;</span><span class="p">,</span>
+                      <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_col</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# No query necessary&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Querying:&quot;</span><span class="p">,</span> <span class="n">_col</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_col</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-          <span class="k">return</span>
+            <span class="k">return</span>
 
-        <span class="n">df</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">,</span> <span class="n">_col</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">,</span>
+                   <span class="n">_col</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                   <span class="n">verbatim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="nb">all</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">all</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#   DONE</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#   DONE</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;querying different numbers of records: </span><span class="si">{0}</span><span class="s2">, </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">msg</span>
 
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">values</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
+    <span class="k">def</span> <span class="nf">write_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write POS file for selected configurations</span>
 
-<div class="viewcode-block" id="Selection.write_pos"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection.write_pos">[docs]</a>    <span class="k">def</span> <span class="nf">write_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Write POS file for configurations</span>
+<span class="sd">        Equivalent to `casm query -c &lt;selection&gt; --write-pos`. This writes a POS file for selected configurations at `&lt;root&gt;/training_data/&lt;configname&gt;/POS`.</span>
 
 <span class="sd">        Arguments</span>
 <span class="sd">        ---------</span>
 
-<span class="sd">          all: bool, optional, default=False</span>
-<span class="sd">            if True, will write POS file for all configurations in the selection</span>
-<span class="sd">            whether selected or not. If False, only write POS file for selected</span>
-<span class="sd">            configurations.</span>
+<span class="sd">        all: bool, optional, default=False</span>
+<span class="sd">            If True, will write POS file for all configurations in the selection whether selected or not. If False, only write POS file for selected configurations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;query -c &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot; --write-pos&quot;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="s2">&quot;query -c &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot; --write-pos&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add selection data, either by query or from an existing DataFrame</span>
 
-<div class="viewcode-block" id="Selection.add_data"><a class="viewcode-back" href="../../../python/casm.project.Selection.html#casm.project.Selection.add_data">[docs]</a>    <span class="k">def</span> <span class="nf">add_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Equivalent to:</span>
-<span class="sd">        if name not in sel.data.columns or force == True:</span>
-<span class="sd">          if data is None:</span>
-<span class="sd">            sel.query([name], force)</span>
-<span class="sd">          else:</span>
-<span class="sd">            sel.data.loc[:,name] = data</span>
+
+<span class="sd">            if name not in sel.data.columns or force == True:</span>
+<span class="sd">                if data is None:</span>
+<span class="sd">                    sel.query([name], force)</span>
+<span class="sd">                else:</span>
+<span class="sd">                    sel.data.loc[:,name] = data</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        columns: List(str)</span>
+<span class="sd">            The data requested. This corresponds to the `-k` option of `casm query`, or a column in `data`. A list of options can be obtained from `casm query --help properties`.</span>
+
+<span class="sd">        data: pandas.DataFrame</span>
+<span class="sd">            May be provided as a data source as an alternative to `casm query`.</span>
+
+<span class="sd">        force: bool</span>
+<span class="sd">            If True, overwrite existing data in `self.data`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-          <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">([</span><span class="n">name</span><span class="p">],</span> <span class="n">force</span><span class="p">)</span>
-          <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span></div></div>
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">([</span><span class="n">name</span><span class="p">],</span> <span class="n">force</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span></div>
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, CASM Developers.
+        &#169; Copyright 2018, CASM Developers.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -451,33 +518,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'0.3.dev',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

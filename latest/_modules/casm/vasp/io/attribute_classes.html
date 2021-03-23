@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>casm.vasp.io.attribute_classes &mdash; CASM 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> CASM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About CASM</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CASM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>casm.vasp.io.attribute_classes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for casm.vasp.io.attribute_classes</h1><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">DofClassError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exception handling&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Writes out the error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span>
+
+
+<div class="viewcode-block" id="CmagspinAttr"><a class="viewcode-back" href="../../../../reference/casm.vasp.io.CmagspinAttr.html#casm.vasp.io.CmagspinAttr">[docs]</a><span class="k">class</span> <span class="nc">CmagspinAttr</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class containing information specific to Cmagspin dof.</span>
+<span class="sd">       This object will be constructed from casm.project.attribute_info.AttributeInfo class</span>
+<span class="sd">       which digests its information.</span>
+
+<span class="sd">       self.atom_props: List[Dict] - Contains the list of atom properites (with atom name and it&#39;s value)</span>
+<span class="sd">       Look at the example below for detailed description of object properties</span>
+
+<span class="sd">       Consider the example of NaFeO2 with Fe having a +5 magnetic moment and rest all being 0</span>
+<span class="sd">       self.atom_props: [{&quot;site_index&quot;:0, &quot;atom&quot;: &quot;Na&quot;, &quot;value&quot;:0},{&quot;site_index&quot;:1,&quot;atom&quot;:&quot;Fe&quot;, &quot;value&quot;:5},{&quot;site_index&quot;:2, &quot;atom&quot;:&quot;O&quot;,&quot;value&quot;:0},{&quot;site_index&quot;:3, &quot;atom&quot;:&quot;O&quot;,&quot;value&quot;:0}]&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CmagspinAttr.__init__"><a class="viewcode-back" href="../../../../reference/casm.vasp.io.CmagspinAttr.html#casm.vasp.io.CmagspinAttr.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dof_info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructs the CmagspinAttr object from AttributeInfo object</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dof_info : casm.project.attribute_info.AttributeInfo</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atom_props</span> <span class="o">=</span> <span class="p">[{</span>
+                <span class="s2">&quot;site_index&quot;</span><span class="p">:</span>
+                <span class="n">x</span><span class="p">,</span>
+                <span class="s2">&quot;atom&quot;</span><span class="p">:</span>
+                <span class="n">dof_info</span><span class="o">.</span><span class="n">atom_type</span><span class="p">[</span><span class="n">x</span><span class="p">],</span>
+                <span class="s2">&quot;value&quot;</span><span class="p">:</span>
+                <span class="n">dof_info</span><span class="o">.</span><span class="n">atom_dofs</span><span class="p">[</span><span class="s2">&quot;Cmagspin&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+            <span class="p">}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dof_info</span><span class="o">.</span><span class="n">atom_type</span><span class="p">))]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DofClassError</span><span class="p">(</span>
+                <span class="s2">&quot;Could not construct CmagspinAttr class!! Check if you&#39;re dealing with Cmagspin dof calculations&quot;</span>
+            <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">vasp_input_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a dictionary of VASP input tags specific to collinear magnetic spin calculations.</span>
+<span class="sd">        The collinear magnetic spin specific tags are as follows:</span>
+<span class="sd">            </span>
+<span class="sd">        MAGMOM, ISPIN</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sort: bool (This should match the sort used to write POSCAR file (whether the basis atoms are sorted))</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict{&quot;vasp_input_tag&quot;: &quot;value&quot;}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#TODO: Group together atoms of same MAGMOM together</span>
+        <span class="c1">#TODO: Also add ISPIN default tag which is required if missed in INCAR.base</span>
+
+        <span class="k">if</span> <span class="n">sort</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atom_props</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;atom&quot;</span><span class="p">])</span>
+
+        <span class="n">magmom_value</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">atom_props</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_props</span><span class="p">:</span>
+            <span class="n">magmom_value</span> <span class="o">=</span> <span class="n">magmom_value</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">atom_props</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+
+        <span class="n">tags</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">tags</span><span class="p">[</span><span class="s2">&quot;MAGMOM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">magmom_value</span>
+        <span class="k">return</span> <span class="n">tags</span>
+
+    <span class="k">def</span> <span class="nf">vasp_output_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outcar</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the attribute specific vasp output dictionary which can be updated</span>
+<span class="sd">        to the whole output dictionary which will be printed as properties.calc.json.</span>
+
+<span class="sd">        For Cmagspin, this will be magnetic moment of each individual species</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        outcar : casm.vasp.io.outcar (Class containing information about magmom of individual species from OUTCAR)</span>
+<span class="sd">        sort : bool (This should be the same sort used while writing POSCAR)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict{&quot;Cmagspin&quot;:{&quot;value&quot;:[list]}}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sort</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atom_props</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;atom&quot;</span><span class="p">])</span>
+
+        <span class="n">permutation_vector_to_unsort</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">x</span><span class="p">[</span><span class="s2">&quot;site_index&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_props</span>
+        <span class="p">]</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;Cmagspin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;Cmagspin&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">mag</span><span class="p">]</span> <span class="k">for</span> <span class="n">site_index</span><span class="p">,</span> <span class="n">mag</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">permutation_vector_to_unsort</span><span class="p">,</span> <span class="n">outcar</span><span class="o">.</span><span class="n">mag</span><span class="p">))]</span>
+
+        <span class="k">return</span> <span class="n">output</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018, CASM Developers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

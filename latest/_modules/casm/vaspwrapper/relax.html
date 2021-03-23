@@ -1,49 +1,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>casm.vaspwrapper.relax &mdash; CASM 0.3.dev documentation</title>
-  
-
-  
-  
-  
+  <title>casm.vaspwrapper.relax &mdash; CASM 1.0.0 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +62,7 @@
             
             
               <div class="version">
-                0.3
+                1.0
               </div>
             
           
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +89,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">CASM Python packages documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,11 +131,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -148,8 +157,10 @@
            <div itemprop="articleBody">
             
   <h1>Source code for casm.vaspwrapper.relax</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span></span><span class="sd">&quot;&quot;&quot;Defines the relax module methods&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">math</span>
@@ -157,165 +168,91 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">casm</span>
+<span class="kn">from</span> <span class="nn">casm.vaspwrapper.vasp_calculator_base</span> <span class="kn">import</span> <span class="n">VaspCalculatorBase</span>
+<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="kn">import</span> <span class="n">Relax</span> <span class="k">as</span> <span class="n">calculator</span>
 
-<span class="k">try</span><span class="p">:</span>
-  <span class="kn">from</span> <span class="nn">prisms_jobs</span> <span class="k">import</span> <span class="n">Job</span><span class="p">,</span> <span class="n">JobDB</span><span class="p">,</span> <span class="n">error_job</span><span class="p">,</span> <span class="n">complete_job</span><span class="p">,</span> <span class="n">JobsError</span><span class="p">,</span> <span class="n">JobDBError</span><span class="p">,</span> <span class="n">EligibilityError</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-  <span class="c1"># use of the pbs module is deprecated after CASM v0.2.1</span>
-  <span class="kn">from</span> <span class="nn">pbs</span> <span class="k">import</span> <span class="n">Job</span><span class="p">,</span> <span class="n">JobDB</span><span class="p">,</span> <span class="n">error_job</span><span class="p">,</span> <span class="n">complete_job</span><span class="p">,</span> <span class="n">JobDBError</span><span class="p">,</span> <span class="n">EligibilityError</span>
-  <span class="kn">from</span> <span class="nn">pbs</span> <span class="k">import</span> <span class="n">PBSError</span> <span class="k">as</span> <span class="n">JobsError</span>
+<span class="kn">from</span> <span class="nn">casm</span> <span class="kn">import</span> <span class="n">vasp</span><span class="p">,</span> <span class="n">wrapper</span>
+<span class="kn">from</span> <span class="nn">casm.misc</span> <span class="kn">import</span> <span class="n">noindent</span>
+<span class="kn">from</span> <span class="nn">casm.project</span> <span class="kn">import</span> <span class="n">DirectoryStructure</span><span class="p">,</span> <span class="n">ProjectSettings</span>
+<span class="kn">from</span> <span class="nn">casm.vaspwrapper</span> <span class="kn">import</span> <span class="n">VaspWrapperError</span><span class="p">,</span> <span class="n">read_settings</span><span class="p">,</span> <span class="n">write_settings</span>
+<span class="kn">from</span> <span class="nn">casm.vaspwrapper.vasp_calculator_base</span> <span class="kn">import</span> <span class="n">VaspCalculatorBase</span>
 
-<span class="kn">from</span> <span class="nn">casm</span> <span class="k">import</span> <span class="n">vasp</span><span class="p">,</span> <span class="n">wrapper</span>
-<span class="kn">from</span> <span class="nn">casm.misc</span> <span class="k">import</span> <span class="n">noindent</span>
-<span class="kn">from</span> <span class="nn">casm.project</span> <span class="k">import</span> <span class="n">DirectoryStructure</span><span class="p">,</span> <span class="n">ProjectSettings</span>
-<span class="kn">from</span> <span class="nn">casm.vaspwrapper</span> <span class="k">import</span> <span class="n">VaspWrapperError</span><span class="p">,</span> <span class="n">read_settings</span><span class="p">,</span> <span class="n">write_settings</span><span class="p">,</span> \
-  <span class="n">vasp_input_file_names</span>
 
-<div class="viewcode-block" id="Relax"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax">[docs]</a><span class="k">class</span> <span class="nc">Relax</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Relax"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax">[docs]</a><span class="k">class</span> <span class="nc">Relax</span><span class="p">(</span><span class="n">VaspCalculatorBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The Relax class contains functions for setting up, executing, and parsing a VASP relaxation.</span>
-
-<span class="sd">        The relaxation creates the following directory structure:</span>
-<span class="sd">        config/</span>
-<span class="sd">          calctype.name/</span>
-<span class="sd">              run.0/</span>
-<span class="sd">              run.1/</span>
-<span class="sd">              ...</span>
-<span class="sd">              run.final/</span>
-
-<span class="sd">        &#39;run.i&#39; directories are only created when ready.</span>
-<span class="sd">        &#39;run.final&#39; is a final constant volume run {&quot;ISIF&quot;:2, &quot;ISMEAR&quot;:-5, &quot;NSW&quot;:0, &quot;IBRION&quot;:-1}</span>
-
-<span class="sd">        This automatically looks for VASP settings files using:</span>
-<span class="sd">          casm.project.DirectoryStructure.settings_path_crawl</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
+<span class="sd">    selection : casm.project.Selection</span>
+<span class="sd">        selection of configuration</span>
+<span class="sd">    calctype : string</span>
+<span class="sd">        calctype to setup and run the neb calculations</span>
+<span class="sd">    auto : bool</span>
+<span class="sd">    sort : bool</span>
 
-<span class="sd">      casm_settings: casm.project.ProjectSettings instance</span>
-<span class="sd">        CASM project settings</span>
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    from_configuration_dir(configuration_dir=&#39;string&#39;, calctype=&#39;string&#39;, bool, bool)</span>
+<span class="sd">        returns a instance of the Neb class instantited with a single configuration</span>
+<span class="sd">    config_properties(config_data=dict/Pandas.DataFrame)</span>
+<span class="sd">        return a dict of the properties required to setup a configuration</span>
+<span class="sd">    pre_setup</span>
+<span class="sd">        creates folder and makes POS files for each image</span>
+<span class="sd">    setup</span>
+<span class="sd">        sets up the input vasp files for the selection</span>
+<span class="sd">    config_setup</span>
+<span class="sd">        sets up the input vasp files for a single configuration</span>
+<span class="sd">    get_vasp_input_files(config_data=dict/Pandas.DataFrame, settings=dict)</span>
+<span class="sd">        returns filenames of a vasp neb calculation</span>
+<span class="sd">    submit</span>
+<span class="sd">        submit a job for each configuration</span>
+<span class="sd">    run</span>
+<span class="sd">        runs the neb calcutation on the selection</span>
+<span class="sd">    report</span>
+<span class="sd">        reports results for the selection</span>
+<span class="sd">    run_cmd(configdir=&#39;string&#39;, calctype=&#39;string&#39;)</span>
+<span class="sd">        return a string of command to run a single configuration</span>
+<span class="sd">    finalize(config_data=dict/pandas_data, super_poscarfile=&#39;string&#39;)</span>
+<span class="sd">        checks convergnce and write a properties file for the selection</span>
+<span class="sd">    properties(calcdir=&#39;string&#39;, super_poscarfile=&#39;string&#39;, speciesfile=&#39;string&#39;)</span>
+<span class="sd">        return a dict containing all the relaxed properties for a configuration</span>
 
-<span class="sd">      casm_directories: casm.project.DirectoryStructure instance</span>
-<span class="sd">        CASM project directory hierarchy</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The Relax class contains functions for setting up, executing, and parsing a VASP relaxation.</span>
 
-<span class="sd">      settings: dict</span>
-<span class="sd">        Settings for job submission and the relaxation, see vaspwrapper.read_settings</span>
+<span class="sd">    The relaxation creates the following directory structure:</span>
+<span class="sd">    config/</span>
+<span class="sd">        calctype.name/</span>
+<span class="sd">            run.0/</span>
+<span class="sd">            ....</span>
 
-<span class="sd">      configdir: str</span>
-<span class="sd">        Directory where configuration results are stored. The result of:</span>
-<span class="sd">          casm.project.DirectoryStructure.configuration_dir(self.configname)</span>
+<span class="sd">    &#39;run.i&#39; directories are only created when ready.</span>
 
-<span class="sd">      configname: str</span>
-<span class="sd">        The name of the configuration to be calculated</span>
-
-<span class="sd">      auto: boolean</span>
-<span class="sd">        True if using prisms_jobs module&#39;s JobDB to manage jobs</span>
-
-<span class="sd">      sort: boolean</span>
-<span class="sd">        True if sorting atoms in POSCAR by type</span>
-
-<span class="sd">      clex: casm.project.ClexDescription instance</span>
-<span class="sd">        The cluster expansion being worked on. Used for the &#39;calctype&#39; settings.</span>
-<span class="sd">        Currently, fixed to self.casm_settings.default_clex.</span>
+<span class="sd">    This automatically looks for VASP settings files using:</span>
+<span class="sd">        casm.project.DirectoryStructure.settings_path_crawl</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Relax.__init__"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Construct a VASP relaxation job object.</span>
-
-<span class="sd">        Arguments</span>
-<span class="sd">        ----------</span>
-
-<span class="sd">            configdir: str, optional, default=None</span>
-<span class="sd">              Path to configuration directory. If None, uses the current working</span>
-<span class="sd">              directory</span>
-
-<span class="sd">            auto: boolean, optional, default=True,</span>
-<span class="sd">              Use True to use the prisms_jobs module&#39;s JobDB to manage jobs</span>
-
-<span class="sd">            sort: boolean, optional, default=True,</span>
-<span class="sd">              Use True to sort atoms in POSCAR by type</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Relax.__init__"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct a VASP neb job object&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Construct a casm.vaspwrapper.Relax instance:&quot;</span><span class="p">)</span>
+        <span class="n">VaspCalculatorBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">calctype</span><span class="p">,</span> <span class="n">auto</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span></div>
 
-        <span class="k">if</span> <span class="n">configdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">configdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Input directory:&quot;</span><span class="p">,</span> <span class="n">configdir</span><span class="p">)</span>
+<div class="viewcode-block" id="Relax.pre_setup"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.pre_setup">[docs]</a>    <span class="k">def</span> <span class="nf">pre_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setus up folders and writes POS files&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">write_pos</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">config_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;calcdir&quot;</span><span class="p">])</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span></div>
 
-        <span class="c1"># get the configname from the configdir path</span>
-        <span class="n">_res</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">configdir</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">configname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">_res</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">_res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Configuration:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading CASM settings&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span> <span class="o">=</span> <span class="n">DirectoryStructure</span><span class="p">(</span><span class="n">configdir</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">casm_settings</span> <span class="o">=</span> <span class="n">ProjectSettings</span><span class="p">(</span><span class="n">configdir</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_settings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;Not in a CASM project. The file &#39;.casm&#39; directory was not found.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">configdir</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configdir</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input configdir:&quot;</span><span class="p">,</span> <span class="n">configdir</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;determined configname:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expected configdir given configname:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configdir</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;Mismatch between configname and configdir&quot;</span><span class="p">)</span>
-
-        <span class="c1"># fixed to default_clex for now</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_settings</span><span class="o">.</span><span class="n">default_clex</span>
-
-        <span class="c1"># store path to .../config/calctype.name, and create if not existing</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">calctype_dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Calculations directory:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">)</span>
-
-        <span class="c1"># read the settings json file</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Reading relax.json settings file&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="n">setfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;relax.json&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">setfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;Could not find </span><span class="se">\&quot;</span><span class="s2">relax.json</span><span class="se">\&quot;</span><span class="s2"> in an appropriate </span><span class="se">\&quot;</span><span class="s2">settings</span><span class="se">\&quot;</span><span class="s2"> directory&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Read settings from:&quot;</span><span class="p">,</span> <span class="n">setfile</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">read_settings</span><span class="p">(</span><span class="n">setfile</span><span class="p">)</span>
-
-        <span class="c1"># set default settings if not present</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;ncore&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;npar&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;kpar&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;kpar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;vasp_cmd&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;vasp_cmd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;ncpus&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;run_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;prerun&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;prerun&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;postrun&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;postrun&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">auto</span> <span class="o">=</span> <span class="n">auto</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sort</span> <span class="o">=</span> <span class="n">sort</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  DONE</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">configdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="Relax.setup"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Setup initial relaxation run</span>
+<div class="viewcode-block" id="Relax.config_setup"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.config_setup">[docs]</a>    <span class="k">def</span> <span class="nf">config_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Setup initial relaxation run for a configuration</span>
 
 <span class="sd">            Uses the following files from the most local .../settings/calctype.name directory:</span>
 <span class="sd">                INCAR: VASP input settings</span>
@@ -323,445 +260,75 @@
 <span class="sd">                POSCAR: reference for KPOINTS if KPOINTS mode is not A/AUTO/Automatic</span>
 <span class="sd">                SPECIES: info for each species such as which POTCAR files to use, MAGMOM, GGA+U, etc.</span>
 
-<span class="sd">            Uses the following files from the .../config directory:</span>
-<span class="sd">                POS: structure of the configuration to be relaxed</span>
+<span class="sd">            Uses the following files from the .../config_calcdir/00 directory:</span>
+<span class="sd">                POSCAR: sample structure of the configuration to be relaxed</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Find required input files in CASM project directory tree</span>
-        <span class="n">vaspfiles</span><span class="o">=</span><span class="n">vasp_input_file_names</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span>
-        <span class="n">incarfile</span><span class="p">,</span><span class="n">prim_kpointsfile</span><span class="p">,</span><span class="n">prim_poscarfile</span><span class="p">,</span><span class="n">super_poscarfile</span><span class="p">,</span><span class="n">speciesfile</span><span class="o">=</span><span class="n">vaspfiles</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_settings</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;setfile&quot;</span><span class="p">])</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">config_setup</span><span class="p">(</span><span class="n">config_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial_deformation&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">deformation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_deformation</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">apply_deformation</span><span class="p">(</span><span class="n">deformation</span><span class="p">,</span> <span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;calcdir&quot;</span><span class="p">])</span></div>
 
-        <span class="c1"># Find optional input files</span>
-        <span class="n">extra_input_files</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]:</span>
-            <span class="n">extra_input_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">extra_input_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Relax.setup failed. Extra input file &quot;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s2">&quot; not found in CASM project.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]:</span>
-            <span class="n">extra_input_files</span> <span class="o">+=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span> <span class="p">]</span>
-            <span class="k">if</span> <span class="n">extra_input_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Relax.setup failed. No initial INCAR file &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; found in CASM project.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]:</span>
-            <span class="n">extra_input_files</span> <span class="o">+=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span> <span class="p">]</span>
-            <span class="k">if</span> <span class="n">extra_input_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span><span class="s2">&quot;Relax.setup failed. No final INCAR file &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;final&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; found in CASM project.&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<div class="viewcode-block" id="Relax.setup"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setup initial relaxation run for the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span></div>
 
-        <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_vasp_input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">incarfile</span><span class="p">,</span> <span class="n">prim_kpointsfile</span><span class="p">,</span> <span class="n">prim_poscarfile</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort</span><span class="p">,</span> <span class="n">extra_input_files</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;strict_kpoints&quot;</span><span class="p">])</span></div>
+<div class="viewcode-block" id="Relax.submit"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a job for each configuration&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="Relax.run"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Runs the neb calcutation on the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Relax.submit"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Submit a job for this VASP relaxation&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Relax.report"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.report">[docs]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reports results for the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">report</span><span class="p">()</span></div>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Submitting...&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Configuration:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">)</span>
-        <span class="c1"># first, check if the job has already been submitted and is not completed</span>
-        <span class="n">db</span> <span class="o">=</span> <span class="n">JobDB</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculation directory:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">)</span>
-        <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">select_regex_id</span><span class="p">(</span><span class="s2">&quot;rundir&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;JobID:&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">id</span> <span class="o">!=</span> <span class="p">[]:</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">id</span><span class="p">:</span>
-                <span class="n">job</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">select_job</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                <span class="c1"># taskstatus = [&quot;Incomplete&quot;,&quot;Complete&quot;,&quot;Continued&quot;,&quot;Check&quot;,&quot;Error:.*&quot;,&quot;Aborted&quot;]</span>
-                <span class="c1"># jobstatus = [&quot;C&quot;,&quot;Q&quot;,&quot;R&quot;,&quot;E&quot;,&quot;W&quot;,&quot;H&quot;,&quot;M&quot;]</span>
-                <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s2">&quot;jobstatus&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;JobID:&quot;</span><span class="p">,</span> <span class="n">job</span><span class="p">[</span><span class="s2">&quot;jobid&quot;</span><span class="p">],</span> <span class="s2">&quot;  Jobstatus:&quot;</span><span class="p">,</span> <span class="n">job</span><span class="p">[</span><span class="s2">&quot;jobstatus&quot;</span><span class="p">],</span> <span class="s2">&quot;  Not submitting.&quot;</span><span class="p">)</span>
-                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-                    <span class="k">return</span>
-                <span class="c1">#elif job[&quot;taskstatus&quot;] in [&quot;Complete&quot;, &quot;Check&quot;] or re.match( &quot;Error:.*&quot;, job[&quot;taskstatus&quot;]):</span>
-                <span class="c1">#    print &quot;JobID:&quot;, job[&quot;jobid&quot;], &quot;  Taskstatus:&quot;, job[&quot;taskstatus&quot;], &quot;  Not submitting.&quot;</span>
-                <span class="c1">#    sys.stdout.flush()</span>
-                <span class="c1">#    return</span>
+<div class="viewcode-block" id="Relax.run_cmd"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.run_cmd">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">run_cmd</span><span class="p">(</span><span class="n">configdir</span><span class="p">,</span> <span class="n">calctype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a string of command to run a single configuration&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;python -c </span><span class="se">\&quot;</span><span class="s2">import casm.vaspwrapper; obj = casm.vaspwrapper.Relax.from_configuration_dir(&#39;</span><span class="si">{0}</span><span class="s2">&#39;, &#39;</span><span class="si">{1}</span><span class="s2">&#39;); obj.run()</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">configdir</span><span class="p">,</span> <span class="n">calctype</span><span class="p">)</span></div>
 
-
-        <span class="c1"># second, only submit a job if relaxation status is &quot;incomplete&quot;</span>
-
-        <span class="c1"># construct the Relax object</span>
-        <span class="n">relaxation</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">Relax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_settings</span><span class="p">())</span>
-
-        <span class="c1"># check the current status</span>
-        <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="o">=</span> <span class="n">relaxation</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="s2">&quot;  Not submitting.&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-            <span class="c1"># ensure job marked as complete in db</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">id</span><span class="p">:</span>
-                  <span class="n">job</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">select_job</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                  <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s2">&quot;taskstatus&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Incomplete&quot;</span><span class="p">:</span>
-                      <span class="k">try</span><span class="p">:</span>
-                          <span class="n">complete_job</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">j</span><span class="p">)</span>
-                      <span class="k">except</span> <span class="p">(</span><span class="n">JobsError</span><span class="p">,</span> <span class="n">JobDBError</span><span class="p">,</span> <span class="n">EligibilityError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                          <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                          <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-            <span class="c1"># ensure results report written</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="s2">&quot;properties.calc.json&quot;</span><span class="p">)):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
-
-            <span class="k">return</span>
-
-        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;not_converging&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="s2">&quot;  Not submitting.&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="k">return</span>
-
-        <span class="k">elif</span> <span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;incomplete&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;unexpected relaxation status: &#39;&quot;</span> <span class="o">+</span> <span class="n">status</span> <span class="o">+</span> <span class="s2">&quot;&#39; and task: &#39;&quot;</span> <span class="o">+</span> <span class="n">task</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="k">return</span>
-
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preparing to submit a VASP relaxation job&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-        <span class="c1"># cd to configdir, submit jobs from configdir, then cd back to currdir</span>
-        <span class="n">currdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">)</span>
-
-        <span class="c1"># determine the number of atoms in the configuration</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Counting atoms in the POSCAR&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configdir</span><span class="p">,</span><span class="s2">&quot;POS&quot;</span><span class="p">))</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">basis</span><span class="p">)</span>
-
-        <span class="c1"># construct command to be run</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;preamble&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># Append any instructions given in the &#39;preamble&#39; file, if given</span>
-            <span class="n">preamble</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;preamble&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">preamble</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_preamble</span><span class="p">:</span>
-                <span class="n">cmd</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">my_preamble</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="c1"># Or just execute a single prerun line, if given</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;prerun&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="n">cmd</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;prerun&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">cmd</span> <span class="o">+=</span> <span class="s2">&quot;python -c </span><span class="se">\&quot;</span><span class="s2">import casm.vaspwrapper; casm.vaspwrapper.Relax(&#39;&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">configdir</span> <span class="o">+</span> <span class="s2">&quot;&#39;).run()</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;postrun&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-          <span class="n">cmd</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;postrun&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Constructing a job&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="c1"># construct a Job</span>
-        <span class="n">job</span> <span class="o">=</span> <span class="n">Job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">wrapper</span><span class="o">.</span><span class="n">jobname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">),</span>\
-                      <span class="n">account</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;account&quot;</span><span class="p">],</span>\
-                      <span class="n">nodes</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;atom_per_proc&quot;</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ppn&quot;</span><span class="p">]))),</span>\
-                      <span class="n">ppn</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ppn&quot;</span><span class="p">]),</span>\
-                      <span class="n">walltime</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;walltime&quot;</span><span class="p">],</span>\
-                      <span class="n">pmem</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;pmem&quot;</span><span class="p">],</span>\
-                      <span class="n">qos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;qos&quot;</span><span class="p">],</span>\
-                      <span class="n">queue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;queue&quot;</span><span class="p">],</span>\
-                      <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">],</span>\
-                      <span class="n">email</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span>\
-                      <span class="n">priority</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">],</span>\
-                      <span class="n">command</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span>\
-                      <span class="n">auto</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auto</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Submitting&quot;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="c1"># submit the job</span>
-        <span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s2">&quot;submitted&quot;</span><span class="p">)</span>
-
-        <span class="c1"># return to current directory</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currdir</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CASM VASPWrapper relaxation job submission complete</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="Relax.finalize"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.finalize">[docs]</a>    <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_data</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks convergnce and write a properties file for the selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">super_poscarfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">super_poscarfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;configdir&quot;</span><span class="p">],</span> <span class="s2">&quot;POS&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">config_data</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="Relax.run_settings"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.run_settings">[docs]</a>    <span class="k">def</span> <span class="nf">run_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set default values based on runtime environment&quot;&quot;&quot;</span>
-        <span class="n">settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
-
-        <span class="c1"># set default values</span>
-
-        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CASM_DEFAULT&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;PBS_NUM_NODES&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PBS_NUM_NODES&quot;</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="s2">&quot;SLURM_JOB_NUM_NODES&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SLURM_JOB_NUM_NODES&quot;</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">elif</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;VASP_DEFAULT&quot;</span><span class="p">:</span>
-            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;npar&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CASM_DEFAULT&quot;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s2">&quot;PBS_NUM_PPN&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PBS_NUM_PPN&quot;</span><span class="p">])</span>
-                <span class="k">elif</span> <span class="s2">&quot;SLURM_CPUS_ON_NODE&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SLURM_CPUS_ON_NODE&quot;</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">elif</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;VASP_DEFAULT&quot;</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncore&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CASM_DEFAULT&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;PBS_NP&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PBS_NP&quot;</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="s2">&quot;SLURM_NTASKS&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SLURM_NTASKS&quot;</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;ncpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CASM_DEFAULT&quot;</span><span class="p">:</span>
-            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;run_limit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
-
-        <span class="k">return</span> <span class="n">settings</span></div>
-
-
-<div class="viewcode-block" id="Relax.run"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Setup input files, run a vasp relaxation, and report results &quot;&quot;&quot;</span>
-
-        <span class="c1"># construct the Relax object</span>
-        <span class="n">relaxation</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">Relax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_settings</span><span class="p">())</span>
-
-        <span class="c1"># check the current status</span>
-        <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="o">=</span> <span class="n">relaxation</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-
-
-        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-            <span class="c1"># mark job as complete in db</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">complete_job</span><span class="p">()</span>
-                <span class="k">except</span> <span class="p">(</span><span class="n">JobsError</span><span class="p">,</span> <span class="n">JobDBError</span><span class="p">,</span> <span class="n">EligibilityError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-            <span class="c1"># write results to properties.calc.json</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
-            <span class="k">return</span>
-
-        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;not_converging&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s2">&quot;failed&quot;</span><span class="p">,</span><span class="s2">&quot;run_limit&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Returning&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="k">return</span>
-
-        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;incomplete&quot;</span><span class="p">:</span>
-
-            <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s2">&quot;started&quot;</span><span class="p">)</span>
-            <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="o">=</span> <span class="n">relaxation</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s2">&quot;failed&quot;</span><span class="p">,</span><span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;unexpected relaxation status: &#39;&quot;</span> <span class="o">+</span> <span class="n">status</span> <span class="o">+</span> <span class="s2">&quot;&#39; and task: &#39;&quot;</span> <span class="o">+</span> <span class="n">task</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-
-        <span class="c1"># once the run is done, update database records accordingly</span>
-
-        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;not_converging&quot;</span><span class="p">:</span>
-
-            <span class="c1"># mark error</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">error_job</span><span class="p">(</span><span class="s2">&quot;Not converging&quot;</span><span class="p">)</span>
-                <span class="k">except</span> <span class="p">(</span><span class="n">JobsError</span><span class="p">,</span> <span class="n">JobDBError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not Converging!&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s2">&quot;failed&quot;</span><span class="p">,</span><span class="s2">&quot;run_limit&quot;</span><span class="p">)</span>
-
-            <span class="c1"># print a local settings file, so that the run_limit can be extended if the</span>
-            <span class="c1">#   convergence problems are fixed</span>
-
-            <span class="n">config_set_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">configuration_calc_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span>
-
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">config_set_dir</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">pass</span>
-            <span class="n">settingsfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config_set_dir</span><span class="p">,</span> <span class="s2">&quot;relax.json&quot;</span><span class="p">)</span>
-            <span class="n">write_settings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span> <span class="n">settingsfile</span><span class="p">)</span>
-
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Writing:&quot;</span><span class="p">,</span> <span class="n">settingsfile</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edit the &#39;run_limit&#39; property if you wish to continue.&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="k">return</span>
-
-        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span><span class="p">:</span>
-
-            <span class="c1"># mark job as complete in db</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">complete_job</span><span class="p">()</span>
-                <span class="k">except</span> <span class="p">(</span><span class="n">JobsError</span><span class="p">,</span> <span class="n">JobDBError</span><span class="p">,</span> <span class="n">EligibilityError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-
-            <span class="c1"># write results to properties.calc.json</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s2">&quot;failed&quot;</span><span class="p">,</span><span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;vasp relaxation complete with unexpected status: &#39;&quot;</span> <span class="o">+</span> <span class="n">status</span> <span class="o">+</span> <span class="s2">&quot;&#39; and task: &#39;&quot;</span> <span class="o">+</span> <span class="n">task</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="Relax.report_status"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.report_status">[docs]</a>    <span class="k">def</span> <span class="nf">report_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">failure_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Report calculation status to status.json file in configuration directory.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            status: string describing calculation status. Currently used values are</span>
-<span class="sd">                 not_submitted</span>
-<span class="sd">                 submitted</span>
-<span class="sd">                 complete</span>
-<span class="sd">                 failed</span>
-<span class="sd">             failure_type: optional string describing reason for failure. Currently used values are</span>
-<span class="sd">                 unknown</span>
-<span class="sd">                 electronic_convergence</span>
-<span class="sd">                 run_limit&quot;&quot;&quot;</span>
-
-        <span class="n">output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span>
-        <span class="k">if</span> <span class="n">failure_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">output</span><span class="p">[</span><span class="s2">&quot;failure_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">failure_type</span>
-
-        <span class="n">outputfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="s2">&quot;status.json&quot;</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">noindent</span><span class="o">.</span><span class="n">NoIndentEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wrote &quot;</span> <span class="o">+</span> <span class="n">outputfile</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
-
-    <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span><span class="p">():</span>
-        <span class="c1"># write properties.calc.json</span>
-        <span class="n">vaspdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="s2">&quot;run.final&quot;</span><span class="p">)</span>
-        <span class="n">super_poscarfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configdir</span><span class="p">,</span><span class="s2">&quot;POS&quot;</span><span class="p">)</span>
-        <span class="n">speciesfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">casm_directories</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;SPECIES&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clex</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">vaspdir</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">speciesfile</span><span class="p">)</span>
-        <span class="n">outputfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="s2">&quot;properties.calc.json&quot;</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputfile</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">noindent</span><span class="o">.</span><span class="n">NoIndentEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wrote &quot;</span> <span class="o">+</span> <span class="n">outputfile</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">is_converged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="c1"># Check for electronic convergence in completed calculations. Returns True or False.</span>
-
-      <span class="c1"># Verify that the last relaxation reached electronic convergence</span>
-      <span class="n">relaxation</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">Relax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_settings</span><span class="p">())</span>
-      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">relaxation</span><span class="o">.</span><span class="n">rundir</span><span class="p">)):</span>
-        <span class="k">try</span><span class="p">:</span>
-          <span class="n">vrun</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Vasprun</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">relaxation</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;vasprun.xml&quot;</span><span class="p">))</span>
-          <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">all_e_0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">vrun</span><span class="o">.</span><span class="n">nelm</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">((</span><span class="s1">&#39;The last relaxation run (&#39;</span> <span class="o">+</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">relaxation</span><span class="o">.</span><span class="n">rundir</span><span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span>
-                <span class="s1">&#39;) failed to achieve electronic convergence; properties.calc.json will not be written.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s1">&#39;failed&#39;</span><span class="p">,</span><span class="s1">&#39;electronic_convergence&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">False</span>
-          <span class="k">break</span>
-        <span class="k">except</span><span class="p">:</span>
-          <span class="k">pass</span>
-
-      <span class="c1"># Verify that the final static run reached electronic convergence</span>
-      <span class="n">vrun</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Vasprun</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calcdir</span><span class="p">,</span> <span class="s2">&quot;run.final&quot;</span><span class="p">,</span> <span class="s2">&quot;vasprun.xml&quot;</span><span class="p">)</span> <span class="p">)</span>
-      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">all_e_0</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">vrun</span><span class="o">.</span><span class="n">nelm</span><span class="p">:</span>
-          <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The final run failed to achieve electronic convergence; properties.calc.json will not be written.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-          <span class="bp">self</span><span class="o">.</span><span class="n">report_status</span><span class="p">(</span><span class="s1">&#39;failed&#39;</span><span class="p">,</span><span class="s1">&#39;electronic_convergence&#39;</span><span class="p">)</span>
-          <span class="k">return</span> <span class="kc">False</span>
-
-      <span class="k">return</span> <span class="kc">True</span>
-
-<div class="viewcode-block" id="Relax.properties"><a class="viewcode-back" href="../../../python/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.properties">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="n">vaspdir</span><span class="p">,</span> <span class="n">super_poscarfile</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">speciesfile</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Report results to properties.calc.json file in configuration directory, after checking for electronic convergence.&quot;&quot;&quot;</span>
-
-        <span class="n">output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">vrun</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Vasprun</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vaspdir</span><span class="p">,</span> <span class="s2">&quot;vasprun.xml&quot;</span><span class="p">)</span> <span class="p">)</span>
-
-         <span class="c1"># load the final OSZICAR, OUTCAR, and INCAR</span>
-        <span class="n">zcar</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Oszicar</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vaspdir</span><span class="p">,</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">)</span> <span class="p">)</span>
-        <span class="n">ocar</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Outcar</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vaspdir</span><span class="p">,</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">)</span> <span class="p">)</span>
-
-        <span class="c1"># the calculation is run on the &#39;sorted&#39; POSCAR, need to report results &#39;unsorted&#39;</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">super_poscarfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">speciesfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="n">species_settings</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">species_settings</span><span class="p">(</span><span class="n">speciesfile</span><span class="p">)</span>
-            <span class="nb">super</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">super_poscarfile</span><span class="p">,</span> <span class="n">species_settings</span><span class="p">)</span>
-            <span class="n">unsort_dict</span> <span class="o">=</span> <span class="nb">super</span><span class="o">.</span><span class="n">unsort_dict</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># fake unsort_dict (unsort_dict[i] == i)</span>
-            <span class="n">unsort_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">)),</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">))))</span>
-            <span class="nb">super</span> <span class="o">=</span> <span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Poscar</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vaspdir</span><span class="p">,</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">))</span>
-
-        <span class="c1"># unsort_dict:</span>
-        <span class="c1">#   Returns &#39;unsort_dict&#39;, for which: unsorted_dict[orig_index] == sorted_index;</span>
-        <span class="c1">#   unsorted_dict[sorted_index] == orig_index</span>
-        <span class="c1">#   For example:</span>
-        <span class="c1">#     &#39;unsort_dict[0]&#39; returns the index into the unsorted POSCAR of the first atom in the sorted POSCAR</span>
-
-
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;atom_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">super</span><span class="o">.</span><span class="n">type_atoms</span>
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;atoms_per_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">super</span><span class="o">.</span><span class="n">num_atoms</span>
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;coord_mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vrun</span><span class="o">.</span><span class="n">coord_mode</span>
-
-        <span class="c1"># as lists</span>
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_forces&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">forces</span><span class="p">))]</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">forces</span><span class="p">):</span>
-            <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_forces&quot;</span><span class="p">][</span><span class="n">unsort_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_lattice&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vrun</span><span class="o">.</span><span class="n">lattice</span><span class="p">]</span>
-
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_basis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">))]</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
-            <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_basis&quot;</span><span class="p">][</span><span class="n">unsort_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vrun</span><span class="o">.</span><span class="n">total_energy</span>
-
-        <span class="c1"># output[&quot;relaxed_mag_basis&quot;] = [ None for i in range(len(vrun.basis))]</span>
-        <span class="c1"># output[&quot;relaxed_magmom&quot;] = None</span>
-        <span class="k">if</span> <span class="n">ocar</span><span class="o">.</span><span class="n">ispin</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_magmom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zcar</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">ocar</span><span class="o">.</span><span class="n">lorbit</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]:</span>
-                <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_mag_basis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">))]</span>
-                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vrun</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
-                    <span class="n">output</span><span class="p">[</span><span class="s2">&quot;relaxed_mag_basis&quot;</span><span class="p">][</span><span class="n">unsort_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">ocar</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="c1"># if output[&quot;relaxed_magmom&quot;] is None:</span>
-        <span class="c1">#     output.pop(&quot;relaxed_magmom&quot;, None)</span>
-        <span class="c1"># if output[&quot;relaxed_mag_basis&quot;][0] is None:</span>
-        <span class="c1">#     output.pop(&quot;relaxed_mag_basis&quot;, None)</span>
-
+<div class="viewcode-block" id="Relax.properties"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">speciesfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make properties output as a list of dict of each image properties&quot;&quot;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span>
+                                               <span class="n">speciesfile</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div></div>
-
-
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, CASM Developers.
+        &#169; Copyright 2018, CASM Developers.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -770,33 +337,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'0.3.dev',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

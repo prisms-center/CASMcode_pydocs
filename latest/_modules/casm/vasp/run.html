@@ -1,49 +1,54 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>casm.vasp.run &mdash; CASM 0.3.dev documentation</title>
-  
-
-  
-  
-  
+  <title>casm.vasp.run &mdash; CASM 1.0.0 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
-
-  
-  <script src="../../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +62,7 @@
             
             
               <div class="version">
-                0.3
+                1.0
               </div>
             
           
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,13 +89,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">CASM Python packages documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">CASM Python packages documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -124,11 +131,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -149,8 +158,9 @@
             
   <h1>Source code for casm.vasp.run</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; Job manipuation routines for VASP&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
@@ -162,10 +172,11 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">signal</span>
 
-<span class="kn">from</span> <span class="nn">casm.vasp.error</span> <span class="k">import</span> <span class="n">VaspError</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">,</span> <span class="n">error_check</span><span class="p">,</span> <span class="n">crash_check</span>
-<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="k">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">casm.vasp.error</span> <span class="kn">import</span> <span class="n">VaspError</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">,</span> <span class="n">error_check</span><span class="p">,</span> <span class="n">crash_check</span>
+<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="kn">import</span> <span class="n">io</span>
 
-<div class="viewcode-block" id="complete_job"><a class="viewcode-back" href="../../../python/casm.vasp.complete_job.html#casm.vasp.complete_job">[docs]</a><span class="k">def</span> <span class="nf">complete_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+
+<div class="viewcode-block" id="complete_job"><a class="viewcode-back" href="../../../reference/casm.vasp.complete_job.html#casm.vasp.complete_job">[docs]</a><span class="k">def</span> <span class="nf">complete_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Remove files from a vasp job directory</span>
 
 <span class="sd">       Args:</span>
@@ -184,35 +195,47 @@
     <span class="c1"># remove files</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  rm:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">f</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">+</span>
+                     <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">f</span><span class="p">))</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">f</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
     <span class="c1"># compress files</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; gzip:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">file</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="c1"># Open target file, target file.gz</span>
             <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
             <span class="c1"># Compress, close files</span>
             <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
             <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="c1"># Remove original target file</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">file</span><span class="p">))</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../python/casm.vasp.run.html#casm.vasp.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">jobdir</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stdout</span> <span class="o">=</span> <span class="s2">&quot;std.out&quot;</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="s2">&quot;std.err&quot;</span><span class="p">,</span> <span class="n">npar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ncore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ncpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kpar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">poll_check_time</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">err_check_time</span> <span class="o">=</span> <span class="mf">60.0</span><span class="p">,</span> <span class="n">err_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../reference/casm.vasp.run.html#casm.vasp.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;std.out&quot;</span><span class="p">,</span>
+        <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;std.err&quot;</span><span class="p">,</span>
+        <span class="n">npar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ncore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ncpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">kpar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">poll_check_time</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+        <span class="n">err_check_time</span><span class="o">=</span><span class="mf">60.0</span><span class="p">,</span>
+        <span class="n">err_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Run vasp using subprocess.</span>
 
 <span class="sd">        The &#39;command&#39; is executed in the directory &#39;jobdir&#39;.</span>
@@ -258,7 +281,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;mpirun -np </span><span class="si">{NCPUS}</span><span class="s2"> vasp&quot;</span>
 
-    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;\{NCPUS\}&quot;</span><span class="p">,</span><span class="n">command</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;\{NCPUS\}&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
         <span class="n">command</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">NCPUS</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ncpus</span><span class="p">))</span>
 
     <span class="c1">### Expand remaining environment variables</span>
@@ -268,25 +291,25 @@
         <span class="n">ncore</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">if</span> <span class="n">npar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ncore</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;NPAR&quot;</span><span class="p">:</span><span class="n">npar</span><span class="p">,</span> <span class="s2">&quot;NCORE&quot;</span><span class="p">:</span><span class="n">ncore</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;NPAR&quot;</span><span class="p">:</span> <span class="n">npar</span><span class="p">,</span> <span class="s2">&quot;NCORE&quot;</span><span class="p">:</span> <span class="n">ncore</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">kpar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;KPAR&quot;</span><span class="p">:</span><span class="n">kpar</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;KPAR&quot;</span><span class="p">:</span> <span class="n">kpar</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  jobdir:&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  exec:&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
-    <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">stdout</span><span class="p">),</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-    <span class="n">serr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">stderr</span><span class="p">),</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">serr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stderr</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span><span class="n">stdout</span><span class="o">=</span><span class="n">sout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">serr</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">sout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">serr</span><span class="p">)</span>
 
     <span class="c1"># wait for process to end, and periodically check for errors</span>
     <span class="n">poll</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
     <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">stopcar_time</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">while</span> <span class="n">poll</span>  <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">poll</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_check_time</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_check</span> <span class="o">&gt;</span> <span class="n">err_check_time</span><span class="p">:</span>
@@ -341,7 +364,7 @@
         <span class="c1"># Crash-type errors take priority over any other error that may show up</span>
         <span class="n">err</span> <span class="o">=</span> <span class="n">crash_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">err</span> <span class="o">=</span> <span class="n">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span><span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Found errors:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
@@ -355,20 +378,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, CASM Developers.
+        &#169; Copyright 2018, CASM Developers.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -377,33 +405,16 @@
   </div>
   
 
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'0.3.dev',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
-
-  
-
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
