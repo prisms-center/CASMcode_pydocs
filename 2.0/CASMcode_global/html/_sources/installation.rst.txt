@@ -34,7 +34,7 @@ Installation of libcasm-global from source requires standard compilers with supp
   conda activate casm
   ```
 
-Then `libcasm-global` can be installed with:
+Then libcasm-global can be installed with:
 
     pip install .
 

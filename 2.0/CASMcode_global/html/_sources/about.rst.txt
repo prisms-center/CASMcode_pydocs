@@ -1,6 +1,11 @@
 About libcasm-global
 ====================
 
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+
+
 libcasm-global is part of the CASM project developed by the `Van der Ven group`_, originally at the University of Michigan and currently at the University of California Santa Barbara.
 
 Learn more about CASM `here <https://prisms-center.github.io/CASMcode_docs/>`_.
