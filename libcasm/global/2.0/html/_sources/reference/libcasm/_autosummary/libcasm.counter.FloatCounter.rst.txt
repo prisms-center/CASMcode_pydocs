@@ -1,0 +1,32 @@
+FloatCounter
+============
+
+.. currentmodule:: libcasm.counter
+
+.. autoclass:: FloatCounter
+  :show-inheritance:
+
+  
+  
+  .. rubric:: Methods
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    ~FloatCounter.current
+    ~FloatCounter.element
+    ~FloatCounter.final
+    ~FloatCounter.increment
+    ~FloatCounter.initial
+    ~FloatCounter.next
+    ~FloatCounter.reset
+    ~FloatCounter.size
+    ~FloatCounter.valid
+  
+  
+
+  
+  
+    

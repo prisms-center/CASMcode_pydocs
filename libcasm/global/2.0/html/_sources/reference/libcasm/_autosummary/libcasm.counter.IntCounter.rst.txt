@@ -1,0 +1,32 @@
+IntCounter
+==========
+
+.. currentmodule:: libcasm.counter
+
+.. autoclass:: IntCounter
+  :show-inheritance:
+
+  
+  
+  .. rubric:: Methods
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    ~IntCounter.current
+    ~IntCounter.element
+    ~IntCounter.final
+    ~IntCounter.increment
+    ~IntCounter.initial
+    ~IntCounter.next
+    ~IntCounter.reset
+    ~IntCounter.size
+    ~IntCounter.valid
+  
+  
+
+  
+  
+    
