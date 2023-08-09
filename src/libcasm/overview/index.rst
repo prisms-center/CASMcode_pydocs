@@ -11,9 +11,9 @@ The Python namespace libcasm is used for CASM_ packages that include C++ impleme
 Packages
 ========
 
-- libcasm-global: CASM global constants and tools: `[2.0] <../../../global/2.0/html/index.html>`_
+- libcasm-global: CASM global constants and tools: `[2.0] <../../../global/2.0/>`_
 
-- libcasm-xtal: CASM crystallography: `[2.0] <../../../xtal/2.0/html/index.html>`_
+- libcasm-xtal: CASM crystallography: `[2.0] <../../../xtal/2.0/>`_
 
 
 About CASM
