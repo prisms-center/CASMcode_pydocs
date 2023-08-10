@@ -1,0 +1,35 @@
+StrainConverter
+===============
+
+.. currentmodule:: libcasm.xtal
+
+.. autoclass:: StrainConverter
+  :show-inheritance:
+
+  
+  
+  .. rubric:: Methods
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    ~StrainConverter.F_to_QU
+    ~StrainConverter.F_to_VQ
+    ~StrainConverter.basis
+    ~StrainConverter.basis_pinv
+    ~StrainConverter.dim
+    ~StrainConverter.from_E_matrix
+    ~StrainConverter.from_F
+    ~StrainConverter.from_standard_basis
+    ~StrainConverter.metric
+    ~StrainConverter.to_E_matrix
+    ~StrainConverter.to_F
+    ~StrainConverter.to_standard_basis
+  
+  
+
+  
+  
+    
