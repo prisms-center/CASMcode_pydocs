@@ -11,9 +11,25 @@ The Python namespace libcasm is used for CASM_ packages that include C++ impleme
 Packages
 ========
 
-- **libcasm-global** - CASM global constants and tools: `[2.0] <../../global/2.0/>`_
+- **libcasm-global**:
 
-- **libcasm-xtal** - CASM crystallography: `[2.0] <../../xtal/2.0/>`_
+  - Docs: `[2.0] <../../global/2.0/>`_
+  - Repository: `CASMcode_global <https://github.com/prisms-center/CASMcode_global/>`_
+  - Packages:
+
+    - **libcasm.casmglobal** - CASM global constants and tools
+    - **libcasm.counter** - Loop over many incrementing variables in one loop
+
+- **libcasm-xtal**:
+
+  - Docs: `[2.0] <../../xtal/2.0/>`_
+  - Repository: `CASMcode_crystallography <https://github.com/prisms-center/CASMcode_crystallography/>`_
+  - Packages:
+
+    - **libcasm.xtal**
+
+      - Data structures for representing lattices, crystal structures, degrees of freedom (DoF), symmetry operations, and crystal sites.
+      - Methods for enumerating superlattices, making super structures, finding primitive and reduced cells, finding symmetry operations, and applying symmetry operations.
 
 
 About CASM
