@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.vaspwrapper.relax &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">casm.vaspwrapper.relax</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for casm.vaspwrapper.relax</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Defines the relax module methods&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">casm</span>
+<span class="kn">from</span> <span class="nn">casm.vaspwrapper.vasp_calculator_base</span> <span class="kn">import</span> <span class="n">VaspCalculatorBase</span>
+<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="kn">import</span> <span class="n">Relax</span> <span class="k">as</span> <span class="n">calculator</span>
+
+<span class="kn">from</span> <span class="nn">casm</span> <span class="kn">import</span> <span class="n">vasp</span><span class="p">,</span> <span class="n">wrapper</span>
+<span class="kn">from</span> <span class="nn">casm.misc</span> <span class="kn">import</span> <span class="n">noindent</span>
+<span class="kn">from</span> <span class="nn">casm.project</span> <span class="kn">import</span> <span class="n">DirectoryStructure</span><span class="p">,</span> <span class="n">ProjectSettings</span>
+<span class="kn">from</span> <span class="nn">casm.vaspwrapper</span> <span class="kn">import</span> <span class="n">VaspWrapperError</span><span class="p">,</span> <span class="n">read_settings</span><span class="p">,</span> <span class="n">write_settings</span>
+<span class="kn">from</span> <span class="nn">casm.vaspwrapper.vasp_calculator_base</span> <span class="kn">import</span> <span class="n">VaspCalculatorBase</span>
+
+
+<div class="viewcode-block" id="Relax"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax">[docs]</a><span class="k">class</span> <span class="nc">Relax</span><span class="p">(</span><span class="n">VaspCalculatorBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The Relax class contains functions for setting up, executing, and parsing a VASP relaxation.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    selection : casm.project.Selection</span>
+<span class="sd">        selection of configuration</span>
+<span class="sd">    calctype : string</span>
+<span class="sd">        calctype to setup and run the calculation</span>
+<span class="sd">    auto : bool</span>
+<span class="sd">    sort : bool</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    from_configuration_dir(configuration_dir=&#39;string&#39;, calctype=&#39;string&#39;, bool, bool)</span>
+<span class="sd">        returns a instance of the Neb class instantited with a single configuration</span>
+<span class="sd">    config_properties(config_data=dict/Pandas.DataFrame)</span>
+<span class="sd">        return a dict of the properties required to setup a configuration</span>
+<span class="sd">    pre_setup</span>
+<span class="sd">        creates folder and makes POS files for each image</span>
+<span class="sd">    setup</span>
+<span class="sd">        sets up the input vasp files for the selection</span>
+<span class="sd">    config_setup</span>
+<span class="sd">        sets up the input vasp files for a single configuration</span>
+<span class="sd">    get_vasp_input_files(config_data=dict/Pandas.DataFrame, settings=dict)</span>
+<span class="sd">        returns filenames of a vasp calculation</span>
+<span class="sd">    submit</span>
+<span class="sd">        submit a job for each configuration</span>
+<span class="sd">    run</span>
+<span class="sd">        runs the calcutation on the selection</span>
+<span class="sd">    report</span>
+<span class="sd">        reports results for the selection</span>
+<span class="sd">    run_cmd(configdir=&#39;string&#39;, calctype=&#39;string&#39;)</span>
+<span class="sd">        return a string of command to run a single configuration</span>
+<span class="sd">    finalize(config_data=dict/pandas_data, super_poscarfile=&#39;string&#39;)</span>
+<span class="sd">        checks convergnce and write a properties file for the selection</span>
+<span class="sd">    properties(calcdir=&#39;string&#39;, super_poscarfile=&#39;string&#39;, speciesfile=&#39;string&#39;)</span>
+<span class="sd">        return a dict containing all the relaxed properties for a configuration</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The Relax class contains functions for setting up, executing, and parsing a VASP relaxation.</span>
+
+<span class="sd">    The relaxation creates the following directory structure:</span>
+<span class="sd">    config/</span>
+<span class="sd">        calctype.name/</span>
+<span class="sd">            run.0/</span>
+<span class="sd">            ....</span>
+
+<span class="sd">    &#39;run.i&#39; directories are only created when ready.</span>
+
+<span class="sd">    This automatically looks for VASP settings files using:</span>
+<span class="sd">        casm.project.DirectoryStructure.settings_path_crawl</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Relax.__init__"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a VASP job object&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Construct a casm.vaspwrapper.Relax instance:&quot;</span><span class="p">)</span>
+        <span class="n">VaspCalculatorBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">calctype</span><span class="p">,</span> <span class="n">auto</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span></div>
+
+<div class="viewcode-block" id="Relax.pre_setup"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.pre_setup">[docs]</a>    <span class="k">def</span> <span class="nf">pre_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setus up folders and writes structure files&quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="s2">&quot;query -c &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot; --write-structure&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">config_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;calcdir&quot;</span><span class="p">],</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Relax.config_setup"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.config_setup">[docs]</a>    <span class="k">def</span> <span class="nf">config_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Setup initial relaxation run for a configuration</span>
+
+<span class="sd">            Uses the following files from the most local .../settings/calctype.name directory:</span>
+<span class="sd">                INCAR: VASP input settings</span>
+<span class="sd">                KPOINTS: VASP kpoints settings</span>
+<span class="sd">                POSCAR: reference for KPOINTS if KPOINTS mode is not A/AUTO/Automatic</span>
+<span class="sd">                SPECIES: info for each species such as which POTCAR files to use, MAGMOM, GGA+U, etc.</span>
+
+<span class="sd">            Uses the following files from the .../config_calcdir/00 directory:</span>
+<span class="sd">                POSCAR: sample structure of the configuration to be relaxed</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_settings</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;setfile&quot;</span><span class="p">])</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">config_setup</span><span class="p">(</span><span class="n">config_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;initial_deformation&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">deformation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_deformation</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">apply_deformation</span><span class="p">(</span><span class="n">deformation</span><span class="p">,</span> <span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;calcdir&quot;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Relax.setup"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup initial relaxation run for the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Relax.submit"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a job for each configuration&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Relax.run"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs the calcutation on the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Relax.report"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.report">[docs]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reports results for the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">report</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Relax.run_cmd"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.run_cmd">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">run_cmd</span><span class="p">(</span><span class="n">configdir</span><span class="p">,</span> <span class="n">calctype</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string of command to run a single configuration&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;python -c </span><span class="se">\&quot;</span><span class="s2">import casm.vaspwrapper; obj = casm.vaspwrapper.Relax.from_configuration_dir(&#39;</span><span class="si">{0}</span><span class="s2">&#39;, &#39;</span><span class="si">{1}</span><span class="s2">&#39;); obj.run()</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">configdir</span><span class="p">,</span> <span class="n">calctype</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Relax.finalize"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.finalize">[docs]</a>    <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks convergnce and write a properties file for the selection&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">config_data</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Relax.properties"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.Relax.html#casm.vaspwrapper.Relax.properties">[docs]</a>    <span class="k">def</span> <span class="nf">properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">speciesfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make properties output as a list of dict of each image properties&quot;&quot;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Relax</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">super_poscarfile</span><span class="p">,</span>
+                                               <span class="n">speciesfile</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

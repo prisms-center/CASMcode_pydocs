@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.learn.FittingData &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.learn.TrainingData" href="casm.learn.TrainingData.html" />
+    <link rel="prev" title="casm.learn.set_input_defaults" href="casm.learn.set_input_defaults.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-info">casm.info</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-learn">casm.learn</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.create_halloffame.html">casm.learn.create_halloffame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.EqualIndividual.html">casm.learn.EqualIndividual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.empty_individual.html">casm.learn.empty_individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_Lasso.html">casm.learn.example_input_Lasso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_LassoCV.html">casm.learn.example_input_LassoCV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_RFE.html">casm.learn.example_input_RFE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_GeneticAlgorithm.html">casm.learn.example_input_GeneticAlgorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_IndividualBestFirst.html">casm.learn.example_input_IndividualBestFirst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_PopulationBestFirst.html">casm.learn.example_input_PopulationBestFirst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.example_input_DirectSelection.html">casm.learn.example_input_DirectSelection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.open_input.html">casm.learn.open_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.set_input_defaults.html">casm.learn.set_input_defaults</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.learn.FittingData</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#casm.learn.FittingData"><code class="docutils literal notranslate"><span class="pre">FittingData</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.TrainingData.html">casm.learn.TrainingData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.print_input_help.html">casm.learn.print_input_help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.print_individual.html">casm.learn.print_individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.print_population.html">casm.learn.print_population</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.print_halloffame.html">casm.learn.print_halloffame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.print_eci.html">casm.learn.print_eci</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.to_json.html">casm.learn.to_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.open_halloffame.html">casm.learn.open_halloffame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.save_halloffame.html">casm.learn.save_halloffame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.checkspecs.html">casm.learn.checkspecs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.checkhull.html">casm.learn.checkhull</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.fit_and_select.html">casm.learn.fit_and_select</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.learn.direct_fit.html">casm.learn.direct_fit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">casm.learn.FittingData</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/casm.learn.FittingData.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="casm-learn-fittingdata">
+<h1>casm.learn.FittingData<a class="headerlink" href="#casm-learn-fittingdata" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="casm.learn.FittingData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">casm.learn.</span></span><span class="sig-name descname"><span class="pre">FittingData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/learn/fit.html#FittingData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.learn.FittingData" title="Permalink to this definition"></a></dt>
+<dd><p>FittingData holds feature values, target values, sample weights, etc. used
+to solve:</p>
+<blockquote>
+<div><p>L*X * b = L*y</p>
+</div></blockquote>
+<p>a weighted linear model where the weights are given by W = L * L.transpose().</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.X">
+<span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#casm.learn.FittingData.X" title="Permalink to this definition"></a></dt>
+<dd><p>The training input samples (correlations).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.y">
+<span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#casm.learn.FittingData.y" title="Permalink to this definition"></a></dt>
+<dd><p>The target values (property values).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like of shape: (n_samples, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.cv">
+<span class="sig-name descname"><span class="pre">cv</span></span><a class="headerlink" href="#casm.learn.FittingData.cv" title="Permalink to this definition"></a></dt>
+<dd><p>Provides train/test splits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>cross-validation generator or an iterable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.n_samples">
+<span class="sig-name descname"><span class="pre">n_samples</span></span><a class="headerlink" href="#casm.learn.FittingData.n_samples" title="Permalink to this definition"></a></dt>
+<dd><p>The number of samples / target values (number of rows in X)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.n_features">
+<span class="sig-name descname"><span class="pre">n_features</span></span><a class="headerlink" href="#casm.learn.FittingData.n_features" title="Permalink to this definition"></a></dt>
+<dd><p>The number of features (number of columns in X)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.W">
+<span class="sig-name descname"><span class="pre">W</span></span><a class="headerlink" href="#casm.learn.FittingData.W" title="Permalink to this definition"></a></dt>
+<dd><p>Contains sample weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like of shape: (n_samples, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.L">
+<span class="sig-name descname"><span class="pre">L</span></span><a class="headerlink" href="#casm.learn.FittingData.L" title="Permalink to this definition"></a></dt>
+<dd><p>Used to generate weighted_X and weighted_y, W = L * L.transpose().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like of shape: (n_samples, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.weighted_X">
+<span class="sig-name descname"><span class="pre">weighted_X</span></span><a class="headerlink" href="#casm.learn.FittingData.weighted_X" title="Permalink to this definition"></a></dt>
+<dd><p>Weighted training input data, weighted_X = L*x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like of shape: (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.weighted_y">
+<span class="sig-name descname"><span class="pre">weighted_y</span></span><a class="headerlink" href="#casm.learn.FittingData.weighted_y" title="Permalink to this definition"></a></dt>
+<dd><p>Weighted target values, weighted_y = L*y.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like of shape: (n_samples, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.scoring">
+<span class="sig-name descname"><span class="pre">scoring</span></span><a class="headerlink" href="#casm.learn.FittingData.scoring" title="Permalink to this definition"></a></dt>
+<dd><p>A string or a scorer callable object / function with signature
+scorer(estimator, X, y). The parameter for sklearn.model_selection.cross_val_score,
+default = None, uses estimator.score().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string, callable or None, optional, default: None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.penalty">
+<span class="sig-name descname"><span class="pre">penalty</span></span><a class="headerlink" href="#casm.learn.FittingData.penalty" title="Permalink to this definition"></a></dt>
+<dd><p>The CV score is increased by ‘penalty*(number of selected basis function)’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float, optional, default=0.0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.learn.FittingData.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#casm.learn.FittingData.data" title="Permalink to this definition"></a></dt>
+<dd><p>Optionally, store TrainingData.data with weighted_X and weighted_y data
+added. No checks are made for consistency of tdata.X, tdata.y and X and
+y or other parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame, optional, default=None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The training input samples (correlations).</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em> of </em><em>shape:</em><em> (</em><em>n_samples</em><em>, </em><em>1</em><em>)</em>) – The target values (property values).</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation generator</em><em> or </em><em>an iterable</em>) – Provides train/test splits</p></li>
+<li><p><strong>sample_weight</strong> (<em>None</em><em>, </em><em>1-d array-like</em><em> of </em><em>shape:</em><em> (</em><em>n_samples</em><em>, </em><em>1</em><em>)</em><em>, or </em><em>2-d array-like</em><em> of </em><em>shape:</em><em> (</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – <p>Sample weights.</p>
+<dl class="simple">
+<dt>if sample_weight is None: (default, unweighted)</dt><dd><p>W = np.matlib.eye(N)</p>
+</dd>
+<dt>if sample_weight is 1-dimensional:</dt><dd><p>W = np.diag(sample_weight)*Nvalue/np.sum(sample_weight)</p>
+</dd>
+<dt>if sample_weight is 2-dimensional (must be Hermitian, positive-definite):</dt><dd><p>W = sample_weight*Nvalue/np.sum(sample_weight)</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – A string or a scorer callable object / function with signature
+scorer(estimator, X, y). The parameter for sklearn.model_selection.cross_val_score,
+default = None, uses estimator.score().</p></li>
+<li><p><strong>penalty</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default=0.0</em>) – The CV score is increased by ‘penalty*(number of selected basis function)’</p></li>
+<li><p><strong>tdata</strong> (<em>TrainingData instance</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Optionally, store TrainingData.data with weighted_X and weighted_y data
+added. No checks are made for consistency of tdata.X, tdata.y and X and
+y or other parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="casm.learn.FittingData.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/learn/fit.html#FittingData.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.learn.FittingData.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The training input samples (correlations).</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em> of </em><em>shape:</em><em> (</em><em>n_samples</em><em>, </em><em>1</em><em>)</em>) – The target values (property values).</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation generator</em><em> or </em><em>an iterable</em>) – Provides train/test splits</p></li>
+<li><p><strong>sample_weight</strong> (<em>None</em><em>, </em><em>1-d array-like</em><em> of </em><em>shape:</em><em> (</em><em>n_samples</em><em>, </em><em>1</em><em>)</em><em>, or </em><em>2-d array-like</em><em> of </em><em>shape:</em><em> (</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – <p>Sample weights.</p>
+<dl class="simple">
+<dt>if sample_weight is None: (default, unweighted)</dt><dd><p>W = np.matlib.eye(N)</p>
+</dd>
+<dt>if sample_weight is 1-dimensional:</dt><dd><p>W = np.diag(sample_weight)*Nvalue/np.sum(sample_weight)</p>
+</dd>
+<dt>if sample_weight is 2-dimensional (must be Hermitian, positive-definite):</dt><dd><p>W = sample_weight*Nvalue/np.sum(sample_weight)</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – A string or a scorer callable object / function with signature
+scorer(estimator, X, y). The parameter for sklearn.model_selection.cross_val_score,
+default = None, uses estimator.score().</p></li>
+<li><p><strong>penalty</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default=0.0</em>) – The CV score is increased by ‘penalty*(number of selected basis function)’</p></li>
+<li><p><strong>tdata</strong> (<em>TrainingData instance</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Optionally, store TrainingData.data with weighted_X and weighted_y data
+added. No checks are made for consistency of tdata.X, tdata.y and X and
+y or other parameters.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#casm.learn.FittingData.__init__" title="casm.learn.FittingData.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(X, y, cv[, sample_weight, scoring, ...])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param X<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The training input samples (correlations).</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="casm.learn.set_input_defaults.html" class="btn btn-neutral float-left" title="casm.learn.set_input_defaults" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="casm.learn.TrainingData.html" class="btn btn-neutral float-right" title="casm.learn.TrainingData" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

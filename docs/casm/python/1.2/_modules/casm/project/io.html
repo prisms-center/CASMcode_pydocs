@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.project.io &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">casm.project.io</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for casm.project.io</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;casm.project file io&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">casm.misc</span> <span class="kn">import</span> <span class="n">compat</span><span class="p">,</span> <span class="n">noindent</span>
+
+
+<div class="viewcode-block" id="write_eci"><a class="viewcode-back" href="../../../reference/casm.project.write_eci.html#casm.project.write_eci">[docs]</a><span class="k">def</span> <span class="nf">write_eci</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">eci</span><span class="p">,</span> <span class="n">fit_details</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write eci.json</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+
+<span class="sd">    proj: casm.project.Project</span>
+<span class="sd">        The CASM project</span>
+
+<span class="sd">    eci: List[(index, value)]</span>
+<span class="sd">        List of tuple containing basis function index and coefficient value:</span>
+
+<span class="sd">            index (int): linear index of basis function</span>
+<span class="sd">            value (float): ECI value</span>
+
+<span class="sd">    fit_details: Dict</span>
+<span class="sd">        Description of the fitting method used to generate the ECI, usually as output by `casm.learn.to_json`. It is added to the eci.json file under the attribute `&quot;fit&quot;`.</span>
+
+<span class="sd">    clex: casm.project.ClexDescription</span>
+<span class="sd">        Specifies where to write the ECI. Default value is  `proj.settings.default_clex`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">dir</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">dir</span>
+    <span class="k">if</span> <span class="n">clex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">clex</span> <span class="o">=</span> <span class="n">proj</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">default_clex</span>
+
+    <span class="c1"># read basis.json</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">clex</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># edit to add fitting settings</span>
+    <span class="n">j</span><span class="p">[</span><span class="s2">&quot;fit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fit_details</span>
+
+    <span class="c1"># make linear_function_index: (linear_orbit_index, cluster_function_index)</span>
+    <span class="n">function_keys</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">linear_orbit_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">orbit</span> <span class="ow">in</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;orbits&quot;</span><span class="p">]:</span>
+            <span class="n">cluster_function_index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">cluster_function</span> <span class="ow">in</span> <span class="n">orbit</span><span class="p">[</span><span class="s2">&quot;cluster_functions&quot;</span><span class="p">]:</span>
+                <span class="n">linear_function_index</span> <span class="o">=</span> <span class="n">cluster_function</span><span class="p">[</span><span class="s2">&quot;linear_function_index&quot;</span><span class="p">]</span>
+                <span class="n">function_keys</span><span class="p">[</span><span class="n">linear_function_index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">linear_orbit_index</span><span class="p">,</span> <span class="n">cluster_function_index</span><span class="p">)</span>
+                <span class="n">cluster_function_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">linear_orbit_index</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Formatting error in basis.json&quot;</span><span class="p">)</span>
+
+    <span class="c1"># edit to add eci</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">eci</span><span class="p">:</span>
+        <span class="n">linear_orbit_index</span> <span class="o">=</span> <span class="n">function_keys</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cluster_function_index</span> <span class="o">=</span> <span class="n">function_keys</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">orbit</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;orbits&quot;</span><span class="p">][</span><span class="n">linear_orbit_index</span><span class="p">]</span>
+        <span class="n">cluster_function</span> <span class="o">=</span> <span class="n">orbit</span><span class="p">[</span><span class="s2">&quot;cluster_functions&quot;</span><span class="p">][</span><span class="n">cluster_function_index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cluster_function</span><span class="p">[</span><span class="s2">&quot;linear_function_index&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">index</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Formatting error in &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;: &quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; linear_function_index mismatch&quot;</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">cluster_function</span><span class="p">[</span><span class="s2">&quot;eci&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="c1"># pretty printing -- could be improved</span>
+    <span class="n">cspecs_params</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;bspecs&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_specs&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;generating_group&quot;</span> <span class="ow">in</span> <span class="n">cspecs_params</span><span class="p">:</span>
+        <span class="n">cspecs_params</span><span class="p">[</span><span class="s2">&quot;generating_group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span>
+            <span class="n">cspecs_params</span><span class="p">[</span><span class="s2">&quot;generating_group&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;orbits&quot;</span><span class="p">]:</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;prototype&quot;</span><span class="p">][</span><span class="s2">&quot;sites&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sites</span><span class="p">)):</span>
+            <span class="n">sites</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">sites</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">][</span><span class="s2">&quot;basis&quot;</span><span class="p">]:</span>
+        <span class="n">site</span><span class="p">[</span><span class="s2">&quot;coordinate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">site</span><span class="p">[</span><span class="s2">&quot;coordinate&quot;</span><span class="p">])</span>
+        <span class="n">site</span><span class="p">[</span><span class="s2">&quot;occupants&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span><span class="n">site</span><span class="p">[</span><span class="s2">&quot;occupants&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">][</span><span class="s2">&quot;lattice_vectors&quot;</span><span class="p">])):</span>
+        <span class="n">j</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">][</span><span class="s2">&quot;lattice_vectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">noindent</span><span class="o">.</span><span class="n">NoIndent</span><span class="p">(</span>
+            <span class="n">j</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">][</span><span class="s2">&quot;lattice_vectors&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># write eci.json</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">eci</span><span class="p">(</span><span class="n">clex</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Writing:&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">noindent</span><span class="o">.</span><span class="n">NoIndentEncoder</span><span class="p">))</span>
+
+    <span class="c1"># refresh proj to reflect new eci</span>
+    <span class="n">proj</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">clear_clex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

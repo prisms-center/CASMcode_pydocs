@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.vasp.run &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">casm.vasp.run</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for casm.vasp.run</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Job manipuation routines for VASP&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+
+<span class="kn">from</span> <span class="nn">casm.vasp.error</span> <span class="kn">import</span> <span class="n">VaspError</span><span class="p">,</span> <span class="n">VaspWarning</span><span class="p">,</span> <span class="n">error_check</span><span class="p">,</span> <span class="n">crash_check</span>
+<span class="kn">from</span> <span class="nn">casm.vasp</span> <span class="kn">import</span> <span class="n">io</span>
+
+
+<div class="viewcode-block" id="complete_job"><a class="viewcode-back" href="../../../reference/casm.vasp.complete_job.html#casm.vasp.complete_job">[docs]</a><span class="k">def</span> <span class="nf">complete_job</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove files from a vasp job directory</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">         jobdir: path to current job directory</span>
+<span class="sd">       Settings:</span>
+<span class="sd">         copy: Does nothing</span>
+<span class="sd">         move: Does nothing</span>
+<span class="sd">         compress: Compresses listed files</span>
+<span class="sd">         backup: Does nothing</span>
+<span class="sd">         remove: Deletes listed files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complete VASP job: &quot;</span> <span class="o">+</span> <span class="n">jobdir</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="c1"># remove files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  rm:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">+</span>
+                     <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;backup&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># compress files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; gzip:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="c1"># Open target file, target file.gz</span>
+            <span class="n">f_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+            <span class="n">f_out</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="c1"># Compress, close files</span>
+            <span class="n">f_out</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">f_in</span><span class="p">)</span>
+            <span class="n">f_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">f_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="c1"># Remove original target file</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../reference/casm.vasp.run.html#casm.vasp.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">jobdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">stdout</span><span class="o">=</span><span class="s2">&quot;std.out&quot;</span><span class="p">,</span>
+        <span class="n">stderr</span><span class="o">=</span><span class="s2">&quot;std.err&quot;</span><span class="p">,</span>
+        <span class="n">npar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ncore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ncpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">kpar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">poll_check_time</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+        <span class="n">err_check_time</span><span class="o">=</span><span class="mf">60.0</span><span class="p">,</span>
+        <span class="n">err_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Run vasp using subprocess.</span>
+
+<span class="sd">        The &#39;command&#39; is executed in the directory &#39;jobdir&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            jobdir:     directory to run vasp.  If jobdir is None, the current directory is used.</span>
+<span class="sd">            stdout:     filename to write to.  If stdout is None, &quot;std.out&quot; is used.</span>
+<span class="sd">            stderr:     filename to write to.  If stderr is None, &quot;std.err&quot; is used.</span>
+<span class="sd">            npar:       (int or None) VASP INCAR NPAR setting. If npar is None, then NPAR is removed from INCAR</span>
+<span class="sd">            kpar:       (int or None) VASP INCAR KPAR setting. If kpar is None, then KPAR is removed from INCAR</span>
+<span class="sd">            ncore:      (int or None) VASP INCAR NCORE setting. If not npar is None or ncore is None, then NCORE is removed from INCAR</span>
+<span class="sd">            command:    (str or None) vasp execution command</span>
+<span class="sd">                        If command != None: then &#39;command&#39; is run in a subprocess</span>
+<span class="sd">                        Else, if ncpus == 1, then command = &quot;vasp&quot;</span>
+<span class="sd">                        Else, command = &quot;mpirun -np {NCPUS} vasp&quot;</span>
+<span class="sd">            ncpus:      (int) if &#39;{NCPUS}&#39; is in &#39;command&#39; string, then &#39;ncpus&#39; is substituted in the command.</span>
+<span class="sd">                        if ncpus==None, $PBS_NP is used if it exists, else 1</span>
+<span class="sd">            poll_check_time: how frequently to check if the vasp job is completed</span>
+<span class="sd">            err_check_time: how frequently to parse vasp output to check for errors</span>
+<span class="sd">            err_types:  List of error types to check for. Supported errors: &#39;IbzkptError&#39;, &#39;SubSpaceMatrixError&#39;, &#39;NbandsError&#39;. Default: None, in which case only SubSpaceMatrixErrors are checked.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Begin vasp run:&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">jobdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jobdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+    <span class="n">currdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ncpus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;PBS_NP&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PBS_NP&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="s2">&quot;SLURM_NTASKS&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SLURM_NTASKS&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ncpus</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ncpus</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;vasp&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;mpirun -np </span><span class="si">{NCPUS}</span><span class="s2"> vasp&quot;</span>
+
+    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;\{NCPUS\}&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">NCPUS</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">ncpus</span><span class="p">))</span>
+
+    <span class="c1">### Expand remaining environment variables</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">npar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ncore</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">npar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ncore</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;NPAR&quot;</span><span class="p">:</span> <span class="n">npar</span><span class="p">,</span> <span class="s2">&quot;NCORE&quot;</span><span class="p">:</span> <span class="n">ncore</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">kpar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">io</span><span class="o">.</span><span class="n">set_incar_tag</span><span class="p">({</span><span class="s2">&quot;KPAR&quot;</span><span class="p">:</span> <span class="n">kpar</span><span class="p">},</span> <span class="n">jobdir</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  jobdir:&quot;</span><span class="p">,</span> <span class="n">jobdir</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  exec:&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="n">sout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">serr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stderr</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">sout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">serr</span><span class="p">)</span>
+
+    <span class="c1"># wait for process to end, and periodically check for errors</span>
+    <span class="n">poll</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+    <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">stopcar_time</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">poll</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_check_time</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_check</span> <span class="o">&gt;</span> <span class="n">err_check_time</span><span class="p">:</span>
+            <span class="n">last_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># FreezeErrors are fatal and usually not helped with STOPCAR</span>
+                <span class="k">if</span> <span class="s2">&quot;FreezeError&quot;</span> <span class="ow">in</span> <span class="n">err</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  VASP is frozen, killing job&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                    <span class="c1"># Sometimes p.kill doesn&#39;t work if the process is on multiple nodes</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+                    <span class="n">p</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+                    <span class="c1"># If the job is re-invoked (e.g. via mpirun or srun) too quickly</span>
+                    <span class="c1">#   after the previous job ended, infinitiband clusters can have</span>
+                    <span class="c1">#   some issues with resource allocation. A 30s sleep solves this.</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+                <span class="c1"># Other errors can be killed with STOPCAR, which is safer</span>
+                <span class="k">elif</span> <span class="n">stopcar_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Found errors:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Killing job with STOPCAR&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                    <span class="n">io</span><span class="o">.</span><span class="n">write_stopcar</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">jobdir</span><span class="p">)</span>
+                    <span class="n">stopcar_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+                <span class="c1"># If the STOPCAR exists, wait 5 min before manually killing the job</span>
+                <span class="k">elif</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stopcar_time</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  VASP is non-responsive, killing job&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+                    <span class="n">p</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+                    <span class="c1"># If the job is re-invoked (e.g. via mpirun or srun) too quickly</span>
+                    <span class="c1">#   after the previous job ended, infinitiband clusters can have</span>
+                    <span class="c1">#   some issues with resource allocation. A 30s sleep solves this.</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+        <span class="n">poll</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+
+    <span class="c1"># close output files</span>
+    <span class="n">sout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">serr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currdir</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run complete&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="c1"># check finished job for errors</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Crash-type errors take priority over any other error that may show up</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">crash_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">error_check</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jobdir</span><span class="p">,</span> <span class="n">stdout</span><span class="p">),</span> <span class="n">err_types</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Found errors:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">err</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

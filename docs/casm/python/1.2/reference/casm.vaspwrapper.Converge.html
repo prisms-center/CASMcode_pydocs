@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.vaspwrapper.Converge &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.vaspwrapper.Relax" href="casm.vaspwrapper.Relax.html" />
+    <link rel="prev" title="casm.vasp.io.CmagspinAttr" href="casm.vasp.io.CmagspinAttr.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-info">casm.info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.vaspwrapper.Converge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#casm.vaspwrapper.Converge"><code class="docutils literal notranslate"><span class="pre">Converge</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.Relax.html">casm.vaspwrapper.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.VaspCalculatorBase.html">casm.vaspwrapper.VaspCalculatorBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.VaspWrapperError.html">casm.vaspwrapper.VaspWrapperError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.read_settings.html">casm.vaspwrapper.read_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.write_settings.html">casm.vaspwrapper.write_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vaspwrapper.vasp_input_file_names.html">casm.vaspwrapper.vasp_input_file_names</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">casm.vaspwrapper.Converge</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/casm.vaspwrapper.Converge.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="casm-vaspwrapper-converge">
+<h1>casm.vaspwrapper.Converge<a class="headerlink" href="#casm-vaspwrapper-converge" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">casm.vaspwrapper.</span></span><span class="sig-name descname"><span class="pre">Converge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">propdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/converge.html#Converge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.vaspwrapper.Converge" title="Permalink to this definition"></a></dt>
+<dd><p>The Converge class contains functions for setting up, executing, and parsing a VASP convergence test.</p>
+<blockquote>
+<div><p>The convergence creates the following directory structure:
+config/</p>
+<blockquote>
+<div><dl class="simple">
+<dt>calctype.name/</dt><dd><dl class="simple">
+<dt>property/</dt><dd><p>value.0/
+value.1/
+…
+value.n/</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>‘value.i’ directories are created for each discrete step in ‘value’</dt><dd><p>being explored for ‘property’, e.g., every 10 eV for ENCUT, or every
+1 for KPOINTS.</p>
+</dd>
+</dl>
+<p>If runs are static runs, ‘value.i’ contains INCAR, POSCAR, etc.
+If runs are relaxation runs, ‘value.i’ contains ‘run.0’, ‘run.1’, …,</p>
+<blockquote>
+<div><p>‘run.final’, where ‘run.final’ contains a static run.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>This automatically looks for VASP settings files using:</dt><dd><p>casm.project.DirectoryStructure.settings_path_crawl</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.casm_settings">
+<span class="sig-name descname"><span class="pre">casm_settings</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.casm_settings" title="Permalink to this definition"></a></dt>
+<dd><p>CASM project settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>casm.project.ProjectSettings instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.casm_directories">
+<span class="sig-name descname"><span class="pre">casm_directories</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.casm_directories" title="Permalink to this definition"></a></dt>
+<dd><p>CASM project directory hierarchy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>casm.project.DirectoryStructure instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.settings" title="Permalink to this definition"></a></dt>
+<dd><p>Settings for job submission and the relaxation, see vaspwrapper.read_settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.configdir">
+<span class="sig-name descname"><span class="pre">configdir</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.configdir" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Directory where configuration results are stored. The result of:</dt><dd><p>casm.project.DirectoryStructure.configuration_dir(self.configname)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.configname">
+<span class="sig-name descname"><span class="pre">configname</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.configname" title="Permalink to this definition"></a></dt>
+<dd><p>The name of the configuration to be calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.auto">
+<span class="sig-name descname"><span class="pre">auto</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.auto" title="Permalink to this definition"></a></dt>
+<dd><p>True if using prisms_jobs module’s JobDB to manage jobs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.sort">
+<span class="sig-name descname"><span class="pre">sort</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.sort" title="Permalink to this definition"></a></dt>
+<dd><p>True if sorting atoms in POSCAR by type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.clex">
+<span class="sig-name descname"><span class="pre">clex</span></span><a class="headerlink" href="#casm.vaspwrapper.Converge.clex" title="Permalink to this definition"></a></dt>
+<dd><p>The cluster expansion being worked on. Used for the ‘calctype’ settings.
+Currently, fixed to self.casm_settings.default_clex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>casm.project.ClexDescription instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Construct a VASP convergence job object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configdir</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Path to configuration directory. If None, uses the current working
+directory</p></li>
+<li><p><strong>auto</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to use the prisms_jobs module’s JobDB to manage jobs</p></li>
+<li><p><strong>sort</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to sort atoms in POSCAR by type</p></li>
+<li><p><strong>propdir</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – <dl class="simple">
+<dt>Name of the directory within the configdir for converging the</dt><dd><p>current property-of-interest</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>prop</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Name of an INCAR property that is being converged</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="casm.vaspwrapper.Converge.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">propdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/vaspwrapper/converge.html#Converge.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.vaspwrapper.Converge.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a VASP convergence job object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configdir</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Path to configuration directory. If None, uses the current working
+directory</p></li>
+<li><p><strong>auto</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to use the prisms_jobs module’s JobDB to manage jobs</p></li>
+<li><p><strong>sort</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default=True</em><em>,</em>) – Use True to sort atoms in POSCAR by type</p></li>
+<li><p><strong>propdir</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – <dl class="simple">
+<dt>Name of the directory within the configdir for converging the</dt><dd><p>current property-of-interest</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>prop</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Name of an INCAR property that is being converged</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#casm.vaspwrapper.Converge.__init__" title="casm.vaspwrapper.Converge.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([configdir, auto, sort, propdir, prop])</p></td>
+<td><p>Construct a VASP convergence job object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect</span></code>()</p></td>
+<td><p>Collect the results of a convergence run</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">finalize</span></code>()</p></td>
+<td><p>Checks if a series of runs is converged, and writes properties.calc.json as appropriate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">frange</span></code>(x, y[, jump])</p></td>
+<td><p>Robust Range for floats, without using numpy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_converged</span></code>()</p></td>
+<td><p>Check for electronic convergence in completed calculations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">lengths</span></code>(lat)</p></td>
+<td><p>Computes the lengths of the 3 basis vectors in a lattice</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">properties</span></code>(vaspdir[, initial_structurefile, ...])</p></td>
+<td><p>Report results to properties.calc.json file in configuration directory, after checking for electronic convergence.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">report_status</span></code>(status[, failure_type])</p></td>
+<td><p>Report calculation status to status.json file in configuration directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code>()</p></td>
+<td><p>Setup input files, run a vasp convergence, and report results</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_settings</span></code>()</p></td>
+<td><p>Set default values based on runtime environment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span></code>()</p></td>
+<td><p>Setup initial convergence run</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">submit</span></code>()</p></td>
+<td><p>Submit jobs for this VASP convergence</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">volume</span></code>(lat)</p></td>
+<td><p>Computes the volume of a parallelpiped given a 3-list of 3-lists (i.e., 3 3-vectors)</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#casm.vaspwrapper.Converge.configdir" title="casm.vaspwrapper.Converge.configdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configdir</span></code></a></p></td>
+<td><p>Produces a configname from the configdir</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="casm.vasp.io.CmagspinAttr.html" class="btn btn-neutral float-left" title="casm.vasp.io.CmagspinAttr" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="casm.vaspwrapper.Relax.html" class="btn btn-neutral float-right" title="casm.vaspwrapper.Relax" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

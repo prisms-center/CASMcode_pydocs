@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.project.StructureInfo &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.vasp.io" href="casm.vasp.io.html" />
+    <link rel="prev" title="casm.project.write_eci" href="casm.project.write_eci.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-info">casm.info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-project">casm.project</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.project.project_path.html">casm.project.project_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.html">casm.project.ClexDescription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.html">casm.project.ProjectSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.html">casm.project.DirectoryStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.html">casm.project.Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Prim.html">casm.project.Prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Selection.html">casm.project.Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.query.html">casm.project.query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.write_eci.html">casm.project.write_eci</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.project.StructureInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#casm.project.StructureInfo"><code class="docutils literal notranslate"><span class="pre">StructureInfo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#casm.project.StructureInfo.self.atom_type"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.atom_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#casm.project.StructureInfo.self.atom_properties"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.atom_properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#casm.project.StructureInfo.self.mol_type"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.mol_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#casm.project.StructureInfo.self.mol_properties"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.mol_properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.atom_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.atom_properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.mol_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">StructureInfo.self.mol_properties</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">casm.project.StructureInfo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/casm.project.StructureInfo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="casm-project-structureinfo">
+<h1>casm.project.StructureInfo<a class="headerlink" href="#casm-project-structureinfo" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="casm.project.StructureInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">casm.project.</span></span><span class="sig-name descname"><span class="pre">StructureInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/structure.html#StructureInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.project.StructureInfo" title="Permalink to this definition"></a></dt>
+<dd><p>Contains the atom and molecule attributes’ information</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.project.StructureInfo.self.atom_type">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">atom_type</span></span><a class="headerlink" href="#casm.project.StructureInfo.self.atom_type" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str] - Contains the atom types</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.project.StructureInfo.self.atom_properties">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">atom_properties</span></span><a class="headerlink" href="#casm.project.StructureInfo.self.atom_properties" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict{Dict{List[float or int]}} - Contains dofs for all the atoms in the structure.json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.project.StructureInfo.self.mol_type">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">mol_type</span></span><a class="headerlink" href="#casm.project.StructureInfo.self.mol_type" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str] - Contains the molecule types</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.project.StructureInfo.self.mol_properties">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">mol_properties</span></span><a class="headerlink" href="#casm.project.StructureInfo.self.mol_properties" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict{Dict{List[float or int]}} - Contains dofs for the molecules</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Look</span> <span class="pre">the</span> <span class="pre">example</span> <span class="pre">below</span> <span class="pre">for</span> <span class="pre">clarity</span> <span class="pre">regarding</span> <span class="pre">object</span> <span class="pre">properties</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">For</span> <span class="pre">example</span> <span class="pre">consider</span> <span class="pre">a</span> <span class="pre">Cmagspin</span> <span class="pre">dof</span> <span class="pre">for</span> <span class="pre">NaFeO2</span> <span class="pre">system</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">atom_type</span></span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[Na, Fe, O, O]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">atom_properties</span></span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>{‘Cmagspin’:{‘value’: [[0],[-1],[0],[0]]}}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">mol_type</span></span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[Na, Fe-, O, O]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-prename descclassname"><span class="pre">self.</span></span><span class="sig-name descname"><span class="pre">mol_properties</span></span><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>{‘Cmagspin’: {‘value’: [[0],[0],[0],[0]]}}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>This class should be considered experimental and subject to change.</p>
+<p>Constructs the StructureInfo object by reading the structure.json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em><em> (</em><em>structure.json file</em><em>)</em>) – </p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="casm.project.StructureInfo.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/casm/project/structure.html#StructureInfo.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.project.StructureInfo.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs the StructureInfo object by reading the structure.json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em><em> (</em><em>structure.json file</em><em>)</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#casm.project.StructureInfo.__init__" title="casm.project.StructureInfo.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(filename)</p></td>
+<td><p>Constructs the StructureInfo object by reading the structure.json file</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code>(filename)</p></td>
+<td><p>Reads the attribute information from a CASM structure.json file</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="casm.project.write_eci.html" class="btn btn-neutral float-left" title="casm.project.write_eci" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="casm.vasp.io.html" class="btn btn-neutral float-right" title="casm.vasp.io" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

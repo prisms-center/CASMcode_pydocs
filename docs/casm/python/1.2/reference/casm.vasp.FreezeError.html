@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.vasp.FreezeError &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm.vasp.error_check" href="casm.vasp.error_check.html" />
+    <link rel="prev" title="casm.vasp.NoConvergeError" href="casm.vasp.NoConvergeError.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CASM</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-api">casm.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-info">casm.info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-learn">casm.learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-project">casm.project</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#casm-vasp">casm.vasp</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.io.html">casm.vasp.io</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.VaspError.html">casm.vasp.VaspError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.VaspWarning.html">casm.vasp.VaspWarning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.continue_job.html">casm.vasp.continue_job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.IbzkptError.html">casm.vasp.IbzkptError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.FEXCFError.html">casm.vasp.FEXCFError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.SubSpaceMatrixError.html">casm.vasp.SubSpaceMatrixError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.InisymError.html">casm.vasp.InisymError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.SgrconError.html">casm.vasp.SgrconError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.WavecarError.html">casm.vasp.WavecarError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.NbandsError.html">casm.vasp.NbandsError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.NoConvergeError.html">casm.vasp.NoConvergeError</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">casm.vasp.FreezeError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#casm.vasp.FreezeError"><code class="docutils literal notranslate"><span class="pre">FreezeError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.error_check.html">casm.vasp.error_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.crash_check.html">casm.vasp.crash_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.complete_job.html">casm.vasp.complete_job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.run.html">casm.vasp.run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.Relax.html">casm.vasp.Relax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.vasp.Converge.html">casm.vasp.Converge</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vasp-io">casm.vasp.io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-vaspwrapper">casm.vaspwrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#casm-wrapper">casm.wrapper</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">casm.vasp.FreezeError</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/casm.vasp.FreezeError.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="casm-vasp-freezeerror">
+<h1>casm.vasp.FreezeError<a class="headerlink" href="#casm-vasp-freezeerror" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="casm.vasp.FreezeError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">casm.vasp.</span></span><span class="sig-name descname"><span class="pre">FreezeError</span></span><a class="reference internal" href="../_modules/casm/vasp/error.html#FreezeError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.vasp.FreezeError" title="Permalink to this definition"></a></dt>
+<dd><p>VASP appears frozen</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="casm.vasp.FreezeError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#casm.vasp.FreezeError.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#casm.vasp.FreezeError.__init__" title="casm.vasp.FreezeError.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">error</span></code>([line, jobdir])</p></td>
+<td><p>Check if VASP appears frozen</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fix</span></code>(err_jobdir, new_jobdir, settings)</p></td>
+<td><p>Fix by killing the job and resubmitting.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pattern</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="casm.vasp.NoConvergeError.html" class="btn btn-neutral float-left" title="casm.vasp.NoConvergeError" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="casm.vasp.error_check.html" class="btn btn-neutral float-right" title="casm.vasp.error_check" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

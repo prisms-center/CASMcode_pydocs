@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.vaspwrapper.vaspwrapper &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">casm.vaspwrapper.vaspwrapper</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for casm.vaspwrapper.vaspwrapper</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">casm</span> <span class="kn">import</span> <span class="n">vasp</span>
+
+<span class="kn">from</span> <span class="nn">casm</span> <span class="kn">import</span> <span class="n">vasp</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">six</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">subprocess</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">casm.vasp.io</span>
+
+
+<div class="viewcode-block" id="VaspWrapperError"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.VaspWrapperError.html#casm.vaspwrapper.VaspWrapperError">[docs]</a><span class="k">class</span> <span class="nc">VaspWrapperError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="read_settings"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.read_settings.html#casm.vaspwrapper.read_settings">[docs]</a><span class="k">def</span> <span class="nf">read_settings</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a JSON object reading JSON files containing settings for VASP PBS jobs.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">        settings = a JSON object containing the settings file contents</span>
+<span class="sd">                     This can be accessed like a dict: settings[&quot;account&quot;], etc.</span>
+<span class="sd">                     ** All values are expected to be &#39;str&#39; type. **</span>
+
+<span class="sd">    The required keys are:</span>
+<span class="sd">        &quot;queue&quot;: queue to submit job in</span>
+<span class="sd">        &quot;ppn&quot;: processors (cores) per node to request</span>
+<span class="sd">        &quot;walltime&quot;: walltime to request (ex. &quot;48:00:00&quot;)</span>
+
+<span class="sd">    The optional keys are:</span>
+<span class="sd">        &quot;atom_per_proc&quot;: max number of atoms per processor (core)</span>
+<span class="sd">        &quot;account&quot;: account to submit job under (default None)</span>
+<span class="sd">        &quot;pmem&quot;: string for requested memory (default None)</span>
+<span class="sd">        &quot;priority&quot;: requested job priority (default &quot;0&quot;)</span>
+<span class="sd">        &quot;constraint&quot;: constraint. ex: ``&quot;haswell&quot;`` (default None)</span>
+<span class="sd">        &quot;message&quot;: when to send messages about jobs (ex. &quot;abe&quot;, default &quot;a&quot;)</span>
+<span class="sd">        &quot;email&quot;: where to send messages (ex. &quot;me@fake.com&quot;, default None)</span>
+<span class="sd">        &quot;qos&quot;: quality of service, &#39;qos&#39; option (ex. &quot;fluxoe&quot;)</span>
+<span class="sd">        &quot;npar&quot;: vasp incar setting (default None)</span>
+<span class="sd">        &quot;ncore&quot;: vasp incar setting (default None)</span>
+<span class="sd">        &quot;kpar&quot;: vasp incar setting (default None)</span>
+<span class="sd">        &quot;vasp_cmd&quot;: vasp execution command (default is &quot;vasp&quot; (ncpus=1) or &quot;mpirun -np {NCPUS} vasp&quot; (ncpus!=1))</span>
+<span class="sd">        &quot;ncpus&quot;: number of cpus (cores) to run on (default $PBS_NP)</span>
+<span class="sd">        &quot;run_limit&quot;: number of vasp runs until &quot;not_converging&quot; (default 10)</span>
+<span class="sd">        &quot;nrg_convergence&quot;: converged if last two runs complete and differ in energy by less than this amount (default None)</span>
+<span class="sd">        &quot;move&quot;: files to move at the end of a run (ex. [&quot;POTCAR&quot;, &quot;WAVECAR&quot;], default [&quot;POTCAR&quot;])</span>
+<span class="sd">        &quot;copy&quot;: files to copy from run to run (ex. [&quot;INCAR&quot;, &quot;KPOINTS&quot;], default [&quot;INCAR, KPOINTS&quot;])</span>
+<span class="sd">        &quot;remove&quot;: files to remove at the end of a run (ex. [&quot;IBZKPT&quot;, &quot;CHGCAR&quot;], default [&quot;IBKZPT&quot;, &quot;CHG&quot;, &quot;CHGCAR&quot;, &quot;WAVECAR&quot;, &quot;TMPCAR&quot;, &quot;EIGENVAL&quot;, &quot;DOSCAR&quot;, &quot;PROCAR&quot;, &quot;PCDAT&quot;, &quot;XDATCAR&quot;, &quot;LOCPOT&quot;, &quot;ELFCAR&quot;, &quot;PROOUT&quot;]</span>
+<span class="sd">        &quot;compress&quot;: files to compress at the end of a run (ex. [&quot;OUTCAR&quot;, &quot;vasprun.xml&quot;], default [])</span>
+<span class="sd">        &quot;backup&quot;: files to compress to backups at the end of a run, used in conjunction with move (ex. [&quot;WAVECAR&quot;])</span>
+<span class="sd">        &quot;extra_input_files&quot;: extra input files to be copied from the settings directory, e.g., a vdW kernel file.</span>
+<span class="sd">        &quot;initial&quot; : location of INCAR with tags for the initial run, if desired (e.g. to generate a PBE WAVECAR for use with M06-L)</span>
+<span class="sd">        &quot;final&quot; : location of INCAR with tags for the final run, if desired (e.g. &quot;ISMEAR = -5&quot;, etc). Otherwise, the settings enforced are (&quot;ISMEAR = -5&quot;, &quot;NSW = 0&quot;, &quot;IBRION = -1&quot;, &quot;ISIF = 2&quot;)</span>
+<span class="sd">        &quot;err_types&quot; : list of errors to check for. Allowed entries are &quot;IbzkptError&quot; and &quot;SubSpaceMatrixError&quot;. Default: [&quot;SubSpaceMatrixError&quot;]</span>
+<span class="sd">        &quot;preamble&quot; : a text file containing anything that MUST be run before python is invoked (e.g. module.txt which contains &quot;module load python&quot;, or &quot;source foo&quot;)</span>
+<span class="sd">        &quot;prerun&quot; : bash commands to run before vasp.Relax.run (default None)</span>
+<span class="sd">        &quot;postrun&quot; : bash commands to run after vasp.Relax.run completes (default None)</span>
+<span class="sd">        &quot;prop&quot;: USED IN vasp.converge ONLY. Property to converge with respect to (current options are &quot;KPOINT&quot; and &quot;ENCUT&quot;)</span>
+<span class="sd">        &quot;prop_start&quot;: USED IN vasp.converge ONLY. Starting value of &quot;prop&quot;, e.g. 450 (for ENCUT) or 5 (for KPOINTS) or [4 4 4] (for KPOINTS)</span>
+<span class="sd">        &quot;prop_stop&quot;: USED IN vasp.converge ONLY. Ending value of &quot;prop&quot;, e.g. 550 (for ENCUT) or 20 (for KPOINTS).</span>
+<span class="sd">        &quot;prop_step&quot;: USED IN vasp.converge ONLY. Delta value of &quot;prop&quot;, e.g. 10 (for ENCUT) or 2 (for KPOINTS) or [1 1 2] (for KPOINTS)</span>
+<span class="sd">        &quot;tol&quot; : USED IN vasp.converge ONLY. Tolerance type for convergence, e.g. relaxed_energy. Optional</span>
+<span class="sd">        &quot;tol_amount&quot; : USED IN vasp.converge ONLY. Tolerance criteria convergence, e.g. 0.001. If the abs difference between two runs in their &quot;tol&quot; is smaller than &quot;tol_amount&quot;, the &quot;prop&quot; is considered converged.</span>
+<span class="sd">        &quot;name&quot; : USED IN vasp.converge ONLY. Name used in the .../config/calctype.calc/NAME/property_i directory scheme, where, if not specified, &quot;prop&quot;_converge is used as NAME</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error reading settings file:&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">e</span>
+
+    <span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="s2">&quot;ppn&quot;</span><span class="p">,</span> <span class="s2">&quot;walltime&quot;</span><span class="p">]</span>
+
+    <span class="n">select_one</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="s2">&quot;atom_per_proc&quot;</span><span class="p">,</span> <span class="s2">&quot;nodes_per_image&quot;</span><span class="p">]]</span>
+
+    <span class="n">optional</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;pmem&quot;</span><span class="p">,</span> <span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;constraint&quot;</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;qos&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;npar&quot;</span><span class="p">,</span> <span class="s2">&quot;ncore&quot;</span><span class="p">,</span> <span class="s2">&quot;kpar&quot;</span><span class="p">,</span> <span class="s2">&quot;ncpus&quot;</span><span class="p">,</span> <span class="s2">&quot;vasp_cmd&quot;</span><span class="p">,</span> <span class="s2">&quot;run_limit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nrg_convergence&quot;</span><span class="p">,</span> <span class="s2">&quot;encut&quot;</span><span class="p">,</span> <span class="s2">&quot;kpoints&quot;</span><span class="p">,</span> <span class="s2">&quot;extra_input_files&quot;</span><span class="p">,</span> <span class="s2">&quot;move&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;copy&quot;</span><span class="p">,</span> <span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;compress&quot;</span><span class="p">,</span> <span class="s2">&quot;backup&quot;</span><span class="p">,</span> <span class="s2">&quot;initial&quot;</span><span class="p">,</span> <span class="s2">&quot;final&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;strict_kpoints&quot;</span><span class="p">,</span> <span class="s2">&quot;err_types&quot;</span><span class="p">,</span> <span class="s2">&quot;preamble&quot;</span><span class="p">,</span> <span class="s2">&quot;prerun&quot;</span><span class="p">,</span> <span class="s2">&quot;postrun&quot;</span><span class="p">,</span> <span class="s2">&quot;prop&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prop_start&quot;</span><span class="p">,</span> <span class="s2">&quot;prop_stop&quot;</span><span class="p">,</span> <span class="s2">&quot;prop_step&quot;</span><span class="p">,</span> <span class="s2">&quot;tol&quot;</span><span class="p">,</span> <span class="s2">&quot;tol_amount&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fine_ngx&quot;</span><span class="p">,</span> <span class="s2">&quot;CI_neb&quot;</span><span class="p">,</span> <span class="s2">&quot;n_images&quot;</span><span class="p">,</span> <span class="s2">&quot;software&quot;</span><span class="p">,</span> <span class="s2">&quot;method&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;endstate_calctype&quot;</span><span class="p">,</span> <span class="s2">&quot;initial_deformation&quot;</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;&#39; missing from: &#39;&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">select_one</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key_list</span> <span class="ow">in</span> <span class="n">select_one</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">[</span><span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_list</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span>
+                    <span class="s2">&quot;Declare one and only of the following options: &#39;&quot;</span> <span class="o">+</span>
+                    <span class="s2">&quot;&#39; or &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">key_list</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; in file: &#39;&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+                    <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span>
+                    <span class="s2">&quot;extra_input_files&quot;</span><span class="p">,</span> <span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;compress&quot;</span><span class="p">,</span> <span class="s2">&quot;backup&quot;</span>
+            <span class="p">]:</span>
+                <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]:</span>
+                <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">casm</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_MOVE_LIST</span>
+            <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]:</span>
+                <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">casm</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_COPY_LIST</span>
+            <span class="c1"># elif key.lower() in [&quot;remove&quot;]:</span>
+            <span class="c1">#     settings[key] = casm.vasp.io.DEFAULT_VASP_REMOVE_LIST</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]:</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">casm</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_REMOVE_LIST</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">casm</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_VASP_REMOVE_LIST</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;remove&quot;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;extra_input_files&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;strict_kpoints&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;strict_kpoints&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;fine_ngx&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;fine_ngx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">required</span> <span class="o">+</span> <span class="n">optional</span> <span class="o">+</span> <span class="p">[</span>
+                <span class="n">key</span> <span class="k">for</span> <span class="n">key_list</span> <span class="ow">in</span> <span class="n">select_one</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_list</span>
+        <span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="s2">&quot;unknown key &#39;&quot;</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;&#39; found in: &#39;&quot;</span> <span class="o">+</span>
+                                   <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">settings</span></div>
+
+
+<div class="viewcode-block" id="write_settings"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.write_settings.html#casm.vaspwrapper.write_settings">[docs]</a><span class="k">def</span> <span class="nf">write_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Write &#39;settings&#39; as json file, &#39;filename&#39; &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="vasp_input_file_names"><a class="viewcode-back" href="../../../reference/casm.vaspwrapper.vasp_input_file_names.html#casm.vaspwrapper.vasp_input_file_names">[docs]</a><span class="k">def</span> <span class="nf">vasp_input_file_names</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">is_neb</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Collect casm.vaspwrapper input files from the CASM project hierarchy</span>
+
+<span class="sd">    Looks for:</span>
+
+<span class="sd">      INCAR:</span>
+<span class="sd">        The base INCAR file used for calculations. Found via:</span>
+<span class="sd">          DirectoryStructure.settings_path_crawl</span>
+
+<span class="sd">      KPOINTS:</span>
+<span class="sd">        The KPOINTS file specifying the k-point grid for a reference structure</span>
+<span class="sd">        which is then scaled to be approximately the same density for other</span>
+<span class="sd">        structures. Found via:</span>
+<span class="sd">          DirectoryStructure.settings_path_crawl</span>
+
+<span class="sd">      KPOINTS_REF: (optional)</span>
+<span class="sd">        The reference structure used to determine the k-point density, if not</span>
+<span class="sd">        running in Auto mode. If running VASP with AUTO KPOINTS mode, this file</span>
+<span class="sd">        is not necessary. Found via:</span>
+<span class="sd">          DirectoryStructure.settings_path_crawl</span>
+
+<span class="sd">      structurefile:</span>
+<span class="sd">        The CASM structure.json or VASP POSCAR file giving the initial structure to be calculated.</span>
+
+<span class="sd">      SPECIES:</span>
+<span class="sd">        The SPECIES file specifying Vasp settings for each species in the structure.</span>
+
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+
+<span class="sd">      dir: casm.project.DirectoryStructure instance</span>
+<span class="sd">        CASM project directory hierarchy</span>
+
+<span class="sd">      configname: str</span>
+<span class="sd">        The name of the configuration to be calculated</span>
+
+<span class="sd">      clex: casm.project.ClexDescription instance</span>
+<span class="sd">        The cluster expansion being worked on. Used for the &#39;calctype&#39; settings.</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">      filepaths: tuple(INCAR, KPOINTS, KPOINTS_REF, structurefile, SPECIES)</span>
+<span class="sd">        A tuple containing the paths to the vaspwrapper input files</span>
+
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">      If any required file is not found.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find required input files in CASM project directory tree</span>
+    <span class="n">incarfile</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;INCAR&quot;</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">)</span>
+    <span class="n">ref_kpointsfile</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;KPOINTS&quot;</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">)</span>
+    <span class="n">ref_structurefile</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">)</span>
+    <span class="n">structurefile</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">structure_json</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">)</span>
+    <span class="n">speciesfile</span> <span class="o">=</span> <span class="nb">dir</span><span class="o">.</span><span class="n">settings_path_crawl</span><span class="p">(</span><span class="s2">&quot;SPECIES&quot;</span><span class="p">,</span> <span class="n">configname</span><span class="p">,</span> <span class="n">clex</span><span class="p">)</span>
+
+    <span class="c1"># Verify that required input files exist</span>
+    <span class="k">if</span> <span class="n">incarfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span>
+            <span class="s2">&quot;vasp_input_file_names failed. No INCAR file found in CASM project.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">ref_kpointsfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span>
+            <span class="s2">&quot;vasp_input_file_names failed. No KPOINTS file found in CASM project.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">ref_structurefile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;No reference POSCAR file found in CASM project. I hope your KPOINTS mode is A/AUTO/Automatic or this will fail!&quot;</span><span class="p">,</span>
+            <span class="n">vasp</span><span class="o">.</span><span class="n">VaspWarning</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">structurefile</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_neb</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span>
+            <span class="s2">&quot;vasp_input_file_names failed. No structure.json file found for this configuration.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">speciesfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">vasp</span><span class="o">.</span><span class="n">VaspError</span><span class="p">(</span>
+            <span class="s2">&quot;vasp_input_file_names failed. No SPECIES file found in CASM project.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">incarfile</span><span class="p">,</span> <span class="n">ref_kpointsfile</span><span class="p">,</span> <span class="n">ref_structurefile</span><span class="p">,</span> <span class="n">structurefile</span><span class="p">,</span>
+            <span class="n">speciesfile</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">read_properties</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Read a properties.calc.json&quot;&quot;&quot;</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;atom_type&quot;</span><span class="p">,</span> <span class="s2">&quot;atoms_per_type&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinate_mode&quot;</span><span class="p">,</span> <span class="s2">&quot;relaxed_basis&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relaxed_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;relaxed_forces&quot;</span><span class="p">,</span> <span class="s2">&quot;relaxed_lattice&quot;</span>
+    <span class="p">]</span>
+    <span class="n">optional</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;relaxed_magmom&quot;</span><span class="p">,</span> <span class="s2">&quot;relaxed_mag_basis&quot;</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">myfile</span><span class="p">:</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">myfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">VaspWrapperError</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;&#39; missing from: &#39;&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">:</span>
+            <span class="n">properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">properties</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

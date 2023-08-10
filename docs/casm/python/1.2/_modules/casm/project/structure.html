@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.project.structure &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">casm.project.structure</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for casm.project.structure</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">get_casm_structure_property</span><span class="p">(</span><span class="n">casm_structure</span><span class="p">,</span> <span class="n">property_type</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the value of a property from a CASM structure</span>
+
+<span class="sd">    A CASM property name to find from the structure&#39;s atom, mol, or global properties. For example, property_name &quot;disp&quot;, &quot;magspin&quot;, or &quot;strain&quot; will find &quot;&lt;qualifier&gt;_disp&quot;, &quot;&lt;qualifier&gt;_&lt;flavor&gt;magspin&quot;, or &quot;&lt;qualifier&gt;_&lt;metric&gt;strain&quot;, respectively. Finding multiple matches raises.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">      casm_structure: dict</span>
+<span class="sd">        A CASM structure, as from JSON</span>
+
+<span class="sd">      property_type: str</span>
+<span class="sd">        One of &quot;atom&quot;, &quot;mol&quot;, or &quot;global&quot;</span>
+
+<span class="sd">      property_name: str</span>
+<span class="sd">        A CASM property (i.e. &quot;disp&quot;, &quot;strain&quot;, &quot;magspin&quot;, etc.)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">      value: Any or None</span>
+<span class="sd">        Returns &quot;value&quot; for a found property with `property_name` as the suffix, else None.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">      Exception:</span>
+<span class="sd">        If &gt;1 matching property is found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">property_type</span> <span class="o">+</span> <span class="s2">&quot;_properties&quot;</span>
+    <span class="n">matching</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">casm_structure</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">casm_structure</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">property_name</span><span class="p">):]</span> <span class="o">==</span> <span class="n">property_name</span><span class="p">:</span>
+                <span class="n">matching</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error getting atom properties from a CASM structure: Found multiple matches for &#39;&quot;</span> <span class="o">+</span> <span class="n">property_name</span> <span class="o">+</span> <span class="s2">&quot;&#39;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">matching</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">matching</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">casm_structure</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">class</span> <span class="nc">StructureInfoError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception handling&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Writes out the error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span>
+
+<div class="viewcode-block" id="StructureInfo"><a class="viewcode-back" href="../../../reference/casm.project.StructureInfo.html#casm.project.StructureInfo">[docs]</a><span class="k">class</span> <span class="nc">StructureInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Contains the atom and molecule attributes&#39; information</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">       self.atom_type: List[str] - Contains the atom types</span>
+<span class="sd">       self.atom_properties: Dict{Dict{List[float or int]}} - Contains dofs for all the atoms in the structure.json</span>
+<span class="sd">       self.mol_type: List[str] - Contains the molecule types</span>
+<span class="sd">       self.mol_properties: Dict{Dict{List[float or int]}} - Contains dofs for the molecules</span>
+<span class="sd">       Look the example below for clarity regarding object properties</span>
+
+<span class="sd">       For example consider a Cmagspin dof for NaFeO2 system</span>
+<span class="sd">       self.atom_type: [Na, Fe, O, O]</span>
+<span class="sd">       self.atom_properties: {&#39;Cmagspin&#39;:{&#39;value&#39;: [[0],[-1],[0],[0]]}}</span>
+<span class="sd">       self.mol_type: [Na, Fe-, O, O]</span>
+<span class="sd">       self.mol_properties: {&#39;Cmagspin&#39;: {&#39;value&#39;: [[0],[0],[0],[0]]}}</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    This class should be considered experimental and subject to change.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="StructureInfo.__init__"><a class="viewcode-back" href="../../../reference/casm.project.StructureInfo.html#casm.project.StructureInfo.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructs the StructureInfo object by reading the structure.json file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : string (structure.json file)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the attribute information from a CASM structure.json file</span>
+
+<span class="sd">        Will set attributes to None, with message &quot;No dof information found in &lt;filename&gt;&quot;, if the file cannot be read as a CASM structure.json file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : string (structure.json file)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">casm_structure</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">atom_type</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="p">[</span><span class="s2">&quot;atom_type&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atom_properties</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;atom_properties&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_type</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="p">[</span><span class="s2">&quot;mol_type&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_properties</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mol_properties&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

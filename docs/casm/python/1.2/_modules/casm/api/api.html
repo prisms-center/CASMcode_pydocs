@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>casm.api.api &mdash; CASM 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CASM
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CASM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CASM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">casm.api.api</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for casm.api.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">distutils.spawn</span> <span class="kn">import</span> <span class="n">find_executable</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">platform</span>
+
+<span class="kn">import</span> <span class="nn">sh</span>
+
+
+<div class="viewcode-block" id="API"><a class="viewcode-back" href="../../../reference/casm.api.API.html#casm.api.API">[docs]</a><span class="k">class</span> <span class="nc">API</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to provide access to the libccasm C API.</span>
+
+<span class="sd">    Acts like a singleton by loading libcasm and libccasm into a class member the</span>
+<span class="sd">    first time (and only the first time) that a new API instance is constructed.</span>
+
+<span class="sd">    Each API instance uses the same shared class member to make calls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">class</span> <span class="nc">__API</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Hidden class of which there will be only one instance</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">          lib_casm: ctypes.CDLL</span>
+<span class="sd">            Handle to libcasm.*</span>
+
+<span class="sd">          lib_ccasm: ctypes.CDLL</span>
+<span class="sd">            Handle to libccasm.*</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Loads dynamic libraries&quot;&quot;&quot;</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;LIBCASM&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+                    <span class="n">libcasm_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;LIBCASM&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">casm_path</span> <span class="o">=</span> <span class="n">find_executable</span><span class="p">(</span><span class="s1">&#39;ccasm&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">:</span>
+                        <span class="n">libcasm_path</span> <span class="o">=</span> <span class="n">sh</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">otool</span><span class="p">(</span><span class="s1">&#39;-L&#39;</span><span class="p">,</span> <span class="n">casm_path</span><span class="p">),</span>
+                                               <span class="s1">&#39;libcasm&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">libcasm_path</span> <span class="o">=</span> <span class="n">libcasm_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                            <span class="s1">&#39;@loader_path&#39;</span><span class="p">,</span> <span class="n">dirname</span><span class="p">(</span><span class="n">casm_path</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">libcasm_path</span> <span class="o">=</span> <span class="n">sh</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">ldd</span><span class="p">(</span><span class="n">casm_path</span><span class="p">),</span>
+                                               <span class="s1">&#39;libcasm&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">libccasm_path</span> <span class="o">=</span> <span class="n">libcasm_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;libcasm&#39;</span><span class="p">,</span> <span class="s1">&#39;libccasm&#39;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">lib_casm</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">libcasm_path</span><span class="p">,</span>
+                                            <span class="n">mode</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">RTLD_GLOBAL</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">libccasm_path</span><span class="p">,</span>
+                                             <span class="n">mode</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">RTLD_GLOBAL</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">~~~ Error loading casm libraries ~~~&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;LIBCASM&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+                    <span class="n">libcasm_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;LIBCASM&#39;</span><span class="p">]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Looking for libcasm at LIBCASM:&quot;</span><span class="p">,</span> <span class="n">libcasm_path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">libcasm_path</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File does not exist&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;Install CASM if it is not installed, or update your PATH, or set LIBCASM to the location of libcasm.&quot;</span>
+                        <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;File exists, but for unknown reason could not be loaded.&quot;</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">casm_path</span> <span class="o">=</span> <span class="n">find_executable</span><span class="p">(</span><span class="s1">&#39;ccasm&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;find_executable(&#39;ccasm&#39;):&quot;</span><span class="p">,</span> <span class="n">casm_path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">casm_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;Could not find &#39;ccasm&#39; executable. CASM is not installed on your PATH.&quot;</span>
+                        <span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;Install CASM if it is not installed, or update your PATH, or set LIBCASM to the location of libcasm.&quot;</span>
+                        <span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">basename</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">casm_path</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;.libs&quot;</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;Found &#39;ccasm&#39; executable in a &#39;.libs&#39; directory. Are you running tests?&quot;</span>
+                        <span class="p">)</span>
+                        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">:</span>
+                            <span class="n">check</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">casm_path</span><span class="p">),</span> <span class="s2">&quot;libcasm.dylib&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">check</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">casm_path</span><span class="p">),</span> <span class="s2">&quot;libcasm.so&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">check</span><span class="p">):</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You probably need to set LIBCASM=&quot;</span> <span class="o">+</span> <span class="n">check</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span>
+                                <span class="s2">&quot;You probably need to re-make or update your PATH&quot;</span>
+                            <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;Found &#39;ccasm&#39;, but for unknown reason could not determine libcasm location.&quot;</span>
+                        <span class="p">)</span>
+                        <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;otool -L:&quot;</span><span class="p">)</span>
+                            <span class="n">res</span> <span class="o">=</span> <span class="n">sh</span><span class="o">.</span><span class="n">otool</span><span class="p">(</span><span class="s1">&#39;-L&#39;</span><span class="p">,</span> <span class="n">casm_path</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ldd:&quot;</span><span class="p">)</span>
+                            <span class="n">res</span> <span class="o">=</span> <span class="n">sh</span><span class="o">.</span><span class="n">ldd</span><span class="p">(</span><span class="n">casm_path</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+            <span class="c1">#### Argument types</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_STDOUT</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_STDERR</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_nullstream</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_new</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_delete</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_delete</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_size</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_size</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_strcpy</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_strcpy</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_fstream_new</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_fstream_new</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_fstream_delete</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+            <span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_null</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_null</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_new</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_new</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_delete</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_delete</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_refresh</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span><span class="p">,</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_bool</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_refresh</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_command_list</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_command_list</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_capi</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span>
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+            <span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_capi</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+
+    <span class="n">__api</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="API.__init__"><a class="viewcode-back" href="../../../reference/casm.api.API.html#casm.api.API.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Acts like a singleton by loading libcasm and libccasm into a class member the</span>
+<span class="sd">        first time (and only the first time) that a new API instance is constructed.</span>
+
+<span class="sd">        Each API instance uses the same shared class member to make calls.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">API</span><span class="o">.</span><span class="n">__api</span> <span class="o">=</span> <span class="n">API</span><span class="o">.</span><span class="n">__API</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+    <span class="k">def</span> <span class="nf">stdout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a pointer to a CASM::Log that writes to std::cout.</span>
+
+<span class="sd">        This does not need to be deleted manually.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_STDOUT</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">stderr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a pointer to a CASM::Log that writes to std::cerr</span>
+
+<span class="sd">        This does not need to be deleted manually.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_STDERR</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">nullstream</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a pointer to a CASM::Log that writes to null.</span>
+
+<span class="sd">        This does not need to be deleted manually.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_nullstream</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">ostringstream_new</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a CASM::OStringStreamLog that writes to std::ostringstream.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          ptr: CASM::OStringStreamLog pointer</span>
+<span class="sd">            Used for capturing CASM output in a string.</span>
+<span class="sd">            This ptr needs to be deleted manually by using API.ostringstream_delete(ptr)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_new</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">ostringstream_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Copy the value of a CASM::OStringStreamLog to a Python string.</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          ptr: CASM::OStringStreamLog pointer</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          s: str</span>
+<span class="sd">            The contents of a CASM::OStringStreamLog</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c_str</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">create_string_buffer</span><span class="p">(</span>
+            <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_size</span><span class="p">(</span><span class="n">ptr</span><span class="p">))</span>
+        <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_strcpy</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">c_str</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">c_str</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">ostringstream_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a CASM::OStringStreamLog</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          ptr: CASM::OStringStreamLog pointer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_ostringstream_delete</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">fstream_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a CASM::FileLog that writes to a file.</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          path: str</span>
+<span class="sd">            Path to file where log is written</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          ptr: CASM::FileLog pointer</span>
+<span class="sd">            Used for capturing CASM output in a file.</span>
+<span class="sd">            This ptr needs to be deleted manually by using API.fstream_delete(ptr)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_fstream_new</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">fstream_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a CASM::FileLog</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          ptr: CASM::FileLog pointer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_fstream_delete</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">primclex_null</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a CASM::PrimClex nullptr</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          ptr: CASM::PrimClex nullptr</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_null</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">primclex_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a new CASM::PrimClex</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          path: str</span>
+<span class="sd">            The path to a CASM project</span>
+
+<span class="sd">          log: CASM::Log pointer</span>
+<span class="sd">            A pointer to a CASM::Log to write standard output</span>
+
+<span class="sd">          err_log: CASM::Log pointer</span>
+<span class="sd">            A pointer to a CASM::Log to write error output</span>
+
+
+<span class="sd">        Notes</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        CASM::Log pointers can be obtained from:</span>
+<span class="sd">          1) API.stdout()</span>
+<span class="sd">          2) API.stderr()</span>
+<span class="sd">          3) API.nullstream()</span>
+<span class="sd">          4) API.ostringstream()</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          ptr: CASM::PrimClex pointer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_new</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">primclex_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">ptr</span><span class="p">,</span>
+                         <span class="n">log</span><span class="p">,</span>
+                         <span class="n">err_log</span><span class="p">,</span>
+                         <span class="n">read_settings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">read_composition</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">read_chem_ref</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">read_configs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">clear_clex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call CASM::PrimClex::refresh to reload PrimClex data from settings files</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          ptr: CASM::PrimClex pointer</span>
+
+<span class="sd">          log: CASM::Log pointer</span>
+<span class="sd">            A pointer to a CASM::Log to write standard output</span>
+
+<span class="sd">          err_log: CASM::Log pointer</span>
+<span class="sd">            A pointer to a CASM::Log to write error output</span>
+
+<span class="sd">          read_settings: bool, optional, default=False</span>
+<span class="sd">            If True, read project_settings.json</span>
+
+<span class="sd">          read_composition: bool, optional, default=False</span>
+<span class="sd">            If True, read composition_axes.json</span>
+
+<span class="sd">          read_chem_ref: bool, optional, default=False</span>
+<span class="sd">            If True, read chemical_reference.json</span>
+
+<span class="sd">          read_configs: bool, optional, default=False</span>
+<span class="sd">            If True, read SCEL and config_list.json</span>
+
+<span class="sd">          clear_clex: bool, optional, default=False</span>
+<span class="sd">            If True, clear stored orbitrees, clexulators, and eci</span>
+
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+
+<span class="sd">          This does not check if what you request will cause problems.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_refresh</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">,</span>
+                                                  <span class="n">read_settings</span><span class="p">,</span>
+                                                  <span class="n">read_composition</span><span class="p">,</span>
+                                                  <span class="n">read_chem_ref</span><span class="p">,</span> <span class="n">read_configs</span><span class="p">,</span>
+                                                  <span class="n">clear_clex</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">primclex_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a CASM::PrimClex</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          ptr: CASM::PrimClex pointer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_primclex_delete</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">command_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list of recognized casm commands implemented at the libcasm level</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          s: str</span>
+<span class="sd">            JSON array containing the list of recognized casm commands</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
+        <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_command_list</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="k">def</span> <span class="nf">capi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">primclex</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make an API call</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">          args: str</span>
+<span class="sd">            A string containing the arguments for the casm command to be executed.</span>
+
+<span class="sd">              Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
+<span class="sd">              Ex: &quot;query -k &#39;configname selected&#39; -v -o STDOUT&quot;</span>
+
+<span class="sd">          primclex: CASM::PrimClex pointer</span>
+<span class="sd">            A pointer to a CASM::PrimClex, as obtained from API.primclex_new()</span>
+
+<span class="sd">          root: str</span>
+<span class="sd">            A string giving the path to a root directory of a CASM project, typically</span>
+<span class="sd">            casm.project.Project.path</span>
+
+<span class="sd">          log: CASM::Log pointer</span>
+<span class="sd">            A pointer to a CASM::Log to write standard output</span>
+
+<span class="sd">          err_log: CASM::Log pointer</span>
+<span class="sd">            A pointer to a CASM::Log to write error output</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          returncode: int</span>
+
+<span class="sd">            Possible values:</span>
+
+<span class="sd">              0: No error</span>
+
+<span class="sd">              1: ERR_INVALID_ARG</span>
+<span class="sd">                Command line input is not valid</span>
+
+<span class="sd">              2: ERR_UNKNOWN</span>
+<span class="sd">                Misc. or Unknown error</span>
+
+<span class="sd">              3: ERR_NO_PROJ</span>
+<span class="sd">                No CASM project can be found in expected location</span>
+
+<span class="sd">              4: ERR_INVALID_INPUT_FILE</span>
+<span class="sd">                An expected input file is invalid</span>
+
+<span class="sd">              5: ERR_MISSING_INPUT_FILE</span>
+<span class="sd">                An expected input file can not be found</span>
+
+<span class="sd">              6: ERR_EXISTING_FILE</span>
+<span class="sd">                A file might be overwritten</span>
+
+<span class="sd">              7: ERR_MISSING_DEPENDS</span>
+<span class="sd">                Requested command can not be performed because some dependency needs</span>
+<span class="sd">                to be done first (i.e. no basis set, so can&#39;t use clexulator)</span>
+
+<span class="sd">              8: ERR_OTHER_PROJ</span>
+<span class="sd">                Unknown attempting to overwrite another CASM project</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">API</span><span class="o">.</span><span class="n">__api</span><span class="o">.</span><span class="n">lib_ccasm</span><span class="o">.</span><span class="n">casm_capi</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">primclex</span><span class="p">,</span>
+                                             <span class="n">six</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="n">root</span><span class="p">),</span> <span class="n">log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_project_path</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crawl up from dir to find &#39;.casm&#39;. If found returns the directory containing the &#39;.casm&#39; directory.</span>
+<span class="sd">    If not found, return None.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    If dir == None, set to os.getcwd()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error, no directory named: &quot;</span> <span class="o">+</span> <span class="nb">dir</span><span class="p">)</span>
+    <span class="n">curr</span> <span class="o">=</span> <span class="nb">dir</span>
+    <span class="n">cont</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">cont</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">test_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="s2">&quot;.casm&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">test_path</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">curr</span>
+        <span class="k">elif</span> <span class="n">curr</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">curr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="command_list"><a class="viewcode-back" href="../../../reference/casm.api.command_list.html#casm.api.command_list">[docs]</a><span class="k">def</span> <span class="nf">command_list</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get list of recognized casm commands implemented at the libcasm level</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">      s: str</span>
+<span class="sd">        JSON array containing the list of recognized casm commands</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_api</span><span class="o">.</span><span class="n">command_list</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="casm_command"><a class="viewcode-back" href="../../../reference/casm.api.casm_command.html#casm.api.casm_command">[docs]</a><span class="k">def</span> <span class="nf">casm_command</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute a command via the c api, writing output to stdout/stderr. If required by the specific</span>
+<span class="sd">    command, a temporary PrimClex instance will be constrcuted. Use Project.command or</span>
+<span class="sd">    Project.capture to avoid re-initializations.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+
+<span class="sd">      args: str</span>
+<span class="sd">        A string containing the arguments for the casm command to be executed.</span>
+
+<span class="sd">          Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
+<span class="sd">          Ex: &quot;query -k &#39;configname selected&#39; -v -o STDOUT&quot;</span>
+
+<span class="sd">      root: str (optional)</span>
+<span class="sd">        A string giving the path to a root directory of a CASM project,</span>
+<span class="sd">        typically casm.project.Project.path. If None given, a `&#39;.casm&#39;`</span>
+<span class="sd">        directory is searched for starting at the current working directory,</span>
+<span class="sd">        and if not found the empty string is used.</span>
+
+<span class="sd">      combine_output: bool (optional, default=False)</span>
+<span class="sd">        If True, print stdout and stderr to same str and only ret</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">      returncode: The result of running the command via the command line iterface. &#39;stdout&#39; and</span>
+<span class="sd">        &#39;stderr&#39; are in text type (&#39;unicode&#39;/&#39;str&#39;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+
+    <span class="c1"># set default root</span>
+    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">_project_path</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># construct stringstream objects to capture stdout, stderr</span>
+    <span class="n">ss</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">stdout</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">combine_output</span><span class="p">:</span>
+        <span class="n">ss_err</span> <span class="o">=</span> <span class="n">ss</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ss_err</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">stderr</span><span class="p">()</span>
+
+    <span class="n">returncode</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">capi</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">_api</span><span class="o">.</span><span class="n">primclex_null</span><span class="p">(),</span> <span class="n">root</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">ss_err</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">returncode</span></div>
+
+
+<div class="viewcode-block" id="casm_capture"><a class="viewcode-back" href="../../../reference/casm.api.casm_capture.html#casm.api.casm_capture">[docs]</a><span class="k">def</span> <span class="nf">casm_capture</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combine_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute a command via the c api and store stdout/stderr result as str. If required by the</span>
+<span class="sd">    specific command, a temporary PrimClex instance will be constrcuted. Use Project.command or</span>
+<span class="sd">    Project.capture to avoid re-initializations.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+
+<span class="sd">      args: str</span>
+<span class="sd">        A string containing the arguments for the casm command to be executed.</span>
+
+<span class="sd">          Ex: &quot;select --set-on -o /abspath/to/my_selection&quot;</span>
+<span class="sd">          Ex: &quot;query -k &#39;configname selected&#39; -v -o STDOUT&quot;</span>
+
+<span class="sd">      root: str (optional)</span>
+<span class="sd">        A string giving the path to a root directory of a CASM project,</span>
+<span class="sd">        typically casm.project.Project.path. If None given, a `&#39;.casm&#39;`</span>
+<span class="sd">        directory is searched for starting at the current working directory,</span>
+<span class="sd">        and if not found the empty string is used.</span>
+
+<span class="sd">      combine_output: bool (optional, default=False)</span>
+<span class="sd">        If True, print stdout and stderr to same str and only ret</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -------</span>
+<span class="sd">      Prefer not to use this function if you have an existing casm.project.Project instance that</span>
+<span class="sd">      the command will operate on. Instead use Project.command() which will execute the command and</span>
+<span class="sd">      then update the Project instance&#39;s ProjectSettings and DirectoryStructure to reflect any</span>
+<span class="sd">      changes that have occurred.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">      (stdout, stderr, returncode): The result of running the command via the</span>
+<span class="sd">          command line iterface. &#39;stdout&#39; and &#39;stderr&#39; are in text type (&#39;unicode&#39;/&#39;str&#39;). If</span>
+<span class="sd">          &#39;combine_output&#39; is True, then returns (combined_output, returncode).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+
+    <span class="c1"># set default root</span>
+    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">_project_path</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># construct stringstream objects to capture stdout, stderr</span>
+    <span class="n">ss</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">combine_output</span><span class="p">:</span>
+        <span class="n">ss_err</span> <span class="o">=</span> <span class="n">ss</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ss_err</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_new</span><span class="p">()</span>
+
+    <span class="n">returncode</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">capi</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">_api</span><span class="o">.</span><span class="n">primclex_null</span><span class="p">(),</span> <span class="n">root</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">ss_err</span><span class="p">)</span>
+
+    <span class="c1"># copy strings and delete stringstreams</span>
+    <span class="n">stdout</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+    <span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">combine_output</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">returncode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stderr</span> <span class="o">=</span> <span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_to_str</span><span class="p">(</span><span class="n">ss_err</span><span class="p">)</span>
+        <span class="n">_api</span><span class="o">.</span><span class="n">ostringstream_delete</span><span class="p">(</span><span class="n">ss_err</span><span class="p">)</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">returncode</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CASM Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
