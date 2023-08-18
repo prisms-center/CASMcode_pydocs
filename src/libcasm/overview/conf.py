@@ -60,7 +60,12 @@ extensions = [
     "sphinxarg.ext",
     "sphinx.ext.intersphinx",
     "numpydoc",
+    "sphinx_copybutton",
 ]
+
+# sphinx-copybotton configuration
+# copybutton_exclude = '.linenos, .gp'
+# copybutton_selector = "div:not(.no-copybutton) > div.highlight > pre"
 
 # Napoleon settings
 napoleon_google_docstring = False
@@ -104,7 +109,7 @@ language = None
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = []
 
-# The name of the Pygments (syntax highlighting) style to use.
+# # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -125,7 +130,8 @@ html_logo = "_static/small_logo.svg"
 html_theme_options = {
     "logo": {
         "text": "libcasm",
-    }
+    },
+    # "pygment_light_style": "tango",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
