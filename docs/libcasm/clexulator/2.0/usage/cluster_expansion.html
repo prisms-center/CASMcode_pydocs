@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Evaluating a cluster expansion &#8212; libcasm-clexulator 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/cluster_expansion';</script>
+    <link rel="icon" href="../_static/small_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluating a local cluster expansion" href="local_cluster_expansion.html" />
+    <link rel="prev" title="The ConfigDoFValues data structure" href="config_dof_values.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/small_logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-clexulator</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="config_dof_values.html">The ConfigDoFValues data structure</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluating a cluster expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_cluster_expansion.html">Evaluating a local cluster expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_expansion_details.html">Cluster expansion details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="order_parameters.html">Evaluating order parameters</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Evaluating a cluster expansion</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="evaluating-a-cluster-expansion">
+<span id="eval-cluster-expansion"></span><span id="cluster-expansion-index"></span><h1>Evaluating a cluster expansion<a class="headerlink" href="#evaluating-a-cluster-expansion" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> class is used to calculate:</p>
+<ul class="simple">
+<li><p>the value of a cluster expansion</p></li>
+<li><p>the change in the value of a cluster expansion given changes in degree of freedom (DoF) values</p></li>
+</ul>
+<p>Evaluating a cluster expansion requires:</p>
+<ul class="simple">
+<li><p>Cluster expansion basis functions, as a CASM <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> source code file</p></li>
+<li><p>Cluster expansion coefficients, as a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SparseCoefficients.html#libcasm.clexulator.SparseCoefficients" title="libcasm.clexulator.SparseCoefficients"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseCoefficients</span></code></a> object</p></li>
+<li><p>Configuration degree of freedom (DoF) values, as a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> object</p></li>
+<li><p>A neighbor list for the supercell of the configuration, which is used to find the correct degree of freedom (DoF) values for each basis function, as a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a>.</p></li>
+</ul>
+<section id="construct-a-clusterexpansion">
+<h2>Construct a ClusterExpansion<a class="headerlink" href="#construct-a-clusterexpansion" title="Permalink to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_cluster_expansion.html#libcasm.clexulator.make_cluster_expansion" title="libcasm.clexulator.make_cluster_expansion"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_cluster_expansion()</span></code></a> method can be used to construct a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> calculator along with consistent <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> and <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a> objects, given a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> and the integer transformation matrix for the supercell containing the configuration:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before running, set the environment variable <code class="docutils literal notranslate"><span class="pre">CASM_PREFIX</span></code> to the location where CASM is installed in order to enable proper compilation and linking of the CASM clexulator using the CASM libraries.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_PREFIX</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>-m<span class="w"> </span>libcasm.casmglobal<span class="w"> </span>--prefix<span class="k">)</span>
+</pre></div>
+</div>
+<p>In some cases, finer control of compilation and linking options may be necessary, which can be done as described in the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a> documentation. For example, compiling and linking with gcc may require:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_SOFLAGS</span><span class="o">=</span><span class="s2">&quot;-shared -Wl,--no-as-needed&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">make_cluster_expansion</span><span class="p">,</span>
+    <span class="n">SparseCoefficients</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># construct the Prim</span>
+<span class="n">xtal_prim</span> <span class="o">=</span> <span class="c1"># xtal.Prim(...)</span>
+
+<span class="c1"># specify the clexulator source file</span>
+<span class="n">clexulator_source</span> <span class="o">=</span> <span class="c1"># str( ... path to clexulator source code file ... )</span>
+
+<span class="c1"># specify the cluster expansion coefficients</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="c1"># SparseCoefficients(...)</span>
+
+<span class="c1"># specify the supercell:</span>
+<span class="n">l_unitcells</span> <span class="o">=</span> <span class="c1"># int(... specify a l * l * l unit cells sized supercell ...)</span>
+<span class="n">transformation_matrix_to_super</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">l_unitcells</span>
+
+<span class="c1"># construct a ClusterExpansion calculator</span>
+<span class="n">cluster_expansion</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">make_cluster_expansion</span><span class="p">(</span>
+    <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+    <span class="n">clexulator_source</span><span class="o">=</span><span class="n">clexulator_source</span><span class="p">,</span>
+    <span class="n">coefficients</span><span class="o">=</span><span class="n">coefficients</span><span class="p">,</span>
+    <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">transformation_matrix_to_super</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># get the ConfigDoFValues that cluster_expansion will evaluate</span>
+<span class="n">config_dof_values</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">config_dof_values</span>
+</pre></div>
+</div>
+<p>In this example, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_cluster_expansion.html#libcasm.clexulator.make_cluster_expansion" title="libcasm.clexulator.make_cluster_expansion"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_cluster_expansion()</span></code></a> method returns two objects:</p>
+<ul class="simple">
+<li><p><cite>cluster_expansion</cite>: The constructed <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> calculator</p></li>
+<li><p><cite>info</cite>: A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansionInfo.html#libcasm.clexulator.ClusterExpansionInfo" title="libcasm.clexulator.ClusterExpansionInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansionInfo</span></code></a> instance which provides the supercell neighbor list and a default initialized <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance for the specified supercell</p></li>
+</ul>
+</section>
+<section id="evaluate-the-cluster-expansion">
+<h2>Evaluate the cluster expansion<a class="headerlink" href="#evaluate-the-cluster-expansion" title="Permalink to this heading">#</a></h2>
+<p>To evaluate the cluster expansion, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> calculator must be set to point at a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance. This is done at automatically for the objects returned by <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_cluster_expansion.html#libcasm.clexulator.make_cluster_expansion" title="libcasm.clexulator.make_cluster_expansion"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_cluster_expansion()</span></code></a>.</p>
+<p>Then, the cluster expansion value can be evaluated with:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... calculate cluster expansion value for the current state</span>
+<span class="c1">#     of the ConfigDoFValues that cluster_expansion has been set with ...</span>
+
+<span class="c1"># evaluate and return extensive value:</span>
+<span class="n">value_per_supercell</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">extensive_value</span><span class="p">()</span>
+
+<span class="c1"># or evaluate and return the intensive value:</span>
+<span class="n">value_per_unitcell</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">intensive_value</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="change-dof-values-and-re-calculate">
+<span id="change-and-re-evaluate-clex"></span><h2>Change DoF values and re-calculate<a class="headerlink" href="#change-dof-values-and-re-calculate" title="Permalink to this heading">#</a></h2>
+<p>To change DoF values and re-calculate the cluster expansion, just modify the values of the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance and re-evaluate:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correct usage --&gt;</span>
+<span class="c1"># The following all assign new DoF values to</span>
+<span class="c1"># `config_dof_values`&#39;s data using a copy:</span>
+
+<span class="c1"># ... set ConfigDoFValues occupant values, using a copy...</span>
+<span class="n">occupation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">config_dof_values</span><span class="o">.</span><span class="n">set_occupation</span><span class="p">(</span><span class="n">occupation</span><span class="p">)</span>
+
+<span class="c1"># ... or set a single ConfigDoFValues occupant value, using a copy...</span>
+<span class="n">linear_site_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">new_occ</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">config_dof_values</span><span class="o">.</span><span class="n">set_occ</span><span class="p">(</span><span class="n">linear_site_index</span><span class="p">,</span> <span class="n">new_occ</span><span class="p">)</span>
+
+<span class="c1"># ... or set all ConfigDoFValues values from other</span>
+<span class="c1">#     ConfigDoFValues instance, using copies ...</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">ConfigDoFValues</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">config_dof_values</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<span class="c1"># ... calculate cluster expansion value for the current state</span>
+<span class="c1">#     of the ConfigDoFValues that cluster_expansion has been set with ...</span>
+
+<span class="c1"># evaluate and return the intensive value:</span>
+<span class="n">value_per_unitcell</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">intensive_value</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Wrong usage, trying to change DoF values, but actually changing what a Python variable points to:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># !Wrong usage! --&gt;</span>
+<span class="c1"># In Python, the following will change what `config_dof_values`</span>
+<span class="c1"># points at, not assign values to `config_dof_values`&#39;s data</span>
+<span class="c1"># using a copy.</span>
+<span class="c1"># Therefore, cluster_expansion, which still has a pointer to the</span>
+<span class="c1"># original data structure, will not use the DoF values from `other`.</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">ConfigDoFValues</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">config_dof_values</span> <span class="o">=</span> <span class="n">other</span>
+
+<span class="c1"># ... this will try to calculate cluster expansion value</span>
+<span class="c1">#     but still points at the original `config_dof_values` data ...</span>
+
+<span class="c1"># ... so it will evaluate and return the wrong intensive value ...</span>
+<span class="n">wrong_value_per_unitcell</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">intensive_value</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Wrong usage, trying to change DoF values using an external data structure which was copied:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># !Wrong usage! --&gt;</span>
+<span class="c1"># ConfigDoFValues.set_occuption copies values of an occupation array</span>
+<span class="c1"># into the  `config_dof_values`&#39;s data, so subsequently changing the</span>
+<span class="c1"># values in the array has no effect on `config_dof_values`</span>
+
+<span class="n">occupation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="c1"># ... this copies `occupation` values into `config_dof_values`&#39;s data ...</span>
+<span class="n">config_dof_values</span><span class="o">.</span><span class="n">set_occupation</span><span class="p">(</span><span class="n">occupation</span><span class="p">)</span>
+
+<span class="c1"># ... so this has no effect on `config_dof_values`&#39;s data ...</span>
+<span class="n">occupation</span><span class="p">[</span><span class="n">linear_site_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_occ</span>
+
+<span class="c1"># ... and it will evaluate and return the wrong intensive value ...</span>
+<span class="n">wrong_value_per_unitcell</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">intensive_value</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="set-a-clusterexpansion-to-use-a-different-configdofvalues-instance">
+<h2>Set a ClusterExpansion to use a different ConfigDoFValues instance<a class="headerlink" href="#set-a-clusterexpansion-to-use-a-different-configdofvalues-instance" title="Permalink to this heading">#</a></h2>
+<p>The function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.set.html#libcasm.clexulator.ClusterExpansion.set" title="libcasm.clexulator.ClusterExpansion.set"><code class="xref py py-func docutils literal notranslate"><span class="pre">set()</span></code></a> may be used to point <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> at the data of a different <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance <em>which must have the same supercell</em>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correct usage --&gt;</span>
+<span class="c1"># Reset cluster_expansion to point at the data in `other`,</span>
+<span class="c1"># which must have the same supercell.</span>
+<span class="n">other</span> <span class="o">=</span> <span class="n">ConfigDoFValues</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">cluster_expansion</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<span class="c1"># ... calculate cluster expansion value using `other`&#39;s data ...</span>
+<span class="n">value_per_unitcell</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">intensive_value</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To calculate the cluster expansion in a different supercell, a new <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-func docutils literal notranslate"><span class="pre">ClusterExpansion()</span></code></a> instance must be constructed.</p>
+</div>
+</section>
+<section id="calculate-the-effect-of-changes-in-dof-values">
+<h2>Calculate the effect of changes in DoF values<a class="headerlink" href="#calculate-the-effect-of-changes-in-dof-values" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="libcasm.clexulator.ClusterExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> includes methods to efficiently calculate the change in the value of the extensive cluster expansion value due to changes in particular DoF values:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.occ_delta_value.html#libcasm.clexulator.ClusterExpansion.occ_delta_value" title="libcasm.clexulator.ClusterExpansion.occ_delta_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">occ_delta_value()</span></code></a>: For the change in the extensive cluster expansion value due to the change in a single occupant value</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.multi_occ_delta_value.html#libcasm.clexulator.ClusterExpansion.multi_occ_delta_value" title="libcasm.clexulator.ClusterExpansion.multi_occ_delta_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">multi_occ_delta_value()</span></code></a>: For the change in the extensive cluster expansion value due to changes in multiple occupant values</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.local_delta_value.html#libcasm.clexulator.ClusterExpansion.local_delta_value" title="libcasm.clexulator.ClusterExpansion.local_delta_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_delta_value()</span></code></a>: For the change in the extensive cluster expansion value due to the change in a single local continuous DoF value</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.global_delta_value.html#libcasm.clexulator.ClusterExpansion.global_delta_value" title="libcasm.clexulator.ClusterExpansion.global_delta_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">global_delta_value()</span></code></a>: For the change in the extensive cluster expansion value due to the change in a single global continuous DoF value</p></li>
+</ul>
+<p>As an example, the following is pseudo-code that uses <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.occ_delta_value.html#libcasm.clexulator.ClusterExpansion.occ_delta_value" title="libcasm.clexulator.ClusterExpansion.occ_delta_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">occ_delta_value()</span></code></a> in the inner loop of a semi-grand canonical Monte Carlo simulation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... propose the change of a single occupation value ...</span>
+<span class="n">linear_site_index</span> <span class="o">=</span> <span class="o">...</span> <span class="n">random</span> <span class="n">site</span> <span class="n">index</span> <span class="o">...</span>
+<span class="n">new_occ</span> <span class="o">=</span> <span class="o">...</span> <span class="n">random</span> <span class="n">occupant</span> <span class="n">index</span><span class="p">,</span> <span class="n">excluding</span> <span class="n">current</span> <span class="n">value</span> <span class="o">...</span>
+
+<span class="c1"># ... calculate the change in formation energy relative the current</span>
+<span class="c1">#     state of the ConfigDoFValues that cluster_expansion has been set with ...</span>
+<span class="n">delta_formation_energy</span> <span class="o">=</span> <span class="n">cluster_expansion</span><span class="o">.</span><span class="n">occ_delta_value</span><span class="p">(</span>
+    <span class="n">linear_site_index</span><span class="p">,</span> <span class="n">new_occ</span><span class="p">)</span>
+
+<span class="n">delta_generalized_enthalpy</span> <span class="o">=</span> <span class="o">...</span> <span class="n">calculate</span> <span class="n">change</span> <span class="ow">in</span> <span class="n">potential</span> <span class="o">...</span>
+
+<span class="c1"># ... accept or reject ...</span>
+<span class="k">if</span> <span class="n">is_accepted</span><span class="p">(</span><span class="n">delta_generalized_enthalpy</span><span class="p">):</span>
+    <span class="c1"># ... if accepted, update config_dof_values ...</span>
+    <span class="n">config_dof_values</span><span class="o">.</span><span class="n">set_occ</span><span class="p">(</span><span class="n">linear_site_index</span><span class="p">,</span> <span class="n">new_occ</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="config_dof_values.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The ConfigDoFValues data structure</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="local_cluster_expansion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluating a local cluster expansion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-a-clusterexpansion">Construct a ClusterExpansion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-cluster-expansion">Evaluate the cluster expansion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#change-dof-values-and-re-calculate">Change DoF values and re-calculate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-a-clusterexpansion-to-use-a-different-configdofvalues-instance">Set a ClusterExpansion to use a different ConfigDoFValues instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-effect-of-changes-in-dof-values">Calculate the effect of changes in DoF values</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/usage/cluster_expansion.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -106,6 +106,35 @@ Docs: `[2.0a1] <../../mapping/2.0/>`_
 Links: |GitHub_mapping|_ |PyPI_mapping|_
 
 
+libcasm-clexulator
+------------------
+
+CASM cluster expansion calculator (clexulator) package
+
+Packages:
+
+- **libcasm.clexulator**
+
+  - A data structure for representing degrees of freedom (DoF) in
+    a configuration
+  - Neighbor list generation
+  - Methods for evaluating cluster expansion basis functions and cluster expansion values
+  - Methods for evaluating order parameters
+
+This package does not include cluster expansion basis function generation, but uses basis functions that have been generated elsewhere (i.e. `casm bset`) and written as CASM clexulator source code.
+
+Install:
+
+.. code-block:: bash
+
+    pip install libcasm-clexulator
+
+
+Docs: `[2.0a1] <../../clexulator/2.0/>`_
+
+Links: |GitHub_clexulator|_ |PyPI_clexulator|_
+
+
 About CASM
 ==========
 
@@ -160,4 +189,15 @@ For more information, see the `CASM homepage <CASM_>`_.
   :alt: Link to libcasm-mapping PyPI package
   :width: 20
 .. _PyPI_mapping: https://pypi.org/project/libcasm-mapping/
+
+
+.. |GitHub_clexulator| image:: _static/github-mark.png
+  :alt: Link to CASMcode_clexulator GitHub repository
+  :width: 24
+.. _GitHub_clexulator: https://github.com/prisms-center/CASMcode_clexulator/
+
+.. |PyPI_clexulator| image:: _static/python-logo-only.png
+  :alt: Link to libcasm-clexulator PyPI package
+  :width: 20
+.. _PyPI_clexulator: https://pypi.org/project/libcasm-clexulator/
 

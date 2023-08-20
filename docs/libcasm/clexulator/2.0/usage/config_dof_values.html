@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>The ConfigDoFValues data structure &#8212; libcasm-clexulator 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/config_dof_values';</script>
+    <link rel="icon" href="../_static/small_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluating a cluster expansion" href="cluster_expansion.html" />
+    <link rel="prev" title="Usage" href="../usage.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/small_logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-clexulator</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The ConfigDoFValues data structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_expansion.html">Evaluating a cluster expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_cluster_expansion.html">Evaluating a local cluster expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_expansion_details.html">Cluster expansion details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="order_parameters.html">Evaluating order parameters</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">The ConfigDoFValues data structure</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="the-configdofvalues-data-structure">
+<span id="config-dof-values-index"></span><h1>The ConfigDoFValues data structure<a class="headerlink" href="#the-configdofvalues-data-structure" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> is a data structure used to hold a configuration’s degrees of freedom (DoF) values for efficient use in calculations.</p>
+<p>The DoF values can be accessed via the following member functions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.occupation.html#libcasm.clexulator.ConfigDoFValues.occupation" title="libcasm.clexulator.ConfigDoFValues.occupation"><code class="xref py py-func docutils literal notranslate"><span class="pre">occupation()</span></code></a>: Occupation DoF values, as an integer array with one value for each site in the supercell</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.local_dof_values.html#libcasm.clexulator.ConfigDoFValues.local_dof_values" title="libcasm.clexulator.ConfigDoFValues.local_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_dof_values()</span></code></a>: Local continuous DoF values, as two-dimensional floating-point arrays, accessed by DoF type, with one column of values for each site in the supercell.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.global_dof_values.html#libcasm.clexulator.ConfigDoFValues.global_dof_values" title="libcasm.clexulator.ConfigDoFValues.global_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">global_dof_values()</span></code></a>: Global continuous DoF values, as one-dimensional floating-point arrays, accessed by DoF type.</p></li>
+</ul>
+<p>For CASM standard DoF types, this module provides methods for constructing properly sized <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instances, and converting between two useful basis types as described below. See the CASM <a class="reference external" href="https://prisms-center.github.io/CASMcode_docs/formats/dof_and_properties/">Degrees of Freedom (DoF) and Properties</a> documentation for the full list of supported DoF types and their definitions. Some examples include:</p>
+<ul class="simple">
+<li><p><cite>“disp”</cite>: Atomic displacement</p></li>
+<li><p><cite>“EAstrain”</cite>: Euler-Almansi strain metric</p></li>
+<li><p><cite>“GLstrain”</cite>: Green-Lagrange strain metric</p></li>
+<li><p><cite>“Hstrain”</cite>: Hencky strain metric</p></li>
+<li><p><cite>“Cmagspin”</cite>: Collinear magnetic spin</p></li>
+<li><p><cite>“SOmagspin”</cite>: Non-collinear magnetic spin, with spin-orbit coupling</p></li>
+</ul>
+</section>
+<section id="data-structure-layout">
+<h2>Data structure layout<a class="headerlink" href="#data-structure-layout" title="Permalink to this heading">#</a></h2>
+<p>The size and order of values in <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-func docutils literal notranslate"><span class="pre">ConfigDoFValues()</span></code></a> is standardized as follows:</p>
+<ul>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.occupation.html#libcasm.clexulator.ConfigDoFValues.occupation" title="libcasm.clexulator.ConfigDoFValues.occupation"><code class="xref py py-func docutils literal notranslate"><span class="pre">occupation()</span></code></a>: Occupation DoF values are accesible as a <cite>np.ndarray[numpy.int32[n_sites, 1]]</cite>, where <cite>n_sites</cite> is the number of sites in the supercell.</p>
+<ul>
+<li><p>The occupant values, for example <cite>[0, 1, 0, 2, 1, …]</cite>, specify the occupant on each site in a supercell.</p></li>
+<li><p>The position in the array is called the <cite>linear_site_index</cite>.</p></li>
+<li><p>The values are indices into the list of allowed occupants, as specified by a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a>, on the associated supercell site.</p></li>
+<li><p>Sites in the occupation vector are organized in blocks by sublattice:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Occupation vector layout:</span>
+<span class="c1"># [&lt;-- sublattice 0 --&gt;][&lt;-- sublattice 1 --&gt;]...[&lt;-- sublattice n-1 --&gt;]</span>
+</pre></div>
+</div>
+</li>
+<li><p>For a particular supercell, each sublattice block is of size <cite>n_unitcells</cite>, the number of unitcells in the supercell</p></li>
+<li><p>In each sublattice block, the sites are ordered according to the <cite>linear_unitcell_index</cite> of a particular unit cell. Conversions between unit cell indices <cite>(i,j,k)</cite> and <cite>linear_unitcell_index</cite> can be done using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.UnitCellIndexConverter.html#libcasm.xtal.UnitCellIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitCellIndexConverter</span></code></a>.</p></li>
+<li><p>Conversions between <cite>linear_site_index</cite> and <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a> (unit cell index <cite>(i,j,k)</cite> and sublattice index <cite>b</cite>) can be done using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a> can be used for conversions to and from Cartesian and fractional coordinates.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.local_dof_values.html#libcasm.clexulator.ConfigDoFValues.local_dof_values" title="libcasm.clexulator.ConfigDoFValues.local_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_dof_values()</span></code></a>: Local continuous DoF values are accesible as a <cite>numpy.ndarray[numpy.float64[matrix_dim, n_sites]]</cite>, where <cite>n_sites</cite> is the number of sites in the supercell, and <cite>matrix_dim</cite> varies by DoF type and basis type. A DoF type string (i.e. <cite>“disp”</cite> for displacements) is used as a key to access the values array.</p>
+<ul class="simple">
+<li><p>For example, when using the standard basis for displacement DoF, <cite>matrix_dim=3</cite>.</p></li>
+<li><p>Values can be accessed using indices <cite>[dof_component_index, linear_site_index]</cite>:</p>
+<ul>
+<li><p>Columns of <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.local_dof_values.html#libcasm.clexulator.ConfigDoFValues.local_dof_values" title="libcasm.clexulator.ConfigDoFValues.local_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_dof_values()</span></code></a> correspond to sites in the supercell using the same indexing conventions as the occupation vector.</p></li>
+<li><p>Rows of <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.local_dof_values.html#libcasm.clexulator.ConfigDoFValues.local_dof_values" title="libcasm.clexulator.ConfigDoFValues.local_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_dof_values()</span></code></a> correspond to components of a local DoF value.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.global_dof_values.html#libcasm.clexulator.ConfigDoFValues.global_dof_values" title="libcasm.clexulator.ConfigDoFValues.global_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">global_dof_values()</span></code></a>: Global continuous DoF values, accesible by DoF type as a <cite>numpy.ndarray[numpy.float64[vector_dim, 1]]</cite>, where <cite>vector_dim</cite> varies by DoF type and basis type. A DoF type string (i.e. <cite>“GLstrain”</cite> for strain represented using the Green-Lagrange strain metric) is used  as a key to access the values array.</p>
+<ul class="simple">
+<li><p>For example, when using the standard basis for strain DoF, <cite>vector_dim=6</cite>.</p></li>
+<li><p>Values can be accessed using index <cite>[dof_component_index]</cite>:</p>
+<ul>
+<li><p>Elements of <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.global_dof_values.html#libcasm.clexulator.ConfigDoFValues.global_dof_values" title="libcasm.clexulator.ConfigDoFValues.global_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">global_dof_values()</span></code></a> correspond to components of a global DoF value.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="basis-types">
+<h2>Basis types<a class="headerlink" href="#basis-types" title="Permalink to this heading">#</a></h2>
+<p>There are two basis types for the continuous DoF values in <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a>:</p>
+<ul class="simple">
+<li><p>The “standard DoF basis”, using the standard definition of CASM supported DoF types (i.e. <cite>x, y, z</cite> for displacments)</p>
+<ul>
+<li><p>Used for input and output, such as serialization, conversion to <code class="xref py py-func docutils literal notranslate"><span class="pre">Structure()</span></code>, mapping from <code class="xref py py-func docutils literal notranslate"><span class="pre">Structure()</span></code>, etc.</p></li>
+</ul>
+</li>
+<li><p>The “prim DoF basis”, which is specified by the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.DoFSetBasis.html#libcasm.xtal.DoFSetBasis" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoFSetBasis</span></code></a> used to define the space of allowed DoF in a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a></p>
+<ul>
+<li><p>Allows specifiying DoF values, including those that have been constrained to a subspace of the full standard DoF space (i.e. two-dimensional displacements, or only isotropic strains) using independent variables</p></li>
+<li><p>Used as the input to cluster expansion and order parameter calculators</p></li>
+</ul>
+</li>
+</ul>
+<p>When using the standard DoF basis:</p>
+<ul class="simple">
+<li><p>The <cite>matrix_dim</cite> (row dimension) of local DoF and <cite>vector_dim</cite> of global DoF is the standard DoF dimension (i.e. 3 for displacements, 6 for strain), and DoF components are ordered using the CASM standard definitions. See the CASM <a class="reference external" href="https://prisms-center.github.io/CASMcode_docs/formats/dof_and_properties/">Degrees of Freedom (DoF) and Properties</a> documentation for definitions.</p></li>
+</ul>
+<p>When using the prim DoF basis:</p>
+<ul class="simple">
+<li><p>The <cite>matrix_dim</cite> (row dimension) of local DoF is the maximum dimension of the basis for that DoF type on any sublattice.</p></li>
+<li><p>For local DoF, rows of zeros may be present at the bottom of a sublattice block if it is constrained to a smaller subspace than DoF of the same type on other sublattices.</p></li>
+<li><p>The <cite>vector_dim</cite> of global DoF is the dimension of the basis for that DoF type.</p></li>
+</ul>
+</section>
+<section id="construction">
+<h2>Construction<a class="headerlink" href="#construction" title="Permalink to this heading">#</a></h2>
+<p>There are factory functions to construct properly sized and zero-valued <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instances for both basis types:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_default_config_dof_values.html#libcasm.clexulator.make_default_config_dof_values" title="libcasm.clexulator.make_default_config_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_default_config_dof_values()</span></code></a>: Construct <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> sized for use of the “prim DoF basis” in a supercell of a particular size</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_default_standard_config_dof_values.html#libcasm.clexulator.make_default_standard_config_dof_values" title="libcasm.clexulator.make_default_standard_config_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_default_standard_config_dof_values()</span></code></a>: Construct <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> sized for use of the “standard DoF basis” in a supercell of a particular size</p></li>
+</ul>
+</section>
+<section id="changing-basis">
+<h2>Changing basis<a class="headerlink" href="#changing-basis" title="Permalink to this heading">#</a></h2>
+<p>Conversions between the two basis types can performed using:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.from_standard_values.html#libcasm.clexulator.from_standard_values" title="libcasm.clexulator.from_standard_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_standard_values()</span></code></a>: Convert to the “prim DoF basis” from the “standard DoF basis”</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.to_standard_values.html#libcasm.clexulator.to_standard_values" title="libcasm.clexulator.to_standard_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_standard_values()</span></code></a>: Convert to the “standard DoF basis” from the “prim DoF basis”</p></li>
+</ul>
+</section>
+<section id="input-and-output">
+<h2>Input and output<a class="headerlink" href="#input-and-output" title="Permalink to this heading">#</a></h2>
+<p>For serialization, <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> can be converted to and from representations using plain old Python data types (<code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>) using:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.to_dict.html#libcasm.clexulator.ConfigDoFValues.to_dict" title="libcasm.clexulator.ConfigDoFValues.to_dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">to_dict</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.from_dict.html#libcasm.clexulator.ConfigDoFValues.from_dict" title="libcasm.clexulator.ConfigDoFValues.from_dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">from_dict</span></code></a></p></li>
+</ul>
+<p>After conversion to dict, either <code class="docutils literal notranslate"><span class="pre">json</span></code> (for long term storage and portability) or <code class="docutils literal notranslate"><span class="pre">pickle</span></code> (for fast local storage) can be used to save <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a>.</p>
+<p>For a description of the format, see <a class="reference external" href="https://prisms-center.github.io/CASMcode_docs/formats/casm/clex/Configuration/#configdof-json-object">ConfigDoF JSON object</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no change in basis when using <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.to_dict.html#libcasm.clexulator.ConfigDoFValues.to_dict" title="libcasm.clexulator.ConfigDoFValues.to_dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">to_dict</span></code></a> or <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.from_dict.html#libcasm.clexulator.ConfigDoFValues.from_dict" title="libcasm.clexulator.ConfigDoFValues.from_dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">from_dict</span></code></a>, so serialization can be done for <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> in either the standard DoF basis or prim DoF basis. However, the recommended convention is that the standard DoF basis is used for input and output.</p>
+</div>
+<p>Conversions to and from other data structures, such as conversion to <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> and mapping from <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> are outside the scope of this module. See <cite>libcasm-configuration</cite> and <cite>libcasm-mapping</cite> for those type of conversions.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../usage.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Usage</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cluster_expansion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluating a cluster expansion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structure-layout">Data structure layout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-types">Basis types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construction">Construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-basis">Changing basis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and output</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/usage/config_dof_values.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

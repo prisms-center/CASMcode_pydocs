@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Cluster expansion details &#8212; libcasm-clexulator 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/cluster_expansion_details';</script>
+    <link rel="icon" href="../_static/small_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluating order parameters" href="order_parameters.html" />
+    <link rel="prev" title="Evaluating a local cluster expansion" href="local_cluster_expansion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/small_logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-clexulator</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="config_dof_values.html">The ConfigDoFValues data structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_expansion.html">Evaluating a cluster expansion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_cluster_expansion.html">Evaluating a local cluster expansion</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cluster expansion details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="order_parameters.html">Evaluating order parameters</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Cluster expansion details</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="cluster-expansion-details">
+<span id="id1"></span><h1>Cluster expansion details<a class="headerlink" href="#cluster-expansion-details" title="Permalink to this heading">#</a></h1>
+<section id="the-casm-clexulator">
+<h2>The CASM Clexulator<a class="headerlink" href="#the-casm-clexulator" title="Permalink to this heading">#</a></h2>
+<p>CASM generates custom code for very efficient calculation of basis functions given a particular <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> and choice of cluster expansion basis functions. This source code is written to a file and then may be compiled, linked, and used at runtime via the class  <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> (clexulator = CLuster EXpansion calcULATOR).</p>
+<p>For periodic cluster expansions, CASM custom generates:</p>
+<ul class="simple">
+<li><p><cite>&lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc</cite>: a clexulator source code file that evaluates the basis functions</p></li>
+<li><p><cite>basis.json</cite>: a JSON file describing the cluster basis functions.</p></li>
+</ul>
+<p>These files are written to a basis set directory, which is usually organized as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/path/to/basis_sets/bset.&lt;bsetname&gt;/
+├── &lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc
+└── basis.json
+</pre></div>
+</div>
+<p>Here, <cite>&lt;primname&gt;</cite> is the name given to the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> and <cite>&lt;bsetname&gt;</cite> is a unique name for the cluster expansion basis set.</p>
+<p id="local-clexulator-files">For local cluster expansions, CASM custom generates:</p>
+<ul class="simple">
+<li><p><cite>&lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc</cite>: a clexulator source code file for a prototype local cluster expansion</p></li>
+<li><p><cite>basis.json</cite>: a JSON file describing the cluster basis functions for the prototype</p></li>
+<li><p><cite>&lt;equivalent_index&gt;/&lt;primname&gt;_Clexulator_&lt;bsetname&gt;_&lt;equivalent_index&gt;.cc</cite>: source code files for each symmetrically equivalent local cluster expansion per unit cell</p></li>
+<li><p><cite>equivalents_info.json</cite>: a JSON file which describes the prototype local expansion basis set’s cluster basis and the symmetry operations which relate the prototype local expansion basis set to the symmetrically equivalent local cluster expansion basis sets.</p></li>
+</ul>
+<p>From this information, CASM can compile functions to evaluate all the local cluster expansion basis functions and use a single set of expansion coefficients for each of the symmetrically equivalent local cluster expansions.</p>
+<p>The files necessary for a local cluster expansion are all written to a local basis set directory, which is usually organized as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/path/to/basis_sets/bset.&lt;bsetname&gt;/
+├── 0
+│   └── &lt;primname&gt;_Clexulator_&lt;bsetname&gt;_0.cc
+├── 1
+│   └── &lt;primname&gt;_Clexulator_&lt;bsetname&gt;_1.cc
+├── ...
+├── &lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc
+├── equivalents_info.json
+└── basis.json
+</pre></div>
+</div>
+<p>As before, <cite>&lt;primname&gt;</cite> is the name given to the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> and <cite>&lt;bsetname&gt;</cite> is a unique name for the local cluster expansion basis set.</p>
+</section>
+<section id="neighbor-lists">
+<h2>Neighbor lists<a class="headerlink" href="#neighbor-lists" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> source code contains the definition for a single translational equivalent of each cluster basis function. A neighbor list is used to determine the correct degree of freedom (DoF) values to evaluate the cluster basis function at a particular lattice translation. There are two types of neighbor lists:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a>: A prim neighbor list, defines an ordering of unit cells in the local neighborhood of a unit cell for a particular <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a>: A neighbor list that uses the ordering specified by a prim neighbor list to construct a neighbor list for each unit cell in a supercell. One of these must be generated for each supercell in which cluster basis functions are evaluated.</p></li>
+</ul>
+</section>
+<section id="environment-variables-for-compiling-and-linking-clexulator">
+<h2>Environment variables for compiling and linking Clexulator<a class="headerlink" href="#environment-variables-for-compiling-and-linking-clexulator" title="Permalink to this heading">#</a></h2>
+<p>Before constructing a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> or <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.LocalClexulator.html#libcasm.clexulator.LocalClexulator" title="libcasm.clexulator.LocalClexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalClexulator</span></code></a>, set the environment variable <code class="docutils literal notranslate"><span class="pre">CASM_PREFIX</span></code> to the location where CASM is installed in order to enable proper compilation and linking of the CASM clexulator using the CASM libraries:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_PREFIX</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>-m<span class="w"> </span>libcasm.casmglobal<span class="w"> </span>--prefix<span class="k">)</span>
+</pre></div>
+</div>
+<p>In some cases, finer control of compilation and linking options may be necessary, which can be done as described in the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a> documentation. For example, compiling and linking with gcc may require:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_SOFLAGS</span><span class="o">=</span><span class="s2">&quot;-shared -Wl,--no-as-needed&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="constructing-a-clexulator">
+<h2>Constructing a Clexulator<a class="headerlink" href="#constructing-a-clexulator" title="Permalink to this heading">#</a></h2>
+<p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> is constructed using a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> and the path to a CASM clexulator source file, using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
+<span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">PrimNeighborList</span><span class="p">()</span>
+<span class="n">clexulator</span> <span class="o">=</span> <span class="n">make_clexulator</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="s2">&quot;/path/to/.../&lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc&quot;</span><span class="p">,</span>
+    <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> provided to <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a> is expanded as necessary to include all sites required by the cluster basis functions.</p>
+</section>
+<section id="constructing-a-localclexulator">
+<h2>Constructing a LocalClexulator<a class="headerlink" href="#constructing-a-localclexulator" title="Permalink to this heading">#</a></h2>
+<p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.LocalClexulator.html#libcasm.clexulator.LocalClexulator" title="libcasm.clexulator.LocalClexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalClexulator</span></code></a> is constructed in a similar manner as <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a>, using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_local_clexulator.html#libcasm.clexulator.make_local_clexulator" title="libcasm.clexulator.make_local_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_local_clexulator</span></code></a>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_local_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
+<span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">PrimNeighborList</span><span class="p">()</span>
+<span class="n">local_clexulator</span> <span class="o">=</span> <span class="n">make_local_clexulator</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="s2">&quot;/path/to/.../&lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc&quot;</span><span class="p">,</span>
+    <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="local_cluster_expansion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Evaluating a local cluster expansion</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="order_parameters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluating order parameters</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-casm-clexulator">The CASM Clexulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neighbor-lists">Neighbor lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variables-for-compiling-and-linking-clexulator">Environment variables for compiling and linking Clexulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-a-clexulator">Constructing a Clexulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-a-localclexulator">Constructing a LocalClexulator</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/usage/cluster_expansion_details.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
