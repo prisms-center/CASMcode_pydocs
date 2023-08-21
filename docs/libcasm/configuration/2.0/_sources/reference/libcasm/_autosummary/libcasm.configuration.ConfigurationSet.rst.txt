@@ -1,0 +1,39 @@
+ConfigurationSet
+================
+
+.. currentmodule:: libcasm.configuration
+
+.. autoclass:: ConfigurationSet
+  :show-inheritance:
+
+  
+  
+  .. rubric:: Methods
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    ~ConfigurationSet.add
+    ~ConfigurationSet.add_configuration
+    ~ConfigurationSet.add_record
+    ~ConfigurationSet.clear
+    ~ConfigurationSet.discard
+    ~ConfigurationSet.discard_by_name
+    ~ConfigurationSet.discard_configuration
+    ~ConfigurationSet.empty
+    ~ConfigurationSet.from_dict
+    ~ConfigurationSet.get
+    ~ConfigurationSet.get_by_name
+    ~ConfigurationSet.get_configuration
+    ~ConfigurationSet.remove
+    ~ConfigurationSet.remove_by_name
+    ~ConfigurationSet.remove_configuration
+    ~ConfigurationSet.to_dict
+  
+  
+
+  
+  
+    

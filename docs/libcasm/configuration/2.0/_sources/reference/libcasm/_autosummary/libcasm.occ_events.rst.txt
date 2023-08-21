@@ -1,0 +1,54 @@
+﻿libcasm.occ\_events
+===================
+
+.. automodule:: libcasm.occ_events
+
+  
+  
+  
+
+  
+  
+  .. rubric:: Functions
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    get_occevent_coordinate
+    load_occevent
+    make_canonical_occevent
+    make_canonical_prim_periodic_occevents
+    make_occevent_cluster_specs
+    make_occevent_group
+    make_occevent_symgroup_rep
+    make_occevent_symgroup_rep_from_existing
+    make_prim_periodic_orbit
+    save_occevent
+  
+  
+
+  
+  
+  .. rubric:: Classes
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-class-template.rst
+  
+    OccEvent
+    OccEventPrinter
+    OccEventRep
+    OccPosition
+    OccSystem
+  
+  
+
+  
+  
+  
+
+
+

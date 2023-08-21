@@ -135,6 +135,57 @@ Docs: `[2.0a1] <../../clexulator/2.0/>`_
 Links: |GitHub_clexulator|_ |PyPI_clexulator|_
 
 
+libcasm-configuration
+---------------------
+
+CASM configuration comparison and enumeration
+
+Packages:
+
+- **libcasm.clusterography**
+
+  - Methods for comparing and enumerating unique clusters and orbits of equivalent clusters
+  - Methods for constructing neighborhoods for impact tables
+
+- **libcasm.configuration**
+
+  - Classes for representing supercells and configurations
+  - Methods for comparing configurations
+  - Methods for copying configurations to make sub- or super-configurations
+  - Methods for creating configurations with properties from mapped structures
+
+- **libcasm.irreps**
+
+  - Methods for irreducible space decompositions
+
+- **libcasm.enumerate**
+
+  - Methods for enumerating configurations
+
+- **libcasm.occ_events**
+
+  - Class for representing occupation events for kinetic Monte Carlo (KMC)
+  - Methods for comparing and enumerating occupation events
+
+- **libcasm.sym_info**
+
+  - Methods for generating and using crystal factor groups and point groups
+  - Mehtods for using group-subgroup relationships, multiplication tables, and conjugacy classes
+  - Methods for constructing symmetry group representations for integral site coordinates and configuration degrees of freedom (DoF) values
+
+
+Install:
+
+.. code-block:: bash
+
+    pip install libcasm-configuration
+
+
+Docs: `[2.0a1] <../../configuration/2.0/>`_
+
+Links: |GitHub_configuration|_ |PyPI_configuration|_
+
+
 About CASM
 ==========
 
@@ -201,3 +252,13 @@ For more information, see the `CASM homepage <CASM_>`_.
   :width: 20
 .. _PyPI_clexulator: https://pypi.org/project/libcasm-clexulator/
 
+
+.. |GitHub_configuration| image:: _static/github-mark.png
+  :alt: Link to CASMcode_configuration GitHub repository
+  :width: 24
+.. _GitHub_configuration: https://github.com/prisms-center/CASMcode_configuration/
+
+.. |PyPI_configuration| image:: _static/python-logo-only.png
+  :alt: Link to libcasm-configuration PyPI package
+  :width: 20
+.. _PyPI_configuration: https://pypi.org/project/libcasm-configuration/

@@ -1,0 +1,34 @@
+ClusterSpecs
+============
+
+.. currentmodule:: libcasm.clusterography
+
+.. autoclass:: ClusterSpecs
+  :show-inheritance:
+
+  
+  
+  .. rubric:: Methods
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    ~ClusterSpecs.custom_generators
+    ~ClusterSpecs.cutoff_radius
+    ~ClusterSpecs.from_dict
+    ~ClusterSpecs.generating_group
+    ~ClusterSpecs.include_phenomenal_sites
+    ~ClusterSpecs.make_orbits
+    ~ClusterSpecs.max_length
+    ~ClusterSpecs.phenomenal
+    ~ClusterSpecs.site_filter_method
+    ~ClusterSpecs.to_dict
+    ~ClusterSpecs.xtal_prim
+  
+  
+
+  
+  
+    

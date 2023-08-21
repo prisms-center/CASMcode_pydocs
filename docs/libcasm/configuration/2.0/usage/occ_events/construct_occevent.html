@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Occupation event basics &#8212; libcasm-configuration 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/occ_events/construct_occevent';</script>
+    <link rel="icon" href="../../_static/small_logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Constructing local-cluster orbits" href="construct_occevent_cluster_specs.html" />
+    <link rel="prev" title="Occupation Events (libcasm.occ_events)" href="occ_events.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/small_logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/small_logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-configuration</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="occ_events.html">Occupation Events (libcasm.occ_events)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Occupation event basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="construct_occevent_cluster_specs.html">Constructing local-cluster orbits</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="occ_events.html" class="nav-link">Occupation Events (libcasm.occ_events)</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Occupation event basics</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="occupation-event-basics">
+<span id="occupation-events-basics"></span><h1>Occupation event basics<a class="headerlink" href="#occupation-event-basics" title="Permalink to this heading">#</a></h1>
+<p>The class <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> is used to represent changes in occupation. For example, this could be:</p>
+<ul class="simple">
+<li><p>the change in occupation due to a diffusive hop</p></li>
+<li><p>the change in occupation due to a molecular re-orientation</p></li>
+</ul>
+<p>An occupation event is represented by specifying the trajectories of each of the occupants involved in the event.</p>
+<section id="construct-an-atomic-hop-occevent">
+<h2>Construct an atomic hop OccEvent<a class="headerlink" href="#construct-an-atomic-hop-occevent" title="Permalink to this heading">#</a></h2>
+<p>As an example, consider an event representing atom-vacancy exchange. In an <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a>, the exchange of an atom and a vacancy is specified by:</p>
+<ul>
+<li><p>The trajectory of the atom, which consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>the initial position of the atom</p></li>
+<li><p>the final position of the atom</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The trajectory of the vacancy, which consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>the initial position of the vacancy</p></li>
+<li><p>the final position of the vacancy</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>The type and position of the occupants can be specified with:</p>
+<ul class="simple">
+<li><p>the site the occupant is on, represented by <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a></p></li>
+<li><p>an occupation index, which is the index of the occupant in the allowed occupant list ( <code class="xref py py-func docutils literal notranslate"><span class="pre">occ_dof()</span></code>) for the sublattice of the occupied site</p></li>
+</ul>
+<p>The occupant position are represented by <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccPosition.html#libcasm.occ_events.OccPosition" title="libcasm.occ_events.OccPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccPosition</span></code></a>, and a trajectory is represented by a two-element <code class="docutils literal notranslate"><span class="pre">list[OccPosition]</span></code>.</p>
+<p>The following example shows how to construct an <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> representing the exchange of an “A” atom and a vacancy on the 1NN sites in an FCC prim with allowed occupants “A”, “B”, and “Va”:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">from</span> <span class="nn">libcasm.xtal.prims</span> <span class="kn">import</span> <span class="n">FCC</span> <span class="k">as</span> <span class="n">FCC_prim</span>
+<span class="kn">import</span> <span class="nn">libcasm.occ_events</span> <span class="k">as</span> <span class="nn">occ_events</span>
+<span class="kn">from</span> <span class="nn">libcasm.occ_events</span> <span class="kn">import</span> <span class="n">OccPosition</span><span class="p">,</span> <span class="n">OccEvent</span>
+
+<span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">FCC_prim</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">occ_dof</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;Va&quot;</span><span class="p">])</span>
+
+<span class="n">site1</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span><span class="n">sublattice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">unitcell</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">site2</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span><span class="n">sublattice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">unitcell</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">A_occ_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">Va_occ_index</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">A_initial_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site1</span><span class="p">,</span> <span class="n">A_occ_index</span><span class="p">)</span>
+<span class="n">A_final_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site2</span><span class="p">,</span> <span class="n">A_occ_index</span><span class="p">)</span>
+<span class="n">Va_initial_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site2</span><span class="p">,</span> <span class="n">Va_occ_index</span><span class="p">)</span>
+<span class="n">Va_final_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site1</span><span class="p">,</span> <span class="n">Va_occ_index</span><span class="p">)</span>
+
+<span class="n">occ_event</span> <span class="o">=</span> <span class="n">OccEvent</span><span class="p">([</span>
+    <span class="p">[</span><span class="n">A_initial_pos</span><span class="p">,</span> <span class="n">A_final_pos</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Va_initial_pos</span><span class="p">,</span> <span class="n">Va_final_pos</span><span class="p">],</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="transforming-occevent">
+<h2>Transforming OccEvent<a class="headerlink" href="#transforming-occevent" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> can be translated by multiples of the lattice vectors:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">translation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># copy and translate:</span>
+<span class="n">translated_occ_event</span> <span class="o">=</span> <span class="n">occ_event</span> <span class="o">+</span> <span class="n">translation</span>
+<span class="k">assert</span> <span class="n">translated_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
+
+<span class="n">translated_occ_event</span> <span class="o">=</span> <span class="n">occ_event</span> <span class="o">-</span> <span class="n">translation</span>
+<span class="k">assert</span> <span class="n">translated_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
+
+<span class="c1"># mutate by translatation:</span>
+<span class="n">occ_event</span> <span class="o">+=</span> <span class="n">translation</span>
+<span class="n">occ_event</span> <span class="o">-=</span> <span class="n">translation</span>
+</pre></div>
+</div>
+<p>Symmetry operations can be applied to <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> using the <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEventRep.html#libcasm.occ_events.OccEventRep" title="libcasm.occ_events.OccEventRep"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEventRep</span></code></a> representation:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct the prim factor group</span>
+<span class="n">factor_group</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_factor_group</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">)</span>
+
+<span class="c1"># construct a representation of the prim factor group (list[OccEventRep])</span>
+<span class="c1"># for transforming OccEvent</span>
+<span class="n">occevent_symgroup_rep</span> <span class="o">=</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">make_occevent_symgroup_rep</span><span class="p">(</span>
+    <span class="n">factor_group</span><span class="p">,</span>
+    <span class="n">xtal_prim</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">occevent_symgroup_rep</span><span class="p">:</span>
+    <span class="c1"># copy and transform</span>
+    <span class="n">transformed_occ_event</span> <span class="o">=</span> <span class="n">rep</span> <span class="o">*</span> <span class="n">occ_event</span>
+    <span class="k">assert</span> <span class="n">transformed_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
+</pre></div>
+</div>
+<p>A copy of an <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> can be constructed using <code class="docutils literal notranslate"><span class="pre">copy.deepcopy</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="c1"># in Python, assignment is not a copy</span>
+<span class="n">assigned_occ_event</span> <span class="o">=</span> <span class="n">occ_event</span>
+<span class="k">assert</span> <span class="n">assigned_occ_event</span> <span class="ow">is</span> <span class="n">occ_event</span>
+
+<span class="c1"># to create a copy, use copy.deepcopy</span>
+<span class="n">copied_occ_event</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">occ_event</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">copied_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
+</pre></div>
+</div>
+</section>
+<section id="comparing-occevent">
+<h2>Comparing OccEvent<a class="headerlink" href="#comparing-occevent" title="Permalink to this heading">#</a></h2>
+<p>To compare <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a>, they can be put in a standardized form which sorts the occupant trajectories, considering both the forward and reverse directions:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># mutate, into standardized form</span>
+<span class="n">occ_event_a</span><span class="o">.</span><span class="n">standardize</span><span class="p">()</span>
+
+<span class="c1"># mutate, into standardized form</span>
+<span class="n">occ_event_b</span><span class="o">.</span><span class="n">standardize</span><span class="p">()</span>
+
+<span class="c1"># check for equivalence:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OccEvent are equal?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">==</span> <span class="n">occ_event_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OccEvent are not equal?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">!=</span> <span class="n">occ_event_b</span><span class="p">)</span>
+
+<span class="c1"># check ordering (lexicographical ordering of trajectories):</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_event_a &lt; occ_event_b?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">&lt;</span> <span class="n">occ_event_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_event_a &lt;= occ_event_b?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">&lt;=</span> <span class="n">occ_event_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_event_a &gt; occ_event_b?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">&gt;</span> <span class="n">occ_event_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_event_a &gt;= occ_event_b?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">&gt;=</span> <span class="n">occ_event_b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OccEvent are not equal?:&quot;</span><span class="p">,</span> <span class="n">occ_event_a</span> <span class="o">!=</span> <span class="n">occ_event_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="orbits-of-occevent">
+<span id="id1"></span><h2>Orbits of OccEvent<a class="headerlink" href="#orbits-of-occevent" title="Permalink to this heading">#</a></h2>
+<p>The orbit of symmetrically equivalent <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> can be constructed using <code class="xref py py-func docutils literal notranslate"><span class="pre">make_prim_periodic_orbit()</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">factor_group</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_factor_group</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">)</span>
+<span class="n">occevent_symgroup_rep</span> <span class="o">=</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">make_occevent_symgroup_rep</span><span class="p">(</span>
+    <span class="n">factor_group</span><span class="p">,</span>
+    <span class="n">xtal_prim</span><span class="p">)</span>
+<span class="n">occevent_orbit</span> <span class="o">=</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">make_prim_periodic_orbit</span><span class="p">(</span>
+    <span class="n">occ_event</span><span class="p">,</span>
+    <span class="n">occevent_symgroup_rep</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output, <code class="docutils literal notranslate"><span class="pre">occevent_orbit</span></code>, is a <code class="docutils literal notranslate"><span class="pre">list[OccEvent]</span></code>, giving the <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> associated with the origin unit cell from the orbit of all equivalent OccEvent under prim factor group symmetry.</p>
+</section>
+<section id="atomic-hops-with-sublattice-restrictions">
+<h2>Atomic hops with sublattice restrictions<a class="headerlink" href="#atomic-hops-with-sublattice-restrictions" title="Permalink to this heading">#</a></h2>
+<p>Note that in the previous example the occupation order is the same on every sublattice. In a more complicated <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> with multiple sublattices, the occupation index for the “A” atom or vacancy might change from one sublattice to the other.</p>
+<p>In the following example, “A”, “B”, and vacancies are allowed on FCC corner sites, while “B”, “C”, and vacancies are allowed on face sites:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">from</span> <span class="nn">libcasm.occ_events</span> <span class="kn">import</span> <span class="n">OccPosition</span><span class="p">,</span> <span class="n">OccEvent</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="c1"># first lattice vector</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="c1"># second</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="c1"># third</span>
+<span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="c1"># &lt;--- note transpose</span>
+
+<span class="c1"># Basis sites positions, as columns of a matrix,</span>
+<span class="c1"># in fractional coordinates with respect to the lattice vectors</span>
+<span class="n">coordinate_frac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>   <span class="c1"># coordinates of basis site, b=0</span>
+    <span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="c1"># &lt;--- note transpose</span>
+
+<span class="c1"># Occupation degrees of freedom (DoF)</span>
+<span class="n">occ_dof</span><span class="o">=</span><span class="p">[</span>
+  <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;Va&quot;</span><span class="p">],</span> <span class="c1"># occupants allowed on basis site, b=0</span>
+  <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;Va&quot;</span><span class="p">],</span> <span class="c1"># occupants allowed on basis site, b=1</span>
+  <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;Va&quot;</span><span class="p">],</span> <span class="c1"># occupants allowed on basis site, b=2</span>
+  <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;Va&quot;</span><span class="p">],</span> <span class="c1"># occupants allowed on basis site, b=3</span>
+<span class="p">])</span>
+
+<span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+    <span class="n">coordinate_frac</span><span class="o">=</span><span class="n">coordinate_frac</span><span class="p">,</span>
+    <span class="n">occ_dof</span><span class="o">=</span><span class="n">occ_dof</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;FCC, with sublattice restrictions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then an “B”-vacancy exchange event between corner and face sites is constructed using:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">site1</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span><span class="n">sublattice</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">unitcell</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">site2</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span><span class="n">sublattice</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">unitcell</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">B_init_occ_index</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">B_final_occ_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">Va_occ_index</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">B_initial_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site1</span><span class="p">,</span> <span class="n">B_init_occ_index</span><span class="p">)</span>
+<span class="n">B_final_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site2</span><span class="p">,</span> <span class="n">B_final_occ_index</span><span class="p">)</span>
+<span class="n">Va_initial_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site2</span><span class="p">,</span> <span class="n">Va_occ_index</span><span class="p">)</span>
+<span class="n">Va_final_pos</span> <span class="o">=</span> <span class="n">OccPosition</span><span class="o">.</span><span class="n">occupant</span><span class="p">(</span><span class="n">site1</span><span class="p">,</span> <span class="n">Va_occ_index</span><span class="p">)</span>
+
+<span class="n">occ_event</span> <span class="o">=</span> <span class="n">OccEvent</span><span class="p">([</span>
+    <span class="p">[</span><span class="n">A_initial_pos</span><span class="p">,</span> <span class="n">A_final_pos</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Va_initial_pos</span><span class="p">,</span> <span class="n">Va_final_pos</span><span class="p">],</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="occ_events.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Occupation Events (libcasm.occ_events)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="construct_occevent_cluster_specs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Constructing local-cluster orbits</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-an-atomic-hop-occevent">Construct an atomic hop OccEvent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-occevent">Transforming OccEvent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-occevent">Comparing OccEvent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbits-of-occevent">Orbits of OccEvent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atomic-hops-with-sublattice-restrictions">Atomic hops with sublattice restrictions</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/usage/occ_events/construct_occevent.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
