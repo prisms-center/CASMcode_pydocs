@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -8,8 +7,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Lattice construction and symmetry analysis &#8212; libcasm-xtal 2.0a3 documentation</title>
+    <link href="../_static/small_logo.svg" rel="icon" type="image/svg+xml">
+    <title>Lattice construction and symmetry analysis &#8212; libcasm-xtal 2.0a8 documentation</title>
   
   
   
@@ -19,26 +18,27 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=58649a15"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/lattice';</script>
     <link rel="icon" href="../_static/small_logo.svg"/>
@@ -56,6 +56,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -96,7 +105,8 @@
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
   
@@ -106,13 +116,14 @@
   
   
   
+  
     
     
       
     
     
-    <img src="../_static/small_logo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/small_logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
   
   
     <p class="title logo__title">libcasm-xtal</p>
@@ -120,7 +131,6 @@
 </a></div>
     
   </div>
-  
   
   <div class="col-lg-9 navbar-header-items">
     
@@ -179,23 +189,25 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
         <div class="navbar-item">
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
@@ -206,18 +218,20 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
       <span class="fa-solid fa-outdent"></span>
     </label>
   
@@ -292,10 +306,10 @@ document.write(`
           <div class="navbar-item">
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
@@ -342,8 +356,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../index.html" class="nav-link" aria-label="Home">
@@ -353,7 +367,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Lattice construction and symmetry analysis</li>
+    <li class="breadcrumb-item active" aria-current="page">Lattice...</li>
   </ul>
 </nav>
 </div>
@@ -371,9 +385,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="lattice-construction-and-symmetry-analysis">
-<h1>Lattice construction and symmetry analysis<a class="headerlink" href="#lattice-construction-and-symmetry-analysis" title="Permalink to this heading">#</a></h1>
+<h1>Lattice construction and symmetry analysis<a class="headerlink" href="#lattice-construction-and-symmetry-analysis" title="Link to this heading">#</a></h1>
 <section id="lattice-construction">
-<h2>Lattice construction<a class="headerlink" href="#lattice-construction" title="Permalink to this heading">#</a></h2>
+<h2>Lattice construction<a class="headerlink" href="#lattice-construction" title="Link to this heading">#</a></h2>
 <p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Lattice.html#libcasm.xtal.Lattice" title="libcasm.xtal.Lattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code></a> class is used to represent a three-dimensional lattice. It is constructed by providing the lattice vectors as columns of a shape=(3,3) array.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -392,7 +406,7 @@ document.write(`
 </div>
 </section>
 <section id="common-lattices">
-<h2>Common lattices<a class="headerlink" href="#common-lattices" title="Permalink to this heading">#</a></h2>
+<h2>Common lattices<a class="headerlink" href="#common-lattices" title="Link to this heading">#</a></h2>
 <p>Some common lattices can be constructed using the convenience methods in <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.lattices.html#module-libcasm.xtal.lattices" title="libcasm.xtal.lattices"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.xtal.lattices</span></code></a>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">libcasm.xtal.lattices</span> <span class="k">as</span> <span class="nn">xtal_lattices</span>
 
@@ -413,7 +427,7 @@ document.write(`
 </div>
 </section>
 <section id="coordinate-conversions">
-<h2>Coordinate conversions<a class="headerlink" href="#coordinate-conversions" title="Permalink to this heading">#</a></h2>
+<h2>Coordinate conversions<a class="headerlink" href="#coordinate-conversions" title="Link to this heading">#</a></h2>
 <p>The column-vector convention is used throughout CASM to represent basis vectors and values because it allows easily transforming values between different bases. For instance, coordinates stored as columns in shape=(3,n) arrays can be transformed between fractional and Cartesian coordinates using:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">coordinate_cart</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span> <span class="o">@</span> <span class="n">coordinate_frac</span>
 <span class="n">coordinate_frac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">lattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">())</span> <span class="o">@</span> <span class="n">coordinate_cart</span>
@@ -427,7 +441,7 @@ document.write(`
 <p>Additionally, the method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.fractional_within.html#libcasm.xtal.fractional_within" title="libcasm.xtal.fractional_within"><code class="xref py py-func docutils literal notranslate"><span class="pre">fractional_within()</span></code></a> can be used to set fractional coordinates with values less than 0.0 or greater than or equal to 1.0 to the equivalent values within the lattice unit cell.</p>
 </section>
 <section id="symmetry-operations">
-<h2>Symmetry operations<a class="headerlink" href="#symmetry-operations" title="Permalink to this heading">#</a></h2>
+<h2>Symmetry operations<a class="headerlink" href="#symmetry-operations" title="Link to this heading">#</a></h2>
 <p>A symmetry operation transforms a spatial coordinate according to <span class="math notranslate nohighlight">\(\vec{r}_{cart}\rightarrow A \vec{r}_{cart}+\vec{\tau}\)</span>, where <span class="math notranslate nohighlight">\(A\)</span> is the shape=(3,3) <cite>operation matrix</cite> and <span class="math notranslate nohighlight">\(\vec{\tau}\)</span> is the <cite>translation vector</cite>.</p>
 <p>An instance of the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymOp.html#libcasm.xtal.SymOp" title="libcasm.xtal.SymOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymOp</span></code></a> class, <cite>op</cite>, is used to represent a symmetry operation that transforms Cartesian coordinates according to:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">r_after</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span> <span class="o">@</span> <span class="n">r_before</span> <span class="o">+</span> <span class="n">op</span><span class="o">.</span><span class="n">translation</span><span class="p">()</span>
@@ -442,7 +456,7 @@ document.write(`
 <p>where <cite>s_before</cite> and <cite>s_after</cite> are the spins before and after transformation, respectively.</p>
 </section>
 <section id="lattice-point-group-generation">
-<h2>Lattice point group generation<a class="headerlink" href="#lattice-point-group-generation" title="Permalink to this heading">#</a></h2>
+<h2>Lattice point group generation<a class="headerlink" href="#lattice-point-group-generation" title="Link to this heading">#</a></h2>
 <p>The lattice point group is the set of symmetry operations with <span class="math notranslate nohighlight">\(\vec{\tau}=\vec{0}\)</span> that transform the lattice vectors but leave all the lattice points (the points that are integer multiples of the lattice vectors) invariant. The lattice point group can be generated using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_point_group.html#libcasm.xtal.make_point_group" title="libcasm.xtal.make_point_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_point_group()</span></code></a> method. For the example of a simple cubic lattice, the lattice point group has 48 operations:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">point_group</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_point_group</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
@@ -452,7 +466,7 @@ document.write(`
 </div>
 </section>
 <section id="symmetry-operation-information">
-<span id="lattice-symmetry-operation-information"></span><h2>Symmetry operation information<a class="headerlink" href="#symmetry-operation-information" title="Permalink to this heading">#</a></h2>
+<span id="lattice-symmetry-operation-information"></span><h2>Symmetry operation information<a class="headerlink" href="#symmetry-operation-information" title="Link to this heading">#</a></h2>
 <p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymInfo.html#libcasm.xtal.SymInfo" title="libcasm.xtal.SymInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymInfo</span></code></a> class is used to determine information about a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymOp.html#libcasm.xtal.SymOp" title="libcasm.xtal.SymOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymOp</span></code></a>, such as:</p>
 <ul class="simple">
 <li><p>The type of symmetry operation</p></li>
@@ -498,7 +512,7 @@ document.write(`
 </div>
 </section>
 <section id="lattice-comparison">
-<h2>Lattice comparison<a class="headerlink" href="#lattice-comparison" title="Permalink to this heading">#</a></h2>
+<h2>Lattice comparison<a class="headerlink" href="#lattice-comparison" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code> operators can be used to check if two lattices have identical column vector matrices up to the lattice tolerance. Note that these operators do not check permutations of the lattice vectors.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
@@ -525,7 +539,7 @@ document.write(`
 </div>
 </section>
 <section id="lattice-equivalence">
-<h2>Lattice equivalence<a class="headerlink" href="#lattice-equivalence" title="Permalink to this heading">#</a></h2>
+<h2>Lattice equivalence<a class="headerlink" href="#lattice-equivalence" title="Link to this heading">#</a></h2>
 <p>A lattice can be represented using any choice of lattice vectors that results in the same lattice points. The <code class="xref py py-func docutils literal notranslate"><span class="pre">is_equivalent_to()</span></code> method checks for the equivalence of lattices that do not have identical lattice vectors by determining if one choice of lattice vectors can be formed by linear combination of another choice of lattice vectors according to <span class="math notranslate nohighlight">\(L_1 = L_2 U\)</span>, where <span class="math notranslate nohighlight">\(L_1\)</span> and <span class="math notranslate nohighlight">\(L_2\)</span> are the lattice vectors as columns of matrices, and <span class="math notranslate nohighlight">\(U\)</span> is an integer matrix with <span class="math notranslate nohighlight">\(\det(U) = \pm 1\)</span>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">lattice1</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="o">...</span>     <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="c1"># &#39;a&#39;</span>
@@ -545,7 +559,7 @@ document.write(`
 </div>
 </section>
 <section id="lattice-canonical-form">
-<span id="id1"></span><h2>Lattice canonical form<a class="headerlink" href="#lattice-canonical-form" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Lattice canonical form<a class="headerlink" href="#lattice-canonical-form" title="Link to this heading">#</a></h2>
 <p>For clarity and comparison purposes it is useful to have a canonical choice of equivalent lattice vectors. The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_canonical.html#libcasm.xtal.make_canonical" title="libcasm.xtal.make_canonical"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_canonical()</span></code></a> method finds the canonical right-handed Niggli cell of the lattice by applying point group operations to find the equivalent lattice in the orientation which compares greatest.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">noncanonical_lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span>
 <span class="o">...</span>     <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
@@ -580,11 +594,10 @@ document.write(`
               
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../usage.html"
@@ -604,10 +617,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -655,8 +665,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -674,7 +684,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>
@@ -682,10 +692,11 @@ document.write(`
     </div>
   
   
+  
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.3.
 </p></div>
       
     </div>
