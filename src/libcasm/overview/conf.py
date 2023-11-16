@@ -57,6 +57,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
+    "sphinx_favicon",
     "sphinxarg.ext",
     "sphinx.ext.intersphinx",
     "numpydoc",
@@ -110,7 +111,7 @@ language = None
 exclude_patterns = []
 
 # # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "sphinx"
+# pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
@@ -130,8 +131,11 @@ html_logo = "_static/small_logo.svg"
 html_theme_options = {
     "logo": {
         "text": "libcasm",
+        "image_light": "_static/small_logo.svg",
+        "image_dark": "_static/small_logo_dark.svg",
     },
-    # "pygment_light_style": "tango",
+    "pygment_light_style": "xcode",
+    "pygment_dark_style": "lightbulb",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -139,6 +143,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_favicon = "_static/small_logo.svg"
+favicons = ["small_logo.svg"]
 html_css_files = [
     "css/custom.css",
 ]
@@ -197,9 +202,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, "libcasm", "libcasm Documentation", [author], 1)
-]
+man_pages = [(master_doc, "libcasm", "libcasm Documentation", [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 

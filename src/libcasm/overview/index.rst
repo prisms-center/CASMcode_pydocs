@@ -1,6 +1,13 @@
-.. image:: _static/logo.svg
+.. image:: _static/logo_outline.svg
   :alt: CASM logo
   :width: 600
+  :class: only-light
+
+.. image:: _static/logo_dark_outline.svg
+  :alt: CASM logo
+  :width: 600
+  :class: only-dark
+
 
 libcasm
 =======
@@ -51,7 +58,7 @@ Install:
 
     pip install libcasm-xtal
 
-Docs: `[2.0a3] <../../xtal/2.0/>`_
+Docs: `[2.0a8] <../../xtal/2.0/>`_
 
 Links: |GitHub_xtal|_ |PyPI_xtal|_
 
