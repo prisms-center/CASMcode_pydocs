@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../../_static/small_logo.svg" rel="icon" type="image/svg+xml">
+    <title>ConfigurationWithProperties &#8212; libcasm-configuration 2.0a2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=e877a769"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.configuration.ConfigurationWithProperties';</script>
+    <link rel="icon" href="../../../_static/small_logo.svg"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="from_dict" href="libcasm.configuration.ConfigurationWithProperties.from_dict.html" />
+    <link rel="prev" title="to_dict" href="libcasm.configuration.ConfigurationSet.to_dict.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-xtal</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage/usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage/usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.clusterography.html">libcasm.clusterography</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.equivalents_info_from_dict.html">equivalents_info_from_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_cluster_group.html">make_cluster_group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_integral_site_coordinate_symgroup_rep.html">make_integral_site_coordinate_symgroup_rep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_cluster_specs.html">make_local_cluster_specs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_equivalence_map.html">make_local_equivalence_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_equivalence_map_indices.html">make_local_equivalence_map_indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_orbit.html">make_local_orbit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_periodic_cluster_specs.html">make_periodic_cluster_specs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_periodic_equivalence_map.html">make_periodic_equivalence_map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_periodic_equivalence_map_indices.html">make_periodic_equivalence_map_indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_periodic_orbit.html">make_periodic_orbit</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clusterography.Cluster.html">Cluster</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.append.html">append</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.from_list.html">from_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.is_sorted.html">is_sorted</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.site.html">site</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.sites.html">sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.size.html">size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.sort.html">sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.sorted.html">sorted</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.to_index_list.html">to_index_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.to_index_set.html">to_index_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.Cluster.to_list.html">to_list</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clusterography.ClusterOrbitGenerator.html">ClusterOrbitGenerator</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterOrbitGenerator.from_list.html">from_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterOrbitGenerator.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.html">ClusterSpecs</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.custom_generators.html">custom_generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.cutoff_radius.html">cutoff_radius</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.generating_group.html">generating_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.include_phenomenal_sites.html">include_phenomenal_sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.make_orbits.html">make_orbits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.max_length.html">max_length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.phenomenal.html">phenomenal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.site_filter_method.html">site_filter_method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clusterography.ClusterSpecs.xtal_prim.html">xtal_prim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.configuration.html">libcasm.configuration</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.apply.html">apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.config_space_analysis.html">config_space_analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.copy_apply.html">copy_apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.copy_configuration.html">copy_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.copy_transformed_configuration.html">copy_transformed_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.dof_space_analysis.html">dof_space_analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.from_canonical_configuration.html">from_canonical_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.from_canonical_supercell.html">from_canonical_supercell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.is_canonical_configuration.html">is_canonical_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.is_canonical_supercell.html">is_canonical_supercell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.is_primitive_configuration.html">is_primitive_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_all_super_configurations.html">make_all_super_configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_canonical_configuration.html">make_canonical_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_canonical_supercell.html">make_canonical_supercell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_dof_space_rep.html">make_dof_space_rep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_equivalent_configurations.html">make_equivalent_configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_equivalent_supercells.html">make_equivalent_supercells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_global_dof_matrix_rep.html">make_global_dof_matrix_rep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_invariant_subgroup.html">make_invariant_subgroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_local_dof_matrix_rep.html">make_local_dof_matrix_rep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.make_primitive_configuration.html">make_primitive_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.to_canonical_configuration.html">to_canonical_configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.configuration.to_canonical_supercell.html">to_canonical_supercell</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.html">ConfigSpaceAnalysisResults</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.eigenvalues.html">eigenvalues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.equivalent_configurations.html">equivalent_configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.equivalent_dof_values.html">equivalent_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.projector.html">projector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.standard_dof_space.html">standard_dof_space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigSpaceAnalysisResults.symmetry_adapted_dof_space.html">symmetry_adapted_dof_space</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.Configuration.html">Configuration</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.dof_values.html">dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.dof_values_ptr.html">dof_values_ptr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.from_structure.html">from_structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.global_dof_values.html">global_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.global_standard_dof_values.html">global_standard_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.local_dof_site_value.html">local_dof_site_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.local_dof_values.html">local_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.local_standard_dof_site_value.html">local_standard_dof_site_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.local_standard_dof_values.html">local_standard_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.occ.html">occ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.occupation.html">occupation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_dof_values.html">set_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_global_dof_values.html">set_global_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_global_standard_dof_values.html">set_global_standard_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_local_dof_site_value.html">set_local_dof_site_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_local_dof_values.html">set_local_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_local_standard_dof_site_value.html">set_local_standard_dof_site_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_local_standard_dof_values.html">set_local_standard_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_occ.html">set_occ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.set_occupation.html">set_occupation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.supercell.html">supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Configuration.to_structure.html">to_structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.ConfigurationRecord.html">ConfigurationRecord</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationRecord.configuration.html">configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationRecord.configuration_id.html">configuration_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationRecord.configuration_name.html">configuration_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationRecord.supercell_name.html">supercell_name</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.html">ConfigurationSet</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.add.html">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.add_configuration.html">add_configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.add_record.html">add_record</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.clear.html">clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.discard.html">discard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.discard_by_name.html">discard_by_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.discard_configuration.html">discard_configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.empty.html">empty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.get.html">get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.get_by_name.html">get_by_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.get_configuration.html">get_configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.remove.html">remove</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.remove_by_name.html">remove_by_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.remove_configuration.html">remove_configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationSet.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">ConfigurationWithProperties</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.from_structure.html">from_structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.global_property_values.html">global_property_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.local_property_values.html">local_property_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.scalar_global_property_value.html">scalar_global_property_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.to_structure.html">to_structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.configuration.html">configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.global_properties.html">global_properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.local_properties.html">local_properties</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.DoFSpaceAnalysisResults.html">DoFSpaceAnalysisResults</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.DoFSpaceAnalysisResults.symmetry_adapted_dof_space.html">symmetry_adapted_dof_space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.DoFSpaceAnalysisResults.symmetry_report.html">symmetry_report</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.Prim.html">Prim</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.atom_position_symgroup_rep.html">atom_position_symgroup_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.crystal_point_group.html">crystal_point_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.factor_group.html">factor_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.from_json.html">from_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.global_dof_basis.html">global_dof_basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.global_dof_basis_inv.html">global_dof_basis_inv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.global_dof_matrix_rep.html">global_dof_matrix_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.has_anisotropic_occupants.html">has_anisotropic_occupants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.has_occupation_dofs.html">has_occupation_dofs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.integral_site_coordinate_symgroup_rep.html">integral_site_coordinate_symgroup_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.local_dof_basis.html">local_dof_basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.local_dof_basis_inv.html">local_dof_basis_inv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.local_dof_matrix_rep.html">local_dof_matrix_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.occ_symgroup_rep.html">occ_symgroup_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.to_json.html">to_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.xtal_prim.html">xtal_prim</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.Supercell.html">Supercell</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.coordinate_cart.html">coordinate_cart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.coordinate_frac.html">coordinate_frac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.factor_group.html">factor_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.factor_group_permutations.html">factor_group_permutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.integral_site_coordinate.html">integral_site_coordinate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.linear_site_index.html">linear_site_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.linear_unitcell_index.html">linear_unitcell_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.linear_unitcell_indices.html">linear_unitcell_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.n_occupants.html">n_occupants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.n_sites.html">n_sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.n_unitcells.html">n_unitcells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.occ_dof.html">occ_dof</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.prim.html">prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.prim_lattice.html">prim_lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.site_index_converter.html">site_index_converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.sublattice_indices.html">sublattice_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.superlattice.html">superlattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.translation_permutations.html">translation_permutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.unitcell_index_converter.html">unitcell_index_converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.unitcell_indices.html">unitcell_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.within.html">within</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Supercell.xtal_prim.html">xtal_prim</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.SupercellRecord.html">SupercellRecord</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellRecord.canonical_supercell_name.html">canonical_supercell_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellRecord.is_canonical.html">is_canonical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellRecord.supercell.html">supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellRecord.supercell_name.html">supercell_name</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.SupercellSet.html">SupercellSet</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.add.html">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.add_by_canonical_name.html">add_by_canonical_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.add_by_transformation_matrix_to_super.html">add_by_transformation_matrix_to_super</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.add_record.html">add_record</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.add_supercell.html">add_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.clear.html">clear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.discard.html">discard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.discard_by_canonical_name.html">discard_by_canonical_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.discard_by_transformation_matrix_to_super.html">discard_by_transformation_matrix_to_super</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.discard_record.html">discard_record</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.discard_supercell.html">discard_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.empty.html">empty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.prim.html">prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.remove.html">remove</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.remove_by_canonical_name.html">remove_by_canonical_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.remove_by_transformation_matrix_to_super.html">remove_by_transformation_matrix_to_super</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.remove_record.html">remove_record</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.remove_supercell.html">remove_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSet.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.html">SupercellSymOp</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.begin.html">begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.combined_permute.html">combined_permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.end.html">end</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.inverse.html">inverse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.next.html">next</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.permute_index.html">permute_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.prim_factor_group_index.html">prim_factor_group_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.supercell.html">supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.supercell_factor_group_index.html">supercell_factor_group_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.to_symop.html">to_symop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.translation_begin.html">translation_begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.translation_end.html">translation_end</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.translation_frac.html">translation_frac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.SupercellSymOp.translation_index.html">translation_index</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.configuration.io.html">libcasm.configuration.io</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.configuration_list_from_data.html">configuration_list_from_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.configuration_list_to_data.html">configuration_list_to_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.supercell_list_from_data.html">supercell_list_from_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.supercell_list_to_data.html">supercell_list_to_data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.enumerate.html">libcasm.enumerate</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.get_occevent_coordinate.html">get_occevent_coordinate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_all_distinct_local_perturbations.html">make_all_distinct_local_perturbations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_occevent_simple_structures.html">make_occevent_simple_structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_occevent_suborbits.html">make_occevent_suborbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_phenomenal_occevent.html">make_phenomenal_occevent</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.irreps.html">libcasm.irreps</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepInfo.html">IrrepInfo</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.characters.html">characters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.directions.html">directions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.irrep_dim.html">irrep_dim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.trans_mat.html">trans_mat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.vector_dim.html">vector_dim</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepWedge.html">IrrepWedge</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepWedge.axes.html">axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepWedge.irrep_info.html">irrep_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepWedge.mult.html">mult</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.SubWedge.html">SubWedge</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.SubWedge.irrep_wedges.html">irrep_wedges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.SubWedge.trans_mat.html">trans_mat</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.html">VectorSpaceSymReport</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.axis_glossary.html">axis_glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.irreducible_wedge.html">irreducible_wedge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.irrep_axes_indices.html">irrep_axes_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.irrep_names.html">irrep_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.irrep_wedge_axes.html">irrep_wedge_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.irreps.html">irreps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.symgroup_rep.html">symgroup_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.symmetry_adapted_subspace.html">symmetry_adapted_subspace</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.occ_events.html">libcasm.occ_events</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.get_occevent_coordinate.html">get_occevent_coordinate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.load_occevent.html">load_occevent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_canonical_occevent.html">make_canonical_occevent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_canonical_prim_periodic_occevents.html">make_canonical_prim_periodic_occevents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_occevent_cluster_specs.html">make_occevent_cluster_specs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_occevent_group.html">make_occevent_group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_occevent_symgroup_rep.html">make_occevent_symgroup_rep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_occevent_symgroup_rep_from_existing.html">make_occevent_symgroup_rep_from_existing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_prim_periodic_orbit.html">make_prim_periodic_orbit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.save_occevent.html">save_occevent</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccEvent.html">OccEvent</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.cluster.html">cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.copy_reverse.html">copy_reverse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.copy_sort.html">copy_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.final_occupation.html">final_occupation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.initial_occupation.html">initial_occupation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.reverse.html">reverse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.size.html">size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.sort.html">sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.standardize.html">standardize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.trajectories.html">trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.OccEventPrinter.html">OccEventPrinter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.OccEventRep.html">OccEventRep</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccPosition.html">OccPosition</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.atom_component.html">atom_component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.atom_position_index.html">atom_position_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.integral_site_coordinate.html">integral_site_coordinate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.is_atom.html">is_atom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.is_in_resevoir.html">is_in_resevoir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.molecule.html">molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.occupant.html">occupant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.occupant_index.html">occupant_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccSystem.html">OccSystem</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.atom_name_list.html">atom_name_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.chemical_name_list.html">chemical_name_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_atom_name.html">get_atom_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_cartesian_coordinate.html">get_cartesian_coordinate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_chemical_index.html">get_chemical_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_chemical_name.html">get_chemical_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_occupant.html">get_occupant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_orientation_index.html">get_orientation_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.get_orientation_name.html">get_orientation_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.is_indivisible.html">is_indivisible</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.is_vacancy.html">is_vacancy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.is_vacancy_list.html">is_vacancy_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.orientation_name_list.html">orientation_name_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.xtal_prim.html">xtal_prim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.sym_info.html">libcasm.sym_info</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.sym_info.make_factor_group.html">make_factor_group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.sym_info.make_point_group.html">make_point_group</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.sym_info.SymGroup.html">SymGroup</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-29"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.conjugacy_classes.html">conjugacy_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.elements.html">elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.head_group.html">head_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.head_group_index.html">head_group_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.inv.html">inv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.inverse_index.html">inverse_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.is_subgroup.html">is_subgroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.make_subgroup.html">make_subgroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.mult.html">mult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.multiplication_table.html">multiplication_table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference (libcasm)</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="libcasm.configuration.html" class="nav-link">libcasm.configuration</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Configuratio...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="configurationwithproperties">
+<h1>ConfigurationWithProperties<a class="headerlink" href="#configurationwithproperties" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="libcasm.configuration.ConfigurationWithProperties">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.configuration.</span></span><span class="sig-name descname"><span class="pre">ConfigurationWithProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.configuration.ConfigurationWithProperties" title="libcasm.configuration._configuration.ConfigurationWithProperties"><span class="pre">ConfigurationWithProperties</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.configuration.Configuration.html#libcasm.configuration.Configuration" title="libcasm.configuration._configuration.Configuration"><span class="pre">Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">n</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libcasm.configuration.ConfigurationWithProperties" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A data structure encapsulating a Configuration along with associated
+local and global continuous properties.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The format for local and global properties follows the format for local and
+global continuous degrees of freedom (DoF) in the standard basis, as documented
+for <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexulator/2.0/usage/config_dof_values.html">ConfigDoFValues</a></p></li>
+<li><p>Scalar global properties, such as energy, are stored in a vector like other
+global properties, and can also be accessed using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scalar_property()</span></code>.</p></li>
+<li><p>ConfigurationWithProperties may be copied with <cite>copy.copy</cite> or <cite>copy.deepcopy</cite>.</p></li>
+</ul>
+<p>Construct a ConfigurationWithProperties</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configuration</strong> (<a class="reference internal" href="libcasm.configuration.Configuration.html#libcasm.configuration.Configuration" title="libcasm.configuration.Configuration"><em>Configuration</em></a>) – The configuration.</p></li>
+<li><p><strong>local_properties</strong> (<em>dict</em><em>[</em><em>str</em><em>,</em><em>numpy.ndarray</em><em>[</em><em>numpy.float64</em><em>[</em><em>matrix_dim</em><em>, </em><em>n_sites</em><em>]</em><em>]</em><em>] </em><em>= {}</em>) – Local continuous property values, as two-dimensional floating-point arrays
+(value), by property type (key), with one column of values
+for each in the supercell. To be transformed by symmetry operations,
+the keys must be CASM-supported property types and values are expected
+to be in the standard basis.</p></li>
+<li><p><strong>global_properties</strong> (<em>dict</em><em>[</em><em>str</em><em>,</em><em>numpy.ndarray</em><em>[</em><em>numpy.float64</em><em>[</em><em>vector_dim</em><em>, </em><em>1</em><em>]</em><em>]</em><em>] </em><em>= {}</em>) – Global continuous property values, as one-dimensional floating-point arrays
+(value), accessed by property type (key). To be transformed by symmetry
+operations, the keys must be CASM-supported property types and values are
+expected to be in the standard basis.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.from_dict.html#libcasm.configuration.ConfigurationWithProperties.from_dict" title="libcasm.configuration.ConfigurationWithProperties.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a></p></td>
+<td><p>Construct a ConfigurationWithProperties from a Python dict</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.from_structure.html#libcasm.configuration.ConfigurationWithProperties.from_structure" title="libcasm.configuration.ConfigurationWithProperties.from_structure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_structure</span></code></a></p></td>
+<td><p>Construct a ConfigurationWithProperties from a Structure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.global_property_values.html#libcasm.configuration.ConfigurationWithProperties.global_property_values" title="libcasm.configuration.ConfigurationWithProperties.global_property_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_property_values</span></code></a></p></td>
+<td><p>numpy.ndarray[numpy.float64[vector_dim, 1]]: Global property values of type <cite>key</cite>, as a const reference.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.local_property_values.html#libcasm.configuration.ConfigurationWithProperties.local_property_values" title="libcasm.configuration.ConfigurationWithProperties.local_property_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_property_values</span></code></a></p></td>
+<td><p>numpy.ndarray[numpy.float64[matrix_dim, n_sites]]: Local property values of type <cite>key</cite>, as a const reference.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.scalar_global_property_value.html#libcasm.configuration.ConfigurationWithProperties.scalar_global_property_value" title="libcasm.configuration.ConfigurationWithProperties.scalar_global_property_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalar_global_property_value</span></code></a></p></td>
+<td><p>float: Scalar global property value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.to_dict.html#libcasm.configuration.ConfigurationWithProperties.to_dict" title="libcasm.configuration.ConfigurationWithProperties.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a></p></td>
+<td><p>Represent the ConfigurationWithProperties as a Python dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.to_structure.html#libcasm.configuration.ConfigurationWithProperties.to_structure" title="libcasm.configuration.ConfigurationWithProperties.to_structure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_structure</span></code></a></p></td>
+<td><p>Construct a Structure from a ConfigurationWithProperties</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.configuration.html#libcasm.configuration.ConfigurationWithProperties.configuration" title="libcasm.configuration.ConfigurationWithProperties.configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configuration</span></code></a></p></td>
+<td><p>Access the configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.global_properties.html#libcasm.configuration.ConfigurationWithProperties.global_properties" title="libcasm.configuration.ConfigurationWithProperties.global_properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_properties</span></code></a></p></td>
+<td><p><p></p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.configuration.ConfigurationWithProperties.local_properties.html#libcasm.configuration.ConfigurationWithProperties.local_properties" title="libcasm.configuration.ConfigurationWithProperties.local_properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_properties</span></code></a></p></td>
+<td><p><p></p>
+</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="libcasm.configuration.ConfigurationSet.to_dict.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">to_dict</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="libcasm.configuration.ConfigurationWithProperties.from_dict.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">from_dict</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.configuration.ConfigurationWithProperties"><code class="docutils literal notranslate"><span class="pre">ConfigurationWithProperties</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.configuration.ConfigurationWithProperties.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
