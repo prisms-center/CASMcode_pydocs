@@ -1,6 +1,16 @@
+.. image:: _static/logo_outline.svg
+  :alt: CASM logo
+  :width: 600
+  :class: only-light
 
-libcasm-composition: The Python interface to the CASM composition library
-=========================================================================
+.. image:: _static/logo_dark_outline.svg
+  :alt: CASM logo
+  :width: 600
+  :class: only-dark
+
+
+libcasm-composition: The CASM composition module
+================================================
 
 The libcasm-composition package is the CASM composition module.
 This includes:
@@ -14,7 +24,7 @@ This includes:
 About CASM
 ==========
 
-The libcasm-global package is part of the CASM_ open source software package, which is designed to perform first-principles statistical mechanical studies of multi-component crystalline solids.
+The libcasm-composition package is part of the CASM_ open source software package, which is designed to perform first-principles statistical mechanical studies of multi-component crystalline solids.
 
 CASM is developed by the Van der Ven group, originally at the University of Michigan and currently at the University of California Santa Barbara.
 
