@@ -9,8 +9,8 @@
   :class: only-dark
 
 
-libcasm-composition: The CASM composition module
-================================================
+libcasm-composition
+===================
 
 The libcasm-composition package is the CASM composition module.
 This includes:
