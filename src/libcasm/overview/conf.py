@@ -12,7 +12,6 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import os
 
 # -- General configuration ------------------------------------------------
 
@@ -57,7 +56,6 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
-    "sphinx_favicon",
     "sphinxarg.ext",
     "sphinx.ext.intersphinx",
     "numpydoc",
@@ -86,7 +84,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "libcasm"
-copyright = "2023, CASM Developers"
+copyright = "2024, CASM Developers"
 author = "CASM Developers"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -136,14 +134,25 @@ html_theme_options = {
     },
     "pygment_light_style": "xcode",
     "pygment_dark_style": "lightbulb",
+    "favicons": [
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "href": "favicon-32x32.png",
+        },
+        {
+            "rel": "icon",
+            "sizes": "16x16",
+            "href": "favicon-16x16.png",
+        },
+        {"rel": "apple-touch-icon", "sizes": "180x180", "href": "apple-touch-icon.png"},
+    ],
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-html_favicon = "_static/small_logo.svg"
-favicons = ["small_logo.svg"]
 html_css_files = [
     "css/custom.css",
 ]

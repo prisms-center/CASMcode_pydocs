@@ -58,7 +58,7 @@ Install:
 
     pip install libcasm-xtal
 
-Docs: `[2.0a8] <../../xtal/2.0/>`_
+Docs: `[2.0a9] <../../xtal/2.0/>`_
 
 Links: |GitHub_xtal|_ |PyPI_xtal|_
 
@@ -82,7 +82,7 @@ Install:
 
     pip install libcasm-composition
 
-Docs: `[2.0a1] <../../composition/2.0/>`_
+Docs: `[2.0a2] <../../composition/2.0/>`_
 
 Links: |GitHub_composition|_ |PyPI_composition|_
 
@@ -108,7 +108,7 @@ Install:
     pip install libcasm-mapping
 
 
-Docs: `[2.0a2] <../../mapping/2.0/>`_
+Docs: `[2.0a3] <../../mapping/2.0/>`_
 
 Links: |GitHub_mapping|_ |PyPI_mapping|_
 
