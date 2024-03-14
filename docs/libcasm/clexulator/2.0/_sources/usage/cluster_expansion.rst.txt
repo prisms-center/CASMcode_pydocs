@@ -82,7 +82,7 @@ In this example, the :func:`~libcasm.clexulator.make_cluster_expansion` method r
 Evaluate the cluster expansion
 ------------------------------
 
-To evaluate the cluster expansion, the :class:`~libcasm.clexulator.ClusterExpansion` calculator must be set to point at a :class:`~libcasm.clexulator.ConfigDoFValues` instance. This is done at automatically for the objects returned by :func:`~libcasm.clexulator.make_cluster_expansion`.
+To evaluate the cluster expansion, the :class:`~libcasm.clexulator.ClusterExpansion` calculator must be set to point at a :class:`~libcasm.clexulator.ConfigDoFValues` instance. This is done automatically for the objects returned by :func:`~libcasm.clexulator.make_cluster_expansion`.
 
 Then, the cluster expansion value can be evaluated with:
 
@@ -91,11 +91,11 @@ Then, the cluster expansion value can be evaluated with:
     # ... calculate cluster expansion value for the current state
     #     of the ConfigDoFValues that cluster_expansion has been set with ...
 
-    # evaluate and return extensive value:
-    value_per_supercell = cluster_expansion.extensive_value()
+    # evaluate and return per_supercell value:
+    value_per_supercell = cluster_expansion.per_supercell()
 
-    # or evaluate and return the intensive value:
-    value_per_unitcell = cluster_expansion.intensive_value()
+    # or evaluate and return the per_unitcell value:
+    value_per_unitcell = cluster_expansion.per_unitcell()
 
 
 .. _change-and-re-evaluate-clex:
@@ -128,8 +128,8 @@ To change DoF values and re-calculate the cluster expansion, just modify the val
     # ... calculate cluster expansion value for the current state
     #     of the ConfigDoFValues that cluster_expansion has been set with ...
 
-    # evaluate and return the intensive value:
-    value_per_unitcell = cluster_expansion.intensive_value()
+    # evaluate and return the per_unitcell value:
+    value_per_unitcell = cluster_expansion.per_unitcell()
 
 .. warning::
 
@@ -149,8 +149,8 @@ To change DoF values and re-calculate the cluster expansion, just modify the val
         # ... this will try to calculate cluster expansion value
         #     but still points at the original `config_dof_values` data ...
 
-        # ... so it will evaluate and return the wrong intensive value ...
-        wrong_value_per_unitcell = cluster_expansion.intensive_value()
+        # ... so it will evaluate and return the wrong per_unitcell value ...
+        wrong_value_per_unitcell = cluster_expansion.per_unitcell()
 
 .. warning::
 
@@ -171,8 +171,8 @@ To change DoF values and re-calculate the cluster expansion, just modify the val
         # ... so this has no effect on `config_dof_values`'s data ...
         occupation[linear_site_index] = new_occ
 
-        # ... and it will evaluate and return the wrong intensive value ...
-        wrong_value_per_unitcell = cluster_expansion.intensive_value()
+        # ... and it will evaluate and return the wrong per_unitcell value ...
+        wrong_value_per_unitcell = cluster_expansion.per_unitcell()
 
 
 Set a ClusterExpansion to use a different ConfigDoFValues instance
@@ -189,7 +189,7 @@ The function :func:`~libcasm.clexulator.ClusterExpansion.set` may be used to poi
     cluster_expansion.set(other)
 
     # ... calculate cluster expansion value using `other`'s data ...
-    value_per_unitcell = cluster_expansion.intensive_value()
+    value_per_unitcell = cluster_expansion.per_unitcell()
 
 
 .. warning::
@@ -200,12 +200,12 @@ The function :func:`~libcasm.clexulator.ClusterExpansion.set` may be used to poi
 Calculate the effect of changes in DoF values
 ---------------------------------------------
 
-:class:`~libcasm.clexulator.ClusterExpansion` includes methods to efficiently calculate the change in the value of the extensive cluster expansion value due to changes in particular DoF values:
+:class:`~libcasm.clexulator.ClusterExpansion` includes methods to efficiently calculate the change in the value of the per_supercell cluster expansion value due to changes in particular DoF values:
 
-- :func:`~libcasm.clexulator.ClusterExpansion.occ_delta_value`: For the change in the extensive cluster expansion value due to the change in a single occupant value
-- :func:`~libcasm.clexulator.ClusterExpansion.multi_occ_delta_value`: For the change in the extensive cluster expansion value due to changes in multiple occupant values
-- :func:`~libcasm.clexulator.ClusterExpansion.local_delta_value`: For the change in the extensive cluster expansion value due to the change in a single local continuous DoF value
-- :func:`~libcasm.clexulator.ClusterExpansion.global_delta_value`: For the change in the extensive cluster expansion value due to the change in a single global continuous DoF value
+- :func:`~libcasm.clexulator.ClusterExpansion.occ_delta_value`: For the change in the per_supercell cluster expansion value due to the change in a single occupant value
+- :func:`~libcasm.clexulator.ClusterExpansion.multi_occ_delta_value`: For the change in the per_supercell cluster expansion value due to changes in multiple occupant values
+- :func:`~libcasm.clexulator.ClusterExpansion.local_delta_value`: For the change in the per_supercell cluster expansion value due to the change in a single local continuous DoF value
+- :func:`~libcasm.clexulator.ClusterExpansion.global_delta_value`: For the change in the per_supercell cluster expansion value due to the change in a single global continuous DoF value
 
 As an example, the following is pseudo-code that uses :func:`~libcasm.clexulator.ClusterExpansion.occ_delta_value` in the inner loop of a semi-grand canonical Monte Carlo simulation:
 

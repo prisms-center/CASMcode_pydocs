@@ -59,6 +59,10 @@ Neighbor lists
 - :class:`~libcasm.clexulator.PrimNeighborList`: A prim neighbor list, defines an ordering of unit cells in the local neighborhood of a unit cell for a particular :class:`~libcasm.xtal.Prim`.
 - :class:`~libcasm.clexulator.SuperNeighborList`: A neighbor list that uses the ordering specified by a prim neighbor list to construct a neighbor list for each unit cell in a supercell. One of these must be generated for each supercell in which cluster basis functions are evaluated.
 
+For more details on constructing or using neighbor lists, see the section :ref:`Neighbor lists <neighbor-lists-index>`.
+
+When a :class:`~libcasm.clexulator.Clexulator` is constructed, a :class:`~libcasm.clexulator.PrimNeighborList` is constructed with the same ordering as the one used to write the basis functions, or if an existing :class:`~libcasm.clexulator.PrimNeighborList` is provided, it is validated that the ordering is the same. Then the :class:`~libcasm.clexulator.PrimNeighborList` can be used to construct :class:`~libcasm.clexulator.SuperNeighborList` for each supercell in which the cluster expansion will be evaluated.
+
 
 Environment variables for compiling and linking Clexulator
 ----------------------------------------------------------

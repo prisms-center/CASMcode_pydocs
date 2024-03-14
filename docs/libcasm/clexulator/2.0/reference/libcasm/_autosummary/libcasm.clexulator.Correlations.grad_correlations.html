@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>grad_correlations &#8212; libcasm-clexulator 2.0a4 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.clexulator.Correlations.grad_correlations';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="has_point" href="libcasm.clexulator.Correlations.has_point.html" />
+    <link rel="prev" title="global_delta" href="libcasm.clexulator.Correlations.global_delta.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-clexulator</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexulator/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexulator/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexulator/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexulator/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.clexulator.html">libcasm.clexulator</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.calc_local_correlations.html">calc_local_correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.calc_order_parameters.html">calc_order_parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.calc_per_unitcell_correlations.html">calc_per_unitcell_correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.from_standard_values.html">from_standard_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_clexulator.html">make_clexulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_cluster_expansion.html">make_cluster_expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_default_config_dof_values.html">make_default_config_dof_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_default_prim_neighbor_list.html">make_default_prim_neighbor_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_default_standard_config_dof_values.html">make_default_standard_config_dof_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_local_clexulator.html">make_local_clexulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.to_standard_values.html">to_standard_values</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.Clexulator.html">Clexulator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Clexulator.n_functions.html">n_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Clexulator.n_point_corr.html">n_point_corr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Clexulator.n_sublattices.html">n_sublattices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Clexulator.nlist_size.html">nlist_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Clexulator.sublat_indices.html">sublat_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Clexulator.weight_matrix.html">weight_matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.html">ClusterExpansion</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.coefficients.html">coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.correlations.html">correlations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.global_delta_value.html">global_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.local_delta_value.html">local_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.multi_occ_delta_value.html">multi_occ_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.occ_delta_value.html">occ_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.required_update_neighborhood.html">required_update_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansion.set.html">set</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.ClusterExpansionInfo.html">ClusterExpansionInfo</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansionInfo.prim_neighbor_list.html">prim_neighbor_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansionInfo.supercell_neighbor_list.html">supercell_neighbor_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansionInfo.clexulator.html">clexulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ClusterExpansionInfo.config_dof_values.html">config_dof_values</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.html">ConfigDoFValues</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.global_dof_keys.html">global_dof_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.global_dof_values.html">global_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.insert_or_assign_global_dof_values.html">insert_or_assign_global_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.insert_or_assign_local_dof_values.html">insert_or_assign_local_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.local_dof_keys.html">local_dof_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.local_dof_site_value.html">local_dof_site_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.local_dof_values.html">local_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.occ.html">occ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.occupation.html">occupation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.set.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.set_global_dof_values.html">set_global_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.set_local_dof_site_value.html">set_local_dof_site_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.set_local_dof_values.html">set_local_dof_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.set_occ.html">set_occ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.set_occupation.html">set_occupation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.ConfigDoFValues.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="libcasm.clexulator.Correlations.html">Correlations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.all_points.html">all_points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.all_points_site_indices.html">all_points_site_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.contribution.html">contribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.corr_size.html">corr_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.global_delta.html">global_delta</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">grad_correlations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.has_point.html">has_point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.indices.html">indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.local_delta.html">local_delta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.multi_occ_delta.html">multi_occ_delta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.occ_delta.html">occ_delta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.point.html">point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.required_update_neighborhood.html">required_update_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.Correlations.set.html">set</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.DoFSpace.html">DoFSpace</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.axis_info.html">axis_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.basis.html">basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.basis_inv.html">basis_inv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.dof_key.html">dof_key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.is_global.html">is_global</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.prim.html">prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.site_indices.html">site_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.subspace_dim.html">subspace_dim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpace.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.DoFSpaceAxisInfo.html">DoFSpaceAxisInfo</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpaceAxisInfo.basis_row_index.html">basis_row_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpaceAxisInfo.dof_component_index.html">dof_component_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpaceAxisInfo.glossary.html">glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.DoFSpaceAxisInfo.linear_site_index.html">linear_site_index</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.LocalClexulator.html">LocalClexulator</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClexulator.n_equivalents.html">n_equivalents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClexulator.n_functions.html">n_functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.LocalClusterExpansion.html">LocalClusterExpansion</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClusterExpansion.coefficients.html">coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClusterExpansion.correlations.html">correlations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClusterExpansion.required_update_neighborhood.html">required_update_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClusterExpansion.set.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalClusterExpansion.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.LocalCorrelations.html">LocalCorrelations</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalCorrelations.corr_size.html">corr_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalCorrelations.indices.html">indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalCorrelations.required_update_neighborhood.html">required_update_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalCorrelations.set.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.LocalCorrelations.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.html">MultiClusterExpansion</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.coefficients.html">coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.correlations.html">correlations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.global_delta_value.html">global_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.local_delta_value.html">local_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.multi_occ_delta_value.html">multi_occ_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.occ_delta_value.html">occ_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.required_update_neighborhood.html">required_update_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.set.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiClusterExpansion.size.html">size</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.html">MultiLocalClusterExpansion</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.coefficients.html">coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.correlations.html">correlations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.required_update_neighborhood.html">required_update_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.set.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.size.html">size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.MultiLocalClusterExpansion.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.OrderParameter.html">OrderParameter</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.global_component_delta_value.html">global_component_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.global_delta_value.html">global_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.local_component_delta_value.html">local_component_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.local_delta_value.html">local_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.multi_occ_delta_value.html">multi_occ_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.occ_delta_value.html">occ_delta_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.set.html">set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.update.html">update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html">PrimNeighborList</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.add_site.html">add_site</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.add_unitcell.html">add_unitcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.default_lattice_weight_matrix.html">default_lattice_weight_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.default_sublattice_indices.html">default_sublattice_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.make_weight_matrix.html">make_weight_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.n_neighborhood_sites.html">n_neighborhood_sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.n_neighborhood_unitcells.html">n_neighborhood_unitcells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.neighbor_index.html">neighbor_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.sublattice_indices.html">sublattice_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.total_n_sublattice.html">total_n_sublattice</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.html">SparseCoefficients</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.from_data.html">from_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.to_data.html">to_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.index.html">index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.html">SuperNeighborList</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.linear_unitcell_index.html">linear_unitcell_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.n_supercell_sites.html">n_supercell_sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.n_supercell_unitcells.html">n_supercell_unitcells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.nbor_linear_site_index.html">nbor_linear_site_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.nbor_linear_unitcell_index.html">nbor_linear_unitcell_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.overlaps.html">overlaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.sites.html">sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.sublattice_index.html">sublattice_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.SuperNeighborList.unitcells.html">unitcells</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">libcasm package</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="libcasm.clexulator.Correlations.html" class="nav-link">Correlations</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">grad_correlations</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="grad-correlations">
+<h1>grad_correlations<a class="headerlink" href="#grad-correlations" title="Link to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="libcasm.clexulator.Correlations.grad_correlations">
+<span class="sig-prename descclassname"><span class="pre">Correlations.</span></span><span class="sig-name descname"><span class="pre">grad_correlations</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.clexulator.Correlations.html#libcasm.clexulator.Correlations" title="libcasm.clexulator._clexulator.Correlations"><span class="pre">Correlations</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dof_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">n</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libcasm.clexulator.Correlations.grad_correlations" title="Link to this definition">#</a></dt>
+<dd><p>Calculates and returns gradients of correlations with respect to
+degrees of freedom corresponding to <cite>dof_key</cite></p>
+<p>Returns a <span class="math notranslate nohighlight">\(\\mathbf{M} \times \\mathbf{N}\)</span> matrix,
+where <span class="math notranslate nohighlight">\(\\mathbf{M}\)</span> represents the number of correlations,
+and <span class="math notranslate nohighlight">\(\\mathbf{N} represents the dimensions of the degrees
+of freedom corresponding to `dof_key\)</span></p>
+<p>For example, if <cite>dof_key</cite> is <cite>Hstrain</cite>, N will be 6.
+if <cite>dof_key</cite> is <cite>disp</cite>, and there are 3 sites in the configuration,
+N will be 9 (<span class="math notranslate nohighlight">\(x, y, z\)</span> displacements for each site)</p>
+<p>Each row of the matrix corresponds to gradients of all <span class="math notranslate nohighlight">\(\\mathbf{M}\)</span>
+correlations with respect to one of the dimensions of degrees of freedom
+corresponding to <cite>dof_key</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dof_key</strong> (<em>str</em>) – Specifies the type of DoF
+Can be <cite>occ</cite>, <cite>disp</cite>, <cite>Hstrain</cite>, etc.
+DoF that is set in the <cite>Prim</cite></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>gradients_of_correlations</strong> – gradients_of_correlations
+where m represents number of correlations and
+n represents number of degrees of freedom</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray[np.float64[m,n]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="libcasm.clexulator.Correlations.global_delta.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">global_delta</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="libcasm.clexulator.Correlations.has_point.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">has_point</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.clexulator.Correlations.grad_correlations"><code class="docutils literal notranslate"><span class="pre">Correlations.grad_correlations()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.clexulator.Correlations.grad_correlations.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

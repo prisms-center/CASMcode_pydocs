@@ -187,11 +187,11 @@ Default configuration degree of freedom (DoF) values in a particular supercell c
         config_dof_values=config_dof_values,
     )
 
-The same `transformation_matrix_to_super` must be used for `config_dof_values`, and the `transformation_matrix_to_super` and `site_index_converter` arguments for :func:`~libcasm.clexulator.OrderParameter.update`. This is the supercell in which the configuration is defined and which the OrderParameter calculator uses to properly select DoF values.
+The `transformation_matrix_to_super` used to construct the :class:`~libcasm.clexulator.ConfigDoFValues` and :class:`~libcasm.xtal.SiteIndexConverter` instances and given as the :func:`~libcasm.clexulator.OrderParameter.update` argument defines the supercell of the configuration being evaluated and therefore must be the same.
 
-- For occupant DoF and local DoF, it does not need to be the same supercell as the :class:`~libcasm.clexulator.DoFSpace` is defined for.
+However, it does not need to be the same supercell as the :class:`~libcasm.clexulator.DoFSpace` is defined with. When evaluating the order paramers, if the configuration supercell differs from the the :class:`~libcasm.clexulator.DoFSpace` supercell:
 
-  - Internally, a commensurate supercell is constructed and order parameters are evaluated as if the `config_dof_values` are tiled into the commensurate supercell.
+- For occupant DoF and local DoF, a commensurate supercell is determined internally and order parameters are evaluated as if the `config_dof_values` are tiled into the commensurate supercell.
 
 - For global DoF, the supercell is irrelevant.
 
@@ -205,10 +205,7 @@ Then, the cluster expansion value can be evaluated with:
 
 .. code-block:: Python
 
-    # ... calculate order parameter values for the current state
-    #     of the ConfigDoFValues that order_parameter has been set with ...
-
-    # evaluate and get current value, as a const reference:
+    # evaluate and get current order parameters value:
     eta = order_parameter.value()
 
     # eta is a const reference of type numpy.ndarray[numpy.float64[d, 1]],
@@ -222,13 +219,3 @@ Change DoF values and re-evaluate
 
 To change DoF values and re-calculate the cluster expansion, just modify the values of the :class:`~libcasm.clexulator.ConfigDoFValues` instance and re-evaluate. For a detailed discussion and some pitfalls, see the discussion :ref:`Change DoF values and re-evaluate <change-and-re-evaluate-clex>` for ClusterExpansion.
 
-
-Notes
------
-
-- An OrderParameter is set to calculate order parameters in one supercell at a time, using the appropriate :class:`~libcasm.xtal.SiteIndexConverter`. This can be set using the :func:`~libcasm.clexulator.OrderParameter.update` method.
-- Order parameters are calculated for a :class:`~libcasm.clexulator.ConfigDoFValues` instance that is set using the :func:`~libcasm.clexulator.OrderParameter.update` method, or the :func:`~libcasm.clexulator.ClusterExpansion.set` method.
-
-  - The :class:`~libcasm.clexulator.ConfigDoFValues` must be constructed consistent with the :class:`~libcasm.xtal.SiteIndexConverter`.
-  - Once set by any method, OrderParameter maintains a non-owning pointer to that :class:`~libcasm.clexulator.ConfigDoFValues` instance.
-  - The :class:`~libcasm.clexulator.ConfigDoFValues` can then be modified externally and subsequent calls of OrderParameter methods will use the current DoF values.

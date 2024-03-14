@@ -10,3 +10,4 @@ Using libcasm-clexulator:
     usage/local_cluster_expansion
     usage/cluster_expansion_details
     usage/order_parameters
+    usage/neighbor_lists

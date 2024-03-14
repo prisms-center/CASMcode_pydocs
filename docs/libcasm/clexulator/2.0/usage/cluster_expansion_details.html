@@ -1,15 +1,14 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cluster expansion details &#8212; libcasm-clexulator 2.0a2 documentation</title>
+    <title>Cluster expansion details &#8212; libcasm-clexulator 2.0a4 documentation</title>
   
   
   
@@ -19,31 +18,31 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/cluster_expansion_details';</script>
-    <link rel="icon" href="../_static/small_logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Evaluating order parameters" href="order_parameters.html" />
@@ -58,6 +57,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -98,12 +106,15 @@
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -113,8 +124,8 @@
       
     
     
-    <img src="../_static/small_logo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/small_logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
   
   
     <p class="title logo__title">libcasm-clexulator</p>
@@ -123,12 +134,12 @@
     
   </div>
   
-  
   <div class="col-lg-9 navbar-header-items">
     
     <div class="me-auto navbar-header-items__center">
       
-        <div class="navbar-item"><nav class="navbar-nav">
+        <div class="navbar-item">
+<nav class="navbar-nav">
   <p class="sidebar-header-items__title"
      role="heading"
      aria-level="1"
@@ -174,26 +185,58 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
         <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexulator/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexulator/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -201,18 +244,21 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
       <span class="fa-solid fa-outdent"></span>
     </label>
   
@@ -232,7 +278,8 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item"><nav class="navbar-nav">
+          <div class="navbar-item">
+<nav class="navbar-nav">
   <p class="sidebar-header-items__title"
      role="heading"
      aria-level="1"
@@ -278,22 +325,52 @@ document.write(`
       <div class="sidebar-header-items__end">
         
           <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexulator/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexulator/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
         
       </div>
     
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
@@ -302,6 +379,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="local_cluster_expansion.html">Evaluating a local cluster expansion</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Cluster expansion details</a></li>
 <li class="toctree-l1"><a class="reference internal" href="order_parameters.html">Evaluating order parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neighbor_lists.html">Neighbor lists</a></li>
 </ul>
 </div>
 </nav></div>
@@ -331,8 +409,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../index.html" class="nav-link" aria-label="Home">
@@ -342,7 +420,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Cluster expansion details</li>
+    <li class="breadcrumb-item active" aria-current="page">Cluster...</li>
   </ul>
 </nav>
 </div>
@@ -360,9 +438,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="cluster-expansion-details">
-<span id="id1"></span><h1>Cluster expansion details<a class="headerlink" href="#cluster-expansion-details" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1>Cluster expansion details<a class="headerlink" href="#cluster-expansion-details" title="Link to this heading">#</a></h1>
 <section id="the-casm-clexulator">
-<h2>The CASM Clexulator<a class="headerlink" href="#the-casm-clexulator" title="Permalink to this heading">#</a></h2>
+<h2>The CASM Clexulator<a class="headerlink" href="#the-casm-clexulator" title="Link to this heading">#</a></h2>
 <p>CASM generates custom code for very efficient calculation of basis functions given a particular <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> and choice of cluster expansion basis functions. This source code is written to a file and then may be compiled, linked, and used at runtime via the class  <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> (clexulator = CLuster EXpansion calcULATOR).</p>
 <p>For periodic cluster expansions, CASM custom generates:</p>
 <ul class="simple">
@@ -399,15 +477,17 @@ document.write(`
 <p>As before, <cite>&lt;primname&gt;</cite> is the name given to the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> and <cite>&lt;bsetname&gt;</cite> is a unique name for the local cluster expansion basis set.</p>
 </section>
 <section id="neighbor-lists">
-<h2>Neighbor lists<a class="headerlink" href="#neighbor-lists" title="Permalink to this heading">#</a></h2>
+<h2>Neighbor lists<a class="headerlink" href="#neighbor-lists" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> source code contains the definition for a single translational equivalent of each cluster basis function. A neighbor list is used to determine the correct degree of freedom (DoF) values to evaluate the cluster basis function at a particular lattice translation. There are two types of neighbor lists:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a>: A prim neighbor list, defines an ordering of unit cells in the local neighborhood of a unit cell for a particular <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a>.</p></li>
 <li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a>: A neighbor list that uses the ordering specified by a prim neighbor list to construct a neighbor list for each unit cell in a supercell. One of these must be generated for each supercell in which cluster basis functions are evaluated.</p></li>
 </ul>
+<p>For more details on constructing or using neighbor lists, see the section <a class="reference internal" href="neighbor_lists.html#neighbor-lists-index"><span class="std std-ref">Neighbor lists</span></a>.</p>
+<p>When a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> is constructed, a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> is constructed with the same ordering as the one used to write the basis functions, or if an existing <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> is provided, it is validated that the ordering is the same. Then the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> can be used to construct <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a> for each supercell in which the cluster expansion will be evaluated.</p>
 </section>
 <section id="environment-variables-for-compiling-and-linking-clexulator">
-<h2>Environment variables for compiling and linking Clexulator<a class="headerlink" href="#environment-variables-for-compiling-and-linking-clexulator" title="Permalink to this heading">#</a></h2>
+<h2>Environment variables for compiling and linking Clexulator<a class="headerlink" href="#environment-variables-for-compiling-and-linking-clexulator" title="Link to this heading">#</a></h2>
 <p>Before constructing a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> or <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.LocalClexulator.html#libcasm.clexulator.LocalClexulator" title="libcasm.clexulator.LocalClexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalClexulator</span></code></a>, set the environment variable <code class="docutils literal notranslate"><span class="pre">CASM_PREFIX</span></code> to the location where CASM is installed in order to enable proper compilation and linking of the CASM clexulator using the CASM libraries:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_PREFIX</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>-m<span class="w"> </span>libcasm.casmglobal<span class="w"> </span>--prefix<span class="k">)</span>
 </pre></div>
@@ -418,7 +498,7 @@ document.write(`
 </div>
 </section>
 <section id="constructing-a-clexulator">
-<h2>Constructing a Clexulator<a class="headerlink" href="#constructing-a-clexulator" title="Permalink to this heading">#</a></h2>
+<h2>Constructing a Clexulator<a class="headerlink" href="#constructing-a-clexulator" title="Link to this heading">#</a></h2>
 <p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> is constructed using a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> and the path to a CASM clexulator source file, using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
 <span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">PrimNeighborList</span><span class="p">()</span>
@@ -431,7 +511,7 @@ document.write(`
 <p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> provided to <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a> is expanded as necessary to include all sites required by the cluster basis functions.</p>
 </section>
 <section id="constructing-a-localclexulator">
-<h2>Constructing a LocalClexulator<a class="headerlink" href="#constructing-a-localclexulator" title="Permalink to this heading">#</a></h2>
+<h2>Constructing a LocalClexulator<a class="headerlink" href="#constructing-a-localclexulator" title="Link to this heading">#</a></h2>
 <p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.LocalClexulator.html#libcasm.clexulator.LocalClexulator" title="libcasm.clexulator.LocalClexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalClexulator</span></code></a> is constructed in a similar manner as <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a>, using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_local_clexulator.html#libcasm.clexulator.make_local_clexulator" title="libcasm.clexulator.make_local_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_local_clexulator</span></code></a>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_local_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
 <span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">PrimNeighborList</span><span class="p">()</span>
@@ -449,11 +529,10 @@ document.write(`
               
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="local_cluster_expansion.html"
@@ -473,10 +552,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -486,6 +562,7 @@ document.write(`
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
   <div class="sidebar-secondary-item">
+
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
@@ -500,6 +577,7 @@ document.write(`
   </nav></div>
 
   <div class="sidebar-secondary-item">
+
   <div class="tocsection sourcelink">
     <a href="../_sources/usage/cluster_expansion_details.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
@@ -520,8 +598,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -529,6 +607,7 @@ document.write(`
     <div class="footer-items__start">
       
         <div class="footer-item">
+
   <p class="copyright">
     
       © Copyright 2023, CASM Developers.
@@ -538,8 +617,9 @@ document.write(`
 </div>
       
         <div class="footer-item">
+
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>
@@ -547,10 +627,12 @@ document.write(`
     </div>
   
   
+  
     <div class="footer-items__end">
       
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
 </p></div>
       
     </div>
