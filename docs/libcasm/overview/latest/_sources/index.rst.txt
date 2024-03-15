@@ -188,7 +188,7 @@ Install:
     pip install libcasm-configuration
 
 
-Docs: `[2.0a1] <../../configuration/2.0/>`_
+Docs: `[2.0a3] <../../configuration/2.0/>`_
 
 Links: |GitHub_configuration|_ |PyPI_configuration|_
 
