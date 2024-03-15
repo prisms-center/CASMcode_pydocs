@@ -193,6 +193,35 @@ Docs: `[2.0a3] <../../configuration/2.0/>`_
 Links: |GitHub_configuration|_ |PyPI_configuration|_
 
 
+libcasm-monte
+-------------
+
+CASM building blocks for Monte Carlo simulations
+
+Packages:
+
+- **libcasm.monte**
+
+  - Sampling classes and functions
+  - Equilibration, convergence checking, and statistics calculation
+  - Generic results IO
+  - Supercell index conversions
+  - Generic event definitions, construction, and selection
+  - Example Ising model implementations
+
+
+Install:
+
+.. code-block:: bash
+
+    pip install libcasm-monte
+
+
+Docs: `[2.0a1] <../../monte/2.0/>`_
+
+Links: |GitHub_monte|_ |PyPI_monte|_
+
+
 About CASM
 ==========
 
@@ -269,3 +298,14 @@ For more information, see the `CASM homepage <CASM_>`_.
   :alt: Link to libcasm-configuration PyPI package
   :width: 20
 .. _PyPI_configuration: https://pypi.org/project/libcasm-configuration/
+
+
+.. |GitHub_monte| image:: _static/github-mark.png
+  :alt: Link to CASMcode_monte GitHub repository
+  :width: 24
+.. _GitHub_monte: https://github.com/prisms-center/CASMcode_monte/
+
+.. |PyPI_monte| image:: _static/python-logo-only.png
+  :alt: Link to libcasm-monte PyPI package
+  :width: 20
+.. _PyPI_monte: https://pypi.org/project/libcasm-monte/

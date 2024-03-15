@@ -1,0 +1,1203 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>to_dict &#8212; libcasm-monte 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.monte.sampling.BasicStatisticsCalculator.to_dict';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="confidence" href="libcasm.monte.sampling.BasicStatisticsCalculator.confidence.html" />
+    <link rel="prev" title="from_dict" href="libcasm.monte.sampling.BasicStatisticsCalculator.from_dict.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-monte</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_monte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-monte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_monte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-monte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.monte.html">libcasm.monte</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.MethodLog.html">MethodLog</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.begin_lap.html">begin_lap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.begin_section_print_always.html">begin_section_print_always</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.begin_section_print_if_debug.html">begin_section_print_if_debug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.begin_section_print_if_quiet.html">begin_section_print_if_quiet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.begin_section_print_if_standard.html">begin_section_print_if_standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.begin_section_print_if_verbose.html">begin_section_print_if_verbose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.decrease_indent.html">decrease_indent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.end_section.html">end_section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.hide_clock.html">hide_clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.increase_indent.html">increase_indent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.indent_str.html">indent_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.lap_time.html">lap_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.log_frequency.html">log_frequency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.logfile_path.html">logfile_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.paragraph.html">paragraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.paragraph_justification.html">paragraph_justification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.paragraph_width.html">paragraph_width</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.print.html">print</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.reset.html">reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.restart_clock.html">restart_clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.section.html">section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_debug.html">set_debug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_indent_space.html">set_indent_space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_initial_indent_space.html">set_initial_indent_space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_paragraph_justification.html">set_paragraph_justification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_paragraph_width.html">set_paragraph_width</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_quiet.html">set_quiet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_standard.html">set_standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_verbose.html">set_verbose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.show_clock.html">show_clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.time_s.html">time_s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.verbatim.html">verbatim</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.RandomNumberEngine.html">RandomNumberEngine</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberEngine.dump.html">dump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberEngine.load.html">load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberEngine.seed.html">seed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberEngine.seed_seq.html">seed_seq</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.RandomNumberGenerator.html">RandomNumberGenerator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberGenerator.engine.html">engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberGenerator.random_int.html">random_int</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.RandomNumberGenerator.random_real.html">random_real</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.ValueMap.html">ValueMap</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.is_mismatched.html">is_mismatched</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.make_incremented_values.html">make_incremented_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.boolean_values.html">boolean_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.matrix_values.html">matrix_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.scalar_values.html">scalar_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ValueMap.vector_values.html">vector_values</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.events.html">libcasm.monte.events</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.choose_canonical_swap.html">choose_canonical_swap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.choose_semigrand_canonical_multiswap.html">choose_semigrand_canonical_multiswap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.choose_semigrand_canonical_swap.html">choose_semigrand_canonical_swap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.is_allowed_canonical_swap.html">is_allowed_canonical_swap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.make_canonical_swaps.html">make_canonical_swaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.make_multiswaps.html">make_multiswaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.make_semigrand_canonical_swaps.html">make_semigrand_canonical_swaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.propose_canonical_event.html">propose_canonical_event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.propose_canonical_event_from_swap.html">propose_canonical_event_from_swap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.propose_semigrand_canonical_event.html">propose_semigrand_canonical_event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.propose_semigrand_canonical_event_from_multiswap.html">propose_semigrand_canonical_event_from_multiswap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.propose_semigrand_canonical_event_from_swap.html">propose_semigrand_canonical_event_from_swap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.propose_semigrand_canonical_multiswap_event.html">propose_semigrand_canonical_multiswap_event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.events.swaps_allowed_per_unitcell.html">swaps_allowed_per_unitcell</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.Atom.html">Atom</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Atom.n_jumps.html">n_jumps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Atom.translation.html">translation</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.AtomLocation.html">AtomLocation</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomLocation.linear_site_index.html">linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomLocation.mol_comp.html">mol_comp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomLocation.mol_id.html">mol_id</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.AtomTraj.html">AtomTraj</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTraj.delta_ijk.html">delta_ijk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTraj.from.html">from</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTraj.to.html">to</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.AtomTrajVector.html">AtomTrajVector</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTrajVector.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTrajVector.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTrajVector.extend.html">extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTrajVector.insert.html">insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomTrajVector.pop.html">pop</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.AtomVector.html">AtomVector</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomVector.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomVector.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomVector.extend.html">extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomVector.insert.html">insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.AtomVector.pop.html">pop</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.Conversions.html">Conversions</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.asym_size.html">asym_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.asym_to_b.html">asym_to_b</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.asym_to_unitl.html">asym_to_unitl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.bijk_to_asym.html">bijk_to_asym</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.bijk_to_l.html">bijk_to_l</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.bijk_to_unitl.html">bijk_to_unitl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_size.html">l_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_asym.html">l_to_asym</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_b.html">l_to_b</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_basis_cart.html">l_to_basis_cart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_basis_frac.html">l_to_basis_frac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_bijk.html">l_to_bijk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_cart.html">l_to_cart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_frac.html">l_to_frac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_ijk.html">l_to_ijk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.l_to_unitl.html">l_to_unitl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.lat_column_mat.html">lat_column_mat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.make_with_custom_asym.html">make_with_custom_asym</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.make_with_custom_unitcell.html">make_with_custom_unitcell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.occ_size.html">occ_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.occ_to_species_index.html">occ_to_species_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.site_index_converter.html">site_index_converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_allowed.html">species_allowed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_index_to_atoms_size.html">species_index_to_atoms_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_index_to_name.html">species_index_to_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_index_to_occupant.html">species_index_to_occupant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_name_to_index.html">species_name_to_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_size.html">species_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.species_to_occ_index.html">species_to_occ_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unit_site_index_converter.html">unit_site_index_converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unit_transformation_matrix_to_super.html">unit_transformation_matrix_to_super</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unitcell_index_converter.html">unitcell_index_converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unitl_size.html">unitl_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unitl_to_asym.html">unitl_to_asym</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unitl_to_b.html">unitl_to_b</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Conversions.unitl_to_bijk.html">unitl_to_bijk</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.IntVector.html">IntVector</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.count.html">count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.extend.html">extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.insert.html">insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.pop.html">pop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.IntVector.remove.html">remove</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.LongVector.html">LongVector</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.count.html">count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.extend.html">extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.insert.html">insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.pop.html">pop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.LongVector.remove.html">remove</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.Mol.html">Mol</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Mol.asymmetric_unit_index.html">asymmetric_unit_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Mol.component_id.html">component_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Mol.id.html">id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Mol.linear_site_index.html">linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.Mol.mol_location_index.html">mol_location_index</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.MolVector.html">MolVector</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MolVector.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MolVector.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MolVector.extend.html">extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MolVector.insert.html">insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MolVector.pop.html">pop</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.html">MultiOccSwap</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.reverse.html">reverse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.sort.html">sort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.sorted.html">sorted</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.swaps.html">swaps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.MultiOccSwap.total_count.html">total_count</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccCandidate.html">OccCandidate</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidate.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidate.is_valid.html">is_valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidate.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidate.asymmetric_unit_index.html">asymmetric_unit_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidate.species_index.html">species_index</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccCandidateList.html">OccCandidateList</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidateList.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidateList.index.html">index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidateList.matching_index.html">matching_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccCandidateList.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccEvent.html">OccEvent</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccEvent.atom_traj.html">atom_traj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccEvent.linear_site_index.html">linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccEvent.new_occ.html">new_occ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccEvent.occ_transform.html">occ_transform</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccLocation.html">OccLocation</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.apply.html">apply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.atom.html">atom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.atom_positions_cart.html">atom_positions_cart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.atom_positions_cart_within.html">atom_positions_cart_within</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.atom_size.html">atom_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.cand_size.html">cand_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.cand_size_by_candidate_index.html">cand_size_by_candidate_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.candidate_list.html">candidate_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.choose_mol.html">choose_mol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.choose_mol_by_candidate_index.html">choose_mol_by_candidate_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.convert.html">convert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.current_atom_n_jumps.html">current_atom_n_jumps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.current_atom_names.html">current_atom_names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.current_atom_position_index.html">current_atom_position_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.current_atom_species_index.html">current_atom_species_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.initial_atom_position_index.html">initial_atom_position_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.initial_atom_species_index.html">initial_atom_species_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.initialize.html">initialize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.linear_site_index_to_mol_id.html">linear_site_index_to_mol_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.mol.html">mol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.mol_id.html">mol_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.mol_id_by_candidate_index.html">mol_id_by_candidate_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccLocation.mol_size.html">mol_size</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccSwap.html">OccSwap</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.is_valid.html">is_valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.reverse.html">reverse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.sort.html">sort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.sorted.html">sorted</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.first.html">first</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwap.second.html">second</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccSwapCountMap.html">OccSwapCountMap</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwapCountMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwapCountMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccSwapCountMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccTransform.html">OccTransform</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransform.asym.html">asym</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransform.from_species.html">from_species</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransform.linear_site_index.html">linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransform.mol_id.html">mol_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransform.to_species.html">to_species</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.events.OccTransformVector.html">OccTransformVector</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransformVector.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransformVector.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransformVector.extend.html">extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransformVector.insert.html">insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.events.OccTransformVector.pop.html">pop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.html">libcasm.monte.ising_cpp</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.html">IsingConfiguration</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.from_linear_site_index.html">from_linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.occ.html">occ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.occupation.html">occupation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.set_occ.html">set_occ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.set_occupation.html">set_occupation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.to_linear_site_index.html">to_linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.within.html">within</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.n_sites.html">n_sites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.n_unitcells.html">n_unitcells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.n_variable_sites.html">n_variable_sites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingConfiguration.shape.html">shape</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingFormationEnergy.html">IsingFormationEnergy</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingFormationEnergy.occ_delta_per_supercell.html">occ_delta_per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingFormationEnergy.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingFormationEnergy.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingFormationEnergy.set_state.html">set_state</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingParamComposition.html">IsingParamComposition</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-29"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingParamComposition.n_independent_compositions.html">n_independent_compositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingParamComposition.occ_delta_per_supercell.html">occ_delta_per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingParamComposition.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingParamComposition.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingParamComposition.set_state.html">set_state</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingState.html">IsingState</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-30"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingState.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingState.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingState.conditions.html">conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingState.configuration.html">configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingState.properties.html">properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingSystem.html">IsingSystem</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-31"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingSystem.formation_energy_calculator.html">formation_energy_calculator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.IsingSystem.param_composition_calculator.html">param_composition_calculator</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.html">libcasm.monte.ising_cpp.semigrand_canonical</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-32"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.default_write_status.html">default_write_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.SemiGrandCanonicalCalculator.html">SemiGrandCanonicalCalculator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.SemiGrandCanonicalConditions.html">SemiGrandCanonicalConditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.SemiGrandCanonicalData.html">SemiGrandCanonicalData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.SemiGrandCanonicalEventGenerator.html">SemiGrandCanonicalEventGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_cpp.semigrand_canonical.SemiGrandCanonicalPotential.html">SemiGrandCanonicalPotential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.ising_py.html">libcasm.monte.ising_py</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-33"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.html">IsingConfiguration</a><input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-34"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.from_linear_site_index.html">from_linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.occ.html">occ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.occupation.html">occupation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.set_occ.html">set_occ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.set_occupation.html">set_occupation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.to_linear_site_index.html">to_linear_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.within.html">within</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.shape.html">shape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.n_sites.html">n_sites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.n_variable_sites.html">n_variable_sites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingConfiguration.n_unitcells.html">n_unitcells</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.html">IsingFormationEnergy</a><input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-35"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.occ_delta_per_supercell.html">occ_delta_per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.set_state.html">set_state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.J.html">J</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.lattice_type.html">lattice_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingFormationEnergy.state.html">state</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_py.IsingParamComposition.html">IsingParamComposition</a><input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-36"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingParamComposition.n_independent_compositions.html">n_independent_compositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingParamComposition.occ_delta_per_supercell.html">occ_delta_per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingParamComposition.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingParamComposition.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.IsingParamComposition.set_state.html">set_state</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ising_py.IsingState.html">IsingState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.ising_py.IsingSystem.html">IsingSystem</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.html">libcasm.monte.ising_py.semigrand_canonical</a><input class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-37"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.default_write_status.html">default_write_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.make_formation_energy_f.html">make_formation_energy_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.make_param_composition_f.html">make_param_composition_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.make_potential_energy_f.html">make_potential_energy_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalCalculator.html">SemiGrandCanonicalCalculator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.html">SemiGrandCanonicalConditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.html">SemiGrandCanonicalData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.html">SemiGrandCanonicalEventGenerator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.html">SemiGrandCanonicalPotential</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.monte.methods.html">libcasm.monte.methods</a><input class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-38"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.methods.basic_occupation_metropolis.html">basic_occupation_metropolis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.methods.metropolis_acceptance.html">metropolis_acceptance</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.html">BasicOccupationMetropolisData</a><input class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-39"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.acceptance_rate.html">acceptance_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.rejection_rate.html">rejection_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.completion_check.html">completion_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.json_samplers.html">json_samplers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.json_sampling_functions.html">json_sampling_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.n_accept.html">n_accept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.n_pass.html">n_pass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.n_reject.html">n_reject</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.n_steps_per_pass.html">n_steps_per_pass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.sample_weight.html">sample_weight</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.samplers.html">samplers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.methods.BasicOccupationMetropolisData.sampling_functions.html">sampling_functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="libcasm.monte.sampling.html">libcasm.monte.sampling</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-40"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.all_minimums_met.html">all_minimums_met</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.any_maximum_met.html">any_maximum_met</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.colmajor_component_names.html">colmajor_component_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.component_convergence_check.html">component_convergence_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.converge.html">converge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.convergence_check.html">convergence_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.default_component_names.html">default_component_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.default_equilibration_check.html">default_equilibration_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.get_n_samples.html">get_n_samples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.matrix_as_vector.html">matrix_as_vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.sampling.scalar_as_vector.html">scalar_as_vector</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.html">BasicStatistics</a><input class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-41"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.relative_precision.html">relative_precision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.calculated_precision.html">calculated_precision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.mean.html">mean</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.html">BasicStatisticsCalculator</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-42"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.calculate.html">calculate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.from_dict.html">from_dict</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.confidence.html">confidence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.n_resamples.html">n_resamples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.weighted_observations_method.html">weighted_observations_method</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.html">CompletionCheck</a><input class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-43"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.check.html">check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.count_and_time_check.html">count_and_time_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.count_check.html">count_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.params.html">params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.reset.html">reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.results.html">results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheck.time_check.html">time_check</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.html">CompletionCheckParams</a><input class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-44"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.calc_statistics_f.html">calc_statistics_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.check_base.html">check_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.check_begin.html">check_begin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.check_period.html">check_period</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.check_period_max.html">check_period_max</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.check_shift.html">check_shift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.cutoff_params.html">cutoff_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.equilibration_check_f.html">equilibration_check_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.log_spacing.html">log_spacing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckParams.requested_precision.html">requested_precision</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.html">CompletionCheckResults</a><input class="toctree-checkbox" id="toctree-checkbox-45" name="toctree-checkbox-45" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-45"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.full_reset.html">full_reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.partial_reset.html">partial_reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.clocktime.html">clocktime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.convergence_check_results.html">convergence_check_results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.count.html">count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.equilibration_check_results.html">equilibration_check_results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.has_all_minimums_met.html">has_all_minimums_met</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.has_any_maximum_met.html">has_any_maximum_met</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.is_complete.html">is_complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.n_samples.html">n_samples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.n_samples_at_convergence_check.html">n_samples_at_convergence_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.params.html">params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CompletionCheckResults.time.html">time</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceCheckResults.html">ConvergenceCheckResults</a><input class="toctree-checkbox" id="toctree-checkbox-46" name="toctree-checkbox-46" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-46"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceCheckResults.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceCheckResults.N_samples_for_statistics.html">N_samples_for_statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceCheckResults.all_converged.html">all_converged</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceCheckResults.individual_results.html">individual_results</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceResultMap.html">ConvergenceResultMap</a><input class="toctree-checkbox" id="toctree-checkbox-47" name="toctree-checkbox-47" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-47"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceResultMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceResultMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.ConvergenceResultMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.html">CutoffCheckParams</a><input class="toctree-checkbox" id="toctree-checkbox-48" name="toctree-checkbox-48" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-48"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.max_clocktime.html">max_clocktime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.max_count.html">max_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.max_sample.html">max_sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.max_time.html">max_time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.min_clocktime.html">min_clocktime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.min_count.html">min_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.min_sample.html">min_sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.CutoffCheckParams.min_time.html">min_time</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationCheckResults.html">EquilibrationCheckResults</a><input class="toctree-checkbox" id="toctree-checkbox-49" name="toctree-checkbox-49" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-49"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationCheckResults.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationCheckResults.N_samples_for_all_to_equilibrate.html">N_samples_for_all_to_equilibrate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationCheckResults.all_equilibrated.html">all_equilibrated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationCheckResults.individual_results.html">individual_results</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationResultMap.html">EquilibrationResultMap</a><input class="toctree-checkbox" id="toctree-checkbox-50" name="toctree-checkbox-50" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-50"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationResultMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationResultMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.EquilibrationResultMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.IndividualConvergenceResult.html">IndividualConvergenceResult</a><input class="toctree-checkbox" id="toctree-checkbox-51" name="toctree-checkbox-51" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-51"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualConvergenceResult.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualConvergenceResult.is_converged.html">is_converged</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualConvergenceResult.requested_precision.html">requested_precision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualConvergenceResult.stats.html">stats</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.IndividualEquilibrationResult.html">IndividualEquilibrationResult</a><input class="toctree-checkbox" id="toctree-checkbox-52" name="toctree-checkbox-52" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-52"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualEquilibrationResult.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualEquilibrationResult.N_samples_for_equilibration.html">N_samples_for_equilibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.IndividualEquilibrationResult.is_equilibrated.html">is_equilibrated</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.html">RequestedPrecision</a><input class="toctree-checkbox" id="toctree-checkbox-53" name="toctree-checkbox-53" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-53"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.abs_convergence_is_required.html">abs_convergence_is_required</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.abs_precision.html">abs_precision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.rel_convergence_is_required.html">rel_convergence_is_required</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecision.rel_precision.html">rel_precision</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionConstructor.html">RequestedPrecisionConstructor</a><input class="toctree-checkbox" id="toctree-checkbox-54" name="toctree-checkbox-54" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-54"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionConstructor.set_precision.html">set_precision</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionMap.html">RequestedPrecisionMap</a><input class="toctree-checkbox" id="toctree-checkbox-55" name="toctree-checkbox-55" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-55"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_METHOD.html">SAMPLE_METHOD</a><input class="toctree-checkbox" id="toctree-checkbox-56" name="toctree-checkbox-56" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-56"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_METHOD.CUSTOM.html">CUSTOM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_METHOD.LINEAR.html">LINEAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_METHOD.LOG.html">LOG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_METHOD.name.html">name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_METHOD.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_MODE.html">SAMPLE_MODE</a><input class="toctree-checkbox" id="toctree-checkbox-57" name="toctree-checkbox-57" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-57"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_MODE.BY_PASS.html">BY_PASS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_MODE.BY_STEP.html">BY_STEP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_MODE.BY_TIME.html">BY_TIME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_MODE.name.html">name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SAMPLE_MODE.value.html">value</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.Sampler.html">Sampler</a><input class="toctree-checkbox" id="toctree-checkbox-58" name="toctree-checkbox-58" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-58"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.append.html">append</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.component.html">component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.component_names.html">component_names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.n_components.html">n_components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.n_samples.html">n_samples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.sample.html">sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.sample_capacity.html">sample_capacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.set_capacity_increment.html">set_capacity_increment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.set_sample_capacity.html">set_sample_capacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.set_values.html">set_values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.shape.html">shape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.Sampler.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.SamplerComponent.html">SamplerComponent</a><input class="toctree-checkbox" id="toctree-checkbox-59" name="toctree-checkbox-59" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-59"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplerComponent.component_index.html">component_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplerComponent.component_name.html">component_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplerComponent.sampler_name.html">sampler_name</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.SamplerMap.html">SamplerMap</a><input class="toctree-checkbox" id="toctree-checkbox-60" name="toctree-checkbox-60" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-60"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplerMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplerMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplerMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.html">SamplingParams</a><input class="toctree-checkbox" id="toctree-checkbox-61" name="toctree-checkbox-61" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-61"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.begin.html">begin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.do_sample_time.html">do_sample_time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.do_sample_trajectory.html">do_sample_trajectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.period.html">period</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.sample_method.html">sample_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.sample_mode.html">sample_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.sampler_names.html">sampler_names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.shift.html">shift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.SamplingParams.stochastic_sample_period.html">stochastic_sample_period</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunction.html">StateSamplingFunction</a><input class="toctree-checkbox" id="toctree-checkbox-62" name="toctree-checkbox-62" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-62"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunction.component_names.html">component_names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunction.description.html">description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunction.function.html">function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunction.name.html">name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunction.shape.html">shape</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunctionMap.html">StateSamplingFunctionMap</a><input class="toctree-checkbox" id="toctree-checkbox-63" name="toctree-checkbox-63" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-63"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunctionMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunctionMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.StateSamplingFunctionMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunction.html">jsonStateSamplingFunction</a><input class="toctree-checkbox" id="toctree-checkbox-64" name="toctree-checkbox-64" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-64"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunction.description.html">description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunction.function.html">function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunction.name.html">name</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunctionMap.html">jsonStateSamplingFunctionMap</a><input class="toctree-checkbox" id="toctree-checkbox-65" name="toctree-checkbox-65" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-65"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunctionMap.items.html">items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunctionMap.keys.html">keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.monte.sampling.jsonStateSamplingFunctionMap.values.html">values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference (libcasm)</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="libcasm.monte.sampling.BasicStatisticsCalculator.html" class="nav-link">BasicStatisticsCalculator</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">to_dict</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="to-dict">
+<h1>to_dict<a class="headerlink" href="#to-dict" title="Link to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="libcasm.monte.sampling.BasicStatisticsCalculator.to_dict">
+<span class="sig-prename descclassname"><span class="pre">BasicStatisticsCalculator.</span></span><span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.monte.sampling.BasicStatisticsCalculator.html#libcasm.monte.sampling.BasicStatisticsCalculator" title="libcasm.monte.sampling._monte_sampling.BasicStatisticsCalculator"><span class="pre">BasicStatisticsCalculator</span></a></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">json</span></span></span><a class="headerlink" href="#libcasm.monte.sampling.BasicStatisticsCalculator.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Represent the BasicStatistics as a Python dict.</p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="libcasm.monte.sampling.BasicStatisticsCalculator.from_dict.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">from_dict</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="libcasm.monte.sampling.BasicStatisticsCalculator.confidence.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">confidence</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.monte.sampling.BasicStatisticsCalculator.to_dict"><code class="docutils literal notranslate"><span class="pre">BasicStatisticsCalculator.to_dict()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.monte.sampling.BasicStatisticsCalculator.to_dict.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Overview &#8212; libcasm-monte 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/overview';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Completion Checks" href="completion_check.html" />
+    <link rel="prev" title="Usage" href="../usage.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-monte</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_monte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-monte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_monte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-monte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="completion_check.html">Completion Checks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Overview</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<p>The libcasm-monte package provides generic data structures and methods that can form the
+building blocks for Monte Carlo simulation implementations. The Python interface is
+provided for controlling simulations, data analysis, and initial testing. For the most
+efficient simulations, extensions written in C++ are used to implement calculators and
+checks used most frequently.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexmonte/2.0/">libcasm-clexmonte</a> package provides the CASM cluster expansion Monte Carlo
+implementations built using this package.</p>
+</div>
+<p>Primarily, the libcasm-monte package includes a Python interface to data structures
+and methods written in C++ in the CASM::monte namespace:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.html#module-libcasm.monte" title="libcasm.monte"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte</span></code></a>: Provides random number generation, logging, and the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ValueMap</span></code> data structure used throughout <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.html#module-libcasm.monte" title="libcasm.monte"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.sampling.html#module-libcasm.monte.sampling" title="libcasm.monte.sampling"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte.sampling</span></code></a>: Provides data structures and methods for sampling data
+and checking for convergence of Monte Carlo calculations.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.events.html#module-libcasm.monte.events" title="libcasm.monte.events"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte.events</span></code></a>: Provides data structures and methods to help specify,
+propose, and apply Monte Carlo events that update discrete occupation variables.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.methods.html#module-libcasm.monte.methods" title="libcasm.monte.methods"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte.methods</span></code></a>: Provides data structures and methods for implementing
+Monte Carlo methods, such as the Metropolis algorithm.</p></li>
+</ul>
+<p>Monte Carlo implementations can be roughly divided into two parts: a “model” which
+specifies how microstates are implemented and properties are calculated, and a
+“calculator” which implements a particular Monte Carlo method for sampling a particular
+thermodynamic ensemble.</p>
+<p>CASM does not expect or require a standard interface to allow any model to work with
+any calculator. Generally, it is expected that models and calculators can be built
+re-using generic methods the libcasm-monte package provides as building blocks.</p>
+<p>For tutorial and testing purposes libcasm-monte also includes:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.ising_cpp.html#module-libcasm.monte.ising_cpp" title="libcasm.monte.ising_cpp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte.ising_cpp</span></code></a>: An Ising model implementation and a semi-grand
+canonical ensemble Monte Carlo calculator, written in C++ using CASM::monte with a
+Python interface using libcasm-monte.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.monte.ising_py.html#module-libcasm.monte.ising_py" title="libcasm.monte.ising_py"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.monte.ising_py</span></code></a>: An Ising model implementation and a semi-grand
+canonical ensemble Monte Carlo calculator, written in Python using libcasm-monte.</p></li>
+</ul>
+<section id="monte-carlo-models">
+<h2>Monte Carlo models<a class="headerlink" href="#monte-carlo-models" title="Link to this heading">#</a></h2>
+<p>Generally, a model implements:</p>
+<ul class="simple">
+<li><p>a <em>configuration</em> data structure, to represent microstates,</p></li>
+<li><p>a <em>state</em> data structure, to represent a configuration and the current thermodynamic
+conditions,</p></li>
+<li><p>as many <em>property calculator</em> methods as necessary to calculate properties of
+configurations,</p></li>
+<li><p>a <em>system</em> data structure, to store property calculators, and handle input of data that
+is used by property calculators, such as parametric composition axes,
+order parameter definitions, neighbor lists, and cluster expansion basis sets and
+coefficients.</p></li>
+</ul>
+<p>For example, the CASM cluster expansion model in <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexmonte/2.0/">libcasm-clexmonte</a> is implemented
+using:</p>
+<ul class="simple">
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code>
+classes to represent microstates and thermodynamic conditions, and</p></li>
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code> class to manage the data needed by the
+calculators.</p></li>
+</ul>
+<p>It also makes use of:</p>
+<ul class="simple">
+<li><p>the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexulator/2.0/reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.html#libcasm.clexulator.ClusterExpansion" title="(in libcasm-clexulator v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterExpansion</span></code></a> class and related methods for
+calculating energies,</p></li>
+<li><p>the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/composition/2.0/reference/libcasm/_autosummary/libcasm.composition.CompositionCalculator.html#libcasm.composition.CompositionCalculator" title="(in libcasm-composition v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CompositionCalculator</span></code></a> and
+<a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/composition/2.0/reference/libcasm/_autosummary/libcasm.composition.CompositionConverter.html#libcasm.composition.CompositionConverter" title="(in libcasm-composition v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CompositionConverter</span></code></a> classes and related methods for
+calculating compositions,</p></li>
+<li><p>the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexulator/2.0/reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.html#libcasm.clexulator.OrderParameter" title="(in libcasm-clexulator v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderParameter</span></code></a> class for calculating order
+parameters.</p></li>
+</ul>
+</section>
+<section id="monte-carlo-calculators">
+<h2>Monte Carlo calculators<a class="headerlink" href="#monte-carlo-calculators" title="Link to this heading">#</a></h2>
+<p>Generally, a calculator includes:</p>
+<ul class="simple">
+<li><p>the <em>Monte Carlo calculator</em> class with a run method which implements a particular
+method for sampling properties of microstates in a particular thermodynamic ensemble,</p></li>
+<li><p>an <em>event generator</em> method, for proposing Monte Carlo events,</p></li>
+<li><p>a <em>potential calculator</em> method, for calculating changes in the thermodynamic
+potential due to an event, under given thermodynamic conditions.</p></li>
+</ul>
+<p>For example, the <code class="xref py py-class docutils literal notranslate"><span class="pre">libcasm.clexmonte.semigrand_canonical</span></code> package implements
+Monte Carlo simulations in the semi-grand canonical ensemble for the CASM cluster
+expansion model.</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">libcasm.clexmonte.semigrand_canonical</span></code> package provides:</p>
+<ul class="simple">
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">SemiGrandCanonicalConditions</span></code>
+class for representing thermodynamic conditions,</p></li>
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">SemiGrandCanonicalEventGenerator</span></code>
+class for proposing events in the semi-grand canonical ensemble,</p></li>
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">SemiGrandCanonicalPotential</span></code>
+class for calculating changes in the semi-grand canonical energy due to the
+proposed events, and</p></li>
+<li><p>the <code class="xref py py-class docutils literal notranslate"><span class="pre">SemiGrandCanonicalCalculator</span></code>
+class for sampling microstates in the semi-grand canonical ensemble.</p></li>
+</ul>
+<p>It also makes use of:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingFixture</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">RunManager</span></code>, to control sampling, convergence
+checking, and results output.</p></li>
+</ul>
+<p>Other CASM cluster expansion model calculator packages include:</p>
+<ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">canonical</span></code>: The standard CASM canonical Monte Carlo
+implementation using the Metropolis algorithm</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">semigrand_canonical</span></code>: The standard CASM semigrand-canonical Monte
+Carlo implementation using the Metropolis algorithm</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">kinetic</span></code>: The standard CASM kinetic Monte Carlo implementation</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">nfold</span></code>: Implements semigrand-canonical Monte
+Carlo calculations using the N-fold way algorithm</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">flex</span></code>: A flexible CASM Monte Carlo implementation that allows
+including a additional terms to the potential to enable umbrella sampling, special
+quasi-random structure (SQS) generation, and other approaches.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../usage.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Usage</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="completion_check.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Completion Checks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-models">Monte Carlo models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-calculators">Monte Carlo calculators</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/usage/overview.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
