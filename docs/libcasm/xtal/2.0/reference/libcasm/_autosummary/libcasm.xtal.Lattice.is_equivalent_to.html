@@ -682,24 +682,35 @@ document.write(`
 
 <dl>
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.xtal.Lattice.html#libcasm.xtal.Lattice" title="libcasm.xtal._xtal.Lattice"><span class="pre">Lattice</span></a></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.xtal.Lattice.html#libcasm.xtal.Lattice" title="libcasm.xtal._xtal.Lattice"><span class="pre">Lattice</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">lattice2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.xtal.Lattice.html#libcasm.xtal.Lattice" title="libcasm.xtal._xtal.Lattice"><span class="pre">Lattice</span></a></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#libcasm.xtal.Lattice.is_equivalent_to" title="Link to this definition">#</a></dt>
 <dd><p>Check if this lattice is equivalent to another lattice</p>
-<p>Two lattices, L1 and L2, are equivalent (i.e. have the same
-lattice points) if there exists <cite>U</cite> such that:</p>
+<p>Two lattices, L1 and L2, are equivalent in the sense that the
+lattice points have the same Cartesian coordinates if there exists
+<cite>U</cite> such that:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span> <span class="o">=</span> <span class="n">L2</span> <span class="o">@</span> <span class="n">U</span><span class="p">,</span>
 </pre></div>
 </div>
-<p>where <cite>L1</cite> and <cite>L2</cite> are the lattice vectors as matrix columns, and
-<cite>U</cite> is a unimodular matrix (integer matrix, with abs(det(U))==1).</p>
+<p>where <cite>L1</cite> and <cite>L2</cite> are the Cartesian lattice vectors as matrix
+columns, and <cite>U</cite> is a unimodular matrix (integer matrix, with
+abs(det(U))==1).</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Use <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/mapping/2.0/reference/libcasm/_autosummary/libcasm.mapping.methods.map_lattices.html#libcasm.mapping.methods.map_lattices" title="(in libcasm-mapping v2.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">libcasm.mapping.methods.map_lattices()</span></code></a> to check if
+lattices are equivalent in the sense that a rigid rotation can
+map the Cartesian coordinates of one lattice onto the other.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lattice2</strong> (<a class="reference internal" href="libcasm.xtal.Lattice.html#libcasm.xtal.Lattice" title="libcasm.xtal.Lattice"><em>Lattice</em></a>) – The second lattice.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>is_equivalent</strong> – True if self is equivalent to <cite>lattice2</cite>.</p>
+<dd class="field-even"><p><strong>is_equivalent</strong> – True if <cite>self</cite>, with lattice vectors <cite>L1</cite>, is equivalent to
+<cite>lattice2</cite>, with lattice vectors <cite>L2</cite>, in the sense that
+the lattice points have the same Cartesian coordinates; False
+otherwise.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>bool</em></p>
