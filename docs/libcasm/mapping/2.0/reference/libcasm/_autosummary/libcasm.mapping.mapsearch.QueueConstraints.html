@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>QueueConstraints &#8212; libcasm-mapping 2.0a3 documentation</title>
+    <title>QueueConstraints &#8212; libcasm-mapping 2.0a4 documentation</title>
   
   
   
@@ -39,13 +39,13 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.mapping.mapsearch.QueueConstraints';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="StructureSearchData" href="libcasm.mapping.mapsearch.StructureSearchData.html" />
+    <link rel="next" title="enforce" href="libcasm.mapping.mapsearch.QueueConstraints.enforce.html" />
     <link rel="prev" title="prim_sym_invariant_displacement_modes" href="libcasm.mapping.mapsearch.PrimSearchData.prim_sym_invariant_displacement_modes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -485,8 +485,11 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.AtomMappingSearchData.trial_translation_cart.html">trial_translation_cart</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.mapsearch.IsotropicAtomCost.html">IsotropicAtomCost</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.LatticeMappingSearchData.html">LatticeMappingSearchData</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.IsotropicAtomCost.html">IsotropicAtomCost</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.IsotropicAtomCost.cost.html">cost</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.LatticeMappingSearchData.html">LatticeMappingSearchData</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.LatticeMappingSearchData.N_supercell_site.html">N_supercell_site</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.LatticeMappingSearchData.atom_coordinate_cart_in_supercell.html">atom_coordinate_cart_in_supercell</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.LatticeMappingSearchData.lattice_mapping.html">lattice_mapping</a></li>
@@ -498,7 +501,7 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.LatticeMappingSearchData.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.html">MappingNode</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.html">MappingNode</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.atom_cost.html">atom_cost</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.atom_mapping.html">atom_mapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.atom_mapping_data.html">atom_mapping_data</a></li>
@@ -506,9 +509,11 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.forced_on.html">forced_on</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.lattice_cost.html">lattice_cost</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.lattice_mapping_data.html">lattice_mapping_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.total_cost.html">total_cost</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.html">MappingSearch</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.html">MappingSearch</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.back.html">back</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.front.html">front</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.make_and_insert_mapping_node.html">make_and_insert_mapping_node</a></li>
@@ -517,9 +522,12 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.pop_front.html">pop_front</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.results.html">results</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.size.html">size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.k_best.html">k_best</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.max_cost.html">max_cost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.min_cost.html">min_cost</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.PrimSearchData.html">PrimSearchData</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.PrimSearchData.html">PrimSearchData</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.PrimSearchData.N_prim_site.html">N_prim_site</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.PrimSearchData.prim.html">prim</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.PrimSearchData.prim_allowed_atom_types.html">prim_allowed_atom_types</a></li>
@@ -530,8 +538,11 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.PrimSearchData.prim_sym_invariant_displacement_modes.html">prim_sym_invariant_displacement_modes</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">QueueConstraints</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.StructureSearchData.html">StructureSearchData</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 current active has-children"><a class="current reference internal" href="#">QueueConstraints</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.QueueConstraints.enforce.html">enforce</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.StructureSearchData.html">StructureSearchData</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.StructureSearchData.N_atom.html">N_atom</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.StructureSearchData.atom_coordinate_cart.html">atom_coordinate_cart</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.StructureSearchData.atom_type.html">atom_type</a></li>
@@ -543,11 +554,17 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.StructureSearchData.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.mapsearch.SymmetryBreakingAtomCost.html">SymmetryBreakingAtomCost</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.mapsearch.WeightedTotalCost.html">WeightedTotalCost</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.SymmetryBreakingAtomCost.html">SymmetryBreakingAtomCost</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.SymmetryBreakingAtomCost.cost.html">cost</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.mapping.methods.html">libcasm.mapping.methods</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.mapsearch.WeightedTotalCost.html">WeightedTotalCost</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.mapsearch.WeightedTotalCost.cost.html">cost</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.mapping.methods.html">libcasm.mapping.methods</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.make_mapped_lattice.html">make_mapped_lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.make_mapped_structure.html">make_mapped_structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.map_atoms.html">map_atoms</a></li>
@@ -632,7 +649,7 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.mapping.mapsearch.QueueConstraints" title="libcasm.mapping.mapsearch._mapping_mapsearch.QueueConstraints"><span class="pre">QueueConstraints</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">min_queue_cost</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">max_queue_cost</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">min_queue_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">max_queue_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span><a class="headerlink" href="#libcasm.mapping.mapsearch.QueueConstraints" title="Link to this definition">#</a></dt>
@@ -645,19 +662,35 @@ modifies the search queue to enforce the following
 optional constraints which can reduce the overall search
 time:</p>
 <ul class="simple">
-<li><p>min_queue_cost: Allow searching for sub-optimal mappings
-if the total cost &gt;= min_queue_cost</p></li>
-<li><p>max_queue_cost: Allow searching for sub-optimal mappings
-if the total cost &lt;= max_queue_cost</p></li>
-<li><p>max_queue_size: Reduce the queue size to max_queue_size
-by repeatedly calling <cite>pop_back</cite>.</p></li>
+<li><p><cite>min_queue_cost</cite>: Skip searching for sub-optimal atom assignments if
+the total cost is less than <cite>min_queue_cost</cite> by repeatedly calling
+<a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.pop_front.html#libcasm.mapping.mapsearch.MappingSearch.pop_front" title="libcasm.mapping.mapsearch.MappingSearch.pop_front"><code class="xref py py-func docutils literal notranslate"><span class="pre">pop_front()</span></code></a>.</p></li>
+<li><p><cite>max_queue_cost</cite>: Skip searching for sub-optimal atom assignments if
+the total cost is greater than <cite>max_queue_cost</cite> by repeatedly calling
+<a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.pop_back.html#libcasm.mapping.mapsearch.MappingSearch.pop_back" title="libcasm.mapping.mapsearch.MappingSearch.pop_back"><code class="xref py py-func docutils literal notranslate"><span class="pre">pop_back()</span></code></a>.</p></li>
+<li><p><cite>max_queue_size</cite>: Reduce the queue size to <cite>max_queue_size</cite>, no matter
+what the total cost of queued mappings is, by repeatedly calling
+<a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.pop_back.html#libcasm.mapping.mapsearch.MappingSearch.pop_back" title="libcasm.mapping.mapsearch.MappingSearch.pop_back"><code class="xref py py-func docutils literal notranslate"><span class="pre">pop_back()</span></code></a>.</p></li>
 </ul>
-<p>Construct QueueConstraints</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.html#libcasm.mapping.mapsearch.MappingSearch" title="libcasm.mapping.mapsearch.MappingSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">MappingSearch</span></code></a> constructor
+parameters <cite>min_cost</cite> and <cite>max_cost</cite> set bounds on mappings stored
+in the search <a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.results.html#libcasm.mapping.mapsearch.MappingSearch.results" title="libcasm.mapping.mapsearch.MappingSearch.results"><code class="xref py py-func docutils literal notranslate"><span class="pre">results()</span></code></a>,
+but not on the <a class="reference internal" href="libcasm.mapping.mapsearch.MappingNode.html#libcasm.mapping.mapsearch.MappingNode" title="libcasm.mapping.mapsearch.MappingNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">MappingNode</span></code></a> (used to
+find next-best costing assignments) stored in the
+<a class="reference internal" href="libcasm.mapping.mapsearch.MappingSearch.html#libcasm.mapping.mapsearch.MappingSearch" title="libcasm.mapping.mapsearch.MappingSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">MappingSearch</span></code></a> queue.</p></li>
+</ul>
+<p class="rubric">Constructor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>min_queue_cost</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em><em>, </em><em>default=None</em>) – Minimum cost mappings to keep in the search queue.</p></li>
-<li><p><strong>max_queue_cost</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em><em>, </em><em>default=None</em>) – Maximum cost mappings to keep in the search queue.</p></li>
+<li><p><strong>min_queue_cost</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em><em>, </em><em>default=None</em>) – Minimum cost mappings to keep in the search queue and use as the
+starting point for finding next-best cost atom mapping
+assignments.</p></li>
+<li><p><strong>max_queue_cost</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em><em>, </em><em>default=None</em>) – Maximum cost mappings to keep in the search queue and use as the
+starting point for finding next-best cost atom mapping
+assignments.</p></li>
 <li><p><strong>max_queue_size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>default=None</em>) – Maximum search queue size to allow.</p></li>
 </ul>
 </dd>
@@ -665,6 +698,9 @@ by repeatedly calling <cite>pop_back</cite>.</p></li>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.mapping.mapsearch.QueueConstraints.enforce.html#libcasm.mapping.mapsearch.QueueConstraints.enforce" title="libcasm.mapping.mapsearch.QueueConstraints.enforce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enforce</span></code></a></p></td>
+<td><p>Enforce constraints on a MappingSearch queue</p></td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
@@ -691,11 +727,11 @@ by repeatedly calling <cite>pop_back</cite>.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="libcasm.mapping.mapsearch.StructureSearchData.html"
+       href="libcasm.mapping.mapsearch.QueueConstraints.enforce.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">StructureSearchData</p>
+        <p class="prev-next-title">enforce</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
