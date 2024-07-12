@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>StrainConverter &#8212; libcasm-xtal 2.0a9 documentation</title>
+    <title>StrainConverter &#8212; libcasm-xtal 2.0a10 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=fc1c1e0c"></script>
+    <script src="../../../_static/documentation_options.js?v=e2e896ca"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -674,7 +674,15 @@ document.write(`
 <h1>StrainConverter<a class="headerlink" href="#strainconverter" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="libcasm.xtal.StrainConverter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.xtal.</span></span><span class="sig-name descname"><span class="pre">StrainConverter</span></span><a class="headerlink" href="#libcasm.xtal.StrainConverter" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.xtal.</span></span><span class="sig-name descname"><span class="pre">StrainConverter</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.xtal.StrainConverter" title="libcasm.xtal._xtal.StrainConverter"><span class="pre">StrainConverter</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Ustrain'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">n</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">array([[1.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.],</span> <span class="pre">[0.,</span> <span class="pre">1.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.],</span> <span class="pre">[0.,</span> <span class="pre">0.,</span> <span class="pre">1.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.],</span> <span class="pre">[0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">1.,</span> <span class="pre">0.,</span> <span class="pre">0.],</span> <span class="pre">[0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">1.,</span> <span class="pre">0.],</span> <span class="pre">[0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">0.,</span> <span class="pre">1.]])</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="headerlink" href="#libcasm.xtal.StrainConverter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
 <p>Convert strain values</p>
 <p>Converts between strain metric vector values
@@ -691,14 +699,6 @@ strain metrics, <span class="math notranslate nohighlight">\(E\)</span>, shape=(
 <li><p><cite>“Ustrain”</cite>: Right stretch tensor, <span class="math notranslate nohighlight">\(E = U\)</span></p></li>
 <li><p><cite>“Bstrain”</cite>: Biot strain metric, <span class="math notranslate nohighlight">\(E = U - I\)</span></p></li>
 </ul>
-<dl class="simple">
-<dt>__init__(self: libcasm.xtal._xtal.StrainConverter, metric: str = ‘Ustrain’, basis: numpy.ndarray[numpy.float64[m, n]] = array([[1., 0., 0., 0., 0., 0.],</dt><dd><p>[0., 1., 0., 0., 0., 0.],
-[0., 0., 1., 0., 0., 0.],
-[0., 0., 0., 1., 0., 0.],
-[0., 0., 0., 0., 1., 0.],
-[0., 0., 0., 0., 0., 1.]])) -&gt; None</p>
-</dd>
-</dl>
 <p class="rubric">Constructor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
