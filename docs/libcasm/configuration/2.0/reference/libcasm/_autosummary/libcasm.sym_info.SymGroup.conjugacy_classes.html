@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>conjugacy_classes &#8212; libcasm-configuration 2.0a3 documentation</title>
+    <title>conjugacy_classes &#8212; libcasm-configuration 2.0a4 documentation</title>
   
   
   
@@ -39,14 +39,14 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.sym_info.SymGroup.conjugacy_classes';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="inv" href="libcasm.sym_info.SymGroup.inv.html" />
-    <link rel="prev" title="SymGroup" href="libcasm.sym_info.SymGroup.html" />
+    <link rel="next" title="from_dict" href="libcasm.sym_info.SymGroup.from_dict.html" />
+    <link rel="prev" title="brief_frac" href="libcasm.sym_info.SymGroup.brief_frac.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -364,6 +364,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.equivalents_info_from_dict.html">equivalents_info_from_dict</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_cluster_group.html">make_cluster_group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_integral_site_coordinate_symgroup_rep.html">make_integral_site_coordinate_symgroup_rep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_cluster_group.html">make_local_cluster_group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_cluster_specs.html">make_local_cluster_specs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_equivalence_map.html">make_local_equivalence_map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clusterography.make_local_equivalence_map_indices.html">make_local_equivalence_map_indices</a></li>
@@ -546,6 +547,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.has_occupation_dofs.html">has_occupation_dofs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.integral_site_coordinate_symgroup_rep.html">integral_site_coordinate_symgroup_rep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.is_atomic.html">is_atomic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.lattice_point_group.html">lattice_point_group</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.occ_symgroup_rep.html">occ_symgroup_rep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.Prim.xtal_prim.html">xtal_prim</a></li>
 </ul>
@@ -631,11 +633,39 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.configuration_list_to_data.html">configuration_list_to_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.supercell_list_from_data.html">supercell_list_from_data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.supercell_list_to_data.html">supercell_list_to_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.configuration.io.symgroup_to_dict_with_group_classification.html">symgroup_to_dict_with_group_classification</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.configuration.io.spglib.html">libcasm.configuration.io.spglib</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_cell.html">as_cell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_lattice.html">as_lattice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_magmoms.html">as_magmoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_numbers.html">as_numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_positions.html">as_positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_rotations.html">as_rotations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_time_reversals.html">as_time_reversals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.as_translations.html">as_translations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.asdict.html">asdict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.get_magnetic_spacegroup_type_from_symmetry.html">get_magnetic_spacegroup_type_from_symmetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.get_magnetic_symmetry_dataset.html">get_magnetic_symmetry_dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.get_spacegroup_type_from_symmetry.html">get_spacegroup_type_from_symmetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.spglib.get_symmetry_dataset.html">get_symmetry_dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.configuration.io.tools.html">libcasm.configuration.io.tools</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.CasmObjectWithLattice.html">libcasm.configuration.io.tools.CasmObjectWithLattice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.CasmObjectWithPositions.html">libcasm.configuration.io.tools.CasmObjectWithPositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.as_structure_if_config.html">as_structure_if_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.get_coordinate_cart.html">get_coordinate_cart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.get_coordinate_frac.html">get_coordinate_frac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.get_lattice.html">get_lattice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.get_magmoms.html">get_magmoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcasm.configuration.io.tools.get_unique_numbers.html">get_unique_numbers</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.enumerate.html">libcasm.enumerate</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.enumerate.html">libcasm.enumerate</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.get_occevent_coordinate.html">get_occevent_coordinate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.irreducible_wedge_points.html">irreducible_wedge_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_all_distinct_local_perturbations.html">make_all_distinct_local_perturbations</a></li>
@@ -645,7 +675,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_occevent_suborbits.html">make_occevent_suborbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.make_phenomenal_occevent.html">make_phenomenal_occevent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.enumerate.meshgrid_points.html">meshgrid_points</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ConfigEnumAllOccupations.html">ConfigEnumAllOccupations</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ConfigEnumAllOccupations.html">ConfigEnumAllOccupations</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumAllOccupations.by_cluster.html">by_cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumAllOccupations.by_cluster_list.html">by_cluster_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumAllOccupations.by_integral_site_coordinates.html">by_integral_site_coordinates</a></li>
@@ -660,7 +690,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumAllOccupations.supercell_set.html">supercell_set</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ConfigEnumInfo.html">ConfigEnumInfo</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ConfigEnumInfo.html">ConfigEnumInfo</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumInfo.check.html">check</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumInfo.finish.html">finish</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumInfo.config_enum.html">config_enum</a></li>
@@ -671,7 +701,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumInfo.n_config_excluded.html">n_config_excluded</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ConfigEnumMeshGrid.html">ConfigEnumMeshGrid</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ConfigEnumMeshGrid.html">ConfigEnumMeshGrid</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumMeshGrid.by_grid_coordinates.html">by_grid_coordinates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumMeshGrid.by_irreducible_wedge.html">by_irreducible_wedge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumMeshGrid.by_range.html">by_range</a></li>
@@ -684,7 +714,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ConfigEnumMeshGrid.supercell_set.html">supercell_set</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ScelEnum.html">ScelEnum</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.enumerate.ScelEnum.html">ScelEnum</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ScelEnum.by_volume.html">by_volume</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ScelEnum.prim.html">prim</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.enumerate.ScelEnum.supercell_set.html">supercell_set</a></li>
@@ -692,8 +722,8 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.irreps.html">libcasm.irreps</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepDecomposition.html">IrrepDecomposition</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.irreps.html">libcasm.irreps</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepDecomposition.html">IrrepDecomposition</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepDecomposition.make_symmetry_report.html">make_symmetry_report</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepDecomposition.head_group.html">head_group</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepDecomposition.irreps.html">irreps</a></li>
@@ -702,7 +732,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepDecomposition.symmetry_adapted_subspace.html">symmetry_adapted_subspace</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepInfo.html">IrrepInfo</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepInfo.html">IrrepInfo</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.to_dict.html">to_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.characters.html">characters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.directions.html">directions</a></li>
@@ -711,13 +741,13 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepInfo.vector_dim.html">vector_dim</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepWedge.html">IrrepWedge</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.IrrepWedge.html">IrrepWedge</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepWedge.axes.html">axes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepWedge.irrep_info.html">irrep_info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.IrrepWedge.mult.html">mult</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.MatrixRepGroup.html">MatrixRepGroup</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.MatrixRepGroup.html">MatrixRepGroup</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-29"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.MatrixRepGroup.conjugacy_classes.html">conjugacy_classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.MatrixRepGroup.inv.html">inv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.MatrixRepGroup.make_subgroup.html">make_subgroup</a></li>
@@ -730,12 +760,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.MatrixRepGroup.multiplication_table.html">multiplication_table</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.SubWedge.html">SubWedge</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.SubWedge.html">SubWedge</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-30"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.SubWedge.irrep_wedges.html">irrep_wedges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.SubWedge.trans_mat.html">trans_mat</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.html">VectorSpaceSymReport</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-29"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.html">VectorSpaceSymReport</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-31"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.to_dict.html">to_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.axis_glossary.html">axis_glossary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.irreps.VectorSpaceSymReport.irreducible_wedge.html">irreducible_wedge</a></li>
@@ -749,7 +779,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.occ_events.html">libcasm.occ_events</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-30"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="libcasm.occ_events.html">libcasm.occ_events</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-32"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.get_occevent_coordinate.html">get_occevent_coordinate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.load_occevent.html">load_occevent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_canonical_occevent.html">make_canonical_occevent</a></li>
@@ -760,7 +790,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_occevent_symgroup_rep_from_existing.html">make_occevent_symgroup_rep_from_existing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.make_prim_periodic_orbit.html">make_prim_periodic_orbit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.save_occevent.html">save_occevent</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccEvent.html">OccEvent</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-31"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccEvent.html">OccEvent</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-33"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.cluster.html">cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.copy_reverse.html">copy_reverse</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccEvent.copy_sort.html">copy_sort</a></li>
@@ -777,20 +807,20 @@ document.write(`
 </li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.OccEventPrinter.html">OccEventPrinter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.occ_events.OccEventRep.html">OccEventRep</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccPosition.html">OccPosition</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-32"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccPosition.html">OccPosition</a><input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-34"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.atom_component.html">atom_component</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.atom_position_index.html">atom_position_index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.from_dict.html">from_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.integral_site_coordinate.html">integral_site_coordinate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.is_atom.html">is_atom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.is_in_resevoir.html">is_in_resevoir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.is_in_reservoir.html">is_in_reservoir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.molecule.html">molecule</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.occupant.html">occupant</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.occupant_index.html">occupant_index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccPosition.to_dict.html">to_dict</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccSystem.html">OccSystem</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-33"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.occ_events.OccSystem.html">OccSystem</a><input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-35"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.atom_name_list.html">atom_name_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.chemical_name_list.html">chemical_name_list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.occ_events.OccSystem.from_dict.html">from_dict</a></li>
@@ -811,14 +841,19 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.sym_info.html">libcasm.sym_info</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-34"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.sym_info.html">libcasm.sym_info</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-36"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libcasm.sym_info.make_factor_group.html">make_factor_group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.sym_info.make_point_group.html">make_point_group</a></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="libcasm.sym_info.SymGroup.html">SymGroup</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-35"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="libcasm.sym_info.SymGroup.html">SymGroup</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-37"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.brief_cart.html">brief_cart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.brief_frac.html">brief_frac</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">conjugacy_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.from_elements.html">from_elements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.inv.html">inv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.make_subgroup.html">make_subgroup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.mult.html">mult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.to_dict.html">to_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.elements.html">elements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.head_group.html">head_group</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.sym_info.SymGroup.head_group_index.html">head_group_index</a></li>
@@ -904,7 +939,7 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.sym_info.SymGroup.html#libcasm.sym_info.SymGroup" title="libcasm.sym_info._sym_info.SymGroup"><span class="pre">SymGroup</span></a></span></em>,</dd>
 </dl>
 
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libcasm.sym_info.SymGroup.conjugacy_classes" title="Link to this definition">#</a></dt>
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libcasm.sym_info.SymGroup.conjugacy_classes" title="Link to this definition">#</a></dt>
 <dd><p>Returns the conjugacy classes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -930,20 +965,20 @@ the <cite>i</cite>-th class.”</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="libcasm.sym_info.SymGroup.html"
+       href="libcasm.sym_info.SymGroup.brief_frac.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">SymGroup</p>
+        <p class="prev-next-title">brief_frac</p>
       </div>
     </a>
     <a class="right-next"
-       href="libcasm.sym_info.SymGroup.inv.html"
+       href="libcasm.sym_info.SymGroup.from_dict.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">inv</p>
+        <p class="prev-next-title">from_dict</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

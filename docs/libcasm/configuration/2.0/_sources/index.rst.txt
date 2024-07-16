@@ -22,6 +22,12 @@ The libcasm-configuration package is the CASM configuration comparison and enume
 - Methods for creating configurations with properties from mapped structures
 
 
+Dependencies
+============
+
+For symmetry group classification, we use the `spglib <https://spglib.readthedocs.io/en/latest/>`_ package (see :func:`~libcasm.configuration.io.symgroup_to_dict_with_group_classification`).
+
+
 About CASM
 ==========
 

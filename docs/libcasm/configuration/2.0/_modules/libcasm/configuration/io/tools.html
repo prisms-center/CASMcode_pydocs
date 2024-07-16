@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>libcasm.configuration.io.tools &#8212; libcasm-configuration 2.0a4 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/configuration/io/tools';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-configuration</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage/usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_configuration/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-configuration/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage/usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_configuration/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-configuration/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../io.html" class="nav-link">libcasm.configuration.io</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">libcasm.conf...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for libcasm.configuration.io.tools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Methods for getting properties from CASM objects&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.configuration</span>
+<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># python 3.10+</span>
+    <span class="n">CasmObjectWithLattice</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">ConfigurationWithProperties</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;TypeAlias for a CASM object with a lattice</span>
+<span class="sd">    </span>
+<span class="sd">    May be:</span>
+<span class="sd">    </span>
+<span class="sd">    - a :class:`libcasm.xtal.Lattice`,</span>
+<span class="sd">    - a :class:`libcasm.xtal.Structure`,</span>
+<span class="sd">    - a :class:`libcasm.xtal.Prim`,</span>
+<span class="sd">    - a :class:`libcasm.configuration.Prim`,</span>
+<span class="sd">    - a :class:`libcasm.configuration.Configuration`, or</span>
+<span class="sd">    - a :class:`libcasm.configuration.ConfigurationWithProperties`.</span>
+<span class="sd">    </span>
+<span class="sd">    Note that :class:`~libcasm.configuration.Configuration` and </span>
+<span class="sd">    :class:`~libcasm.configuration.ConfigurationWithProperties` are converted to </span>
+<span class="sd">    :class:`~libcasm.xtal.Structure` using the equivalent of:</span>
+<span class="sd">    </span>
+<span class="sd">    .. code-block:: Python</span>
+<span class="sd">    </span>
+<span class="sd">        if isinstance(obj, libcasm.configuration.Configuration):</span>
+<span class="sd">            obj = obj.to_structure()</span>
+<span class="sd">        if isinstance(obj, libcasm.configuration.ConfigurationWithProperties):</span>
+<span class="sd">            obj = obj.to_structure()</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        typing.TypeAlias was introduced in Python3.10; for Python3.9 </span>
+<span class="sd">        CasmObjectWithLattice is typing.Any</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">CasmObjectWithPositions</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">ConfigurationWithProperties</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;TypeAlias for a CASM object with positions</span>
+<span class="sd">    </span>
+<span class="sd">    May be:</span>
+<span class="sd">    </span>
+<span class="sd">    - a :class:`libcasm.xtal.Structure`,</span>
+<span class="sd">    - a :class:`libcasm.xtal.Prim`,</span>
+<span class="sd">    - a :class:`libcasm.configuration.Prim`,</span>
+<span class="sd">    - a :class:`libcasm.configuration.Configuration`, or</span>
+<span class="sd">    - a :class:`libcasm.configuration.ConfigurationWithProperties`.</span>
+<span class="sd">    </span>
+<span class="sd">    Note that :class:`~libcasm.configuration.Configuration` and </span>
+<span class="sd">    :class:`~libcasm.configuration.ConfigurationWithProperties` are converted to </span>
+<span class="sd">    :class:`~libcasm.xtal.Structure` using the equivalent of:</span>
+<span class="sd">    </span>
+<span class="sd">    .. code-block:: Python</span>
+<span class="sd">    </span>
+<span class="sd">        if isinstance(obj, libcasm.configuration.Configuration):</span>
+<span class="sd">            obj = obj.to_structure()</span>
+<span class="sd">        if isinstance(obj, libcasm.configuration.ConfigurationWithProperties):</span>
+<span class="sd">            obj = obj.to_structure()</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        typing.TypeAlias was introduced in Python3.10; for Python3.9 </span>
+<span class="sd">        CasmObjectWithPositions is typing.Any</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+    <span class="c1"># python 3.9</span>
+    <span class="n">CasmObjectWithLattice</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span>
+    <span class="n">CasmObjectWithPositions</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span>
+
+
+<div class="viewcode-block" id="as_structure_if_config">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.tools.as_structure_if_config.html#libcasm.configuration.io.tools.as_structure_if_config">[docs]</a>
+<span class="k">def</span> <span class="nf">as_structure_if_config</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If a Configuration or ConfigurationWithProperties, convert to a Structure</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj: Any</span>
+<span class="sd">        Any object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    structure_if_config: Any</span>
+<span class="sd">        If `obj` is a Configuration or ConfigurationWithProperties, call</span>
+<span class="sd">        `obj.to_structure()` and return the resulting Structure. Otherwise, returns</span>
+<span class="sd">        `obj`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_structure</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">ConfigurationWithProperties</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_structure</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">obj</span></div>
+
+
+
+<div class="viewcode-block" id="get_lattice">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.tools.get_lattice.html#libcasm.configuration.io.tools.get_lattice">[docs]</a>
+<span class="k">def</span> <span class="nf">get_lattice</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">CasmObjectWithLattice</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get lattice vectors from a lattice, structure, configuration, or prim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj: :py:data:`CasmObjectWithLattice`</span>
+<span class="sd">        A lattice, structure, configuration, or prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lattice: np.ndarray[np.float64[3,3]]</span>
+<span class="sd">        The lattice vectors as columns (i.e. ``a == lattice[:,0]``,</span>
+<span class="sd">        ``b == lattice[:,1]``, ``c == lattice[:,2]``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">as_structure_if_config</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">):</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">obj</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in get_lattice: &quot;</span> <span class="s2">&quot;not a lattice, structure, configuration, or prim&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">lattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_coordinate_frac">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.tools.get_coordinate_frac.html#libcasm.configuration.io.tools.get_coordinate_frac">[docs]</a>
+<span class="k">def</span> <span class="nf">get_coordinate_frac</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">CasmObjectWithPositions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get fractional coordinates from a structure, configuration, or prim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj: :py:data:`CasmObjectWithPositions`</span>
+<span class="sd">        An atomic structure, configuration, or prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    positions: np.ndarray[np.float64[3, n_sites]]</span>
+<span class="sd">        The positions of atoms or sites, as columns, in fractional coordinates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">as_structure_if_config</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+        <span class="n">coordinate_frac</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">coordinate_frac</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+        <span class="n">coordinate_frac</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">coordinate_frac</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+        <span class="n">coordinate_frac</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">atom_coordinate_frac</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in get_positions: &quot;</span>
+            <span class="s2">&quot;not a libcasm.xtal.Structure, &quot;</span>
+            <span class="s2">&quot;libcasm.xtal.Prim, or libcasm.configuration.Prim&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">coordinate_frac</span></div>
+
+
+
+<div class="viewcode-block" id="get_coordinate_cart">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.tools.get_coordinate_cart.html#libcasm.configuration.io.tools.get_coordinate_cart">[docs]</a>
+<span class="k">def</span> <span class="nf">get_coordinate_cart</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">CasmObjectWithPositions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get Cartesian coordinates from a structure, configuration, or prim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj: :py:data:`CasmObjectWithPositions`</span>
+<span class="sd">        An atomic structure, configuration, or prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    positions: np.ndarray[np.float64[3, n_sites]]</span>
+<span class="sd">        The positions of atoms or sites, as columns, in Cartesian coordinates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">as_structure_if_config</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+        <span class="n">coordinate_cart</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">coordinate_cart</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+        <span class="n">coordinate_cart</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">coordinate_cart</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+        <span class="n">coordinate_cart</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">atom_coordinate_cart</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in get_coordinate_cart: &quot;</span>
+            <span class="s2">&quot;not a libcasm.xtal.Structure, &quot;</span>
+            <span class="s2">&quot;libcasm.xtal.Prim, or libcasm.configuration.Prim&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">coordinate_cart</span></div>
+
+
+
+<div class="viewcode-block" id="get_unique_numbers">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.tools.get_unique_numbers.html#libcasm.configuration.io.tools.get_unique_numbers">[docs]</a>
+<span class="k">def</span> <span class="nf">get_unique_numbers</span><span class="p">(</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">CasmObjectWithPositions</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get unique occupant numbers from a structure, configuration, or prim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj: :py:data:`CasmObjectWithPositions`</span>
+<span class="sd">        An atomic structure, configuration, or prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numbers: list[int]</span>
+<span class="sd">        For structures or configurations, a unique int for each atom type. For prim,</span>
+<span class="sd">        the asymmetric unit indices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">as_structure_if_config</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+            <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">xtal_prim</span>
+
+        <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">coordinate_frac</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">asym_indices</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">asymmetric_unit_indices</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">asym_unit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">asym_indices</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">site_index</span> <span class="ow">in</span> <span class="n">asym_unit</span><span class="p">:</span>
+                <span class="n">numbers</span><span class="p">[</span><span class="n">site_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+        <span class="n">atom_type</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">atom_type</span><span class="p">()</span>
+        <span class="n">unique_atom_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">atom_type</span><span class="p">))</span>
+        <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">unique_atom_types</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atom_type</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in get_unique_numbers: &quot;</span>
+            <span class="s2">&quot;not a libcasm.xtal.Structure, &quot;</span>
+            <span class="s2">&quot;libcasm.xtal.Prim, or libcasm.configuration.Prim&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">numbers</span></div>
+
+
+
+<div class="viewcode-block" id="get_magmoms">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.tools.get_magmoms.html#libcasm.configuration.io.tools.get_magmoms">[docs]</a>
+<span class="k">def</span> <span class="nf">get_magmoms</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">CasmObjectWithPositions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get magmoms from a structure, configuration, or prim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj: :py:data:`CasmObjectWithPositions`</span>
+<span class="sd">        An atomic structure, configuration, or prim. Configurations are converted to</span>
+<span class="sd">        structures using ``obj.to_structure()``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    magmoms: Union[list[float], list[list[float]], None]</span>
+<span class="sd">        Magnetic moments associated with each position.</span>
+
+<span class="sd">        For collinear magnetic spin, the return type is ``list[float]``.</span>
+
+<span class="sd">        For non-collinear spins, the return type is ``list[list[float]]``.</span>
+
+<span class="sd">        For prim with magnetic DoF, the values are set to value ``0.`` (collinear) or</span>
+<span class="sd">        ``[0., 0., 0.]`` (non-collinear).</span>
+
+<span class="sd">        Returns None if no magnetic spin properties or degrees of freedom (DoF) are</span>
+<span class="sd">        present.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">as_structure_if_config</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+            <span class="n">prim</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prim</span> <span class="o">=</span> <span class="n">obj</span>
+
+        <span class="n">n_sites</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">coordinate_frac</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">continuous_magspin_key</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">continuous_magspin_key</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+                <span class="n">magmoms</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_sites</span>
+            <span class="k">elif</span> <span class="n">prim</span><span class="o">.</span><span class="n">continuous_magspin_key</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;NC&quot;</span><span class="p">,</span> <span class="s2">&quot;SO&quot;</span><span class="p">]:</span>
+                <span class="n">magmoms</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_sites</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in get_magmoms: &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Unexpected continuous_magspin_key=</span><span class="si">{</span><span class="n">prim</span><span class="o">.</span><span class="n">continuous_magspin_key</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">prim</span><span class="o">.</span><span class="n">discrete_atomic_magspin_key</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">discrete_atomic_magspin_key</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+                <span class="n">magmoms</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_sites</span>
+            <span class="k">elif</span> <span class="n">prim</span><span class="o">.</span><span class="n">discrete_atomic_magspin_key</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;NC&quot;</span><span class="p">,</span> <span class="s2">&quot;SO&quot;</span><span class="p">]:</span>
+                <span class="n">magmoms</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_sites</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in get_magmoms: Unexpected &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;discrete_atomic_magspin_key=</span><span class="si">{</span><span class="n">prim</span><span class="o">.</span><span class="n">continuous_magspin_key</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">magmoms</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+        <span class="n">atom_properties</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">atom_properties</span><span class="p">()</span>
+
+        <span class="n">magmoms</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">atom_properties</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;magspin&quot;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">atom_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">magmoms</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">magmoms</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="s2">&quot;Error in get_magmoms: &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;Invalid row dimension for atom_properties[</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">], &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;must be 1 or 3, found </span><span class="si">{</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">break</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in get_magmoms: &quot;</span>
+            <span class="s2">&quot;not a libcasm.xtal.Structure, &quot;</span>
+            <span class="s2">&quot;libcasm.xtal.Prim, or libcasm.configuration.Prim&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">magmoms</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
