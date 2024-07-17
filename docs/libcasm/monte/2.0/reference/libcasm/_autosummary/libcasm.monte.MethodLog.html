@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MethodLog &#8212; libcasm-monte 2.0a1 documentation</title>
+    <title>MethodLog &#8212; libcasm-monte 2.0a2 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.monte.MethodLog';</script>
@@ -395,6 +395,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.paragraph_width.html">paragraph_width</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.print.html">print</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.reset.html">reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.reset_to_stdout.html">reset_to_stdout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.restart_clock.html">restart_clock</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.section.html">section</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_debug.html">set_debug</a></li>
@@ -1074,7 +1075,7 @@ document.write(`
 
 <dl>
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.monte.MethodLog" title="libcasm.monte._monte.MethodLog"><span class="pre">MethodLog</span></a></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">logfile_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">logfile_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">log_frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 </dl>
 
@@ -1085,7 +1086,7 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>logfile_path</strong> (<em>str</em>) – File location for log output</p></li>
+<li><p><strong>logfile_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – File location for log output. If None, log to stdout.</p></li>
 <li><p><strong>log_frequency</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – How often to log method status, in seconds</p></li>
 </ul>
 </dd>
@@ -1150,43 +1151,46 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.reset.html#libcasm.monte.MethodLog.reset" title="libcasm.monte.MethodLog.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
 <td><p>Reset log file, creating parent directories as necessary</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.restart_clock.html#libcasm.monte.MethodLog.restart_clock" title="libcasm.monte.MethodLog.restart_clock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restart_clock</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.reset_to_stdout.html#libcasm.monte.MethodLog.reset_to_stdout" title="libcasm.monte.MethodLog.reset_to_stdout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_to_stdout</span></code></a></p></td>
+<td><p>Reset to print to stdout.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.restart_clock.html#libcasm.monte.MethodLog.restart_clock" title="libcasm.monte.MethodLog.restart_clock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restart_clock</span></code></a></p></td>
 <td><p>Restart internal timer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.section.html#libcasm.monte.MethodLog.section" title="libcasm.monte.MethodLog.section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.section.html#libcasm.monte.MethodLog.section" title="libcasm.monte.MethodLog.section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section</span></code></a></p></td>
 <td><p>Print a nicely formatted section header, optionally with the current timer value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_debug.html#libcasm.monte.MethodLog.set_debug" title="libcasm.monte.MethodLog.set_debug"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_debug</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_debug.html#libcasm.monte.MethodLog.set_debug" title="libcasm.monte.MethodLog.set_debug"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_debug</span></code></a></p></td>
 <td><p>Set to &quot;debug&quot; printing mode.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_indent_space.html#libcasm.monte.MethodLog.set_indent_space" title="libcasm.monte.MethodLog.set_indent_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_indent_space</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_indent_space.html#libcasm.monte.MethodLog.set_indent_space" title="libcasm.monte.MethodLog.set_indent_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_indent_space</span></code></a></p></td>
 <td><p>Set the number of spaces per indent level.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_initial_indent_space.html#libcasm.monte.MethodLog.set_initial_indent_space" title="libcasm.monte.MethodLog.set_initial_indent_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_initial_indent_space</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_initial_indent_space.html#libcasm.monte.MethodLog.set_initial_indent_space" title="libcasm.monte.MethodLog.set_initial_indent_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_initial_indent_space</span></code></a></p></td>
 <td><p>Set an initial number of indent spaces, before applying indent levels.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_paragraph_justification.html#libcasm.monte.MethodLog.set_paragraph_justification" title="libcasm.monte.MethodLog.set_paragraph_justification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_paragraph_justification</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_paragraph_justification.html#libcasm.monte.MethodLog.set_paragraph_justification" title="libcasm.monte.MethodLog.set_paragraph_justification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_paragraph_justification</span></code></a></p></td>
 <td><p>Set paragraph justification type.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_paragraph_width.html#libcasm.monte.MethodLog.set_paragraph_width" title="libcasm.monte.MethodLog.set_paragraph_width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_paragraph_width</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_paragraph_width.html#libcasm.monte.MethodLog.set_paragraph_width" title="libcasm.monte.MethodLog.set_paragraph_width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_paragraph_width</span></code></a></p></td>
 <td><p>Set paragraph width.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_quiet.html#libcasm.monte.MethodLog.set_quiet" title="libcasm.monte.MethodLog.set_quiet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_quiet</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_quiet.html#libcasm.monte.MethodLog.set_quiet" title="libcasm.monte.MethodLog.set_quiet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_quiet</span></code></a></p></td>
 <td><p>Set to &quot;quiet&quot; printing mode.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_standard.html#libcasm.monte.MethodLog.set_standard" title="libcasm.monte.MethodLog.set_standard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_standard</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_standard.html#libcasm.monte.MethodLog.set_standard" title="libcasm.monte.MethodLog.set_standard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_standard</span></code></a></p></td>
 <td><p>Set to &quot;standard&quot; printing mode.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_verbose.html#libcasm.monte.MethodLog.set_verbose" title="libcasm.monte.MethodLog.set_verbose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_verbose</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.set_verbose.html#libcasm.monte.MethodLog.set_verbose" title="libcasm.monte.MethodLog.set_verbose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_verbose</span></code></a></p></td>
 <td><p>Set to &quot;verbose&quot; printing mode.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.show_clock.html#libcasm.monte.MethodLog.show_clock" title="libcasm.monte.MethodLog.show_clock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show_clock</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.show_clock.html#libcasm.monte.MethodLog.show_clock" title="libcasm.monte.MethodLog.show_clock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show_clock</span></code></a></p></td>
 <td><p>Show <cite>time_s</cite> as a part of section headings.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.time_s.html#libcasm.monte.MethodLog.time_s" title="libcasm.monte.MethodLog.time_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_s</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.time_s.html#libcasm.monte.MethodLog.time_s" title="libcasm.monte.MethodLog.time_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_s</span></code></a></p></td>
 <td><p>Time in seconds since construction or <cite>restart_clock</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.verbatim.html#libcasm.monte.MethodLog.verbatim" title="libcasm.monte.MethodLog.verbatim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">verbatim</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.monte.MethodLog.verbatim.html#libcasm.monte.MethodLog.verbatim" title="libcasm.monte.MethodLog.verbatim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">verbatim</span></code></a></p></td>
 <td><p>Print with indent and line wrapping, without justification.</p></td>
 </tr>
 </tbody>

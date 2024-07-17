@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SamplingParams &#8212; libcasm-monte 2.0a1 documentation</title>
+    <title>SamplingParams &#8212; libcasm-monte 2.0a2 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -396,6 +396,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.paragraph_width.html">paragraph_width</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.print.html">print</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.reset.html">reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.reset_to_stdout.html">reset_to_stdout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.restart_clock.html">restart_clock</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.section.html">section</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.monte.MethodLog.set_debug.html">set_debug</a></li>
@@ -1076,7 +1077,7 @@ document.write(`
 <h1>SamplingParams<a class="headerlink" href="#samplingparams" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="libcasm.monte.sampling.SamplingParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.monte.sampling.</span></span><span class="sig-name descname"><span class="pre">SamplingParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">self:</span> <span class="pre">libcasm.monte.sampling._monte_sampling.SamplingParams,</span> <span class="pre">sampler_names:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">sample_mode:</span> <span class="pre">libcasm.monte.sampling._monte_sampling.SAMPLE_MODE</span> <span class="pre">=</span> <span class="pre">&lt;SAMPLE_MODE.BY_PASS:</span> <span class="pre">1&gt;,</span> <span class="pre">sample_method:</span> <span class="pre">libcasm.monte.sampling._monte_sampling.SAMPLE_METHOD</span> <span class="pre">=</span> <span class="pre">&lt;SAMPLE_METHOD.LINEAR:</span> <span class="pre">0&gt;,</span> <span class="pre">period:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0,</span> <span class="pre">begin:</span> <span class="pre">Optional[float]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">base:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.2589254117941673,</span> <span class="pre">shift:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0,</span> <span class="pre">custom_sample_at:</span> <span class="pre">Optional[Callable[[int],</span> <span class="pre">float]]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">stochastic_sample_period:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">do_sample_trajectory:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">do_sample_time:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#libcasm.monte.sampling.SamplingParams" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.monte.sampling.</span></span><span class="sig-name descname"><span class="pre">SamplingParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">self:</span> <span class="pre">libcasm.monte.sampling._monte_sampling.SamplingParams,</span> <span class="pre">sampler_names:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">sample_mode:</span> <span class="pre">libcasm.monte.sampling._monte_sampling.SAMPLE_MODE</span> <span class="pre">=</span> <span class="pre">&lt;SAMPLE_MODE.BY_PASS:</span> <span class="pre">1&gt;,</span> <span class="pre">sample_method:</span> <span class="pre">libcasm.monte.sampling._monte_sampling.SAMPLE_METHOD</span> <span class="pre">=</span> <span class="pre">&lt;SAMPLE_METHOD.LINEAR:</span> <span class="pre">0&gt;,</span> <span class="pre">period:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0,</span> <span class="pre">begin:</span> <span class="pre">Optional[float]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">base:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.2589254117941673,</span> <span class="pre">shift:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0,</span> <span class="pre">custom_sample_at:</span> <span class="pre">Optional[Callable[[int],</span> <span class="pre">float]]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">stochastic_sample_period:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">do_sample_trajectory:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">do_sample_time:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#libcasm.monte.sampling.SamplingParams" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
 <p>Parameters controlling sampling fixtures</p>
 <p class="rubric">Sample mode</p>
