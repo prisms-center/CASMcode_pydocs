@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../../_static/small_logo.svg" rel="icon" type="image/svg+xml">
+    <title>is_local_basis_set &#8212; libcasm-clexmonte 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.clexmonte.System.is_local_basis_set';</script>
+    <link rel="icon" href="../../../_static/small_logo.svg"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="is_local_clex" href="libcasm.clexmonte.System.is_local_clex.html" />
+    <link rel="prev" title="is_clex" href="libcasm.clexmonte.System.is_clex.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-clexmonte</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexmonte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexmonte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexmonte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexmonte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.clexmonte.html">libcasm.clexmonte</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexmonte.enforce_composition.html">enforce_composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexmonte.make_canonical_initial_state.html">make_canonical_initial_state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexmonte.make_initial_state.html">make_initial_state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexmonte.scale_supercell.html">scale_supercell</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.FindMinPotentialConfigs.html">FindMinPotentialConfigs</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.FindMinPotentialConfigs.check.html">check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.FindMinPotentialConfigs.reset.html">reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.FixedConfigGenerator.html">FixedConfigGenerator</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.FixedConfigGenerator.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.FixedConfigGenerator.methodname.html">methodname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.FixedConfigGenerator.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.html">IncrementalConditionsStateGenerator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.append.html">append</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.methodname.html">methodname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.read_completed_runs.html">read_completed_runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.write_completed_runs.html">write_completed_runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.completed_runs.html">completed_runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.is_complete.html">is_complete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.n_completed_runs.html">n_completed_runs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.IncrementalConditionsStateGenerator.next_state.html">next_state</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.html">MonteCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.make_default_sampling_fixture_params.html">make_default_sampling_fixture_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.make_sampling_fixture_params_from_dict.html">make_sampling_fixture_params_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.run.html">run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.run_fixture.html">run_fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.set_state_and_potential.html">set_state_and_potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.analysis_functions.html">analysis_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.json_sampling_functions.html">json_sampling_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.modifying_functions.html">modifying_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.name.html">name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.potential.html">potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.sampling_functions.html">sampling_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.state_data.html">state_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.system.html">system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCalculator.time_sampling_allowed.html">time_sampling_allowed</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.MonteCarloState.html">MonteCarloState</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCarloState.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCarloState.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCarloState.conditions.html">conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCarloState.configuration.html">configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MonteCarloState.properties.html">properties</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.MontePotential.html">MontePotential</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MontePotential.occ_delta_per_supercell.html">occ_delta_per_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MontePotential.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MontePotential.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.MontePotential.state_data.html">state_data</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.Results.html">Results</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.analysis.html">analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.analysis_functions.html">analysis_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.completion_check_results.html">completion_check_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.elapsed_clocktime.html">elapsed_clocktime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.json_sampler_names.html">json_sampler_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.json_samplers.html">json_samplers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.json_sampling_functions.html">json_sampling_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.n_accept.html">n_accept</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.n_reject.html">n_reject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sample_clocktime.html">sample_clocktime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sample_count.html">sample_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sample_time.html">sample_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sample_trajectory.html">sample_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sample_weight.html">sample_weight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sampler_names.html">sampler_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.samplers.html">samplers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.Results.sampling_functions.html">sampling_functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunction.html">ResultsAnalysisFunction</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunction.component_names.html">component_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunction.description.html">description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunction.function.html">function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunction.name.html">name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunction.shape.html">shape</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunctionMap.html">ResultsAnalysisFunctionMap</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunctionMap.items.html">items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunctionMap.keys.html">keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.ResultsAnalysisFunctionMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.RunData.html">RunData</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.n_unitcells.html">n_unitcells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.conditions.html">conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.initial_state.html">initial_state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunData.final_state.html">final_state</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.html">RunDataOutputParams</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.do_save_all_initial_states.html">do_save_all_initial_states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.do_save_all_final_states.html">do_save_all_final_states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.do_save_last_final_state.html">do_save_last_final_state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.write_initial_states.html">write_initial_states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.write_final_states.html">write_final_states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.write_prim_basis.html">write_prim_basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunDataOutputParams.output_dir.html">output_dir</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.RunManager.html">RunManager</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunManager.sampling_fixture.html">sampling_fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunManager.engine.html">engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunManager.global_cutoff.html">global_cutoff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunManager.run_index.html">run_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunManager.sampling_fixture_labels.html">sampling_fixture_labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.RunManager.sampling_fixtures.html">sampling_fixtures</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.SamplingFixture.html">SamplingFixture</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixture.label.html">label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixture.params.html">params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixture.results.html">results</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.html">SamplingFixtureParams</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.converge.html">converge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.analysis_functions.html">analysis_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.completion_check_params.html">completion_check_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.json_sampling_functions.html">json_sampling_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.label.html">label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.method_log.html">method_log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.sampling_functions.html">sampling_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.SamplingFixtureParams.sampling_params.html">sampling_params</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.StateData.html">StateData</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.clex.html">clex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.corr.html">corr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.local_clex.html">local_clex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.local_corr.html">local_corr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.local_multiclex.html">local_multiclex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.multiclex.html">multiclex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.order_parameter.html">order_parameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.n_unitcells.html">n_unitcells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.occ_location.html">occ_location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.state.html">state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.system.html">system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateData.transformation_matrix_to_super.html">transformation_matrix_to_super</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunction.html">StateModifyingFunction</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunction.description.html">description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunction.function.html">function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunction.name.html">name</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunctionMap.html">StateModifyingFunctionMap</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunctionMap.items.html">items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunctionMap.keys.html">keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.StateModifyingFunctionMap.values.html">values</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="libcasm.clexmonte.System.html">System</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.basis_set.html">basis_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.canonical_swaps.html">canonical_swaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.clex.html">clex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.dof_space.html">dof_space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.is_basis_set.html">is_basis_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.is_clex.html">is_clex</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">is_local_basis_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.is_local_clex.html">is_local_clex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.is_local_multiclex.html">is_local_multiclex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.is_multiclex.html">is_multiclex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.local_basis_set.html">local_basis_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.local_clex.html">local_clex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.local_multiclex.html">local_multiclex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.make_default_configuration.html">make_default_configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.make_default_state.html">make_default_state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.multiclex.html">multiclex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.order_parameter.html">order_parameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.order_parameter_subspaces.html">order_parameter_subspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.semigrand_canonical_multiswaps.html">semigrand_canonical_multiswaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.semigrand_canonical_swaps.html">semigrand_canonical_swaps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.basis_set_keys.html">basis_set_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.clex_keys.html">clex_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.composition_calculator.html">composition_calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.composition_converter.html">composition_converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.dof_space_keys.html">dof_space_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.dof_subspace_keys.html">dof_subspace_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.local_basis_set_keys.html">local_basis_set_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.local_clex_keys.html">local_clex_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.local_multiclex_keys.html">local_multiclex_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.multiclex_keys.html">multiclex_keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.n_dimensions.html">n_dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.prim.html">prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.prim_neighbor_list.html">prim_neighbor_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.species_list.html">species_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.System.xtal_prim.html">xtal_prim</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexmonte.parsing.html">libcasm.clexmonte.parsing</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.parsing.optional_from_dict.html">optional_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.parsing.required_array_from_dict.html">required_array_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.parsing.required_from_dict.html">required_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.parsing.required_int_array_from_dict.html">required_int_array_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexmonte.parsing.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Reference (libcasm)</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="libcasm.clexmonte.System.html" class="nav-link">System</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">is_local_basis_set</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="is-local-basis-set">
+<h1>is_local_basis_set<a class="headerlink" href="#is-local-basis-set" title="Link to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="libcasm.clexmonte.System.is_local_basis_set">
+<span class="sig-prename descclassname"><span class="pre">System.</span></span><span class="sig-name descname"><span class="pre">is_local_basis_set</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.clexmonte.System.html#libcasm.clexmonte.System" title="libcasm.clexmonte._clexmonte_system.System"><span class="pre">System</span></a></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#libcasm.clexmonte.System.is_local_basis_set" title="Link to this definition">#</a></dt>
+<dd><p>Check if a local basis set calculator exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – Local basis set name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>exists</strong> – True if local basis set calculator exists for <cite>key</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="libcasm.clexmonte.System.is_clex.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">is_clex</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="libcasm.clexmonte.System.is_local_clex.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">is_local_clex</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.clexmonte.System.is_local_basis_set"><code class="docutils literal notranslate"><span class="pre">System.is_local_basis_set()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.clexmonte.System.is_local_basis_set.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
