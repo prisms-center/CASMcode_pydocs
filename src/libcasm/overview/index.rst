@@ -35,7 +35,7 @@ Install:
 
     pip install libcasm-global
 
-Docs: `[2.0.4] <../../global/2.0/>`_
+Docs: `[2.0.5] <../../global/2.0/>`_
 
 Links: |GitHub_global|_ |PyPI_global|_
 
@@ -58,7 +58,7 @@ Install:
 
     pip install libcasm-xtal
 
-Docs: `[2.0a9] <../../xtal/2.0/>`_
+Docs: `[2.0a10] <../../xtal/2.0/>`_
 
 Links: |GitHub_xtal|_ |PyPI_xtal|_
 
@@ -82,7 +82,7 @@ Install:
 
     pip install libcasm-composition
 
-Docs: `[2.0a2] <../../composition/2.0/>`_
+Docs: `[2.0a3] <../../composition/2.0/>`_
 
 Links: |GitHub_composition|_ |PyPI_composition|_
 
@@ -108,7 +108,7 @@ Install:
     pip install libcasm-mapping
 
 
-Docs: `[2.0a3] <../../mapping/2.0/>`_
+Docs: `[2.0a4] <../../mapping/2.0/>`_
 
 Links: |GitHub_mapping|_ |PyPI_mapping|_
 
@@ -137,7 +137,7 @@ Install:
     pip install libcasm-clexulator
 
 
-Docs: `[2.0a4] <../../clexulator/2.0/>`_
+Docs: `[2.0a6] <../../clexulator/2.0/>`_
 
 Links: |GitHub_clexulator|_ |PyPI_clexulator|_
 
@@ -188,7 +188,7 @@ Install:
     pip install libcasm-configuration
 
 
-Docs: `[2.0a3] <../../configuration/2.0/>`_
+Docs: `[2.0a4] <../../configuration/2.0/>`_
 
 Links: |GitHub_configuration|_ |PyPI_configuration|_
 
@@ -217,9 +217,26 @@ Install:
     pip install libcasm-monte
 
 
-Docs: `[2.0a1] <../../monte/2.0/>`_
+Docs: `[2.0a2] <../../monte/2.0/>`_
 
 Links: |GitHub_monte|_ |PyPI_monte|_
+
+
+libcasm-clexmonte
+-----------------
+
+CASM cluster expansion Monte Carlo simulations
+
+Install:
+
+.. code-block:: bash
+
+    pip install libcasm-clexmonte
+
+
+Docs: `[2.0a1] <../../clexmonte/2.0/>`_
+
+Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
 
 About CASM
@@ -309,3 +326,14 @@ For more information, see the `CASM homepage <CASM_>`_.
   :alt: Link to libcasm-monte PyPI package
   :width: 20
 .. _PyPI_monte: https://pypi.org/project/libcasm-monte/
+
+
+.. |GitHub_clexmonte| image:: _static/github-mark.png
+  :alt: Link to CASMcode_clexmonte GitHub repository
+  :width: 24
+.. _GitHub_clexmonte: https://github.com/prisms-center/CASMcode_clexmonte/
+
+.. |PyPI_clexmonte| image:: _static/python-logo-only.png
+  :alt: Link to libcasm-clexmonte PyPI package
+  :width: 20
+.. _PyPI_clexmonte: https://pypi.org/project/libcasm-clexmonte/
