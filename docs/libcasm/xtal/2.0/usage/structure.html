@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Structure construction and symmetry analysis &#8212; libcasm-xtal 2.0a10 documentation</title>
+    <title>Structure construction and symmetry analysis &#8212; libcasm-xtal 2.0a11 documentation</title>
   
   
   
@@ -39,13 +39,13 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=e2e896ca"></script>
+    <script src="../_static/documentation_options.js?v=469012d3"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/structure';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Prim Examples" href="../examples/prim/index.html" />
+    <link rel="next" title="Input and output" href="input_output.html" />
     <link rel="prev" title="Superlattice enumeration" href="superlattice.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -392,6 +392,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="prim.html">Primitive crystal structure construction and symmetry analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="superlattice.html">Superlattice enumeration</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Structure construction and symmetry analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
 </ul>
 </div>
 </nav></div>
@@ -628,8 +629,87 @@ document.write(`
 </section>
 <section id="structure-manipulation">
 <h2>Structure manipulation<a class="headerlink" href="#structure-manipulation" title="Link to this heading">#</a></h2>
+<section id="move-coordinates-within-the-unit-cell">
+<h3>Move coordinates within the unit cell<a class="headerlink" href="#move-coordinates-within-the-unit-cell" title="Link to this heading">#</a></h3>
 <p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_within.html#libcasm.xtal.make_structure_within" title="libcasm.xtal.make_structure_within"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_within()</span></code></a> method returns an equivalent <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="libcasm.xtal.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> with all atom and mol site coordinates within the unit cell.</p>
-<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_superstructure.html#libcasm.xtal.make_superstructure" title="libcasm.xtal.make_superstructure"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_superstructure()</span></code></a> method can be used to create super structures.</p>
+</section>
+<section id="make-a-superstructure">
+<h3>Make a superstructure<a class="headerlink" href="#make-a-superstructure" title="Link to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_superstructure.html#libcasm.xtal.make_superstructure" title="libcasm.xtal.make_superstructure"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_superstructure()</span></code></a> method can be used to create superstructures.</p>
+</section>
+<section id="apply-a-transformation-to-a-structure">
+<h3>Apply a transformation to a structure<a class="headerlink" href="#apply-a-transformation-to-a-structure" title="Link to this heading">#</a></h3>
+<p>Rotations and other transformations can be applied to a <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code> using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymOp.html#libcasm.xtal.SymOp" title="libcasm.xtal.SymOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymOp</span></code></a> class. For example, to rotate a structure by 90 degrees counterclockwise about the z-axis, a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymOp.html#libcasm.xtal.SymOp" title="libcasm.xtal.SymOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymOp</span></code></a> can be constructed with the rotation matrix and applied to the initial structure with the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">rotation_op</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">(</span><span class="n">rotation_matrix</span><span class="p">)</span>
+<span class="n">rotated_structure</span> <span class="o">=</span> <span class="n">rotation_op</span> <span class="o">*</span> <span class="n">structure</span>
+</pre></div>
+</div>
+</section>
+<section id="filter-or-sort-atoms-in-a-structure">
+<h3>Filter or sort atoms in a structure<a class="headerlink" href="#filter-or-sort-atoms-in-a-structure" title="Link to this heading">#</a></h3>
+<p>There are several methods provided in libcasm-xtal to help with filtering and sorting atoms in a <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.filter_structure_by_atom_info.html#libcasm.xtal.filter_structure_by_atom_info" title="libcasm.xtal.filter_structure_by_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_structure_by_atom_info()</span></code></a>: Filter atoms by atom type, coordinate, or properties.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_coordinate_cart.html#libcasm.xtal.sort_structure_by_atom_coordinate_cart" title="libcasm.xtal.sort_structure_by_atom_coordinate_cart"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_coordinate_cart()</span></code></a>: Sort atoms by Cartesian coordinates.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_coordinate_frac.html#libcasm.xtal.sort_structure_by_atom_coordinate_frac" title="libcasm.xtal.sort_structure_by_atom_coordinate_frac"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_coordinate_frac()</span></code></a>: Sort atoms by fractional coordinates.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_type.html#libcasm.xtal.sort_structure_by_atom_type" title="libcasm.xtal.sort_structure_by_atom_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_type()</span></code></a>: Sort atoms by type name.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_info.html#libcasm.xtal.sort_structure_by_atom_info" title="libcasm.xtal.sort_structure_by_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_info()</span></code></a>: Sort atoms by custom function of atom type, coordinate, or properties.</p></li>
+</ul>
+</section>
+<section id="substitute-species">
+<h3>Substitute species<a class="headerlink" href="#substitute-species" title="Link to this heading">#</a></h3>
+<p>The method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.substitute_structure_species.html#libcasm.xtal.substitute_structure_species" title="libcasm.xtal.substitute_structure_species"><code class="xref py py-func docutils literal notranslate"><span class="pre">substitute_structure_species()</span></code></a> can be used to quickly create a copy of a structure with atomic and molecular species renamed according to a dict containing the substitutions. For example, using <code class="docutils literal notranslate"><span class="pre">substitutions</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">&quot;A&quot;:</span> <span class="pre">&quot;Mg&quot;,</span> <span class="pre">&quot;B&quot;:</span> <span class="pre">&quot;Cd&quot;</span> <span class="pre">}</span></code> a generic A-B structure can be converted to a MgCd structure.</p>
+</section>
+<section id="combine-structures">
+<h3>Combine structures<a class="headerlink" href="#combine-structures" title="Link to this heading">#</a></h3>
+<p>The method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.combine_structures.html#libcasm.xtal.combine_structures" title="libcasm.xtal.combine_structures"><code class="xref py py-func docutils literal notranslate"><span class="pre">combine_structures()</span></code></a> can be used to make superstructures of two or more atomic substructures. The resulting structure contains the species of all input structures with Cartesian coordinates fixed to the same values as in the input structures. All atom or molecule properties remain the same as in the input structures.</p>
+</section>
+<section id="custom-manipulations">
+<h3>Custom manipulations<a class="headerlink" href="#custom-manipulations" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="libcasm.xtal.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> objects are immutable, so manipulations are performed by creating a copy.
+For atomic structures</p>
+<p>For atomic structures, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_atom_info.html#libcasm.xtal.make_structure_atom_info" title="libcasm.xtal.make_structure_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_atom_info()</span></code></a> and <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_from_atom_info.html#libcasm.xtal.make_structure_from_atom_info" title="libcasm.xtal.make_structure_from_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_from_atom_info()</span></code></a> methods can be used to:</p>
+<ul class="simple">
+<li><p>iterate over the atoms in one or more structures,</p></li>
+<li><p>perform some operation, and</p></li>
+<li><p>create a new structure.</p></li>
+</ul>
+<p>The method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_atom_info.html#libcasm.xtal.make_structure_atom_info" title="libcasm.xtal.make_structure_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_atom_info()</span></code></a> takes a structure and creates a list of <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.StructureAtomInfo.html#libcasm.xtal.StructureAtomInfo" title="libcasm.xtal.StructureAtomInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureAtomInfo</span></code></a> namedtuple which have atom type, coordinates, and properties. These can be iterated over, filterd, sorted, combined or otherwise manipulated and then passed to <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_from_atom_info.html#libcasm.xtal.make_structure_from_atom_info" title="libcasm.xtal.make_structure_from_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_from_atom_info()</span></code></a> to create a new structure.</p>
+<p>For example, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.combine_structures.html#libcasm.xtal.combine_structures" title="libcasm.xtal.combine_structures"><code class="xref py py-func docutils literal notranslate"><span class="pre">combine_structures()</span></code></a> method can be implemented as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.xtal</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">combine_structures</span><span class="p">(</span>
+    <span class="n">structures</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+    <span class="n">lattice</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">global_properties</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combine `structures` into a new `combined_structure`</span>
+<span class="sd">    with given `lattice` and `global_properties`.</span>
+<span class="sd">    If `lattice` is None, use the lattice of the first structure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">structures</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lattice</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lattice</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span>
+        <span class="n">atoms</span> <span class="o">+=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_atom_info</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_from_atom_info</span><span class="p">(</span>
+        <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span>
+        <span class="n">global_properties</span><span class="o">=</span><span class="n">global_properties</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -653,11 +733,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../examples/prim/index.html"
+       href="input_output.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Prim Examples</p>
+        <p class="prev-next-title">Input and output</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -682,7 +762,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-structures">Common structures</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-factor-group-generation">Structure factor group generation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crystal-point-group">Crystal point group</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-manipulation">Structure manipulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-manipulation">Structure manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#move-coordinates-within-the-unit-cell">Move coordinates within the unit cell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-superstructure">Make a superstructure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-a-transformation-to-a-structure">Apply a transformation to a structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-or-sort-atoms-in-a-structure">Filter or sort atoms in a structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitute-species">Substitute species</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-structures">Combine structures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-manipulations">Custom manipulations</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
