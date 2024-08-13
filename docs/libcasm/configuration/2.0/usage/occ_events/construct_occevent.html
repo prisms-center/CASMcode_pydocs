@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Occupation event basics &#8212; libcasm-configuration 2.0a4 documentation</title>
+    <title>Occupation event basics &#8212; libcasm-configuration 2.0a5 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../_static/documentation_options.js?v=23fe37a4"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/occ_events/construct_occevent';</script>
@@ -519,14 +519,18 @@ document.write(`
     <span class="k">assert</span> <span class="n">transformed_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
 </pre></div>
 </div>
-<p>A copy of an <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> can be constructed using <code class="docutils literal notranslate"><span class="pre">copy.deepcopy</span></code>:</p>
+<p>A copy of an <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> can be constructed using <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.copy.html#libcasm.occ_events.OccEvent.copy" title="libcasm.occ_events.OccEvent.copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">OccEvent.copy</span></code></a> or <code class="docutils literal notranslate"><span class="pre">copy.deepcopy</span></code>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
 
 <span class="c1"># in Python, assignment is not a copy</span>
 <span class="n">assigned_occ_event</span> <span class="o">=</span> <span class="n">occ_event</span>
 <span class="k">assert</span> <span class="n">assigned_occ_event</span> <span class="ow">is</span> <span class="n">occ_event</span>
 
-<span class="c1"># to create a copy, use copy.deepcopy</span>
+<span class="c1"># to create a copy, use OccEvent.copy</span>
+<span class="n">copied_occ_event</span> <span class="o">=</span> <span class="n">occ_event</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">copied_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
+
+<span class="c1"># or, use copy.deepcopy</span>
 <span class="n">copied_occ_event</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">occ_event</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">copied_occ_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">occ_event</span>
 </pre></div>

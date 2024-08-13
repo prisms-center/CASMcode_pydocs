@@ -100,7 +100,7 @@ Symmetry operations can be applied to :class:`~libcasm.occ_events.OccEvent` usin
         assert transformed_occ_event is not occ_event
 
 
-A copy of an :class:`~libcasm.occ_events.OccEvent` can be constructed using ``copy.deepcopy``:
+A copy of an :class:`~libcasm.occ_events.OccEvent` can be constructed using :func:`OccEvent.copy <libcasm.occ_events.OccEvent.copy>` or ``copy.deepcopy``:
 
 .. code-block:: Python
 
@@ -110,9 +110,14 @@ A copy of an :class:`~libcasm.occ_events.OccEvent` can be constructed using ``co
     assigned_occ_event = occ_event
     assert assigned_occ_event is occ_event
 
-    # to create a copy, use copy.deepcopy
+    # to create a copy, use OccEvent.copy
+    copied_occ_event = occ_event.copy()
+    assert copied_occ_event is not occ_event
+
+    # or, use copy.deepcopy
     copied_occ_event = copy.deepcopy(occ_event)
     assert copied_occ_event is not occ_event
+
 
 
 Comparing OccEvent
