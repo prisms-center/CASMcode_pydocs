@@ -13,7 +13,7 @@ Packages
 
 - **casm-python**:
 
-  - Reference: `[1.2] <../../python/1.2/>`_  `[1.0] <../../python/1.0/>`_ `[0.3] <../../python/0.3/>`_
+  - Reference: `[1.2] <../../casm/python/1.2/>`_  `[1.0] <../../casm/python/1.0/>`_ `[0.3] <../../casm/python/0.3/>`_
   - Repository: `CASMpython <https://github.com/prisms-center/CASMpython/>`_
   - Packages:
 
