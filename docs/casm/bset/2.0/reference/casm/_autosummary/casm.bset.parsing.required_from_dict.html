@@ -1,0 +1,840 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>required_from_dict &#8212; casm-bset 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/casm/_autosummary/casm.bset.parsing.required_from_dict';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="required_int_array_from_dict" href="casm.bset.parsing.required_int_array_from_dict.html" />
+    <link rel="prev" title="required_array_from_dict" href="casm.bset.parsing.required_array_from_dict.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">casm-bset</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_bset/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-bset/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_bset/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-bset/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="casm.bset.html">casm.bset</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="casm.bset.autoconfigure.html">autoconfigure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.bset.build_cluster_functions.html">build_cluster_functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.bset.make_clex_basis_specs.html">make_clex_basis_specs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.bset.write_clexulator.html">write_clexulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.bset.clexwriter.html">casm.bset.clexwriter</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.make_orbit_bfuncs.html">make_orbit_bfuncs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.make_site_bfuncs.html">make_site_bfuncs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.monomial_cpp_str.html">monomial_cpp_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.occ_delta_site_bfunc_cpp_str.html">occ_delta_site_bfunc_cpp_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.occ_func_cpp_str.html">occ_func_cpp_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.orbit_bfunc_cpp_str.html">orbit_bfunc_cpp_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.polynomial_sum_cpp_str.html">polynomial_sum_cpp_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.site_bfunc_cpp_str.html">site_bfunc_cpp_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.clexwriter.variable_cpp_str.html">variable_cpp_str</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.html">ClexulatorWriter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.write.html">write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.bset_dir.html">bset_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.version.html">version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.project_name.html">project_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.bset_name.html">bset_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.linear_function_indices.html">linear_function_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.cpp_fmt.html">cpp_fmt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.src_path.html">src_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.ClexulatorWriter.local_src_path.html">local_src_path</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.clexwriter.CppFormatProperties.html">CppFormatProperties</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.CppFormatProperties.coeff_fmt_spec.html">coeff_fmt_spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.CppFormatProperties.coeff_atol.html">coeff_atol</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.html">WriterV1Basic</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.template_name.html">template_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.variables.html">variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.clexulator_name.html">clexulator_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.prim_neighbor_list.html">prim_neighbor_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.occ_site_functions.html">occ_site_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.linear_function_indices.html">linear_function_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.cpp_fmt.html">cpp_fmt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.n_corr.html">n_corr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.complete_neighborhood.html">complete_neighborhood</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.function_neighborhoods.html">function_neighborhoods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.nlist_size.html">nlist_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.orbit_bfuncs.html">orbit_bfuncs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.orbit_bfuncs_variables_needed.html">orbit_bfuncs_variables_needed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.site_bfuncs.html">site_bfuncs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.site_bfuncs_variables_needed_at.html">site_bfuncs_variables_needed_at</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.n_point_corr_sites.html">n_point_corr_sites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.continuous_dof.html">continuous_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.clexwriter.WriterV1Basic.params.html">params</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.bset.cluster_functions.html">casm.bset.cluster_functions</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.get_occ_site_functions.html">get_occ_site_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_chebychev_site_functions.html">make_chebychev_site_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_cluster_dof_info.html">make_cluster_dof_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_cluster_matrix_rep.html">make_cluster_matrix_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_cluster_permutation_rep.html">make_cluster_permutation_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_cluster_variables.html">make_cluster_variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_composition_gram_matrix.html">make_composition_gram_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_composition_site_functions.html">make_composition_site_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_direct_site_functions.html">make_direct_site_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_equivalence_map_matrix_rep.html">make_equivalence_map_matrix_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_equivalence_map_site_rep.html">make_equivalence_map_site_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_equivalents_generators.html">make_equivalents_generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_global_dof_matrix_rep.html">make_global_dof_matrix_rep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_global_variables.html">make_global_variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_local_point_functions.html">make_local_point_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_neighborhood.html">make_neighborhood</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_occ_site_functions.html">make_occ_site_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_occevent_cluster_specs.html">make_occevent_cluster_specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_occupation_site_functions.html">make_occupation_site_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_orthonormal_discrete_functions.html">make_orthonormal_discrete_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_point_functions.html">make_point_functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.make_symop_inverse.html">make_symop_inverse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.cluster_functions.orbits_to_dict.html">orbits_to_dict</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.html">BasisFunctionSpecs</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.dof_specs.html">dof_specs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.dofs.html">dofs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.global_max_poly_order.html">global_max_poly_order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.orbit_branch_max_poly_order.html">orbit_branch_max_poly_order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.BasisFunctionSpecs.param_pack_type.html">param_pack_type</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.cluster_functions.ClexBasisSpecs.html">ClexBasisSpecs</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClexBasisSpecs.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClexBasisSpecs.is_periodic.html">is_periodic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClexBasisSpecs.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClexBasisSpecs.cluster_specs.html">cluster_specs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClexBasisSpecs.basis_function_specs.html">basis_function_specs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.html">ClusterFunctionsBuilder</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.basis_dict.html">basis_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalents_info_dict.html">equivalents_info_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.global_dof.html">global_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.local_continuous_dof.html">local_continuous_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.local_discrete_dof.html">local_discrete_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.only_discrete.html">only_discrete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.occ_site_functions.html">occ_site_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.prim_neighbor_list.html">prim_neighbor_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.prototype_basis_sets.html">prototype_basis_sets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.orbit_matrix_rep_builders.html">orbit_matrix_rep_builders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.constraints.html">constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.functions.html">functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.clusters.html">clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalent_functions.html">equivalent_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalent_clusters.html">equivalent_clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.html">ClusterMatrixRepBuilder</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.prim.html">prim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.generating_group.html">generating_group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.key.html">key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.cluster.html">cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.phenomenal.html">phenomenal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.dof_matrix_rep.html">dof_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.cluster_group.html">cluster_group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.cluster_perm_rep.html">cluster_perm_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.cluster_matrix_rep.html">cluster_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.variables.html">variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.variable_subsets.html">variable_subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.site_index_to_basis_index.html">site_index_to_basis_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.ClusterMatrixRepBuilder.total_dim.html">total_dim</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.html">OrbitMatrixRepBuilder</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.prim.html">prim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.generating_group.html">generating_group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.global_dof.html">global_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_continuous_dof.html">local_continuous_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_discrete_dof.html">local_discrete_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.occ_site_functions.html">occ_site_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_dof.html">local_dof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.orbit.html">orbit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.cluster_group.html">cluster_group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.equivalence_map_ops.html">equivalence_map_ops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.equivalence_map_indices.html">equivalence_map_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.equivalence_map_site_rep.html">equivalence_map_site_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.equivalence_map_clusters.html">equivalence_map_clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.phenomenal_generating_ops.html">phenomenal_generating_ops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.phenomenal_generating_indices.html">phenomenal_generating_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.phenomenal_generating_site_rep.html">phenomenal_generating_site_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.global_variables.html">global_variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.global_variable_subsets.html">global_variable_subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.global_matrix_rep.html">global_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.global_inv_matrix_rep.html">global_inv_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_prototype.html">local_prototype</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_equivalence_map_matrix_rep.html">local_equivalence_map_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_equivalence_map_inv_matrix_rep.html">local_equivalence_map_inv_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_phenomenal_generating_matrix_rep.html">local_phenomenal_generating_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.local_phenomenal_generating_inv_matrix_rep.html">local_phenomenal_generating_inv_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.prototype_matrix_rep.html">prototype_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.n_global_variables.html">n_global_variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.n_local_variables.html">n_local_variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.prototype_variables.html">prototype_variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.prototype_variable_subsets.html">prototype_variable_subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.equivalence_map_matrix_rep.html">equivalence_map_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.equivalence_map_inv_matrix_rep.html">equivalence_map_inv_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.phenomenal_generating_matrix_rep.html">phenomenal_generating_matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.cluster_functions.OrbitMatrixRepBuilder.phenomenal_generating_inv_matrix_rep.html">phenomenal_generating_inv_matrix_rep</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.bset.misc.html">casm.bset.misc</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.misc.almost_equal.html">almost_equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.misc.almost_int.html">almost_int</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.misc.almost_zero.html">almost_zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.misc.factor_by_mode.html">factor_by_mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.misc.irrational_to_tex_string.html">irrational_to_tex_string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.misc.signof.html">signof</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="casm.bset.parsing.html">casm.bset.parsing</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.parsing.optional_from_dict.html">optional_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.parsing.required_array_from_dict.html">required_array_from_dict</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">required_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.parsing.required_int_array_from_dict.html">required_int_array_from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.parsing.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.bset.polynomial_functions.html">casm.bset.polynomial_functions</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.gram_schmidt.html">gram_schmidt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.is_canonical_coord.html">is_canonical_coord</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.make_canonical_coord.html">make_canonical_coord</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.make_symmetry_adapted_polynomials.html">make_symmetry_adapted_polynomials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.monomial_exponents_to_tensor_coord.html">monomial_exponents_to_tensor_coord</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.monomial_inner_product.html">monomial_inner_product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.bset.polynomial_functions.tensor_coord_to_monomial_exponents.html">tensor_coord_to_monomial_exponents</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.polynomial_functions.ExponentSumConstraint.html">ExponentSumConstraint</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.ExponentSumConstraint.satisfied.html">satisfied</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.ExponentSumConstraint.variables.html">variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.ExponentSumConstraint.sum.html">sum</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.polynomial_functions.FunctionRep.html">FunctionRep</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.FunctionRep.matrix_rep.html">matrix_rep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.FunctionRep.sparse_matrix_rep.html">sparse_matrix_rep</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.html">PolynomialFunction</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.can_factor_by.html">can_factor_by</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.copy.html">copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.latex_formula.html">latex_formula</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.make_canonical.html">make_canonical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.monomials.html">monomials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.normalize.html">normalize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.order.html">order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.prune.html">prune</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.scalar_product.html">scalar_product</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.tensor_coords_to_monomial_exponents.html">tensor_coords_to_monomial_exponents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.zeros.html">zeros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.coeff.html">coeff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.variables.html">variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.monomial_exponents.html">monomial_exponents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.variable_subsets.html">variable_subsets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.PolynomialFunction.tol.html">tol</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.html">Variable</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.name.html">name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.key.html">key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.cluster_site_index.html">cluster_site_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.component_index.html">component_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.site_basis_function_index.html">site_basis_function_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.bset.polynomial_functions.Variable.neighborhood_site_index.html">neighborhood_site_index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">casm package</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="casm.bset.parsing.html" class="nav-link">casm.bset.parsing</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">required_from_dict</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="required-from-dict">
+<h1>required_from_dict<a class="headerlink" href="#required-from-dict" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="casm.bset.parsing.required_from_dict">
+<span class="sig-prename descclassname"><span class="pre">casm.bset.parsing.</span></span><span class="sig-name descname"><span class="pre">required_from_dict</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">required_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/casm/bset/parsing.html#required_from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#casm.bset.parsing.required_from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Parse required value using <cite>required_type.from_dict</cite> or raise</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Raises if <cite>option</cite> key not in <cite>data</cite> dictionary</p></li>
+<li><p>If <cite>required_type</cite> has a <cite>from_dict</cite> method, that is used and <cite>kwargs</cite> are passed
+through. Otherwise, <cite>dict.get</cite> is used and the value passed to the
+<cite>required_type</cite> constructor.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>required_type</strong> (<em>Any</em>) – The type of the value to be parsed.</p></li>
+<li><p><strong>data</strong> (<em>dict</em>) – The dictionary containing the value.</p></li>
+<li><p><strong>option</strong> (<em>str</em>) – The key in the dictionary containing the value.</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to be passed through to the <cite>from_dict</cite> method of
+<cite>required_type</cite>, if it exists.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> – A value of the required type.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>required_type</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="casm.bset.parsing.required_array_from_dict.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">required_array_from_dict</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="casm.bset.parsing.required_int_array_from_dict.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">required_int_array_from_dict</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#casm.bset.parsing.required_from_dict"><code class="docutils literal notranslate"><span class="pre">required_from_dict()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/casm/_autosummary/casm.bset.parsing.required_from_dict.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

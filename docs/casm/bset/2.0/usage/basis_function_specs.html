@@ -1,0 +1,1034 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Basis function specifications &#8212; casm-bset 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/basis_function_specs';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="casm package" href="../reference/casm/index.html" />
+    <link rel="prev" title="Quickstart" href="quick_start.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">casm-bset</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_bset/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-bset/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_bset/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-bset/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quickstart</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basis function specifications</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Basis...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="basis-function-specifications">
+<h1>Basis function specifications<a class="headerlink" href="#basis-function-specifications" title="Link to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../reference/casm/_autosummary/casm.bset.cluster_functions.BasisFunctionSpecs.html#casm.bset.cluster_functions.BasisFunctionSpecs" title="casm.bset.cluster_functions.BasisFunctionSpecs"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasisFunctionSpecs</span></code></a> class is used to specify the type and order of basis functions that CASM generates.</p>
+<section id="selection-of-degrees-of-freedom-dof">
+<h2>Selection of degrees of freedom (DoF)<a class="headerlink" href="#selection-of-degrees-of-freedom-dof" title="Link to this heading">#</a></h2>
+<p>By default, all DoF present in the prim are coupled. The <cite>dofs</cite> parameter allows
+specifying that only the given subset of DoFs should be included in the basis
+functions.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">casm.bset.cluster_functions</span> <span class="kn">import</span> <span class="n">BasisFunctionSpecs</span>
+
+<span class="n">basis_functions_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dofs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;occ&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dof-specifications">
+<span id="sec-dof-specifications"></span><h2>DoF specifications<a class="headerlink" href="#dof-specifications" title="Link to this heading">#</a></h2>
+<p>The occupation and magnetic spin DoF types require specific parameterization using the <cite>dof_specs</cite> parameter, which takes the form of a dictionary with keys corresponding to DoF types. For example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dof_spces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;occupation&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dof_spces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;NCmagspin&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;max_poly_order&quot;</span><span class="p">:</span> <span class="mi">5</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="occupation-site-basis-functions">
+<h2>Occupation site basis functions<a class="headerlink" href="#occupation-site-basis-functions" title="Link to this heading">#</a></h2>
+<section id="formulation">
+<h3>Formulation<a class="headerlink" href="#formulation" title="Link to this heading">#</a></h3>
+<p>For occupation DoF (“occ”), the <cite>dof_specs</cite> parameter is used to specify the value
+of the discrete site basis functions. The following is a summary of the formulation
+described in detail in <a class="reference external" href="todo">TODO</a>.</p>
+<p>The occupation site basis functions are specified in terms of the site occupation index, <span class="math notranslate nohighlight">\(s_\nu\)</span>, which takes on the values <span class="math notranslate nohighlight">\(0, 1, \dots, m-1\)</span>, where <span class="math notranslate nohighlight">\(m\)</span> is the number of allowed occupants on the site.</p>
+<p>It is convenient to define the particular choice of occupation site basis functions
+using occupation indicator functions, <span class="math notranslate nohighlight">\(p^j_\nu\)</span>, as a common reference. The
+occupation indicator functions take on value <span class="math notranslate nohighlight">\(1\)</span> when site <span class="math notranslate nohighlight">\(\nu\)</span> is
+occupied by the <span class="math notranslate nohighlight">\(j\)</span>-th allowed occupant, and <span class="math notranslate nohighlight">\(0\)</span> otherwise.</p>
+<p>For example, site <span class="math notranslate nohighlight">\(\nu\)</span> in a binary A-B alloy would have two indicator
+functions, <span class="math notranslate nohighlight">\(p^A_\nu\)</span> and <span class="math notranslate nohighlight">\(p^B_\nu\)</span>, though only one is independent, since
+<span class="math notranslate nohighlight">\(p^A_\nu + p^B_\nu = 1\)</span>. Similarly, a ternary A-B-C alloy would have <span class="math notranslate nohighlight">\(p^A_\nu + p^B_\nu + p^C_\nu = 1\)</span>.</p>
+<p>Generalizing, each site has a vector of indicator functions, <span class="math notranslate nohighlight">\(\vec{p}\)</span>, and
+we consider site basis functions <span class="math notranslate nohighlight">\(\vec{\varphi}\)</span> that can be linearly combined to give the indicator functions according to</p>
+<div class="math notranslate nohighlight">
+\[\vec{p} = \pmb{B} \vec{\varphi},\]</div>
+<p>with equivalent matrix representation</p>
+<div class="math notranslate nohighlight">
+\[\pmb{P} = \pmb{B} \pmb{\varphi},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pmb{P}\)</span> and <span class="math notranslate nohighlight">\(\pmb{\varphi}\)</span> are <span class="math notranslate nohighlight">\(m \times m\)</span> matrices with
+element <span class="math notranslate nohighlight">\(ij\)</span> being the value of the <span class="math notranslate nohighlight">\(i\)</span>-th function when the site
+occupation index is the <span class="math notranslate nohighlight">\(j\)</span>-th possible value. By definition, <span class="math notranslate nohighlight">\(\pmb{P}\)</span> is
+the <span class="math notranslate nohighlight">\(m \times m\)</span> identity matrix, and therefore
+<span class="math notranslate nohighlight">\(\pmb{B} = \left( \pmb{\varphi} \right)^{-1}\)</span>.</p>
+<p>Cluster expansion basis functions are then constructed as polynomials with the site basis
+functions, <span class="math notranslate nohighlight">\(\varphi_i\)</span>, at each site in the cluster included as variables.</p>
+<p class="rubric">Example, binary spin occupation variables</p>
+<p>A common choice for occupation variables in a binary alloy cluster expansion are
+<span class="math notranslate nohighlight">\(\varphi(A)=-1\)</span> and <span class="math notranslate nohighlight">\(\varphi(B)=1\)</span>. Using the above notation, this is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{P} = \begin{bmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{bmatrix},
+\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1\\
+-1 &amp; 1
+\end{bmatrix},\end{split}\]</div>
+<p>where the constant function <span class="math notranslate nohighlight">\(\varphi_1(s_j)=1\)</span> that allows cluster expansion
+is explicitly included and <span class="math notranslate nohighlight">\(\varphi_2(s_j)\)</span> is a site basis function
+with values equal to the spin occupation variables (<span class="math notranslate nohighlight">\(\varphi_2(A)=-1\)</span>, <span class="math notranslate nohighlight">\(\varphi_2(B)=1\)</span>).</p>
+<p class="rubric">Example, “occupation” site basis variables</p>
+<p>For a binary alloy, the “occupation” site basis variables take the form <span class="math notranslate nohighlight">\(\varphi(A)=0\)</span> and <span class="math notranslate nohighlight">\(\varphi(B)=1\)</span>. In general, using the above notation this becomes <span class="math notranslate nohighlight">\(\varphi_{1} = 1\)</span> and <span class="math notranslate nohighlight">\(\varphi_{i \neq 1}(s_j) = \delta_{ij}\)</span>. For a ternary alloy cluster expansion this is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{P} = \begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1\\
+\end{bmatrix},
+\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1 &amp; 1\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}.\end{split}\]</div>
+</section>
+<section id="symmetry">
+<h3>Symmetry<a class="headerlink" href="#symmetry" title="Link to this heading">#</a></h3>
+<p>The indicator variables transform under symmetry according to</p>
+<div class="math notranslate nohighlight" id="equation-indicator-transformation">
+<span class="eqno">(1)<a class="headerlink" href="#equation-indicator-transformation" title="Link to this equation">#</a></span>\[\left(\vec{p}_{\nu}\right)' = \pmb{M}_{b^{\ast}}(\hat{s}) \vec{p}_{\nu^{\ast}},\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{s}\)</span> is a space group operation</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{p}_{\nu^{\ast}}\)</span> is the vector of indicator variables on site <span class="math notranslate nohighlight">\(\nu^{\ast}\)</span>, which is on sublattice <span class="math notranslate nohighlight">\(b^{\ast}\)</span>, before transformation by <span class="math notranslate nohighlight">\(\hat{s}\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\left(\vec{p}_{\nu}\right)'\)</span> is the vector of indicator variables on site <span class="math notranslate nohighlight">\(\nu\)</span>, which is on sublattice <span class="math notranslate nohighlight">\(b\)</span>, after transformation by <span class="math notranslate nohighlight">\(\hat{s}\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{M}_{b^{\ast}}(\hat{s})\)</span> is the matrix representation of <span class="math notranslate nohighlight">\(\hat{s}\)</span> used to transform indicator variables occupying sites on sublattice <span class="math notranslate nohighlight">\(b^{\ast}\)</span>.</p></li>
+</ul>
+<p>The matrix representations <span class="math notranslate nohighlight">\(\pmb{M}_{b^{\ast}}(\hat{s})\)</span> for transforming indicator variables by factor group operations is determined when constructing a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Prim.html#libcasm.configuration.Prim" title="(in libcasm-configuration v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcasm.configuration.Prim</span></code></a> by transforming each allowed occupant on <span class="math notranslate nohighlight">\(b^{\ast}\)</span> and finding the permutation (if it exists) that results in the allowed occupants on <span class="math notranslate nohighlight">\(b\)</span>. These matrix representations can be accessed using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Prim.local_dof_matrix_rep.html#libcasm.configuration.Prim.local_dof_matrix_rep" title="(in libcasm-configuration v2.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Prim.local_dof_matrix_rep</span></code></a> with</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">local_dof_matrix_rep</span><span class="p">(</span><span class="s2">&quot;occ&quot;</span><span class="p">)[</span><span class="n">i_factor_group</span><span class="p">][</span><span class="n">i_sublat</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where <cite>i_factor_group</cite> is the index of the factor group operation that differs from <span class="math notranslate nohighlight">\(\hat{s}\)</span> by only a translation (i.e. index in <code class="docutils literal notranslate"><span class="pre">prim.factor_group.elements</span></code>), and <cite>i_sublat</cite> is the index of sublattice <span class="math notranslate nohighlight">\(b^{\ast}\)</span> (i.e. column index in <code class="docutils literal notranslate"><span class="pre">prim.xtal_prim.coordinate_frac()</span></code>).</p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{M}_{b^{\ast}}(\hat{s})\)</span> is a row permutation matrix. It permutes the rows of the column vector <span class="math notranslate nohighlight">\(\vec{p}_{b^{\ast}}\)</span> consistent with the order the transformed occupants are listed  as allowed occupants on the final site.</p></li>
+<li><p>The transpose of a permutation matrix is equal to its inverse.</p></li>
+<li><p>The inverse of a row permutation matrix is the column permutation matrix which permutes columns in the same cycle that the row permutation matrix permutes rows.</p></li>
+<li><p>Therefore, <span class="math notranslate nohighlight">\(\pmb{M}_{b^{\ast}}(\hat{s})^{\top}\)</span> is a column permutation matrix which can permute the columns of <span class="math notranslate nohighlight">\(\pmb{\varphi}_{b^{\ast}}\)</span> (which correspond to occupation index) to give symmetrically consistent site basis functions on <span class="math notranslate nohighlight">\(b\)</span> according to <span class="math notranslate nohighlight">\(\pmb{\varphi}_{b} = \pmb{\varphi}_{b^{\ast}} \pmb{M}_{b^{\ast}}(\hat{s})^{\top}\)</span>.</p></li>
+</ul>
+<p>Matrix representations, <span class="math notranslate nohighlight">\(\pmb{\tilde{M}}_{b^{\ast}}(\hat{s})\)</span>, for transforming site basis functions, <span class="math notranslate nohighlight">\(\vec{\varphi}\)</span>, can be determined in terms of <span class="math notranslate nohighlight">\(\pmb{M}_{b^{\ast}}(\hat{s})\)</span>. First, write <span class="math notranslate nohighlight">\(\vec{\varphi}\)</span> before and after transformation in terms of <span class="math notranslate nohighlight">\(\vec{p}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\vec{p}_{\nu^{\ast}} &amp;= \pmb{B}_{\nu^{\ast}} \vec{\varphi}_{\nu^{\ast}}, \\
+\left(\vec{p}_{\nu}\right)' &amp;= \pmb{B}_{\nu} \left(\vec{\varphi}_{\nu}\right)'.
+\end{align}\end{split}\]</div>
+<p>Then substitute into Eq. <a class="reference internal" href="#equation-indicator-transformation">(1)</a> to obtain</p>
+<div class="math notranslate nohighlight">
+\[\pmb{B}_{\nu} \left(\vec{\varphi}_{\nu}\right)' = \pmb{M}_{b^{\ast}}(\hat{s}) \pmb{B}_{\nu^{\ast}} \vec{\varphi}_{\nu^{\ast}}.\]</div>
+<p>Finally, left multiply by <span class="math notranslate nohighlight">\(\pmb{B}_{\nu}^{-1}\)</span> and use <span class="math notranslate nohighlight">\(\pmb{B} = \left( \pmb{\varphi} \right)^{-1}\)</span> to obtain</p>
+<div class="math notranslate nohighlight" id="equation-occ-site-func-transformation">
+<span class="eqno">(2)<a class="headerlink" href="#equation-occ-site-func-transformation" title="Link to this equation">#</a></span>\[\begin{split}\begin{align}
+\left(\vec{\varphi}_{\nu}\right)' &amp;= \pmb{\tilde{M}}_{b^{\ast}}(\hat{s}) \vec{\varphi}_{\nu^{\ast}}, \\
+\pmb{\tilde{M}}_{b^{\ast}}(\hat{s}) &amp;= \pmb{\varphi}_{\nu} \pmb{M}_{b^{\ast}}(\hat{s}) \pmb{\varphi}_{\nu^{\ast}}^{-1}.
+\end{align}\end{split}\]</div>
+</section>
+<section id="specification">
+<h3>Specification<a class="headerlink" href="#specification" title="Link to this heading">#</a></h3>
+<section id="chebychev-occupation-site-basis-functions">
+<h4>Chebychev occupation site basis functions<a class="headerlink" href="#chebychev-occupation-site-basis-functions" title="Link to this heading">#</a></h4>
+<p>Chebychev site basis functions give an expansion (with correlation values all equal to <cite>0</cite>) about the idealized random alloy where the probability of any of the allowed occupants on a particular site is the same. This choice of occupation site basis functions can be specified with:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;chebychev&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For a binary alloy, the Chebychev site basis functions used by CASM have the value:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1\\
+-1 &amp; 1
+\end{bmatrix}.\end{split}\]</div>
+<p>For a ternary alloy, the Chebychev site basis functions used by CASM have the value:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1 &amp; 1\\
+-3/\sqrt{6} &amp; 0 &amp; -3/\sqrt{6} \\
+-\sqrt{2}/2 &amp; \sqrt{2} &amp; -\sqrt{2}/2
+\end{bmatrix}.\end{split}\]</div>
+</section>
+<section id="id1">
+<h4>Occupation site basis functions<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>The “occupation” site basis functions give an expansion (with correlation values all equal to <cite>0</cite>) about the default configuration where each site is occupied by the first allowed occupant in the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.occ_dof.html#libcasm.xtal.Prim.occ_dof" title="(in libcasm-xtal v2.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Prim.occ_dof</span></code></a> list. This choice of occupation site basis functions can be specified with:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;occupation&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For a binary alloy, the “occupation” site basis functions used by CASM have the value:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1\\
+0 &amp; 1
+\end{bmatrix}.\end{split}\]</div>
+<p>For a ternary alloy, the “occupation” site basis functions used by CASM have the value:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1 &amp; 1\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}.\end{split}\]</div>
+</section>
+<section id="composition-centered-site-basis-functions">
+<h4>Composition-centered site basis functions<a class="headerlink" href="#composition-centered-site-basis-functions" title="Link to this heading">#</a></h4>
+<p>The composition-centered site basis functions give an expansion (with correlation values all equal to <cite>0</cite>) for the idealized random configuration with a particular composition on each sublattice. The formulation is described in the documentation for the function <a class="reference internal" href="../reference/casm/_autosummary/casm.bset.cluster_functions.make_orthonormal_discrete_functions.html#casm.bset.cluster_functions.make_orthonormal_discrete_functions" title="casm.bset.cluster_functions.make_orthonormal_discrete_functions"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_orthonormal_discrete_functions()</span></code></a>. The sublattice compositions can be specified using an array of dict, with the attributes:</p>
+<ul class="simple">
+<li><p>“composition”: dict[str, float], Species the sublattice composition, using the
+the occupant names as keys (matching the prim occupants dictionary,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">occupants()</span></code>), and sublattice composition as values. The
+values on a sublattice must sum to 1.0.</p></li>
+<li><p>“sublat_indices”: list[int], Specifies the sublattices for which the composition
+values apply.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="s2">&quot;composition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">},</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                    <span class="s2">&quot;composition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Only one sublattice in each asymmetric unit with &gt;1 allowed occupant is required to be given. The specified composition is used to construct discrete basis functions on one site and then symmetry is used to construct an equivalent basis on other sites in the asymmetric unit.</p>
+<p>For anisotropic occupants there may be multiple ways consistent with the prim factor group to construct the site basis functions on other sites (i.e. the choice of which spin state or molecular orientation of an occupant gets site basis function values of -1 or +1 may be arbitrary as long as it is done consistently). The particular choice made is based on the order in which symmetry operations are sorted in the prim factor group and should be consistent for a particular choice of prim.</p>
+<p>An exception will be raised if sublattices in different asymmetric units are incorrectly grouped, or if no site is given for an asymmetric unit with &gt;1 allowed occupant.</p>
+</section>
+<section id="directly-set-site-basis-functions">
+<h4>Directly-set site basis functions<a class="headerlink" href="#directly-set-site-basis-functions" title="Link to this heading">#</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>With this method it is possible to incorrectly use site basis functions
+that are not consistent with the symmetry of the prim. It should be
+considered a feature for developers and advanced users who understand
+how to check the results.</p>
+</div>
+<p>The site basis functions can be directly specified on each sublattice using an array of dict, with the attributes:</p>
+<ul class="simple">
+<li><p>“value”: list[list[float], Species the site basis function values, <span class="math notranslate nohighlight">\(\varphi_{ms}\)</span>,
+where the row index, <span class="math notranslate nohighlight">\(m\)</span>, corresponds to a function index, and the column, <span class="math notranslate nohighlight">\(s\)</span>,
+is the site occupation index. One row must be the vector of ones.</p></li>
+<li><p>“sublat_indices”: list[int], Specifies the sublattices for which the site basis
+function values apply.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                    <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="magnetic-spin-site-basis-functions">
+<h3>Magnetic spin site basis functions<a class="headerlink" href="#magnetic-spin-site-basis-functions" title="Link to this heading">#</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>DoF specs as described in this section are planned but not yet implemented.</p>
+</div>
+<p>For magnetic spin DoF (“&lt;flavor&gt;magspin”), the <cite>dof_specs</cite> parameter is used to
+specify the maximum order of spherical harmonic site basis functions.</p>
+<p>CASM generates spherical harmonic site basis functions of magnetic spin
+continuous DoFs. The maximum polynomial order of the site basis functions is given by the
+<cite>max_poly_order</cite> parameter.</p>
+<p>Example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;NCmagspin&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;max_poly_order&quot;</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="maximum-polynomial-order">
+<h2>Maximum polynomial order<a class="headerlink" href="#maximum-polynomial-order" title="Link to this heading">#</a></h2>
+<p>By default, for a given cluster orbit, polynomials of order up to the
+cluster size are created. For functions of continuous degrees of freedom (DoF),
+higher order polynomials are usually necessary and can be requested either on a
+per-orbit-branch or global basis, where an “orbit branch” is the set of cluster
+orbits with the same number of sites per cluster. The most specific level specified
+is used. Orbit branches are specified using the string value of the cluster
+size as a key.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<section id="occupation-dof">
+<h3>Occupation DoF<a class="headerlink" href="#occupation-dof" title="Link to this heading">#</a></h3>
+<section id="example-chebychev-site-basis-functions">
+<h4>Example: Chebychev site basis functions<a class="headerlink" href="#example-chebychev-site-basis-functions" title="Link to this heading">#</a></h4>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;chebychev&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-occupation-site-basis-functions">
+<h4>Example: Occupation site basis functions<a class="headerlink" href="#example-occupation-site-basis-functions" title="Link to this heading">#</a></h4>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;occupation&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-composition-centered-site-basis-functions">
+<h4>Example: Composition-centered site basis functions<a class="headerlink" href="#example-composition-centered-site-basis-functions" title="Link to this heading">#</a></h4>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="s2">&quot;composition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">},</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                    <span class="s2">&quot;composition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-directly-set-site-basis-function-values">
+<h4>Example: Directly set site basis function values<a class="headerlink" href="#example-directly-set-site-basis-function-values" title="Link to this heading">#</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>With this method it is possible to incorrectly use site basis functions
+that are not consistent with the symmetry of the prim. It should be
+considered a feature for developers and advanced users who understand
+how to check the results.</p>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                    <span class="p">]</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sublat_indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="strain-dof">
+<h3>Strain DoF<a class="headerlink" href="#strain-dof" title="Link to this heading">#</a></h3>
+<section id="example-hencky-strain-dof">
+<h4>Example: Hencky strain DoF<a class="headerlink" href="#example-hencky-strain-dof" title="Link to this heading">#</a></h4>
+<p>With maximum polynomial order 5:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">max_poly_order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="strain-and-occupation-dof">
+<h3>Strain and occupation DoF<a class="headerlink" href="#strain-and-occupation-dof" title="Link to this heading">#</a></h3>
+<section id="example-coupled-strain-and-occupation-dof-1">
+<h4>Example: Coupled strain and occupation DoF (1)<a class="headerlink" href="#example-coupled-strain-and-occupation-dof-1" title="Link to this heading">#</a></h4>
+<p>With:</p>
+<ul class="simple">
+<li><p>“occupation” site basis functions for the discrete occupants</p></li>
+<li><p>maximum polynomial order 5, which includes both strain and discrete DoF variables
+for the cluster functions.</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dofs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;occ&quot;</span><span class="p">],</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;occupation&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">global_max_poly_order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-coupled-strain-and-occupation-dof-2">
+<h4>Example: Coupled strain and occupation DoF (2)<a class="headerlink" href="#example-coupled-strain-and-occupation-dof-2" title="Link to this heading">#</a></h4>
+<p>With:</p>
+<ul class="simple">
+<li><p>“occupation” site basis functions for the discrete occupants</p></li>
+<li><p>global maximum polynomial order 5, which includes both strain and discrete DoF variables
+for the cluster functions.</p></li>
+<li><p>point- and pair-cluster branch maximum polynomial order 7,</p></li>
+<li><p>null-cluster (strain-only) maximum polynomial order 8.</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dofs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;occ&quot;</span><span class="p">],</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="s2">&quot;occupation&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">global_max_poly_order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">orbit_branch_max_poly_order</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="quick_start.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quickstart</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../reference/casm/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">casm package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-of-degrees-of-freedom-dof">Selection of degrees of freedom (DoF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dof-specifications">DoF specifications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#occupation-site-basis-functions">Occupation site basis functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation">Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry">Symmetry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">Specification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chebychev-occupation-site-basis-functions">Chebychev occupation site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Occupation site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-centered-site-basis-functions">Composition-centered site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#directly-set-site-basis-functions">Directly-set site basis functions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-spin-site-basis-functions">Magnetic spin site basis functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-polynomial-order">Maximum polynomial order</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupation-dof">Occupation DoF</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-chebychev-site-basis-functions">Example: Chebychev site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-occupation-site-basis-functions">Example: Occupation site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-composition-centered-site-basis-functions">Example: Composition-centered site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-directly-set-site-basis-function-values">Example: Directly set site basis function values</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strain-dof">Strain DoF</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-hencky-strain-dof">Example: Hencky strain DoF</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strain-and-occupation-dof">Strain and occupation DoF</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-coupled-strain-and-occupation-dof-1">Example: Coupled strain and occupation DoF (1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-coupled-strain-and-occupation-dof-2">Example: Coupled strain and occupation DoF (2)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/usage/basis_function_specs.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,2092 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_cluster_functions';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">casm-bset</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_bset/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-bset/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_bset/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-bset/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">casm.bset.cl...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for casm.bset.cluster_functions._cluster_functions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">casmclust</span>
+<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
+<span class="kn">import</span> <span class="nn">libcasm.configuration.io</span> <span class="k">as</span> <span class="nn">config_io</span>
+<span class="kn">import</span> <span class="nn">libcasm.sym_info</span> <span class="k">as</span> <span class="nn">sym_info</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._discrete_functions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_occ_site_functions</span><span class="p">,</span>
+    <span class="n">make_occ_site_functions</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._matrix_rep</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._misc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">orbits_to_dict</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">casm.bset.polynomial_functions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ExponentSumConstraint</span><span class="p">,</span>
+    <span class="n">FunctionRep</span><span class="p">,</span>
+    <span class="n">PolynomialFunction</span><span class="p">,</span>
+    <span class="n">Variable</span><span class="p">,</span>
+    <span class="n">make_symmetry_adapted_polynomials</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PrimNeighborList</span><span class="p">,</span>
+    <span class="n">make_default_prim_neighbor_list</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">._clex_basis_specs</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ClexBasisSpecs</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_dof_types</span><span class="p">(</span>
+    <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">dofs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a list of dofs, make lists of which are global, local continuous, and local</span>
+<span class="sd">    discrete.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xtal_prim: xtal.Prim</span>
+<span class="sd">        The Prim</span>
+<span class="sd">    dofs: Optional[Iterable[str]] = None</span>
+<span class="sd">        An iterable of string of dof type names that should be used to construct basis</span>
+<span class="sd">        functions. The default value is all DoF types included in the prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    (global_dof, local_continuous_dof, local_discrete_dof):</span>
+
+<span class="sd">        global_dof: list[str]</span>
+<span class="sd">            The types of global degree of freedom (DoF). All global DoF are treated</span>
+<span class="sd">            as continuous.</span>
+
+<span class="sd">        local_continuous_dof: list[str]</span>
+<span class="sd">            The types of local discrete degree of freedom (DoF).</span>
+
+<span class="sd">        local_discrete_dof: list[str]</span>
+<span class="sd">            The types of local discrete degree of freedom (DoF).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">all_global_dof</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_global_dof</span> <span class="ow">in</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">global_dof</span><span class="p">():</span>
+        <span class="n">all_global_dof</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_global_dof</span><span class="o">.</span><span class="n">dofname</span><span class="p">())</span>
+
+    <span class="n">all_local_continuous_dof</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_sublattice_dof</span> <span class="ow">in</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">local_dof</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">_local_dof</span> <span class="ow">in</span> <span class="n">_sublattice_dof</span><span class="p">:</span>
+            <span class="n">all_local_continuous_dof</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_local_dof</span><span class="o">.</span><span class="n">dofname</span><span class="p">())</span>
+
+    <span class="c1"># TODO: support other local discrete dof</span>
+    <span class="n">all_local_discrete_dof</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_occ_dof</span> <span class="ow">in</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_occ_dof</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">all_local_discrete_dof</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;occ&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dofs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">global_dof</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_global_dof</span><span class="p">)</span>
+        <span class="n">local_continuous_dof</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_local_continuous_dof</span><span class="p">)</span>
+        <span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_local_discrete_dof</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">global_dof</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">local_continuous_dof</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_dofname</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_dofname</span> <span class="ow">in</span> <span class="n">all_global_dof</span><span class="p">:</span>
+                <span class="n">global_dof</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_dofname</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">_dofname</span> <span class="ow">in</span> <span class="n">all_local_continuous_dof</span><span class="p">:</span>
+                <span class="n">local_continuous_dof</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_dofname</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">_dofname</span> <span class="ow">in</span> <span class="n">all_local_discrete_dof</span><span class="p">:</span>
+                <span class="n">local_discrete_dof</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_dofname</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in _get_dof_types: Unknown dof &#39;</span><span class="si">{</span><span class="n">_dofname</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">global_dof</span><span class="p">,</span> <span class="n">local_continuous_dof</span><span class="p">,</span> <span class="n">local_discrete_dof</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_default_nlist_sublat_indices</span><span class="p">(</span>
+    <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Default sublattice indices for PrimNeighborList</span>
+
+<span class="sd">    Typically, sublattices are included in the neighbor list if they have allowed DoF,</span>
+<span class="sd">    either &gt;1 occupant DoF allowed, or 1 continuous DoF.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xtal_prim: xtal.Prim</span>
+<span class="sd">        The Prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    sublat_indices: list[int]</span>
+<span class="sd">        The indices of the sublattices that should be included in the neighbor list.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sublat_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">occ_dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">sublattice_occ_dof</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">occ_dof</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sublattice_occ_dof</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">sublat_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">local_dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">local_dof</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">sublattice_local_dof</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">local_dof</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sublattice_local_dof</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sublat_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">sublat_indices</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_make_orbits_data</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">clex_basis_specs</span><span class="p">:</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span>
+    <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
+    <span class="n">functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]]],</span>
+    <span class="n">coordinate_mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+    <span class="n">cluster_specs</span> <span class="o">=</span> <span class="n">clex_basis_specs</span><span class="o">.</span><span class="n">cluster_specs</span>
+    <span class="k">if</span> <span class="n">xtal_prim</span> <span class="o">!=</span> <span class="n">cluster_specs</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in ClusterFunctionsBuilder.basis_dict: &quot;</span>
+            <span class="s2">&quot;Prim and cluster specs have different xtal_prim.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in ClusterFunctionsBuilder.basis_dict: &quot;</span>
+            <span class="s2">&quot;This method requires a null cluster orbit.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_brief_desc</span><span class="p">(</span><span class="n">op</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">sym_info</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymInfo</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">coordinate_mode</span> <span class="o">==</span> <span class="s2">&quot;cart&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">brief_cart</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">coordinate_mode</span> <span class="o">==</span> <span class="s2">&quot;frac&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">brief_frac</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Error in ClusterFunctionsBuilder.basis_dict: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Unknown coordinate_mode: </span><span class="si">{</span><span class="n">coordinate_mode</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="s2">&quot;must be &#39;cart&#39; or &#39;frac&#39;.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="n">is_periodic</span> <span class="o">=</span> <span class="n">cluster_specs</span><span class="o">.</span><span class="n">phenomenal</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="n">generating_group_site_rep</span> <span class="o">=</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">make_integral_site_coordinate_symgroup_rep</span><span class="p">(</span>
+        <span class="n">group_elements</span><span class="o">=</span><span class="n">cluster_specs</span><span class="o">.</span><span class="n">generating_group</span><span class="p">()</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+        <span class="n">xtal_prim</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">orbits_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">linear_function_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i_orbit</span><span class="p">,</span> <span class="n">orbit_functions</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+        <span class="n">orbit</span> <span class="o">=</span> <span class="n">clusters</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">]</span>
+        <span class="n">prototype</span> <span class="o">=</span> <span class="n">orbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">is_periodic</span><span class="p">:</span>
+            <span class="n">cluster_group</span> <span class="o">=</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">make_cluster_group</span><span class="p">(</span>
+                <span class="n">cluster</span><span class="o">=</span><span class="n">prototype</span><span class="p">,</span>
+                <span class="n">group</span><span class="o">=</span><span class="n">cluster_specs</span><span class="o">.</span><span class="n">generating_group</span><span class="p">(),</span>
+                <span class="n">lattice</span><span class="o">=</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+                <span class="n">integral_site_coordinate_symgroup_rep</span><span class="o">=</span><span class="n">generating_group_site_rep</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cluster_group</span> <span class="o">=</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">make_local_cluster_group</span><span class="p">(</span>
+                <span class="n">cluster</span><span class="o">=</span><span class="n">prototype</span><span class="p">,</span>
+                <span class="n">phenomenal_group</span><span class="o">=</span><span class="n">cluster_specs</span><span class="o">.</span><span class="n">generating_group</span><span class="p">(),</span>
+                <span class="n">integral_site_coordinate_symgroup_rep</span><span class="o">=</span><span class="n">generating_group_site_rep</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">orbit_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;linear_orbit_index&quot;</span><span class="p">:</span> <span class="n">i_orbit</span><span class="p">,</span>
+            <span class="s2">&quot;mult&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">),</span>
+            <span class="s2">&quot;prototype&quot;</span><span class="p">:</span> <span class="n">orbit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span>
+                <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">phenomenal</span><span class="o">=</span><span class="n">cluster_specs</span><span class="o">.</span><span class="n">phenomenal</span><span class="p">()</span>
+            <span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">orbit_data</span><span class="p">[</span><span class="s2">&quot;prototype&quot;</span><span class="p">][</span><span class="s2">&quot;invariant_group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_group</span><span class="o">.</span><span class="n">head_group_index</span>
+        <span class="n">orbit_data</span><span class="p">[</span><span class="s2">&quot;prototype&quot;</span><span class="p">][</span><span class="s2">&quot;invariant_group_descriptions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">_brief_desc</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">cluster_group</span><span class="o">.</span><span class="n">elements</span>
+        <span class="p">]</span>
+
+        <span class="n">cluster_functions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prototype</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># add constant function</span>
+            <span class="n">cluster_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">Phi_</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;linear_function_index&quot;</span><span class="p">:</span> <span class="n">linear_function_index</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+            <span class="n">linear_function_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i_func</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">cluster_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">Phi_</span><span class="se">{{</span><span class="si">{</span><span class="n">linear_function_index</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="n">latex_formula</span><span class="p">(),</span>
+                        <span class="s2">&quot;linear_function_index&quot;</span><span class="p">:</span> <span class="n">linear_function_index</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+                <span class="n">linear_function_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">orbit_data</span><span class="p">[</span><span class="s2">&quot;cluster_functions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_functions</span>
+        <span class="n">orbits_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">orbits_data</span>
+
+
+<span class="k">def</span> <span class="nf">_make_occ_site_function_basis_data</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">occ_site_function</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate basis dict for an occupation site basis function</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim: casmconfig.Prim</span>
+<span class="sd">        The Prim</span>
+<span class="sd">    occ_site_function: dict</span>
+<span class="sd">        Occupation site basis function values, must include:</span>
+
+<span class="sd">        - `&quot;sublattice_index&quot;`: int, index of the sublattice</span>
+<span class="sd">        - `&quot;value&quot;`: list[list[float]], list of the site basis function values,</span>
+<span class="sd">          as ``value[function_index][occupant_index]``.</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data: dict</span>
+<span class="sd">        A dict with the format:</span>
+
+<span class="sd">        .. code-block:: Python</span>
+
+<span class="sd">            # b: sublattice index,</span>
+<span class="sd">            # r: site basis function index</span>
+<span class="sd">            # occ1, occ2, etc.: Occupant DoF names, from prim.xtal_prim.occ_dof()[b]</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;basis&quot;: {</span>
+<span class="sd">                    &quot;\\phi_{b,f}&quot;: {</span>
+<span class="sd">                        &quot;occ1&quot;: value1,</span>
+<span class="sd">                        &quot;occ2&quot;: value2,</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;value&quot;: [</span>
+<span class="sd">                    [value1, value2, ...],</span>
+<span class="sd">                    ...</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">occ_site_function</span><span class="p">[</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">]</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">occ_site_function</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+    <span class="n">occ_dof</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">()[</span><span class="n">b</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">occ_dof</span><span class="p">)</span> <span class="o">!=</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">occ_dof</span><span class="p">)</span> <span class="o">!=</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in _make_occ_site_function_basis_data: &quot;</span>
+            <span class="s2">&quot;Inconsistent number of site basis functions or occupants. &quot;</span>
+            <span class="s2">&quot;Sublattice index: </span><span class="si">{b}</span><span class="s2">; Phi shape = </span><span class="si">{phi.shape}</span><span class="s2">; &quot;</span>
+        <span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">phi</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_</span><span class="se">{{</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">occ_dof</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;basis&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="k">def</span> <span class="nf">_make_site_functions_data</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">occ_site_functions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate basis dict for site functions</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim: casmconfig.Prim</span>
+<span class="sd">        The Prim</span>
+<span class="sd">    occ_site_functions: Optional[list[dict]]</span>
+<span class="sd">        List of occupation site basis functions. For each sublattice with discrete</span>
+<span class="sd">        site basis functions, must include:</span>
+
+<span class="sd">        - `&quot;sublattice_index&quot;`: int, index of the sublattice</span>
+<span class="sd">        - `&quot;value&quot;`: list[list[float]], list of the site basis function values,</span>
+<span class="sd">          as ``value[function_index][occupant_index]``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data: list[dict]</span>
+<span class="sd">        List of site functions data, with the format:</span>
+
+<span class="sd">        .. code-block:: Python</span>
+
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;sublat&quot;: b,  # sublattice index</span>
+<span class="sd">                    &quot;asym_unit&quot;: a,  # asymmetric unit index</span>
+<span class="sd">                    &quot;occ&quot;: { # if discrete site basis functions are present</span>
+<span class="sd">                        &quot;basis&quot;: {</span>
+<span class="sd">                            &quot;\\phi_{b,f}&quot;: {</span>
+<span class="sd">                                &quot;occ1&quot;: value1,</span>
+<span class="sd">                                &quot;occ2&quot;: value2,</span>
+<span class="sd">                                ...</span>
+<span class="sd">                            },</span>
+<span class="sd">                            ...</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;value&quot;: [</span>
+<span class="sd">                            [value1, value2, ...],</span>
+<span class="sd">                            ...</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                ...</span>
+<span class="sd">            ]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sublat_to_asym_unit</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">sublat_indices</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">asymmetric_unit_indices</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">sublat_indices</span><span class="p">:</span>
+            <span class="n">sublat_to_asym_unit</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+
+    <span class="n">site_functions_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;sublat&quot;</span><span class="p">:</span> <span class="n">b</span><span class="p">,</span> <span class="s2">&quot;asym_unit&quot;</span><span class="p">:</span> <span class="n">a</span><span class="p">}</span> <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">sublat_to_asym_unit</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">occ_site_functions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">occ_site_function</span> <span class="ow">in</span> <span class="n">occ_site_functions</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">occ_site_function</span><span class="p">[</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">]</span>
+            <span class="n">site_functions_data</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="s2">&quot;occ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_make_occ_site_function_basis_data</span><span class="p">(</span>
+                <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span> <span class="n">occ_site_function</span><span class="o">=</span><span class="n">occ_site_function</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">site_functions_data</span>
+
+
+<span class="k">def</span> <span class="nf">assign_neighborhood_site_index</span><span class="p">(</span>
+    <span class="n">cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
+    <span class="n">function</span><span class="p">:</span> <span class="n">PolynomialFunction</span><span class="p">,</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
+    <span class="n">translation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assign neighborhood_site_index for function variables</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cluster: libcasm.clusterography.Cluster</span>
+<span class="sd">        The cluster associated with the function</span>
+<span class="sd">    function: casm.bset.polynomial_functions.PolynomialFunction</span>
+<span class="sd">        A PolynomialFunction with variables that have cluster_site_index set</span>
+<span class="sd">        referring to which site in `cluster` they are associated with.</span>
+<span class="sd">    prim_neighbor_list: libcasm.clexulator.PrimNeighborList</span>
+<span class="sd">        The neighbor list</span>
+<span class="sd">    translation: Optional[np.ndarray],</span>
+<span class="sd">        Optional translation to apply to cluster.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">function</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">integral_site_coordinate</span> <span class="o">=</span> <span class="n">cluster</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">translation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">integral_site_coordinate</span> <span class="o">=</span> <span class="n">integral_site_coordinate</span> <span class="o">+</span> <span class="n">translation</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span> <span class="o">=</span> <span class="n">prim_neighbor_list</span><span class="o">.</span><span class="n">neighbor_index</span><span class="p">(</span>
+                <span class="n">integral_site_coordinate</span>
+            <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_equivalent_cluster_basis_sets</span><span class="p">(</span>
+    <span class="n">prototype_cluster_basis_set</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>
+    <span class="n">equivalence_map_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
+    <span class="n">equivalence_map_inv_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">i_orbit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]]]:</span>
+    <span class="n">orbit</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># generate basis sets on all equivalent clusters</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating equivalents...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+    <span class="c1"># i_equiv: index for equivalent clusters</span>
+    <span class="c1"># M_list: sym rep matrices (1 for each sym op that prototype cluster to</span>
+    <span class="c1">#     the equivalent cluster, only the first is needed here)</span>
+    <span class="k">for</span> <span class="n">i_equiv</span><span class="p">,</span> <span class="n">M_list</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">equivalence_map_inv_matrix_rep</span><span class="p">):</span>
+        <span class="c1"># add equivalent cluster to orbit of clusters</span>
+        <span class="n">equiv_cluster</span> <span class="o">=</span> <span class="n">equivalence_map_clusters</span><span class="p">[</span><span class="n">i_equiv</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">orbit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_cluster</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~~~ i_orbit: </span><span class="si">{</span><span class="n">i_orbit</span><span class="si">}</span><span class="s2">, i_equiv: </span><span class="si">{</span><span class="n">i_equiv</span><span class="si">}</span><span class="s2"> ~~~&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent cluster:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">equiv_cluster</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># add basis set for equivalent cluster to orbit of basis sets</span>
+        <span class="n">equiv_basis_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">f_prototype</span> <span class="ow">in</span> <span class="n">prototype_cluster_basis_set</span><span class="p">:</span>
+            <span class="n">M</span> <span class="o">=</span> <span class="n">M_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">FunctionRep</span><span class="p">(</span><span class="n">matrix_rep</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
+            <span class="n">f_equiv</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">f_prototype</span>
+            <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                <span class="n">cluster</span><span class="o">=</span><span class="n">equiv_cluster</span><span class="p">,</span>
+                <span class="n">function</span><span class="o">=</span><span class="n">f_equiv</span><span class="p">,</span>
+                <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">)):</span>
+                <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">equiv_basis_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_equiv</span><span class="p">)</span>
+        <span class="n">orbit_basis_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent cluster basis set:&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i_func</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~~~ order: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="n">order</span><span class="p">()</span><span class="si">}</span><span class="s2">, function_index: </span><span class="si">{</span><span class="n">i_func</span><span class="si">}</span><span class="s2"> ~~~&quot;</span><span class="p">)</span>
+                <span class="n">func</span><span class="o">.</span><span class="n">_basic_print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">orbit</span><span class="p">,</span> <span class="n">orbit_basis_sets</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_constraints</span><span class="p">(</span>
+    <span class="n">prototype_cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
+    <span class="n">prototype_variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span>
+    <span class="n">prototype_variable_subsets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+    <span class="n">occ_site_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make constraints for constructing symmetry adapted polynomials</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prototype_cluster: libcasm.clusterography.Cluster</span>
+<span class="sd">        The prototype cluster.</span>
+<span class="sd">    prototype_variables: list[casm.bset.polynomial_functions.Variable]</span>
+<span class="sd">        The prototype cluster function variables, including global and local variables.</span>
+<span class="sd">    prototype_variable_subsets: list[set[int]]</span>
+<span class="sd">        The indices of Variable in `prototype_variables` which mix under application of</span>
+<span class="sd">        symmetry, or permute as a group. A subset could be strain variables,</span>
+<span class="sd">        displacement variables on a site, or occupant site basis functions on a site.</span>
+<span class="sd">    occ_site_functions: list[dict]</span>
+<span class="sd">        List of occupation site basis functions. For each sublattice with discrete</span>
+<span class="sd">        site basis functions, must include:</span>
+
+<span class="sd">        - `&quot;sublattice_index&quot;`: int, index of the sublattice</span>
+<span class="sd">        - `&quot;value&quot;`: list[list[float]], list of the site basis function values,</span>
+<span class="sd">          as ``value[function_index][occupant_index]``.</span>
+
+<span class="sd">    local_discrete_dof: list[str]</span>
+<span class="sd">            The types of local discrete degree of freedom (DoF).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    constraints: list[casm.bset.polynomial_functions.ExponentSumConstraint]</span>
+<span class="sd">        Constraints that set the exponent for constant discrete site functions to 0,</span>
+<span class="sd">        and ensure one and only one of mutually exclusive discrete variables</span>
+<span class="sd">        is included in any monomial.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">subset</span> <span class="ow">in</span> <span class="n">prototype_variable_subsets</span><span class="p">:</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">prototype_variables</span><span class="p">[</span><span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">var</span><span class="o">.</span><span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">local_discrete_dof</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Find the constant site function and set constraint to exclude</span>
+        <span class="n">found_constant_function</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i_var</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="n">prototype_variables</span><span class="p">[</span><span class="n">i_var</span><span class="p">]</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">prototype_cluster</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span><span class="p">]</span><span class="o">.</span><span class="n">sublattice</span><span class="p">()</span>
+            <span class="n">site_function_index</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">site_basis_function_index</span>
+            <span class="n">phi</span> <span class="o">=</span> <span class="n">get_occ_site_functions</span><span class="p">(</span>
+                <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">occ_site_functions</span><span class="p">,</span>
+                <span class="n">sublattice_index</span><span class="o">=</span><span class="n">b</span><span class="p">,</span>
+                <span class="n">site_function_index</span><span class="o">=</span><span class="n">site_function_index</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">phi</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ExponentSumConstraint</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">i_var</span><span class="p">],</span> <span class="nb">sum</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">found_constant_function</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found_constant_function</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Error in make_constraints: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;discrete DoF (sublattice=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">) has no constant site basis function&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Set mutually exclusive discrete variable subset constraint</span>
+        <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ExponentSumConstraint</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span> <span class="nb">sum</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">constraints</span>
+
+
+<div class="viewcode-block" id="ClusterFunctionsBuilder">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.html#casm.bset.cluster_functions.ClusterFunctionsBuilder">[docs]</a>
+<span class="k">class</span> <span class="nc">ClusterFunctionsBuilder</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Constructs cluster functions</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    Cluster functions are generated using the following steps:</span>
+
+<span class="sd">    1. A cluster from each orbit is input, along with the phenomenal cluster if local</span>
+<span class="sd">       cluster functions are to be generated.</span>
+
+<span class="sd">    2. For each orbit,</span>
+<span class="sd">       :func:`~casm.bset.polynomial_functions.make_symmetry_adapted_polynomials`</span>
+<span class="sd">       is used to construct symmetry-adapted polynomial functions</span>
+<span class="sd">       (:class:`~casm.bset.polynomial_functions.PolynomialFunction`) using matrix</span>
+<span class="sd">       representations constructed by</span>
+<span class="sd">       :class:`~casm.bset.cluster_functions.OrbitMatrixRepBuilder`.</span>
+
+<span class="sd">       - For functions of discrete degrees of freedom (DoF), the polynomial functions</span>
+<span class="sd">         include a single occupation site basis function on each site in a cluster.</span>
+<span class="sd">       - For functions that include continuous DoF, by default, polynomials of order up</span>
+<span class="sd">         to the cluster size are created. Higher order polynomials are requested either</span>
+<span class="sd">         according to cluster size using the `orbit_branch_max_poly_order` parameter or</span>
+<span class="sd">         globally using `global_max_poly_order`. For each orbit, the most specific</span>
+<span class="sd">         level specified is used.</span>
+<span class="sd">       - Functions are generated for all clusters in the orbit by default. If only</span>
+<span class="sd">         functions on the prototype cluster are needed, then the `make_equivalents`</span>
+<span class="sd">         parameter can be set to `False`.</span>
+<span class="sd">       - The `prim_neighbor_list` is used to set the `neighborhood_site_index` for the</span>
+<span class="sd">         :class:`~casm.bset.polynomial_functions.Variable` corresponding to local DoF</span>
+<span class="sd">         used by each :class:`~casm.bset.polynomial_functions.PolynomialFunction`.</span>
+
+<span class="sd">    3. If this is a local cluster expansion (if `phenomenal` is not None), then</span>
+<span class="sd">       local cluster functions are generated for the orbits associated with each of the</span>
+<span class="sd">       symmetrically equivalent phenomenal clusters.</span>
+
+<span class="sd">       - The symmetrically equivalent, but distinct, local cluster expansions are</span>
+<span class="sd">         found by using the prim factor group to generate equivalent phenomenal</span>
+<span class="sd">         clusters and excluding those that are equivalent by `generating_group`</span>
+<span class="sd">         symmetry.</span>
+<span class="sd">       - For local cluster expansions, all local cluster expansions in the orbit are</span>
+<span class="sd">         constructed by default. If only functions in the original orbits are needed,</span>
+<span class="sd">         then the `make_all_local_basis_sets` parameter can be set to `False`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+        <span class="n">generating_group</span><span class="p">:</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
+        <span class="n">clusters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">phenomenal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dofs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">global_max_poly_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">orbit_branch_max_poly_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PrimNeighborList</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">make_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">make_all_local_basis_sets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prim: libcasm.configuration.Prim</span>
+<span class="sd">            The Prim, with symmetry information</span>
+<span class="sd">        generating_group: libcasm.sym_info.SymGroup</span>
+<span class="sd">            The symmetry group for generating cluster functions. For periodic cluster</span>
+<span class="sd">            functions, this is the prim factor group (usually) or a subgroup. For</span>
+<span class="sd">            local cluster functions, this is the cluster group of the phenomenal</span>
+<span class="sd">            cluster or a subgroup (often the subgroup which leaves an</span>
+<span class="sd">            :class:`~libcasm.occ_events.OccEvent` invariant).</span>
+<span class="sd">        clusters: Iterable[libcasm.clusterography.Cluster]</span>
+<span class="sd">            An iterable of :class:`~libcasm.clusterography.Cluster` containing the</span>
+<span class="sd">            a single cluster from each orbit to generate functions for. If not provided,</span>
+<span class="sd">            clusters are generated using the `max_length`, phenomenal`, and</span>
+<span class="sd">            `cutoff_radius` parameters.</span>
+<span class="sd">        phenomenal: Optional[libcasm.clusterography.Cluster] = None</span>
+<span class="sd">            For local cluster functions, specifies the sites about which</span>
+<span class="sd">            local-clusters orbits are generated. The phenomenal cluster must be chosen</span>
+<span class="sd">            from one of the equivalents that is generated by</span>
+<span class="sd">            :func:`~libcasm.clusterography.make_periodic_orbit` using the prim factor</span>
+<span class="sd">            group.</span>
+<span class="sd">        dofs: Optional[Iterable[str]] = None</span>
+<span class="sd">            An iterable of string of dof type names that should be used to construct</span>
+<span class="sd">            basis functions. The default value is all DoF types included in the prim.</span>
+<span class="sd">        global_max_poly_order: Optional[int] = None</span>
+<span class="sd">            The maximum order of polynomials of continuous DoF to generate, for any</span>
+<span class="sd">            orbit not specified more specifically by `orbit_branch_max_poly_order`.</span>
+<span class="sd">        orbit_branch_max_poly_order: Optional[dict[int, int]] = None</span>
+<span class="sd">            Specifies for continuous DoF the maximum polynomial order to generate by</span>
+<span class="sd">            cluster size, according to</span>
+<span class="sd">            ``orbit_branch_max_poly_order[cluster_size] = max_poly_order``. By default,</span>
+<span class="sd">            for a given cluster orbit, polynomials of order up to the cluster size are</span>
+<span class="sd">            created. Higher order polynomials are requested either according to cluster</span>
+<span class="sd">            size using `orbit_branch_max_poly_order` or globally using</span>
+<span class="sd">            `global_max_poly_order`. The most specific level specified is used.</span>
+<span class="sd">        occ_site_basis_functions_specs: Union[str, list[dict], None] = None</span>
+<span class="sd">            Provides instructions for constructing occupation site basis functions.</span>
+<span class="sd">            The accepted options are &quot;chebychev&quot;, &quot;occupation&quot;, or a `list[dict]`</span>
+<span class="sd">            a specifying sublattice-specific choice of site basis functions. This</span>
+<span class="sd">            parameter corresponds to the value of</span>
+
+<span class="sd">            .. code-block:: Python</span>
+
+<span class="sd">                &quot;dof_specs&quot;: {</span>
+<span class="sd">                    &quot;occ&quot;: {</span>
+<span class="sd">                        &quot;site_basis_functions&quot;: ...</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+
+<span class="sd">            as described in detail in the section</span>
+<span class="sd">            :ref:`DoF Specifications &lt;sec-dof-specifications&gt;` and is required for</span>
+<span class="sd">            functions of occupation DoF.</span>
+<span class="sd">        prim_neighbor_list: Optional[libcasm.clexulator.PrimNeighborList] = None</span>
+<span class="sd">            The :class:`PrimNeighborList` is used to uniquely index sites with local</span>
+<span class="sd">            variables included in the cluster functions, relative to a reference unit</span>
+<span class="sd">            cell. If not provided, a PrimNeighborList is constructed using default</span>
+<span class="sd">            parameters that include all sites with degrees of freedom (DoF) and the</span>
+<span class="sd">            default shape used by CASM projects. In most cases, the default should be</span>
+<span class="sd">            used.</span>
+<span class="sd">        make_equivalents: bool = True</span>
+<span class="sd">            If True, make all equivalent clusters and functions. Otherwise, only</span>
+<span class="sd">            construct functions on the prototype cluster (i.e. ``i_equiv=0`` only).</span>
+<span class="sd">        make_all_local_basis_sets: bool = True</span>
+<span class="sd">            If True, make local clusters and functions for all phenomenal</span>
+<span class="sd">            clusters in the primitive cell equivalent by prim factor group symmetry.</span>
+<span class="sd">            Requires that `make_equivalents` is True.</span>
+<span class="sd">        make_variable_name_f: Optional[Callable] = None</span>
+<span class="sd">            Allows specifying a custom function to construct variable names. The default</span>
+<span class="sd">            function used is :func:`make_variable_name`. Custom functions should have</span>
+<span class="sd">            the same signature as :func:`make_variable_name`.</span>
+<span class="sd">        verbose: bool = False</span>
+<span class="sd">            Print progress statements</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">orbit_branch_max_poly_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">orbit_branch_max_poly_order</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="n">prim_neighbor_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">make_default_prim_neighbor_list</span><span class="p">(</span>
+                <span class="n">xtal_prim</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+            <span class="p">)</span>
+
+        <span class="n">global_dof</span><span class="p">,</span> <span class="n">local_continuous_dof</span><span class="p">,</span> <span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="n">_get_dof_types</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">dofs</span>
+        <span class="p">)</span>
+
+        <span class="n">only_discrete</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_dof</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_continuous_dof</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="c1"># Data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span> <span class="o">=</span> <span class="n">prim</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.configuration.Prim: The Prim, with symmetry information&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generating_group</span> <span class="o">=</span> <span class="n">generating_group</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.sym_info.SymGroup: The symmetry group used to generate clusters and \</span>
+<span class="sd">        functions.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">global_dof</span> <span class="o">=</span> <span class="n">global_dof</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: List of global continuous DoF included in functions. &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_continuous_dof</span> <span class="o">=</span> <span class="n">local_continuous_dof</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: List of local continuous DoF included in functions.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="n">local_discrete_dof</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: List of local discrete DoF included in functions.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span> <span class="o">=</span> <span class="n">only_discrete</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: True if only discrete DoF are included in functions.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span> <span class="o">=</span> <span class="n">clusters</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[libcasm.clusterography.Cluster]: A list of clusters with a single \</span>
+<span class="sd">        cluster from each orbit to generate functions for.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="o">=</span> <span class="n">phenomenal</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[Cluster]: If provided, specifies the sites about which \</span>
+<span class="sd">        local-clusters orbits are generated. </span>
+<span class="sd">        </span>
+<span class="sd">        The phenomenal cluster must be chosen from one of the equivalents that is </span>
+<span class="sd">        generated by :func:`~libcasm.clusterography.make_periodic_orbit` using the prim</span>
+<span class="sd">        factor group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_global_max_poly_order</span> <span class="o">=</span> <span class="n">global_max_poly_order</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The default maximum polynomial order.</span>
+<span class="sd">        </span>
+<span class="sd">        The maximum order of polynomials of continuous DoF to generate, for any orbit</span>
+<span class="sd">        not specified more specifically by `orbit_branch_max_poly_order`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orbit_branch_max_poly_order</span> <span class="o">=</span> <span class="n">orbit_branch_max_poly_order</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict[int, int]: The per-orbit-branch maximum polynomial order.</span>
+<span class="sd">        </span>
+<span class="sd">        Specifies for continuous DoF the maximum polynomial order to generate by</span>
+<span class="sd">        cluster size, according to</span>
+<span class="sd">        ``orbit_branch_max_poly_order[cluster_size] = max_poly_order``. By default, for</span>
+<span class="sd">        a given cluster orbit, polynomials of order up to the cluster size are created.</span>
+<span class="sd">        Higher order polynomials are requested either according to cluster size</span>
+<span class="sd">        using `orbit_branch_max_poly_order` or globally using `global_max_poly_order`.</span>
+<span class="sd">        The most specific level specified is used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_occ_site_basis_functions_specs</span> <span class="o">=</span> <span class="n">occ_site_basis_functions_specs</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Union[str, list[dict], None]: Instructions for constructing occupation \</span>
+<span class="sd">        site basis functions.</span>
+<span class="sd">            </span>
+<span class="sd">        The accepted options are &quot;chebychev&quot;, &quot;occupation&quot;, or a `list[dict]`</span>
+<span class="sd">        a specifying sublattice-specific choice of site basis functions. </span>
+<span class="sd">        </span>
+<span class="sd">        This parameter corresponds to the value of</span>
+
+<span class="sd">        .. code-block:: Python</span>
+
+<span class="sd">            &quot;dof_specs&quot;: {</span>
+<span class="sd">                &quot;occ&quot;: {</span>
+<span class="sd">                    &quot;site_basis_functions&quot;: ...</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        as described in detail in the section</span>
+<span class="sd">        :ref:`DoF Specifications &lt;sec-dof-specifications&gt;` and is required for</span>
+<span class="sd">        functions of occupation DoF.&quot;&quot;&quot;</span>
+
+        <span class="n">occ_site_functions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">occ_site_basis_functions_specs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">occ_site_functions</span> <span class="o">=</span> <span class="n">make_occ_site_functions</span><span class="p">(</span>
+                <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
+                <span class="n">occ_site_basis_functions_specs</span><span class="o">=</span><span class="n">occ_site_basis_functions_specs</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions</span> <span class="o">=</span> <span class="n">occ_site_functions</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[dict]: List of occupation site basis functions.</span>
+<span class="sd">        </span>
+<span class="sd">        For each sublattice with discrete site basis functions, must include:</span>
+
+<span class="sd">        - `&quot;sublattice_index&quot;`: int, index of the sublattice</span>
+<span class="sd">        - `&quot;value&quot;`: list[list[float]], list of the site basis function values,</span>
+<span class="sd">          as ``value[function_index][occupant_index]``.</span>
+<span class="sd">       </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">prim_neighbor_list</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.clexulator.PrimNeighborList: The PrimNeighborList, expanded as \</span>
+<span class="sd">        necessary</span>
+<span class="sd">        </span>
+<span class="sd">        The :class:`~libcasm.clexulator.PrimNeighborList` used to uniquely index sites </span>
+<span class="sd">        with local variables included in the cluster functions, relative to a reference </span>
+<span class="sd">        unit cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_make_equivalents</span> <span class="o">=</span> <span class="n">make_equivalents</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: If True, make all equivalent clusters and functions. </span>
+<span class="sd">        </span>
+<span class="sd">        Otherwise, only construct functions on the prototype cluster.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_make_all_local_basis_sets</span> <span class="o">=</span> <span class="n">make_all_local_basis_sets</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: If True, make all equivalent orbits of local clusters and local \</span>
+<span class="sd">        functions. </span>
+
+<span class="sd">        If True, make local clusters and functions for all phenomenal clusters in the </span>
+<span class="sd">        primitive cell equivalent by prim factor group symmetry. Requires that </span>
+<span class="sd">        `make_equivalents` is True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_make_variable_name_f</span> <span class="o">=</span> <span class="n">make_variable_name_f</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Callable: Function used to construct variable names.</span>
+<span class="sd">        </span>
+<span class="sd">        The default function used is</span>
+<span class="sd">        :func:`~casm.bset.cluster_functions.make_variable_name`. Custom functions </span>
+<span class="sd">        have the same signature as :func:`make_variable_name`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: If True, print progress statements&quot;&quot;&quot;</span>
+
+        <span class="c1">## Construct cluster functions on a prototype cluster for each orbit</span>
+        <span class="n">prototype_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">orbit_matrix_rep_builders</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i_orbit</span><span class="p">,</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span><span class="p">):</span>
+            <span class="n">_1</span><span class="p">,</span> <span class="n">_2</span><span class="p">,</span> <span class="n">_3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_prototype_basis_set</span><span class="p">(</span><span class="n">i_orbit</span><span class="p">,</span> <span class="n">cluster</span><span class="p">)</span>
+            <span class="n">prototype_basis_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_1</span><span class="p">)</span>
+            <span class="n">orbit_matrix_rep_builders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_2</span><span class="p">)</span>
+            <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prototype_basis_sets</span> <span class="o">=</span> <span class="n">prototype_basis_sets</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[list[PolynomialFunction]]: For each orbit, the symmetry adapted \</span>
+<span class="sd">        polynomial cluster functions for the prototype cluster.</span>
+<span class="sd">        </span>
+<span class="sd">        The function ``prototype_basis_sets[i_orbit][i_func]`` is the `i_func`-th </span>
+<span class="sd">        function on the prototype cluster in the `i_orbit`-th orbit.</span>
+<span class="sd">        </span>
+<span class="sd">        The orbits are generated from the input clusters (stored in </span>
+<span class="sd">        :py:data:`~casm.bset.cluster_functions.ClusterFunctionBuilder._clusters`), and </span>
+<span class="sd">        stored in the same order. The prototype cluster is determined from sorting the </span>
+<span class="sd">        equivalent clusters in the orbit and may not be the input cluster.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">orbit_matrix_rep_builders</span> <span class="o">=</span> <span class="n">orbit_matrix_rep_builders</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[casm.bset.cluster_functions.OrbitMatrixRepBuilder]: For each orbit,</span>
+<span class="sd">        the OrbitMatrixRepBuilder contains matrix representations of symmetry</span>
+<span class="sd">        operations for generating symmetry-adapted polynomial cluster functions on the</span>
+<span class="sd">        orbit prototype, coupling all local and global DoFs, and matrix representations</span>
+<span class="sd">        for constructing cluster functions on symmetrically equivalent clusters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="n">constraints</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[list[ExponentSumConstraint]]: For each orbit, the constraints used \</span>
+<span class="sd">        when constructing `prototype_basis_set` to ensure one and only one of \</span>
+<span class="sd">        mutually exclusive discrete variables is included in any monomial.</span>
+<span class="sd">         </span>
+<span class="sd">        If a local cluster expansion, ``constraints[i_orbit]`` are also the correct</span>
+<span class="sd">        constraints for the `i_orbit`-th orbit about each equivalent phenomenal cluster.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">## Construct equivalent cluster functions</span>
+        <span class="n">orbit_basis_sets</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">orbit_clusters</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">equivalent_orbit_basis_sets</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">equivalent_orbit_clusters</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">make_equivalents</span><span class="p">:</span>
+            <span class="n">orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">orbit_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1">## Transform cluster functions</span>
+            <span class="c1"># from prototype clusters to equivalent clusters</span>
+            <span class="k">for</span> <span class="n">i_orbit</span><span class="p">,</span> <span class="n">orbit_matrix_rep_builder</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">orbit_matrix_rep_builders</span>
+            <span class="p">):</span>
+                <span class="n">_1</span><span class="p">,</span> <span class="n">_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_orbit_basis_sets</span><span class="p">(</span>
+                    <span class="n">i_orbit</span><span class="o">=</span><span class="n">i_orbit</span><span class="p">,</span>
+                    <span class="n">orbit_matrix_rep_builder</span><span class="o">=</span><span class="n">orbit_matrix_rep_builder</span><span class="p">,</span>
+                    <span class="n">prototype_basis_set</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prototype_basis_sets</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="n">orbit_basis_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_1</span><span class="p">)</span>
+                <span class="n">orbit_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_2</span><span class="p">)</span>
+
+                <span class="c1">## For local cluster expansions, transform cluster functions</span>
+                <span class="c1"># from the local basis set around the original phenomenal cluster</span>
+                <span class="c1"># to the local basis sets around equivalent phenomenal clusters</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">make_all_local_basis_sets</span><span class="p">:</span>
+                    <span class="n">_3</span><span class="p">,</span> <span class="n">_4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_equivalent_orbit_basis_sets</span><span class="p">(</span>
+                        <span class="n">i_orbit</span><span class="o">=</span><span class="n">i_orbit</span><span class="p">,</span>
+                        <span class="n">orbit_matrix_rep_builder</span><span class="o">=</span><span class="n">orbit_matrix_rep_builder</span><span class="p">,</span>
+                        <span class="n">orbit_basis_sets</span><span class="o">=</span><span class="n">_1</span><span class="p">,</span>
+                        <span class="n">orbit_clusters</span><span class="o">=</span><span class="n">_2</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">n_clex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_3</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">equivalent_orbit_basis_sets</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">equivalent_orbit_basis_sets</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clex</span><span class="p">)]</span>
+                        <span class="n">equivalent_orbit_clusters</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clex</span><span class="p">)]</span>
+                    <span class="k">for</span> <span class="n">i_clex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clex</span><span class="p">):</span>
+                        <span class="n">equivalent_orbit_basis_sets</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_3</span><span class="p">[</span><span class="n">i_clex</span><span class="p">])</span>
+                        <span class="n">equivalent_orbit_clusters</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_4</span><span class="p">[</span><span class="n">i_clex</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">functions</span> <span class="o">=</span> <span class="n">orbit_basis_sets</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[list[list[PolynomialFunction]]]: The generated cluster functions</span>
+
+<span class="sd">        Polynomial functions, where ``functions[i_orbit][i_equiv][i_func]``, is the </span>
+<span class="sd">        `i_func`-th function on the cluster given by `clusters[i_orbit][i_equiv]`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span> <span class="o">=</span> <span class="n">orbit_clusters</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[list[libcasm.clusterography.Cluster]]: The clusters for which </span>
+<span class="sd">        cluster functions have been constructed</span>
+<span class="sd">        </span>
+<span class="sd">        The cluster ``clusters[i_orbit][i_equiv]`` is the `i_equiv`-th symmetrically </span>
+<span class="sd">        equivalent cluster in the `i_orbit`-th orbit.</span>
+
+<span class="sd">        The order of sites in the clusters is not arbitrary, it is consistent with the </span>
+<span class="sd">        `cluster_site_index` of the :class:`~casm.bset.polynomial_functions.Variable`</span>
+<span class="sd">        used in the :class:`~casm.bset.polynomial_functions.PolynomialFunction` stored </span>
+<span class="sd">        in :py:data:`~ClusterFunctionsBuilder.functions`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">equivalent_functions</span> <span class="o">=</span> <span class="n">equivalent_orbit_basis_sets</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[list[list[list[\</span>
+<span class="sd">        casm.bset.polynomial_functions.PolynomialFunction]]]]]: \</span>
+<span class="sd">        The generated cluster functions about all equivalent phenomenal clusters (if \</span>
+<span class="sd">        a local cluster expansion).</span>
+<span class="sd">        </span>
+<span class="sd">        Symmetry adapted polynomial cluster functions for each cluster in each</span>
+<span class="sd">        orbit about a symmetrically equivalent phenomenal cluster,</span>
+<span class="sd">        where ``equivalent_functions[i_clex][i_orbit][i_equiv][i_func]``, is the</span>
+<span class="sd">        `i_func`-th function on the `i_equiv`-th cluster in the `i_orbit`-th orbit about</span>
+<span class="sd">        the `i_clex`-th equivalent phenomenal cluster.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">equivalent_clusters</span> <span class="o">=</span> <span class="n">equivalent_orbit_clusters</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[list[list[libcasm.clusterography.Cluster]]]]: Orbit of \</span>
+<span class="sd">        clusters for which cluster functions have been constructed about all \</span>
+<span class="sd">        equivalent phenomenal clusters (if a local cluster expansion).</span>
+
+<span class="sd">        The cluster ``equivalent_clusters[i_clex][i_orbit][i_equiv]`` is the</span>
+<span class="sd">        `i_equiv`-th symmetrically equivalent cluster in the `i_orbit`-th orbit about </span>
+<span class="sd">        the `i_clex`-th equivalent phenomenal cluster.</span>
+
+<span class="sd">        The order of sites in the clusters is not arbitrary, it is consistent with the </span>
+<span class="sd">        `cluster_site_index` of the :class:`~casm.bset.polynomial_functions.Variable`</span>
+<span class="sd">        used in the :class:`~casm.bset.polynomial_functions.PolynomialFunction` stored </span>
+<span class="sd">        in :py:data:`~ClusterFunctionsBuilder.equivalent_functions`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_min_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_prototype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_max_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_prototype</span><span class="p">)</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_prototype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">branch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orbit_branch_max_poly_order</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orbit_branch_max_poly_order</span><span class="p">[</span><span class="n">branch</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_global_max_poly_order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_global_max_poly_order</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">branch</span>
+
+    <span class="k">def</span> <span class="nf">_build_prototype_basis_set</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">i_orbit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the prototype cluster basis set</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ---------</span>
+<span class="sd">        i_orbit: int</span>
+<span class="sd">            Orbit number, starting from 0, used for printing information when</span>
+<span class="sd">            `verbose` is set to `True`.</span>
+<span class="sd">        cluster: libcasm.clusterography.Cluster</span>
+<span class="sd">            A cluster in the orbit on which to build the cluster functions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (prototype_basis_set, orbit_matrix_rep_builder, constraints):</span>
+<span class="sd">            prototype_basis_set: list[PolynomialFunction]</span>
+<span class="sd">                Symmetry adapted polynomial cluster functions for the prototype</span>
+<span class="sd">                cluster in the orbit generated from `cluster`.</span>
+
+<span class="sd">            orbit_matrix_rep_builder: casm.bset.cluster_functions.OrbitMatrixRepBuilder</span>
+<span class="sd">                The OrbitMatrixRepBuilder contains matrix representations for generating</span>
+<span class="sd">                polynomial cluster functions on the orbit prototype, coupling all local</span>
+<span class="sd">                and global DoFs.</span>
+
+<span class="sd">                Also includes:</span>
+
+<span class="sd">                - Matrix representations for generating equivalent functions on other</span>
+<span class="sd">                  clusters in the orbit.</span>
+<span class="sd">                - Matrix representations for constructing local cluster functions for</span>
+<span class="sd">                  symmetrically equivalent phenomenal clusters (local cluster functions</span>
+<span class="sd">                  only).</span>
+
+<span class="sd">            constraints: list[ExponentSumConstraint]</span>
+<span class="sd">                The constraints used when constructing `prototype_basis_set` to ensure</span>
+<span class="sd">                one and only one of mutually exclusive discrete variables</span>
+<span class="sd">                is included in any monomial.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;### i_orbit: </span><span class="si">{</span><span class="n">i_orbit</span><span class="si">}</span><span class="s2"> ###&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Phenomenal cluster:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial cluster:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">OrbitMatrixRepBuilder</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
+            <span class="n">generating_group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_generating_group</span><span class="p">,</span>
+            <span class="n">global_dof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">global_dof</span><span class="p">,</span>
+            <span class="n">local_continuous_dof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">local_continuous_dof</span><span class="p">,</span>
+            <span class="n">local_discrete_dof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
+            <span class="n">cluster</span><span class="o">=</span><span class="n">cluster</span><span class="p">,</span>
+            <span class="n">phenomenal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span><span class="p">,</span>
+            <span class="n">make_variable_name_f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_variable_name_f</span><span class="p">,</span>
+            <span class="n">occ_site_functions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">constraints</span> <span class="o">=</span> <span class="n">make_constraints</span><span class="p">(</span>
+            <span class="n">prototype_cluster</span><span class="o">=</span><span class="n">cluster</span><span class="p">,</span>
+            <span class="n">prototype_variables</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variables</span><span class="p">,</span>
+            <span class="n">prototype_variable_subsets</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variable_subsets</span><span class="p">,</span>
+            <span class="n">occ_site_functions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+            <span class="n">local_discrete_dof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variables</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># if no variables, no functions</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No variables&quot;</span><span class="p">)</span>
+            <span class="n">prototype_basis_set</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">elif</span> <span class="n">builder</span><span class="o">.</span><span class="n">n_local_variables</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cluster</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># if no local variables and not the null cluster, no functions</span>
+            <span class="c1"># (only generate pure global DoF functions on the null cluster)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No local variables&quot;</span><span class="p">)</span>
+            <span class="n">prototype_basis_set</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variables:&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i_var</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variables</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i_var</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variable subsets:&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i_subset</span><span class="p">,</span> <span class="n">subset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variable_subsets</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i_subset</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i_var</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variables</span><span class="p">[</span><span class="n">i_var</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+            <span class="n">prototype_basis_set</span> <span class="o">=</span> <span class="n">make_symmetry_adapted_polynomials</span><span class="p">(</span>
+                <span class="n">matrix_rep</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_matrix_rep</span><span class="p">,</span>
+                <span class="n">variables</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variables</span><span class="p">,</span>
+                <span class="n">variable_subsets</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prototype_variable_subsets</span><span class="p">,</span>
+                <span class="n">min_poly_order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_min_poly_order</span><span class="p">(</span><span class="n">cluster</span><span class="p">),</span>
+                <span class="n">max_poly_order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_poly_order</span><span class="p">(</span><span class="n">cluster</span><span class="p">),</span>
+                <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span>
+                <span class="n">orthonormalize_in_place</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prototype cluster basis set:&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prototype_basis_set</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i_func</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prototype_basis_set</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~~~ order: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="n">order</span><span class="p">()</span><span class="si">}</span><span class="s2">, function_index: </span><span class="si">{</span><span class="n">i_func</span><span class="si">}</span><span class="s2"> ~~~&quot;</span><span class="p">)</span>
+                    <span class="n">func</span><span class="o">.</span><span class="n">_basic_print</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="n">orbit_matrix_rep_builder</span> <span class="o">=</span> <span class="n">builder</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">prototype_basis_set</span><span class="p">,</span> <span class="n">orbit_matrix_rep_builder</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_orbit_basis_sets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">i_orbit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">orbit_matrix_rep_builder</span><span class="p">:</span> <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
+        <span class="n">prototype_basis_set</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build basis sets for each cluster in an orbit</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ---------</span>
+<span class="sd">        i_orbit: int</span>
+<span class="sd">            Orbit number, starting from 0, used for printing information when</span>
+<span class="sd">            `verbose` is set to `True`.</span>
+<span class="sd">        orbit_matrix_rep_builder: casm.bset.cluster_functions.OrbitMatrixRepBuilder</span>
+<span class="sd">            An OrbitMatrixRepBuilder which contains matrix representations of</span>
+<span class="sd">            symmetry operations for generating symmetry-adapted polynomial cluster</span>
+<span class="sd">            functions for the orbit from the orbit prototype, as output from</span>
+<span class="sd">            :func:`~casm.bset.cluster_functions.ClusterFunctionsBuilder._build_prototype_basis_set`.</span>
+<span class="sd">        prototype_basis_set: list[casm.bset.polynomial_functions.PolynomialFunction]</span>
+<span class="sd">            Symmetry adapted polynomial cluster functions for the prototype</span>
+<span class="sd">            cluster in the orbit, as output from</span>
+<span class="sd">            :func:`~casm.bset.cluster_functions.ClusterFunctionsBuilder._build_prototype_basis_set`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (orbit_basis_sets, orbit_clusters):</span>
+
+<span class="sd">            orbit_basis_sets: list[list[\</span>
+<span class="sd">            casm.bset.polynomial_functions.PolynomialFunction]]</span>
+<span class="sd">                Symmetry adapted polynomial cluster functions for each cluster in</span>
+<span class="sd">                the orbit, where ``orbit_basis_sets[i_equiv][i_func]``, is the</span>
+<span class="sd">                `i_func`-th function on the `i_equiv`-th cluster in the orbit.</span>
+
+<span class="sd">            orbit_clusters: list[libcasm.clusterography.Cluster]]:</span>
+<span class="sd">                Orbit of clusters for which `orbit_basis_sets` has been constructed.</span>
+
+<span class="sd">                The cluster ``orbit_clusters[i_equiv]`` is the `i_equiv`-th</span>
+<span class="sd">                symmetrically equivalent cluster in the orbit.</span>
+
+<span class="sd">                The order of sites in the clusters is not arbitrary, it is consistent</span>
+<span class="sd">                with the `cluster_site_index` of the</span>
+<span class="sd">                :class:`~casm.bset.polynomial_functions.Variable`</span>
+<span class="sd">                used in the `orbit_basis_sets` functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">orbit_matrix_rep_builder</span>
+
+        <span class="n">orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">orbit_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># generate basis sets on all equivalent clusters</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating equivalent cluster functions in orbit...&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+        <span class="c1"># i_equiv: index for equivalent clusters</span>
+        <span class="c1"># M_list: sym rep matrices (1 for each sym op that prototype cluster to</span>
+        <span class="c1">#     the equivalent cluster, only the first is needed here)</span>
+        <span class="k">for</span> <span class="n">i_equiv</span><span class="p">,</span> <span class="n">M_list</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalence_map_inv_matrix_rep</span><span class="p">):</span>
+            <span class="c1"># add equivalent cluster to orbit of clusters</span>
+            <span class="n">equiv_cluster</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">equivalence_map_clusters</span><span class="p">[</span><span class="n">i_equiv</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">orbit_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_cluster</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~~~ i_orbit: </span><span class="si">{</span><span class="n">i_orbit</span><span class="si">}</span><span class="s2">, i_equiv: </span><span class="si">{</span><span class="n">i_equiv</span><span class="si">}</span><span class="s2"> ~~~&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent cluster:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">equiv_cluster</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+            <span class="c1"># add basis set for equivalent cluster to orbit of basis sets</span>
+            <span class="n">equiv_basis_set</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">f_prototype</span> <span class="ow">in</span> <span class="n">prototype_basis_set</span><span class="p">:</span>
+                <span class="n">M</span> <span class="o">=</span> <span class="n">M_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">S</span> <span class="o">=</span> <span class="n">FunctionRep</span><span class="p">(</span><span class="n">matrix_rep</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
+                <span class="n">f_equiv</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">f_prototype</span>
+                <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                    <span class="n">cluster</span><span class="o">=</span><span class="n">equiv_cluster</span><span class="p">,</span>
+                    <span class="n">function</span><span class="o">=</span><span class="n">f_equiv</span><span class="p">,</span>
+                    <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">)):</span>
+                    <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">equiv_basis_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_equiv</span><span class="p">)</span>
+            <span class="n">orbit_basis_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent cluster basis set:&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i_func</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~~~ order: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="n">order</span><span class="p">()</span><span class="si">}</span><span class="s2">, function_index: </span><span class="si">{</span><span class="n">i_func</span><span class="si">}</span><span class="s2"> ~~~&quot;</span><span class="p">)</span>
+                    <span class="n">func</span><span class="o">.</span><span class="n">_basic_print</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">orbit_basis_sets</span><span class="p">,</span> <span class="n">orbit_clusters</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_equivalent_orbit_basis_sets</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">i_orbit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">orbit_matrix_rep_builder</span><span class="p">:</span> <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
+        <span class="n">orbit_basis_sets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>
+        <span class="n">orbit_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build basis sets for each cluster in the equivalent orbits around \</span>
+<span class="sd">        equivalent phenomenal cluster.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        i_orbit: int</span>
+<span class="sd">            Orbit number, starting from 0, used for printing information when</span>
+<span class="sd">            `verbose` is set to `True`.</span>
+
+<span class="sd">        orbit_matrix_rep_builder: casm.bset.cluster_functions.OrbitMatrixRepBuilder</span>
+<span class="sd">            An OrbitMatrixRepBuilder which contains matrix representations of</span>
+<span class="sd">            symmetry operations for generating polynomial cluster functions for the</span>
+<span class="sd">            orbit from the orbit prototype, as output from</span>
+<span class="sd">            :func:`~casm.bset.cluster_functions.ClusterFunctionsBuilder._build_prototype_basis_set`.</span>
+
+<span class="sd">        orbit_basis_sets: list[list[casm.bset.polynomial_functions.PolynomialFunction]]</span>
+<span class="sd">            Symmetry adapted polynomial cluster functions for each cluster in</span>
+<span class="sd">            the orbit, where ``orbit_basis_sets[i_equiv][i_func]``, is the</span>
+<span class="sd">            `i_func`-th function on the `i_equiv`-th cluster in the orbit.</span>
+
+<span class="sd">        orbit_clusters: list[libcasm.clusterography.Cluster]]:</span>
+<span class="sd">            Orbit of clusters for which `orbit_basis_sets` has been constructed.</span>
+
+<span class="sd">            The cluster ``orbit_clusters[i_equiv]`` is the `i_equiv`-th</span>
+<span class="sd">            symmetrically equivalent cluster in the orbit.</span>
+
+<span class="sd">            The order of sites in the clusters is not arbitrary, it is consistent</span>
+<span class="sd">            with the `cluster_site_index` of the</span>
+<span class="sd">            :class:`~casm.bset.polynomial_functions.Variable`</span>
+<span class="sd">            used in the `orbit_basis_sets` functions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (equivalent_orbit_basis_sets, equivalent_orbit_clusters):</span>
+
+<span class="sd">            equivalent_orbit_basis_sets: list[list[list[\</span>
+<span class="sd">            casm.bset.polynomial_functions.PolynomialFunction]]]</span>
+<span class="sd">                Symmetry adapted polynomial cluster functions for each cluster in each</span>
+<span class="sd">                equivalent orbit about a symmetrically equivalent phenomenal cluster,</span>
+<span class="sd">                where ``equivalent_orbit_basis_sets[i_clex][i_equiv][i_func]``, is the</span>
+<span class="sd">                `i_func`-th function on the `i_equiv`-th cluster in the orbit about</span>
+<span class="sd">                the `i_clex`-th equivalent phenomenal cluster.</span>
+
+<span class="sd">            equivalent_orbit_clusters: list[list[libcasm.clusterography.Cluster]]]:</span>
+<span class="sd">                Orbit of clusters for which `orbit_basis_sets` has been constructed.</span>
+
+<span class="sd">                The cluster ``equivalent_orbit_clusters[i_clex][i_equiv]`` is the</span>
+<span class="sd">                `i_equiv`-th symmetrically equivalent cluster in the orbit about the</span>
+<span class="sd">                `i_clex`-th equivalent phenomenal cluster.</span>
+
+<span class="sd">                The order of sites in the clusters is not arbitrary, it is consistent</span>
+<span class="sd">                with the `cluster_site_index` of the</span>
+<span class="sd">                :class:`~casm.bset.polynomial_functions.Variable`</span>
+<span class="sd">                used in the `orbit_basis_sets` functions.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">orbit_matrix_rep_builder</span>
+
+        <span class="n">equivalent_orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">equivalent_orbit_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># generate equivalent local basis sets</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Generating local cluster functions &quot;</span>
+                <span class="s2">&quot;for equivalent phenomenal clusters...&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># i_clex: index for equivalent local cluster expansion</span>
+        <span class="k">for</span> <span class="n">i_clex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">phenomenal_generating_ops</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*** i_orbit: </span><span class="si">{</span><span class="n">i_orbit</span><span class="si">}</span><span class="s2">, i_clex: </span><span class="si">{</span><span class="n">i_clex</span><span class="si">}</span><span class="s2"> ***&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent phenomenal cluster:&quot;</span><span class="p">)</span>
+                <span class="n">site_rep</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">phenomenal_generating_site_rep</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span>
+                <span class="n">equiv_phenomenal</span> <span class="o">=</span> <span class="n">site_rep</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">equiv_phenomenal</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+            <span class="n">_equiv_orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">_equiv_orbit_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># i_clust: index for equivalent clusters</span>
+            <span class="c1"># M: sym rep matrix for transforming functions on the `i_clust`-th cluster</span>
+            <span class="c1">#    to the orbit around the `i_clex`-th equivalent phenomenal cluster</span>
+            <span class="k">for</span> <span class="n">i_clust</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                <span class="n">builder</span><span class="o">.</span><span class="n">phenomenal_generating_inv_matrix_rep</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span>
+            <span class="p">):</span>
+                <span class="c1"># add equivalent cluster to orbit of clusters</span>
+                <span class="n">site_rep</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">phenomenal_generating_site_rep</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span>
+                <span class="n">equiv_cluster</span> <span class="o">=</span> <span class="n">site_rep</span> <span class="o">*</span> <span class="n">orbit_clusters</span><span class="p">[</span><span class="n">i_clust</span><span class="p">]</span>
+                <span class="n">_equiv_orbit_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_cluster</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;~~~ i_orbit: </span><span class="si">{</span><span class="n">i_orbit</span><span class="si">}</span><span class="s2">, &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;i_clex: </span><span class="si">{</span><span class="n">i_clex</span><span class="si">}</span><span class="s2">, &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;i_clust: </span><span class="si">{</span><span class="n">i_clust</span><span class="si">}</span><span class="s2"> ~~~&quot;</span>
+                    <span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent cluster:&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">equiv_cluster</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+                    <span class="nb">print</span><span class="p">()</span>
+
+                <span class="c1"># add basis set for equivalent cluster to orbit of basis sets</span>
+                <span class="n">equiv_basis_set</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">f_prototype</span> <span class="ow">in</span> <span class="n">orbit_basis_sets</span><span class="p">[</span><span class="n">i_clust</span><span class="p">]:</span>
+                    <span class="n">S</span> <span class="o">=</span> <span class="n">FunctionRep</span><span class="p">(</span><span class="n">matrix_rep</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
+                    <span class="n">f_equiv</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">f_prototype</span>
+                    <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                        <span class="n">cluster</span><span class="o">=</span><span class="n">equiv_cluster</span><span class="p">,</span>
+                        <span class="n">function</span><span class="o">=</span><span class="n">f_equiv</span><span class="p">,</span>
+                        <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">)):</span>
+                        <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">equiv_basis_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f_equiv</span><span class="p">)</span>
+                <span class="n">_equiv_orbit_basis_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent cluster basis set:&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Empty&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i_func</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">equiv_basis_set</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;~~~ order: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="n">order</span><span class="p">()</span><span class="si">}</span><span class="s2">, function_index: </span><span class="si">{</span><span class="n">i_func</span><span class="si">}</span><span class="s2"> ~~~&quot;</span>
+                        <span class="p">)</span>
+                        <span class="n">func</span><span class="o">.</span><span class="n">_basic_print</span><span class="p">()</span>
+                        <span class="nb">print</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">()</span>
+
+            <span class="n">equivalent_orbit_basis_sets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_equiv_orbit_basis_sets</span><span class="p">)</span>
+            <span class="n">equivalent_orbit_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_equiv_orbit_clusters</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">equivalent_orbit_basis_sets</span><span class="p">,</span> <span class="n">equivalent_orbit_clusters</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ClusterFunctionsBuilder.basis_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.basis_dict.html#casm.bset.cluster_functions.ClusterFunctionsBuilder.basis_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">basis_dict</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">clex_basis_specs</span><span class="p">:</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span>
+        <span class="n">coordinate_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;frac&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Generate the CASM basis.json data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clex_basis_specs: casm.bset.cluster_functions.ClexBasisSpecs</span>
+<span class="sd">            The specifications for the cluster expansion basis set.</span>
+<span class="sd">        coordinate_mode: str = &quot;frac&quot;</span>
+<span class="sd">            The coordinate mode used to represent cluster invariant group operations.</span>
+<span class="sd">            The default value is &quot;frac&quot;. The other option is &quot;cart&quot;.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            A description of the generated cluster expansion basis set, as described</span>
+<span class="sd">            `here &lt;https://prisms-center.github.io/CASMcode_docs/formats/casm/clex/ClexBasis/&gt;`_.</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+        <span class="n">prim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span>
+        <span class="n">functions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">functions</span>
+        <span class="n">occ_site_functions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions</span>
+
+        <span class="n">basis_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">basis_data</span><span class="p">[</span><span class="s2">&quot;bspecs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">clex_basis_specs</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">basis_data</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+        <span class="n">basis_data</span><span class="p">[</span><span class="s2">&quot;orbits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_make_orbits_data</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
+            <span class="n">clex_basis_specs</span><span class="o">=</span><span class="n">clex_basis_specs</span><span class="p">,</span>
+            <span class="n">clusters</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span>
+            <span class="n">functions</span><span class="o">=</span><span class="n">functions</span><span class="p">,</span>
+            <span class="n">coordinate_mode</span><span class="o">=</span><span class="n">coordinate_mode</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">basis_data</span><span class="p">[</span><span class="s2">&quot;site_functions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_make_site_functions_data</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
+            <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">occ_site_functions</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">basis_data</span></div>
+
+
+<div class="viewcode-block" id="ClusterFunctionsBuilder.equivalents_info_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalents_info_dict.html#casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalents_info_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">equivalents_info_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Generate the CASM equivalents_info.json data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        equivalents_info_dict: dict</span>
+<span class="sd">            The equivalents info provides the phenomenal cluster and local-cluster</span>
+<span class="sd">            orbits for all symmetrically equivalent local-cluster expansions, and the</span>
+<span class="sd">            indices of the factor group operations used to construct each equivalent</span>
+<span class="sd">            local cluster expansion from the prototype local-cluster expansion. When</span>
+<span class="sd">            there is an orientation to the local-cluster expansion this information</span>
+<span class="sd">            allows generating the proper diffusion events, etc. from the prototype.</span>
+
+<span class="sd">            A description of the generated cluster expansion basis set, as described</span>
+<span class="sd">            `here &lt;TODO&gt;`_.</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="c1"># Equivalents info, prototype</span>
+        <span class="n">equivalents_info</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">equivalents_info</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orbit_matrix_rep_builders</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Error in ClusterFunctionsBuilder.equivalents_info_dict: No orbits&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Write prim factor group info</span>
+        <span class="n">equivalents_info</span><span class="p">[</span>
+            <span class="s2">&quot;factor_group&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">config_io</span><span class="o">.</span><span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">factor_group</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Write equivalents generating ops</span>
+        <span class="c1"># (actually prim factor group indices of those ops and the</span>
+        <span class="c1">#  translations can be figured out from the phenomenal cluster)</span>
+        <span class="n">orbit_matrix_rep_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orbit_matrix_rep_builders</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">equivalents_info</span><span class="p">[</span>
+            <span class="s2">&quot;equivalent_generating_ops&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">orbit_matrix_rep_builder</span><span class="o">.</span><span class="n">phenomenal_generating_indices</span>
+
+        <span class="c1"># Write prototype orbits info</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">prototype_phenomenal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;phenomenal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prototype_phenomenal</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">xtal_prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;orbits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">orbits_to_dict</span><span class="p">(</span>
+            <span class="n">orbits</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span>
+            <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">equivalents_info</span><span class="p">[</span><span class="s2">&quot;prototype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+        <span class="c1"># Write equivalent orbits info</span>
+        <span class="n">equivalents_info</span><span class="p">[</span><span class="s2">&quot;equivalents&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i_clex</span><span class="p">,</span> <span class="n">clusters</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">equivalent_clusters</span><span class="p">):</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">site_rep</span> <span class="o">=</span> <span class="n">orbit_matrix_rep_builder</span><span class="o">.</span><span class="n">phenomenal_generating_site_rep</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span>
+            <span class="n">equiv_phenomenal</span> <span class="o">=</span> <span class="n">site_rep</span> <span class="o">*</span> <span class="n">prototype_phenomenal</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;phenomenal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">equiv_phenomenal</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">xtal_prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;orbits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">orbits_to_dict</span><span class="p">(</span>
+                <span class="n">orbits</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span>
+                <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">equivalents_info</span><span class="p">[</span><span class="s2">&quot;equivalents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">equivalents_info</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="make_point_functions">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_point_functions.html#casm.bset.cluster_functions.make_point_functions">[docs]</a>
+<span class="k">def</span> <span class="nf">make_point_functions</span><span class="p">(</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
+    <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
+    <span class="n">orbit_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct point functions</span>
+
+<span class="sd">    This method uses the data generated by :class:`ClusterFunctionsBuilder` to</span>
+<span class="sd">    collect all the functions that involve each point. These functions are used</span>
+<span class="sd">    by Clexulator methods that can calculate point correlations and changes in point</span>
+<span class="sd">    correlations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim_neighbor_list: libcasm.clexulator.PrimNeighborList</span>
+<span class="sd">        The :class:`PrimNeighborList` is used to uniquely index sites with local</span>
+<span class="sd">        variables included in the cluster functions, relative to a reference unit cell.</span>
+
+<span class="sd">    orbit: list[libcasm.clusterography.Cluster]</span>
+<span class="sd">        An orbit of clusters, where ``orbit[i_equiv]``, is the</span>
+<span class="sd">        `i_equiv`-th symmetrically equivalent cluster in the orbit.</span>
+<span class="sd">        The order of sites in the clusters may not be arbitrary, it must be</span>
+<span class="sd">        consistent with the `cluster_site_index` of the :class:`Variable` used</span>
+<span class="sd">        in the :class:`PolynomialFunction` returned in `orbit_functions`.</span>
+
+<span class="sd">        This should generally be one orbit as generated by</span>
+<span class="sd">        :class:`ClusterFunctionsBuilder`.</span>
+
+<span class="sd">    orbit_functions: list[list[casm.bset.polynomial_functions.PolynomialFunction]]</span>
+<span class="sd">        Polynomial functions, where ``functions[i_equiv][i_func]``,</span>
+<span class="sd">        is the `i_func`-th function on the cluster given by `orbit[i_equiv]`.</span>
+
+<span class="sd">        This should generally be the functions for one orbit as generated by</span>
+<span class="sd">        :class:`ClusterFunctionsBuilder`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    point_functions: list[list[list[casm.bset.polynomial_functions.PolynomialFunction]]]</span>
+<span class="sd">        Polynomial functions, where ``point_functions[i_func][nlist_index]`` is</span>
+<span class="sd">        a list of PolynomialFunction that are symmetrically equivalent to the</span>
+<span class="sd">        `i_func`-th function on the clusters and involve the `nlist_index`-th site</span>
+<span class="sd">        in the neighbor list.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_point_functions: &quot;</span>
+            <span class="s2">&quot;orbit size does not match orbit_functions size&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[[[]]]</span>
+
+    <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sublattice_index</span> <span class="ow">in</span> <span class="n">prim_neighbor_list</span><span class="o">.</span><span class="n">sublattice_indices</span><span class="p">():</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span>
+                <span class="n">sublattice</span><span class="o">=</span><span class="n">sublattice_index</span><span class="p">,</span>
+                <span class="n">unitcell</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="c1"># orbit_point_functions: list[list[list[PolynomialFunction]]]</span>
+    <span class="c1"># orbit_point_functions[i_func][nlist_index][i_point_function]</span>
+    <span class="n">point_functions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i_func</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">equiv_functions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">nlist_index</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+            <span class="n">equiv_functions_by_point</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i_equiv</span><span class="p">,</span> <span class="n">equiv</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orbit</span><span class="p">):</span>
+                <span class="c1"># for each cluster site on same sublattice as point,</span>
+                <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">equiv</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sublattice</span><span class="p">()</span> <span class="o">!=</span> <span class="n">point</span><span class="o">.</span><span class="n">sublattice</span><span class="p">():</span>
+                        <span class="k">continue</span>
+                    <span class="c1"># copy function</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="n">orbit_functions</span><span class="p">[</span><span class="n">i_equiv</span><span class="p">][</span><span class="n">i_func</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="c1"># assign neighborhood_site_index with translation to point</span>
+                    <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                        <span class="n">cluster</span><span class="o">=</span><span class="n">equiv</span><span class="p">,</span>
+                        <span class="n">function</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
+                        <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                        <span class="n">translation</span><span class="o">=-</span><span class="n">site</span><span class="o">.</span><span class="n">unitcell</span><span class="p">(),</span>
+                    <span class="p">)</span>
+                    <span class="c1"># add to point functions</span>
+                    <span class="n">equiv_functions_by_point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">equiv_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_functions_by_point</span><span class="p">)</span>
+        <span class="n">point_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_functions</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">point_functions</span></div>
+
+
+
+<div class="viewcode-block" id="make_local_point_functions">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_local_point_functions.html#casm.bset.cluster_functions.make_local_point_functions">[docs]</a>
+<span class="k">def</span> <span class="nf">make_local_point_functions</span><span class="p">(</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
+    <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
+    <span class="n">orbit_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct local cluster point functions</span>
+
+<span class="sd">    This method uses the data generated by :class:`ClusterFunctionsBuilder` to</span>
+<span class="sd">    collect all the local cluster functions that involve each point. These functions</span>
+<span class="sd">    are used by Clexulator methods that can calculate point correlations and changes</span>
+<span class="sd">    in point correlations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim_neighbor_list: libcasm.clexulator.PrimNeighborList</span>
+<span class="sd">        The :class:`PrimNeighborList` is used to uniquely index sites with local</span>
+<span class="sd">        variables included in the cluster functions, relative to a reference unit cell.</span>
+
+<span class="sd">    orbit: list[libcasm.clusterography.Cluster]</span>
+<span class="sd">        An orbit of clusters, where ``orbit[i_equiv]``, is the</span>
+<span class="sd">        `i_equiv`-th symmetrically equivalent cluster in the orbit.</span>
+<span class="sd">        The order of sites in the clusters may not be arbitrary, it must be</span>
+<span class="sd">        consistent with the `cluster_site_index` of the :class:`Variable` used</span>
+<span class="sd">        in the :class:`PolynomialFunction` returned in `orbit_functions`.</span>
+
+<span class="sd">        This should generally be one orbit as generated by</span>
+<span class="sd">        :class:`ClusterFunctionsBuilder`.</span>
+
+<span class="sd">    orbit_functions: list[list[casm.bset.polynomial_functions.PolynomialFunction]]</span>
+<span class="sd">        Polynomial functions, where ``functions[i_equiv][i_func]``,</span>
+<span class="sd">        is the `i_func`-th function on the cluster given by `orbit[i_equiv]`.</span>
+
+<span class="sd">        This should generally be the functions for one orbit as generated by</span>
+<span class="sd">        :class:`ClusterFunctionsBuilder`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    point_functions: list[list[list[casm.bset.polynomial_functions.PolynomialFunction]]]</span>
+<span class="sd">        Polynomial functions, where ``point_functions[i_func][nlist_index]`` is</span>
+<span class="sd">        a list of PolynomialFunction that are symmetrically equivalent to the</span>
+<span class="sd">        `i_func`-th function on the clusters and involve the `nlist_index`-th site</span>
+<span class="sd">        in the neighbor list.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_local_point_functions: &quot;</span>
+            <span class="s2">&quot;orbit size does not match orbit_functions size&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[[[]]]</span>
+
+    <span class="n">orbit_neighbor_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">equiv</span> <span class="ow">in</span> <span class="n">orbit</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">equiv</span><span class="p">:</span>
+            <span class="n">nlist_index</span> <span class="o">=</span> <span class="n">prim_neighbor_list</span><span class="o">.</span><span class="n">neighbor_index</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+            <span class="n">orbit_neighbor_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nlist_index</span><span class="p">)</span>
+
+    <span class="c1"># orbit_point_functions: list[list[list[PolynomialFunction]]]</span>
+    <span class="c1"># orbit_point_functions[i_func][nlist_index][i_point_function]</span>
+    <span class="n">prototype_basis_set</span> <span class="o">=</span> <span class="n">orbit_functions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">point_functions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i_func</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prototype_basis_set</span><span class="p">)):</span>
+        <span class="n">point_functions</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">nlist_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">orbit_neighbor_indices</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">point_functions</span><span class="p">[</span><span class="n">i_func</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+    <span class="k">for</span> <span class="n">i_equiv</span><span class="p">,</span> <span class="n">equiv_functions</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">orbit</span><span class="p">[</span><span class="n">i_equiv</span><span class="p">]:</span>
+            <span class="n">nlist_index</span> <span class="o">=</span> <span class="n">prim_neighbor_list</span><span class="o">.</span><span class="n">neighbor_index</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i_func</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">equiv_functions</span><span class="p">):</span>
+                <span class="n">point_functions</span><span class="p">[</span><span class="n">i_func</span><span class="p">][</span><span class="n">nlist_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">point_functions</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
