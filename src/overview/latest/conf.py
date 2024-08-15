@@ -83,7 +83,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "libcasm"
+project = "CASM"
 copyright = "2024, CASM Developers"
 author = "CASM Developers"
 
@@ -128,7 +128,7 @@ html_theme = "pydata_sphinx_theme"
 html_logo = "_static/small_logo.svg"
 html_theme_options = {
     "logo": {
-        "text": "libcasm",
+        "text": "CASM",
         "image_light": "_static/small_logo.svg",
         "image_dark": "_static/small_logo_dark.svg",
     },
@@ -200,8 +200,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "libcasm.tex",
-        "libcasm Documentation",
+        "CASM.tex",
+        "CASM Documentation",
         "CASM Developers",
         "manual",
     ),
@@ -211,7 +211,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "libcasm", "libcasm Documentation", [author], 1)]
+man_pages = [(master_doc, "CASM", "CASM Documentation", [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -221,10 +221,10 @@ man_pages = [(master_doc, "libcasm", "libcasm Documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "libcasm",
-        "libcasm Documentation",
+        "CASM",
+        "CASM Documentation",
         author,
-        "libcasm",
+        "CASM",
         "CASM: First-principles statistical mechanical software for the study of multi-component crystalline solids",
         "Miscellaneous",
     ),
