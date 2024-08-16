@@ -55,7 +55,7 @@ Install:
 
     pip install libcasm-xtal
 
-Docs: `[2.0a10] <../../libcasm/xtal/2.0/>`_
+Docs: `[2.0a11] <../../libcasm/xtal/2.0/>`_
 
 Links: |GitHub_xtal|_ |PyPI_xtal|_
 
@@ -185,7 +185,7 @@ Install:
     pip install libcasm-configuration
 
 
-Docs: `[2.0a4] <../../libcasm/configuration/2.0/>`_
+Docs: `[2.0a5] <../../libcasm/configuration/2.0/>`_
 
 Links: |GitHub_configuration|_ |PyPI_configuration|_
 
@@ -256,7 +256,7 @@ Install:
     pip install libcasm-clexmonte
 
 
-Docs: `[2.0a1] <../../libcasm/clexmonte/2.0/>`_
+Docs: `[2.0a2] <../../libcasm/clexmonte/2.0/>`_
 
 Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
