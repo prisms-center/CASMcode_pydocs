@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casm.project.ase_utils &#8212; casm-project 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/ase_utils';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">casm-project</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">casm.project...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for casm.project.ase_utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+
+<span class="kn">import</span> <span class="nn">ase</span>
+<span class="kn">import</span> <span class="nn">ase.calculators.vasp</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+
+
+<div class="viewcode-block" id="make_ase_atoms">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.ase_utils.make_ase_atoms.html#casm.project.ase_utils.make_ase_atoms">[docs]</a>
+<span class="k">def</span> <span class="nf">make_ase_atoms</span><span class="p">(</span><span class="n">casm_structure</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a CASM Structure , convert it to an ASE Atoms</span>
+
+<span class="sd">    .. attention::</span>
+
+<span class="sd">        This method only works for non-magnetic atomic structures. If the structure</span>
+<span class="sd">        contains molecular information, an error will be raised.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    casm_structure : xtal.Structure</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ase.Atoms</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">casm_structure</span><span class="o">.</span><span class="n">mol_type</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Error: only non-magnetic atomic structures may be converted using &quot;</span>
+            <span class="s2">&quot;to_ase_atoms&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">symbols</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">atom_type</span><span class="p">()</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">atom_coordinate_cart</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">(</span>
+        <span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">,</span>
+        <span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span>
+        <span class="n">cell</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span>
+        <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_casm_structure">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.ase_utils.make_casm_structure.html#casm.project.ase_utils.make_casm_structure">[docs]</a>
+<span class="k">def</span> <span class="nf">make_casm_structure</span><span class="p">(</span><span class="n">ase_atoms</span><span class="p">:</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given an ASE Atoms, convert it to a CASM Structure</span>
+
+<span class="sd">    .. attention::</span>
+
+<span class="sd">        This method only works for non-magnetic atomic structures.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ase_atoms : ase.Atoms</span>
+<span class="sd">        A :class:`ase.Atoms` object</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    casm_structure: libcasm.xtal.Structure</span>
+<span class="sd">        A :class:`~libcasm.xtal.Structure` object</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span>
+        <span class="n">column_vector_matrix</span><span class="o">=</span><span class="n">ase_atoms</span><span class="o">.</span><span class="n">get_cell</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">atom_coordinate_frac</span> <span class="o">=</span> <span class="n">ase_atoms</span><span class="o">.</span><span class="n">get_scaled_positions</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="n">atom_type</span> <span class="o">=</span> <span class="n">ase_atoms</span><span class="o">.</span><span class="n">get_chemical_symbols</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">(</span>
+        <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+        <span class="n">atom_coordinate_frac</span><span class="o">=</span><span class="n">atom_coordinate_frac</span><span class="p">,</span>
+        <span class="n">atom_type</span><span class="o">=</span><span class="n">atom_type</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AseVaspTool">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.html#casm.project.ase_utils.AseVaspTool">[docs]</a>
+<span class="k">class</span> <span class="nc">AseVaspTool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">calctype_settings_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">setups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">xc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup, run, and collect VASP calculations using ASE.</span>
+
+<span class="sd">        For details on the parameters, see the `ase documentation for the vasp</span>
+<span class="sd">        calculator &lt;https://wiki.fysik.dtu.dk/ase/ase/calculators/vasp.html&gt;`.</span>
+
+<span class="sd">        .. attention::</span>
+
+<span class="sd">            ase assumes that POTCAR files exist in one of `potpaw_PBE`, `potpaw`, or</span>
+<span class="sd">            `potpaw_GGA`, located at the path specified by the environment</span>
+<span class="sd">            variable VASP_PP_PATH.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calctype_settings_dir: pathlib.Path</span>
+<span class="sd">            Path to the directory containing INCAR and KPOINTS files.</span>
+<span class="sd">        setups: dict</span>
+<span class="sd">            Dictionary of pseudopotential setups for each element.</span>
+<span class="sd">        xc: str</span>
+<span class="sd">            Exchange-correlation type, one of: &quot;pbe&quot;, &quot;lda&quot;, or &quot;pw91&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;VASP_PP_PATH&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Please set the environment variable VASP_PP_PATH to the directory &quot;</span>
+                <span class="s2">&quot;containing the VASP POTCAR files. It should contain the directories &quot;</span>
+                <span class="s2">&quot;potpaw_PBE, potpaw, and potpaw_GGA.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">incar_path</span> <span class="o">=</span> <span class="n">calctype_settings_dir</span> <span class="o">/</span> <span class="s2">&quot;INCAR&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pathlib.Path: Path to the INCAR file.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">kpoints_path</span> <span class="o">=</span> <span class="n">calctype_settings_dir</span> <span class="o">/</span> <span class="s2">&quot;KPOINTS&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pathlib.Path: Path to the KPOINTS file.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setups</span> <span class="o">=</span> <span class="n">setups</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: Dictionary of pseudopotential setups for each element.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="n">xc</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Exchange-correlation type, one of: &quot;pbe&quot;, &quot;lda&quot;, or &quot;pw91&quot; &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AseVaspTool.make_calculator">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.make_calculator.html#casm.project.ase_utils.AseVaspTool.make_calculator">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_calculator</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ase_atoms</span><span class="p">:</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">,</span>
+        <span class="n">calc_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">Vasp</span><span class="p">:</span>
+        <span class="n">calc_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">vasp_calculator</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">Vasp</span><span class="p">(</span>
+            <span class="n">atoms</span><span class="o">=</span><span class="n">ase_atoms</span><span class="p">,</span>
+            <span class="n">directory</span><span class="o">=</span><span class="n">calc_dir</span><span class="p">,</span>
+            <span class="n">setups</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">setups</span><span class="p">,</span>
+            <span class="n">xc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xc</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">vasp_calculator</span><span class="o">.</span><span class="n">read_incar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">incar_path</span><span class="p">)</span>
+        <span class="n">vasp_calculator</span><span class="o">.</span><span class="n">read_kpoints</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kpoints_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vasp_calculator</span></div>
+
+
+<div class="viewcode-block" id="AseVaspTool.setup">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.setup.html#casm.project.ase_utils.AseVaspTool.setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">casm_structure</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+        <span class="n">calc_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">make_ase_atoms_f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_ase_atoms</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">vasp</span><span class="o">.</span><span class="n">Vasp</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup a VASP calculation for a given structure.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        casm_structure: libcasm.xtal.Structure</span>
+<span class="sd">            The structure to calculate.</span>
+<span class="sd">        calc_dir: pathlib.Path</span>
+<span class="sd">            The directory in which to store the calculation files.</span>
+<span class="sd">        make_ase_atoms_f: Callable[[xtal.Structure], ase.Atoms] = make_ase_atoms</span>
+<span class="sd">            A function to convert the CASM structure to an ASE Atoms object. The</span>
+<span class="sd">            default function, :func:`make_ase_atoms` works for non-magnetic atomic</span>
+<span class="sd">            structures.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vasp_calculator: ase.calculators.vasp.Vasp</span>
+<span class="sd">            The ASE VASP calculator object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ase_atoms</span> <span class="o">=</span> <span class="n">make_ase_atoms_f</span><span class="p">(</span><span class="n">casm_structure</span><span class="p">)</span>
+        <span class="n">vasp_calculator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_calculator</span><span class="p">(</span><span class="n">ase_atoms</span><span class="o">=</span><span class="n">ase_atoms</span><span class="p">,</span> <span class="n">calc_dir</span><span class="o">=</span><span class="n">calc_dir</span><span class="p">)</span>
+
+        <span class="c1"># Write INCAR, KPOINTS, POTCAR, POSCAR</span>
+        <span class="n">vasp_calculator</span><span class="o">.</span><span class="n">write_input</span><span class="p">(</span><span class="n">atoms</span><span class="o">=</span><span class="n">ase_atoms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vasp_calculator</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

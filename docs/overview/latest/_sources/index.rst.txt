@@ -261,6 +261,23 @@ Docs: `[2.0a2] <../../libcasm/clexmonte/2.0/>`_
 Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
 
+casm-project
+-----------------
+
+**Note**: casm-project is under development and not yet released. The interface may change in future releases.
+
+The casm-project package makes it easier to construct, fit, and use a cluster expansion in CASM version >= 2 by:
+
+- providing quick access to the most commonly used methods,
+- automatically reading project data needed by those methods from a CASM project directory,
+- automatically writing the results to the standard location in a CASM project directory.
+
+
+Docs: `[prerelease] <../../casm/project/2.0/>`_
+
+Links: |GitHub_project|_ |PyPI_project|_
+
+
 About CASM
 ==========
 
@@ -370,3 +387,14 @@ For more information, see the `CASM homepage <CASM_>`_.
   :alt: Link to libcasm-clexmonte PyPI package
   :width: 20
 .. _PyPI_clexmonte: https://pypi.org/project/libcasm-clexmonte/
+
+
+.. |GitHub_project| image:: _static/github-mark.png
+  :alt: Link to CASMcode_project GitHub repository
+  :width: 24
+.. _GitHub_project: https://github.com/prisms-center/CASMcode_project/
+
+.. |PyPI_project| image:: _static/python-logo-only.png
+  :alt: Link to libcasm-project PyPI package
+  :width: 20
+.. _PyPI_project: https://pypi.org/project/libcasm-project/
