@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CompositionCalculator &#8212; libcasm-composition 2.0a3 documentation</title>
+    <title>CompositionCalculator &#8212; libcasm-composition 2.0a4 documentation</title>
   
   
   
@@ -39,13 +39,13 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.composition.CompositionCalculator';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="components" href="libcasm.composition.CompositionCalculator.components.html" />
+    <link rel="next" title="allowed_occs" href="libcasm.composition.CompositionCalculator.allowed_occs.html" />
     <link rel="prev" title="set_occupant" href="libcasm.composition.set_occupant.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -352,15 +352,24 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_composition_space.html">make_composition_space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_end_members.html">make_end_members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_exchange_chemical_potential.html">make_exchange_chemical_potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_normalized_origin_and_end_members.html">make_normalized_origin_and_end_members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_null_composition_space.html">make_null_composition_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_standard_axes.html">make_standard_axes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_standard_origin_and_end_members.html">make_standard_origin_and_end_members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.pretty_json.html">pretty_json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.print_axes_summary.html">print_axes_summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.print_axes_table.html">print_axes_table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.set_occupant.html">set_occupant</a></li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">CompositionCalculator</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.allowed_occs.html">allowed_occs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.components.html">components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.from_dict.html">from_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.mean_num_each_component.html">mean_num_each_component</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.n_sublat.html">n_sublat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.num_each_component.html">num_each_component</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.species_frac.html">species_frac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.vacancy_names.html">vacancy_names</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.CompositionConverter.html">CompositionConverter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -385,6 +394,17 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.param_composition.html">param_composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.param_formula.html">param_formula</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.html">FormationEnergyCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.formation_energy.html">formation_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.reference_energy.html">reference_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.independent_compositions.html">independent_compositions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.composition_ref.html">composition_ref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.energy_ref.html">energy_ref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.h.html">h</a></li>
 </ul>
 </li>
 </ul>
@@ -459,7 +479,7 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.composition.CompositionCalculator" title="libcasm.composition._composition.CompositionCalculator"><span class="pre">CompositionCalculator</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">allowed_occs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'va',</span> <span class="pre">'Va',</span> <span class="pre">'VA'}</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'VA',</span> <span class="pre">'va',</span> <span class="pre">'Va'}</span></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span><a class="headerlink" href="#libcasm.composition.CompositionCalculator" title="Link to this definition">#</a></dt>
@@ -511,20 +531,32 @@ An exception is raised if more than one component is a vacancy.</p></li>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.components.html#libcasm.composition.CompositionCalculator.components" title="libcasm.composition.CompositionCalculator.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a></p></td>
-<td><p>The order of components in composition vector results.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.allowed_occs.html#libcasm.composition.CompositionCalculator.allowed_occs" title="libcasm.composition.CompositionCalculator.allowed_occs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allowed_occs</span></code></a></p></td>
+<td><p>list[list[str]]: The names of allowed occupants for each sublattice.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.components.html#libcasm.composition.CompositionCalculator.components" title="libcasm.composition.CompositionCalculator.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a></p></td>
+<td><p>list[str]: The order of components in composition vector results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.from_dict.html#libcasm.composition.CompositionCalculator.from_dict" title="libcasm.composition.CompositionCalculator.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a></p></td>
+<td><p>Construct a CompositionCalculator from a Python dict</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.mean_num_each_component.html#libcasm.composition.CompositionCalculator.mean_num_each_component" title="libcasm.composition.CompositionCalculator.mean_num_each_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_num_each_component</span></code></a></p></td>
 <td><p>Composition as number per primitive cell</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.n_sublat.html#libcasm.composition.CompositionCalculator.n_sublat" title="libcasm.composition.CompositionCalculator.n_sublat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_sublat</span></code></a></p></td>
-<td><p>The number of sublattices.</p></td>
+<td><p>int: The number of sublattices.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.num_each_component.html#libcasm.composition.CompositionCalculator.num_each_component" title="libcasm.composition.CompositionCalculator.num_each_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_each_component</span></code></a></p></td>
 <td><p>Composition as total number</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.species_frac.html#libcasm.composition.CompositionCalculator.species_frac" title="libcasm.composition.CompositionCalculator.species_frac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">species_frac</span></code></a></p></td>
 <td><p>Composition as species fraction, with [Va] = 0.0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.to_dict.html#libcasm.composition.CompositionCalculator.to_dict" title="libcasm.composition.CompositionCalculator.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a></p></td>
+<td><p>Represent a CompositionCalculator as a Python dict</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionCalculator.vacancy_names.html#libcasm.composition.CompositionCalculator.vacancy_names" title="libcasm.composition.CompositionCalculator.vacancy_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vacancy_names</span></code></a></p></td>
+<td><p>set[str]: The names of vacancy components.</p></td>
 </tr>
 </tbody>
 </table>
@@ -552,11 +584,11 @@ An exception is raised if more than one component is a vacancy.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="libcasm.composition.CompositionCalculator.components.html"
+       href="libcasm.composition.CompositionCalculator.allowed_occs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">components</p>
+        <p class="prev-next-title">allowed_occs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CompositionConverter &#8212; libcasm-composition 2.0a3 documentation</title>
+    <title>CompositionConverter &#8212; libcasm-composition 2.0a4 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="axes" href="libcasm.composition.CompositionConverter.axes.html" />
-    <link rel="prev" title="species_frac" href="libcasm.composition.CompositionCalculator.species_frac.html" />
+    <link rel="prev" title="vacancy_names" href="libcasm.composition.CompositionCalculator.vacancy_names.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -353,15 +353,24 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_composition_space.html">make_composition_space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_end_members.html">make_end_members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_exchange_chemical_potential.html">make_exchange_chemical_potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_normalized_origin_and_end_members.html">make_normalized_origin_and_end_members</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_null_composition_space.html">make_null_composition_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_standard_axes.html">make_standard_axes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_standard_origin_and_end_members.html">make_standard_origin_and_end_members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.pretty_json.html">pretty_json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.print_axes_summary.html">print_axes_summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.composition.print_axes_table.html">print_axes_table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.set_occupant.html">set_occupant</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.CompositionCalculator.html">CompositionCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.allowed_occs.html">allowed_occs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.components.html">components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.from_dict.html">from_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.mean_num_each_component.html">mean_num_each_component</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.n_sublat.html">n_sublat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.num_each_component.html">num_each_component</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.species_frac.html">species_frac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.vacancy_names.html">vacancy_names</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">CompositionConverter</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -386,6 +395,17 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.param_composition.html">param_composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.param_formula.html">param_formula</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.html">FormationEnergyCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.formation_energy.html">formation_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.reference_energy.html">reference_energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.independent_compositions.html">independent_compositions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.composition_ref.html">composition_ref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.energy_ref.html">energy_ref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.h.html">h</a></li>
 </ul>
 </li>
 </ul>
@@ -460,7 +480,7 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.composition.CompositionConverter" title="libcasm.composition._composition.CompositionConverter"><span class="pre">CompositionConverter</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">origin_and_end_members</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">n</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'va',</span> <span class="pre">'Va',</span> <span class="pre">'VA'}</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'VA',</span> <span class="pre">'va',</span> <span class="pre">'Va'}</span></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span><a class="headerlink" href="#libcasm.composition.CompositionConverter" title="Link to this definition">#</a></dt>
@@ -471,22 +491,51 @@ document.write(`
 \[ \begin{align}\begin{aligned}\vec{n} = \vec{n}_0 + \mathbf{Q} \vec{x}\\\vec{x} = \mathbf{R}^{\mathsf{T}} (\vec{n} - \vec{n}_0)\end{aligned}\end{align} \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\vec{n}\)</span>: The mol composition as number of each component species per unit cell, a vector of length <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\vec{x}\)</span>: The parametric composition, a vector of length <span class="math notranslate nohighlight">\(k\)</span>, giving the composition along each composition axis when referenced to the origin composition.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\vec{n}_0\)</span>: The origin in composition space, a vector of length <span class="math notranslate nohighlight">\(s\)</span>, as the number of each component species per unit cell.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{n}\)</span>: The mol composition as number of each component species
+per unit cell, a vector of length <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{x}\)</span>: The parametric composition, a vector of length <span class="math notranslate nohighlight">\(k\)</span>,
+giving the composition along each composition axis when referenced to the
+origin composition.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{n}_0\)</span>: The origin in composition space, a vector of length
+<span class="math notranslate nohighlight">\(s\)</span>, as the number of each component species per unit cell.</p></li>
 <li><p><span class="math notranslate nohighlight">\(s\)</span>: The number of component species (<code class="docutils literal notranslate"><span class="pre">n_components</span></code>).</p></li>
 <li><p><span class="math notranslate nohighlight">\(k\)</span>: The number of independent composition axes (<code class="docutils literal notranslate"><span class="pre">k</span></code>).</p></li>
-<li><p><span class="math notranslate nohighlight">\(Q\)</span>: Matrix of shape=(<span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(k\)</span>), with columns representing the end member compositions, as number of each component species per unit cell, for each independent composition axes.</p></li>
-<li><p><span class="math notranslate nohighlight">\(R\)</span>: Matrix of shape=(<span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(k\)</span>), with columns forming the dual-spanning basis of Q, such that <span class="math notranslate nohighlight">\(\mathbf{R}^{\mathsf{T}}\mathbf{Q} = \mathbf{Q}^{\mathsf{T}}\mathbf{R} = \mathbf{I}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q\)</span>: Matrix of shape=(<span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(k\)</span>), with columns representing
+the change in composition per unit cell along each independent composition axis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span>: Matrix of shape=(<span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(k\)</span>), with columns forming the
+dual-spanning basis of Q, such that
+<span class="math notranslate nohighlight">\(\mathbf{R}^{\mathsf{T}}\mathbf{Q} = \mathbf{Q}^{\mathsf{T}}\mathbf{R} = \mathbf{I}\)</span>.</p></li>
+</ul>
+<p>The “parametric composition axes” are the columns of <span class="math notranslate nohighlight">\(Q\)</span>,
+<span class="math notranslate nohighlight">\(\vec{q}_i\)</span>. Due to preservation of the number of sites per
+unit cell, <span class="math notranslate nohighlight">\(\sum_{i} Q_{ij} = 0\)</span> (vacancies are included as a
+component). If <span class="math notranslate nohighlight">\(\sum_{i} |Q_{ij}| = 2\)</span>, the parametric composition
+axis can be said to be normalized in the sense that a unit distance along
+that axis corresponds to a change in occupation of one site per unit cell.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>The term “endmember” usually refers to the extreme compositions in a
+solid solution. In the context of CompositionConverter, the term
+“end member composition” is used to mean the composition one unit
+distance along a parametric composition axis,
+<span class="math notranslate nohighlight">\(\vec{n}_0 + \vec{q}_i\)</span>.</p></li>
+<li><p>When printing formulas, the characters “a”, “b”, “c”, etc. are used to
+represent the parametric compositions, <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>,
+<span class="math notranslate nohighlight">\(x_3\)</span>, etc.</p></li>
+<li><p>When referring to parametric composition axes, the characters “a”, “b”,
+“c”, etc. are used to represent the parametric composition axes,
+<span class="math notranslate nohighlight">\(\vec{q}_1\)</span>, <span class="math notranslate nohighlight">\(\vec{q}_2\)</span>, <span class="math notranslate nohighlight">\(\vec{q}_3\)</span>, etc.</p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>components</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The requested component order in the composition vectors.</p></li>
 <li><p><strong>origin_and_end_members</strong> (<em>numpy.ndarray</em><em>[</em><em>numpy.float64</em><em>[</em><em>n_components</em><em>, </em><em>n_composition_axes+1</em><em>]</em><em>]</em>) – A matrix representing the origin and end member compositions
-for the choice of composition axes. The composition of the origin
-is the first column of each matrix, and the subsequent columns
-are the compositions of the end members. Rows are ordered according to
+for the choice of composition axes. The composition of the origin,
+<span class="math notranslate nohighlight">\(\vec{n}_0\)</span>, is the first column of each matrix, and the
+subsequent columns are the “end member compositions” one unit
+distance along a parametric composition axis,
+<span class="math notranslate nohighlight">\(\vec{n}_0 + \vec{q}_i\)</span>. Rows are ordered according to
 the order requested by <code class="docutils literal notranslate"><span class="pre">components</span></code>.</p></li>
 <li><p><strong>vacancy_names</strong> (<em>set</em><em>[</em><em>str</em><em>]</em>) – Set of component names that should be recognized as vacancies.
 An exception is raised if more than one component is a vacancy.</p></li>
@@ -512,7 +561,7 @@ An exception is raised if more than one component is a vacancy.</p></li>
 <td><p>The mol composition of the i-th parameteric composition end member.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member_formula.html#libcasm.composition.CompositionConverter.end_member_formula" title="libcasm.composition.CompositionConverter.end_member_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member_formula</span></code></a></p></td>
-<td><p>Return formula for the i-th end member, <span class="math notranslate nohighlight">\(q_i\)</span>.</p></td>
+<td><p>Return formula for the i-th end member, <span class="math notranslate nohighlight">\(\vec{n}_0 + \vec{q}_i\)</span>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.from_dict.html#libcasm.composition.CompositionConverter.from_dict" title="libcasm.composition.CompositionConverter.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a></p></td>
 <td><p>Construct a CompositionConverter from a Python dict.</p></td>
@@ -527,7 +576,7 @@ An exception is raised if more than one component is a vacancy.</p></li>
 <td><p>Return the matrix <span class="math notranslate nohighlight">\(R^{\mathsf{T}}\)</span>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_component_formula.html#libcasm.composition.CompositionConverter.mol_component_formula" title="libcasm.composition.CompositionConverter.mol_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_component_formula</span></code></a></p></td>
-<td><p>Return formula the i-th mol composition component, <span class="math notranslate nohighlight">\(n_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
+<td><p>Return formula for the i-th mol composition component, <span class="math notranslate nohighlight">\(n_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_composition.html#libcasm.composition.CompositionConverter.mol_composition" title="libcasm.composition.CompositionConverter.mol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_composition</span></code></a></p></td>
 <td><p>Convert parametric composition, <span class="math notranslate nohighlight">\(\vec{x}\)</span>, to number per unit cell, <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
@@ -545,10 +594,10 @@ An exception is raised if more than one component is a vacancy.</p></li>
 <td><p>Convert <span class="math notranslate nohighlight">\(dG/dn\)</span> to <span class="math notranslate nohighlight">\(dG/dx\)</span>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot_formula.html#libcasm.composition.CompositionConverter.param_chem_pot_formula" title="libcasm.composition.CompositionConverter.param_chem_pot_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot_formula</span></code></a></p></td>
-<td><p>Return formula the parametric composition conjugate potential in terms of the chemical potentials.</p></td>
+<td><p>Return formula for the parametric composition conjugate potential in terms of the chemical potentials.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_component_formula.html#libcasm.composition.CompositionConverter.param_component_formula" title="libcasm.composition.CompositionConverter.param_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_component_formula</span></code></a></p></td>
-<td><p>Return formula the i-th parametric composition component, <span class="math notranslate nohighlight">\(x_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
+<td><p>Return formula for the i-th parametric composition component, <span class="math notranslate nohighlight">\(x_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_composition.html#libcasm.composition.CompositionConverter.param_composition" title="libcasm.composition.CompositionConverter.param_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_composition</span></code></a></p></td>
 <td><p>Convert number per unit cell, <span class="math notranslate nohighlight">\(\vec{n}\)</span>, to parametric composition, <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
@@ -576,12 +625,12 @@ An exception is raised if more than one component is a vacancy.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="libcasm.composition.CompositionCalculator.species_frac.html"
+       href="libcasm.composition.CompositionCalculator.vacancy_names.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">species_frac</p>
+        <p class="prev-next-title">vacancy_names</p>
       </div>
     </a>
     <a class="right-next"
