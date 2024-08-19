@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>map_atoms &#8212; libcasm-mapping 2.0a4 documentation</title>
+    <title>map_atoms &#8212; libcasm-mapping 2.0a5 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../_static/documentation_options.js?v=23fe37a4"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -378,7 +378,9 @@ document.write(`
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.mapping.html">libcasm.mapping</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.mapping.info.html">libcasm.mapping.info</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.info.has_same_prim.html">has_same_prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.info.isotropic_strain_cost.html">isotropic_strain_cost</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.info.pretty_json.html">pretty_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.info.symmetry_breaking_strain_cost.html">symmetry_breaking_strain_cost</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="libcasm.mapping.info.AtomMapping.html">AtomMapping</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.info.AtomMapping.displacement.html">displacement</a></li>
 <li class="toctree-l4"><a class="reference internal" href="libcasm.mapping.info.AtomMapping.from_dict.html">from_dict</a></li>
@@ -570,6 +572,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.make_mapped_structure.html">make_mapped_structure</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">map_atoms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.map_lattices.html">map_lattices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.map_lattices_without_reorientation.html">map_lattices_without_reorientation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.mapping.methods.map_structures.html">map_structures</a></li>
 </ul>
 </li>
@@ -666,30 +669,38 @@ atom mappings (<a class="reference internal" href="libcasm.mapping.info.AtomMapp
 lattice mapping (<a class="reference internal" href="libcasm.mapping.info.LatticeMapping.html#libcasm.mapping.info.LatticeMapping" title="libcasm.mapping.info.LatticeMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticeMapping</span></code></a>).</p>
 <p>Atom mapping costs are calculated and ranked according to one of:</p>
 <ul>
-<li><p>“isotropic_disp_cost”: an atom mapping cost, calculated to be
-volume-normalized and invariant to which structure is the
-parent/child. Calculated as:</p>
+<li><p>“isotropic_disp_cost”: A displacement cost that is a volume-normalized and does
+not depend on which structure is “parent” and which is “child”. It is calculated
+as</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\mathrm{cost} &amp;= \frac{1}{2}*\left( \frac{1}{3}*\mathrm{tr}\left(\tilde{B}_{c \to p}^{2} \right) + \frac{1}{3}*\mathrm{tr}\left(\tilde{B}_{p \to c}^{2} \right) \right)\\\tilde{F} &amp;= \frac{1}{\det{F}^{1/3}} F = \tilde{Q} \tilde{U}\\\tilde{B} &amp;= \tilde{U} - I,\end{aligned}\end{align} \]</div>
-<p>where <span class="math notranslate nohighlight">\(F\)</span> is the deformation gradient tensor, which can be defined
-in either the parent-to-child (<span class="math notranslate nohighlight">\(p \to c\)</span>) sense as
-<span class="math notranslate nohighlight">\(F_{p \to c} L_1 T N = L_2\)</span>, or in the child-to-parent sense
-(<span class="math notranslate nohighlight">\(c \to p\)</span>) according to <span class="math notranslate nohighlight">\(F_{c \to p} = F_{p \to c}^{-1}\)</span>,
-<span class="math notranslate nohighlight">\(B\)</span> is the Biot strain tensor, and the use of (<span class="math notranslate nohighlight">\(\tilde{X}\)</span>)
-indicates that the quantity has been normalized to be volume
-invariant.</p>
+\[\begin{split}\mathrm{cost} &amp;= \frac{1}{2}(c^{g}(L_1 T, D) + c^g(L_2, D^{rev}) \\
+c^{g}(S, D) &amp;= \left( \frac{3v(S)}{4\pi} \right)^{-2/3} \frac{\sum^N_i \vec{d}(i)^2}{N}\end{split}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{d}(i)\)</span>: The site-to-atom displacement, as defined in
+<a class="reference internal" href="libcasm.mapping.info.AtomMapping.html#libcasm.mapping.info.AtomMapping" title="libcasm.mapping.info.AtomMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcasm.mapping.info.AtomMapping</span></code></a>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span>: The shape=(3, N) matrix with column <cite>i</cite> being the
+displacement <span class="math notranslate nohighlight">\(\vec{d}(i)\)</span> associated with the atom at the
+i-th site in the parent superstructure.</p></li>
+<li><p><span class="math notranslate nohighlight">\(D^{rev}\)</span>: The shape=(3, n_sites) matrix corresponding to the
+displacements associated with the reverse mapping,
+<span class="math notranslate nohighlight">\(D^{rev} = -U * D\)</span>, <span class="math notranslate nohighlight">\(U\)</span> being the right stretch tensor
+of the parent-to-child lattice mapping, as defined in
+<a class="reference internal" href="libcasm.mapping.info.LatticeMapping.html#libcasm.mapping.info.LatticeMapping" title="libcasm.mapping.info.LatticeMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">libcasm.mapping.info.LatticeMapping</span></code></a>,</p></li>
+<li><p>v(S): The volume per site for the superlattice <span class="math notranslate nohighlight">\(S\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c^{g}(S,D)\)</span> is the “geometric atom cost” for the displacements
+in superlattice <span class="math notranslate nohighlight">\(S\)</span>, and</p></li>
+</ul>
 </li>
-<li><p>“symmetry_breaking_strain_cost”: a strain cost, including only
-the components of the strain that break the symmetry of the parent
-point group. Calculated as:</p>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\mathrm{cost} &amp;= \frac{1}{2}*\left( \frac{1}{3}*\mathrm{tr}\left( B_{sym-break, p \to c}^2 \right) + \frac{1}{3}*\mathrm{tr}\left( B_{sym-break, c \to p}^2 \right) \right)\\B_{sym-break} &amp;= B - B_{sym}\\B_{sym} &amp;= \frac{1}{N_{G_1}} * \sum_i ( G_1(i) * B * G_1^{\mathsf{T}}(i) )\end{aligned}\end{align} \]</div>
-<p>where <span class="math notranslate nohighlight">\(B_{sym-break}\)</span>, is the symmetry-breaking Biot strain,
-<span class="math notranslate nohighlight">\(G_1(i)\)</span> are parent point group operations, and
-<span class="math notranslate nohighlight">\(N_{G_1}\)</span> is the total number of operations. Similar relations hold
-for calculating <span class="math notranslate nohighlight">\(B_{sym-break, p \to c}\)</span> and
-<span class="math notranslate nohighlight">\(B_{sym-break, c \to p}\)</span> from <span class="math notranslate nohighlight">\(B\)</span>.</p>
-</li>
+<li><p>“symmetry_breaking_disp_cost”: A displacement cost, based on the
+symmetry-breaking displacements that are left after removing
+displacement modes which preserve the symmetry of the parent point
+group. The symmetry-breaking displacement cost is
+calculated using the same equation as the isotropic displacement cost,
+with the substitutions <span class="math notranslate nohighlight">\(D \to D^{sym-break}\)</span> and
+<span class="math notranslate nohighlight">\(D^{rev} \to D^{sym-break, rev}\)</span>, the matrices holding the
+symmetry-breaking displacements for the parent-to-child and reverse
+atom mappings.</p></li>
 </ul>
 <p>For more details, see <span id="id1">Thomas <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id3" title="John C. Thomas, Anirudh Raju Natarajan, and Anton Van der Ven. Comparing crystal structures with symmetry and geometry. npj Computational Materials, 7(1):164, 2021. URL: https://doi.org/10.1038/s41524-021-00627-0, doi:10.1038/s41524-021-00627-0.">TNVdV21</a>]</span>.</p>
 <dl class="field-list simple">
