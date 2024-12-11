@@ -218,7 +218,7 @@ Configuration:
 - See the `casm-bset documentation <https://prisms-center.github.io/CASMcode_pydocs/casm/bset/2.0/installation.html#environment-variable-configuration>`_ for environment configuration instructions.
 
 
-Docs: `[2.0a1] <../../casm/bset/2.0/>`_
+Docs: `[2.0a2] <../../casm/bset/2.0/>`_
 
 Links: |GitHub_bset|_ |PyPI_bset|_
 
