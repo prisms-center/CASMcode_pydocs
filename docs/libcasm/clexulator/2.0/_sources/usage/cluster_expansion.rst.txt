@@ -31,12 +31,15 @@ The :func:`~libcasm.clexulator.make_cluster_expansion` method can be used to con
         export CASM_PREFIX=$(python -m libcasm.casmglobal --prefix)
 
 
-    In some cases, finer control of compilation and linking options may be necessary, which can be done as described in the :class:`~libcasm.clexulator.make_clexulator` documentation. For example, compiling and linking with gcc may require:
+    In some cases, finer control of compilation and linking options may be necessary, which can be done as described in the :class:`~libcasm.clexulator.make_clexulator` documentation. For example, compiling and linking on some Linux distros may require one or both of the "-D_GLIBCXX_USE_CXX11_ABI=0" and "--no-as-needed" flags. These can be set in the environment variables ``CASM_CXXFLAGS`` and ``CASM_SOFLAGS`` respectively:
+
+    .. code-block:: bash
+
+        export CASM_CXXFLAGS="-O3 -Wall -fPIC --std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 "
 
     .. code-block:: bash
 
         export CASM_SOFLAGS="-shared -Wl,--no-as-needed"
-
 
 
 .. code-block:: Python

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Evaluating a cluster expansion &#8212; libcasm-clexulator 2.0a4 documentation</title>
+    <title>Evaluating a cluster expansion &#8212; libcasm-clexulator 2.0a7 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../_static/documentation_options.js?v=b07e39d7"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/cluster_expansion';</script>
@@ -460,7 +460,10 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_PREFIX</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>-m<span class="w"> </span>libcasm.casmglobal<span class="w"> </span>--prefix<span class="k">)</span>
 </pre></div>
 </div>
-<p>In some cases, finer control of compilation and linking options may be necessary, which can be done as described in the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a> documentation. For example, compiling and linking with gcc may require:</p>
+<p>In some cases, finer control of compilation and linking options may be necessary, which can be done as described in the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a> documentation. For example, compiling and linking on some Linux distros may require one or both of the “-D_GLIBCXX_USE_CXX11_ABI=0” and “–no-as-needed” flags. These can be set in the environment variables <code class="docutils literal notranslate"><span class="pre">CASM_CXXFLAGS</span></code> and <code class="docutils literal notranslate"><span class="pre">CASM_SOFLAGS</span></code> respectively:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-O3 -Wall -fPIC --std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 &quot;</span>
+</pre></div>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CASM_SOFLAGS</span><span class="o">=</span><span class="s2">&quot;-shared -Wl,--no-as-needed&quot;</span>
 </pre></div>
 </div>

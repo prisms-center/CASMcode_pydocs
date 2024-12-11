@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>make_clexulator &#8212; libcasm-clexulator 2.0a7 documentation</title>
+    <title>weight_matrix &#8212; libcasm-clexulator 2.0a7 documentation</title>
   
   
   
@@ -42,11 +42,12 @@
     <script src="../../../_static/documentation_options.js?v=b07e39d7"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.weight_matrix';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="make_cluster_expansion" href="libcasm.clexulator.make_cluster_expansion.html" />
-    <link rel="prev" title="from_standard_values" href="libcasm.clexulator.from_standard_values.html" />
+    <link rel="next" title="SparseCoefficients" href="libcasm.clexulator.SparseCoefficients.html" />
+    <link rel="prev" title="total_n_sublattice" href="libcasm.clexulator.PrimNeighborList.total_n_sublattice.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -379,7 +380,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.calc_order_parameters.html">calc_order_parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.calc_per_unitcell_correlations.html">calc_per_unitcell_correlations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.from_standard_values.html">from_standard_values</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">make_clexulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_clexulator.html">make_clexulator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_cluster_expansion.html">make_cluster_expansion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_default_config_dof_values.html">make_default_config_dof_values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.clexulator.make_default_prim_neighbor_list.html">make_default_prim_neighbor_list</a></li>
@@ -531,7 +532,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.OrderParameter.value.html">value</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html">PrimNeighborList</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html">PrimNeighborList</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.add_site.html">add_site</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.add_unitcell.html">add_unitcell</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.default_lattice_weight_matrix.html">default_lattice_weight_matrix</a></li>
@@ -542,7 +543,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.neighbor_index.html">neighbor_index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.sublattice_indices.html">sublattice_indices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.total_n_sublattice.html">total_n_sublattice</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.weight_matrix.html">weight_matrix</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">weight_matrix</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.html">SparseCoefficients</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -595,6 +596,8 @@ document.write(`
 
 
 
+
+
 <nav aria-label="Breadcrumb">
   <ul class="bd-breadcrumbs">
     
@@ -607,9 +610,12 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">libcasm package</a></li>
     
     
-    <li class="breadcrumb-item"><a href="libcasm.clexulator.html" class="nav-link">libcasm.clexulator</a></li>
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
     
-    <li class="breadcrumb-item active" aria-current="page">make_clexulator</li>
+    
+    <li class="breadcrumb-item"><a href="libcasm.clexulator.PrimNeighborList.html" class="nav-link">PrimNeighborList</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">weight_matrix</li>
   </ul>
 </nav>
 </div>
@@ -626,70 +632,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="make-clexulator">
-<h1>make_clexulator<a class="headerlink" href="#make-clexulator" title="Link to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="libcasm.clexulator.make_clexulator">
-<span class="sig-prename descclassname"><span class="pre">libcasm.clexulator.</span></span><span class="sig-name descname"><span class="pre">make_clexulator</span></span><span class="sig-paren">(</span>
+  <section id="weight-matrix">
+<h1>weight_matrix<a class="headerlink" href="#weight-matrix" title="Link to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="libcasm.clexulator.PrimNeighborList.weight_matrix">
+<span class="sig-prename descclassname"><span class="pre">PrimNeighborList.</span></span><span class="sig-name descname"><span class="pre">weight_matrix</span></span><span class="sig-paren">(</span>
 
 <dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">prim_neighbor_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator._clexulator.PrimNeighborList"><span class="pre">PrimNeighborList</span></a></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">compile_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">so_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator._clexulator.PrimNeighborList"><span class="pre">PrimNeighborList</span></a></span></em>,</dd>
 </dl>
 
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator._clexulator.Clexulator"><span class="pre">Clexulator</span></a></span></span><a class="headerlink" href="#libcasm.clexulator.make_clexulator" title="Link to this definition">#</a></dt>
-<dd><p>Construct a Clexulator, if necessary compiling from source code</p>
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.int64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#libcasm.clexulator.PrimNeighborList.weight_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Get the weight matrix that defines the shape of neighborhood and orders neighbors.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>source</strong> (<em>str</em>) – Path to a Clexulator source file implementing a basis set.</p></li>
-<li><p><strong>prim_neighbor_list</strong> (<a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><em>PrimNeighborList</em></a>) – The PrimNeighborList is expanded as necessary for use with
-the Clexulator.</p></li>
-<li><p><strong>compile_options</strong> (<em>str = None</em>) – <p>Options used to compile the Clexulator source file, if it is not yet
-compiled. Example: “g++ -O3 -Wall -fPIC –std=c++17 -I/path/to/include”.
-The default values can be configured by setting environment variables:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>CASM_CXX:</dt><dd><p>Set compiler; default=”g++”</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>weight_matrix</strong> – Weight matrix, <span class="math notranslate nohighlight">\(W\)</span>, that defines the shape of neighborhood
+that orders neighbors. In the
+<a class="reference internal" href="libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a>,
+unit cells are ordered by the integer distance,
+<span class="math notranslate nohighlight">\(r = x^{\mathsf{T}} W x\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the integer
+unit cell coordinates.</p>
 </dd>
-<dt>CASM_CXXFLAGS:</dt><dd><p>Set compiler flags; default=”-O3 -Wall -fPIC –std=c++17”</p>
-</dd>
-<dt>CASM_INCLUDEDIR:</dt><dd><p>Set include search path, overriding CASM_PREFIX</p>
-</dd>
-<dt>CASM_PREFIX:</dt><dd><p>Set include search path to -I$CASM_PREFIX/include; default
-tries to find “ccasm” or “casm” executables on PATH and
-checks relative locations</p>
-</dd>
-</dl>
-</div></blockquote>
-</p></li>
-<li><p><strong>so_options</strong> (<em>str = None</em>) – <p>Options used to compile the Clexulator shared object file, if it is not
-yet compiled. Example: “g++ -shared -L/path/to/lib -lcasm_clexulator “</p>
-<p>The default values can be configured by setting environment variables:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>CASM_CXX:</dt><dd><p>Set compiler; default=”g++”</p>
-</dd>
-<dt>CASM_SOFLAGS:</dt><dd><p>Set shared object compilation flags; default=”-shared”</p>
-</dd>
-<dt>CASM_LIBDIR:</dt><dd><p>Set link search path, overriding CASM_PREFIX</p>
-</dd>
-<dt>CASM_PREFIX:</dt><dd><p>Set library search path to -L$CASM_PREFIX/lib; default
-tries to find “ccasm” or “casm” executables on PATH and
-checks relative locations</p>
-</dd>
-</dl>
-</div></blockquote>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>clexulator</strong> – The Clexulator.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><em>Clexulator</em></a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray, shape=(3,3), dtype=int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -707,20 +672,20 @@ checks relative locations</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="libcasm.clexulator.from_standard_values.html"
+       href="libcasm.clexulator.PrimNeighborList.total_n_sublattice.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">from_standard_values</p>
+        <p class="prev-next-title">total_n_sublattice</p>
       </div>
     </a>
     <a class="right-next"
-       href="libcasm.clexulator.make_cluster_expansion.html"
+       href="libcasm.clexulator.SparseCoefficients.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">make_cluster_expansion</p>
+        <p class="prev-next-title">SparseCoefficients</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -740,14 +705,14 @@ checks relative locations</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.clexulator.make_clexulator"><code class="docutils literal notranslate"><span class="pre">make_clexulator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.clexulator.PrimNeighborList.weight_matrix"><code class="docutils literal notranslate"><span class="pre">PrimNeighborList.weight_matrix()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.rst.txt">
+    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.weight_matrix.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

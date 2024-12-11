@@ -67,7 +67,7 @@ Matrix representations, :math:`\tilde{M}_i`, that transform :math:`\vec{\eta}` a
 
 To calculate symmetry adapted order parameters, a DoFSpace should be constructed with a symmetry adapted basis, :math:`Q`, which block diagonalizes the matrix representations :math:`\tilde{M}_i` with the smallest possible blocks (the `irreducible representations`). A block-diagonal matrix representation can only transform vectors in the subspace corresponding to the block into other vectors in the same subspace. These are `invariant subspaces` under the application of the symmetry, and the order parameters in these subspaces can be used as input variables to symmetry adapted basis functions for properties of the configuration.
 
-Construction of a symmetry adapted basis can be done using methods in `libcasm-configuration`, which provides support for determining and applying symmetry representations representations. This package provides the underlying methods that calculate :math:`\vec{\eta}` for a configuration (represented using :class:`~libcasm.clexulator.ConfigDoFValues`) given a particular choice of order parameter basis, :math:`Q`.
+Construction of a symmetry adapted basis can be done using methods in `libcasm-configuration`, which provides support for determining and applying symmetry representations. This package provides the underlying methods that calculate :math:`\vec{\eta}` for a configuration (represented using :class:`~libcasm.clexulator.ConfigDoFValues`) given a particular choice of order parameter basis, :math:`Q`.
 
 .. seealso::
 

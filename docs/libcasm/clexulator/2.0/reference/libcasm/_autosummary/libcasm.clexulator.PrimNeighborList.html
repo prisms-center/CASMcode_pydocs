@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>PrimNeighborList &#8212; libcasm-clexulator 2.0a4 documentation</title>
+    <title>PrimNeighborList &#8212; libcasm-clexulator 2.0a7 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../_static/documentation_options.js?v=b07e39d7"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -543,6 +543,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.neighbor_index.html">neighbor_index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.sublattice_indices.html">sublattice_indices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.total_n_sublattice.html">total_n_sublattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.weight_matrix.html">weight_matrix</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.clexulator.SparseCoefficients.html">SparseCoefficients</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -635,7 +636,7 @@ document.write(`
 <dl>
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator._clexulator.PrimNeighborList"><span class="pre">PrimNeighborList</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">lattice_weight_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.int64</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">sublattice_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">sublattice_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">total_n_sublattice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 </dl>
 
@@ -719,6 +720,9 @@ Required when <cite>lattice_weight_matrix</cite> is provided.</p></li>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.total_n_sublattice.html#libcasm.clexulator.PrimNeighborList.total_n_sublattice" title="libcasm.clexulator.PrimNeighborList.total_n_sublattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_n_sublattice</span></code></a></p></td>
 <td><p>int: The total number of sublattices in the relevant Prim.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.clexulator.PrimNeighborList.weight_matrix.html#libcasm.clexulator.PrimNeighborList.weight_matrix" title="libcasm.clexulator.PrimNeighborList.weight_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weight_matrix</span></code></a></p></td>
+<td><p>Get the weight matrix that defines the shape of neighborhood and orders neighbors.</p></td>
 </tr>
 </tbody>
 </table>
