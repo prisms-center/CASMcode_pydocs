@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.clexwriter._methods &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset.clexwriter._methods &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/clexwriter/_methods';</script>
@@ -416,6 +416,8 @@ document.write(`
   <h1>Source code for casm.bset.clexwriter._methods</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">jinja2</span>
@@ -437,6 +439,7 @@ document.write(`
     <span class="n">make_local_point_functions</span><span class="p">,</span>
     <span class="n">make_point_functions</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">casm.bset.json_io</span> <span class="kn">import</span> <span class="n">dump</span>
 <span class="kn">from</span> <span class="nn">casm.bset.polynomial_functions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">PolynomialFunction</span><span class="p">,</span>
 <span class="p">)</span>
@@ -781,11 +784,15 @@ document.write(`
                 <span class="n">linear_function_indices</span> <span class="ow">is</span> <span class="kc">None</span>
                 <span class="ow">or</span> <span class="n">linear_function_index</span> <span class="ow">in</span> <span class="n">linear_function_indices</span>
             <span class="p">):</span>
+                <span class="c1"># prototype_functions: i_func-th function on prototype cluster only</span>
                 <span class="c1"># orbit_functions: i_func-th function on each cluster in orbit</span>
-                <span class="n">orbit_functions</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="n">functions_by_cluster</span><span class="p">[</span><span class="n">i_func</span><span class="p">]</span>
-                    <span class="k">for</span> <span class="n">functions_by_cluster</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">]</span>
-                <span class="p">]</span>
+                <span class="n">prototype_functions</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">orbit_functions</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i_equiv</span><span class="p">,</span> <span class="n">functions_by_cluster</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">functions</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="n">i_equiv</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">prototype_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">functions_by_cluster</span><span class="p">[</span><span class="n">i_func</span><span class="p">])</span>
+                    <span class="n">orbit_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">functions_by_cluster</span><span class="p">[</span><span class="n">i_func</span><span class="p">])</span>
+
                 <span class="n">_add_variables_needed</span><span class="p">(</span>
                     <span class="n">data</span><span class="o">=</span><span class="n">variables_needed</span><span class="p">,</span>
                     <span class="n">functions</span><span class="o">=</span><span class="n">orbit_functions</span><span class="p">,</span>
@@ -804,14 +811,57 @@ document.write(`
                             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                             <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
                         <span class="p">),</span>
-                        <span class="s2">&quot;latex_prototype&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;todo&gt;&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;latex_orbit&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;todo&gt;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;latex_prototype&quot;</span><span class="p">:</span> <span class="n">orbit_bfunc_cpp_str</span><span class="p">(</span>
+                            <span class="c1"># only functions from prototype cluster</span>
+                            <span class="n">orbit_functions</span><span class="o">=</span><span class="n">prototype_functions</span><span class="p">,</span>
+                            <span class="c1"># orbit_size=len(orbit_functions) -&gt; same normalization</span>
+                            <span class="n">orbit_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">),</span>
+                            <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                            <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span>
+                            <span class="n">label_site_using</span><span class="o">=</span><span class="s2">&quot;cluster_site_index&quot;</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;latex_orbit&quot;</span><span class="p">:</span> <span class="n">orbit_bfunc_cpp_str</span><span class="p">(</span>
+                            <span class="n">orbit_functions</span><span class="o">=</span><span class="n">orbit_functions</span><span class="p">,</span>
+                            <span class="n">orbit_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">),</span>
+                            <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                            <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span>
+                            <span class="n">label_site_using</span><span class="o">=</span><span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
+                        <span class="p">),</span>
                     <span class="p">}</span>
                 <span class="p">)</span>
             <span class="n">linear_function_index</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">linear_orbit_index</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">orbit_bfuncs</span><span class="p">,</span> <span class="n">variables_needed</span><span class="p">)</span></div>
 
+
+
+<span class="k">def</span> <span class="nf">_print_latex_orbit_bfuncs</span><span class="p">(</span><span class="n">builder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For debugging purposes, print the orbit basis functions in LaTeX format.&quot;&quot;&quot;</span>
+    <span class="n">orbit_bfuncs</span><span class="p">,</span> <span class="n">variables_needed</span> <span class="o">=</span> <span class="n">make_orbit_bfuncs</span><span class="p">(</span>
+        <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+        <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">clusters</span><span class="p">,</span>
+        <span class="n">functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">functions</span><span class="p">,</span>
+        <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+        <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">CppFormatProperties</span><span class="p">(),</span>
+        <span class="n">linear_function_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;occ_var_name:&quot;</span><span class="p">,</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_var_desc:&quot;</span><span class="p">,</span> <span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_desc&quot;</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">orbit_bfunc</span> <span class="ow">in</span> <span class="n">orbit_bfuncs</span><span class="p">:</span>
+        <span class="n">linear_function_index</span> <span class="o">=</span> <span class="n">orbit_bfunc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;linear_function_index&quot;</span><span class="p">)</span>
+        <span class="n">orbit_latex_formula</span> <span class="o">=</span> <span class="n">orbit_bfunc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;latex_orbit&quot;</span><span class="p">)</span>
+        <span class="n">prototype_latex_formula</span> <span class="o">=</span> <span class="n">orbit_bfunc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;latex_prototype&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Linear function index: &quot;</span><span class="p">,</span> <span class="n">linear_function_index</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prototype_formula: &quot;</span><span class="p">,</span> <span class="n">prototype_latex_formula</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;formula: &quot;</span><span class="p">,</span> <span class="n">orbit_latex_formula</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">_make_site_bfuncs_data</span><span class="p">(</span>
@@ -838,14 +888,27 @@ document.write(`
                     <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                     <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
                 <span class="p">),</span>
-                <span class="s2">&quot;latex_prototype&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;todo&gt;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;latex_orbit&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;todo&gt;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;latex&quot;</span><span class="p">:</span> <span class="n">site_bfunc_cpp_str</span><span class="p">(</span>
+                    <span class="n">point_functions</span><span class="o">=</span><span class="n">equiv_functions_by_point</span><span class="p">,</span>
+                    <span class="n">orbit_size</span><span class="o">=</span><span class="n">orbit_size</span><span class="p">,</span>
+                    <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                    <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
                 <span class="s2">&quot;occ_delta_cpp&quot;</span><span class="p">:</span> <span class="n">occ_delta_site_bfunc_cpp_str</span><span class="p">(</span>
                     <span class="n">neighbor_list_index</span><span class="o">=</span><span class="n">neighbor_list_index</span><span class="p">,</span>
                     <span class="n">point_functions</span><span class="o">=</span><span class="n">equiv_functions_by_point</span><span class="p">,</span>
                     <span class="n">orbit_size</span><span class="o">=</span><span class="n">orbit_size</span><span class="p">,</span>
                     <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                     <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;occ_delta_latex&quot;</span><span class="p">:</span> <span class="n">occ_delta_site_bfunc_cpp_str</span><span class="p">(</span>
+                    <span class="n">neighbor_list_index</span><span class="o">=</span><span class="n">neighbor_list_index</span><span class="p">,</span>
+                    <span class="n">point_functions</span><span class="o">=</span><span class="n">equiv_functions_by_point</span><span class="p">,</span>
+                    <span class="n">orbit_size</span><span class="o">=</span><span class="n">orbit_size</span><span class="p">,</span>
+                    <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                    <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span>
                 <span class="p">),</span>
             <span class="p">}</span>
         <span class="p">)</span>
@@ -1017,10 +1080,65 @@ document.write(`
 
 
 
+<span class="k">def</span> <span class="nf">_print_latex_site_bfuncs</span><span class="p">(</span><span class="n">builder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For debugging purposes, print the site basis functions in LaTeX format.&quot;&quot;&quot;</span>
+
+    <span class="n">is_periodic</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">site_bfuncs</span><span class="p">,</span> <span class="n">site_bfuncs_variables_needed_at</span> <span class="o">=</span> <span class="n">make_site_bfuncs</span><span class="p">(</span>
+        <span class="n">is_periodic</span><span class="o">=</span><span class="n">is_periodic</span><span class="p">,</span>
+        <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+        <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">clusters</span><span class="p">,</span>
+        <span class="n">functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">functions</span><span class="p">,</span>
+        <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+        <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">CppFormatProperties</span><span class="p">(),</span>
+        <span class="n">linear_function_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;occ_var_name:&quot;</span><span class="p">,</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_var_desc:&quot;</span><span class="p">,</span> <span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_desc&quot;</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">site_bfunc_all</span> <span class="ow">in</span> <span class="n">site_bfuncs</span><span class="p">:</span>
+        <span class="n">linear_function_index</span> <span class="o">=</span> <span class="n">site_bfunc_all</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;linear_function_index&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;### Linear function index: &quot;</span><span class="p">,</span> <span class="n">linear_function_index</span><span class="p">,</span> <span class="s2">&quot;###&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">site_bfunc_at</span> <span class="ow">in</span> <span class="n">site_bfunc_all</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;at&quot;</span><span class="p">):</span>
+            <span class="n">neighbor_list_index</span> <span class="o">=</span> <span class="n">site_bfunc_at</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;neighbor_list_index&quot;</span><span class="p">)</span>
+            <span class="n">latex_formula</span> <span class="o">=</span> <span class="n">site_bfunc_at</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;latex&quot;</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Linear function index: &quot;</span><span class="p">,</span>
+                <span class="n">linear_function_index</span><span class="p">,</span>
+                <span class="s2">&quot;at: &quot;</span><span class="p">,</span>
+                <span class="n">neighbor_list_index</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;formula: &quot;</span><span class="p">,</span> <span class="n">latex_formula</span><span class="p">)</span>
+            <span class="n">occ_delta_latex_formula</span> <span class="o">=</span> <span class="n">site_bfunc_at</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_delta_latex&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_delta_formula: &quot;</span><span class="p">,</span> <span class="n">occ_delta_latex_formula</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+
 <div class="viewcode-block" id="ClexulatorWriter">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.ClexulatorWriter.html#casm.bset.clexwriter.ClexulatorWriter">[docs]</a>
 <span class="k">class</span> <span class="nc">ClexulatorWriter</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write Clexulator source files and related files&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write Clexulator source files and related files</span>
+
+<span class="sd">    The design is:</span>
+
+<span class="sd">    - :func:`~casm.bset.write_clexulator` is the intended user interface for</span>
+<span class="sd">      writing Clexulator source files</span>
+<span class="sd">    - :class:`~casm.bset.clexwriter.ClexulatorWriter` implements the things that</span>
+<span class="sd">      all Clexulator writer versions need to do (write the C++ source files,</span>
+<span class="sd">      basis.json, equivalents_info.json, etc.)</span>
+<span class="sd">    - :class:`~casm.bset.clexwriter._methods.WriterV1Basic` or other classes</span>
+<span class="sd">      (WriterV1Diff, etc.) implements the specifics for a particular Clexulator</span>
+<span class="sd">      `version`, by specifying the template files and generating the variables used</span>
+<span class="sd">      by the templates.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1111,6 +1229,10 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[pathlib.Path]]: The paths to the local Clexulator source \</span>
 <span class="sd">        files, once written.&quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">generated_files</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[pathlib.Path]]: The paths to the generated files, once \</span>
+<span class="sd">        written.&quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
             <span class="sa">R</span><span class="s2">&quot;^[a-zA-Z_]+\w*&quot;</span><span class="p">,</span>
             <span class="n">project_name</span><span class="p">,</span>
@@ -1143,6 +1265,8 @@ document.write(`
         <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">clex_basis_specs</span><span class="p">:</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span>
         <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">very_verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write Clexulator source files and related files</span>
 
@@ -1158,6 +1282,12 @@ document.write(`
 <span class="sd">            The :class:`PrimNeighborList` is used to uniquely index sites with local</span>
 <span class="sd">            variables included in the cluster functions, relative to a reference unit</span>
 <span class="sd">            cell. If None, a default neighbor list is constructed.</span>
+
+<span class="sd">        verbose: bool = True</span>
+<span class="sd">            Print progress statements</span>
+
+<span class="sd">        very_verbose: bool = False</span>
+<span class="sd">            Print detailed progress statements from the cluster functions builder.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cluster_specs</span> <span class="o">=</span> <span class="n">clex_basis_specs</span><span class="o">.</span><span class="n">cluster_specs</span>
@@ -1180,6 +1310,14 @@ document.write(`
                     <span class="s2">&quot;site_basis_functions&quot;</span>
                 <span class="p">]</span>
 
+        <span class="c1"># store a list of generated files</span>
+        <span class="n">generated_files</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building cluster functions...&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
         <span class="n">builder</span> <span class="o">=</span> <span class="n">ClusterFunctionsBuilder</span><span class="p">(</span>
             <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
             <span class="n">generating_group</span><span class="o">=</span><span class="n">cluster_specs</span><span class="o">.</span><span class="n">generating_group</span><span class="p">(),</span>
@@ -1190,7 +1328,21 @@ document.write(`
             <span class="n">orbit_branch_max_poly_order</span><span class="o">=</span><span class="n">orbit_branch_max_poly_order</span><span class="p">,</span>
             <span class="n">occ_site_basis_functions_specs</span><span class="o">=</span><span class="n">occ_site_basis_functions_specs</span><span class="p">,</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">very_verbose</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;cluster_functions.json.gz&quot;</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">dump</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building cluster functions DONE&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- n_orbits: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- n_functions: </span><span class="si">{</span><span class="n">builder</span><span class="o">.</span><span class="n">n_functions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build time: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (s)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span>
             <span class="n">trim_blocks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1206,53 +1358,109 @@ document.write(`
             <span class="n">is_periodic</span><span class="o">=</span><span class="n">is_periodic</span><span class="p">,</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
             <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+            <span class="n">occ_site_functions_info</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="p">,</span>
             <span class="n">linear_function_indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_function_indices</span><span class="p">,</span>
             <span class="n">cpp_fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_fmt</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1">## write periodic clexulator / prototype local clexulator</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating variables...&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
         <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer_type</span><span class="p">(</span>
             <span class="n">i_clex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">clusters</span><span class="p">,</span>
             <span class="n">functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">functions</span><span class="p">,</span>
             <span class="o">**</span><span class="n">writer_params</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">src_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">writer</span><span class="o">.</span><span class="n">clexulator_name</span><span class="si">}</span><span class="s2">.cc&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">src_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating variables DONE&quot;</span><span class="p">)</span>
+            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;generation time: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (s)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="c1"># Clexulator source file</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">writer</span><span class="o">.</span><span class="n">clexulator_name</span><span class="si">}</span><span class="s2">.cc&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">variables</span><span class="p">()))</span>
 
-        <span class="n">basis_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;basis.json&quot;</span>
+        <span class="c1"># basis.json file</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;basis.json&quot;</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">basis_dict</span><span class="p">(</span>
+            <span class="n">clex_basis_specs</span><span class="o">=</span><span class="n">clex_basis_specs</span><span class="p">,</span> <span class="n">coordinate_mode</span><span class="o">=</span><span class="s2">&quot;frac&quot;</span>
+        <span class="p">)</span>
+        <span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">basis_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">basis_dict</span><span class="p">(</span>
-                <span class="n">clex_basis_specs</span><span class="o">=</span><span class="n">clex_basis_specs</span><span class="p">,</span>
-                <span class="n">coordinate_mode</span><span class="o">=</span><span class="s2">&quot;frac&quot;</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="c1"># write all template variables</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;variables.json.gz&quot;</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">dump</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">variables</span><span class="p">(),</span> <span class="n">path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1">## if local clexulators</span>
         <span class="k">if</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># write equivalents_info.json</span>
-            <span class="n">equivalents_info_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;equivalents_info.json&quot;</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">equivalents_info_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalents_info_dict</span><span class="p">()))</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;equivalents_info.json&quot;</span>
+            <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">dump</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalents_info_dict</span><span class="p">(),</span> <span class="n">path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
             <span class="c1"># write each local clexulator</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i_clex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalent_clusters</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generating variables for local clexulator </span><span class="si">{</span><span class="n">i_clex</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
                 <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer_type</span><span class="p">(</span>
                     <span class="n">i_clex</span><span class="o">=</span><span class="n">i_clex</span><span class="p">,</span>
                     <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalent_clusters</span><span class="p">[</span><span class="n">i_clex</span><span class="p">],</span>
                     <span class="n">functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalent_functions</span><span class="p">[</span><span class="n">i_clex</span><span class="p">],</span>
                     <span class="o">**</span><span class="n">writer_params</span><span class="p">,</span>
                 <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i_clex</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">writer</span><span class="o">.</span><span class="n">clexulator_name</span><span class="si">}</span><span class="s2">.cc&quot;</span>
-                <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating variables DONE&quot;</span><span class="p">)</span>
+                    <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;generation time: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (s)&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                <span class="n">local_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i_clex</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">local_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="c1"># write local Clexulator</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">local_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">writer</span><span class="o">.</span><span class="n">clexulator_name</span><span class="si">}</span><span class="s2">.cc&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">variables</span><span class="p">()))</span>
 
+                <span class="c1"># write all template variables</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">local_dir</span> <span class="o">/</span> <span class="s2">&quot;variables.json&quot;</span>
+                <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="n">dump</span><span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">variables</span><span class="p">(),</span> <span class="n">path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># write generated_files.json (includes itself)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;generated_files.json&quot;</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generated_files</span> <span class="o">=</span> <span class="n">generated_files</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;src_path&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">)),</span>
+            <span class="s2">&quot;all&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">generated_files</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;local_src_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_src_path</span>
+            <span class="p">]</span>
+        <span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 </div>
 

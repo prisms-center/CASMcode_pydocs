@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.cluster_functions._matrix_rep &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset.cluster_functions._matrix_rep &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_matrix_rep';</script>
@@ -656,6 +656,112 @@ document.write(`
 
 
 
+<div class="viewcode-block" id="MakeVariableName">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.MakeVariableName.html#casm.bset.cluster_functions.MakeVariableName">[docs]</a>
+<span class="k">class</span> <span class="nc">MakeVariableName</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to construct variable names for DoF</span>
+
+<span class="sd">    - For continuous DoF, use the :class:`DoFSetBasis` axis names</span>
+<span class="sd">    - For discrete DoF, use a template string. For example, the default is</span>
+<span class="sd">      ``&quot;\\phi_{{{b},{m}}}&quot;`` where &quot;{b}&quot; is replaced by the sublattice index and</span>
+<span class="sd">      &quot;{m}&quot; is replaced by the site function index, a number in the range 0 to M-1,</span>
+<span class="sd">      where M is the number of occupants allowed on the site.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">occ_var_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">occ_var_desc</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        occ_var_name: Optional[str]=None</span>
+<span class="sd">            A template string for occupation variable names. The default is</span>
+<span class="sd">            &quot;\\phi_{{{b},{m}}}&quot;, where b is the sublattice index and m is the site</span>
+<span class="sd">            function index.</span>
+<span class="sd">        occ_var_desc: Optional[str]=None</span>
+<span class="sd">            A description of the occupation variable, particularly for the meaning of</span>
+<span class="sd">            the indices. The default is for the default `occ_var_name`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">occ_var_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">occ_var_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_{{</span><span class="si">{b}</span><span class="s2">,</span><span class="si">{m}</span><span class="s2">}}&quot;</span>
+        <span class="k">if</span> <span class="n">occ_var_desc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">occ_var_desc</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_{{</span><span class="si">{b}</span><span class="s2">,</span><span class="si">{m}</span><span class="s2">}}, where &quot;</span>
+                <span class="s2">&quot;$b$ is the sublattice index and &quot;</span>
+                <span class="s2">&quot;$m$ is the site function index&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_name</span> <span class="o">=</span> <span class="n">occ_var_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_desc</span> <span class="o">=</span> <span class="n">occ_var_desc</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">sublattice_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cluster_site_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">component_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">site_basis_function_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">make_variable_symbol</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sublattice_index</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sublattice_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">local_dof</span><span class="p">()[</span><span class="n">sublattice_index</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">global_dof</span><span class="p">()</span>
+            <span class="n">axis_names</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">dof_basis_set</span> <span class="ow">in</span> <span class="n">dof</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dof_basis_set</span><span class="o">.</span><span class="n">dofname</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                    <span class="n">axis_names</span> <span class="o">=</span> <span class="n">dof_basis_set</span><span class="o">.</span><span class="n">axis_names</span><span class="p">()</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">axis_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;x&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">axis_names</span><span class="p">[</span><span class="n">component_index</span><span class="p">]</span>
+
+        <span class="n">symbol</span> <span class="o">=</span> <span class="n">make_variable_symbol</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sublattice_index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cluster_site_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">local_discrete_dof</span><span class="p">:</span>
+                <span class="c1"># local discrete</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">sublattice_index</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">site_basis_function_index</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># local continuous</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># global continuous</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="MakeVariableName.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.MakeVariableName.to_dict.html#casm.bset.cluster_functions.MakeVariableName.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent the MakeVariableName object as a Python dict&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;occ_var_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_name</span><span class="p">,</span>
+            <span class="s2">&quot;occ_var_desc&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_desc</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="MakeVariableName.from_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.MakeVariableName.from_dict.html#casm.bset.cluster_functions.MakeVariableName.from_dict">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a MakeVariableName object from a Python dict&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">MakeVariableName</span><span class="p">(</span>
+            <span class="n">occ_var_name</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_name&quot;</span><span class="p">),</span>
+            <span class="n">occ_var_desc</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_desc&quot;</span><span class="p">),</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
 <span class="k">def</span> <span class="nf">make_variable_name</span><span class="p">(</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -665,33 +771,16 @@ document.write(`
     <span class="n">site_basis_function_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
 <span class="p">):</span>
-    <span class="k">def</span> <span class="nf">make_variable_symbol</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sublattice_index</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">sublattice_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">local_dof</span><span class="p">()[</span><span class="n">sublattice_index</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">global_dof</span><span class="p">()</span>
-        <span class="n">axis_names</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">for</span> <span class="n">dof_basis_set</span> <span class="ow">in</span> <span class="n">dof</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dof_basis_set</span><span class="o">.</span><span class="n">dofname</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
-                <span class="n">axis_names</span> <span class="o">=</span> <span class="n">dof_basis_set</span><span class="o">.</span><span class="n">axis_names</span><span class="p">()</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">axis_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;x&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">axis_names</span><span class="p">[</span><span class="n">component_index</span><span class="p">]</span>
-
-    <span class="n">symbol</span> <span class="o">=</span> <span class="n">make_variable_symbol</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sublattice_index</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">cluster_site_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">local_discrete_dof</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_</span><span class="se">{{</span><span class="si">{</span><span class="n">sublattice_index</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">site_basis_function_index</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(s_</span><span class="si">{</span><span class="n">cluster_site_index</span><span class="si">}</span><span class="s2">)&quot;</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">(s_</span><span class="si">{</span><span class="n">cluster_site_index</span><span class="si">}</span><span class="s2">)&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">MakeVariableName</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span>
+        <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+        <span class="n">sublattice_index</span><span class="o">=</span><span class="n">sublattice_index</span><span class="p">,</span>
+        <span class="n">cluster_site_index</span><span class="o">=</span><span class="n">cluster_site_index</span><span class="p">,</span>
+        <span class="n">component_index</span><span class="o">=</span><span class="n">component_index</span><span class="p">,</span>
+        <span class="n">site_basis_function_index</span><span class="o">=</span><span class="n">site_basis_function_index</span><span class="p">,</span>
+        <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">local_discrete_dof</span><span class="p">,</span>
+    <span class="p">)</span>
 
 
 <div class="viewcode-block" id="make_global_variables">
@@ -710,9 +799,11 @@ document.write(`
 <span class="sd">    key: str</span>
 <span class="sd">        The name of the global DoF type. Must exist in `prim`.</span>
 <span class="sd">    make_variable_name_f: Optional[Callable] = None</span>
-<span class="sd">        Allows specifying a custom function to construct variable names. The default</span>
-<span class="sd">        function used is :func:`make_variable_name`. Custom functions should have the</span>
-<span class="sd">        same signature as :func:`make_variable_name`.</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">        Custom classes should have the same `__call__` signature as</span>
+<span class="sd">        :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">        `occ_var_name` and `occ_var_desc` attributes.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -778,9 +869,11 @@ document.write(`
 <span class="sd">    cluster: Cluster</span>
 <span class="sd">        The cluster of sites with DoF to be transformed by the matrix representations.</span>
 <span class="sd">    make_variable_name_f: Optional[Callable] = None</span>
-<span class="sd">        Allows specifying a custom function to construct variable names. The default</span>
-<span class="sd">        function used is :func:`make_variable_name`. Custom functions should have the</span>
-<span class="sd">        same signature as :func:`make_variable_name`.</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">        Custom classes should have the same `__call__` signature as</span>
+<span class="sd">        :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">        `occ_var_name` and `occ_var_desc` attributes.</span>
 <span class="sd">    local_discrete_dof: list[str]</span>
 <span class="sd">        The types of local discrete degree of freedom (DoF).</span>
 
@@ -1319,17 +1412,42 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">site_rep</span> <span class="o">=</span> <span class="n">integral_site_coordinate_symgroup_rep</span>
 
+    <span class="c1"># P = B * Phi, P: indicator functions (as rows), Phi: site functions (as rows)</span>
+
+    <span class="c1"># Get Phi and Phi^-1 for each sublattice</span>
     <span class="n">phi</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">phi_inv</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">constant_function_index</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">sublattice_index</span><span class="p">,</span> <span class="n">indicator_rep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indicator_matrix_rep</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="n">site_functions</span> <span class="o">=</span> <span class="n">get_occ_site_functions</span><span class="p">(</span>
             <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">occ_site_functions</span><span class="p">,</span>
             <span class="n">sublattice_index</span><span class="o">=</span><span class="n">sublattice_index</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="c1"># Check for constant site function</span>
+        <span class="k">if</span> <span class="n">site_functions</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">constant_function_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">found_constant_function_index</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">function_index</span><span class="p">,</span> <span class="n">site_function</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">site_functions</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">site_function</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                    <span class="n">found_constant_function_index</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">constant_function_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">function_index</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">found_constant_function_index</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in make_occ_site_functions_matrix_rep: &quot;</span>
+                    <span class="s2">&quot;No constant function found for the occupation site basis &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;functions on sublattice </span><span class="si">{</span><span class="n">sublattice_index</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+
         <span class="n">phi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site_functions</span><span class="p">)</span>
         <span class="n">phi_inv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">site_functions</span><span class="p">))</span>
 
+    <span class="c1"># Generate the matrix rep for transforming phi, M_phi,</span>
+    <span class="c1"># from the matrix rep for transforming indicator functions, M_indicator:</span>
+    <span class="c1">#     M_phi[b_init] = phi[b_final] * M_indicator[b_init] * phi_inv[b_init]</span>
     <span class="n">occ_site_functions_matrix_rep</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mixing</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">prim_factor_group_index</span><span class="p">,</span> <span class="n">indicator_op_rep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indicator_matrix_rep</span><span class="p">):</span>
         <span class="n">site_functions_op_rep</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">sublattice_index</span><span class="p">,</span> <span class="n">indicator_rep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indicator_op_rep</span><span class="p">):</span>
@@ -1346,8 +1464,55 @@ document.write(`
                 <span class="n">site_functions_op_rep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
                 <span class="k">continue</span>
             <span class="n">site_function_rep</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">b_final</span><span class="p">]</span> <span class="o">@</span> <span class="n">indicator_rep</span> <span class="o">@</span> <span class="n">phi_inv</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+
+            <span class="n">x</span> <span class="o">=</span> <span class="n">site_function_rep</span><span class="p">[:,</span> <span class="n">constant_function_index</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">mixing</span> <span class="o">=</span> <span class="kc">True</span>
+
             <span class="n">site_functions_op_rep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site_function_rep</span><span class="p">)</span>
         <span class="n">occ_site_functions_matrix_rep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site_functions_op_rep</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mixing</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;**** Error in make_occ_site_functions_matrix_rep: **********************</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;* Invalid choice of occupation DoF site basis functions.               *</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;* The constant function is mixing with non-constant functions.         *</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;* Try using chebychev site basis functions or an isotropic default     *</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;* occupant.                                                            *</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;************************************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Occupation site basis functions:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sublattice_index</span><span class="p">,</span> <span class="n">indicator_rep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indicator_matrix_rep</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~ sublattice_index: </span><span class="si">{</span><span class="n">sublattice_index</span><span class="si">}</span><span class="s2"> ~&quot;</span><span class="p">)</span>
+            <span class="n">site_functions</span> <span class="o">=</span> <span class="n">get_occ_site_functions</span><span class="p">(</span>
+                <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">occ_site_functions</span><span class="p">,</span>
+                <span class="n">sublattice_index</span><span class="o">=</span><span class="n">sublattice_index</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">site_functions</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Site function matrix reps:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i_fg</span><span class="p">,</span> <span class="n">site_functions_op_rep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">occ_site_functions_matrix_rep</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~~~ prim_factor_group_index: </span><span class="si">{</span><span class="n">i_fg</span><span class="si">}</span><span class="s2"> ~~~&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">site_function_rep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">site_functions_op_rep</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~ sublattice_index: </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> ~&quot;</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">site_function_rep</span><span class="p">[:,</span> <span class="n">constant_function_index</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;********** Mixing **********&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;M:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">site_function_rep</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_occ_site_functions_matrix_rep: &quot;</span>
+            <span class="s2">&quot;Invalid choice of occupation DoF site basis functions. &quot;</span>
+            <span class="s2">&quot;The constant function is mixing with non-constant functions. &quot;</span>
+            <span class="s2">&quot;Try using chebychev site basis functions.&quot;</span>
+        <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">occ_site_functions_matrix_rep</span>
 
@@ -1419,9 +1584,11 @@ document.write(`
 <span class="sd">            :func:`~libcasm.clusterography.make_periodic_orbit` using the prim factor</span>
 <span class="sd">            group.</span>
 <span class="sd">        make_variable_name_f: Optional[Callable] = None</span>
-<span class="sd">            Allows specifying a custom function to construct variable names. The default</span>
-<span class="sd">            function used is :func:`make_variable_name`. Custom functions should have</span>
-<span class="sd">            the same signature as :func:`make_variable_name`.</span>
+<span class="sd">            Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">            class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">            Custom classes should have the same `__call__` signature as</span>
+<span class="sd">            :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">            `occ_var_name` and `occ_var_desc` attributes.</span>
 <span class="sd">        local_discrete_dof: Optional[list[str]] = None</span>
 <span class="sd">            The types of local discrete degree of freedom (DoF). If `key` is in</span>
 <span class="sd">            `local_discrete_dof`, then :func:`make_occ_site_functions_matrix_rep` is</span>
@@ -1481,6 +1648,15 @@ document.write(`
                     <span class="s2">&quot;occ_site_functions is None for discrete DoF.&quot;</span>
                 <span class="p">)</span>
 
+            <span class="c1"># # DEBUG:</span>
+            <span class="c1"># indicator_matrix_rep = prim.local_dof_matrix_rep(key)</span>
+            <span class="c1"># for i_fg, sublat_rep in enumerate(indicator_matrix_rep):</span>
+            <span class="c1">#     print(f&quot;~~~ fg: {i_fg} ~~~&quot;)</span>
+            <span class="c1">#     for i_sublat, M in enumerate(sublat_rep):</span>
+            <span class="c1">#         print(f&quot;~ b: {i_sublat} ~&quot;)</span>
+            <span class="c1">#         print(M)</span>
+            <span class="c1">#         print()</span>
+
             <span class="c1"># For discrete DoF, we need to construct the matrix rep for the</span>
             <span class="c1"># site basis functions actually being used from the matrix rep</span>
             <span class="c1"># for the indicator variables</span>
@@ -1532,7 +1708,7 @@ document.write(`
 
         <span class="c1">## Generated data ##</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dof_matrix_rep</span> <span class="o">=</span> <span class="n">local_dof_matrix_rep</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[np.ndarray]: The matrix representations for transforming site \</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[list[np.ndarray]]: The matrix representations for transforming site \</span>
 <span class="sd">        variables by prim factor group operations.</span>
 <span class="sd">        </span>
 <span class="sd">        The array ``M = dof_matrix_rep[i_factor_group][i_sublat_init]`` specifies that </span>
@@ -1540,7 +1716,11 @@ document.write(`
 <span class="sd">        ``x_final = M @ x_init``, where `x_init` are the site variables on an initial </span>
 <span class="sd">        site on the `i_sublat_init`-th sublattice and `x_final` are the site variables</span>
 <span class="sd">        on the final site under the application of the `i_factor_group`-th prim factor</span>
-<span class="sd">        group operation.&quot;&quot;&quot;</span>
+<span class="sd">        group operation.</span>
+<span class="sd">        </span>
+<span class="sd">        For example, for occupation DoF, these are the matrix representations </span>
+<span class="sd">        that transform the site basis functions, not the indicator functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">cluster_group</span> <span class="o">=</span> <span class="n">cluster_group</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.sym_info.SymGroup: The subgroup of the generating group that leaves \</span>
@@ -1594,7 +1774,30 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">total_dim</span> <span class="o">=</span> <span class="n">total_dim</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The total dimension of the resulting cluster DoF vector and cluster \</span>
-<span class="sd">        matrix reps.&quot;&quot;&quot;</span></div>
+<span class="sd">        matrix reps.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ClusterMatrixRepBuilder.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterMatrixRepBuilder.to_dict.html#casm.bset.cluster_functions.ClusterMatrixRepBuilder.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent the ClusterMatrixRepBuilder as a Python dict&quot;&quot;&quot;</span>
+
+        <span class="c1"># This is primarily intended for use by</span>
+        <span class="c1"># OrbitMatrixRepBuilder.to_dict(), so some duplicate information is</span>
+        <span class="c1"># not included.</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+            <span class="s2">&quot;dof_matrix_rep&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof_matrix_rep</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;cluster_group&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_group</span><span class="o">.</span><span class="n">head_group_index</span><span class="p">,</span>
+            <span class="s2">&quot;cluster_perm_rep&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_perm_rep</span><span class="p">,</span>
+            <span class="s2">&quot;cluster_matrix_rep&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_matrix_rep</span><span class="p">],</span>
+            <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">],</span>
+            <span class="s2">&quot;variable_subsets&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_subsets</span><span class="p">,</span>
+            <span class="s2">&quot;site_index_to_basis_index&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">site_index_to_basis_index</span><span class="p">,</span>
+            <span class="s2">&quot;total_dim&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_dim</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
 
 
 
@@ -1703,9 +1906,11 @@ document.write(`
 <span class="sd">            :func:`~libcasm.clusterography.make_periodic_orbit` using the prim factor</span>
 <span class="sd">            group.</span>
 <span class="sd">        make_variable_name_f: Optional[Callable] = None</span>
-<span class="sd">            Allows specifying a custom function to construct variable names. The default</span>
-<span class="sd">            function used is :func:`make_variable_name`. Custom functions should have</span>
-<span class="sd">            the same signature as :func:`make_variable_name`.</span>
+<span class="sd">            Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">            class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">            Custom classes should have the same `__call__` signature as</span>
+<span class="sd">            :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">            `occ_var_name` and `occ_var_desc` attributes.</span>
 <span class="sd">        occ_site_functions: Optional[list[dict]] = None</span>
 <span class="sd">            List of occupation site basis functions. For each sublattice with discrete</span>
 <span class="sd">            site basis functions, must include:</span>
@@ -2078,6 +2283,107 @@ document.write(`
 <span class="sd">        index into `orbit` of the initial cluster.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_make_phenomenal_generating_matrix_rep</span><span class="p">()</span>
+
+<div class="viewcode-block" id="OrbitMatrixRepBuilder.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.OrbitMatrixRepBuilder.to_dict.html#casm.bset.cluster_functions.OrbitMatrixRepBuilder.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store the OrbitMatrixRepBuilder in a dictionary.&quot;&quot;&quot;</span>
+
+        <span class="c1"># This is primarily intended for use by ClusterFunctionsBuilder.to_dict(),</span>
+        <span class="c1"># so we won&#39;t include every attribute in the dictionary to avoid duplicates,</span>
+        <span class="c1"># but we will include some duplicate information for clarity or convenience.</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;sites&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">to_list</span><span class="p">()}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;phenomenal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;sites&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span><span class="o">.</span><span class="n">to_list</span><span class="p">()}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_group</span><span class="o">.</span><span class="n">head_group_index</span>
+
+        <span class="c1"># Add DoF info...</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;global_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_dof</span><span class="p">,</span>
+                <span class="s2">&quot;local_continuous_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_continuous_dof</span><span class="p">,</span>
+                <span class="s2">&quot;local_discrete_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
+                <span class="s2">&quot;local_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_dof</span><span class="p">,</span>
+                <span class="s2">&quot;n_global_variables&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_global_variables</span><span class="p">,</span>
+                <span class="s2">&quot;n_local_variables&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_local_variables</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Global variables and matrix reps</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;global_variables&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dof_vars</span><span class="p">]</span> <span class="k">for</span> <span class="n">dof_vars</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_variables</span>
+        <span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;global_variable_subsets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_variable_subsets</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;global_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">dof_rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">dof_rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_matrix_rep</span>
+        <span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;global_inv_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">dof_rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">dof_rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_inv_matrix_rep</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Local variables and matrix reps</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;local_prototype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">cluster_matrix_rep_builder</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">cluster_matrix_rep_builder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_prototype</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Matrix reps for local DoFs on clusters</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;local_equivalence_map_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">dof_rep</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">dof_rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_equivalence_map_matrix_rep</span>
+        <span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;local_equivalence_map_inv_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">dof_rep</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">dof_rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_equivalence_map_inv_matrix_rep</span>
+        <span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;local_phenomenal_generating_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">dof_rep</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">dof_rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_phenomenal_generating_matrix_rep</span>
+        <span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;local_phenomenal_generating_inv_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">dof_rep</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">dof_rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_phenomenal_generating_inv_matrix_rep</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Coupled matrix reps</span>
+
+        <span class="c1"># Generate functions on the prototype cluster</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;prototype_variables&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prototype_variables</span><span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;prototype_variable_subsets&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prototype_variable_subsets</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;prototype_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prototype_matrix_rep</span><span class="p">]</span>
+
+        <span class="c1"># Generate functions on equivalent clusters</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;equivalence_map_indices&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_indices</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;equivalence_map_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_matrix_rep</span>
+        <span class="p">]</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;equivalence_map_inv_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_inv_matrix_rep</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Generate functions for equivalent phenomenal clusters</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;phenomenal_generating_indices&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_indices</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;phenomenal_generating_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_matrix_rep</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_matrix_rep</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;phenomenal_generating_inv_matrix_rep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_inv_matrix_rep</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_inv_matrix_rep</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
 
     <span class="k">def</span> <span class="nf">_make_orbit_and_equivalence_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>

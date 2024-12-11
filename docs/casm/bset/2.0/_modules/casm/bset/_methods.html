@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset._methods &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset._methods &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/_methods';</script>
@@ -417,7 +417,7 @@ document.write(`
 <span></span><span class="sd">&quot;&quot;&quot;Simple top-level casm.bset methods for the most common use cases&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -462,7 +462,7 @@ document.write(`
     <span class="n">custom_generators</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">ClusterOrbitGenerator</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
     <span class="n">phenomenal</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Cluster</span><span class="p">,</span> <span class="n">OccEvent</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">cutoff_radius</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
-    <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">global_max_poly_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">orbit_branch_max_poly_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClexBasisSpecs</span><span class="p">:</span>
@@ -499,10 +499,9 @@ document.write(`
 <span class="sd">        site to include in the local environment, by number of sites in the cluster.</span>
 <span class="sd">        The null cluster value (element 0) is arbitrary.</span>
 
-<span class="sd">    occ_site_basis_functions_specs: Union[str, list[dict], None] = None</span>
+<span class="sd">    occ_site_basis_functions_specs: Any = None</span>
 <span class="sd">        Provides instructions for constructing occupation site basis functions.</span>
-<span class="sd">        The accepted options are &quot;chebychev&quot;, &quot;occupation&quot;, or a `list[dict]`</span>
-<span class="sd">        a specifying sublattice-specific choice of site basis functions. This</span>
+<span class="sd">        The most common options are &quot;chebychev&quot; or &quot;occupation&quot;. This</span>
 <span class="sd">        parameter corresponds to the value of</span>
 
 <span class="sd">        .. code-block:: Python</span>
@@ -704,6 +703,8 @@ document.write(`
     <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;v1.basic&quot;</span><span class="p">,</span>
     <span class="n">linear_function_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CppFormatProperties</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">very_verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]],</span> <span class="n">PrimNeighborList</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write a CASM Clexulator</span>
 
@@ -763,6 +764,12 @@ document.write(`
 <span class="sd">    cpp_fmt: Optional[CppFormatProperties] = None</span>
 <span class="sd">        C++ string formatting properties. If None, default constructor values are used.</span>
 
+<span class="sd">    verbose: bool = True</span>
+<span class="sd">        Print progress statements</span>
+
+<span class="sd">    very_verbose: bool = False</span>
+<span class="sd">        Print detailed progress statements from the cluster functions builder.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    src_path: pathlib.Path</span>
@@ -792,6 +799,8 @@ document.write(`
         <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
         <span class="n">clex_basis_specs</span><span class="o">=</span><span class="n">clex_basis_specs</span><span class="p">,</span>
         <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="n">very_verbose</span><span class="o">=</span><span class="n">very_verbose</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">writer</span><span class="o">.</span><span class="n">src_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">.</span><span class="n">local_src_path</span><span class="p">,</span> <span class="n">prim_neighbor_list</span><span class="p">)</span></div>

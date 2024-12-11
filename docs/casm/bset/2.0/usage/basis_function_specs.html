@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Basis function specifications &#8212; casm-bset 2.0a1 documentation</title>
+    <title>Basis function specifications &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../_static/documentation_options.js?v=e877a769"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -606,17 +606,46 @@ with values equal to the spin occupation variables (<span class="math notranslat
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>For a binary alloy, the “occupation” site basis functions used by CASM have the value:</p>
+<p>For a binary alloy with occupants <cite>[“A”, “B”]</cite>, the “occupation” site basis functions used by CASM have the value:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\pmb{\varphi} = \begin{bmatrix}
 1 &amp; 1\\
 0 &amp; 1
 \end{bmatrix}.\end{split}\]</div>
-<p>For a ternary alloy, the “occupation” site basis functions used by CASM have the value:</p>
+<p>For a ternary alloy with occupants <cite>[“A”, “B”, “C”]</cite>, the “occupation” site basis functions used by CASM have the value:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\pmb{\varphi} = \begin{bmatrix}
 1 &amp; 1 &amp; 1\\
 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}.\end{split}\]</div>
+</section>
+<section id="occupation-site-basis-functions-with-choice-of-reference-occupant">
+<h4>Occupation site basis functions - with choice of reference occupant<a class="headerlink" href="#occupation-site-basis-functions-with-choice-of-reference-occupant" title="Link to this heading">#</a></h4>
+<p>It is also possible to change which occupant is the reference for the “occupation” site basis functions. This can be done using:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">basis_function_specs</span> <span class="o">=</span> <span class="n">BasisFunctionSpecs</span><span class="p">(</span>
+    <span class="n">dof_specs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;occ&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;site_basis_functions&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;occupation&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reference_occ&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>“reference_occ”</cite> is a list of the reference occupant on each sublattice.</p>
+<p>For a binary alloy with occupants <cite>[“A”, “B”]</cite>, these site basis functions specs would yield:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1\\
+1 &amp; 0
+\end{bmatrix}.\end{split}\]</div>
+<p>For a ternary alloy with occupants <cite>[“A”, “B”, “C”]</cite>, these site basis functions specs would yield:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{\varphi} = \begin{bmatrix}
+1 &amp; 1 &amp; 1\\
+1 &amp; 0 &amp; 0\\
 0 &amp; 0 &amp; 1
 \end{bmatrix}.\end{split}\]</div>
 </section>
@@ -936,6 +965,7 @@ for the cluster functions.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">Specification</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chebychev-occupation-site-basis-functions">Chebychev occupation site basis functions</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Occupation site basis functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#occupation-site-basis-functions-with-choice-of-reference-occupant">Occupation site basis functions - with choice of reference occupant</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-centered-site-basis-functions">Composition-centered site basis functions</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#directly-set-site-basis-functions">Directly-set site basis functions</a></li>
 </ul>

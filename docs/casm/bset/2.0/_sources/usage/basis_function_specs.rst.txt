@@ -242,7 +242,7 @@ The "occupation" site basis functions give an expansion (with correlation values
     )
 
 
-For a binary alloy, the "occupation" site basis functions used by CASM have the value:
+For a binary alloy with occupants `["A", "B"]`, the "occupation" site basis functions used by CASM have the value:
 
 .. math::
 
@@ -251,13 +251,53 @@ For a binary alloy, the "occupation" site basis functions used by CASM have the 
     0 & 1
     \end{bmatrix}.
 
-For a ternary alloy, the "occupation" site basis functions used by CASM have the value:
+For a ternary alloy with occupants `["A", "B", "C"]`, the "occupation" site basis functions used by CASM have the value:
 
 .. math::
 
     \pmb{\varphi} = \begin{bmatrix}
     1 & 1 & 1\\
     0 & 1 & 0\\
+    0 & 0 & 1
+    \end{bmatrix}.
+
+
+Occupation site basis functions - with choice of reference occupant
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+It is also possible to change which occupant is the reference for the "occupation" site basis functions. This can be done using:
+
+.. code-block:: Python
+
+    basis_function_specs = BasisFunctionSpecs(
+        dof_specs={
+            "occ": {
+                "site_basis_functions": {
+                    "type": "occupation",
+                    "reference_occ": ["B"]
+            }
+        }
+    )
+
+
+where `"reference_occ"` is a list of the reference occupant on each sublattice.
+
+For a binary alloy with occupants `["A", "B"]`, these site basis functions specs would yield:
+
+.. math::
+
+    \pmb{\varphi} = \begin{bmatrix}
+    1 & 1\\
+    1 & 0
+    \end{bmatrix}.
+
+For a ternary alloy with occupants `["A", "B", "C"]`, these site basis functions specs would yield:
+
+.. math::
+
+    \pmb{\varphi} = \begin{bmatrix}
+    1 & 1 & 1\\
+    1 & 0 & 0\\
     0 & 0 & 1
     \end{bmatrix}.
 

@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_cluster_functions';</script>
@@ -414,7 +414,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <h1>Source code for casm.bset.cluster_functions._cluster_functions</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -426,8 +426,10 @@ document.write(`
 <span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._discrete_functions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_occ_site_functions</span><span class="p">,</span>
     <span class="n">make_occ_site_functions</span><span class="p">,</span>
+    <span class="n">make_occ_site_functions_info</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._matrix_rep</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MakeVariableName</span><span class="p">,</span>
     <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._misc</span> <span class="kn">import</span> <span class="p">(</span>
@@ -685,7 +687,7 @@ document.write(`
 <span class="sd">            }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">occ_site_function</span><span class="p">[</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">]</span>
-    <span class="n">phi</span> <span class="o">=</span> <span class="n">occ_site_function</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">occ_site_function</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
     <span class="n">occ_dof</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">()[</span><span class="n">b</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">occ_dof</span><span class="p">)</span> <span class="o">!=</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">occ_dof</span><span class="p">)</span> <span class="o">!=</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
@@ -990,7 +992,7 @@ document.write(`
         <span class="n">dofs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">global_max_poly_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">orbit_branch_max_poly_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PrimNeighborList</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">make_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">make_all_local_basis_sets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1036,10 +1038,9 @@ document.write(`
 <span class="sd">            created. Higher order polynomials are requested either according to cluster</span>
 <span class="sd">            size using `orbit_branch_max_poly_order` or globally using</span>
 <span class="sd">            `global_max_poly_order`. The most specific level specified is used.</span>
-<span class="sd">        occ_site_basis_functions_specs: Union[str, list[dict], None] = None</span>
+<span class="sd">        occ_site_basis_functions_specs: Any = None</span>
 <span class="sd">            Provides instructions for constructing occupation site basis functions.</span>
-<span class="sd">            The accepted options are &quot;chebychev&quot;, &quot;occupation&quot;, or a `list[dict]`</span>
-<span class="sd">            a specifying sublattice-specific choice of site basis functions. This</span>
+<span class="sd">            The most common options are &quot;chebychev&quot; or &quot;occupation&quot;. This</span>
 <span class="sd">            parameter corresponds to the value of</span>
 
 <span class="sd">            .. code-block:: Python</span>
@@ -1068,9 +1069,11 @@ document.write(`
 <span class="sd">            clusters in the primitive cell equivalent by prim factor group symmetry.</span>
 <span class="sd">            Requires that `make_equivalents` is True.</span>
 <span class="sd">        make_variable_name_f: Optional[Callable] = None</span>
-<span class="sd">            Allows specifying a custom function to construct variable names. The default</span>
-<span class="sd">            function used is :func:`make_variable_name`. Custom functions should have</span>
-<span class="sd">            the same signature as :func:`make_variable_name`.</span>
+<span class="sd">            Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">            class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">            Custom classes should have the same `__call__` signature as</span>
+<span class="sd">            :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">            `occ_var_name` and `occ_var_desc` attributes.</span>
 <span class="sd">        verbose: bool = False</span>
 <span class="sd">            Print progress statements</span>
 
@@ -1090,6 +1093,32 @@ document.write(`
 
         <span class="n">only_discrete</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_dof</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_continuous_dof</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 
+        <span class="c1"># Validation</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_discrete_dof</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">occ_site_basis_functions_specs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;****************************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** Warning in ClusterFunctionsBuilder:                        **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** No local discrete DoF, but:                                **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** - occ_site_basis_functions_specs is not None               **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** Will use occ_site_basis_functions_specs=None               **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;****************************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">occ_site_basis_functions_specs</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_dof</span> <span class="o">+</span> <span class="n">local_continuous_dof</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">global_max_poly_order</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_branch_max_poly_order</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;****************************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** Warning in ClusterFunctionsBuilder:                        **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** Continuous DoF included, but:                              **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** - global_max_poly_order is None, and                       **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** - len(orbit_branch_max_poly_order) == 0                    **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;** Did you forget to set global_max_poly_order??              **</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;****************************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
         <span class="c1"># Data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span> <span class="o">=</span> <span class="n">prim</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.configuration.Prim: The Prim, with symmetry information&quot;&quot;&quot;</span>
@@ -1106,6 +1135,12 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="n">local_discrete_dof</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: List of local discrete DoF included in functions.&quot;&quot;&quot;</span>
+
+        <span class="n">local_dof</span> <span class="o">=</span> <span class="n">local_continuous_dof</span> <span class="o">+</span> <span class="n">local_discrete_dof</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_dof</span> <span class="o">=</span> <span class="n">local_dof</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: The types of local continuous and discrete degrees of freedom \</span>
+<span class="sd">        (DoF) included in the matrix representation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span> <span class="o">=</span> <span class="n">only_discrete</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: True if only discrete DoF are included in functions.&quot;&quot;&quot;</span>
@@ -1182,6 +1217,28 @@ document.write(`
 <span class="sd">       </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="n">occ_site_functions_info</span> <span class="o">=</span> <span class="n">make_occ_site_functions_info</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
+            <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">occ_site_functions</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># note: this generates default occ_var_name and occ_var_desc, which may be</span>
+        <span class="c1"># overridden by a custom make_variable_name_f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span> <span class="o">=</span> <span class="n">occ_site_functions_info</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: Information about occupation site basis functions.</span>
+<span class="sd">        </span>
+<span class="sd">        Occupation site basis functions info, with format:</span>
+
+<span class="sd">        - `&quot;max_function_index&quot;`: int, The maximum site function index, across all</span>
+<span class="sd">          sublattices.</span>
+<span class="sd">        - `&quot;all_sublattices_have_same_site_functions&quot;`: bool, True if all _sublattices</span>
+<span class="sd">          have same site functions; False otherwise.</span>
+<span class="sd">        - `&quot;occ_var_name&quot;`: str, A variable name template for the site functions,</span>
+<span class="sd">          which may be formated using `b` for sublattice index and `m` for site function</span>
+<span class="sd">          index (i..e ``occ_var_name.format(b=0, m=1)``).</span>
+<span class="sd">        - `&quot;occ_var_desc&quot;`: str, A description of the occupation</span>
+<span class="sd">          variable, including a description of the subscript indices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">prim_neighbor_list</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.clexulator.PrimNeighborList: The PrimNeighborList, expanded as \</span>
 <span class="sd">        necessary</span>
@@ -1206,12 +1263,26 @@ document.write(`
 <span class="sd">        `make_equivalents` is True.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">if</span> <span class="n">make_variable_name_f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">make_variable_name_f</span> <span class="o">=</span> <span class="n">MakeVariableName</span><span class="p">(</span>
+                <span class="n">occ_var_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_name&quot;</span><span class="p">),</span>
+                <span class="n">occ_var_desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_desc&quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="p">[</span>
+                <span class="s2">&quot;occ_var_name&quot;</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">make_variable_name_f</span><span class="o">.</span><span class="n">occ_var_name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="p">[</span>
+                <span class="s2">&quot;occ_var_desc&quot;</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">make_variable_name_f</span><span class="o">.</span><span class="n">occ_var_desc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_make_variable_name_f</span> <span class="o">=</span> <span class="n">make_variable_name_f</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Callable: Function used to construct variable names.</span>
 <span class="sd">        </span>
-<span class="sd">        The default function used is</span>
-<span class="sd">        :func:`~casm.bset.cluster_functions.make_variable_name`. Custom functions </span>
-<span class="sd">        have the same signature as :func:`make_variable_name`.</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`MakeVariableName`. Custom classes should have</span>
+<span class="sd">        the same `__call__` signature as :class:`MakeVariableName`, have</span>
+<span class="sd">        `occ_var_name`, `occ_var_desc`, `occ_var_indices` attributes, and a `to_dict`</span>
+<span class="sd">        method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
@@ -1303,6 +1374,13 @@ document.write(`
 <span class="sd">        `i_func`-th function on the cluster given by `clusters[i_orbit][i_equiv]`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="n">n_functions</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">orbit_basis_set</span> <span class="ow">in</span> <span class="n">orbit_basis_sets</span><span class="p">:</span>
+            <span class="n">n_functions</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_basis_set</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_functions</span> <span class="o">=</span> <span class="n">n_functions</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The total number of symmetrically distinct cluster functions generated</span>
+<span class="sd">        for all clusters in all orbits plus one (for the constant term).&quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span> <span class="o">=</span> <span class="n">orbit_clusters</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;list[list[libcasm.clusterography.Cluster]]: The clusters for which </span>
 <span class="sd">        cluster functions have been constructed</span>
@@ -1343,6 +1421,120 @@ document.write(`
 <span class="sd">        used in the :class:`~casm.bset.polynomial_functions.PolynomialFunction` stored </span>
 <span class="sd">        in :py:data:`~ClusterFunctionsBuilder.equivalent_functions`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ClusterFunctionsBuilder.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.to_dict.html#casm.bset.cluster_functions.ClusterFunctionsBuilder.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">def</span> <span class="nf">_clusters_data</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
+            <span class="n">clusters_data</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">orbit_clusters</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">:</span>
+                <span class="n">orbit_clusters_data</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">orbit_clusters</span><span class="p">:</span>
+                    <span class="n">orbit_clusters_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sites&quot;</span><span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">to_list</span><span class="p">()})</span>
+                <span class="n">clusters_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit_clusters_data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">clusters_data</span>
+
+        <span class="k">def</span> <span class="nf">_functions_data</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="n">functions_data</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">orbit_functions</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+                <span class="n">orbit_functions_data</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">equiv_functions</span> <span class="ow">in</span> <span class="n">orbit_functions</span><span class="p">:</span>
+                    <span class="n">equiv_functions_data</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">equiv_functions</span><span class="p">:</span>
+                        <span class="n">equiv_functions_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+                    <span class="n">orbit_functions_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">equiv_functions_data</span><span class="p">)</span>
+                <span class="n">functions_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit_functions_data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">functions_data</span>
+
+        <span class="c1"># Add prim</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;prim&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+        <span class="c1"># Add phenomenal</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;phenomenal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;sites&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span><span class="o">.</span><span class="n">to_list</span><span class="p">()}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add generating_group (as indices)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;generating_group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generating_group</span><span class="o">.</span><span class="n">head_group_index</span>
+
+        <span class="c1"># Add misc parameters...</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;global_max_poly_order&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_global_max_poly_order</span><span class="p">,</span>
+                <span class="s2">&quot;orbit_branch_max_poly_order&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orbit_branch_max_poly_order</span><span class="p">,</span>
+                <span class="s2">&quot;occ_site_basis_functions_specs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_occ_site_basis_functions_specs</span><span class="p">,</span>
+                <span class="s2">&quot;make_equivalents&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_equivalents</span><span class="p">,</span>
+                <span class="s2">&quot;make_all_local_basis_sets&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_all_local_basis_sets</span><span class="p">,</span>
+                <span class="s2">&quot;make_variable_name_f&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_variable_name_f</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add dof info...</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;global_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_dof</span><span class="p">,</span>
+                <span class="s2">&quot;local_continuous_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_continuous_dof</span><span class="p">,</span>
+                <span class="s2">&quot;local_discrete_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
+                <span class="s2">&quot;local_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_dof</span><span class="p">,</span>
+                <span class="s2">&quot;only_discrete&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add site functions</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;occ_site_functions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+                <span class="s2">&quot;occ_site_functions_info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add orbit_matrix_rep_builders</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;orbit_matrix_rep_builders&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">orbit_matrix_rep_builder</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">orbit_matrix_rep_builder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orbit_matrix_rep_builders</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Add self.clusters</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_clusters_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">)</span>
+
+        <span class="c1"># Add constraints</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;constraints&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">constraint</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">orbit_constraints</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">orbit_constraints</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Add self.functions</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;functions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_functions_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">functions</span><span class="p">)</span>
+
+        <span class="c1"># Add self.n_functions</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;n_functions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_functions</span>
+
+        <span class="c1"># Add self.equivalent_clusters</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;equivalent_clusters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">_clusters_data</span><span class="p">(</span><span class="n">equiv_clusters</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">equiv_clusters</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalent_clusters</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalent_clusters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add self.equivalent_functions</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;equivalent_functions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">_functions_data</span><span class="p">(</span><span class="n">equiv_functions</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">equiv_functions</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalent_functions</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalent_functions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
 
     <span class="k">def</span> <span class="nf">_min_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span><span class="p">:</span>

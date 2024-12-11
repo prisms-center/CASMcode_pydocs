@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.cluster_functions._discrete_functions &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset.cluster_functions._discrete_functions &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_discrete_functions';</script>
@@ -414,7 +414,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <h1>Source code for casm.bset.cluster_functions._discrete_functions</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -699,13 +699,18 @@ document.write(`
 
     <span class="n">occ_site_functions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">occ_site_functions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+        <span class="n">occ_site_functions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">tolist</span><span class="p">()})</span>
 
     <span class="k">return</span> <span class="n">occ_site_functions</span></div>
 
 
 
 <span class="k">def</span> <span class="nf">_is_occupation_site_functions</span><span class="p">(</span><span class="n">site_basis_functions_specs</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">site_basis_functions_specs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">site_basis_functions_specs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">site_basis_functions_specs</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;occupation&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">site_basis_functions_specs</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="n">site_basis_functions_specs</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;occupation&quot;</span>
@@ -716,6 +721,7 @@ document.write(`
 <span class="k">def</span> <span class="nf">make_occupation_site_functions</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
+    <span class="n">reference_occ</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make discrete occupation site functions using the &quot;occupation&quot; basis, which \</span>
 <span class="sd">    expands about the default configuration with each sublattice occupied by the first \</span>
@@ -728,6 +734,11 @@ document.write(`
 
 <span class="sd">    abs_tol: float = 1e-10</span>
 <span class="sd">        A absolute tolerance for comparing values.</span>
+
+<span class="sd">    reference_occ: list[str] = None</span>
+<span class="sd">        For each sublattice, the names of the occupant that should only give a non-zero</span>
+<span class="sd">        value for the constant site function. If not provided, the first occupant</span>
+<span class="sd">        listed in the prim is used.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -745,6 +756,22 @@ document.write(`
     <span class="n">site_rep</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">integral_site_coordinate_symgroup_rep</span>
     <span class="n">indicator_matrix_rep</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">local_dof_matrix_rep</span><span class="p">(</span><span class="s2">&quot;occ&quot;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">reference_occ</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">reference_occ</span> <span class="o">=</span> <span class="p">[</span><span class="n">site_occ_dofs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">site_occ_dofs</span> <span class="ow">in</span> <span class="n">occ_dofs</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reference_occ</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">occ_dofs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_occupation_site_functions: &quot;</span>
+            <span class="s2">&quot;reference_occ must have the same length as the number of sublattices.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">occ_dofs</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">reference_occ</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">occ_dofs</span><span class="p">[</span><span class="n">b</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Error in make_occupation_site_functions: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;for sublattice </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">, reference_occ[</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">]=</span><span class="si">{</span><span class="n">reference_occ</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="s2">&quot;is not an allowed occupant.&quot;</span>
+            <span class="p">)</span>
+
     <span class="n">phi</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">unit_indices</span> <span class="ow">in</span> <span class="n">all_indices</span><span class="p">:</span>
         <span class="n">b_init</span> <span class="o">=</span> <span class="n">unit_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -754,7 +781,8 @@ document.write(`
             <span class="k">continue</span>
 
         <span class="n">occ_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_allowed_occs</span><span class="p">,))</span>
-        <span class="n">occ_probs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">reference_index</span> <span class="o">=</span> <span class="n">occ_dofs</span><span class="p">[</span><span class="n">b_init</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">reference_occ</span><span class="p">[</span><span class="n">b_init</span><span class="p">])</span>
+        <span class="n">occ_probs</span><span class="p">[</span><span class="n">reference_index</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="n">phi</span><span class="p">[</span><span class="n">b_init</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_orthonormal_discrete_functions</span><span class="p">(</span><span class="n">occ_probs</span><span class="p">,</span> <span class="n">abs_tol</span><span class="p">)</span>
 
         <span class="n">site_init</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span><span class="n">sublattice</span><span class="o">=</span><span class="n">b_init</span><span class="p">,</span> <span class="n">unitcell</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
@@ -769,7 +797,7 @@ document.write(`
 
     <span class="n">occ_site_functions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">occ_site_functions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+        <span class="n">occ_site_functions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">tolist</span><span class="p">()})</span>
 
     <span class="k">return</span> <span class="n">occ_site_functions</span></div>
 
@@ -901,7 +929,7 @@ document.write(`
 
     <span class="n">occ_site_functions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">phi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">occ_site_functions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+        <span class="n">occ_site_functions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">tolist</span><span class="p">()})</span>
 
     <span class="k">return</span> <span class="n">occ_site_functions</span></div>
 
@@ -1026,7 +1054,10 @@ document.write(`
 
     <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">found_sublat_indices</span><span class="p">)</span>
     <span class="n">indices</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">_occ_site_functions</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">_occ_site_functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span>
+    <span class="p">]</span></div>
 
 
 
@@ -1034,7 +1065,7 @@ document.write(`
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_occ_site_functions.html#casm.bset.cluster_functions.make_occ_site_functions">[docs]</a>
 <span class="k">def</span> <span class="nf">make_occ_site_functions</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
-    <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]],</span>
+    <span class="n">occ_site_basis_functions_specs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make discrete occupation site functions from `dof_specs` input</span>
@@ -1044,7 +1075,7 @@ document.write(`
 <span class="sd">    prim: libcasm.configation.Prim</span>
 <span class="sd">        The prim, with symmetry information.</span>
 
-<span class="sd">    occ_site_basis_functions_specs: Union[str, list[dict]]</span>
+<span class="sd">    occ_site_basis_functions_specs: Any</span>
 <span class="sd">        Provides instructions for constructing occupation site basis functions. As</span>
 <span class="sd">        described in detail in the section</span>
 <span class="sd">        :ref:`DoF Specifications &lt;sec-dof-specifications&gt;`, the options are:</span>
@@ -1057,6 +1088,30 @@ document.write(`
 <span class="sd">          correlation values all equal to `0`) about the default configuration where</span>
 <span class="sd">          each site is occupied by the first allowed occupant in the prim</span>
 <span class="sd">          :func:`~libcasm.xtal.Prim.occ_dof` list.</span>
+<span class="sd">        - `{&quot;type&quot;: &quot;occupation&quot;, ...}`: An alternative way to specify &quot;occupation&quot;</span>
+<span class="sd">          site basis functions that allows specifying a &quot;reference_occ&quot; list of occupant</span>
+<span class="sd">          names to use as the reference occupant for each sublattice. If</span>
+<span class="sd">          &quot;reference_occ&quot; is not provided, the first occupant listed in the prim is</span>
+<span class="sd">          used. The reference occupant must the same on all symmetrically equivalent</span>
+<span class="sd">          sites. For example, an FCC A-B-C binary could use any of the following:</span>
+
+<span class="sd">          .. code-block:: Python</span>
+
+<span class="sd">              A_ref_specs = {</span>
+<span class="sd">                  &quot;type&quot;: &quot;occupation&quot;,</span>
+<span class="sd">                  &quot;reference_occ&quot;: [&quot;A&quot;],</span>
+<span class="sd">              }</span>
+
+<span class="sd">              B_ref_specs = {</span>
+<span class="sd">                  &quot;type&quot;: &quot;occupation&quot;,</span>
+<span class="sd">                  &quot;reference_occ&quot;: [&quot;B&quot;],</span>
+<span class="sd">              }</span>
+
+<span class="sd">              C_ref_specs = {</span>
+<span class="sd">                  &quot;type&quot;: &quot;occupation&quot;,</span>
+<span class="sd">                  &quot;reference_occ&quot;: [&quot;C&quot;],</span>
+<span class="sd">              }</span>
+
 <span class="sd">        - `list[dict]`: A list of dictionaries in one of the following formats:</span>
 
 <span class="sd">          - Composition-centered basis functions, which give an expansion (with</span>
@@ -1133,7 +1188,14 @@ document.write(`
     <span class="k">if</span> <span class="n">_is_chebychev_site_functions</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">make_chebychev_site_functions</span><span class="p">(</span><span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="n">abs_tol</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">_is_occupation_site_functions</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">make_occupation_site_functions</span><span class="p">(</span><span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="n">abs_tol</span><span class="p">)</span>
+        <span class="n">reference_occ</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">reference_occ</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reference_occ&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">make_occupation_site_functions</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
+            <span class="n">abs_tol</span><span class="o">=</span><span class="n">abs_tol</span><span class="p">,</span>
+            <span class="n">reference_occ</span><span class="o">=</span><span class="n">reference_occ</span><span class="p">,</span>
+        <span class="p">)</span>
     <span class="k">elif</span> <span class="n">_is_composition_site_functions</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">make_composition_site_functions</span><span class="p">(</span>
             <span class="n">site_basis_functions_specs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="n">abs_tol</span>
@@ -1204,6 +1266,106 @@ document.write(`
                 <span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></div>
 
+
+
+<span class="k">def</span> <span class="nf">make_occ_site_functions_info</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">occ_site_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get info used for naming the occupation variables in latex</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim: libcasm.configation.Prim</span>
+<span class="sd">        The prim, with symmetry information.</span>
+
+<span class="sd">    occ_site_functions: list[dict]</span>
+<span class="sd">        List of occupation site basis functions. For each sublattice with discrete</span>
+<span class="sd">        site basis functions, must include:</span>
+
+<span class="sd">        - `&quot;sublattice_index&quot;`: int, index of the sublattice</span>
+<span class="sd">        - `&quot;value&quot;`: list[list[float]], list of the site basis function values, as</span>
+<span class="sd">          ``value = functions[function_index][occupant_index]``.</span>
+
+<span class="sd">    abs_tol: float = 1e-10</span>
+<span class="sd">        A absolute tolerance for comparing values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    occ_site_functions_info: dict</span>
+<span class="sd">        Occupation site basis functions info, with format:</span>
+
+<span class="sd">        - `&quot;max_function_index&quot;`: int, The maximum site function index, across all</span>
+<span class="sd">          sublattices.</span>
+<span class="sd">        - `&quot;all_sublattices_have_same_site_functions&quot;`: bool, True if all _sublattices</span>
+<span class="sd">          have same site functions; False otherwise.</span>
+<span class="sd">        - `&quot;occ_var_name&quot;`: str, A variable name template for the site functions,</span>
+<span class="sd">          which may be formated using `b` for sublattice index and `m` for site function</span>
+<span class="sd">          index (i..e ``occ_var_name.format(b=0, m=1)``).</span>
+<span class="sd">        - `&quot;occ_var_desc&quot;: occ_var_desc, A description of the occupation</span>
+<span class="sd">          variable, including a description of the subscript indices.</span>
+<span class="sd">        - `&quot;occ_var_indices&quot;`: list[list[str, str]], A list of lists, where each sublist</span>
+<span class="sd">          contains the variable name and description for each subscript index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_function_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">all_sublattices_have_same_site_functions</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">phi_0</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">occ_dof_0</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">occ_dof</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">site_funcs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">occ_site_functions</span><span class="p">):</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">site_funcs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">site_funcs</span><span class="p">[</span><span class="s2">&quot;sublattice_index&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">max_function_index</span><span class="p">:</span>
+            <span class="n">max_function_index</span> <span class="o">=</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">phi_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">site_funcs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+            <span class="n">occ_dof_0</span> <span class="o">=</span> <span class="n">occ_dof</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">phi_0</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                <span class="n">all_sublattices_have_same_site_functions</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi_0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">abs_tol</span><span class="p">):</span>
+                <span class="n">all_sublattices_have_same_site_functions</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">elif</span> <span class="n">occ_dof</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">!=</span> <span class="n">occ_dof_0</span><span class="p">:</span>
+                <span class="n">all_sublattices_have_same_site_functions</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">max_function_index</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">all_sublattices_have_same_site_functions</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">occ_var_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi&quot;</span>
+            <span class="n">occ_var_desc</span> <span class="o">=</span> <span class="s2">&quot;Occupation site function&quot;</span>
+            <span class="n">occ_var_indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">occ_var_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_{{</span><span class="si">{b}</span><span class="s2">}}&quot;</span>
+            <span class="n">occ_var_desc</span> <span class="o">=</span> <span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">phi_</span><span class="si">{b}</span><span class="s2">$, where $b$ is the sublattice index&quot;</span>
+            <span class="n">occ_var_indices</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;sublattice index&quot;</span><span class="p">],</span>
+            <span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">all_sublattices_have_same_site_functions</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">occ_var_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_{{</span><span class="si">{m}</span><span class="s2">}}&quot;</span>
+            <span class="n">occ_var_desc</span> <span class="o">=</span> <span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">phi_</span><span class="si">{m}</span><span class="s2">$, where $m$ is the site function index&quot;</span>
+            <span class="n">occ_var_indices</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;site function index&quot;</span><span class="p">],</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">occ_var_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">phi_{{</span><span class="si">{b}</span><span class="s2">,</span><span class="si">{m}</span><span class="s2">}}&quot;</span>
+            <span class="n">occ_var_desc</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">phi_{{</span><span class="si">{b}</span><span class="s2">,</span><span class="si">{m}</span><span class="s2">}}$, where &quot;</span>
+                <span class="s2">&quot;$b$ is the sublattice index and &quot;</span>
+                <span class="s2">&quot;$m$ is the site function index&quot;</span>
+            <span class="p">)</span>
+            <span class="n">occ_var_indices</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;sublattice index&quot;</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;site function index&quot;</span><span class="p">],</span>
+            <span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;max_function_index&quot;</span><span class="p">:</span> <span class="n">max_function_index</span><span class="p">,</span>
+        <span class="s2">&quot;all_sublattices_have_same_site_functions&quot;</span><span class="p">:</span> <span class="n">all_sublattices_have_same_site_functions</span><span class="p">,</span>  <span class="c1"># noqa: E501</span>
+        <span class="s2">&quot;occ_var_name&quot;</span><span class="p">:</span> <span class="n">occ_var_name</span><span class="p">,</span>
+        <span class="s2">&quot;occ_var_desc&quot;</span><span class="p">:</span> <span class="n">occ_var_desc</span><span class="p">,</span>
+        <span class="s2">&quot;occ_var_indices&quot;</span><span class="p">:</span> <span class="n">occ_var_indices</span><span class="p">,</span>
+    <span class="p">}</span>
 </pre></div>
 
                 </article>

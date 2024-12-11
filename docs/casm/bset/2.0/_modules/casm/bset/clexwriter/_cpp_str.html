@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.clexwriter._cpp_str &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset.clexwriter._cpp_str &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/clexwriter/_cpp_str';</script>
@@ -421,6 +421,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">casm.bset.misc</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">almost_equal</span><span class="p">,</span>
     <span class="n">factor_by_mode</span><span class="p">,</span>
+    <span class="n">irrational_to_tex_string</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">casm.bset.polynomial_functions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">PolynomialFunction</span><span class="p">,</span>
@@ -471,6 +472,7 @@ document.write(`
     <span class="n">var</span><span class="p">:</span> <span class="n">Variable</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">occupant_index_argname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to evaluate an occupation site basis variable</span>
 
@@ -483,6 +485,8 @@ document.write(`
 <span class="sd">        The primitive neighbor list, used to find the sublattice index</span>
 <span class="sd">    occupant_index_argname: str</span>
 <span class="sd">        The occupant index argument name. Usually &quot;occ_i&quot; or &quot;occ_f&quot;.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -503,7 +507,14 @@ document.write(`
     <span class="n">i</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">nlist_sublat_indices</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">nlist_sublat_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">site_basis_function_index</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;m_occ_func_</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">occupant_index_argname</span><span class="si">}</span><span class="s2">]&quot;</span></div>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;m_occ_func_</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">occupant_index_argname</span><span class="si">}</span><span class="s2">]&quot;</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">occupant_index_argname</span><span class="si">}</span><span class="s2">_</span><span class="se">{{</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="se">}}</span><span class="s2">)&quot;</span>
+        <span class="c1"># return f&quot;\\phi_{{{b},{m}}}({occupant_index_argname}_{{{n}}})&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -512,6 +523,8 @@ document.write(`
 <span class="k">def</span> <span class="nf">variable_cpp_str</span><span class="p">(</span>
     <span class="n">var</span><span class="p">:</span> <span class="n">Variable</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
+    <span class="n">label_site_using</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to access an evaluated variable</span>
 
@@ -521,6 +534,11 @@ document.write(`
 <span class="sd">        The variable to be accessed.</span>
 <span class="sd">    prim_neighbor_list: PrimNeighborList</span>
 <span class="sd">        The PrimNeighborList used when constructing the functions.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
+<span class="sd">    label_site_using = &quot;neighborhood_site_index&quot;</span>
+<span class="sd">        The label to use for the site index in the output. Options are</span>
+<span class="sd">        &quot;neighborhood_site_index&quot; and &quot;cluster_site_index&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -536,16 +554,43 @@ document.write(`
         <span class="n">b</span> <span class="o">=</span> <span class="n">nlist_sublat_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">site_basis_function_index</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;occ_func_</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;occ_func_</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">label_site_using</span> <span class="o">==</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">(</span><span class="se">\\</span><span class="s2">vec</span><span class="se">{{</span><span class="s2">r</span><span class="se">}}</span><span class="s2">_</span><span class="se">{{</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="se">}}</span><span class="s2">)&quot;</span>
+            <span class="k">elif</span> <span class="n">label_site_using</span> <span class="o">==</span> <span class="s2">&quot;cluster_site_index&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">(</span><span class="se">\\</span><span class="s2">vec</span><span class="se">{{</span><span class="s2">r</span><span class="se">}}</span><span class="s2">_</span><span class="se">{{</span><span class="si">{</span><span class="n">cl</span><span class="si">}</span><span class="se">}}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid label_site_using: </span><span class="si">{</span><span class="n">label_site_using</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># local continuous DoF</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">component_index</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">_var_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&lt;Scalar&gt;(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">_var_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&lt;Scalar&gt;(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">label_site_using</span> <span class="o">==</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">(</span><span class="se">\\</span><span class="s2">vec</span><span class="se">{{</span><span class="s2">r</span><span class="se">}}</span><span class="s2">_</span><span class="se">{{</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="se">}}</span><span class="s2">)&quot;</span>
+            <span class="k">elif</span> <span class="n">label_site_using</span> <span class="o">==</span> <span class="s2">&quot;cluster_site_index&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">(</span><span class="se">\\</span><span class="s2">vec</span><span class="se">{{</span><span class="s2">r</span><span class="se">}}</span><span class="s2">_</span><span class="se">{{</span><span class="si">{</span><span class="n">cl</span><span class="si">}</span><span class="se">}}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid label_site_using: </span><span class="si">{</span><span class="n">label_site_using</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># global continuous DoF</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">component_index</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">_var&lt;Scalar&gt;(</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">_var&lt;Scalar&gt;(</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -557,6 +602,8 @@ document.write(`
     <span class="n">monomial_exponents</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">CppFormatProperties</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
+    <span class="n">label_site_using</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to evaluate a monomial</span>
 
@@ -570,6 +617,11 @@ document.write(`
 <span class="sd">        The PrimNeighborList used when constructing the functions.</span>
 <span class="sd">    cpp_fmt: CppFormatProperties</span>
 <span class="sd">        C++ string formatting properties.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
+<span class="sd">    label_site_using = &quot;neighborhood_site_index&quot;</span>
+<span class="sd">        The label to use for the site index in the output. Options are</span>
+<span class="sd">        &quot;neighborhood_site_index&quot; and &quot;cluster_site_index&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -588,16 +640,31 @@ document.write(`
     <span class="k">for</span> <span class="n">i_var</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">monomial_exponents</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">variable_cpp_str</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">i_var</span><span class="p">],</span> <span class="n">prim_neighbor_list</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">variable_cpp_str</span><span class="p">(</span>
+            <span class="n">variables</span><span class="p">[</span><span class="n">i_var</span><span class="p">],</span>
+            <span class="n">prim_neighbor_list</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">label_site_using</span><span class="o">=</span><span class="n">label_site_using</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">use_mul</span><span class="p">:</span>
-            <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+                <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+            <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+                <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="n">use_mul</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">op</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2">pow(</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+                <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2">pow(</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+                <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">op</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">^</span><span class="se">{{</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cpp_str</span></div>
 
 
@@ -609,6 +676,8 @@ document.write(`
     <span class="n">normalization</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">CppFormatProperties</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
+    <span class="n">label_site_using</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to evaluate a polynomial expression</span>
 
@@ -624,6 +693,11 @@ document.write(`
 <span class="sd">        The PrimNeighborList used when constructing the functions.</span>
 <span class="sd">    cpp_fmt: CppFormatProperties</span>
 <span class="sd">        C++ string formatting properties.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
+<span class="sd">    label_site_using = &quot;neighborhood_site_index&quot;</span>
+<span class="sd">        The label to use for the site index in the output. Options are</span>
+<span class="sd">        &quot;neighborhood_site_index&quot; and &quot;cluster_site_index&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -645,7 +719,15 @@ document.write(`
 
     <span class="n">cpp_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_one</span><span class="p">(</span><span class="n">common_prefix</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="o">.</span><span class="n">coeff_atol</span><span class="p">):</span>
-        <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">common_prefix</span><span class="si">:{</span><span class="n">cpp_fmt</span><span class="o">.</span><span class="n">coeff_fmt_spec</span><span class="si">}}</span><span class="s2"> * &quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+            <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">common_prefix</span><span class="si">:{</span><span class="n">cpp_fmt</span><span class="o">.</span><span class="n">coeff_fmt_spec</span><span class="si">}}</span><span class="s2"> * &quot;</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+            <span class="n">limit</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="n">max_pow</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">common_prefix_tex</span> <span class="o">=</span> <span class="n">irrational_to_tex_string</span><span class="p">(</span>
+                <span class="n">common_prefix</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">max_pow</span><span class="o">=</span><span class="n">max_pow</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">1e-5</span>
+            <span class="p">)</span>
+            <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">common_prefix_tex</span><span class="si">}</span><span class="s2"> &quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;(</span><span class="se">\n</span><span class="s2">&quot;</span>
 
@@ -660,7 +742,8 @@ document.write(`
             <span class="n">orbit_use_plus</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_one</span><span class="p">(</span><span class="n">factored_prefixes</span><span class="p">[</span><span class="n">i_func</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="o">.</span><span class="n">coeff_atol</span><span class="p">):</span>
             <span class="n">cpp_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">factored_prefixes</span><span class="p">[</span><span class="n">i_func</span><span class="p">]</span><span class="si">:{</span><span class="n">cpp_fmt</span><span class="o">.</span><span class="n">coeff_fmt_spec</span><span class="si">}}</span><span class="s2"> * &quot;</span>
-        <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;(&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">monomial_exponents</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;(&quot;</span>
         <span class="n">cluster_use_plus</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">i_monomial</span><span class="p">,</span> <span class="n">_monomial_exponents</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">monomial_exponents</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">cluster_use_plus</span><span class="p">:</span>
@@ -674,8 +757,11 @@ document.write(`
                 <span class="n">monomial_exponents</span><span class="o">=</span><span class="n">_monomial_exponents</span><span class="p">,</span>
                 <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                 <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+                <span class="n">label_site_using</span><span class="o">=</span><span class="n">label_site_using</span><span class="p">,</span>
             <span class="p">)</span>
-        <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">monomial_exponents</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
@@ -694,6 +780,8 @@ document.write(`
     <span class="n">orbit_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">CppFormatProperties</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
+    <span class="n">label_site_using</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to evaluate a single orbit basis function</span>
 
@@ -709,6 +797,11 @@ document.write(`
 <span class="sd">        The PrimNeighborList used when constructing the functions.</span>
 <span class="sd">    cpp_fmt: CppFormatProperties</span>
 <span class="sd">        C++ string formatting properties.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
+<span class="sd">    label_site_using = &quot;neighborhood_site_index&quot;</span>
+<span class="sd">        The label to use for the site index in the output. Options are</span>
+<span class="sd">        &quot;neighborhood_site_index&quot; and &quot;cluster_site_index&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -723,6 +816,8 @@ document.write(`
         <span class="n">normalization</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">orbit_size</span><span class="p">),</span>
         <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
         <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+        <span class="n">label_site_using</span><span class="o">=</span><span class="n">label_site_using</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -734,6 +829,8 @@ document.write(`
     <span class="n">orbit_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">CppFormatProperties</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
+    <span class="n">label_site_using</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to evaluate a single point correlation function</span>
 
@@ -749,6 +846,8 @@ document.write(`
 <span class="sd">        The PrimNeighborList used when constructing the functions.</span>
 <span class="sd">    cpp_fmt: CppFormatProperties</span>
 <span class="sd">        C++ string formatting properties.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -764,6 +863,8 @@ document.write(`
         <span class="n">normalization</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">orbit_size</span><span class="p">),</span>
         <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
         <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+        <span class="n">label_site_using</span><span class="o">=</span><span class="n">label_site_using</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -776,6 +877,8 @@ document.write(`
     <span class="n">orbit_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">CppFormatProperties</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpp&quot;</span><span class="p">,</span>
+    <span class="n">label_site_using</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a C++ expression to evaluate the change in a single point correlation \</span>
 <span class="sd">    function due to a change in occupation</span>
@@ -794,6 +897,8 @@ document.write(`
 <span class="sd">        The PrimNeighborList used when constructing the functions.</span>
 <span class="sd">    cpp_fmt: CppFormatProperties</span>
 <span class="sd">        C++ string formatting properties.</span>
+<span class="sd">    mode: str = &quot;cpp&quot;</span>
+<span class="sd">        The mode for the output. Options are &quot;cpp&quot; and &quot;latex&quot;.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -846,16 +951,27 @@ document.write(`
     <span class="n">indent</span> <span class="o">=</span> <span class="s2">&quot;  &quot;</span>
     <span class="n">cpp_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">use_plus</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cpp&quot;</span><span class="p">:</span>
+        <span class="n">occupant_index_argname_final</span> <span class="o">=</span> <span class="s2">&quot;occ_f&quot;</span>
+        <span class="n">occupant_index_argname_init</span> <span class="o">=</span> <span class="s2">&quot;occ_i&quot;</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;latex&quot;</span><span class="p">:</span>
+        <span class="n">occupant_index_argname_final</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">vec</span><span class="si">{r}</span><span class="s2">^{</span><span class="se">\\</span><span class="s2"> f}&quot;</span>
+        <span class="n">occupant_index_argname_init</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">vec</span><span class="si">{r}</span><span class="s2">^{</span><span class="se">\\</span><span class="s2"> i}&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
     <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">factored_point_functions</span> <span class="ow">in</span> <span class="n">occ_delta_functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">site_var_final</span> <span class="o">=</span> <span class="n">occ_func_cpp_str</span><span class="p">(</span>
             <span class="n">var</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
-            <span class="n">occupant_index_argname</span><span class="o">=</span><span class="s2">&quot;occ_f&quot;</span><span class="p">,</span>
+            <span class="n">occupant_index_argname</span><span class="o">=</span><span class="n">occupant_index_argname_final</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">site_var_init</span> <span class="o">=</span> <span class="n">occ_func_cpp_str</span><span class="p">(</span>
             <span class="n">var</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
-            <span class="n">occupant_index_argname</span><span class="o">=</span><span class="s2">&quot;occ_i&quot;</span><span class="p">,</span>
+            <span class="n">occupant_index_argname</span><span class="o">=</span><span class="n">occupant_index_argname_init</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">use_plus</span><span class="p">:</span>
             <span class="n">cpp_str</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">indent</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span>
@@ -867,6 +983,8 @@ document.write(`
             <span class="n">normalization</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">orbit_size</span><span class="p">),</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
             <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">label_site_using</span><span class="o">=</span><span class="n">label_site_using</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">cpp_str</span></div>
 

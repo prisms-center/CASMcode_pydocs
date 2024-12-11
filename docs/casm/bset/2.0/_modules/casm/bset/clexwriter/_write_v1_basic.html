@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.clexwriter._write_v1_basic &#8212; casm-bset 2.0a1 documentation</title>
+    <title>casm.bset.clexwriter._write_v1_basic &#8212; casm-bset 2.0a2 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/clexwriter/_write_v1_basic';</script>
@@ -415,6 +415,8 @@ document.write(`
                   
   <h1>Source code for casm.bset.clexwriter._write_v1_basic</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">casmclust</span>
@@ -439,7 +441,8 @@ document.write(`
 <div class="viewcode-block" id="WriterV1Basic">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.WriterV1Basic.html#casm.bset.clexwriter.WriterV1Basic">[docs]</a>
 <span class="k">class</span> <span class="nc">WriterV1Basic</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes standard CASM v1 compatible Clexulator (no automatic differentiation)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates the variables needed for the `v1.basic` Clexulator, the</span>
+<span class="sd">    standard CASM v1 compatible Clexulator (no automatic differentiation)&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="WriterV1Basic.template_name">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.WriterV1Basic.template_name.html#casm.bset.clexwriter.WriterV1Basic.template_name">[docs]</a>
@@ -467,8 +470,10 @@ document.write(`
         <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
         <span class="n">functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]]],</span>
         <span class="n">occ_site_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">occ_site_functions_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
         <span class="n">linear_function_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CppFormatProperties</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -515,6 +520,24 @@ document.write(`
 <span class="sd">            - `&quot;value&quot;`: list[list[float]], list of the site basis function values,</span>
 <span class="sd">              as ``value[function_index][occupant_index]``.</span>
 
+<span class="sd">        occ_site_functions_info: dict</span>
+<span class="sd">            Information about occupation site basis functions.</span>
+
+<span class="sd">            Occupation site basis functions info, with format:</span>
+
+<span class="sd">            - `&quot;max_function_index&quot;`: int, The maximum site function index, across all</span>
+<span class="sd">              sublattices.</span>
+<span class="sd">            - `&quot;all_sublattices_have_same_site_functions&quot;`: bool, True if all</span>
+<span class="sd">              sublattices have same site functions; False otherwise.</span>
+<span class="sd">            - `&quot;occ_var_name&quot;`: str, A variable name template for the site functions,</span>
+<span class="sd">              which may be formated using `b` for sublattice index and `m` for site</span>
+<span class="sd">              function index (i..e ``occ_var_name.format(b=0, m=1)``).</span>
+<span class="sd">            - `&quot;occ_var_desc&quot;`: str, A description of the occupation</span>
+<span class="sd">              variable, including a description of the subscript indices.</span>
+<span class="sd">            - `&quot;occ_var_indices&quot;`: list[list[str, str]], A list of lists, where each</span>
+<span class="sd">              sublist contains the variable name and description for each subscript</span>
+<span class="sd">              index.</span>
+
 <span class="sd">        linear_function_indices : Optional[set[int]]</span>
 <span class="sd">            The linear indices of the functions that will be included. If None,</span>
 <span class="sd">            all functions will be included in the Clexulator. Otherwise,</span>
@@ -530,6 +553,9 @@ document.write(`
 <span class="sd">                    coeff_fmt_spec=&quot;.10f&quot;,</span>
 <span class="sd">                    coeff_atol=1e-10,</span>
 <span class="sd">                )</span>
+
+<span class="sd">        verbose: bool = False</span>
+<span class="sd">            Print progress statements</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -595,6 +621,23 @@ document.write(`
                     <span class="s2">&quot;a constant function.&quot;</span>
                 <span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span> <span class="o">=</span> <span class="n">occ_site_functions_info</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: Information about occupation site basis functions.</span>
+<span class="sd">        </span>
+<span class="sd">        Occupation site basis functions info, with format:</span>
+<span class="sd">        </span>
+<span class="sd">        - `&quot;max_function_index&quot;`: int, The maximum site function index, across all</span>
+<span class="sd">            sublattices.</span>
+<span class="sd">        - `&quot;all_sublattices_have_same_site_functions&quot;`: bool, True if all _sublattices</span>
+<span class="sd">            have same site functions; False otherwise.</span>
+<span class="sd">        - `&quot;occ_var_name&quot;`: str, A variable name template for the site functions,</span>
+<span class="sd">            which may be formated using `b` for sublattice index and `m` for site </span>
+<span class="sd">            function index (i..e ``occ_var_name.format(b=0, m=1)``).</span>
+<span class="sd">        - `&quot;occ_var_desc&quot;`: str, A description of the occupation</span>
+<span class="sd">            variable, including a description of the subscript indices.</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c1">## set linear_function_indices</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">linear_function_indices</span> <span class="o">=</span> <span class="n">linear_function_indices</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[set[int]]: The linear indices of the functions that will be </span>
@@ -624,6 +667,11 @@ document.write(`
             <span class="bp">self</span><span class="o">.</span><span class="n">n_corr</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">prototype_functions</span><span class="p">)</span>
 
         <span class="c1">## set neighborhood info</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating neighborhoods...&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
         <span class="n">_complete_neighborhood</span><span class="p">,</span> <span class="n">_function_neighborhoods</span> <span class="o">=</span> <span class="n">make_neighborhoods</span><span class="p">(</span>
             <span class="n">is_periodic</span><span class="o">=</span><span class="n">is_periodic</span><span class="p">,</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
@@ -631,6 +679,13 @@ document.write(`
             <span class="n">functions</span><span class="o">=</span><span class="n">functions</span><span class="p">,</span>
             <span class="n">linear_function_indices</span><span class="o">=</span><span class="n">linear_function_indices</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating neighborhoods DONE&quot;</span><span class="p">)</span>
+            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;time: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (s)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">complete_neighborhood</span> <span class="o">=</span> <span class="n">_complete_neighborhood</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: The neighborhood needed to evaluate basis functions </span>
@@ -686,7 +741,7 @@ document.write(`
 <span class="sd">        - ``&quot;linear_orbit_index&quot;``: int, Linear cluster orbit index</span>
 <span class="sd">        - ``&quot;cpp&quot;``: str, C++ expression for evaluating the global correlation</span>
 <span class="sd">          contribution</span>
-<span class="sd">        - ``&quot;latex_prototype&quot;``: str, Latex formula for the prototype</span>
+<span class="sd">        - ``&quot;latex_prototype&quot;``: str, Latex formula for the prototype cluster</span>
 <span class="sd">        - ``latex_orbit&quot;``: str, Latex formula for the orbit contribution</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -701,6 +756,11 @@ document.write(`
 <span class="sd">        continuous DoF are None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating orbit function formulas...&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">orbit_bfuncs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">orbit_bfuncs_variables_needed</span> <span class="o">=</span> <span class="n">make_orbit_bfuncs</span><span class="p">(</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
             <span class="n">clusters</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span>
@@ -709,6 +769,13 @@ document.write(`
             <span class="n">cpp_fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_fmt</span><span class="p">,</span>
             <span class="n">linear_function_indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_function_indices</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating orbit function formulas DONE&quot;</span><span class="p">)</span>
+            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;time: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (s)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="c1">## set site_bfuncs and site_bfuncs_variables_needed_at</span>
 
@@ -746,6 +813,11 @@ document.write(`
 <span class="sd">        continuous DoF are None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating site function formulas...&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">site_bfuncs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">site_bfuncs_variables_needed_at</span> <span class="o">=</span> <span class="n">make_site_bfuncs</span><span class="p">(</span>
             <span class="n">is_periodic</span><span class="o">=</span><span class="n">is_periodic</span><span class="p">,</span>
             <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
@@ -755,6 +827,13 @@ document.write(`
             <span class="n">cpp_fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_fmt</span><span class="p">,</span>
             <span class="n">linear_function_indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_function_indices</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating site function formulas DONE&quot;</span><span class="p">)</span>
+            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;time: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (s)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="c1">## set n_point_corr_sites</span>
         <span class="n">n_point_corr_sites</span> <span class="o">=</span> <span class="mi">0</span>
@@ -922,6 +1001,7 @@ document.write(`
             <span class="s2">&quot;site_bfuncs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">site_bfuncs</span><span class="p">,</span>
             <span class="s2">&quot;site_bfuncs_variables_needed_at&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">site_bfuncs_variables_needed_at</span><span class="p">,</span>
             <span class="s2">&quot;occ_site_functions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
+            <span class="s2">&quot;occ_site_functions_info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="p">,</span>
             <span class="s2">&quot;continuous_dof&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuous_dof</span><span class="p">,</span>
             <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span>
             <span class="s2">&quot;nlist_weight_matrix&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="o">.</span><span class="n">weight_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
