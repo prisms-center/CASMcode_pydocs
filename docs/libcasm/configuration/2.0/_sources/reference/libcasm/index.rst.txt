@@ -13,5 +13,6 @@ Reference (libcasm-configuration)
     libcasm.configuration
     libcasm.enumerate
     libcasm.irreps
+    libcasm.local_configuration
     libcasm.occ_events
     libcasm.sym_info

@@ -1,0 +1,48 @@
+﻿libcasm.local\_configuration
+============================
+
+.. automodule:: libcasm.local_configuration
+
+  
+  
+  
+
+  
+  
+  .. rubric:: Functions
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-function-template.rst
+  
+    make_canonical_local_configuration
+    make_equivalents_generators
+    make_occevent_equivalents_generators
+    make_occevent_suborbits
+  
+  
+
+  
+  
+  .. rubric:: Classes
+
+  .. autosummary::
+    :nosignatures:
+    :toctree:
+    :template: custom-class-template.rst
+  
+    LocalConfiguration
+    LocalConfigurationList
+    OccEventPrimSymInfo
+    OccEventSupercellSymInfo
+    OccEventSymInfo
+  
+  
+
+  
+  
+  
+
+
+

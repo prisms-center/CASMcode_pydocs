@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._SuperConfigEnum &#8212; libcasm-configuration 2.0a5 documentation</title>
+    <title>libcasm.enumerate._SuperConfigEnum &#8212; libcasm-configuration 2.0a6 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=23fe37a4"></script>
+    <script src="../../../_static/documentation_options.js?v=1406bdce"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_SuperConfigEnum';</script>
@@ -407,6 +407,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">libcasm.configuration</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Configuration</span><span class="p">,</span>
     <span class="n">Prim</span><span class="p">,</span>
+    <span class="n">Supercell</span><span class="p">,</span>
     <span class="n">SupercellSet</span><span class="p">,</span>
     <span class="n">copy_configuration</span><span class="p">,</span>
     <span class="n">make_canonical_configuration</span><span class="p">,</span>
@@ -449,6 +450,39 @@ document.write(`
 <span class="sd">        adding in the :class:`~casmconfig.SupercellSet`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supercell_set</span>
 
+    <span class="k">def</span> <span class="nf">_one_supercell</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">motif</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+        <span class="n">supercell</span><span class="p">:</span> <span class="n">Supercell</span><span class="p">,</span>
+        <span class="n">super_configurations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Configuration</span><span class="p">],</span>
+        <span class="n">canonical_super_configurations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Configuration</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield super configurations of the motif in a single supercell, without</span>
+<span class="sd">        changing the orientation of the motif, and without duplicating equivalent</span>
+<span class="sd">        super configurations.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">_equiv</span> <span class="ow">in</span> <span class="n">make_equivalent_supercells</span><span class="p">(</span><span class="n">supercell</span><span class="p">):</span>
+            <span class="c1"># If supercell_set is not None, add _equiv to the supercell set</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">record</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span><span class="o">.</span><span class="n">add_supercell</span><span class="p">(</span><span class="n">_equiv</span><span class="p">)</span>
+                <span class="n">equiv</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">supercell</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">equiv</span> <span class="o">=</span> <span class="n">_equiv</span>
+
+            <span class="n">is_superlat</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">equiv</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">is_superlattice_of</span><span class="p">(</span>
+                <span class="n">motif</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_superlat</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="nb">super</span> <span class="o">=</span> <span class="n">copy_configuration</span><span class="p">(</span><span class="n">motif</span><span class="p">,</span> <span class="n">equiv</span><span class="p">)</span>
+            <span class="n">canonical_super</span> <span class="o">=</span> <span class="n">make_canonical_configuration</span><span class="p">(</span>
+                <span class="n">configuration</span><span class="o">=</span><span class="nb">super</span><span class="p">,</span>
+                <span class="n">in_canonical_supercell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">canonical_super</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">canonical_super_configurations</span><span class="p">:</span>
+                <span class="n">super_configurations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">super</span><span class="p">)</span>
+                <span class="n">canonical_super_configurations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">canonical_super</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="nb">super</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
 <div class="viewcode-block" id="SuperConfigEnum.by_supercell">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.SuperConfigEnum.by_supercell.html#libcasm.enumerate.SuperConfigEnum.by_supercell">[docs]</a>
     <span class="k">def</span> <span class="nf">by_supercell</span><span class="p">(</span>
@@ -468,7 +502,7 @@ document.write(`
 
 <span class="sd">        - For each supercell generated by `ScelEnum.by_volume`, equivalent supercells</span>
 <span class="sd">          with respect to the prim factor group are generated.</span>
-<span class="sd">        - If the motif tiles a supercells exactly, a super configuration is</span>
+<span class="sd">        - If the motif tiles a supercell exactly, a super configuration is</span>
 <span class="sd">          generated in that supercell.</span>
 <span class="sd">        - If the super configuration is unique, as determined by checking a running</span>
 <span class="sd">          list of canonical super configurations in the canonical supercell, then it</span>
@@ -525,25 +559,64 @@ document.write(`
             <span class="n">diagonal_only</span><span class="o">=</span><span class="n">diagonal_only</span><span class="p">,</span>
             <span class="n">fixed_shape</span><span class="o">=</span><span class="n">fixed_shape</span><span class="p">,</span>
         <span class="p">):</span>
-            <span class="n">_super_configurations</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">_canonical_super_configurations</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">equiv</span> <span class="ow">in</span> <span class="n">make_equivalent_supercells</span><span class="p">(</span><span class="n">supercell</span><span class="p">):</span>
-                <span class="n">is_superlat</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">equiv</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">is_superlattice_of</span><span class="p">(</span>
-                    <span class="n">motif</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span>
-                <span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_superlat</span><span class="p">:</span>
-                    <span class="k">continue</span>
-                <span class="n">super_configuration</span> <span class="o">=</span> <span class="n">copy_configuration</span><span class="p">(</span><span class="n">motif</span><span class="p">,</span> <span class="n">equiv</span><span class="p">)</span>
-                <span class="n">canonical_super_configuration</span> <span class="o">=</span> <span class="n">make_canonical_configuration</span><span class="p">(</span>
-                    <span class="n">configuration</span><span class="o">=</span><span class="n">super_configuration</span><span class="p">,</span>
-                    <span class="n">in_canonical_supercell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="k">if</span> <span class="n">canonical_super_configuration</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_canonical_super_configurations</span><span class="p">:</span>
-                    <span class="n">_super_configurations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">super_configuration</span><span class="p">)</span>
-                    <span class="n">_canonical_super_configurations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                        <span class="n">canonical_super_configuration</span>
-                    <span class="p">)</span>
-                    <span class="k">yield</span> <span class="n">super_configuration</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+            <span class="n">super_configurations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">canonical_super_configurations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_one_supercell</span><span class="p">(</span>
+                <span class="n">motif</span><span class="o">=</span><span class="n">motif</span><span class="p">,</span>
+                <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">,</span>
+                <span class="n">super_configurations</span><span class="o">=</span><span class="n">super_configurations</span><span class="p">,</span>
+                <span class="n">canonical_super_configurations</span><span class="o">=</span><span class="n">canonical_super_configurations</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span></div>
+
+
+<div class="viewcode-block" id="SuperConfigEnum.by_supercell_list">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.SuperConfigEnum.by_supercell_list.html#libcasm.enumerate.SuperConfigEnum.by_supercell_list">[docs]</a>
+    <span class="k">def</span> <span class="nf">by_supercell_list</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">motif</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+        <span class="n">supercells</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Supercell</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make super configurations of the motif, without changing the orientation of</span>
+<span class="sd">        the motif</span>
+
+<span class="sd">        Method:</span>
+
+<span class="sd">        - For each supercell given, equivalent supercells with respect to the prim</span>
+<span class="sd">          factor group are generated.</span>
+<span class="sd">        - If the motif tiles a supercell exactly, a super configuration is</span>
+<span class="sd">          generated in that supercell.</span>
+<span class="sd">        - If the super configuration is unique, as determined by checking a running</span>
+<span class="sd">          list of canonical super configurations in the canonical supercell, then it</span>
+<span class="sd">          is yielded.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        motif: libcasm.configuraiton.Configuration</span>
+<span class="sd">            The configuration to generate super configurations from.</span>
+<span class="sd">        supercells: list[libcasm.configuration.Supercell]</span>
+<span class="sd">            The initial supercells, from which equivalent supercells are generated and</span>
+<span class="sd">            filled with the motif.</span>
+
+<span class="sd">            If `self.supercell_set` is not None, the generated equivalent supercells</span>
+<span class="sd">            are added to the supercell set.</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        ------</span>
+<span class="sd">        config: casmconfig.Configuration</span>
+<span class="sd">            A :class:`~casmconfig.Configuration`. Configurations might not be in the</span>
+<span class="sd">            canonical supercell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">super_configurations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">canonical_super_configurations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_one_supercell</span><span class="p">(</span>
+                <span class="n">motif</span><span class="o">=</span><span class="n">motif</span><span class="p">,</span>
+                <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">,</span>
+                <span class="n">super_configurations</span><span class="o">=</span><span class="n">super_configurations</span><span class="p">,</span>
+                <span class="n">canonical_super_configurations</span><span class="o">=</span><span class="n">canonical_super_configurations</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span></div>
 </div>
 
 </pre></div>

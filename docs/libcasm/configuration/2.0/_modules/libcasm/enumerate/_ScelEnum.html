@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._ScelEnum &#8212; libcasm-configuration 2.0a3 documentation</title>
+    <title>libcasm.enumerate._ScelEnum &#8212; libcasm-configuration 2.0a6 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=1406bdce"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_ScelEnum';</script>
@@ -407,6 +407,8 @@ document.write(`
 <span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
 <span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
 
+<span class="kn">from</span> <span class="nn">._SuperlatticeEnum</span> <span class="kn">import</span> <span class="n">SuperlatticeEnum</span>
+
 
 <div class="viewcode-block" id="ScelEnum">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ScelEnum.html#libcasm.enumerate.ScelEnum">[docs]</a>
@@ -602,11 +604,12 @@ document.write(`
 <span class="sd">            form.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prim_lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">superlattice</span> <span class="ow">in</span> <span class="n">xtal</span><span class="o">.</span><span class="n">enumerate_superlattices</span><span class="p">(</span>
-            <span class="n">unit_lattice</span><span class="o">=</span><span class="n">prim_lattice</span><span class="p">,</span>
-            <span class="n">point_group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">crystal_point_group</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
-            <span class="n">max_volume</span><span class="o">=</span><span class="nb">max</span><span class="p">,</span>
-            <span class="n">min_volume</span><span class="o">=</span><span class="nb">min</span><span class="p">,</span>
+        <span class="n">superlat_enum</span> <span class="o">=</span> <span class="n">SuperlatticeEnum</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">superlattice</span> <span class="ow">in</span> <span class="n">superlat_enum</span><span class="o">.</span><span class="n">by_volume</span><span class="p">(</span>
+            <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="nb">min</span><span class="p">,</span>
             <span class="n">dirs</span><span class="o">=</span><span class="n">dirs</span><span class="p">,</span>
             <span class="n">unit_cell</span><span class="o">=</span><span class="n">unit_cell</span><span class="p">,</span>
             <span class="n">diagonal_only</span><span class="o">=</span><span class="n">diagonal_only</span><span class="p">,</span>

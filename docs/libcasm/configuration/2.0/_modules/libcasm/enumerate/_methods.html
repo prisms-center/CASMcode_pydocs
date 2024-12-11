@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._methods &#8212; libcasm-configuration 2.0a2 documentation</title>
+    <title>libcasm.enumerate._methods &#8212; libcasm-configuration 2.0a6 documentation</title>
   
   
   
@@ -28,6 +28,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -35,11 +38,10 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=e877a769"></script>
+    <script src="../../../_static/documentation_options.js?v=1406bdce"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_methods';</script>
-    <link rel="icon" href="../../../_static/small_logo.svg"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -123,7 +125,7 @@
     <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
   
   
-    <p class="title logo__title">libcasm-xtal</p>
+    <p class="title logo__title">libcasm-configuration</p>
   
 </a></div>
     
@@ -197,6 +199,34 @@ document.write(`
   </button>
 `);
 </script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_configuration/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-configuration/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
       
     </div>
     
@@ -285,6 +315,34 @@ document.write(`
 `);
 </script></div>
         
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_configuration/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-configuration/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
       </div>
     
   </div>
@@ -342,64 +400,75 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <h1>Source code for libcasm.enumerate._methods</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">libcasm.clusterography</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.clusterography</span>
 <span class="kn">import</span> <span class="nn">libcasm.configuration</span>
 <span class="kn">import</span> <span class="nn">libcasm.enumerate._enumerate</span> <span class="k">as</span> <span class="nn">_enumerate</span>
 <span class="kn">import</span> <span class="nn">libcasm.occ_events</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span>
 
 
-<div class="viewcode-block" id="make_occevent_suborbits">
-<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_occevent_suborbits.html#libcasm.enumerate.make_occevent_suborbits">[docs]</a>
-<span class="k">def</span> <span class="nf">make_occevent_suborbits</span><span class="p">(</span>
-    <span class="n">supercell</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span> <span class="n">occ_event</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Make the sub-orbits of OccEvent in a supercell</span>
+<div class="viewcode-block" id="make_all_distinct_periodic_perturbations">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_all_distinct_periodic_perturbations.html#libcasm.enumerate.make_all_distinct_periodic_perturbations">[docs]</a>
+<span class="k">def</span> <span class="nf">make_all_distinct_periodic_perturbations</span><span class="p">(</span>
+    <span class="n">supercell</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
+    <span class="n">motif</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct distinct local perturbations of a configuration</span>
 
-<span class="sd">    This method generates the sub-orbits that occur due to a supercell that has less</span>
-<span class="sd">    symmetry than the prim. Each sub-orbit is made up of OccEvent that are equivalent</span>
-<span class="sd">    with respect to the supercell factor group. OccEvent in different sub-orbits are</span>
-<span class="sd">    equivalent with respect to the prim factor group, but not the supercell factor</span>
-<span class="sd">    group.</span>
+<span class="sd">    This method constructs symmetrically distinct perturbations of a &quot;motif&quot;</span>
+<span class="sd">    configuration, in a given supercell, on specified clusters. The method works as</span>
+<span class="sd">    follows:</span>
+
+<span class="sd">    - Each cluster is used to generate cluster orbits using the symmetry of the</span>
+<span class="sd">      :class:`~libcasm.xtal.Prim`, without regard to the motif</span>
+<span class="sd">      :class:`~libcasm.configuration.Configuration` or</span>
+<span class="sd">      :class:`~libcasm.configuration.Supercell`. Duplicate cluster orbits are</span>
+<span class="sd">      discarded.</span>
+<span class="sd">    - The motif :class:`~libcasm.configuration.Configuration` is tiled into the</span>
+<span class="sd">      :class:`~libcasm.configuration.Supercell` to generate all possible background</span>
+<span class="sd">      :class:`~libcasm.configuration.Configuration`, using</span>
+<span class="sd">      :class:`~libcasm.configuration.make_all_super_configurations`.</span>
+<span class="sd">    - For each distinct background :class:`~libcasm.configuration.Configuration`, the</span>
+<span class="sd">      cluster orbits are used to find the distinct clusters, now taking</span>
+<span class="sd">      into account the background :class:`~libcasm.configuration.Configuration` and</span>
+<span class="sd">      :class:`~libcasm.configuration.Supercell`.</span>
+<span class="sd">    - For each distinct cluster in a distinct background configuration, all</span>
+<span class="sd">      possible changes in occupation are performed to generate perturbation</span>
+<span class="sd">      configurations.</span>
+<span class="sd">    - Each perturbation configuration is put into a canonical form, using the</span>
+<span class="sd">      supercell factor group in order to identify the distinct perturbation</span>
+<span class="sd">      :class:`~libcasm.configuration.Configuration`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    supercell: ~libcasm.configuration.Supercell</span>
-<span class="sd">        The :class:`~libcasm.configuration.Supercell`.</span>
+<span class="sd">    supercell : ~libcasm.configuration.Supercell</span>
+<span class="sd">        The supercell in which perturbation configurations will be generated.</span>
 
-<span class="sd">    occ_event: ~libcasm.occ_events.OccEvent</span>
-<span class="sd">        The :class:`~libcasm.occ_events.OccEvent`.</span>
+<span class="sd">    motif: ~libcasm.configuration.Configuration</span>
+<span class="sd">        The motif configuration is tiled into the supercell to generate</span>
+<span class="sd">        background configurations that are perturbed. Only perfect tilings into the</span>
+<span class="sd">        supercell are kept.</span>
+
+<span class="sd">    clusters: list[~libcasm.clusterography.Cluster]</span>
+<span class="sd">        Clusters, on which the occupation variables will be enumerated in order</span>
+<span class="sd">        to generate perturbation configurations. Each cluster is first used</span>
+<span class="sd">        to generate orbits without regard to the motif or supercell. Then,</span>
+<span class="sd">        the clusters that are distinct taking the motif and supercell into</span>
+<span class="sd">        account are perturbed with each possible occupation.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    suborbits: list[list[~libcasm.occ_events.OccEvent]]</span>
-<span class="sd">        The sub-orbits, where `suborbits[i][j]` is the j-th</span>
-<span class="sd">        :class:`~libcasm.occ_events.OccEvent` in the i-th sub-orbit.</span>
+<span class="sd">    configurations : list[~libcasm.configuration.Configuration]</span>
+<span class="sd">        The symmetrically distinct perturbations of the motif configuration,</span>
+<span class="sd">        in the supercell, on the specified clusters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">prim</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">prim</span><span class="p">()</span>
-    <span class="n">prim_factor_group</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">()</span>
-    <span class="n">prim_rep</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">make_occevent_symgroup_rep</span><span class="p">(</span>
-        <span class="n">prim_factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">(),</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">()</span>
-    <span class="p">)</span>
-    <span class="n">orbit</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">make_prim_periodic_orbit</span><span class="p">(</span><span class="n">occ_event</span><span class="p">,</span> <span class="n">prim_rep</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">in_any_suborbit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">suborbits</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">suborbit</span> <span class="ow">in</span> <span class="n">suborbits</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">suborbit</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="n">suborbits</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">scel_factor_group</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span><span class="p">()</span>
-    <span class="n">scel_rep</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">make_occevent_symgroup_rep</span><span class="p">(</span>
-        <span class="n">scel_factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">(),</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">()</span>
-    <span class="p">)</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">orbit</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">in_any_suborbit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">suborbits</span><span class="p">):</span>
-            <span class="k">continue</span>
-        <span class="n">new_suborbit</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">make_prim_periodic_orbit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scel_rep</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">new_suborbit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">suborbits</span><span class="p">:</span>
-            <span class="n">suborbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_suborbit</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">suborbits</span></div>
+    <span class="k">return</span> <span class="n">_enumerate</span><span class="o">.</span><span class="n">make_all_distinct_periodic_perturbations</span><span class="p">(</span>
+        <span class="n">supercell</span><span class="p">,</span> <span class="n">motif</span><span class="p">,</span> <span class="n">clusters</span>
+    <span class="p">)</span></div>
 
 
 
@@ -409,7 +478,7 @@ document.write(`
     <span class="n">supercell</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
     <span class="n">occ_event</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span>
     <span class="n">motif</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
-    <span class="n">local_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
+    <span class="n">local_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Construct distinct local perturbations of a configuration</span>
@@ -419,7 +488,7 @@ document.write(`
 <span class="sd">    local-clusters around an :class:`~libcasm.occ_events.OccEvent`. The</span>
 <span class="sd">    method works as follows:</span>
 
-<span class="sd">    - Each local cluster is used to generated local-cluster orbits around the</span>
+<span class="sd">    - Each local cluster is used to generate local-cluster orbits around the</span>
 <span class="sd">      :class:`~libcasm.occ_events.OccEvent`, using the symmetry of the</span>
 <span class="sd">      :class:`~libcasm.xtal.Prim` and :class:`~libcasm.occ_events.OccEvent`, without</span>
 <span class="sd">      regard to the background :class:`~libcasm.configuration.Configuration` or</span>
@@ -460,7 +529,7 @@ document.write(`
 <span class="sd">        the background configuration and occ_event before generating</span>
 <span class="sd">        perturbations. Only perfect tilings into the supercell are kept.</span>
 
-<span class="sd">    local_clusters: list[list[~libcasm.clusterography.Cluster]]</span>
+<span class="sd">    local_clusters: list[~libcasm.clusterography.Cluster]</span>
 <span class="sd">        Local clusters, on which the occupation variables will be enumerated</span>
 <span class="sd">        in order to generate local perturbation configurations. The initial</span>
 <span class="sd">        cluster in each local-cluster orbit generated using</span>
@@ -482,6 +551,338 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_enumerate</span><span class="o">.</span><span class="n">make_all_distinct_local_perturbations</span><span class="p">(</span>
         <span class="n">supercell</span><span class="p">,</span> <span class="n">occ_event</span><span class="p">,</span> <span class="n">motif</span><span class="p">,</span> <span class="n">local_clusters</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_first_n_orbits">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_first_n_orbits.html#libcasm.enumerate.make_first_n_orbits">[docs]</a>
+<span class="k">def</span> <span class="nf">make_first_n_orbits</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">phenomenal</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_orbits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cutoff_radius</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">make_all_possible_orbits</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct the first `n` local cluster orbits of each cluster size.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim: libcasm.configuration.Prim</span>
+<span class="sd">        The Prim.</span>
+<span class="sd">    phenomenal: Union[libcasm.clusterography.Cluster, libcasm.occ_events.OccEvent, \</span>
+<span class="sd">    None] = None</span>
+<span class="sd">        If provided, generate local-cluster orbits using the invariant group of the</span>
+<span class="sd">        phenomenal cluster or event. By default, periodic cluster orbits are</span>
+<span class="sd">        generated.</span>
+<span class="sd">    n_orbits: Optional[list[int]] = None</span>
+<span class="sd">        The number of orbits to include, by number of sites in the cluster. The null</span>
+<span class="sd">        cluster is always included, and all point cluster orbits are always included</span>
+<span class="sd">        for periodic orbits. Example: for periodic orbits, `[0, 0, 6, 4]` specifies</span>
+<span class="sd">        that the null cluster, all point clusters, the first 6 pair cluster orbits, and</span>
+<span class="sd">        the first 4 triplet cluster orbits should be included.</span>
+<span class="sd">    cutoff_radius: Optional[list[float]] = None</span>
+<span class="sd">        For local clusters, the maximum distance of sites from any phenomenal cluster</span>
+<span class="sd">        site to include in the local environment, by number of sites in the cluster.</span>
+<span class="sd">        The null cluster value (element 0) is arbitrary.</span>
+<span class="sd">    make_all_possible_orbits: bool = False</span>
+<span class="sd">        If True, ignore `n_orbits` and generate all possible local-cluster orbits for</span>
+<span class="sd">        the specified `cutoff_radius`. If False, raise ValueError if the specified</span>
+<span class="sd">        `n_orbits` cannot be generated. Default is False. Requires `phenomenal` and</span>
+<span class="sd">        `cutoff_radius` to be specified.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    orbits: list[list[libcasm.clusterography.Cluster]]</span>
+<span class="sd">        The resulting orbits, including the null cluster orbit and all point cluster</span>
+<span class="sd">        orbits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">libcasm.clusterography</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">Cluster</span><span class="p">,</span>
+        <span class="n">make_cluster_group</span><span class="p">,</span>
+        <span class="n">make_integral_site_coordinate_symgroup_rep</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">libcasm.occ_events</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">OccEvent</span><span class="p">,</span>
+        <span class="n">make_occevent_group</span><span class="p">,</span>
+        <span class="n">make_occevent_symgroup_rep</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+
+    <span class="k">if</span> <span class="n">n_orbits</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">n_orbits</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">cutoff_radius</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cutoff_radius</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Set `generating_group`, `phenomenal_cluster`, and minimum `n_orbits`</span>
+    <span class="k">if</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">generating_group</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span>
+        <span class="n">phenomenal_cluster</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_orbits</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">n_orbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">make_all_possible_orbits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in make_first_n_orbits:&quot;</span>
+                <span class="s2">&quot;`make_all_possible_orbits` requires `phenomenal` and `cutoff_radius`.&quot;</span>
+            <span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phenomenal</span><span class="p">,</span> <span class="n">Cluster</span><span class="p">):</span>
+        <span class="n">symgroup_rep</span> <span class="o">=</span> <span class="n">make_integral_site_coordinate_symgroup_rep</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+        <span class="p">)</span>
+        <span class="n">generating_group</span> <span class="o">=</span> <span class="n">make_cluster_group</span><span class="p">(</span>
+            <span class="n">cluster</span><span class="o">=</span><span class="n">phenomenal</span><span class="p">,</span>
+            <span class="n">group</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">,</span>
+            <span class="n">lattice</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+            <span class="n">integral_site_coordinate_symgroup_rep</span><span class="o">=</span><span class="n">symgroup_rep</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phenomenal_cluster</span> <span class="o">=</span> <span class="n">phenomenal</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_orbits</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">n_orbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phenomenal</span><span class="p">,</span> <span class="n">OccEvent</span><span class="p">):</span>
+        <span class="n">symgroup_rep</span> <span class="o">=</span> <span class="n">make_occevent_symgroup_rep</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+        <span class="p">)</span>
+        <span class="n">generating_group</span> <span class="o">=</span> <span class="n">make_occevent_group</span><span class="p">(</span>
+            <span class="n">occ_event</span><span class="o">=</span><span class="n">phenomenal</span><span class="p">,</span>
+            <span class="n">group</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">,</span>
+            <span class="n">lattice</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+            <span class="n">occevent_symgroup_rep</span><span class="o">=</span><span class="n">symgroup_rep</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phenomenal_cluster</span> <span class="o">=</span> <span class="n">phenomenal</span><span class="o">.</span><span class="n">cluster</span><span class="p">()</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_orbits</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">n_orbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_first_n_orbits:&quot;</span>
+            <span class="s2">&quot;`phenomenal` must be a Cluster, OccEvent, or None&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># If `make_all_possible_orbits`, generate all possible orbits</span>
+    <span class="k">if</span> <span class="n">make_all_possible_orbits</span><span class="p">:</span>
+        <span class="n">max_cluster_distance</span> <span class="o">=</span> <span class="n">phenomenal_cluster</span><span class="o">.</span><span class="n">distances</span><span class="p">(</span><span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">max_length</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i_branch</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cutoff_radius</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i_branch</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">max_length</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">max_length</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">max_cluster_distance</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">)</span>
+
+        <span class="n">cluster_specs</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">ClusterSpecs</span><span class="p">(</span>
+            <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+            <span class="n">phenomenal</span><span class="o">=</span><span class="n">phenomenal_cluster</span><span class="p">,</span>
+            <span class="n">include_phenomenal_sites</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">generating_group</span><span class="o">=</span><span class="n">generating_group</span><span class="p">,</span>
+            <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
+            <span class="n">cutoff_radius</span><span class="o">=</span><span class="n">cutoff_radius</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cluster_specs</span><span class="o">.</span><span class="n">make_orbits</span><span class="p">()</span>
+
+    <span class="c1"># Otherwise, prepapre to make first `n` orbits in each branch...</span>
+
+    <span class="c1"># Check `n_orbits` and `cuttoff_radius` consistency</span>
+    <span class="k">if</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_orbits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cutoff_radius</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in make_first_n_orbits:&quot;</span>
+                <span class="s2">&quot;`n_orbits` and `cutoff_radius` must have the same length &quot;</span>
+                <span class="s2">&quot;for local-cluster orbits.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="c1"># Prepare to initial `max_length` for each branch...</span>
+
+    <span class="c1"># Use the minimum lattice vector length</span>
+    <span class="c1"># as the initial `max_length` for branches 2, 3, ...</span>
+    <span class="n">l_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span><span class="o">.</span><span class="n">lengths_and_angles</span><span class="p">()[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_length</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_orbits</span><span class="p">):</span>
+        <span class="n">max_length</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_min</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="c1"># Method:</span>
+    <span class="c1"># - Generate orbits</span>
+    <span class="c1"># - Check if `n_orbits` are generated for each branch</span>
+    <span class="c1"># - If not complete:</span>
+    <span class="c1">#   - If no change from previous step, raise ValueError</span>
+    <span class="c1">#   - Otherwise increase `max_length` for the incomplete branches</span>
+    <span class="c1">#   - Go to the next iteration</span>
+    <span class="c1"># - If complete:</span>
+    <span class="c1">#   - Collect the first `n` orbits from each branch and return them</span>
+    <span class="n">total_n_orbits</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Generate orbits</span>
+        <span class="n">cluster_specs</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">ClusterSpecs</span><span class="p">(</span>
+            <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+            <span class="n">phenomenal</span><span class="o">=</span><span class="n">phenomenal_cluster</span><span class="p">,</span>
+            <span class="n">include_phenomenal_sites</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">generating_group</span><span class="o">=</span><span class="n">generating_group</span><span class="p">,</span>
+            <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
+            <span class="n">cutoff_radius</span><span class="o">=</span><span class="n">cutoff_radius</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">orbits</span> <span class="o">=</span> <span class="n">cluster_specs</span><span class="o">.</span><span class="n">make_orbits</span><span class="p">()</span>
+
+        <span class="c1"># If no change from previous step, raise ValueError</span>
+        <span class="n">all_possible_orbits_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbits</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">total_n_orbits</span>
+        <span class="k">if</span> <span class="n">all_possible_orbits_found</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in make_first_n_orbits:&quot;</span>
+                    <span class="s2">&quot;Failed to generate new orbits. Unknown error.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in make_first_n_orbits:&quot;</span>
+                    <span class="s2">&quot;Failed to generate new orbits. Try increasing the cutoff radius.&quot;</span>
+                <span class="p">)</span>
+        <span class="n">total_n_orbits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbits</span><span class="p">)</span>
+
+        <span class="c1"># Organize orbits by branch</span>
+        <span class="n">branches</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cluster_specs</span><span class="o">.</span><span class="n">max_length</span><span class="p">()))]</span>
+        <span class="k">for</span> <span class="n">orbit</span> <span class="ow">in</span> <span class="n">orbits</span><span class="p">:</span>
+            <span class="n">i_branch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">branches</span><span class="p">[</span><span class="n">i_branch</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit</span><span class="p">)</span>
+
+        <span class="c1"># Check if `n_orbits` are generated for each branch</span>
+        <span class="n">complete</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">i_branch</span><span class="p">,</span> <span class="n">branch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">branches</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">i_branch</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">i_branch</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">branch</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n_orbits</span><span class="p">[</span><span class="n">i_branch</span><span class="p">]:</span>
+                <span class="n">complete</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">max_length</span><span class="p">[</span><span class="n">i_branch</span><span class="p">]</span> <span class="o">+=</span> <span class="n">l_min</span>
+
+        <span class="c1"># If complete, collect the first `n` orbits from each branch and return them</span>
+        <span class="k">if</span> <span class="n">complete</span><span class="p">:</span>
+            <span class="n">orbits</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i_branch</span><span class="p">,</span> <span class="n">branch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">branches</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i_branch</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">orbits</span> <span class="o">+=</span> <span class="n">branch</span>
+                <span class="k">elif</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">i_branch</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">orbits</span> <span class="o">+=</span> <span class="n">branch</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">orbits</span> <span class="o">+=</span> <span class="n">branch</span><span class="p">[:</span> <span class="n">n_orbits</span><span class="p">[</span><span class="n">i_branch</span><span class="p">]]</span>
+
+            <span class="k">return</span> <span class="n">orbits</span>
+
+        <span class="c1"># Otherwise, continue to the next iteration</span>
+
+    <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="make_first_n_orbits_cluster_specs">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_first_n_orbits_cluster_specs.html#libcasm.enumerate.make_first_n_orbits_cluster_specs">[docs]</a>
+<span class="k">def</span> <span class="nf">make_first_n_orbits_cluster_specs</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">phenomenal</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_orbits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cutoff_radius</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">make_all_possible_orbits</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct ClusterSpecs for generating the first `n` local cluster orbits of each</span>
+<span class="sd">    cluster size using `custom_generators` for all orbits.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prim: libcasm.configuration.Prim</span>
+<span class="sd">        The Prim.</span>
+<span class="sd">    phenomenal: Union[libcasm.clusterography.Cluster, libcasm.occ_events.OccEvent, \</span>
+<span class="sd">    None] = None</span>
+<span class="sd">        If provided, generate local-cluster orbits using the invariant group of the</span>
+<span class="sd">        phenomenal cluster or event. By default, periodic cluster orbits are</span>
+<span class="sd">        generated.</span>
+<span class="sd">    n_orbits: Optional[list[int]] = None</span>
+<span class="sd">        The number of orbits to include, by number of sites in the cluster. The null</span>
+<span class="sd">        cluster is always included, and all point cluster orbits are always included</span>
+<span class="sd">        for periodic orbits. Example: for periodic orbits, `[0, 0, 6, 4]` specifies</span>
+<span class="sd">        that the null cluster, all point clusters, the first 6 pair cluster orbits, and</span>
+<span class="sd">        the first 4 triplet cluster orbits should be included.</span>
+<span class="sd">    cutoff_radius: Optional[list[float]] = None</span>
+<span class="sd">        For local clusters, the maximum distance of sites from any phenomenal cluster</span>
+<span class="sd">        site to include in the local environment, by number of sites in the cluster.</span>
+<span class="sd">        The null cluster value (element 0) is arbitrary.</span>
+<span class="sd">    make_all_possible_orbits: bool = False</span>
+<span class="sd">        If True, ignore `n_orbits` and generate all possible local-cluster orbits for</span>
+<span class="sd">        the specified `cutoff_radius`. If False, raise ValueError if the specified</span>
+<span class="sd">        `n_orbits` cannot be generated. Default is False. Requires `phenomenal` and</span>
+<span class="sd">        `cutoff_radius` to be specified.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    cluster_specs: libcasm.clusterography.ClusterSpecs</span>
+<span class="sd">        ClusterSpecs for generating the specified orbits using `custom_generators` for</span>
+<span class="sd">        all orbits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">orbits</span> <span class="o">=</span> <span class="n">make_first_n_orbits</span><span class="p">(</span>
+        <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
+        <span class="n">phenomenal</span><span class="o">=</span><span class="n">phenomenal</span><span class="p">,</span>
+        <span class="n">n_orbits</span><span class="o">=</span><span class="n">n_orbits</span><span class="p">,</span>
+        <span class="n">cutoff_radius</span><span class="o">=</span><span class="n">cutoff_radius</span><span class="p">,</span>
+        <span class="n">make_all_possible_orbits</span><span class="o">=</span><span class="n">make_all_possible_orbits</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">custom_generators</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">ClusterOrbitGenerator</span><span class="p">(</span>
+            <span class="n">prototype</span><span class="o">=</span><span class="n">orbit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">include_subclusters</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">orbit</span> <span class="ow">in</span> <span class="n">orbits</span>
+    <span class="p">]</span>
+
+    <span class="kn">from</span> <span class="nn">libcasm.clusterography</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">Cluster</span><span class="p">,</span>
+        <span class="n">make_cluster_group</span><span class="p">,</span>
+        <span class="n">make_integral_site_coordinate_symgroup_rep</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">libcasm.occ_events</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">OccEvent</span><span class="p">,</span>
+        <span class="n">make_occevent_group</span><span class="p">,</span>
+        <span class="n">make_occevent_symgroup_rep</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">phenomenal</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">generating_group</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span>
+        <span class="n">phenomenal_cluster</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phenomenal</span><span class="p">,</span> <span class="n">Cluster</span><span class="p">):</span>
+        <span class="n">symgroup_rep</span> <span class="o">=</span> <span class="n">make_integral_site_coordinate_symgroup_rep</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+        <span class="p">)</span>
+        <span class="n">generating_group</span> <span class="o">=</span> <span class="n">make_cluster_group</span><span class="p">(</span>
+            <span class="n">cluster</span><span class="o">=</span><span class="n">phenomenal</span><span class="p">,</span>
+            <span class="n">group</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">,</span>
+            <span class="n">lattice</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+            <span class="n">integral_site_coordinate_symgroup_rep</span><span class="o">=</span><span class="n">symgroup_rep</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phenomenal_cluster</span> <span class="o">=</span> <span class="n">phenomenal</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phenomenal</span><span class="p">,</span> <span class="n">OccEvent</span><span class="p">):</span>
+        <span class="n">symgroup_rep</span> <span class="o">=</span> <span class="n">make_occevent_symgroup_rep</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+        <span class="p">)</span>
+        <span class="n">generating_group</span> <span class="o">=</span> <span class="n">make_occevent_group</span><span class="p">(</span>
+            <span class="n">occ_event</span><span class="o">=</span><span class="n">phenomenal</span><span class="p">,</span>
+            <span class="n">group</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">,</span>
+            <span class="n">lattice</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+            <span class="n">occevent_symgroup_rep</span><span class="o">=</span><span class="n">symgroup_rep</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phenomenal_cluster</span> <span class="o">=</span> <span class="n">phenomenal</span><span class="o">.</span><span class="n">cluster</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_first_n_orbits_cluster_specs:&quot;</span>
+            <span class="s2">&quot;`phenomenal` must be a Cluster, OccEvent, or None&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">clusterography</span><span class="o">.</span><span class="n">ClusterSpecs</span><span class="p">(</span>
+        <span class="n">xtal_prim</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
+        <span class="n">phenomenal</span><span class="o">=</span><span class="n">phenomenal_cluster</span><span class="p">,</span>
+        <span class="n">generating_group</span><span class="o">=</span><span class="n">generating_group</span><span class="p">,</span>
+        <span class="n">custom_generators</span><span class="o">=</span><span class="n">custom_generators</span><span class="p">,</span>
+        <span class="n">include_phenomenal_sites</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 </pre></div>
@@ -525,7 +926,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023, CASM Developers.
+      © Copyright 2024, CASM Developers.
       <br/>
     
   </p>

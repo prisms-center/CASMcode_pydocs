@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.configuration._methods &#8212; libcasm-configuration 2.0a5 documentation</title>
+    <title>libcasm.configuration._methods &#8212; libcasm-configuration 2.0a6 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=23fe37a4"></script>
+    <script src="../../../_static/documentation_options.js?v=1406bdce"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/configuration/_methods';</script>
@@ -414,6 +414,7 @@ document.write(`
     <span class="n">copy_apply_to_configuration</span><span class="p">,</span>
     <span class="n">copy_apply_to_configuration_with_properties</span><span class="p">,</span>
     <span class="n">copy_apply_to_integral_site_coordinate</span><span class="p">,</span>
+    <span class="n">copy_transformed_configuration</span><span class="p">,</span>
 <span class="p">)</span>
 
 
@@ -496,6 +497,115 @@ document.write(`
             <span class="s2">&quot;`obj` must be a Configuration, ConfigurationWithProperties, &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;or IntegralSiteCoordinate, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="find_mapping_operation">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.configuration.find_mapping_operation.html#libcasm.configuration.find_mapping_operation">[docs]</a>
+<span class="k">def</span> <span class="nf">find_mapping_operation</span><span class="p">(</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">configuration_ref</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find a symmetry operation that maps the configuration to an equivalent reference</span>
+<span class="sd">    configuration which may be in a different supercell</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    configuration : libcasm.configuration.Configuration</span>
+<span class="sd">        The configuration to map.</span>
+<span class="sd">    configuration_ref : libcasm.configuration.Configuration</span>
+<span class="sd">        The reference configuration to map to.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mapping_op : libcasm.xtal.SymOp</span>
+<span class="sd">        The symmetry operation that maps `configuration` to `configuration_ref`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find a symmetry operation that maps</span>
+    <span class="c1"># the configuration to the reference configuration</span>
+    <span class="n">fg</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">elements</span><span class="p">):</span>
+        <span class="n">test_lat</span> <span class="o">=</span> <span class="n">op</span> <span class="o">*</span> <span class="n">configuration</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">test_lat</span><span class="o">.</span><span class="n">is_equivalent_to</span><span class="p">(</span><span class="n">configuration_ref</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">config_init</span> <span class="o">=</span> <span class="n">copy_transformed_configuration</span><span class="p">(</span>
+            <span class="n">prim_factor_group_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+            <span class="n">translation</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">motif</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">supercell</span><span class="o">=</span><span class="n">configuration_ref</span><span class="o">.</span><span class="n">supercell</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">rep_it</span> <span class="o">=</span> <span class="n">SupercellSymOp</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="n">config_init</span><span class="o">.</span><span class="n">supercell</span><span class="p">)</span>
+        <span class="n">rep_end</span> <span class="o">=</span> <span class="n">SupercellSymOp</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">config_init</span><span class="o">.</span><span class="n">supercell</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">rep_it</span> <span class="o">!=</span> <span class="n">rep_end</span><span class="p">:</span>
+            <span class="n">test_config</span> <span class="o">=</span> <span class="n">rep_it</span> <span class="o">*</span> <span class="n">config_init</span>
+            <span class="k">if</span> <span class="n">test_config</span> <span class="o">==</span> <span class="n">configuration_ref</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">rep_it</span><span class="o">.</span><span class="n">to_symop</span><span class="p">()</span> <span class="o">*</span> <span class="n">op</span>
+            <span class="n">rep_it</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="make_consistent_asymmetric_unit_indices">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.configuration.make_consistent_asymmetric_unit_indices.html#libcasm.configuration.make_consistent_asymmetric_unit_indices">[docs]</a>
+<span class="k">def</span> <span class="nf">make_consistent_asymmetric_unit_indices</span><span class="p">(</span>
+    <span class="n">initial</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+    <span class="n">configuration_init</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+    <span class="n">configuration_ref</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update asymmetric unit indices which are consistent with a reference set</span>
+<span class="sd">    generated for an equivalent reference configuration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    initial : list[list[int]]</span>
+<span class="sd">        The asymmetric unit indices for `configuration`.</span>
+<span class="sd">    configuration_init : libcasm.configuration.Configuration</span>
+<span class="sd">        The configuration for which the asymmetric unit indices are given.</span>
+<span class="sd">    reference : list[list[int]]</span>
+<span class="sd">        The asymmetric unit indices for `configuration_ref`.</span>
+<span class="sd">    configuration_ref : libcasm.configuration.Configuration</span>
+<span class="sd">        The reference configuration for which the reference asymmetric unit indices</span>
+<span class="sd">        are given.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    final : Optional[list[list[int]]]</span>
+<span class="sd">        The asymmetric unit indices for `configuration`, made consistent with the</span>
+<span class="sd">        `asymmetric_unit_indices_ref` indices for `configuration_ref`. If the</span>
+<span class="sd">        configurations are not equivalent, then None is returned.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mapping_op</span> <span class="o">=</span> <span class="n">find_mapping_operation</span><span class="p">(</span>
+        <span class="n">configuration</span><span class="o">=</span><span class="n">configuration_init</span><span class="p">,</span>
+        <span class="n">configuration_ref</span><span class="o">=</span><span class="n">configuration_ref</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">mapping_op</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Find how the asymmetric units map</span>
+    <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">configuration_init</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">configuration_init</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">site_index_converter</span>
+    <span class="n">f_ref</span> <span class="o">=</span> <span class="n">configuration_ref</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">site_index_converter</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i_asym</span><span class="p">,</span> <span class="n">asym_unit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">initial</span><span class="p">):</span>
+        <span class="n">site</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">integral_site_coordinate</span><span class="p">(</span><span class="n">asym_unit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">coord_cart</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">coordinate_cart</span><span class="p">(</span><span class="n">prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">)</span>
+        <span class="n">transformed_coord_cart</span> <span class="o">=</span> <span class="n">mapping_op</span> <span class="o">*</span> <span class="n">coord_cart</span>
+        <span class="n">transformed_site</span> <span class="o">=</span> <span class="n">IntegralSiteCoordinate</span><span class="o">.</span><span class="n">from_coordinate_cart</span><span class="p">(</span>
+            <span class="n">coordinate_cart</span><span class="o">=</span><span class="n">transformed_coord_cart</span><span class="p">,</span>
+            <span class="n">prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">transformed_site_index</span> <span class="o">=</span> <span class="n">f_ref</span><span class="o">.</span><span class="n">linear_site_index</span><span class="p">(</span><span class="n">transformed_site</span><span class="p">)</span>
+        <span class="n">i_asym_final</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i_asym_ref</span><span class="p">,</span> <span class="n">asym_unit_ref</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reference</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">transformed_site_index</span> <span class="ow">in</span> <span class="n">asym_unit_ref</span><span class="p">:</span>
+                <span class="n">i_asym_final</span> <span class="o">=</span> <span class="n">i_asym_ref</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">i_asym_final</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error: Failed making consistent asymmetric unit indices.&quot;</span><span class="p">)</span>
+        <span class="n">final</span><span class="p">[</span><span class="n">i_asym_final</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">asym_unit</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">final</span></div>
 
 </pre></div>
 

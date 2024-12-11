@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._ConfigEnumAllOccupations &#8212; libcasm-configuration 2.0a3 documentation</title>
+    <title>libcasm.enumerate._ConfigEnumAllOccupations &#8212; libcasm-configuration 2.0a6 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=1406bdce"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_ConfigEnumAllOccupations';</script>
@@ -413,6 +413,7 @@ document.write(`
     <span class="n">make_distinct_cluster_sites</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">._ScelEnum</span> <span class="kn">import</span> <span class="n">ScelEnum</span>
+<span class="kn">from</span> <span class="nn">._SuperConfigEnum</span> <span class="kn">import</span> <span class="n">SuperConfigEnum</span>
 
 
 <span class="k">def</span> <span class="nf">_make_sublat_sites</span><span class="p">(</span><span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span> <span class="n">sublats</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
@@ -527,12 +528,52 @@ document.write(`
             <span class="p">]</span>
         <span class="k">return</span> <span class="n">supercell_list</span>
 
+    <span class="k">def</span> <span class="nf">_make_super_backgrounds</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+        <span class="n">supercells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fill the background configuration into enumerated supercells, maintaining</span>
+<span class="sd">        the orientation of the background configuration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        background: casmconfig.Configuration</span>
+<span class="sd">            The background configuration to fill into enumerated supercells.</span>
+<span class="sd">        supercells: Optional[dict] = None</span>
+<span class="sd">            Parameters to forward to</span>
+<span class="sd">            :func:`ScelEnum.by_volume &lt;libcasm.enumerate.ScelEnum.by_volume&gt;`</span>
+<span class="sd">            to specify the supercells that the background configuration will be filled</span>
+<span class="sd">            into. If None, only the exact background configuration is returned.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        super_backgrounds: list[casmconfig.Configuration]</span>
+<span class="sd">            A list of :class:`~casmconfig.Configuration` objects, each a distinct</span>
+<span class="sd">            super configuration of the background.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">supercells</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">background</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+        <span class="n">super_config_enum</span> <span class="o">=</span> <span class="n">SuperConfigEnum</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="p">,</span>
+            <span class="n">supercell_set</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">super_config_enum</span><span class="o">.</span><span class="n">by_supercell</span><span class="p">(</span>
+            <span class="n">motif</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">supercells</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="n">super_backgrounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">super_backgrounds</span>
+
     <span class="k">def</span> <span class="nf">_by_site</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">sites</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">use_background_invariant_group</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">which_dofs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the inner loop of enumerating occupations on sites in a background</span>
 
@@ -549,16 +590,30 @@ document.write(`
 <span class="sd">            occupations are enumerated in the current background configuration.</span>
 <span class="sd">        skip_non_primitive: bool</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations.</span>
-<span class="sd">        skip_non_canonical: bool</span>
-<span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
-<span class="sd">            to the subgroup that leaves the background configuration invariant</span>
-<span class="sd">            and does not mix the given sites and other sites.</span>
+<span class="sd">        skip_equivalents: bool</span>
+<span class="sd">            If True, enumeration skips non-unique configurations with respect</span>
+<span class="sd">            to either (i) the complete set of symmetry operations that leave the</span>
+<span class="sd">            supercell lattice vectors invariant (these are canonical configurations),</span>
+<span class="sd">            or (ii) the subgroup that leaves the background configuration invariant and</span>
+<span class="sd">            does not mix the given sites and other sites.</span>
+<span class="sd">        use_background_invariant_group: bool</span>
+<span class="sd">            If True, check for uniqueness using the subgroup that leaves the background</span>
+<span class="sd">            configuration invariant and does not mix the given sites and other sites;</span>
+<span class="sd">            otherwise use the complete set of symmetry operations that leave the</span>
+<span class="sd">            supercell lattice vectors invariant.</span>
+<span class="sd">        which_dofs: Optional[set[str]] = None</span>
+<span class="sd">            When ``skip_equivalents is True`` and</span>
+<span class="sd">            ``use_background_invariant_group is True``, the names of the degrees of</span>
+<span class="sd">            freedom (DoF) in the background that must be invariant. The default is that</span>
+<span class="sd">            all DoF must be invariant.</span>
 
 <span class="sd">        Yields</span>
 <span class="sd">        ------</span>
 <span class="sd">        config: casmconfig.Configuration</span>
 <span class="sd">            A :class:`~casmconfig.Configuration`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">which_dofs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">which_dofs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;all&quot;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_background</span> <span class="o">=</span> <span class="n">background</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sites</span> <span class="o">=</span> <span class="n">sites</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enum_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -569,20 +624,24 @@ document.write(`
             <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
             <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">skip_non_canonical</span><span class="p">:</span>
-            <span class="n">background_fg</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_invariant_subgroup</span><span class="p">(</span>
-                <span class="n">configuration</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
-                <span class="n">site_indices</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
-            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">skip_equivalents</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">use_background_invariant_group</span><span class="p">:</span>
+                <span class="n">canonicalization_group</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_invariant_subgroup</span><span class="p">(</span>
+                    <span class="n">configuration</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
+                    <span class="n">site_indices</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
+                    <span class="n">which_dofs</span><span class="o">=</span><span class="n">which_dofs</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">canonicalization_group</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">while</span> <span class="n">config_enum</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">skip_non_primitive</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">is_primitive_configuration</span><span class="p">(</span>
                 <span class="n">configuration</span><span class="o">=</span><span class="n">config_enum</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
             <span class="p">):</span>
                 <span class="n">config_enum</span><span class="o">.</span><span class="n">advance</span><span class="p">()</span>
                 <span class="k">continue</span>
-            <span class="k">if</span> <span class="n">skip_non_canonical</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">is_canonical_configuration</span><span class="p">(</span>
+            <span class="k">if</span> <span class="n">skip_equivalents</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">is_canonical_configuration</span><span class="p">(</span>
                 <span class="n">configuration</span><span class="o">=</span><span class="n">config_enum</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
-                <span class="n">subgroup</span><span class="o">=</span><span class="n">background_fg</span><span class="p">,</span>
+                <span class="n">subgroup</span><span class="o">=</span><span class="n">canonicalization_group</span><span class="p">,</span>
             <span class="p">):</span>
                 <span class="n">config_enum</span><span class="o">.</span><span class="n">advance</span><span class="p">()</span>
                 <span class="k">continue</span>
@@ -593,7 +652,13 @@ document.write(`
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumAllOccupations.by_supercell.html#libcasm.enumerate.ConfigEnumAllOccupations.by_supercell">[docs]</a>
     <span class="k">def</span> <span class="nf">by_supercell</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">supercells</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="nb">max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">unit_cell</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dirs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span>
+        <span class="n">diagonal_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">fixed_shape</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">supercells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">motif</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -602,9 +667,39 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        supercells: dict</span>
-<span class="sd">            Parameters to forward to :class:`~libcasm.configuration.ScelEnum`, to</span>
-<span class="sd">            specify the supercells that the motif configruation will be filled into.</span>
+<span class="sd">        max: Optional[int] = None</span>
+<span class="sd">            The maximum volume superlattice to enumerate. The volume is measured</span>
+<span class="sd">            relative the unit cell being used to generate supercells (i.e. the</span>
+<span class="sd">            determinant of the `unit_cell` parameter). Is required if `supercells` is</span>
+<span class="sd">            None.</span>
+<span class="sd">        min: int = 1</span>
+<span class="sd">            The minimum volume superlattice to enumerate. The volume is measured</span>
+<span class="sd">            relative the unit cell being used to generate supercells.</span>
+<span class="sd">        dirs: str = &quot;abc&quot;</span>
+<span class="sd">            A string indicating which lattice vectors to enumerate over. Some</span>
+<span class="sd">            combination of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, where &#39;a&#39; indicates the first lattice</span>
+<span class="sd">            vector of the unit cell, &#39;b&#39; the second, and &#39;c&#39; the third.</span>
+<span class="sd">        unit_cell: Optional[np.ndarray] = None,</span>
+<span class="sd">            An integer shape=(3,3) transformation matrix `U` allows specifying an</span>
+<span class="sd">            alternative unit cell that can be used to generate superlattices of the</span>
+<span class="sd">            form `S = (L @ U) @ T`. If None, `U` is set to the identity matrix.</span>
+<span class="sd">        diagonal_only: bool = False</span>
+<span class="sd">            If true, restrict :math:`T` to diagonal matrices.</span>
+<span class="sd">        fixed_shape: bool = False</span>
+<span class="sd">            If true, restrict :math:`T` to diagonal matrices with diagonal coefficients</span>
+<span class="sd">            :math:`[m, 1, 1]` (1d), :math:`[m, m, 1]` (2d), or :math:`[m, m, m]` (3d),</span>
+<span class="sd">            where the dimension is determined from `len(dirs)`.</span>
+<span class="sd">        supercells: Optional[dict] = None</span>
+<span class="sd">            Parameters to forward to</span>
+<span class="sd">            :func:`ScelEnum.by_volume &lt;libcasm.enumerate.ScelEnum.by_volume&gt;` to</span>
+<span class="sd">            specify the supercells that the motif configuration will be filled into.</span>
+
+<span class="sd">            .. deprecated:: 2.0a5</span>
+<span class="sd">                Give the</span>
+<span class="sd">                :func:`ScelEnum.by_volume &lt;libcasm.enumerate.ScelEnum.by_volume&gt;`</span>
+<span class="sd">                parameters directly, or by using `**supercells`, instead of using this</span>
+<span class="sd">                parameter.</span>
+
 <span class="sd">        motif: Optional[casmconfig.Configuration] = None</span>
 <span class="sd">            The background configuration on which enumeration takes place. The motif is</span>
 <span class="sd">            filled into each supercell using</span>
@@ -613,37 +708,100 @@ document.write(`
 <span class="sd">            Providing a motif allows enumerating all occupations with other degrees of</span>
 <span class="sd">            freedom (DoF) fixed. If None, the default configuration in the volume 1</span>
 <span class="sd">            supercell is used.</span>
+
+<span class="sd">            .. deprecated:: 2.0a5</span>
+<span class="sd">                Use the method</span>
+<span class="sd">                :func:`~libcasm.enumerate.ConfigEnumAllOccupations.by_supercell_with_continuous_dof`</span>
+<span class="sd">                instead.</span>
+
 <span class="sd">        skip_non_primitive: bool = True</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
 <span class="sd">        skip_non_canonical: bool = True</span>
 <span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
-<span class="sd">            to the subgroup that leaves the background configuration invariant.</span>
+<span class="sd">            to the symmetry operations that leave the supercell lattice vectors</span>
+<span class="sd">            invariant.</span>
 
 <span class="sd">        Yields</span>
 <span class="sd">        ------</span>
 <span class="sd">        config: casmconfig.Configuration</span>
-<span class="sd">            A :class:`~casmconfig.Configuration`.</span>
+<span class="sd">            A :class:`~casmconfig.Configuration`. All configurations are in the</span>
+<span class="sd">            canonical supercell.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">warnings</span>
+
+        <span class="k">if</span> <span class="nb">max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">supercells</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="s2">&quot;max&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in ConfigEnumAllOccupations.by_supercell: &quot;</span>
+                    <span class="s2">&quot;`max` is required. Could not be obtained from supercells.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">max</span> <span class="o">=</span> <span class="n">supercells</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;The `max` parameter is required. &quot;</span>
+                    <span class="s2">&quot;Obtaining max from supercells, but the &#39;supercells&#39; parameter is &quot;</span>
+                    <span class="s2">&quot;deprecated. Give the ScelEnum.by_volume parameters directly, or &quot;</span>
+                    <span class="s2">&quot;by using `**supercells`, instead of using &#39;supercells&#39;.&quot;</span><span class="p">,</span>
+                    <span class="ne">DeprecationWarning</span><span class="p">,</span>
+                    <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="n">_supercells</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="nb">min</span><span class="p">,</span>
+            <span class="n">unit_cell</span><span class="o">=</span><span class="n">unit_cell</span><span class="p">,</span>
+            <span class="n">dirs</span><span class="o">=</span><span class="n">dirs</span><span class="p">,</span>
+            <span class="n">diagonal_only</span><span class="o">=</span><span class="n">diagonal_only</span><span class="p">,</span>
+            <span class="n">fixed_shape</span><span class="o">=</span><span class="n">fixed_shape</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">supercells</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;The &#39;supercells&#39; parameter is deprecated. Give the &quot;</span>
+                <span class="s2">&quot;ScelEnum.by_volume parameters directly, or by using &quot;</span>
+                <span class="s2">&quot;`**supercells`, instead of using &#39;supercells&#39;.&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">_supercells</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">supercells</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">motif</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">warnings</span>
+
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;The &#39;motif&#39; parameter is deprecated. Use the method &quot;</span>
+                <span class="s2">&quot;&#39;ConfigEnumAllOccupations.by_supercell_with_continuous_dof&#39; instead.&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">by_supercell_with_continuous_dof</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">motif</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">_supercells</span><span class="p">,</span>
+                <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span>
+            <span class="k">return</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
-        <span class="n">motif</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_motif</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
         <span class="n">scel_enum</span> <span class="o">=</span> <span class="n">ScelEnum</span><span class="p">(</span>
             <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="p">,</span>
             <span class="n">supercell_set</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">scel_enum</span><span class="o">.</span><span class="n">by_volume</span><span class="p">(</span><span class="o">**</span><span class="n">supercells</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">scel_enum</span><span class="o">.</span><span class="n">by_volume</span><span class="p">(</span>
+            <span class="o">**</span><span class="n">_supercells</span><span class="p">,</span>
+        <span class="p">):</span>
             <span class="n">sites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">n_sites</span><span class="p">))</span>
-            <span class="n">super_configurations</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_distinct_super_configurations</span><span class="p">(</span>
-                <span class="n">motif</span><span class="o">=</span><span class="n">motif</span><span class="p">,</span> <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">background</span> <span class="ow">in</span> <span class="n">super_configurations</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
-                    <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
-                    <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
-                    <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-                    <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
-                <span class="p">):</span>
-                    <span class="k">yield</span> <span class="n">config</span></div>
+            <span class="n">default_config</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
+                <span class="n">background</span><span class="o">=</span><span class="n">default_config</span><span class="p">,</span>
+                <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
+                <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
+                <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span></div>
 
 
 <div class="viewcode-block" id="ConfigEnumAllOccupations.by_supercell_list">
@@ -651,7 +809,6 @@ document.write(`
     <span class="k">def</span> <span class="nf">by_supercell_list</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">supercells</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">],</span>
-        <span class="n">motif</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
@@ -661,20 +818,13 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        supercells: list[casmconfig.Supercell]</span>
 <span class="sd">            An explicit list of supercells in which to perform enumeration.</span>
-<span class="sd">        motif: Optional[casmconfig.Configuration] = None</span>
-<span class="sd">            The background configuration on which enumeration takes place. The motif is</span>
-<span class="sd">            filled into each supercell using</span>
-<span class="sd">            :func:`~libcasm.configuration.make_distinct_super_configurations`. If the</span>
-<span class="sd">            motif does not tile exactly into a supercell that supercell is skipped.</span>
-<span class="sd">            Providing a motif allows enumerating all occupations with other degrees of</span>
-<span class="sd">            freedom (DoF) fixed. If None, the default configuration in the volume 1</span>
-<span class="sd">            supercell is used.</span>
 <span class="sd">        skip_non_primitive: bool = True</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
 <span class="sd">        skip_non_canonical: bool = True</span>
 <span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
-<span class="sd">            to the subgroup that leaves the background configuration invariant.</span>
+<span class="sd">            to the symmetry operations that leave the supercell lattice vectors</span>
+<span class="sd">            invariant.</span>
 
 <span class="sd">        Yields</span>
 <span class="sd">        ------</span>
@@ -682,20 +832,115 @@ document.write(`
 <span class="sd">            A :class:`~casmconfig.Configuration`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
-        <span class="n">motif</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_motif</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span><span class="o">.</span><span class="n">add_supercell</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span>
             <span class="n">sites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">n_sites</span><span class="p">))</span>
-            <span class="n">super_configurations</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_distinct_super_configurations</span><span class="p">(</span>
-                <span class="n">motif</span><span class="o">=</span><span class="n">motif</span><span class="p">,</span> <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">background</span> <span class="ow">in</span> <span class="n">super_configurations</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
-                    <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
-                    <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
-                    <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-                    <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
-                <span class="p">):</span>
-                    <span class="k">yield</span> <span class="n">config</span></div>
+            <span class="n">default_config</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
+                <span class="n">background</span><span class="o">=</span><span class="n">default_config</span><span class="p">,</span>
+                <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
+                <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
+                <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span></div>
+
+
+<div class="viewcode-block" id="ConfigEnumAllOccupations.by_supercell_with_continuous_dof">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumAllOccupations.by_supercell_with_continuous_dof.html#libcasm.enumerate.ConfigEnumAllOccupations.by_supercell_with_continuous_dof">[docs]</a>
+    <span class="k">def</span> <span class="nf">by_supercell_with_continuous_dof</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">source</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+        <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">unit_cell</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dirs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span>
+        <span class="n">diagonal_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">fixed_shape</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate all occupations in a series of enumerated supercells, with</span>
+<span class="sd">        non-default continuous DoF</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        source: casmconfig.Configuration</span>
+<span class="sd">            Any global continuous DoF from `source` are set to the same value in all</span>
+<span class="sd">            generated supercells. Any local continuous DoF of `source` are filled into</span>
+<span class="sd">            each supercell using :func:`~libcasm.configuration.copy_configuration`. If</span>
+<span class="sd">            `source` does not tile exactly into a supercell in its canonical form, or</span>
+<span class="sd">            any equivalent supercell with respect to the prim factor group, then that</span>
+<span class="sd">            supercell is skipped.</span>
+<span class="sd">        max: Optional[int] = None</span>
+<span class="sd">            The maximum volume superlattice to enumerate. The volume is measured</span>
+<span class="sd">            relative the unit cell being used to generate supercells (i.e. the</span>
+<span class="sd">            determinant of the `unit_cell` parameter). Is required if `supercells` is</span>
+<span class="sd">            None.</span>
+<span class="sd">        min: int = 1</span>
+<span class="sd">            The minimum volume superlattice to enumerate. The volume is measured</span>
+<span class="sd">            relative the unit cell being used to generate supercells.</span>
+<span class="sd">        dirs: str = &quot;abc&quot;</span>
+<span class="sd">            A string indicating which lattice vectors to enumerate over. Some</span>
+<span class="sd">            combination of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, where &#39;a&#39; indicates the first lattice</span>
+<span class="sd">            vector of the unit cell, &#39;b&#39; the second, and &#39;c&#39; the third.</span>
+<span class="sd">        unit_cell: Optional[np.ndarray] = None,</span>
+<span class="sd">            An integer shape=(3,3) transformation matrix `U` allows specifying an</span>
+<span class="sd">            alternative unit cell that can be used to generate superlattices of the</span>
+<span class="sd">            form `S = (L @ U) @ T`. If None, `U` is set to the identity matrix.</span>
+<span class="sd">        diagonal_only: bool = False</span>
+<span class="sd">            If true, restrict :math:`T` to diagonal matrices.</span>
+<span class="sd">        fixed_shape: bool = False</span>
+<span class="sd">            If true, restrict :math:`T` to diagonal matrices with diagonal coefficients</span>
+<span class="sd">            :math:`[m, 1, 1]` (1d), :math:`[m, m, 1]` (2d), or :math:`[m, m, m]` (3d),</span>
+<span class="sd">            where the dimension is determined from `len(dirs)`.</span>
+<span class="sd">        skip_non_primitive: bool = True</span>
+<span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
+<span class="sd">            included in the check for primitive configurations.</span>
+<span class="sd">        skip_equivalents: bool = True</span>
+<span class="sd">            If True, enumeration skips non-unique configurations with respect</span>
+<span class="sd">            to the subgroup that leaves the supercell lattice vectors</span>
+<span class="sd">            and continuous DoF of the background configuration invariant.</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        ------</span>
+<span class="sd">        config: casmconfig.Configuration</span>
+<span class="sd">            A :class:`~casmconfig.Configuration`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
+        <span class="n">supercells</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="nb">min</span><span class="p">,</span>
+            <span class="n">unit_cell</span><span class="o">=</span><span class="n">unit_cell</span><span class="p">,</span>
+            <span class="n">dirs</span><span class="o">=</span><span class="n">dirs</span><span class="p">,</span>
+            <span class="n">diagonal_only</span><span class="o">=</span><span class="n">diagonal_only</span><span class="p">,</span>
+            <span class="n">fixed_shape</span><span class="o">=</span><span class="n">fixed_shape</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_super_backgrounds</span><span class="p">(</span>
+            <span class="n">background</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+            <span class="n">supercells</span><span class="o">=</span><span class="n">supercells</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Get continuous DoF</span>
+        <span class="n">which_dofs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_global_dof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">global_dof</span><span class="p">():</span>
+            <span class="n">which_dofs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_global_dof</span><span class="o">.</span><span class="n">dofname</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">_sublattice_dof</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">local_dof</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">_local_dof</span> <span class="ow">in</span> <span class="n">_sublattice_dof</span><span class="p">:</span>
+                <span class="n">which_dofs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_local_dof</span><span class="o">.</span><span class="n">dofname</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
+            <span class="n">sites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">super_background</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">n_sites</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
+                <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
+                <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
+                <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_equivalents</span><span class="p">,</span>
+                <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">which_dofs</span><span class="o">=</span><span class="n">which_dofs</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span></div>
 
 
 <div class="viewcode-block" id="ConfigEnumAllOccupations.by_linear_site_indices">
@@ -705,7 +950,7 @@ document.write(`
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">sites</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate occupation perturbations of a background configuration on</span>
 <span class="sd">        specified sites</span>
@@ -720,8 +965,8 @@ document.write(`
 <span class="sd">        skip_non_primitive: bool = False</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
-<span class="sd">        skip_non_canonical: bool = False</span>
-<span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
+<span class="sd">        skip_equivalents: bool = True</span>
+<span class="sd">            If True, enumeration skips equivalent configurations with respect</span>
 <span class="sd">            to the subgroup that leaves the background configuration invariant</span>
 <span class="sd">            and does not mix the given sites and other sites.</span>
 
@@ -735,7 +980,8 @@ document.write(`
             <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
             <span class="n">sites</span><span class="o">=</span><span class="n">sites</span><span class="p">,</span>
             <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-            <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
+            <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_equivalents</span><span class="p">,</span>
+            <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">):</span>
             <span class="k">yield</span> <span class="n">config</span></div>
 
@@ -747,7 +993,7 @@ document.write(`
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">sites</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">],</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate occupation perturbations of a background configuration on</span>
 <span class="sd">        specified sites</span>
@@ -762,8 +1008,8 @@ document.write(`
 <span class="sd">        skip_non_primitive: bool = False</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
-<span class="sd">        skip_non_canonical: bool = False</span>
-<span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
+<span class="sd">        skip_equivalents: bool = True</span>
+<span class="sd">            If True, enumeration skips equivalent configurations with respect</span>
 <span class="sd">            to the subgroup that leaves the background configuration invariant</span>
 <span class="sd">            and does not mix the given sites and other sites.</span>
 
@@ -779,7 +1025,8 @@ document.write(`
             <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
             <span class="n">sites</span><span class="o">=</span><span class="n">site_indices</span><span class="p">,</span>
             <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-            <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
+            <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_equivalents</span><span class="p">,</span>
+            <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">):</span>
             <span class="k">yield</span> <span class="n">config</span></div>
 
@@ -792,7 +1039,7 @@ document.write(`
         <span class="n">sublats</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
         <span class="n">supercells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate occupation perturbations of a background configuration on</span>
 <span class="sd">        specified sublattices</span>
@@ -808,14 +1055,15 @@ document.write(`
 <span class="sd">            If not None, occupation enumeration only occurs on the specified</span>
 <span class="sd">            sublattices.</span>
 <span class="sd">        supercells: Optional[dict] = None</span>
-<span class="sd">            Parameters to forward to ScelEnum, to specify the supercells that the</span>
-<span class="sd">            background configuration will be filled into. If None, only the</span>
-<span class="sd">            exact background configuration is perturbed.</span>
+<span class="sd">            Parameters to forward to</span>
+<span class="sd">            :func:`ScelEnum.by_volume &lt;libcasm.enumerate.ScelEnum.by_volume&gt;`</span>
+<span class="sd">            to specify the supercells that the background configuration will be filled</span>
+<span class="sd">            into. If None, only the exact background configuration is perturbed.</span>
 <span class="sd">        skip_non_primitive: bool = False</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
-<span class="sd">        skip_non_canonical: bool = False</span>
-<span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
+<span class="sd">        skip_equivalents: bool = True</span>
+<span class="sd">            If True, enumeration skips equivalent configurations with respect</span>
 <span class="sd">            to the subgroup that leaves the background configuration invariant</span>
 <span class="sd">            and does not mix the selected sublattice sites and other sites.</span>
 
@@ -825,24 +1073,20 @@ document.write(`
 <span class="sd">            A :class:`~casmconfig.Configuration`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
-        <span class="n">supercell_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_supercell_list</span><span class="p">(</span>
+        <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_super_backgrounds</span><span class="p">(</span>
             <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
             <span class="n">supercells</span><span class="o">=</span><span class="n">supercells</span><span class="p">,</span>
         <span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercell_list</span><span class="p">:</span>
-            <span class="n">sublat_sites</span> <span class="o">=</span> <span class="n">_make_sublat_sites</span><span class="p">(</span><span class="n">supercell</span><span class="p">,</span> <span class="n">sublats</span><span class="p">)</span>
-            <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_distinct_super_configurations</span><span class="p">(</span>
-                <span class="n">motif</span><span class="o">=</span><span class="n">background</span><span class="p">,</span> <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
-                    <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
-                    <span class="n">sites</span><span class="o">=</span><span class="n">sublat_sites</span><span class="p">,</span>
-                    <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-                    <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
-                <span class="p">):</span>
-                    <span class="k">yield</span> <span class="n">config</span></div>
+        <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
+            <span class="n">sublat_sites</span> <span class="o">=</span> <span class="n">_make_sublat_sites</span><span class="p">(</span><span class="n">super_background</span><span class="o">.</span><span class="n">supercell</span><span class="p">,</span> <span class="n">sublats</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
+                <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
+                <span class="n">sites</span><span class="o">=</span><span class="n">sublat_sites</span><span class="p">,</span>
+                <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_equivalents</span><span class="p">,</span>
+                <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="k">yield</span> <span class="n">config</span></div>
 
 
 <div class="viewcode-block" id="ConfigEnumAllOccupations.by_cluster">
@@ -853,7 +1097,7 @@ document.write(`
         <span class="n">cluster_specs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
         <span class="n">supercells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate occupation perturbations of a background configuration on</span>
 <span class="sd">        specified clusters</span>
@@ -873,14 +1117,15 @@ document.write(`
 <span class="sd">            generated by filling `background` into the supercells specified by the</span>
 <span class="sd">            `supercells` parameter.</span>
 <span class="sd">        supercells: Optional[dict] = None</span>
-<span class="sd">            Parameters to forward to ScelEnum, to specify the supercells that the</span>
-<span class="sd">            background configuration will be filled into. If None, only the exact</span>
-<span class="sd">            background configuration is perturbed.</span>
+<span class="sd">            Parameters to forward to</span>
+<span class="sd">            :func:`ScelEnum.by_volume &lt;libcasm.enumerate.ScelEnum.by_volume&gt;`</span>
+<span class="sd">            to specify the supercells that the background configuration will be filled</span>
+<span class="sd">            into. If None, only the exact background configuration is perturbed.</span>
 <span class="sd">        skip_non_primitive: bool = False</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
-<span class="sd">        skip_non_canonical: bool = False</span>
-<span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
+<span class="sd">        skip_equivalents: bool = True</span>
+<span class="sd">            If True, enumeration skips equivalent configurations with respect</span>
 <span class="sd">            to the subgroup that leaves the background configuration invariant</span>
 <span class="sd">            and does not mix the cluster sites and other sites.</span>
 
@@ -890,7 +1135,7 @@ document.write(`
 <span class="sd">            A :class:`~casmconfig.Configuration`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
-        <span class="n">supercell_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_supercell_list</span><span class="p">(</span>
+        <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_super_backgrounds</span><span class="p">(</span>
             <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
             <span class="n">supercells</span><span class="o">=</span><span class="n">supercells</span><span class="p">,</span>
         <span class="p">)</span>
@@ -903,23 +1148,20 @@ document.write(`
         <span class="p">)</span>
         <span class="n">orbits</span> <span class="o">=</span> <span class="n">cspecs</span><span class="o">.</span><span class="n">make_orbits</span><span class="p">()</span>
 
-        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercell_list</span><span class="p">:</span>
-            <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_distinct_super_configurations</span><span class="p">(</span>
-                <span class="n">motif</span><span class="o">=</span><span class="n">background</span><span class="p">,</span> <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span>
+        <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
+            <span class="n">distinct_cluster_sites</span> <span class="o">=</span> <span class="n">make_distinct_cluster_sites</span><span class="p">(</span>
+                <span class="n">configuration</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
+                <span class="n">orbits</span><span class="o">=</span><span class="n">orbits</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
-                <span class="n">distinct_cluster_sites</span> <span class="o">=</span> <span class="n">make_distinct_cluster_sites</span><span class="p">(</span>
-                    <span class="n">configuration</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
-                    <span class="n">orbits</span><span class="o">=</span><span class="n">orbits</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="k">for</span> <span class="n">cluster_sites</span> <span class="ow">in</span> <span class="n">distinct_cluster_sites</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
-                        <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
-                        <span class="n">sites</span><span class="o">=</span><span class="n">cluster_sites</span><span class="p">,</span>
-                        <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-                        <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
-                    <span class="p">):</span>
-                        <span class="k">yield</span> <span class="n">config</span></div>
+            <span class="k">for</span> <span class="n">cluster_sites</span> <span class="ow">in</span> <span class="n">distinct_cluster_sites</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
+                    <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
+                    <span class="n">sites</span><span class="o">=</span><span class="n">cluster_sites</span><span class="p">,</span>
+                    <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                    <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_equivalents</span><span class="p">,</span>
+                    <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">config</span></div>
 
 
 <div class="viewcode-block" id="ConfigEnumAllOccupations.by_cluster_list">
@@ -930,7 +1172,7 @@ document.write(`
         <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
         <span class="n">supercells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">skip_non_primitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">skip_non_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">skip_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate occupation perturbations of a background configuration on</span>
 <span class="sd">        an explicitly provided list of clusters</span>
@@ -947,14 +1189,15 @@ document.write(`
 <span class="sd">            those orbits within the background configurations generated by filling</span>
 <span class="sd">            the supercells specified by the `supercells` parameter.</span>
 <span class="sd">        supercells: Optional[dict] = None</span>
-<span class="sd">            Parameters to forward to ScelEnum, to specify the supercells that the</span>
-<span class="sd">            background configuration will be filled into. If None, only the exact</span>
-<span class="sd">            background configuration is perturbed.</span>
+<span class="sd">            Parameters to forward to</span>
+<span class="sd">            :func:`ScelEnum.by_volume &lt;libcasm.enumerate.ScelEnum.by_volume&gt;`</span>
+<span class="sd">            to specify the supercells that the background configuration will be filled</span>
+<span class="sd">            into. If None, only the exact background configuration is perturbed.</span>
 <span class="sd">        skip_non_primitive: bool = False</span>
 <span class="sd">            If True, enumeration skips non-primitive configurations. All DoF are</span>
 <span class="sd">            included in the check for primitive configurations.</span>
-<span class="sd">        skip_non_canonical: bool = False</span>
-<span class="sd">            If True, enumeration skips non-canonical configurations with respect</span>
+<span class="sd">        skip_equivalents: bool = True</span>
+<span class="sd">            If True, enumeration skips equivalent configurations with respect</span>
 <span class="sd">            to the subgroup that leaves the background configuration invariant</span>
 <span class="sd">            and does not mix the cluster sites and other sites.</span>
 
@@ -964,7 +1207,7 @@ document.write(`
 <span class="sd">            A :class:`~casmconfig.Configuration`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_begin</span><span class="p">()</span>
-        <span class="n">supercell_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_supercell_list</span><span class="p">(</span>
+        <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_super_backgrounds</span><span class="p">(</span>
             <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
             <span class="n">supercells</span><span class="o">=</span><span class="n">supercells</span><span class="p">,</span>
         <span class="p">)</span>
@@ -980,23 +1223,20 @@ document.write(`
                 <span class="n">orbit_prototypes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="n">orbits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercell_list</span><span class="p">:</span>
-            <span class="n">super_backgrounds</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_distinct_super_configurations</span><span class="p">(</span>
-                <span class="n">motif</span><span class="o">=</span><span class="n">background</span><span class="p">,</span> <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span>
+        <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
+            <span class="n">distinct_cluster_sites</span> <span class="o">=</span> <span class="n">make_distinct_cluster_sites</span><span class="p">(</span>
+                <span class="n">configuration</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
+                <span class="n">orbits</span><span class="o">=</span><span class="n">orbits</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">for</span> <span class="n">super_background</span> <span class="ow">in</span> <span class="n">super_backgrounds</span><span class="p">:</span>
-                <span class="n">distinct_cluster_sites</span> <span class="o">=</span> <span class="n">make_distinct_cluster_sites</span><span class="p">(</span>
-                    <span class="n">configuration</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
-                    <span class="n">orbits</span><span class="o">=</span><span class="n">orbits</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="k">for</span> <span class="n">cluster_sites</span> <span class="ow">in</span> <span class="n">distinct_cluster_sites</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
-                        <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
-                        <span class="n">sites</span><span class="o">=</span><span class="n">cluster_sites</span><span class="p">,</span>
-                        <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
-                        <span class="n">skip_non_canonical</span><span class="o">=</span><span class="n">skip_non_canonical</span><span class="p">,</span>
-                    <span class="p">):</span>
-                        <span class="k">yield</span> <span class="n">config</span></div>
+            <span class="k">for</span> <span class="n">cluster_sites</span> <span class="ow">in</span> <span class="n">distinct_cluster_sites</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_by_site</span><span class="p">(</span>
+                    <span class="n">background</span><span class="o">=</span><span class="n">super_background</span><span class="p">,</span>
+                    <span class="n">sites</span><span class="o">=</span><span class="n">cluster_sites</span><span class="p">,</span>
+                    <span class="n">skip_non_primitive</span><span class="o">=</span><span class="n">skip_non_primitive</span><span class="p">,</span>
+                    <span class="n">skip_equivalents</span><span class="o">=</span><span class="n">skip_equivalents</span><span class="p">,</span>
+                    <span class="n">use_background_invariant_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">config</span></div>
 </div>
 
 </pre></div>

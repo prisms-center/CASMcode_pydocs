@@ -1,0 +1,1229 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>libcasm.enumerate._point_defect_supercell_methods &#8212; libcasm-configuration 2.0a6 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=1406bdce"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_point_defect_supercell_methods';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-configuration</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage/usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_configuration/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-configuration/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage/usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_configuration/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-configuration/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">libcasm.enum...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for libcasm.enumerate._point_defect_supercell_methods</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">casmclust</span>
+<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
+<span class="kn">import</span> <span class="nn">libcasm.enumerate</span> <span class="k">as</span> <span class="nn">casmenum</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+
+
+<span class="k">def</span> <span class="nf">_format_figure</span><span class="p">(</span>
+    <span class="n">p</span><span class="p">,</span>
+    <span class="n">font_size_1</span><span class="o">=</span><span class="s2">&quot;18pt&quot;</span><span class="p">,</span>
+    <span class="n">font_size_2</span><span class="o">=</span><span class="s2">&quot;14pt&quot;</span><span class="p">,</span>
+    <span class="n">font_name</span><span class="o">=</span><span class="s2">&quot;times&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Format the bokeh figure title, x-axis, and y-axis.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    font_size_1: str</span>
+<span class="sd">        The font size for the title and axis labels.</span>
+<span class="sd">    font_size_2: str</span>
+<span class="sd">        The font size for the axis major tick labels.</span>
+<span class="sd">    font_name: str</span>
+<span class="sd">        The font name.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text_font</span> <span class="o">=</span> <span class="n">font_name</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text_font_size</span> <span class="o">=</span> <span class="n">font_size_1</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label_text_font</span> <span class="o">=</span> <span class="n">font_name</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label_text_font_size</span> <span class="o">=</span> <span class="n">font_size_1</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">major_label_text_font</span> <span class="o">=</span> <span class="n">font_name</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">major_label_text_font_size</span> <span class="o">=</span> <span class="n">font_size_2</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label_text_font</span> <span class="o">=</span> <span class="n">font_name</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label_text_font_size</span> <span class="o">=</span> <span class="n">font_size_1</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">major_label_text_font</span> <span class="o">=</span> <span class="n">font_name</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">major_label_text_font_size</span> <span class="o">=</span> <span class="n">font_size_2</span>
+
+
+<span class="k">def</span> <span class="nf">_make_pareto</span><span class="p">(</span>
+    <span class="n">n_unitcells</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">voronoi_inner_radius</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">has_required_sites</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span>
+    <span class="n">has_all_motif_operations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span>
+<span class="p">):</span>
+    <span class="c1"># Find pareto (n_unitcells, dist),</span>
+    <span class="c1"># restricted to has_required_sites==True and has_all_motif_operations==True</span>
+    <span class="n">pareto</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">n_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_unitcells</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_required_sites</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_all_motif_operations</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="n">point_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">n_unitcells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">n_unitcells</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">point_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">is_max</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">point_set</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">n_unitcells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_unitcells</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span>
+                <span class="n">voronoi_inner_radius</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">voronoi_inner_radius</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">abs_tol</span><span class="o">=</span><span class="n">tol</span>
+            <span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">voronoi_inner_radius</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">voronoi_inner_radius</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">tol</span><span class="p">:</span>
+                <span class="n">is_max</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">is_max</span><span class="p">:</span>
+            <span class="n">pareto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pareto</span>
+
+
+<span class="k">def</span> <span class="nf">_score_point_defect_supercell</span><span class="p">(</span><span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a score for ranking supercells for point defect calculations.</span>
+
+<span class="sd">    The score is `(supercell_factor_group_size, -n_unitcells, voronoi_inner_radius).`</span>
+<span class="sd">    This metric tends to prefer high symmetry, small, compact supercells as the &quot;base&quot;</span>
+<span class="sd">    supercell, which can then be multiplied by a scaling factor to make a larger</span>
+<span class="sd">    supercell that point defect calculations can be performed in.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    supercell: casmconfig.Supercell</span>
+<span class="sd">        The supercell being scored.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    supercell_factor_group_size: int</span>
+<span class="sd">        The supercell factor group size</span>
+<span class="sd">    negative_n_unitcells: int</span>
+<span class="sd">        The negative of the number of unit cells.</span>
+<span class="sd">    voronoi_inner_radius: float</span>
+<span class="sd">        The superlattice voronoi inner radius distance, which is the minimum</span>
+<span class="sd">        defect periodic image distance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scel_fg_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+    <span class="n">n_unitcells</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span>
+    <span class="n">voronoi_inner_radius</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">voronoi_inner_radius</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">scel_fg_size</span><span class="p">,</span> <span class="o">-</span><span class="n">n_unitcells</span><span class="p">,</span> <span class="n">voronoi_inner_radius</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="make_required_sites">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_required_sites.html#libcasm.enumerate.make_required_sites">[docs]</a>
+<span class="k">def</span> <span class="nf">make_required_sites</span><span class="p">(</span>
+    <span class="n">phenomenal_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
+    <span class="n">local_orbits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]]],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make the required sites for a point defect calculation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    phenomenal_clusters: list[casmclust.Cluster]</span>
+<span class="sd">        Phenomenal clusters.</span>
+
+<span class="sd">    local_orbits: list[list[list[casmclust.Cluster]]]</span>
+<span class="sd">        Local orbits, where ``local_orbits[i_equiv]`` is a list of orbits for the</span>
+<span class="sd">        equivalent event ``i_equiv``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    required_sites: list[list[xtal.IntegralSiteCoordinate]]</span>
+<span class="sd">        Sets of required sites for the point defect calculation, where</span>
+<span class="sd">        `required_sites[i]` is the `i`-th set. For each set, it is required that the</span>
+<span class="sd">        periodic images of the sites in the supercell are present without overlap.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">required_sites</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_orbits</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phenomenal_clusters</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Error in make_required_sites: &quot;</span>
+            <span class="s2">&quot;len(local_orbits) != len(phenomenal_clusters).&quot;</span>
+        <span class="p">)</span>
+    <span class="n">required_sites</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i_equiv</span><span class="p">,</span> <span class="n">_local_orbits</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">local_orbits</span><span class="p">):</span>
+        <span class="n">_required_sites</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">phenomenal_clusters</span><span class="p">[</span><span class="n">i_equiv</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">site</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_required_sites</span><span class="p">:</span>
+                <span class="n">_required_sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">orbit</span> <span class="ow">in</span> <span class="n">_local_orbits</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">orbit</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">cluster</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">site</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_required_sites</span><span class="p">:</span>
+                        <span class="n">_required_sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+        <span class="n">_required_sites</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">required_sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_required_sites</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">required_sites</span></div>
+
+
+
+<div class="viewcode-block" id="has_required_sites">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.has_required_sites.html#libcasm.enumerate.has_required_sites">[docs]</a>
+<span class="k">def</span> <span class="nf">has_required_sites</span><span class="p">(</span>
+    <span class="n">required_sites</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">]],</span>
+    <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the supercell has the required sites for a point defect calculation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    required_sites: list[list[xtal.IntegralSiteCoordinate]]</span>
+<span class="sd">        Sets of required sites for the point defect calculation, where</span>
+<span class="sd">        `required_sites[i]` is the `i`-th set. For each set, it is required that the</span>
+<span class="sd">        periodic images of the sites in the supercell are present without overlap.</span>
+<span class="sd">    supercell: casmconfig.Supercell</span>
+<span class="sd">        The supercell to check.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result: bool</span>
+<span class="sd">        True if the supercell has each set of required sites without overlap; else</span>
+<span class="sd">        False.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">_required_sites</span> <span class="ow">in</span> <span class="n">required_sites</span><span class="p">:</span>
+        <span class="n">site_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">_required_sites</span><span class="p">:</span>
+            <span class="n">site_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">linear_site_index</span><span class="p">(</span><span class="n">site</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">site_indices</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_required_sites</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">make_equivalent_supercells_with_required_operations</span><span class="p">(</span>
+    <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
+    <span class="n">required_operations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">supercell_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make equivalent supercells with required operations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    supercell: casmconfig.Supercell</span>
+<span class="sd">        The initial supercell.</span>
+<span class="sd">    required_operations: set[int]</span>
+<span class="sd">        The indices of prim factor group operations that are required in the</span>
+<span class="sd">        in supercell factor group.</span>
+<span class="sd">    supercell_set: Optional[casmconfig.SupercellSet] = None</span>
+<span class="sd">            If not None, generated :class:`~casmconfig.Supercell` are constructed by</span>
+<span class="sd">            adding in the :class:`~casmconfig.SupercellSet`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matching: list[casmconfig.Supercell]</span>
+<span class="sd">        Equivalent supercells to `supercell` with the required operations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_equivalent_supercells</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span>
+    <span class="n">matching</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+        <span class="n">operations</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">head_group_index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">required_operations</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">operations</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">supercell_set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">supercell_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+            <span class="n">matching</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">matching</span>
+
+
+<div class="viewcode-block" id="make_supercells_for_point_defects">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_supercells_for_point_defects.html#libcasm.enumerate.make_supercells_for_point_defects">[docs]</a>
+<span class="k">def</span> <span class="nf">make_supercells_for_point_defects</span><span class="p">(</span>
+    <span class="n">motif</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">base_max_volume</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">min_volume</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">max_volume</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">base_min_factor_group_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">required_sites</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">supercell_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the best supercells for point defect calculations which can be filled by a</span>
+<span class="sd">    particular motif configuration.</span>
+
+<span class="sd">    Supercells are scored by the (1) size of their supercell factor group (larger is</span>
+<span class="sd">    better) and (2) the minimum periodic distance between point defects (larger is</span>
+<span class="sd">    better).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    motif: casmconfig.Configuration</span>
+<span class="sd">        The motif configuration.</span>
+<span class="sd">    base_max_volume: int</span>
+<span class="sd">        Score unit cells with volume up to this value.</span>
+<span class="sd">    min_volume: int</span>
+<span class="sd">        Return supercells for point defect calculations with at least this volume</span>
+<span class="sd">    max_volume: int</span>
+<span class="sd">        Return supercells for point defect calculations with at most this volume</span>
+<span class="sd">    base_min_factor_group_size: Optional[int] = None</span>
+<span class="sd">        If not None, ignore unit cells with factor group size less than this value.</span>
+<span class="sd">    required_sites: Optional[list[list[xtal.IntegralSiteCoordinate]]] = None</span>
+<span class="sd">        Sets of required sites for the point defect calculation, where</span>
+<span class="sd">        `required_sites[i]` is the `i`-th set. If provided, it is checked if the</span>
+<span class="sd">        periodic images of the sites in the supercell are present without overlap,</span>
+<span class="sd">        for each set. Supercells are included in results in either case.</span>
+<span class="sd">    supercell_set: Optional[casmconfig.SupercellSet] = None</span>
+<span class="sd">            If not None, generated :class:`~casmconfig.Supercell` are constructed by</span>
+<span class="sd">            adding in the :class:`~casmconfig.SupercellSet`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    candidate_supercells: Optional[dict]</span>
+<span class="sd">        The best supercells, if any were found which meets the criteria; else None.</span>
+<span class="sd">        The dictionary keys are the candidate supercells (using an equivalent which</span>
+<span class="sd">        has all motif invariant group operations if possible) and the values hold data</span>
+<span class="sd">        about the supercells:</span>
+
+<span class="sd">        - &quot;unitcell&quot;: The unit supercell used to generate the final supercell.</span>
+<span class="sd">        - &quot;unitcell_name&quot;: The name of the unit supercell.</span>
+<span class="sd">        - &quot;has_required_sites&quot;: True if the supercell has the required sites without</span>
+<span class="sd">          overlap (or if there are no required sites).</span>
+<span class="sd">        - &quot;has_all_motif_operations&quot;: True if at least one equivalent supercell</span>
+<span class="sd">          has all motif invariant group operations in the supercell factor group.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prim</span> <span class="o">=</span> <span class="n">motif</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">prim</span>
+    <span class="n">scel_enum</span> <span class="o">=</span> <span class="n">casmenum</span><span class="o">.</span><span class="n">ScelEnum</span><span class="p">(</span><span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">)</span>
+
+    <span class="c1"># Get all prim factor group operations in the motif invariant group</span>
+    <span class="n">required_operations</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">make_invariant_subgroup</span><span class="p">(</span><span class="n">motif</span><span class="p">):</span>
+        <span class="n">required_operations</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">prim_factor_group_index</span><span class="p">())</span>
+
+    <span class="c1"># Generate candidate unit cells</span>
+    <span class="n">candidate_unit_cells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">scel_enum</span><span class="o">.</span><span class="n">by_volume</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">base_max_volume</span><span class="p">):</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">_score_point_defect_supercell</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">base_min_factor_group_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">base_min_factor_group_size</span>
+        <span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">candidate_unit_cells</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">supercell</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+
+    <span class="c1"># Sort candidate unit cells by score:</span>
+    <span class="c1"># (factor_group_size, -n_unitcells, voronoi_inner_radius)</span>
+    <span class="n">candidate_unit_cells</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Generate the candidate supercells</span>
+    <span class="n">candidate_supercells</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">candidate_unit_cells</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">supercell</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="n">T1</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span> <span class="o">&gt;</span> <span class="n">max_volume</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span> <span class="o">&lt;</span> <span class="n">min_volume</span> <span class="ow">or</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">candidate_supercells</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Check if motif can tile the supercell</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span>
+            <span class="n">is_superlat</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">is_equivalent_superlattice_of</span><span class="p">(</span>
+                <span class="n">lattice2</span><span class="o">=</span><span class="n">motif</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="p">,</span>
+                <span class="n">point_group</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_superlat</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Check if at least one equivalent supercell has all required operations</span>
+            <span class="n">matching</span> <span class="o">=</span> <span class="n">make_equivalent_supercells_with_required_operations</span><span class="p">(</span>
+                <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">,</span>
+                <span class="n">required_operations</span><span class="o">=</span><span class="n">required_operations</span><span class="p">,</span>
+                <span class="n">supercell_set</span><span class="o">=</span><span class="n">supercell_set</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">has_all_motif_operations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">has_all_motif_operations</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">matching</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">supercell</span>
+
+            <span class="c1"># All filters passed: include supercell</span>
+            <span class="k">if</span> <span class="n">supercell_set</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">supercell_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">candidate_supercells</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">unitcell</span><span class="o">=</span><span class="n">candidate</span><span class="p">,</span>
+                <span class="n">unitcell_name</span><span class="o">=</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellRecord</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span><span class="o">.</span><span class="n">supercell_name</span><span class="p">,</span>
+                <span class="n">has_required_sites</span><span class="o">=</span><span class="p">(</span>
+                    <span class="kc">True</span>
+                    <span class="k">if</span> <span class="n">required_sites</span> <span class="ow">is</span> <span class="kc">None</span>
+                    <span class="k">else</span> <span class="n">has_required_sites</span><span class="p">(</span><span class="n">required_sites</span><span class="p">,</span> <span class="n">supercell</span><span class="p">)</span>
+                <span class="p">),</span>
+                <span class="n">has_all_motif_operations</span><span class="o">=</span><span class="n">has_all_motif_operations</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidate_supercells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">candidate_supercells</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">candidate_supercells</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">filter_point_defect_supercells</span><span class="p">(</span>
+    <span class="n">candidate_supercells</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">min_volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">require_has_all_motif_operations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">require_has_required_sites</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">min_factor_group_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_voronoi_inner_radius</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter candidate supercells for point defect calculations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    candidate_supercells: dict</span>
+<span class="sd">        The candidate supercells, as returned by `make_supercells_for_point_defects`.</span>
+<span class="sd">    min_volume: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with fewer unit cells than this value.</span>
+<span class="sd">    max_volume: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with more unit cells than this value.</span>
+<span class="sd">    require_has_all_motif_operations: bool = True</span>
+<span class="sd">        If not True, ignore supercells that do not have at least</span>
+<span class="sd">        one equivalent supercell which includes all required operations in the</span>
+<span class="sd">        supercell factor group.</span>
+<span class="sd">    require_has_required_sites: bool = True</span>
+<span class="sd">        If not True, ignore supercells that do not have all required sites.</span>
+<span class="sd">    min_factor_group_size: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with factor group size less than this value.</span>
+<span class="sd">    min_voronoi_inner_radius: Optional[float] = None</span>
+<span class="sd">        If not None, ignore supercells with minimum periodic image distance less than</span>
+<span class="sd">        this value.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filtered_supercells: dict</span>
+<span class="sd">        The supercells are for which `has_required_sites` is True and the optional</span>
+<span class="sd">        criteria hold. The dictionary values hold data about the supercells:</span>
+
+<span class="sd">        - &quot;unitcell&quot;: The unit supercell used to generate the final supercell.</span>
+<span class="sd">        - &quot;unitcell_name&quot;: The name of the unit supercell.</span>
+<span class="sd">        - &quot;has_required_sites&quot;: True if the supercell has the required sites without</span>
+<span class="sd">          overlap.</span>
+<span class="sd">        - &quot;has_all_motif_operations&quot;: True if at least one equivalent supercell</span>
+<span class="sd">          has all motif invariant group operations in the supercell factor group.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">supercell</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">candidate_supercells</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">require_has_required_sites</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;has_required_sites&quot;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">require_has_all_motif_operations</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;has_all_motif_operations&quot;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">min_volume</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span> <span class="o">&lt;</span> <span class="n">min_volume</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">max_volume</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span> <span class="o">&gt;</span> <span class="n">max_volume</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">min_factor_group_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_factor_group_size</span>
+        <span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">min_voronoi_inner_radius</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">voronoi_inner_radius</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">min_voronoi_inner_radius</span>
+        <span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">x</span><span class="p">[</span><span class="n">supercell</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<div class="viewcode-block" id="find_optimal_point_defect_supercells">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.find_optimal_point_defect_supercells.html#libcasm.enumerate.find_optimal_point_defect_supercells">[docs]</a>
+<span class="k">def</span> <span class="nf">find_optimal_point_defect_supercells</span><span class="p">(</span>
+    <span class="n">candidate_supercells</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">min_volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">require_has_all_motif_operations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">require_has_required_sites</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">min_factor_group_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_voronoi_inner_radius</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the Pareto-optimal supercells for point defect calculations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    candidate_supercells: dict</span>
+<span class="sd">        The candidate supercells, as returned by `make_supercells_for_point_defects`.</span>
+<span class="sd">    min_volume: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with fewer unit cells than this value.</span>
+<span class="sd">    max_volume: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with more unit cells than this value.</span>
+<span class="sd">    require_has_all_motif_operations: bool = True</span>
+<span class="sd">        If not True, ignore supercells that do not have at least</span>
+<span class="sd">        one equivalent supercell which includes all required operations in the</span>
+<span class="sd">        supercell factor group.</span>
+<span class="sd">    require_has_required_sites: bool = True</span>
+<span class="sd">        If not True, ignore supercells that do not have all required sites.</span>
+<span class="sd">    min_factor_group_size: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with factor group size less than this value.</span>
+<span class="sd">    min_voronoi_inner_radius: Optional[float] = None</span>
+<span class="sd">        If not None, ignore supercells with minimum periodic image distance less than</span>
+<span class="sd">        this value.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    optimal_supercells: list[Supercell, dict]</span>
+<span class="sd">        The Pareto-optimal supercells and info, sorted by number of unit cells. The</span>
+<span class="sd">        Pareto-optimal supercells are found for the set of supercells for which</span>
+<span class="sd">        `has_required_sites` is True and the optional criteria hold - they may not be</span>
+<span class="sd">        Pareto-optimal considering all supercells. The dictionary values hold data</span>
+<span class="sd">        about the supercells:</span>
+
+<span class="sd">        - &quot;unitcell&quot;: The unit supercell used to generate the final supercell.</span>
+<span class="sd">        - &quot;unitcell_name&quot;: The name of the unit supercell.</span>
+<span class="sd">        - &quot;has_required_sites&quot;: True if the supercell has the required sites without</span>
+<span class="sd">          overlap.</span>
+<span class="sd">        - &quot;has_all_motif_operations&quot;: True if at least one equivalent supercell</span>
+<span class="sd">          has all motif invariant group operations in the supercell factor group.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">filter_point_defect_supercells</span><span class="p">(</span>
+        <span class="n">candidate_supercells</span><span class="o">=</span><span class="n">candidate_supercells</span><span class="p">,</span>
+        <span class="n">min_volume</span><span class="o">=</span><span class="n">min_volume</span><span class="p">,</span>
+        <span class="n">max_volume</span><span class="o">=</span><span class="n">max_volume</span><span class="p">,</span>
+        <span class="n">require_has_all_motif_operations</span><span class="o">=</span><span class="n">require_has_all_motif_operations</span><span class="p">,</span>
+        <span class="n">require_has_required_sites</span><span class="o">=</span><span class="n">require_has_required_sites</span><span class="p">,</span>
+        <span class="n">min_factor_group_size</span><span class="o">=</span><span class="n">min_factor_group_size</span><span class="p">,</span>
+        <span class="n">min_voronoi_inner_radius</span><span class="o">=</span><span class="n">min_voronoi_inner_radius</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">supercells</span> <span class="o">=</span> <span class="p">[</span><span class="n">supercell</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">supercell</span><span class="p">]</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">]</span>
+    <span class="n">n_unitcells</span> <span class="o">=</span> <span class="p">[</span><span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">]</span>
+    <span class="n">voronoi_inner_radius</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">voronoi_inner_radius</span><span class="p">()</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span>
+    <span class="p">]</span>
+    <span class="n">has_required_sites</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;has_required_sites&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+    <span class="n">has_all_motif_operations</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;has_all_motif_operations&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+
+    <span class="c1"># Find pareto (n_unitcells, dist)</span>
+    <span class="n">pareto</span> <span class="o">=</span> <span class="n">_make_pareto</span><span class="p">(</span>
+        <span class="n">n_unitcells</span><span class="p">,</span> <span class="n">voronoi_inner_radius</span><span class="p">,</span> <span class="n">has_required_sites</span><span class="p">,</span> <span class="n">has_all_motif_operations</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="p">[(</span><span class="n">supercells</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pareto</span><span class="p">],</span>
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_unitcells</span><span class="p">,</span>
+        <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="print_point_defect_supercell_info">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.print_point_defect_supercell_info.html#libcasm.enumerate.print_point_defect_supercell_info">[docs]</a>
+<span class="k">def</span> <span class="nf">print_point_defect_supercell_info</span><span class="p">(</span>
+    <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellRecord</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span>
+    <span class="n">base_record</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellRecord</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;unitcell&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Supercell name: </span><span class="si">{</span><span class="n">record</span><span class="o">.</span><span class="n">supercell_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of unit cells:&quot;</span><span class="p">,</span> <span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum periodic image distance:&quot;</span><span class="p">,</span>
+        <span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">voronoi_inner_radius</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Factor group size:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Has all motif operations:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;has_all_motif_operations&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Has required sites:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;has_required_sites&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Superlattice vectors: (column vector matrix)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Transformation matrix to supercell:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Base supercell: </span><span class="si">{</span><span class="n">base_record</span><span class="o">.</span><span class="n">supercell_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Base supercell transformation matrix:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;unitcell&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_point_defect_supercell_scores">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.plot_point_defect_supercell_scores.html#libcasm.enumerate.plot_point_defect_supercell_scores">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_point_defect_supercell_scores</span><span class="p">(</span>
+    <span class="n">candidate_supercells</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">motif_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">min_volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">require_has_all_motif_operations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">require_has_required_sites</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">min_factor_group_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_voronoi_inner_radius</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color_optimal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;darkorange&quot;</span><span class="p">,</span>
+    <span class="n">color_non_optimal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span>
+    <span class="n">size_matching</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">size_non_matching</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">marker_optimal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;star&quot;</span><span class="p">,</span>
+    <span class="n">marker_matching</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;circle&quot;</span><span class="p">,</span>
+    <span class="n">marker_non_matching</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use bokeh to plot the scores of supercells for point defect calculations.</span>
+
+<span class="sd">    Plots the scores of supercells for point defect calculations, where:</span>
+
+<span class="sd">    - x-axis: number of unit cells in the supercell</span>
+<span class="sd">    - y-axis: minimum periodic image distance between point defects</span>
+<span class="sd">    - size: supercells that have the required sites and match the optional criteria</span>
+<span class="sd">      (`min_volume`, `max_volume`, `min_factor_group_size`, and</span>
+<span class="sd">      `min_voronoi_inner_radius`) are plotted with a larger marker size than those</span>
+<span class="sd">      which are non-matching</span>
+<span class="sd">    - color: pareto-optimal supercells for which `has_required_sites` and</span>
+<span class="sd">      `has_all_motif_operations` are True are highlighted</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    candidate_supercells: dict</span>
+<span class="sd">        The candidate supercells, as returned by `make_supercells_for_point_defects`.</span>
+<span class="sd">    motif_name: str</span>
+<span class="sd">        The name of the motif configuration to use in the plot title.</span>
+<span class="sd">    min_volume: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with fewer unit cells than this value.</span>
+<span class="sd">    max_volume: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with more unit cells than this value.</span>
+<span class="sd">    require_has_all_motif_operations: bool = True</span>
+<span class="sd">        If not True, ignore supercells that do not have at least</span>
+<span class="sd">        one equivalent supercell which includes all required operations in the</span>
+<span class="sd">        supercell factor group.</span>
+<span class="sd">    require_has_required_sites: bool = True</span>
+<span class="sd">        If not True, ignore supercells that do not have all required sites.</span>
+<span class="sd">    min_factor_group_size: Optional[int] = None</span>
+<span class="sd">        If not None, ignore supercells with factor group size less than this value.</span>
+<span class="sd">    min_voronoi_inner_radius: Optional[float] = None</span>
+<span class="sd">        If not None, ignore supercells with minimum periodic image distance less than</span>
+<span class="sd">        this value.</span>
+<span class="sd">    color_optimal: str = &quot;darkorange&quot;</span>
+<span class="sd">        The color for pareto-optimal supercells.</span>
+<span class="sd">    color_non_optimal: str = &quot;steelblue&quot;</span>
+<span class="sd">        The color for non-pareto-optimal supercells.</span>
+<span class="sd">    size_matching: int = 10</span>
+<span class="sd">        The size of the markers for supercells that match the criteria.</span>
+<span class="sd">    size_non_matching: int = 5</span>
+<span class="sd">        The size of the markers for supercells that do not match the criteria.</span>
+<span class="sd">    marker_optimal: str = &quot;star&quot;</span>
+<span class="sd">        The marker for pareto-optimal supercells in the matching set.</span>
+<span class="sd">    marker_matching: str = &quot;circle&quot;</span>
+<span class="sd">        The marker for supercells that are in the matching set, but not optimal.</span>
+<span class="sd">    marker_non_matching: str = &quot;x&quot;</span>
+<span class="sd">        The marker for supercells that are not in the matching set.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span>
+    <span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span>
+
+    <span class="c1"># Make a ColumnDataSource</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">candidate_supercells</span>
+    <span class="n">supercells</span> <span class="o">=</span> <span class="p">[</span><span class="n">supercell</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">candidate_supercells</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">supercell</span><span class="p">]</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">]</span>
+    <span class="n">factor_group_size</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span>
+    <span class="p">]</span>
+    <span class="n">n_unitcells</span> <span class="o">=</span> <span class="p">[</span><span class="n">supercell</span><span class="o">.</span><span class="n">n_unitcells</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">]</span>
+    <span class="n">voronoi_inner_radius</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">voronoi_inner_radius</span><span class="p">()</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span>
+    <span class="p">]</span>
+    <span class="n">has_required_sites</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;has_required_sites&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+    <span class="n">has_all_motif_operations</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;has_all_motif_operations&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+    <span class="n">supercell_name</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellRecord</span><span class="p">(</span><span class="n">supercell</span><span class="p">)</span><span class="o">.</span><span class="n">supercell_name</span>
+        <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">candidate_supercells</span>
+    <span class="p">]</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="n">supercell</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">]</span>
+    <span class="n">v1_frac</span> <span class="o">=</span> <span class="p">[</span><span class="n">_T</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">_T</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]</span>
+    <span class="n">v2_frac</span> <span class="o">=</span> <span class="p">[</span><span class="n">_T</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">_T</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]</span>
+    <span class="n">v3_frac</span> <span class="o">=</span> <span class="p">[</span><span class="n">_T</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">_T</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="n">supercell</span><span class="o">.</span><span class="n">superlattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span> <span class="k">for</span> <span class="n">supercell</span> <span class="ow">in</span> <span class="n">supercells</span><span class="p">]</span>
+    <span class="n">v1_cart</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_S</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">_S</span> <span class="ow">in</span> <span class="n">S</span><span class="p">]</span>
+    <span class="n">v2_cart</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_S</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">_S</span> <span class="ow">in</span> <span class="n">S</span><span class="p">]</span>
+    <span class="n">v3_cart</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_S</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">_S</span> <span class="ow">in</span> <span class="n">S</span><span class="p">]</span>
+
+    <span class="n">filtered_supercells</span> <span class="o">=</span> <span class="n">filter_point_defect_supercells</span><span class="p">(</span>
+        <span class="n">candidate_supercells</span><span class="o">=</span><span class="n">candidate_supercells</span><span class="p">,</span>
+        <span class="n">min_volume</span><span class="o">=</span><span class="n">min_volume</span><span class="p">,</span>
+        <span class="n">max_volume</span><span class="o">=</span><span class="n">max_volume</span><span class="p">,</span>
+        <span class="n">require_has_all_motif_operations</span><span class="o">=</span><span class="n">require_has_all_motif_operations</span><span class="p">,</span>
+        <span class="n">require_has_required_sites</span><span class="o">=</span><span class="n">require_has_required_sites</span><span class="p">,</span>
+        <span class="n">min_factor_group_size</span><span class="o">=</span><span class="n">min_factor_group_size</span><span class="p">,</span>
+        <span class="n">min_voronoi_inner_radius</span><span class="o">=</span><span class="n">min_voronoi_inner_radius</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># _sizes = [</span>
+    <span class="c1">#     size_matching if supercells[i] in filtered_supercells else size_non_matching</span>
+    <span class="c1">#     for i in range(len(supercells))</span>
+    <span class="c1"># ]</span>
+
+    <span class="c1"># Find optimal supercells: list[tuple[Supercell, dict]]</span>
+    <span class="n">optimal_supercells</span> <span class="o">=</span> <span class="n">find_optimal_point_defect_supercells</span><span class="p">(</span>
+        <span class="n">candidate_supercells</span><span class="o">=</span><span class="n">filtered_supercells</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Just the supercells:</span>
+    <span class="n">_optimal_supercells</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">optimal_supercells</span><span class="p">]</span>
+
+    <span class="c1"># _colors = [</span>
+    <span class="c1">#     color_optimal if supercells[i] in _optimal_supercells else color_non_optimal</span>
+    <span class="c1">#     for i in range(len(supercells))</span>
+    <span class="c1"># ]</span>
+
+    <span class="n">_label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_color</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_marker</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_sizes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">supercells</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">supercells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_optimal_supercells</span><span class="p">:</span>
+            <span class="n">_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Optimal&quot;</span><span class="p">)</span>
+            <span class="n">_color</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color_optimal</span><span class="p">)</span>
+            <span class="n">_marker</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">marker_optimal</span><span class="p">)</span>
+            <span class="n">_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">size_matching</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">supercells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">filtered_supercells</span><span class="p">:</span>
+            <span class="n">_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Matching&quot;</span><span class="p">)</span>
+            <span class="n">_color</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color_non_optimal</span><span class="p">)</span>
+            <span class="n">_marker</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">marker_matching</span><span class="p">)</span>
+            <span class="n">_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">size_matching</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Non-matching&quot;</span><span class="p">)</span>
+            <span class="n">_color</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color_non_optimal</span><span class="p">)</span>
+            <span class="n">_marker</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">marker_non_matching</span><span class="p">)</span>
+            <span class="n">_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">size_non_matching</span><span class="p">)</span>
+
+    <span class="n">source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">supercell_name</span><span class="o">=</span><span class="n">supercell_name</span><span class="p">,</span>
+            <span class="n">factor_group_size</span><span class="o">=</span><span class="n">factor_group_size</span><span class="p">,</span>
+            <span class="n">n_unitcells</span><span class="o">=</span><span class="n">n_unitcells</span><span class="p">,</span>
+            <span class="n">voronoi_inner_radius</span><span class="o">=</span><span class="n">voronoi_inner_radius</span><span class="p">,</span>
+            <span class="n">has_required_sites</span><span class="o">=</span><span class="n">has_required_sites</span><span class="p">,</span>
+            <span class="n">has_all_motif_operations</span><span class="o">=</span><span class="n">has_all_motif_operations</span><span class="p">,</span>
+            <span class="n">v1_frac</span><span class="o">=</span><span class="n">v1_frac</span><span class="p">,</span>
+            <span class="n">v2_frac</span><span class="o">=</span><span class="n">v2_frac</span><span class="p">,</span>
+            <span class="n">v3_frac</span><span class="o">=</span><span class="n">v3_frac</span><span class="p">,</span>
+            <span class="n">v1_cart</span><span class="o">=</span><span class="n">v1_cart</span><span class="p">,</span>
+            <span class="n">v2_cart</span><span class="o">=</span><span class="n">v2_cart</span><span class="p">,</span>
+            <span class="n">v3_cart</span><span class="o">=</span><span class="n">v3_cart</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">_color</span><span class="p">,</span>
+            <span class="n">sizes</span><span class="o">=</span><span class="n">_sizes</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">_label</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="n">_marker</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># from bokeh.io import output_notebook</span>
+    <span class="c1"># output_notebook()</span>
+
+    <span class="n">figure_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;tools&quot;</span><span class="p">:</span> <span class="s2">&quot;pan,box_zoom,wheel_zoom,save,hover,lasso_select,box_select,tap,reset&quot;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">motif_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">figure_params</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Supercells for &quot;</span> <span class="o">+</span> <span class="n">motif_name</span>
+    <span class="n">figure_params</span><span class="p">[</span><span class="s2">&quot;tooltips&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;supercell&quot;</span><span class="p">,</span> <span class="s2">&quot;@supercell_name&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;factor group size&quot;</span><span class="p">,</span> <span class="s2">&quot;@factor_group_size&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;n_unitcells&quot;</span><span class="p">,</span> <span class="s2">&quot;@n_unitcells&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;voronoi_inner_radius&quot;</span><span class="p">,</span> <span class="s2">&quot;@voronoi_inner_radius&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;has_required_sites&quot;</span><span class="p">,</span> <span class="s2">&quot;@has_required_sites&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;has_all_motif_operations&quot;</span><span class="p">,</span> <span class="s2">&quot;@has_all_motif_operations&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;v1_frac&quot;</span><span class="p">,</span> <span class="s2">&quot;@v1_frac&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;v2_frac&quot;</span><span class="p">,</span> <span class="s2">&quot;@v2_frac&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;v3_frac&quot;</span><span class="p">,</span> <span class="s2">&quot;@v3_frac&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;v1_cart&quot;</span><span class="p">,</span> <span class="s2">&quot;@v1_cart&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;v2_cart&quot;</span><span class="p">,</span> <span class="s2">&quot;@v2_cart&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;v3_cart&quot;</span><span class="p">,</span> <span class="s2">&quot;@v3_cart&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="o">**</span><span class="n">figure_params</span><span class="p">)</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;n_unitcells&quot;</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;voronoi_inner_radius&quot;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="s2">&quot;sizes&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;marker&quot;</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+        <span class="n">legend_group</span><span class="o">=</span><span class="s2">&quot;label&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># label axes</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Number of unitcells&quot;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Minimum periodic image distance&quot;</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;bottom_right&quot;</span>
+
+    <span class="n">_format_figure</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
