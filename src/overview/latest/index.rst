@@ -195,7 +195,7 @@ Links: |GitHub_configuration|_ |PyPI_configuration|_
 
 
 casm-bset
--------------
+---------
 
 CASM cluster expansion basis set construction module
 
@@ -264,7 +264,7 @@ Install:
     pip install libcasm-clexmonte
 
 
-Docs: `[2.0a2] <../../libcasm/clexmonte/2.0/>`_
+Docs: `[2.0a3] <../../libcasm/clexmonte/2.0/>`_
 
 Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
