@@ -1,0 +1,1369 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>libcasm.clexmonte.site_iterators._site_iterators &#8212; libcasm-clexmonte 2.0a4 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/clexmonte/site_iterators/_site_iterators';</script>
+    <link rel="icon" href="../../../../_static/small_logo.svg"/>
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">libcasm-clexmonte</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexmonte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexmonte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/libcasm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexmonte/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexmonte/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">libcasm.clex...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for libcasm.clexmonte.site_iterators._site_iterators</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Helpers for iterating over sites in a Monte Carlo simulation</span>
+
+<span class="sd">The site iterators in this module yield :class:`~libcasm.clexmonte.SiteInfo` that are</span>
+<span class="sd">updated at each step to give the position, coordinates, etc. for a particular set of</span>
+<span class="sd">sites in a Monte Carlo simulation. This can be used to help implement custom sampling</span>
+<span class="sd">and analysis functions.</span>
+
+<span class="sd">.. rubric:: Example: Sampling the local composition around vacancies</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    import libcasm.clexmonte as clexmonte</span>
+<span class="sd">    import libcasm.monte.sampling as sampling</span>
+
+<span class="sd">    # calculator: clexmonte.MonteCalculator</span>
+<span class="sd">    # sampling_fixture: clexmonte.SamplingFixture</span>
+
+<span class="sd">    va_site_iterator = clexmonte.ChemicalTypeSiteIterator(</span>
+<span class="sd">        chemical_name=[&quot;Va&quot;],</span>
+<span class="sd">        calculator=calculator,</span>
+<span class="sd">    )</span>
+
+<span class="sd">    def my_custom_function():</span>
+<span class="sd">        configuration = calculator.state_data.state.configuration</span>
+
+<span class="sd">        for site in va_site_iterator:</span>
+<span class="sd">            # print(&quot;site.l:&quot;, site.l, &quot;occ: &quot;, configuration.occ(site.l))</span>
+
+<span class="sd">        ... do something ...</span>
+
+<span class="sd">        return [component_value1, ...]</span>
+
+<span class="sd">    sampling_f = sampling.StateSamplingFunction(</span>
+<span class="sd">        name=&quot;my_custom_function&quot;,</span>
+<span class="sd">        description=&quot;desc&quot;,</span>
+<span class="sd">        shape=[],</span>
+<span class="sd">        function=my_custom_function,</span>
+<span class="sd">        component_names=[&quot;component_name1&quot;, ...],</span>
+<span class="sd">    )</span>
+
+<span class="sd">    sampling_fixture.add_sampling_function(sampling_f)</span>
+<span class="sd">    sampling_fixture.sample(&quot;my_custom_function&quot;)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.clexmonte</span> <span class="k">as</span> <span class="nn">clexmonte</span>
+<span class="kn">import</span> <span class="nn">libcasm.monte.events</span> <span class="k">as</span> <span class="nn">monte_events</span>
+
+
+<div class="viewcode-block" id="chemical_name_to_candidate_indices">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.chemical_name_to_candidate_indices.html#libcasm.clexmonte.site_iterators.chemical_name_to_candidate_indices">[docs]</a>
+<span class="k">def</span> <span class="nf">chemical_name_to_candidate_indices</span><span class="p">(</span>
+    <span class="n">chemical_name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">occ_location</span><span class="p">:</span> <span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of all OccCandidate indices for a given chemical species</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chemical_name : Union[str, list[str]]</span>
+<span class="sd">        The chemical name (as given in</span>
+<span class="sd">        :func:`Occupant.name &lt;libcasm.xtal.Occupant.name&gt;`) of one or more</span>
+<span class="sd">        occupants.</span>
+<span class="sd">    occ_location : monte_events.OccLocation</span>
+<span class="sd">        The occupant location list.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    candidate_indices : list[int]</span>
+<span class="sd">        Indices into `occ_location.candidate_list()` corresponding to the specified</span>
+<span class="sd">        chemical species on all asymmetric unit sites.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chemical_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">chemical_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">chemical_name</span><span class="p">]</span>
+
+    <span class="n">convert</span> <span class="o">=</span> <span class="n">occ_location</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+    <span class="n">occ_candidate_list</span> <span class="o">=</span> <span class="n">occ_location</span><span class="o">.</span><span class="n">candidate_list</span><span class="p">()</span>
+    <span class="n">candidate_indices</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">species_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">convert</span><span class="o">.</span><span class="n">species_size</span><span class="p">()):</span>
+        <span class="n">occupant</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">species_index_to_occupant</span><span class="p">(</span><span class="n">species_index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">occupant</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chemical_name</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">candidate_index</span><span class="p">,</span> <span class="n">cand</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">occ_candidate_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cand</span><span class="o">.</span><span class="n">species_index</span> <span class="o">==</span> <span class="n">species_index</span><span class="p">:</span>
+                <span class="n">candidate_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate_index</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">candidate_indices</span></div>
+
+
+
+<div class="viewcode-block" id="occupant_name_to_candidate_indices">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.occupant_name_to_candidate_indices.html#libcasm.clexmonte.site_iterators.occupant_name_to_candidate_indices">[docs]</a>
+<span class="k">def</span> <span class="nf">occupant_name_to_candidate_indices</span><span class="p">(</span>
+    <span class="n">occupant_name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">occ_location</span><span class="p">:</span> <span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of all OccCandidate indices for a given occupant</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    occupant_name : Union[str, list[str]]</span>
+<span class="sd">        The occupant DoF names (as given in</span>
+<span class="sd">        :func:`Prim.occ_dof &lt;libcasm.xtal.Prim.occ_dof&gt;`) of one or more occupants.</span>
+<span class="sd">    occ_location : monte_events.OccLocation</span>
+<span class="sd">        The occupant location list.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    candidate_indices : list[int]</span>
+<span class="sd">        Indices into `occ_location.candidate_list()` corresponding to the specified</span>
+<span class="sd">        occupant(s) on all asymmetric unit sites.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">occupant_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">occupant_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">occupant_name</span><span class="p">]</span>
+
+    <span class="n">convert</span> <span class="o">=</span> <span class="n">occ_location</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+    <span class="n">occ_candidate_list</span> <span class="o">=</span> <span class="n">occ_location</span><span class="o">.</span><span class="n">candidate_list</span><span class="p">()</span>
+    <span class="n">candidate_indices</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">_name</span> <span class="ow">in</span> <span class="n">occupant_name</span><span class="p">:</span>
+        <span class="n">species_index</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">species_name_to_index</span><span class="p">(</span><span class="n">species_name</span><span class="o">=</span><span class="n">_name</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">candidate_index</span><span class="p">,</span> <span class="n">cand</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">occ_candidate_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cand</span><span class="o">.</span><span class="n">species_index</span> <span class="o">==</span> <span class="n">species_index</span><span class="p">:</span>
+                <span class="n">candidate_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate_index</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">candidate_indices</span></div>
+
+
+
+<div class="viewcode-block" id="SiteInfo">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.SiteInfo.html#libcasm.clexmonte.site_iterators.SiteInfo">[docs]</a>
+<span class="k">class</span> <span class="nc">SiteInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convenience class for obtaining information about a site and its occupant&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">,</span>
+        <span class="n">l</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mol_id</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        occ_location: libcasm.monte.events.OccLocation</span>
+<span class="sd">            The occupant location list.</span>
+<span class="sd">        l: Optional[int] = None</span>
+<span class="sd">            The linear site index of the current site, :math:`l`. One and only one of</span>
+<span class="sd">            `l` or `mol_id` must be provided.</span>
+<span class="sd">        mol_id: Optional[int] = None</span>
+<span class="sd">            Index of the :class:`~libcasm.monte.events.Mol` on the current site in the</span>
+<span class="sd">            occupant location `mol` list. One and only one of `l` or `mol_id` must be</span>
+<span class="sd">            provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.monte.events.OccLocation: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">convert</span> <span class="o">=</span> <span class="n">occ_location</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.monte.events.Conversions: Data structure used for index </span>
+<span class="sd">        conversions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The linear site index of the current site, :math:`l`.</span>
+<span class="sd">        </span>
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.linear_site_index`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_id</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: Index of the :class:`~libcasm.monte.events.Mol` on the current site in </span>
+<span class="sd">        the occupant location `mol` list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_l</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">mol_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_mol_id</span><span class="p">(</span><span class="n">mol_id</span><span class="o">=</span><span class="n">mol_id</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in SiteInfo constructor: One and only one of `l` or `mol_id` &quot;</span>
+                <span class="s2">&quot;must be provided.&quot;</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="SiteInfo.set_l">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.SiteInfo.set_l.html#libcasm.clexmonte.site_iterators.SiteInfo.set_l">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_l</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the linear site index, :math:`l`, for the current site, and use it to</span>
+<span class="sd">        set `mol_id`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        l : int</span>
+<span class="sd">            The linear site index of the current site, :math:`l`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">linear_site_index_to_mol_id</span><span class="p">(</span><span class="n">l</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SiteInfo.set_mol_id">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.SiteInfo.set_mol_id.html#libcasm.clexmonte.site_iterators.SiteInfo.set_mol_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_mol_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the `mol_id` for the current site, and use it to set the linear</span>
+<span class="sd">        site index, :math:`l`).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol_id : int</span>
+<span class="sd">            Index of the :class:`~libcasm.monte.events.Mol` in the</span>
+<span class="sd">            occupant location `mol` list.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_id</span> <span class="o">=</span> <span class="n">mol_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">mol</span><span class="p">(</span><span class="n">mol_id</span><span class="p">)</span><span class="o">.</span><span class="n">linear_site_index</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SiteInfo</span><span class="p">(</span>
+            <span class="n">mol_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_id</span><span class="p">,</span>
+            <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SiteInfo</span><span class="p">(</span>
+            <span class="n">mol_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_id</span><span class="p">,</span>
+            <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="SiteInfo.copy">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.SiteInfo.copy.html#libcasm.clexmonte.site_iterators.SiteInfo.copy">[docs]</a>
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">linear_site_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The linear site index of the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">asym</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The asymmetric unit index, :math:`a`, of the current site, :math:`l`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_asym</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The sublattice / basis index of the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.sublattice`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_b</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sublattice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The sublattice / basis index of the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.b`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_b</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">basis_cart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.float64[3, 1]]: The Cartesian coordinate,</span>
+<span class="sd">        :math:`r_{cart}`, in the primitive unit cell, of the sublattice that the</span>
+<span class="sd">        current site, :math:`l`, belongs to.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_basis_cart</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">basis_frac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.float64[3, 1]]: The fractional coordinate,</span>
+<span class="sd">        :math:`r_{frac}`, in the primitive unit cell, of the sublattice that the</span>
+<span class="sd">        current site, :math:`l`, belongs to.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_basis_frac</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bijk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.xtal.IntegralSiteCoordinate: The integral site coordinates,</span>
+<span class="sd">        :math:`(b,i,j,k)` for the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.integral_site_coordinate`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_bijk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">integral_site_coordinate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.xtal.IntegralSiteCoordinate: The integral site coordinates,</span>
+<span class="sd">        :math:`(b,i,j,k)` for the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.bijk`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_bijk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ijk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.int64[3, 1]]: The unit cell indices, :math:`(i,j,k)`,</span>
+<span class="sd">        for the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.unitcell_indices`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_ijk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unitcell_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.int64[3, 1]]: The unit cell indices, :math:`(i,j,k)`,</span>
+<span class="sd">        for the current site, :math:`l`.</span>
+
+<span class="sd">        This is equivalent to py:attr:`SiteInfo.ijk`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_ijk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">linear_unitcell_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The linear unitcell index&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coordinate_cart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.float64[3, 1]]: The Cartesian coordinate,</span>
+<span class="sd">        :math:`r_{cart}`, of the current site,: math:`l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_cart</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coordinate_frac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.float64[3, 1]]: The fractional coordinate,</span>
+<span class="sd">        :math:`r_{frac}`, relative to the :class:`~libcasm.xtal.Prim` lattice vectors,</span>
+<span class="sd">        :math:`P`, from the linear site index,: math:`l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_frac</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unitl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: The non-primitive unit cell sublattice index, :math:`l&#39;`, of the</span>
+<span class="sd">        current site, :math:`l`.</span>
+
+<span class="sd">        Linear site index in a non-primitive unit cell. When a non-primitive unit cell</span>
+<span class="sd">        is used to construct a supercell and set the appropriate symmetry for a problem,</span>
+<span class="sd">        conversions between :math:`l`, :math:`b`, and :math:`l&#39;` may all be useful.</span>
+
+<span class="sd">        This is primarily a placeholder for possible future use cases in which the</span>
+<span class="sd">        asymmetric unit is not contained in the primitive unit cell. In the typical</span>
+<span class="sd">        case, where the unit cell is the primitive cell, then :math:`l&#39; == b`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">l_to_unitl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.monte.events.Mol: The :class:`~libcasm.monte.events.Mol` object for</span>
+<span class="sd">        the current site, :math:`l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">mol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_id</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">occupant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.xtal.Occupant: The current occupant at the current site,</span>
+<span class="sd">        :math:`l`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">species_index_to_occupant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">species_index</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">chemical_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The chemical name (as given in</span>
+<span class="sd">        :func:`Occupant.name &lt;libcasm.xtal.Occupant.name&gt;`) of the occupant at</span>
+<span class="sd">        the current site, :math:`l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">occupant</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">occupant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The occupant DoF name (as given in</span>
+<span class="sd">        :func:`Prim.occupants &lt;libcasm.xtal.Prim.occupants&gt;`) of the occupant at</span>
+<span class="sd">        the current site, :math:`l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">species_index_to_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">species_index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of atoms at the current site, :math:`l`.&quot;&quot;&quot;</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">atom_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">component_id</span><span class="p">:</span>
+            <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">atom</span><span class="p">(</span><span class="n">atom_id</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">atoms</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atom_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: (Applies to KMC simulations with atomic occupants) The atom id at the</span>
+<span class="sd">        current site, :math:`l`.</span>
+
+<span class="sd">        The `atom_id` is the index into the current list of atoms,</span>
+<span class="sd">        :func:`OccLoation.atom &lt;libcasm.monte.events.OccLocation.atom&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">component_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unique_atom_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: (Applies to KMC simulations with atomic occupants) The unique atom id</span>
+<span class="sd">        for the atom at the current site, :math:`l`.</span>
+
+<span class="sd">        The `unique_atom_id` differs from the `atom_id` for KMC simulations which allow</span>
+<span class="sd">        deposition / dissolution type events and is the key used for the</span>
+<span class="sd">        :func:`OccLoation.atom_info_initial</span>
+<span class="sd">        &lt;libcasm.monte.events.OccLocation.atom_info_initial&gt;`</span>
+<span class="sd">        and</span>
+<span class="sd">        :func:`OccLoation.atom_info_final</span>
+<span class="sd">        &lt;libcasm.monte.events.OccLocation.atom_info_final&gt;`</span>
+<span class="sd">        data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">unique_atom_id</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_id</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.monte.events.Atom: (Applies to KMC simulations with atomic</span>
+<span class="sd">        occupants) The atom at the current site, :math:`l`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">atom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">component_id</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atom_n_jumps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: (Applies to KMC simulations with atomic</span>
+<span class="sd">        occupants) The atom at the current site, :math:`l`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom</span><span class="o">.</span><span class="n">n_jumps</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atom_coordinate_frac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.float64[3, 1]]: (Applies to KMC simulations with atomic</span>
+<span class="sd">        occupants) Current position, in Cartesian coordinates, as if no periodic</span>
+<span class="sd">        boundary, for the occupant of the current site, :math:`l`.</span>
+
+<span class="sd">        Note that this is not a displacement vector, but the absolute position of the</span>
+<span class="sd">        occupant in the current configuration, if no periodic boundary conditions were</span>
+<span class="sd">        applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom</span><span class="o">.</span><span class="n">translation</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_frac</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">atom_coordinate_cart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.float64[3, 1]]: (Applies to KMC simulations with atomic</span>
+<span class="sd">        occupants) Current position, in Cartesian coordinates, as if no periodic</span>
+<span class="sd">        boundary, for the occupant of the current site, :math:`l`.</span>
+
+<span class="sd">        Note that this is not a displacement vector, but the absolute position of the</span>
+<span class="sd">        occupant in the current configuration, if no periodic boundary conditions were</span>
+<span class="sd">        applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">lat_column_mat</span><span class="p">()</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_coordinate_frac</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">component_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;LongVector: (Applies to KMC simulations with multi-atom occupants) A list of</span>
+<span class="sd">        atom id for the occupant at the current site, :math:`l`.</span>
+
+<span class="sd">        The `atom_id` is the index into the current list of atoms,</span>
+<span class="sd">        :func:`OccLoation.atom &lt;libcasm.monte.events.OccLocation.atom&gt;`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">component_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">component_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[libcasm.monte.events.Atom]: (Applies to KMC simulations with multi-atom</span>
+<span class="sd">        occupants) The component atoms of the occupant at the current site, :math:`l`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">atom</span><span class="p">(</span><span class="n">atom_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">component_id</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="CompleteSiteIterator">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.CompleteSiteIterator.html#libcasm.clexmonte.site_iterators.CompleteSiteIterator">[docs]</a>
+<span class="k">class</span> <span class="nc">CompleteSiteIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for all sites in the system&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">clexmonte</span><span class="o">.</span><span class="n">MonteCalculator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ..rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        occ_location: Optional[monte_events.OccLocation] = None</span>
+<span class="sd">            The occupant location list. One and only one of `occ_location` and</span>
+<span class="sd">            `calculator` must not be `None`.</span>
+<span class="sd">        calculator: Optional[clexmonte.MonteCalculator] = None</span>
+<span class="sd">            A MonteCalculator which will be used to obtain an occupant location list</span>
+<span class="sd">            from `calculator.state_data` when requested. One and only one of</span>
+<span class="sd">            `occ_location` and `calculator` must not be `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">calculator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in CompleteSiteIterator: If `occ_location` is None, &quot;</span>
+                <span class="s2">&quot;`calculator` must be a MonteCalculator&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.monte.events.OccLocation]: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.clexmonte.MonteCalculator]: The MonteCalculator used to </span>
+<span class="sd">        obtain the occupant location list. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for all sites in the system&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">occ_location</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span> <span class="o">=</span> <span class="n">SiteInfo</span><span class="p">(</span>
+            <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">convert</span><span class="o">.</span><span class="n">l_size</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span><span class="o">.</span><span class="n">set_l</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span></div>
+
+
+
+<div class="viewcode-block" id="SublatticeSiteIterator">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.SublatticeSiteIterator.html#libcasm.clexmonte.site_iterators.SublatticeSiteIterator">[docs]</a>
+<span class="k">class</span> <span class="nc">SublatticeSiteIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for 1 or more sublattices&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sublattice</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">clexmonte</span><span class="o">.</span><span class="n">MonteCalculator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ..rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sublattice: Union[int, list[int]]</span>
+<span class="sd">            The sublattice index of one or more sublattices.</span>
+<span class="sd">        occ_location: Optional[monte_events.OccLocation] = None</span>
+<span class="sd">            The occupant location list. One and only one of `occ_location` and</span>
+<span class="sd">            `calculator` must not be `None`.</span>
+<span class="sd">        calculator: Optional[clexmonte.MonteCalculator] = None</span>
+<span class="sd">            A MonteCalculator which will be used to obtain an occupant location list</span>
+<span class="sd">            from `calculator.state_data` when requested. One and only one of</span>
+<span class="sd">            `occ_location` and `calculator` must not be `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sublattice</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">sublattice</span> <span class="o">=</span> <span class="p">[</span><span class="n">sublattice</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sublattice</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sublattice</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[int]: The sublattice index of one or more sublattices.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">calculator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in SublatticeSiteIterator: If `occ_location` is None, &quot;</span>
+                <span class="s2">&quot;`calculator` must be a MonteCalculator&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.monte.events.OccLocation]: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.clexmonte.MonteCalculator]: The MonteCalculator used to </span>
+<span class="sd">        obtain the occupant location list. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for the requested sites&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">occ_location</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span> <span class="o">=</span> <span class="n">SiteInfo</span><span class="p">(</span>
+            <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+        <span class="n">vol</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">unitcell_index_converter</span><span class="p">()</span><span class="o">.</span><span class="n">total_unitcells</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sublattice</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vol</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="n">vol</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span><span class="o">.</span><span class="n">set_l</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span></div>
+
+
+
+<div class="viewcode-block" id="AsymmetricUnitSiteIterator">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.AsymmetricUnitSiteIterator.html#libcasm.clexmonte.site_iterators.AsymmetricUnitSiteIterator">[docs]</a>
+<span class="k">class</span> <span class="nc">AsymmetricUnitSiteIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for the sites in one or more</span>
+<span class="sd">    asymmetric units&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">asym</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">clexmonte</span><span class="o">.</span><span class="n">MonteCalculator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ..rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        asym: Union[int, list[int]]</span>
+<span class="sd">            One or more asymmetric unit indices.</span>
+<span class="sd">        occ_location: Optional[monte_events.OccLocation] = None</span>
+<span class="sd">            The occupant location list. One and only one of `occ_location` and</span>
+<span class="sd">            `calculator` must not be `None`.</span>
+<span class="sd">        calculator: Optional[clexmonte.MonteCalculator] = None</span>
+<span class="sd">            A MonteCalculator which will be used to obtain an occupant location list</span>
+<span class="sd">            from `calculator.state_data` when requested. One and only one of</span>
+<span class="sd">            `occ_location` and `calculator` must not be `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">asym</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">asym</span> <span class="o">=</span> <span class="p">[</span><span class="n">asym</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">asym</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">asym</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[int]: Asymmetric unit indices.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">calculator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in AsymmetricUnitSiteIterator: If `occ_location` is None, &quot;</span>
+                <span class="s2">&quot;`calculator` must be a MonteCalculator&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.monte.events.OccLocation]: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.clexmonte.MonteCalculator]: The MonteCalculator used to </span>
+<span class="sd">        obtain the occupant location list. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for the requested sites&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">occ_location</span>
+
+        <span class="n">convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">asym</span><span class="p">:</span>
+            <span class="n">sites_iterator</span> <span class="o">=</span> <span class="n">SublatticeSiteIterator</span><span class="p">(</span>
+                <span class="n">sublattice</span><span class="o">=</span><span class="n">convert</span><span class="o">.</span><span class="n">asym_to_b</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+                <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">site_info</span> <span class="ow">in</span> <span class="n">sites_iterator</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">site_info</span></div>
+
+
+
+<div class="viewcode-block" id="OccCandidateSiteIterator">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.OccCandidateSiteIterator.html#libcasm.clexmonte.site_iterators.OccCandidateSiteIterator">[docs]</a>
+<span class="k">class</span> <span class="nc">OccCandidateSiteIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield class: `~libcasm.clexmonte.SiteInfo` for 1 or more OccCandidate&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">candidate_indices</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">clexmonte</span><span class="o">.</span><span class="n">MonteCalculator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ..rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        candidate_indices: Union[int, list[int]]</span>
+<span class="sd">            One or more asymmetric unit indices.</span>
+<span class="sd">        occ_location: Optional[monte_events.OccLocation] = None</span>
+<span class="sd">            The occupant location list. One and only one of `occ_location` and</span>
+<span class="sd">            `calculator` must not be `None`.</span>
+<span class="sd">        calculator: Optional[clexmonte.MonteCalculator] = None</span>
+<span class="sd">            A MonteCalculator which will be used to obtain an occupant location list</span>
+<span class="sd">            from `calculator.state_data` when requested. One and only one of</span>
+<span class="sd">            `occ_location` and `calculator` must not be `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">candidate_indices</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">candidate_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">candidate_indices</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">candidate_indices</span> <span class="o">=</span> <span class="n">candidate_indices</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[int]: Indices into `occ_location.candidate_list()` corresponding to the </span>
+<span class="sd">        type of occupant(s) and site(s) requested.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">calculator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in SublatticeSiteIterator: If `occ_location` is None, &quot;</span>
+                <span class="s2">&quot;`calculator` must be a MonteCalculator&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.monte.events.OccLocation]: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.clexmonte.MonteCalculator]: The MonteCalculator used to </span>
+<span class="sd">        obtain the occupant location list. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for the requested sites&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">occ_location</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># `candidate_index`: index into list of OccCandidate corresponding to</span>
+        <span class="c1"># the (species index, asym unit index)</span>
+        <span class="k">for</span> <span class="n">candidate_index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_indices</span><span class="p">:</span>
+            <span class="c1"># Current size of the list occupants corresponding to</span>
+            <span class="c1"># `candidate_index`-th OccCandidate</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">cand_size_by_candidate_index</span><span class="p">(</span><span class="n">candidate_index</span><span class="p">)</span>
+
+            <span class="c1"># `location_index`: index into list occupants corresponding to</span>
+            <span class="c1"># the (species, asym unit) of the `candidate_index`-th OccCandidate</span>
+            <span class="k">for</span> <span class="n">location_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="c1"># mol_id: Index into `OccLocation.mol` list</span>
+                <span class="n">mol_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="o">.</span><span class="n">mol_id_by_candidate_index</span><span class="p">(</span>
+                    <span class="n">candidate_index</span><span class="o">=</span><span class="n">candidate_index</span><span class="p">,</span>
+                    <span class="n">location_index</span><span class="o">=</span><span class="n">location_index</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span> <span class="o">=</span> <span class="n">SiteInfo</span><span class="p">(</span>
+                        <span class="n">mol_id</span><span class="o">=</span><span class="n">mol_id</span><span class="p">,</span>
+                        <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span><span class="o">.</span><span class="n">set_mol_id</span><span class="p">(</span><span class="n">mol_id</span><span class="o">=</span><span class="n">mol_id</span><span class="p">)</span>
+
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_site_info</span></div>
+
+
+
+<div class="viewcode-block" id="ChemicalTypeSiteIterator">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.ChemicalTypeSiteIterator.html#libcasm.clexmonte.site_iterators.ChemicalTypeSiteIterator">[docs]</a>
+<span class="k">class</span> <span class="nc">ChemicalTypeSiteIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for 1 or more chemical species&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chemical_name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">clexmonte</span><span class="o">.</span><span class="n">MonteCalculator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ..rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chemical_name: Union[str, list[str]]</span>
+<span class="sd">            The chemical name( as given in</span>
+<span class="sd">            :func:`Occupant.name &lt;libcasm.xtal.Occupant.name&gt;`) of one or more</span>
+<span class="sd">            occupants.</span>
+<span class="sd">        occ_location: Optional[monte_events.OccLocation] = None</span>
+<span class="sd">            The occupant location list. One and only one of `occ_location` and</span>
+<span class="sd">            `calculator` must not be `None`.</span>
+<span class="sd">        calculator: Optional[clexmonte.MonteCalculator] = None</span>
+<span class="sd">            A MonteCalculator which will be used to obtain an occupant location list</span>
+<span class="sd">            from `calculator.state_data` when requested. One and only one of</span>
+<span class="sd">            `occ_location` and `calculator` must not be `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chemical_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">chemical_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">chemical_name</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">chemical_name</span> <span class="o">=</span> <span class="n">chemical_name</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: The chemical name (as given in: </span>
+<span class="sd">        func:`Occupant.name &lt;libcasm.xtal.Occupant.name&gt;`) of one or more occupants.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">calculator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in ChemicalTypeSiteIterator: If `occ_location` is None, &quot;</span>
+                <span class="s2">&quot;`calculator` must be a MonteCalculator&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.monte.events.OccLocation]: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.clexmonte.MonteCalculator]: The MonteCalculator used to </span>
+<span class="sd">        obtain the occupant location list. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for the requested occupant&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">occ_location</span>
+
+        <span class="n">sites_iterator</span> <span class="o">=</span> <span class="n">OccCandidateSiteIterator</span><span class="p">(</span>
+            <span class="n">candidate_indices</span><span class="o">=</span><span class="n">chemical_name_to_candidate_indices</span><span class="p">(</span>
+                <span class="n">chemical_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chemical_name</span><span class="p">,</span>
+                <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">site_info</span> <span class="ow">in</span> <span class="n">sites_iterator</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">site_info</span></div>
+
+
+
+<div class="viewcode-block" id="OccupantTypeSiteIterator">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.clexmonte.site_iterators.OccupantTypeSiteIterator.html#libcasm.clexmonte.site_iterators.OccupantTypeSiteIterator">[docs]</a>
+<span class="k">class</span> <span class="nc">OccupantTypeSiteIterator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for 1 or more occupants</span>
+
+<span class="sd">    This yields a :class:`~libcasm.clexmonte.SiteInfo` that is updated at each step</span>
+<span class="sd">    to give the position, coordinates, etc. for the requested occupant types, based on</span>
+<span class="sd">    the current occupant location list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">occupant_name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">occ_location</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">monte_events</span><span class="o">.</span><span class="n">OccLocation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculator</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">clexmonte</span><span class="o">.</span><span class="n">MonteCalculator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        ..rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        occupant_name: Union[str, list[str]]</span>
+<span class="sd">            The occupant DoF names (as given in</span>
+<span class="sd">            :func:`Prim.occupants &lt;libcasm.xtal.Prim.occupants&gt;`) of one or more</span>
+<span class="sd">            occupants.</span>
+<span class="sd">        occ_location: Optional[monte_events.OccLocation] = None</span>
+<span class="sd">            The occupant location list.One and only one of `occ_location` and</span>
+<span class="sd">            `calculator` must not be `None`.</span>
+<span class="sd">        calculator: Optional[clexmonte.MonteCalculator] = None</span>
+<span class="sd">            A MonteCalculator which will be used to obtain an occupant location list</span>
+<span class="sd">            from `calculator.state_data` when requested.One and only one of</span>
+<span class="sd">            `occ_location` and `calculator` must not be `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">occupant_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">occupant_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">occupant_name</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occupant_name</span> <span class="o">=</span> <span class="n">occupant_name</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: The occupant DoF names (as given in </span>
+<span class="sd">        :func:`Prim.occupants &lt;libcasm.xtal.Prim.occupants&gt;`) of one or more occupants.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">calculator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in OccupantTypeSiteIterator: If `occ_location` is None, &quot;</span>
+                <span class="s2">&quot;`calculator` must be a MonteCalculator&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="n">occ_location</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.monte.events.OccLocation]: The occupant location list.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">calculator</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[libcasm.clexmonte.MonteCalculator]: The MonteCalculator used to </span>
+<span class="sd">        obtain the occupant location list. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yield :class:`~libcasm.clexmonte.SiteInfo` for the requested occupants&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">occ_location</span>
+
+        <span class="n">sites_iterator</span> <span class="o">=</span> <span class="n">OccCandidateSiteIterator</span><span class="p">(</span>
+            <span class="n">candidate_indices</span><span class="o">=</span><span class="n">occupant_name_to_candidate_indices</span><span class="p">(</span>
+                <span class="n">occupant_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occupant_name</span><span class="p">,</span>
+                <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">occ_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">occ_location</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">site_info</span> <span class="ow">in</span> <span class="n">sites_iterator</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">site_info</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

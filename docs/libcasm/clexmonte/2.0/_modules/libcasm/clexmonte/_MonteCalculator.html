@@ -414,89 +414,172 @@ document.write(`
                   
   <h1>Source code for libcasm.clexmonte._MonteCalculator</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">libcasm.local_configuration</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LocalConfiguration</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">._clexmonte_monte_calculator</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">MonteCalculator</span><span class="p">,</span>
+    <span class="n">MonteCalculatorCore</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._clexmonte_system</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">System</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._system_methods</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">make_system_event_info</span><span class="p">,</span>
 <span class="p">)</span>
 
 
-<div class="viewcode-block" id="print_selected_event_functions">
-<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.print_selected_event_functions.html#libcasm.clexmonte.print_selected_event_functions">[docs]</a>
-<span class="k">def</span> <span class="nf">print_selected_event_functions</span><span class="p">(</span><span class="n">calculator</span><span class="p">:</span> <span class="n">MonteCalculator</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print a summary of the selected event functions in a MonteCalculator</span>
+<div class="viewcode-block" id="MonteCalculator">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.html#libcasm.clexmonte.MonteCalculator">[docs]</a>
+<span class="k">class</span> <span class="nc">MonteCalculator</span><span class="p">(</span><span class="n">MonteCalculatorCore</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">system</span><span class="p">:</span> <span class="n">System</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. rubric:: Constructor</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    calculator : MonteCalculator</span>
-<span class="sd">        The MonteCalculator to summarize the selected event functions of</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : str</span>
+<span class="sd">            Monte Carlo method name. The options are:</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">            - &quot;semigrand_canonical&quot;: Metropolis algorithm in the semi-grand</span>
+<span class="sd">              canonical ensemble. Input states require `&quot;temperature&quot;` and</span>
+<span class="sd">              `&quot;param_chem_pot&quot;` conditions.</span>
+<span class="sd">            - &quot;canonical&quot;: Metropolis algorithm in the canonical ensemble.</span>
+<span class="sd">              Input states require `&quot;temperature&quot;` and one of</span>
+<span class="sd">              `&quot;param_composition&quot;` or `&quot;mol_composition&quot;` conditions.</span>
+<span class="sd">            - &quot;kinetic&quot;: Kinetic Monte Carlo method. Input states require</span>
+<span class="sd">              `&quot;temperature&quot;` and one of `&quot;param_composition&quot;` or</span>
+<span class="sd">              `&quot;mol_composition&quot;` conditions.</span>
 
-    <span class="n">all_functions</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">selected_event_functions</span>
+<span class="sd">        system : libcasm.clexmonte.System</span>
+<span class="sd">            Cluster expansion model system data. The required data depends on</span>
+<span class="sd">            the calculation method. See links under `method` for what system</span>
+<span class="sd">            data is required for each method.</span>
 
-    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
-            <span class="n">text</span><span class="p">,</span>
-            <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
-            <span class="n">initial_indent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">subsequent_indent</span><span class="o">=</span><span class="s2">&quot;    &quot;</span><span class="p">,</span>
+<span class="sd">        params: Optional[dict] = None</span>
+<span class="sd">            Monte Carlo calculation method parameters. Expected values</span>
+<span class="sd">            depends on the calculation method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+            <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">print_generic_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Description = &quot;</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Requires event state = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">requires_event_state</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_info</span> <span class="o">=</span> <span class="n">make_system_event_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict[str, libcasm.local_configuration.OccEventSymInfo]: A dictionary of </span>
+<span class="sd">        event info used to construct and transform </span>
+<span class="sd">        :class:`~libcasm.local_configuration.LocalConfiguration`.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MonteCalculator.make_local_configuration">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.make_local_configuration.html#libcasm.clexmonte.MonteCalculator.make_local_configuration">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_local_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a :class:`~libcasm.local_configuration.LocalConfiguration` from the</span>
+<span class="sd">        current state and current selected event.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        local_configuration : libcasm.local_configuration.LocalConfiguration</span>
+<span class="sd">            The local configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selected_event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_event</span>
+        <span class="n">event_type_name</span> <span class="o">=</span> <span class="n">selected_event</span><span class="o">.</span><span class="n">prim_event_data</span><span class="o">.</span><span class="n">event_type_name</span>
+        <span class="n">unitcell_index</span> <span class="o">=</span> <span class="n">selected_event</span><span class="o">.</span><span class="n">event_data</span><span class="o">.</span><span class="n">unitcell_index</span>
+        <span class="n">equivalent_index</span> <span class="o">=</span> <span class="n">selected_event</span><span class="o">.</span><span class="n">prim_event_data</span><span class="o">.</span><span class="n">equivalent_index</span>
+        <span class="k">return</span> <span class="n">LocalConfiguration</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">unitcell_index</span><span class="p">,</span> <span class="n">equivalent_index</span><span class="p">),</span>
+            <span class="n">event_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">event_info</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MonteCalculator.print_selected_event_functions">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.print_selected_event_functions.html#libcasm.clexmonte.MonteCalculator.print_selected_event_functions">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_selected_event_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print a summary of the selected event functions in a MonteCalculator&quot;&quot;&quot;</span>
+
+        <span class="n">all_functions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_event_functions</span>
+
+        <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+                <span class="n">initial_indent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">subsequent_indent</span><span class="o">=</span><span class="s2">&quot;    &quot;</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default order = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">order</span><span class="p">)))</span>
-            <span class="nb">print</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">print_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Description = &quot;</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;shape&quot;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Shape = [] (Scalar)&quot;</span><span class="p">))</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Shape = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Component names = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">component_names</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;partition_names&quot;</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Partition names = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">partition_names</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;value_labels&quot;</span><span class="p">):</span>
-                <span class="n">value_labels</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">value_labels</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">value_labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">value_labels</span><span class="p">]</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Value labels = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Requires event state = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">requires_event_state</span><span class="p">))</span>
-            <span class="p">)</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;is_log&quot;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">is_log</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Is log = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">is_log</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;initial_begin&quot;</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default initial bin = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">initial_begin</span><span class="p">)))</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default bin width = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">bin_width</span><span class="p">)))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default max size = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">max_size</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;tol&quot;</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default tol = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">tol</span><span class="p">)))</span>
-            <span class="nb">print</span><span class="p">()</span>
+        <span class="k">def</span> <span class="nf">print_generic_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Description = &quot;</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="n">fill</span><span class="p">(</span>
+                        <span class="s2">&quot;  Requires event state = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">requires_event_state</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default order = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">order</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">generic_functions</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected event functions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">print_generic_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">print_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Description = &quot;</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;shape&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Shape = [] (Scalar)&quot;</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Shape = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Component names = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">component_names</span><span class="p">))</span>
+                        <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;partition_names&quot;</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Partition names = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">partition_names</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;value_labels&quot;</span><span class="p">):</span>
+                    <span class="n">value_labels</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">value_labels</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">value_labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">value_labels</span><span class="p">]</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Value labels = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="n">fill</span><span class="p">(</span>
+                        <span class="s2">&quot;  Requires event state = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">requires_event_state</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;is_log&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">is_log</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Is log = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">is_log</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;initial_begin&quot;</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default initial bin = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">initial_begin</span><span class="p">))</span>
+                    <span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default bin width = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">bin_width</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default max size = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">max_size</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;tol&quot;</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default tol = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">tol</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">int_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">discrete_vector_int_functions</span>
-    <span class="n">float_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">discrete_vector_float_functions</span>
-    <span class="n">continuous_1d_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">continuous_1d_functions</span>
+        <span class="n">functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">generic_functions</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected event functions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_generic_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">int_functions</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">float_functions</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">continuous_1d_functions</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected event data functions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">print_functions</span><span class="p">(</span><span class="n">int_functions</span><span class="p">)</span>
-        <span class="n">print_functions</span><span class="p">(</span><span class="n">float_functions</span><span class="p">)</span>
-        <span class="n">print_functions</span><span class="p">(</span><span class="n">continuous_1d_functions</span><span class="p">)</span></div>
+        <span class="n">int_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">discrete_vector_int_functions</span>
+        <span class="n">float_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">discrete_vector_float_functions</span>
+        <span class="n">continuous_1d_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">continuous_1d_functions</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">int_functions</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">float_functions</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">continuous_1d_functions</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected event data functions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_functions</span><span class="p">(</span><span class="n">int_functions</span><span class="p">)</span>
+            <span class="n">print_functions</span><span class="p">(</span><span class="n">float_functions</span><span class="p">)</span>
+            <span class="n">print_functions</span><span class="p">(</span><span class="n">continuous_1d_functions</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
 
