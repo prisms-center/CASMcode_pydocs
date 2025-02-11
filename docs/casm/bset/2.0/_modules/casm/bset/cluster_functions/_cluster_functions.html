@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.0a2 documentation</title>
+    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.0a3 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
+    <script src="../../../../_static/documentation_options.js?v=4c0f2370"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_cluster_functions';</script>
@@ -431,6 +431,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._matrix_rep</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">MakeVariableName</span><span class="p">,</span>
     <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
+    <span class="n">make_variable_name</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._misc</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">orbits_to_dict</span><span class="p">,</span>
@@ -775,18 +776,24 @@ document.write(`
     <span class="k">return</span> <span class="n">site_functions_data</span>
 
 
-<span class="k">def</span> <span class="nf">assign_neighborhood_site_index</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">update_variables</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
     <span class="n">function</span><span class="p">:</span> <span class="n">PolynomialFunction</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">translation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assign neighborhood_site_index for function variables</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update variables after transforming cluster function to assign</span>
+<span class="sd">    neighborhood_site_index and name for function variables</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
+<span class="sd">    prim: libcasm.configuration.Prim</span>
+<span class="sd">        The prim</span>
 <span class="sd">    cluster: libcasm.clusterography.Cluster</span>
-<span class="sd">        The cluster associated with the function</span>
+<span class="sd">        The cluster associated with the function.</span>
 <span class="sd">    function: casm.bset.polynomial_functions.PolynomialFunction</span>
 <span class="sd">        A PolynomialFunction with variables that have cluster_site_index set</span>
 <span class="sd">        referring to which site in `cluster` they are associated with.</span>
@@ -794,15 +801,40 @@ document.write(`
 <span class="sd">        The neighbor list</span>
 <span class="sd">    translation: Optional[np.ndarray],</span>
 <span class="sd">        Optional translation to apply to cluster.</span>
-
+<span class="sd">    make_variable_name_f: Optional[Callable] = None</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">        Custom classes should have the same `__call__` signature as</span>
+<span class="sd">        :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">        `occ_var_name` and `occ_var_desc` attributes.</span>
+<span class="sd">    local_discrete_dof: Optionla[list[str]] = None</span>
+<span class="sd">        The types of local discrete degree of freedom (DoF).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">make_variable_name_f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">make_variable_name_f</span> <span class="o">=</span> <span class="n">make_variable_name</span>
+    <span class="k">if</span> <span class="n">local_discrete_dof</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
     <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">function</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">integral_site_coordinate</span> <span class="o">=</span> <span class="n">cluster</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">translation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">integral_site_coordinate</span> <span class="o">=</span> <span class="n">integral_site_coordinate</span> <span class="o">+</span> <span class="n">translation</span>
+
+            <span class="c1"># Set neighborhood site index</span>
             <span class="n">var</span><span class="o">.</span><span class="n">neighborhood_site_index</span> <span class="o">=</span> <span class="n">prim_neighbor_list</span><span class="o">.</span><span class="n">neighbor_index</span><span class="p">(</span>
                 <span class="n">integral_site_coordinate</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Set variable name:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">make_variable_name_f</span><span class="p">(</span>
+                <span class="n">xtal_prim</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                <span class="n">site_basis_function_index</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">site_basis_function_index</span><span class="p">,</span>
+                <span class="n">component_index</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">component_index</span><span class="p">,</span>
+                <span class="n">cluster_site_index</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">cluster_site_index</span><span class="p">,</span>
+                <span class="n">sublattice_index</span><span class="o">=</span><span class="n">integral_site_coordinate</span><span class="o">.</span><span class="n">sublattice</span><span class="p">(),</span>
+                <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">local_discrete_dof</span><span class="p">,</span>
             <span class="p">)</span>
 
 
@@ -814,6 +846,8 @@ document.write(`
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">i_orbit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]]]:</span>
     <span class="n">orbit</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
@@ -841,10 +875,13 @@ document.write(`
             <span class="n">M</span> <span class="o">=</span> <span class="n">M_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">S</span> <span class="o">=</span> <span class="n">FunctionRep</span><span class="p">(</span><span class="n">matrix_rep</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
             <span class="n">f_equiv</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">f_prototype</span>
-            <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+            <span class="n">update_variables</span><span class="p">(</span>
+                <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
                 <span class="n">cluster</span><span class="o">=</span><span class="n">equiv_cluster</span><span class="p">,</span>
                 <span class="n">function</span><span class="o">=</span><span class="n">f_equiv</span><span class="p">,</span>
                 <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                <span class="n">make_variable_name_f</span><span class="o">=</span><span class="n">make_variable_name_f</span><span class="p">,</span>
+                <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">local_discrete_dof</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">)):</span>
@@ -1749,10 +1786,13 @@ document.write(`
                 <span class="n">M</span> <span class="o">=</span> <span class="n">M_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">S</span> <span class="o">=</span> <span class="n">FunctionRep</span><span class="p">(</span><span class="n">matrix_rep</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
                 <span class="n">f_equiv</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">f_prototype</span>
-                <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                <span class="n">update_variables</span><span class="p">(</span>
+                    <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
                     <span class="n">cluster</span><span class="o">=</span><span class="n">equiv_cluster</span><span class="p">,</span>
                     <span class="n">function</span><span class="o">=</span><span class="n">f_equiv</span><span class="p">,</span>
                     <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                    <span class="n">make_variable_name_f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_variable_name_f</span><span class="p">,</span>
+                    <span class="n">local_discrete_dof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">)):</span>
@@ -1855,7 +1895,7 @@ document.write(`
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equivalent phenomenal cluster:&quot;</span><span class="p">)</span>
                 <span class="n">site_rep</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">phenomenal_generating_site_rep</span><span class="p">[</span><span class="n">i_clex</span><span class="p">]</span>
                 <span class="n">equiv_phenomenal</span> <span class="o">=</span> <span class="n">site_rep</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">equiv_phenomenal</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">equiv_phenomenal</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">)))</span>
                 <span class="nb">print</span><span class="p">()</span>
 
             <span class="n">_equiv_orbit_basis_sets</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1886,10 +1926,13 @@ document.write(`
                 <span class="k">for</span> <span class="n">f_prototype</span> <span class="ow">in</span> <span class="n">orbit_basis_sets</span><span class="p">[</span><span class="n">i_clust</span><span class="p">]:</span>
                     <span class="n">S</span> <span class="o">=</span> <span class="n">FunctionRep</span><span class="p">(</span><span class="n">matrix_rep</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
                     <span class="n">f_equiv</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">f_prototype</span>
-                    <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                    <span class="n">update_variables</span><span class="p">(</span>
+                        <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
                         <span class="n">cluster</span><span class="o">=</span><span class="n">equiv_cluster</span><span class="p">,</span>
                         <span class="n">function</span><span class="o">=</span><span class="n">f_equiv</span><span class="p">,</span>
                         <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                        <span class="n">make_variable_name_f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_variable_name_f</span><span class="p">,</span>
+                        <span class="n">local_discrete_dof</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="k">assert</span> <span class="n">f_equiv</span><span class="o">.</span><span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f_prototype</span><span class="o">.</span><span class="n">variables</span><span class="p">)):</span>
@@ -2040,9 +2083,12 @@ document.write(`
 <div class="viewcode-block" id="make_point_functions">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_point_functions.html#casm.bset.cluster_functions.make_point_functions">[docs]</a>
 <span class="k">def</span> <span class="nf">make_point_functions</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
     <span class="n">orbit_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>
+    <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct point functions</span>
 
@@ -2073,6 +2119,16 @@ document.write(`
 
 <span class="sd">        This should generally be the functions for one orbit as generated by</span>
 <span class="sd">        :class:`ClusterFunctionsBuilder`.</span>
+
+<span class="sd">    make_variable_name_f: Optional[Callable] = None</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">        Custom classes should have the same `__call__` signature as</span>
+<span class="sd">        :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">        `occ_var_name` and `occ_var_desc` attributes.</span>
+
+<span class="sd">    local_discrete_dof: Optionla[list[str]] = None</span>
+<span class="sd">        The types of local discrete degree of freedom (DoF).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -2113,14 +2169,15 @@ document.write(`
                 <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">equiv</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">sublattice</span><span class="p">()</span> <span class="o">!=</span> <span class="n">point</span><span class="o">.</span><span class="n">sublattice</span><span class="p">():</span>
                         <span class="k">continue</span>
-                    <span class="c1"># copy function</span>
                     <span class="n">f</span> <span class="o">=</span> <span class="n">orbit_functions</span><span class="p">[</span><span class="n">i_equiv</span><span class="p">][</span><span class="n">i_func</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                    <span class="c1"># assign neighborhood_site_index with translation to point</span>
-                    <span class="n">assign_neighborhood_site_index</span><span class="p">(</span>
+                    <span class="n">update_variables</span><span class="p">(</span>
+                        <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
                         <span class="n">cluster</span><span class="o">=</span><span class="n">equiv</span><span class="p">,</span>
                         <span class="n">function</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
                         <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                         <span class="n">translation</span><span class="o">=-</span><span class="n">site</span><span class="o">.</span><span class="n">unitcell</span><span class="p">(),</span>
+                        <span class="n">make_variable_name_f</span><span class="o">=</span><span class="n">make_variable_name_f</span><span class="p">,</span>
+                        <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">local_discrete_dof</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="c1"># add to point functions</span>
                     <span class="n">equiv_functions_by_point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>

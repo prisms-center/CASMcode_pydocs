@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.clexwriter._methods &#8212; casm-bset 2.0a2 documentation</title>
+    <title>casm.bset.clexwriter._methods &#8212; casm-bset 2.0a3 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=e877a769"></script>
+    <script src="../../../../_static/documentation_options.js?v=4c0f2370"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/clexwriter/_methods';</script>
@@ -449,6 +449,7 @@ document.write(`
 
 
 <span class="k">def</span> <span class="nf">make_neighborhoods</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">is_periodic</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
@@ -459,6 +460,9 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
+<span class="sd">    prim: libcasm.configuration.Prim</span>
+<span class="sd">        The prim.</span>
+
 <span class="sd">    is_periodic: bool</span>
 <span class="sd">        Whether the Clexulator is for a periodic basis set or local basis set.</span>
 
@@ -558,6 +562,7 @@ document.write(`
             <span class="c1">#     All point functions for this cluster orbit, for each point corr site</span>
             <span class="c1">#     point_functions[i_func][nlist_index][i_point_function]</span>
             <span class="n">point_functions</span> <span class="o">=</span> <span class="n">make_point_functions</span><span class="p">(</span>
+                <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
                 <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                 <span class="n">orbit</span><span class="o">=</span><span class="n">clusters</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">],</span>
                 <span class="n">orbit_functions</span><span class="o">=</span><span class="n">orbit_functions</span><span class="p">,</span>
@@ -741,6 +746,8 @@ document.write(`
 <span class="sd">        - ``&quot;cpp&quot;``: str, C++ expression for evaluating the global correlation</span>
 <span class="sd">          contribution</span>
 <span class="sd">        - ``&quot;latex_prototype&quot;``: str, Latex formula for the prototype</span>
+<span class="sd">        - ``&quot;&quot;latex_prototype_with_neighbor_indices&quot;: str, Latex formula for the</span>
+<span class="sd">          prototype using neighbor site indices instead of cluster site indices</span>
 <span class="sd">        - ``latex_orbit&quot;``: str, Latex formula for the orbit contribution</span>
 
 <span class="sd">    variables_needed: dict[str,list[list[int]]]</span>
@@ -767,6 +774,7 @@ document.write(`
                 <span class="s2">&quot;linear_orbit_index&quot;</span><span class="p">:</span> <span class="n">linear_orbit_index</span><span class="p">,</span>
                 <span class="s2">&quot;cpp&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;latex_prototype&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;latex_prototype_with_neighbor_indices&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;latex_orbit&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">)</span>
@@ -820,6 +828,16 @@ document.write(`
                             <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
                             <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span>
                             <span class="n">label_site_using</span><span class="o">=</span><span class="s2">&quot;cluster_site_index&quot;</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;latex_prototype_with_neighbor_indices&quot;</span><span class="p">:</span> <span class="n">orbit_bfunc_cpp_str</span><span class="p">(</span>
+                            <span class="c1"># only functions from prototype cluster</span>
+                            <span class="n">orbit_functions</span><span class="o">=</span><span class="n">prototype_functions</span><span class="p">,</span>
+                            <span class="c1"># orbit_size=len(orbit_functions) -&gt; same normalization</span>
+                            <span class="n">orbit_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">orbit_functions</span><span class="p">),</span>
+                            <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+                            <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">cpp_fmt</span><span class="p">,</span>
+                            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span>
+                            <span class="n">label_site_using</span><span class="o">=</span><span class="s2">&quot;neighborhood_site_index&quot;</span><span class="p">,</span>
                         <span class="p">),</span>
                         <span class="s2">&quot;latex_orbit&quot;</span><span class="p">:</span> <span class="n">orbit_bfunc_cpp_str</span><span class="p">(</span>
                             <span class="n">orbit_functions</span><span class="o">=</span><span class="n">orbit_functions</span><span class="p">,</span>
@@ -918,6 +936,7 @@ document.write(`
 <div class="viewcode-block" id="make_site_bfuncs">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.make_site_bfuncs.html#casm.bset.clexwriter.make_site_bfuncs">[docs]</a>
 <span class="k">def</span> <span class="nf">make_site_bfuncs</span><span class="p">(</span>
+    <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">is_periodic</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
@@ -936,6 +955,8 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
+<span class="sd">    prim: libcasm.configuration.Prim</span>
+<span class="sd">        The prim.</span>
 <span class="sd">    is_periodic: bool</span>
 <span class="sd">        Whether the Clexulator is for a periodic basis set or local basis set.</span>
 <span class="sd">    prim_neighbor_list: libcasm.clexulator.PrimNeighborList</span>
@@ -1032,6 +1053,7 @@ document.write(`
         <span class="k">if</span> <span class="n">is_periodic</span><span class="p">:</span>
             <span class="c1"># take global functions (non-duplicating) and make all point functions</span>
             <span class="n">point_functions</span> <span class="o">=</span> <span class="n">make_point_functions</span><span class="p">(</span>
+                <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
                 <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                 <span class="n">orbit</span><span class="o">=</span><span class="n">orbit</span><span class="p">,</span>
                 <span class="n">orbit_functions</span><span class="o">=</span><span class="n">functions</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">],</span>
@@ -1085,6 +1107,7 @@ document.write(`
 
     <span class="n">is_periodic</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">_phenomenal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
     <span class="n">site_bfuncs</span><span class="p">,</span> <span class="n">site_bfuncs_variables_needed_at</span> <span class="o">=</span> <span class="n">make_site_bfuncs</span><span class="p">(</span>
+        <span class="n">prim</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">_prim</span><span class="p">,</span>
         <span class="n">is_periodic</span><span class="o">=</span><span class="n">is_periodic</span><span class="p">,</span>
         <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
         <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">clusters</span><span class="p">,</span>
@@ -1371,6 +1394,7 @@ document.write(`
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer_type</span><span class="p">(</span>
+            <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
             <span class="n">i_clex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">clusters</span><span class="p">,</span>
             <span class="n">functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">functions</span><span class="p">,</span>
@@ -1420,6 +1444,7 @@ document.write(`
                     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
                 <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer_type</span><span class="p">(</span>
+                    <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
                     <span class="n">i_clex</span><span class="o">=</span><span class="n">i_clex</span><span class="p">,</span>
                     <span class="n">clusters</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalent_clusters</span><span class="p">[</span><span class="n">i_clex</span><span class="p">],</span>
                     <span class="n">functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">equivalent_functions</span><span class="p">[</span><span class="n">i_clex</span><span class="p">],</span>
