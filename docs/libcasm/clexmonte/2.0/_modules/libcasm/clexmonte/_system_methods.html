@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.clexmonte._system_methods &#8212; libcasm-clexmonte 2.0a4 documentation</title>
+    <title>libcasm.clexmonte._system_methods &#8212; libcasm-clexmonte 2.0a5 documentation</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../_static/documentation_options.js?v=23fe37a4"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/clexmonte/_system_methods';</script>
@@ -413,13 +413,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <h1>Source code for libcasm.clexmonte._system_methods</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pathlib</span>
-
-<span class="kn">from</span> <span class="nn">libcasm.configuration</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">SupercellSet</span><span class="p">,</span>
-<span class="p">)</span>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
 
 <span class="kn">from</span> <span class="nn">libcasm.local_configuration</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LocalConfiguration</span><span class="p">,</span>
+    <span class="n">LocalConfigurationList</span><span class="p">,</span>
     <span class="n">OccEventSymInfo</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -468,69 +467,105 @@ document.write(`
 
 
 
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">libcasm.configuration</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">SupercellSet</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.local_configuration</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">LocalConfiguration</span><span class="p">,</span>
-    <span class="n">LocalConfigurationList</span><span class="p">,</span>
-<span class="p">)</span>
-
-
 <div class="viewcode-block" id="read_abnormal_events">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.read_abnormal_events.html#libcasm.clexmonte.read_abnormal_events">[docs]</a>
 <span class="k">def</span> <span class="nf">read_abnormal_events</span><span class="p">(</span>
     <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
     <span class="n">system</span><span class="p">:</span> <span class="n">System</span><span class="p">,</span>
-    <span class="n">supercells</span><span class="p">:</span> <span class="n">SupercellSet</span><span class="p">,</span>
+    <span class="n">event_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">OccEventSymInfo</span><span class="p">],</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read local configurations and event data from an abnormal events jsonl file</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read local configurations and event data from one or more abnormal events jsonl</span>
+<span class="sd">    files</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    path : Path</span>
-<span class="sd">        The path to the jsonl file containing the local configurations</span>
+<span class="sd">    path : list[pathlib.Path]</span>
+<span class="sd">        The path to one or more jsonl files containing the local configurations and</span>
+<span class="sd">        event state data.</span>
 <span class="sd">    system : libcasm.clexmonte.System</span>
-<span class="sd">        The system to read local configurations for</span>
-<span class="sd">    supercells : libcasm.configuration.SupercellSet</span>
-<span class="sd">        The supercells to use for the local configurations</span>
+<span class="sd">        The system</span>
+<span class="sd">    event_info: dict[str, libcasm.local_configuration.OccEventSymInfo]</span>
+<span class="sd">        A dictionary of event info</span>
+<span class="sd">        (:class:`libcasm.local_configuration.OccEventSymInfo`) for each event type in</span>
+<span class="sd">        the system, with the event type name as the key.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
+<span class="sd">    n: Optional[int]</span>
+<span class="sd">        The number of local configurations in the file, or None if the files</span>
+<span class="sd">        do not exist. This is the sum of the number of local configurations of</span>
+<span class="sd">        each event type.</span>
 <span class="sd">    local_configurations : dict[str, libcasm.local_configuration.LocalConfigurationList]</span>
-<span class="sd">        Local configurations (:class:`libcasm.local_configuration.LocalConfigurationList`)</span>
+<span class="sd">        Local configurations</span>
+<span class="sd">        (:class:`libcasm.local_configuration.LocalConfigurationList`)</span>
 <span class="sd">        for by event type, with the event type name as the key.</span>
-<span class="sd">    event_data : dict[str, list[dict]]</span>
-<span class="sd">        Event data, for the local configurations, by event type, with the event type</span>
-<span class="sd">        name as the key, in the same order as the local configurations.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">event_info</span> <span class="o">=</span> <span class="n">make_system_event_info</span><span class="p">(</span>
-        <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">,</span>
-    <span class="p">)</span>
+<span class="sd">    event_states : dict[str, list[dict]]</span>
+<span class="sd">        Event states, for the local configurations, by event type, with the event type</span>
+<span class="sd">        name as the key, in the same order as the local configurations. The</span>
 
+<span class="sd">        Example output, for one local configuration:</span>
+
+<span class="sd">        .. code-block:: Python</span>
+
+<span class="sd">            {</span>
+<span class="sd">              &quot;event_state&quot;: {</span>
+<span class="sd">                &quot;Ekra&quot;: 0.7375,</span>
+<span class="sd">                &quot;dE_activated&quot;: 1.6666666666666665,</span>
+<span class="sd">                &quot;dE_final&quot;: 1.6666666666666665,</span>
+<span class="sd">                &quot;formation_energy_delta_corr&quot;: [</span>
+<span class="sd">                    0.0, 0.0, 0.0, -0.8333333333333333, 0.5892558333333333, 0.0, 0.0,</span>
+<span class="sd">                    0.0, 0.0,</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;freq&quot;: 10000000000000.0,</span>
+<span class="sd">                &quot;is_allowed&quot;: true,</span>
+<span class="sd">                &quot;is_normal&quot;: false,</span>
+<span class="sd">                &quot;local_corr&quot;: [1.0, 0.5, 0.0, 0.5, 0.0, 0.25, 0.0, 0.5, 0.0],</span>
+<span class="sd">                &quot;rate&quot;: 1000704.0785393054</span>
+<span class="sd">              },</span>
+<span class="sd">              &quot;linear_site_index&quot;: [212, 122],</span>
+<span class="sd">              &quot;prim_event_data&quot;: {</span>
+<span class="sd">                &quot;equivalent_index&quot;: 2,</span>
+<span class="sd">                &quot;event_type_name&quot;: &quot;B_Va_1NN&quot;,</span>
+<span class="sd">                &quot;is_forward&quot;: false,</span>
+<span class="sd">                &quot;occ_final&quot;: [1, 2],</span>
+<span class="sd">                &quot;occ_init&quot;: [2, 1],</span>
+<span class="sd">                &quot;prim_event_index&quot;: 17</span>
+<span class="sd">              },</span>
+<span class="sd">              &quot;unitcell_index&quot;: 212</span>
+<span class="sd">            }</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">local_configurations</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-    <span class="n">event_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">event_states</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">event_type_name</span> <span class="ow">in</span> <span class="n">event_info</span><span class="p">:</span>
         <span class="n">local_configurations</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">LocalConfigurationList</span><span class="p">(</span>
             <span class="n">event_info</span><span class="o">=</span><span class="n">event_info</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">],</span>
         <span class="p">)</span>
-        <span class="n">event_data</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">event_states</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-            <span class="n">_event</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event&quot;</span><span class="p">)</span>
-            <span class="n">event_type_name</span> <span class="o">=</span> <span class="n">_event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prim_event_data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event_type_name&quot;</span><span class="p">)</span>
-            <span class="n">_local_configuration</span> <span class="o">=</span> <span class="n">LocalConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
-                <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local_configuration&quot;</span><span class="p">),</span>
-                <span class="n">supercells</span><span class="o">=</span><span class="n">supercells</span><span class="p">,</span>
-                <span class="n">event_info</span><span class="o">=</span><span class="n">event_info</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">],</span>
-            <span class="p">)</span>
-            <span class="n">local_configurations</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_local_configuration</span><span class="p">)</span>
-            <span class="n">event_data</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_event</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">_p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">_p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">local_configurations</span><span class="p">,</span> <span class="n">event_data</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">_event</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event&quot;</span><span class="p">)</span>
+                <span class="n">event_type_name</span> <span class="o">=</span> <span class="n">_event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prim_event_data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event_type_name&quot;</span><span class="p">)</span>
+                <span class="n">_local_configuration</span> <span class="o">=</span> <span class="n">LocalConfiguration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+                    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local_configuration&quot;</span><span class="p">),</span>
+                    <span class="n">supercells</span><span class="o">=</span><span class="n">system</span><span class="o">.</span><span class="n">supercells</span><span class="p">,</span>
+                    <span class="n">event_info</span><span class="o">=</span><span class="n">event_info</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">local_configurations</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_local_configuration</span><span class="p">)</span>
+                <span class="n">event_states</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_event</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">local_configurations</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span></div>
 
 </pre></div>
 

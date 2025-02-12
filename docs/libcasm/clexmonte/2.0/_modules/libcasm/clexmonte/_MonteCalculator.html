@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.clexmonte._MonteCalculator &#8212; libcasm-clexmonte 2.0a4 documentation</title>
+    <title>libcasm.clexmonte._MonteCalculator &#8212; libcasm-clexmonte 2.0a5 documentation</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
+    <script src="../../../_static/documentation_options.js?v=23fe37a4"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/clexmonte/_MonteCalculator';</script>
@@ -418,6 +418,7 @@ document.write(`
 
 <span class="kn">from</span> <span class="nn">libcasm.local_configuration</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">LocalConfiguration</span><span class="p">,</span>
+    <span class="n">LocalConfigurationList</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">._clexmonte_monte_calculator</span> <span class="kn">import</span> <span class="p">(</span>
@@ -428,6 +429,7 @@ document.write(`
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">._system_methods</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">make_system_event_info</span><span class="p">,</span>
+    <span class="n">read_abnormal_events</span><span class="p">,</span>
 <span class="p">)</span>
 
 
@@ -498,6 +500,127 @@ document.write(`
             <span class="n">configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
             <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">unitcell_index</span><span class="p">,</span> <span class="n">equivalent_index</span><span class="p">),</span>
             <span class="n">event_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">event_info</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MonteCalculator.read_abnormal_events">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.read_abnormal_events.html#libcasm.clexmonte.MonteCalculator.read_abnormal_events">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_abnormal_events</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">which</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LocalConfigurationList</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read abnormal events file, if present.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - The `&quot;kinetic&quot;` MonteCalculator method has optional support for writing</span>
+<span class="sd">          the local configuration and event states of abnormal events during a</span>
+<span class="sd">          simulation. This is controlled by the `&quot;abnormal_event_handling&quot;`</span>
+<span class="sd">          MonteCalculator parameter.</span>
+<span class="sd">        - An &quot;encountered_abnormal_events.jsonl&quot; file is written for events that are</span>
+<span class="sd">          encountered and calculated (but may not be selected).</span>
+<span class="sd">        - A &quot;selected_abnormal_events.jsonl&quot; file is written for events that are</span>
+<span class="sd">          selected.</span>
+<span class="sd">        - The files are expected in `self.event_data.output_dir`.</span>
+<span class="sd">        - This function reads the file(s) and returns the local configurations and</span>
+<span class="sd">          event states.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        Read all encountered and selected abnormal events, and print a summary:</span>
+
+<span class="sd">        &gt;&gt;&gt; n, local_configurations, event_data = mc.read_abnormal_events()</span>
+
+<span class="sd">        Read only the encountered abnormal events:</span>
+
+<span class="sd">        &gt;&gt;&gt; n, local_configurations, event_data = mc.read_abnormal_events(</span>
+<span class="sd">            which=&quot;encountered&quot;,</span>
+<span class="sd">        )</span>
+
+<span class="sd">        Read only the selected abnormal events:</span>
+
+<span class="sd">        &gt;&gt;&gt; n, local_configurations, event_data = mc.read_abnormal_events(</span>
+<span class="sd">            which=&quot;selected&quot;,</span>
+<span class="sd">        )</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        which : str = &quot;all&quot;</span>
+<span class="sd">            The type of abnormal events to read. The options are:</span>
+
+<span class="sd">            - &quot;all&quot;: Read all abnormal events.</span>
+<span class="sd">            - &quot;encountered&quot;: Read only the encountered abnormal events from the</span>
+<span class="sd">              &quot;encountered_abnormal_events.jsonl&quot; file, if it exists.</span>
+<span class="sd">            - &quot;selected&quot;: Read only the selected abnormal events from the</span>
+<span class="sd">              &quot;selected_abnormal_events.jsonl&quot; file, if it exists.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        n: Optional[int]</span>
+<span class="sd">            The number of local configurations in the file, or None if the files</span>
+<span class="sd">            do not exist. This is the sum of the number of local configurations of</span>
+<span class="sd">            each event type.</span>
+<span class="sd">        local_configurations : dict[str,</span>
+<span class="sd">        libcasm.local_configuration.LocalConfigurationList]</span>
+<span class="sd">            Local configurations</span>
+<span class="sd">            (:class:`libcasm.local_configuration.LocalConfigurationList`)</span>
+<span class="sd">            for by event type, with the event type name as the key.</span>
+<span class="sd">        event_data : dict[str, list[dict]]</span>
+<span class="sd">            Event info, for the local configurations, by event type, with the event type</span>
+<span class="sd">            name as the key, in the same order as the local configurations. The</span>
+
+<span class="sd">            Example event data, for one local configuration:</span>
+
+<span class="sd">            .. code-block:: Python</span>
+
+<span class="sd">                {</span>
+<span class="sd">                  &quot;event_state&quot;: {</span>
+<span class="sd">                    &quot;Ekra&quot;: 0.7375,</span>
+<span class="sd">                    &quot;dE_activated&quot;: 1.6666666666666665,</span>
+<span class="sd">                    &quot;dE_final&quot;: 1.6666666666666665,</span>
+<span class="sd">                    &quot;formation_energy_delta_corr&quot;: [</span>
+<span class="sd">                        0.0, 0.0, 0.0, -0.8333333333333333, 0.5892558333333333, 0.0,</span>
+<span class="sd">                        0.0, 0.0, 0.0,</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &quot;freq&quot;: 10000000000000.0,</span>
+<span class="sd">                    &quot;is_allowed&quot;: true,</span>
+<span class="sd">                    &quot;is_normal&quot;: false,</span>
+<span class="sd">                    &quot;local_corr&quot;: [1.0, 0.5, 0.0, 0.5, 0.0, 0.25, 0.0, 0.5, 0.0],</span>
+<span class="sd">                    &quot;rate&quot;: 1000704.0785393054</span>
+<span class="sd">                  },</span>
+<span class="sd">                  &quot;linear_site_index&quot;: [212, 122],</span>
+<span class="sd">                  &quot;prim_event_data&quot;: {</span>
+<span class="sd">                    &quot;equivalent_index&quot;: 2,</span>
+<span class="sd">                    &quot;event_type_name&quot;: &quot;B_Va_1NN&quot;,</span>
+<span class="sd">                    &quot;is_forward&quot;: false,</span>
+<span class="sd">                    &quot;occ_final&quot;: [1, 2],</span>
+<span class="sd">                    &quot;occ_init&quot;: [2, 1],</span>
+<span class="sd">                    &quot;prim_event_index&quot;: 17</span>
+<span class="sd">                  },</span>
+<span class="sd">                  &quot;unitcell_index&quot;: 212</span>
+<span class="sd">                }</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="s2">&quot;encountered&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid value for &#39;which&#39;: </span><span class="si">{</span><span class="n">which</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Must be one of [&#39;selected&#39;, &#39;encountered&#39;, &#39;all&#39;]&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">encountered_path</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">event_data</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;encountered_abnormal_events.jsonl&quot;</span>
+        <span class="p">)</span>
+        <span class="n">selected_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_data</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;selected_abnormal_events.jsonl&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">]:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;encountered&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">]:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encountered_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">read_abnormal_events</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">system</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="p">,</span>
+            <span class="n">event_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">event_info</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
