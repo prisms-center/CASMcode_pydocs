@@ -415,11 +415,11 @@ document.write(`
                   
   <h1>Source code for casm.project._Project</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">libcasm.casmglobal</span> <span class="k">as</span> <span class="nn">casmglobal</span>
+<span class="kn">import</span> <span class="nn">libcasm.clexulator</span> <span class="k">as</span> <span class="nn">casmclex</span>
 <span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration.io</span> <span class="k">as</span> <span class="nn">config_io</span>
 <span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
 
 <span class="kn">from</span> <span class="nn">._CompositionAxes</span> <span class="kn">import</span> <span class="n">CompositionAxes</span>
@@ -430,14 +430,13 @@ document.write(`
     <span class="n">project_path</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">._ProjectSettings</span> <span class="kn">import</span> <span class="n">ProjectSettings</span>
+<span class="kn">from</span> <span class="nn">._symgroup</span> <span class="kn">import</span> <span class="n">symgroup_to_dict_with_group_classification</span>
 <span class="kn">from</span> <span class="nn">.json_io</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">printpathstr</span><span class="p">,</span>
     <span class="n">read_optional</span><span class="p">,</span>
     <span class="n">read_required</span><span class="p">,</span>
     <span class="n">safe_dump</span><span class="p">,</span>
 <span class="p">)</span>
-
-<span class="n">ProjectType</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;Project&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Project">
@@ -467,6 +466,19 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.configuration.Prim: Primitive crytal structure and allowed degrees </span>
 <span class="sd">        of freedom (DoF) with symmetry information&quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">PrimNeighborList</span><span class="p">(</span>
+            <span class="n">lattice_weight_matrix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">nlist_weight_matrix</span><span class="p">,</span>
+            <span class="n">sublattice_indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">nlist_sublat_indices</span><span class="p">,</span>
+            <span class="n">total_n_sublattice</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">()),</span>
+        <span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casmclex.PrimNeighborList: The :class:`PrimNeighborList` used for </span>
+<span class="sd">        constructing Clexulator.</span>
+<span class="sd">        </span>
+<span class="sd">        If the `nlist_weight_matrix` or `nlist_sublat_indices` project settings change,</span>
+<span class="sd">        the Project should be re-constructed so that the `PrimNeighborList` is updated,</span>
+<span class="sd">        and all basis sets will need to be updated with the new neighbor list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">chemical_composition_axes</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;CompositionAxes: Project chemical composition axes.</span>
 <span class="sd">        </span>
@@ -476,16 +488,6 @@ document.write(`
 <span class="sd">        even if they have different magnetic spin, molecular orientation, etc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">chemical_composition</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ChemicalCompositionCalculator: Configuration chemical \</span>
-<span class="sd">        composition calculator.</span>
-<span class="sd">        </span>
-<span class="sd">        The &quot;chemical composition&quot; treats all :class:`~libcasm.xtal.Occupant` that </span>
-<span class="sd">        have the same &quot;chemical name&quot; (:func:`~libcasm.xtal.Occupant.name`) as a </span>
-<span class="sd">        single component, even if they have different magnetic spin, molecular </span>
-<span class="sd">        orientation, etc.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">occupant_composition_axes</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;CompositionAxes: Project distinct occupant composition \</span>
 <span class="sd">        axes.</span>
@@ -493,15 +495,6 @@ document.write(`
 <span class="sd">        The occupant composition axes are based on compositions calculated such that</span>
 <span class="sd">        all :class:`~libcasm.xtal.Occupant` that have different magnetic spin, </span>
 <span class="sd">        molecular orientation, etc. are treated as a distinct components. </span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">occupant_composition</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;OccupantCompositionCalculator: Configuration distinct \</span>
-<span class="sd">        occupants composition calculator.</span>
-
-<span class="sd">        The &quot;occupant composition&quot; treats all :class:`~libcasm.xtal.Occupant` that </span>
-<span class="sd">        have different magnetic spin, molecular orientation, etc. as distinct</span>
-<span class="sd">        components.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">chemical_composition_axes</span><span class="p">()</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -523,7 +516,6 @@ document.write(`
                 <span class="n">xtal_prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
                 <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">chemical_composition_axes</span><span class="p">(),</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">chemical_composition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_composition_axes</span><span class="o">.</span><span class="n">config_composition</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">occupant_composition_axes</span><span class="p">()</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">occupant_composition_axes</span> <span class="o">=</span> <span class="n">CompositionAxes</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
@@ -542,24 +534,68 @@ document.write(`
                 <span class="n">xtal_prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
                 <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">occupant_composition_axes</span><span class="p">(),</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">occupant_composition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">occupant_composition_axes</span><span class="o">.</span><span class="n">config_composition</span>
 
-        <span class="c1"># Make project.enum persist</span>
+        <span class="c1"># Make project.X persist</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_enum</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bset</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_structure_import</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Project.make_chemical_comp_calculator">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.Project.make_chemical_comp_calculator.html#casm.project.Project.make_chemical_comp_calculator">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_chemical_comp_calculator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a chemical composition calculator using the current axes.</span>
+
+<span class="sd">        The &quot;chemical composition&quot; treats all :class:`~libcasm.xtal.Occupant` that</span>
+<span class="sd">        have the same &quot;chemical name&quot; (:func:`~libcasm.xtal.Occupant.name`) as a</span>
+<span class="sd">        single component, even if they have different magnetic spin, molecular</span>
+<span class="sd">        orientation, etc.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        chemical_comp_calculator: casm.configuration.ConfigCompositionCalculator</span>
+<span class="sd">            A configuration composition calculator for the chemical composition axes,</span>
+<span class="sd">            using the currently selected parametric composition axes (may be None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_composition_axes</span><span class="o">.</span><span class="n">make_config_comp_calculator</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Project.make_occupant_comp_calculator">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.Project.make_occupant_comp_calculator.html#casm.project.Project.make_occupant_comp_calculator">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_occupant_comp_calculator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make an occupant composition calculator using the current axes.</span>
+
+<span class="sd">        The &quot;occupant composition&quot; treats all :class:`~libcasm.xtal.Occupant` that</span>
+<span class="sd">        have different magnetic spin, molecular orientation, etc. as distinct</span>
+<span class="sd">        components.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        occupant_comp_calculator: casm.configuration.ConfigCompositionCalculator</span>
+<span class="sd">            A configuration composition calculator for the occupant composition axes,</span>
+<span class="sd">            using the currently selected parametric composition axes (may be None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">occupant_composition_axes</span><span class="o">.</span><span class="n">make_config_comp_calculator</span><span class="p">()</span></div>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.commands.BsetCommand: Methods to construct and print cluster \</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.bset.BsetCommand: Methods to construct and print cluster \</span>
 <span class="sd">        expansion basis sets&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">casm.project.commands</span> <span class="kn">import</span> <span class="n">BsetCommand</span>
+        <span class="kn">from</span> <span class="nn">casm.project.bset</span> <span class="kn">import</span> <span class="n">BsetCommand</span>
 
-        <span class="k">return</span> <span class="n">BsetCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bset</span> <span class="o">=</span> <span class="n">BsetCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bset</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">enum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.commands.EnumCommand: Methods to enumerate supercells, \</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.enum.EnumCommand: Methods to enumerate supercells, \</span>
 <span class="sd">        configurations, events, etc.&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">casm.project.commands._EnumCommand</span> <span class="kn">import</span> <span class="n">EnumCommand</span>
+        <span class="kn">from</span> <span class="nn">casm.project.enum</span> <span class="kn">import</span> <span class="n">EnumCommand</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enum</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_enum</span> <span class="o">=</span> <span class="n">EnumCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
@@ -567,11 +603,51 @@ document.write(`
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">sym</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.commands.SymCommand: Methods to analyse and print symmetry \</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.sym.SymCommand: Methods to analyse and print symmetry \</span>
 <span class="sd">        information&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">casm.project.commands._SymCommand</span> <span class="kn">import</span> <span class="n">SymCommand</span>
+        <span class="kn">from</span> <span class="nn">casm.project.sym</span> <span class="kn">import</span> <span class="n">SymCommand</span>
 
-        <span class="k">return</span> <span class="n">SymCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span> <span class="o">=</span> <span class="n">SymCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.calc.CalcCommand: Methods to help setup, perform, and collect</span>
+<span class="sd">        DFT calculations&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">casm.project.calc</span> <span class="kn">import</span> <span class="n">CalcCommand</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span> <span class="o">=</span> <span class="n">CalcCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">structure_import</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.structure_import.StructureImportCommand: Methods to import and</span>
+<span class="sd">        map structures&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">casm.project.structure_import</span> <span class="kn">import</span> <span class="n">StructureImportCommand</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_structure_import</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_structure_import</span> <span class="o">=</span> <span class="n">StructureImportCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_structure_import</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.fit.FitCommand: Methods to fit cluster expansions&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">casm.project.fit</span> <span class="kn">import</span> <span class="n">FitCommand</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span> <span class="o">=</span> <span class="n">FitCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;casm.project.system.SystemCommand: Methods to setup and use model systems&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">casm.project.system</span> <span class="kn">import</span> <span class="n">SystemCommand</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_system</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_system</span> <span class="o">=</span> <span class="n">SystemCommand</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_system</span>
 
 <div class="viewcode-block" id="Project.init">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.Project.init.html#casm.project.Project.init">[docs]</a>
@@ -582,7 +658,7 @@ document.write(`
         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">crystallography_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">casmglobal</span><span class="o">.</span><span class="n">TOL</span><span class="p">,</span>
         <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProjectType</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Project&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a CASM project</span>
 
 <span class="sd">        This constructs a CASM project at the specified path and returns a</span>
@@ -592,7 +668,8 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        path: Union[str, pathlib.Path, None] = None</span>
 <span class="sd">            The project root directory. If None, the current working directory is used.</span>
-<span class="sd">        prim: Union[libcasm.xtal.Prim, libcasm.configuration.Prim, dict, str, pathlib.Path, None] = None</span>
+<span class="sd">        prim: Union[libcasm.xtal.Prim, libcasm.configuration.Prim, dict, str, \</span>
+<span class="sd">        pathlib.Path, None] = None</span>
 <span class="sd">            The prim, or the path to the prim.json file. If None, a `prim.json` file</span>
 <span class="sd">            is expected in the project directory specified by `path`. Unless the</span>
 <span class="sd">            `force` option is used, the prim must be in primitive, canonical form, and</span>
@@ -666,6 +743,24 @@ document.write(`
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
                 <span class="s2">&quot;Error in casm.project.Project.init: &quot;</span>
                 <span class="s2">&quot;Failed to construct Prim (unknown reason)&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1">### Warn if prim is not atomic:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">is_atomic</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;** WARNING *********************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;The prim is not atomic. An atomic prim:                             </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;- allows 1 or more occupants on each site,                          </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;- all occupants have a single atom without coordinate offset,       </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;- there are no Occupant properties, only AtomComponent properties.  </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;                                                                    </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;Some CASM methods, such as structure mapping and conversions between</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;configuration and structure, may not be implemented. If possible,   </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;use AtomComponent properties for magspin instead of Occupant        </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;properties .                                                        </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;********************************************************************</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="p">)</span>
 
         <span class="c1">### Checks to see if the prim is a standard prim and not tolerance sensitive ###</span>
@@ -759,8 +854,14 @@ document.write(`
                 <span class="p">)</span>
 
                 <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- Writing canonical, symmetrized prim: </span><span class="si">{</span><span class="n">canonical_symmetrized_path</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- Canonical, symmetrized prim: </span><span class="se">\n</span><span class="si">{</span><span class="n">canonical_symmetrized_prim_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;- Writing canonical, symmetrized prim: &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">canonical_symmetrized_path</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;- Canonical, symmetrized prim: &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">canonical_symmetrized_prim_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
 
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">canonical_symmetrized_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">canonical_symmetrized_prim_str</span><span class="p">)</span>
@@ -817,8 +918,8 @@ document.write(`
 
         <span class="c1"># Write symmetry info (overwrite existing files)</span>
         <span class="c1"># - write lattice_point_group.json,</span>
-        <span class="n">lattice_point_group_data</span> <span class="o">=</span> <span class="n">config_io</span><span class="o">.</span><span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
-            <span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+        <span class="n">lattice_point_group_data</span> <span class="o">=</span> <span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
+            <span class="n">prim</span><span class="p">,</span>
             <span class="n">prim</span><span class="o">.</span><span class="n">lattice_point_group</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">safe_dump</span><span class="p">(</span>
@@ -828,7 +929,7 @@ document.write(`
         <span class="p">)</span>
 
         <span class="c1"># - write factor_group.json,</span>
-        <span class="n">factor_group_data</span> <span class="o">=</span> <span class="n">config_io</span><span class="o">.</span><span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
+        <span class="n">factor_group_data</span> <span class="o">=</span> <span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
             <span class="n">prim</span><span class="p">,</span>
             <span class="n">prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">,</span>
         <span class="p">)</span>
@@ -839,7 +940,7 @@ document.write(`
         <span class="p">)</span>
 
         <span class="c1"># - write crystal_point_group.json</span>
-        <span class="n">crystal_point_group_data</span> <span class="o">=</span> <span class="n">config_io</span><span class="o">.</span><span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
+        <span class="n">crystal_point_group_data</span> <span class="o">=</span> <span class="n">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
             <span class="n">prim</span><span class="p">,</span>
             <span class="n">prim</span><span class="o">.</span><span class="n">crystal_point_group</span><span class="p">,</span>
         <span class="p">)</span>
@@ -867,16 +968,35 @@ document.write(`
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;international_full&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;international_short&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;- schoenflies=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;schoenflies&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;- spacegroup=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;- spacegroup=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;magnetic_spacegroup_type&quot;</span> <span class="ow">in</span> <span class="n">factor_group_data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">]:</span>
+            <span class="n">type_info</span> <span class="o">=</span> <span class="n">factor_group_data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;magnetic_spacegroup_type&quot;</span>
+            <span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- magnetic spacegroup uni_number=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;uni_number&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">()</span>
 
         <span class="n">type_info</span> <span class="o">=</span> <span class="n">crystal_point_group_data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">][</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="s2">&quot;Crystal point group: </span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;- size=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">crystal_point_group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
             <span class="sa">f</span><span class="s2">&quot;- international=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;pointgroup_international&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;- schoenflies=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;pointgroup_schoenflies&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;- schoenflies=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;pointgroup_schoenflies&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="s2">&quot;magnetic_spacegroup_type&quot;</span>
+            <span class="ow">in</span> <span class="n">crystal_point_group_data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="n">type_info</span> <span class="o">=</span> <span class="n">crystal_point_group_data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;magnetic_spacegroup_type&quot;</span>
+            <span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- magnetic spacegroup uni_number=</span><span class="si">{</span><span class="n">type_info</span><span class="p">[</span><span class="s1">&#39;uni_number&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">()</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DONE&quot;</span><span class="p">)</span>
 

@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>formation_energies &#8212; casm-project 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/casm/_autosummary/casm.project.fit.FittingData.formation_energies';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="casm.project.json_io" href="casm.project.json_io.html" />
+    <link rel="prev" title="correlations_per_unitcell" href="casm.project.fit.FittingData.correlations_per_unitcell.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">casm-project</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="casm.project.html">casm.project</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="casm.project.make_calculated_fitting_data.html">make_calculated_fitting_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.project.make_symmetrized_lattice.html">make_symmetrized_lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.project.make_symmetrized_prim.html">make_symmetrized_prim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.project.make_uncalculated_fitting_data.html">make_uncalculated_fitting_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.project.project_path.html">project_path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="casm.project.symgroup_to_dict_with_group_classification.html">symgroup_to_dict_with_group_classification</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.ClexDescription.html">ClexDescription</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ClexDescription.to_dict.html">to_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.CompositionAxes.html">CompositionAxes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.commit.html">commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.init.html">init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.init_chemical_axes.html">init_chemical_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.init_occupant_axes.html">init_occupant_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.load.html">load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.make_config_comp_calculator.html">make_config_comp_calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.print_axes.html">print_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.print_axes_table.html">print_axes_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.print_current_axes.html">print_current_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.set_current_axes.html">set_current_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.set_include_va.html">set_include_va</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.path.html">path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.allowed_occs.html">allowed_occs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.calculator.html">calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.independent_compositions.html">independent_compositions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.enumerated.html">enumerated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.possible_axes.html">possible_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.current_axes.html">current_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.CompositionAxes.include_va.html">include_va</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.html">ConfigCompositionCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.param_composition.html">param_composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.species_frac.html">species_frac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.calculator.html">calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.components.html">components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.converter.html">converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ConfigCompositionCalculator.n_components.html">n_components</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.DirectoryStructure.html">DirectoryStructure</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.POS.html">POS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_bset.html">all_bset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_calctype.html">all_calctype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_clex_name.html">all_clex_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_eci.html">all_eci</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_enum.html">all_enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_fit.html">all_fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_import.html">all_import</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_ref.html">all_ref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.all_system.html">all_system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.basis.html">basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.bset_dir.html">bset_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.bspecs.html">bspecs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.calc_settings_dir.html">calc_settings_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.calctype_dir.html">calctype_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.calctype_settings_dir.html">calctype_settings_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.calctype_settings_dir_v2.html">calctype_settings_dir_v2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.calculated_properties.html">calculated_properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.casm_dir.html">casm_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.casmdb_dir.html">casmdb_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.chemical_composition_axes.html">chemical_composition_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.chemical_reference.html">chemical_reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.clexulator_dir.html">clexulator_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.clexulator_o.html">clexulator_o</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.clexulator_so.html">clexulator_so</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.clexulator_src.html">clexulator_src</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.clust.html">clust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.composition_axes.html">composition_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.config_json.html">config_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.config_list.html">config_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.config_props.html">config_props</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.configuration_calc_settings_dir.html">configuration_calc_settings_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.configuration_dir.html">configuration_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.crystal_point_group.html">crystal_point_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.eci.html">eci</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.eci_dir.html">eci_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_POS_file.html">enum_POS_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_calc_dir.html">enum_calc_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_calctype_dir.html">enum_calctype_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_config_file.html">enum_config_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_dir.html">enum_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_structure_file.html">enum_structure_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.enum_structure_with_properties_file.html">enum_structure_with_properties_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.event_list.html">event_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.factor_group.html">factor_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.fit_dir.html">fit_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.import_dir.html">import_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.import_settings.html">import_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.lattice_point_group.html">lattice_point_group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.master_selection.html">master_selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.occupant_composition_axes.html">occupant_composition_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.path_list.html">path_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.path_props.html">path_props</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.prim.html">prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.project_settings.html">project_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.property_dir.html">property_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.ref_dir.html">ref_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.root_dir.html">root_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.scel_list.html">scel_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.structure_json.html">structure_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.supercell_calc_settings_dir.html">supercell_calc_settings_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.supercell_dir.html">supercell_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.symmetry_dir.html">symmetry_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.system_count.html">system_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.system_dir.html">system_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.system_file.html">system_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.DirectoryStructure.path.html">path</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.Project.html">Project</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.init.html">init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.make_chemical_comp_calculator.html">make_chemical_comp_calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.make_occupant_comp_calculator.html">make_occupant_comp_calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.bset.html">bset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.calc.html">calc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.enum.html">enum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.fit.html">fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.structure_import.html">structure_import</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.sym.html">sym</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.system.html">system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.dir.html">dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.path.html">path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.name.html">name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.prim.html">prim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.prim_neighbor_list.html">prim_neighbor_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.chemical_composition_axes.html">chemical_composition_axes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.Project.occupant_composition_axes.html">occupant_composition_axes</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.ProjectSettings.html">ProjectSettings</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.from_dict.html">from_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.make_default.html">make_default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.to_dict.html">to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.cluster_expansions.html">cluster_expansions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.crystallography_tol.html">crystallography_tol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.default_clex_name.html">default_clex_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.default_clex.html">default_clex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.lin_alg_tol.html">lin_alg_tol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.name.html">name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.nlist_sublat_indices.html">nlist_sublat_indices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.nlist_weight_matrix.html">nlist_weight_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.query_alias.html">query_alias</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.required_properties.html">required_properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ProjectSettings.view_command.html">view_command</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.ase_utils.html">casm.project.ase_utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ase_utils.make_ase_atoms.html">make_ase_atoms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.ase_utils.make_casm_structure.html">make_casm_structure</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.html">AseVaspTool</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.make_calculator.html">make_calculator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.setup.html">setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.incar_path.html">incar_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.kpoints_path.html">kpoints_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.setups.html">setups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.ase_utils.AseVaspTool.xc.html">xc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.bset.html">casm.project.bset</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.bset.BsetCommand.html">BsetCommand</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetCommand.all.html">all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetCommand.copy.html">copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetCommand.get.html">get</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetCommand.list.html">list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetCommand.remove.html">remove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetCommand.proj.html">proj</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.bset.BsetData.html">BsetData</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.build.html">build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.clean.html">clean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.commit.html">commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.display_functions.html">display_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.display_occ_site_functions.html">display_occ_site_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.load.html">load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.make_bspecs.html">make_bspecs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.make_clexulator.html">make_clexulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.make_corr_calculator.html">make_corr_calculator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.make_local_clexulator.html">make_local_clexulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.print_clusters.html">print_clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.print_functions_by_orbit.html">print_functions_by_orbit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.print_orbits.html">print_orbits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.set_bspecs.html">set_bspecs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.update.html">update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.proj.html">proj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.id.html">id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.bset_dir.html">bset_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.meta.html">meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.clex_basis_specs.html">clex_basis_specs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.version.html">version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.linear_function_indices.html">linear_function_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.BsetData.out.html">out</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.html">ConfigCorrCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.all_points.html">all_points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.all_points_site_indices.html">all_points_site_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.corr_f.html">corr_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.per_supercell.html">per_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.per_unitcell.html">per_unitcell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.linear_function_indices.html">linear_function_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.n_functions.html">n_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.bset.ConfigCorrCalculator.n_point_corr.html">n_point_corr</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.enum.html">casm.project.enum</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.html">ConfigEnumRunner</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.begin.html">begin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.check.html">check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.finish.html">finish</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.config_enum.html">config_enum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.curr.html">curr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.desc.html">desc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.filter_f.html">filter_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_since_last_commit.html">n_since_last_commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_per_commit.html">n_per_commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.enumerator_has_enum_index.html">enumerator_has_enum_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.curr_enum_index.html">curr_enum_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_config_init.html">n_config_init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_config_final.html">n_config_final</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_config_before.html">n_config_before</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_config_total.html">n_config_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.n_config_excluded.html">n_config_excluded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.print_steps_f.html">print_steps_f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.print_commits.html">print_commits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.verbose.html">verbose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.ConfigEnumRunner.dry_run.html">dry_run</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.enum.EnumCommand.html">EnumCommand</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.all.html">all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.copy.html">copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.get.html">get</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.list.html">list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.merge.html">merge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.remove.html">remove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.proj.html">proj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumCommand.last.html">last</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.enum.EnumData.html">EnumData</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.commit.html">commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.load.html">load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.merge.html">merge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.occ_by_cluster.html">occ_by_cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.occ_by_supercell.html">occ_by_supercell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.occ_by_supercell_list.html">occ_by_supercell_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.supercells_by_volume.html">supercells_by_volume</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.proj.html">proj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.id.html">id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.enum_dir.html">enum_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.meta.html">meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.supercell_set.html">supercell_set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.supercell_list.html">supercell_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.configuration_set.html">configuration_set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.enum.EnumData.configuration_list.html">configuration_list</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="casm.project.fit.html">casm.project.fit</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.fit.FitCommand.html">FitCommand</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FitCommand.all.html">all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FitCommand.copy.html">copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FitCommand.get.html">get</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FitCommand.list.html">list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FitCommand.remove.html">remove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FitCommand.proj.html">proj</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="casm.project.fit.FittingData.html">FittingData</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.commit.html">commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.from_dict.html">from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.load.html">load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.to_dict.html">to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.proj.html">proj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.id.html">id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.fit_dir.html">fit_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.meta.html">meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.names.html">names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.parametric_compositions.html">parametric_compositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.mol_compositions.html">mol_compositions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.fit.FittingData.correlations_per_unitcell.html">correlations_per_unitcell</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">formation_energies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.json_io.html">casm.project.json_io</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.dump.html">dump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.get.html">get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.pretty_json.html">pretty_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.printpathstr.html">printpathstr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.read_cascading.html">read_cascading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.read_contents.html">read_contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.read_optional.html">read_optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.read_required.html">read_required</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.safe_dump.html">safe_dump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.json_io.Any.html">Any</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.structure_import.html">casm.project.structure_import</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="casm.project.structure_import.map_structure.html">map_structure</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.html">StructureImportCommand</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.all.html">all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.copy.html">copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.get.html">get</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.list.html">list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.remove.html">remove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportCommand.proj.html">proj</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.structure_import.StructureImportData.html">StructureImportData</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.collect.html">collect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.commit.html">commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.load.html">load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.map.html">map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.merge.html">merge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.proj.html">proj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.id.html">id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.import_dir.html">import_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.enum_id.html">enum_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.enum.html">enum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.meta.html">meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.structure_import.StructureImportData.structures.html">structures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.sym.html">casm.project.sym</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.sym.SymCommand.html">SymCommand</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.sym.SymCommand.config_space_analysis.html">config_space_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.sym.SymCommand.dof_space_analysis.html">dof_space_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.sym.SymCommand.print_crystal_point_group.html">print_crystal_point_group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.sym.SymCommand.print_factor_group.html">print_factor_group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.sym.SymCommand.print_lattice_point_group.html">print_lattice_point_group</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="casm.project.system.html">casm.project.system</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.system.SystemCommand.html">SystemCommand</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemCommand.all.html">all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemCommand.copy.html">copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemCommand.get.html">get</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemCommand.list.html">list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemCommand.remove.html">remove</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemCommand.proj.html">proj</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="casm.project.system.SystemData.html">SystemData</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-29"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.clear.html">clear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.commit.html">commit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.load.html">load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.proj.html">proj</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.id.html">id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.system_dir.html">system_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.system_count.html">system_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="casm.project.system.SystemData.meta.html">meta</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">casm package</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="casm.project.fit.FittingData.html" class="nav-link">FittingData</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">formation_energies</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="formation-energies">
+<h1>formation_energies<a class="headerlink" href="#formation-energies" title="Link to this heading">#</a></h1>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="casm.project.fit.FittingData.formation_energies">
+<span class="sig-prename descclassname"><span class="pre">FittingData.</span></span><span class="sig-name descname"><span class="pre">formation_energies</span></span><a class="headerlink" href="#casm.project.fit.FittingData.formation_energies" title="Link to this definition">#</a></dt>
+<dd><p>Formation energy per unitcell of all the
+configurations, a shape=(n_configs,) array, if given.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Optional</em>[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="casm.project.fit.FittingData.correlations_per_unitcell.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">correlations_per_unitcell</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="casm.project.json_io.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">casm.project.json_io</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#casm.project.fit.FittingData.formation_energies"><code class="docutils literal notranslate"><span class="pre">FittingData.formation_energies</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/casm/_autosummary/casm.project.fit.FittingData.formation_energies.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

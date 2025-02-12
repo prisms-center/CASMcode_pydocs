@@ -1,0 +1,934 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casm.project.fit._FittingData &#8212; casm-project 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="icon" sizes="32x32" type="image/png" href="../../../../_static/favicon-32x32.png?v=f9ece728" />
+    <link rel="icon" sizes="16x16" type="image/png" href="../../../../_static/favicon-16x16.png?v=dad9ad5b" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../../_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/fit/_FittingData';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">casm-project</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../usage.html">
+                        Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
+                        Bibliography
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">casm.project...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for casm.project.fit._FittingData</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">libcasm.clexulator</span> <span class="k">as</span> <span class="nn">clex</span>
+<span class="kn">import</span> <span class="nn">libcasm.composition</span> <span class="k">as</span> <span class="nn">comp</span>
+<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
+<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">from</span> <span class="nn">casm.project.json_io</span> <span class="kn">import</span> <span class="n">read_optional</span><span class="p">,</span> <span class="n">safe_dump</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">casm.project</span> <span class="kn">import</span> <span class="n">Project</span>
+
+
+<div class="viewcode-block" id="FittingData">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.fit.FittingData.html#casm.project.fit.FittingData">[docs]</a>
+<span class="k">class</span> <span class="nc">FittingData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A convenient class that holds all the required properties</span>
+<span class="sd">    of configurations which can be used while fitting cluster expansions</span>
+
+<span class="sd">    This class can be constructed from :func:`make_calculated_fitting_data` or</span>
+<span class="sd">    :func:`make_uncalculated_fitting_data`</span>
+
+<span class="sd">    If it is constructed from :func:`make_calculated_fitting_data`, all the</span>
+<span class="sd">    attributes will be filled</span>
+
+<span class="sd">    If it is constructed from :func:`make_uncalculated_fitting_data`, all the</span>
+<span class="sd">    attributes except `formation_energies` will be filled</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        proj: casm.project.Project</span>
+<span class="sd">            The CASM project</span>
+<span class="sd">        id: str</span>
+<span class="sd">            The fit identifier. Fitting data is stored in the</span>
+<span class="sd">            fits directory at `&lt;project&gt;/fits/fit.&lt;id&gt;/`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Project: CASM project reference&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Fit identifier&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">fit_dir</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pathlib.Path: Fitting data directory&quot;&quot;&quot;</span>
+
+        <span class="c1">### Data (load &amp; commit) ###</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: A description of the fit, read from `meta.json`.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[str]]: Names of the configurations, a length `n_configs` list, </span>
+<span class="sd">        if given.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parametric_compositions</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[np.ndarray]: Parametric compositions of all the configurations, a </span>
+<span class="sd">        shape=(n_configs, n_axes) array, if given.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_compositions</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Optional[np.ndarray]: Number of components per unitcell of all the </span>
+<span class="sd">        configurations, a shape=(n_configs, n_components) array, if given.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">correlations_per_unitcell</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Optional[np.ndarray]: Correlations per unitcell of all the configurations, a</span>
+<span class="sd">        shape=(n_configs, n_corr_size) array, if given.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">formation_energies</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Optional[np.ndarray]: Formation energy per unitcell of all the </span>
+<span class="sd">        configurations, a shape=(n_configs,) array, if given.&quot;&quot;&quot;</span>
+
+        <span class="c1"># load data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<div class="viewcode-block" id="FittingData.load">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.fit.FittingData.load.html#casm.project.fit.FittingData.load">[docs]</a>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read meta.json</span>
+
+<span class="sd">        This will replace the current contents of this FittingData object with</span>
+<span class="sd">        the contents of the associated files, or set the current contents to None if the</span>
+<span class="sd">        associated files do not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># read meta.json if it exists</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_dir</span> <span class="o">/</span> <span class="s2">&quot;meta.json&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="n">read_optional</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">dict</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="FittingData.commit">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.fit.FittingData.commit.html#casm.project.fit.FittingData.commit">[docs]</a>
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write meta.json</span>
+
+<span class="sd">        If the data does not exist in this object, this will erase the associated</span>
+<span class="sd">        files if they do exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">quiet</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># write meta.json</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_dir</span> <span class="o">/</span> <span class="s2">&quot;meta.json&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;Error in FittingData.commit: FittingData.meta must be a dict&quot;</span>
+                <span class="p">)</span>
+            <span class="n">safe_dump</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="p">,</span>
+                <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+                <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span>
+                <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FittingData.clear">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.fit.FittingData.clear.html#casm.project.fit.FittingData.clear">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear fitting data&quot;&quot;&quot;</span>
+        <span class="c1"># TODO</span>
+        <span class="k">pass</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">libcasm.xtal</span> <span class="kn">import</span> <span class="n">pretty_json</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;FittingData:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s2">&quot;desc&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;- desc: </span><span class="si">{</span><span class="n">pretty_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;desc&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="c1"># TODO:</span>
+
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<div class="viewcode-block" id="FittingData.from_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.fit.FittingData.from_dict.html#casm.project.fit.FittingData.from_dict">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct FittingData from a dictionary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : dict</span>
+<span class="sd">            A dictionary containing `names`, `parametric_compositions`</span>
+<span class="sd">            `mol_compositions`, `correlations_per_unitcell` and `formation_energies`</span>
+<span class="sd">            of the configurations</span>
+<span class="sd">            Note that `formation_energies` can be None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fitting_data : FittingData</span>
+<span class="sd">            :class:`FittingData` with `names`, `parametric_compositions`,</span>
+<span class="sd">            `mol_compositions`, `correlations_per_unitcell` and `formation_energies`</span>
+<span class="sd">            filled in for all the configurations</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fitting_data</span> <span class="o">=</span> <span class="n">FittingData</span><span class="p">()</span>
+
+        <span class="n">fitting_data</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;names&quot;</span><span class="p">]</span>
+        <span class="n">fitting_data</span><span class="o">.</span><span class="n">parametric_compositions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;parametric_compositions&quot;</span><span class="p">])</span>
+        <span class="n">fitting_data</span><span class="o">.</span><span class="n">mol_compositions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mol_compositions&quot;</span><span class="p">])</span>
+        <span class="n">fitting_data</span><span class="o">.</span><span class="n">correlations_per_unitcell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;correlations_per_unitcell&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">fitting_data</span><span class="o">.</span><span class="n">formation_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;formation_energies&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">fitting_data</span></div>
+
+
+<div class="viewcode-block" id="FittingData.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.fit.FittingData.to_dict.html#casm.project.fit.FittingData.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Turn `FittingData` into a dictionary with `names`,</span>
+<span class="sd">        `parametric_compositions`, `mol_compositions`, `correlations_per_unitcell`</span>
+<span class="sd">        and `formation_energies` for the configurations.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data : dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">,</span>
+            <span class="n">parametric_compositions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parametric_compositions</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">mol_compositions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_compositions</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">correlations_per_unitcell</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">correlations_per_unitcell</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">formation_energies</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">formation_energies</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">def</span> <span class="nf">_extract_correlations_for_configuration</span><span class="p">(</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">clexulator</span><span class="p">:</span> <span class="n">clex</span><span class="o">.</span><span class="n">Clexulator</span><span class="p">,</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">clex</span><span class="o">.</span><span class="n">PrimNeighborList</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function which calculates correlations_per_unitcell</span>
+<span class="sd">    of a configuration given a clexulator</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    configuration : libcasm.configuration.Configuration</span>
+<span class="sd">        :class:`~libcasm.configuration.Configuration` for which to obtain</span>
+<span class="sd">        correlations</span>
+<span class="sd">    clexulator : libcasm.clexulator.Clexulator</span>
+<span class="sd">        :class:`~libcasm.clexulator.Clexulator` which will be used to</span>
+<span class="sd">        obtain correlations</span>
+<span class="sd">    prim_neighbor_list : libcasm.clexulator.PrimNeighborList</span>
+<span class="sd">        A :class:`~libcasm.clexulator.PrimNeighborList` which will be</span>
+<span class="sd">        used to construct the :class:`~libcasm.clexulator.SuperNeighborList`</span>
+<span class="sd">        for every configuration and will be used while obtaining correlations</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    corr_per_unitcell : np.ndarray</span>
+<span class="sd">        Correlations per unitcell</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">transformation_matrix_to_super</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">configuration</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span>
+    <span class="p">)</span>
+    <span class="n">super_neighbor_list</span> <span class="o">=</span> <span class="n">clex</span><span class="o">.</span><span class="n">SuperNeighborList</span><span class="p">(</span>
+        <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">transformation_matrix_to_super</span><span class="p">,</span>
+        <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">clex</span><span class="o">.</span><span class="n">Correlations</span><span class="p">(</span>
+        <span class="n">super_neighbor_list</span><span class="p">,</span>
+        <span class="n">clexulator</span><span class="p">,</span>
+        <span class="n">configuration</span><span class="o">.</span><span class="n">dof_values</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">corr</span><span class="o">.</span><span class="n">per_unitcell</span><span class="p">(</span><span class="n">corr</span><span class="o">.</span><span class="n">per_supercell</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">_extract_mol_and_param_comp_for_configuration</span><span class="p">(</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
+    <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">composition_converter</span><span class="p">:</span> <span class="n">comp</span><span class="o">.</span><span class="n">CompositionConverter</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function that calculates mol and parametric</span>
+<span class="sd">    composition given a configuration</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    configuration : libcasm.configuration.Configuration</span>
+<span class="sd">        :class:`~libcasm.configuration.Configuration` for which to obtain</span>
+<span class="sd">        correlations</span>
+<span class="sd">    xtal_prim : libcasm.xtal.Prim</span>
+<span class="sd">        Prim of the project</span>
+<span class="sd">    composition_converter : libcasm.composition.CompositionConverter</span>
+<span class="sd">        A :class:`~libcasm.composition.CompositionCalculator` object with</span>
+<span class="sd">        the warranted composition axes set, which will be used to obtain</span>
+<span class="sd">        mol and parametric compostions</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mol_comp, param_comp : tuple[np.ndarray, np.ndarray]</span>
+<span class="sd">        mol composition and parametric composition of the configuration</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Extract mol compositions-----------</span>
+    <span class="n">composition_calculator</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">CompositionCalculator</span><span class="p">(</span>
+        <span class="n">allowed_occs</span><span class="o">=</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">(),</span>
+        <span class="n">components</span><span class="o">=</span><span class="n">composition_converter</span><span class="o">.</span><span class="n">components</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">mol_comp</span> <span class="o">=</span> <span class="n">composition_calculator</span><span class="o">.</span><span class="n">mean_num_each_component</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">occupation</span><span class="p">)</span>
+    <span class="c1"># Convert mol comp to param comp</span>
+    <span class="n">param_comp</span> <span class="o">=</span> <span class="n">composition_converter</span><span class="o">.</span><span class="n">param_composition</span><span class="p">(</span><span class="n">mol_comp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mol_comp</span><span class="p">,</span> <span class="n">param_comp</span>
+
+
+<div class="viewcode-block" id="make_calculated_fitting_data">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.make_calculated_fitting_data.html#casm.project.fit.make_calculated_fitting_data">[docs]</a>
+<span class="k">def</span> <span class="nf">make_calculated_fitting_data</span><span class="p">(</span>
+    <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">config_props</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">composition_converter</span><span class="p">:</span> <span class="n">comp</span><span class="o">.</span><span class="n">CompositionConverter</span><span class="p">,</span>
+    <span class="n">clexulator</span><span class="p">:</span> <span class="n">clex</span><span class="o">.</span><span class="n">Clexulator</span><span class="p">,</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">clex</span><span class="o">.</span><span class="n">PrimNeighborList</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FittingData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For a given `config_props` list, constructs FittingData which</span>
+<span class="sd">    which holds compositions, correlations per unitcell, formation energies</span>
+<span class="sd">    of all the configurations in the `config_props`</span>
+
+<span class="sd">    This should be used on `config_props` which is generated by mapping/importing</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xtal_prim : xtal.Prim</span>
+<span class="sd">        Prim of the project</span>
+<span class="sd">    config_props : list[dict]</span>
+<span class="sd">        A list containing results of mapping/import</span>
+<span class="sd">    composition_converter : libcasm.composition.CompositionConverter</span>
+<span class="sd">        A :class:`~libcasm.composition.CompositionConverter` object with</span>
+<span class="sd">        the warranted composition axes set, which will be used to obtain</span>
+<span class="sd">        mol and parametric compostions</span>
+<span class="sd">    clexulator : libcasm.clexulator.Clexulator</span>
+<span class="sd">        :class:`~libcasm.clexulator.Clexulator` which will be used to</span>
+<span class="sd">        obtain correlations</span>
+<span class="sd">    prim_neighbor_list : libcasm.clexulator.PrimNeighborList</span>
+<span class="sd">        A :class:`~libcasm.clexulator.PrimNeighborList` which will be</span>
+<span class="sd">        used to construct the :class:`~libcasm.clexulator.SuperNeighborList`</span>
+<span class="sd">        for every configuration and will be used while obtaining correlations</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FittingData</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">parametric_compositions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mol_compositions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">correlations_per_unitcell</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">formation_energies</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">supercell_set</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">(</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">config_id</span><span class="p">,</span> <span class="n">config_prop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config_props</span><span class="p">):</span>
+        <span class="n">config_with_properties</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">ConfigurationWithProperties</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+            <span class="n">config_prop</span><span class="p">[</span><span class="s2">&quot;configuration_with_properties&quot;</span><span class="p">],</span> <span class="n">supercell_set</span>
+        <span class="p">)</span>
+        <span class="c1"># Extract correlations</span>
+        <span class="n">corr_per_unitcell</span> <span class="o">=</span> <span class="n">_extract_correlations_for_configuration</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="n">config_with_properties</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">clexulator</span><span class="o">=</span><span class="n">clexulator</span><span class="p">,</span>
+            <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Extract mol and param compositions</span>
+        <span class="n">mol_comp</span><span class="p">,</span> <span class="n">param_comp</span> <span class="o">=</span> <span class="n">_extract_mol_and_param_comp_for_configuration</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="n">config_with_properties</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+            <span class="n">composition_converter</span><span class="o">=</span><span class="n">composition_converter</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;config.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">config_id</span><span class="p">))</span>
+        <span class="n">correlations_per_unitcell</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corr_per_unitcell</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="n">mol_compositions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol_comp</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="n">parametric_compositions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param_comp</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="c1"># This currently assumes that formation energies are already</span>
+        <span class="c1"># in config props. Should it be like this??</span>
+        <span class="n">formation_energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config_prop</span><span class="p">[</span><span class="s2">&quot;formation_energy&quot;</span><span class="p">])</span>
+
+    <span class="n">fitting_data</span> <span class="o">=</span> <span class="n">FittingData</span><span class="p">()</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">names</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">correlations_per_unitcell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">correlations_per_unitcell</span><span class="p">)</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">mol_compositions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mol_compositions</span><span class="p">)</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">parametric_compositions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">parametric_compositions</span><span class="p">)</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">formation_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">formation_energies</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fitting_data</span></div>
+
+
+
+<div class="viewcode-block" id="make_uncalculated_fitting_data">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.make_uncalculated_fitting_data.html#casm.project.fit.make_uncalculated_fitting_data">[docs]</a>
+<span class="k">def</span> <span class="nf">make_uncalculated_fitting_data</span><span class="p">(</span>
+    <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">config_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">composition_converter</span><span class="p">:</span> <span class="n">comp</span><span class="o">.</span><span class="n">CompositionConverter</span><span class="p">,</span>
+    <span class="n">clexulator</span><span class="p">:</span> <span class="n">clex</span><span class="o">.</span><span class="n">Clexulator</span><span class="p">,</span>
+    <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">clex</span><span class="o">.</span><span class="n">PrimNeighborList</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FittingData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For a given `config_list` list, constructs FittingData which</span>
+<span class="sd">    which holds compositions, correlations per unitcell of all the configurations</span>
+<span class="sd">    in the `config_list`</span>
+
+<span class="sd">    This should be used on `config_list` which is generated by enumeration</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xtal_prim : xtal.Prim</span>
+<span class="sd">        Prim of the project</span>
+<span class="sd">    config_props : list[dict]</span>
+<span class="sd">        A list containing results of mapping/import</span>
+<span class="sd">    composition_converter : libcasm.composition.CompositionCalculator</span>
+<span class="sd">        A :class:`~libcasm.composition.CompositionCalculator` object with</span>
+<span class="sd">        the warranted composition axes set, which will be used to obtain</span>
+<span class="sd">        mol and parametric compostions</span>
+<span class="sd">    clexulator : libcasm.clexulator.Clexulator</span>
+<span class="sd">        :class:`~libcasm.clexulator.Clexulator` which will be used to</span>
+<span class="sd">        obtain correlations</span>
+<span class="sd">    prim_neighbor_list : libcasm.clexulator.PrimNeighborList</span>
+<span class="sd">        A :class:`~libcasm.clexulator.PrimNeighborList` which will be</span>
+<span class="sd">        used to construct the :class:`~libcasm.clexulator.SuperNeighborList`</span>
+<span class="sd">        for every configuration and will be used while obtaining correlations</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FittingData</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">parametric_compositions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mol_compositions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">correlations_per_unitcell</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">supercell_set</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">(</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">config_id</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config_list</span><span class="p">):</span>
+        <span class="n">config_with_properties</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;configuration_with_properties&quot;</span><span class="p">],</span> <span class="n">supercell_set</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Extract correlations</span>
+        <span class="n">corr_per_unitcell</span> <span class="o">=</span> <span class="n">_extract_correlations_for_configuration</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="n">config_with_properties</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">clexulator</span><span class="o">=</span><span class="n">clexulator</span><span class="p">,</span>
+            <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Extract mol and param compositions</span>
+        <span class="n">mol_comp</span><span class="p">,</span> <span class="n">param_comp</span> <span class="o">=</span> <span class="n">_extract_mol_and_param_comp_for_configuration</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="n">config_with_properties</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal_prim</span><span class="p">,</span>
+            <span class="n">composition_converter</span><span class="o">=</span><span class="n">composition_converter</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;config.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">config_id</span><span class="p">))</span>
+        <span class="n">correlations_per_unitcell</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corr_per_unitcell</span><span class="p">)</span>
+        <span class="n">mol_compositions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol_comp</span><span class="p">)</span>
+        <span class="n">parametric_compositions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param_comp</span><span class="p">)</span>
+
+    <span class="n">fitting_data</span> <span class="o">=</span> <span class="n">FittingData</span><span class="p">()</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">names</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">correlations_per_unitcell</span> <span class="o">=</span> <span class="n">correlations_per_unitcell</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">mol_compositions</span> <span class="o">=</span> <span class="n">mol_compositions</span>
+    <span class="n">fitting_data</span><span class="o">.</span><span class="n">parametric_compositions</span> <span class="o">=</span> <span class="n">parametric_compositions</span>
+
+    <span class="k">return</span> <span class="n">fitting_data</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

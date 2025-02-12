@@ -437,11 +437,11 @@ document.write(`
 <div class="viewcode-block" id="printpathstr">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.json_io.printpathstr.html#casm.project.json_io.printpathstr">[docs]</a>
 <span class="k">def</span> <span class="nf">printpathstr</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">abspath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">abspath</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">abspath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">abspath</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()))</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">abspath</span></div>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">abspath</span><span class="p">)</span></div>
 
 
 

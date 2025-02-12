@@ -428,7 +428,10 @@ document.write(`
     <span class="n">print_axes_table</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">._ConfigCompositionCalculator</span> <span class="kn">import</span> <span class="n">ConfigCompositionCalculator</span>
+<span class="kn">from</span> <span class="nn">._ConfigCompositionCalculator</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ConfigCompositionCalculator</span><span class="p">,</span>
+    <span class="n">_independent_compositions</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.json_io</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">read_required</span><span class="p">,</span>
     <span class="n">safe_dump</span><span class="p">,</span>
@@ -446,10 +449,10 @@ document.write(`
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">components</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">unique_components</span>
+        <span class="k">return</span> <span class="n">unique_components</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">components</span> <span class="o">==</span> <span class="s2">&quot;sorted&quot;</span><span class="p">:</span>
-            <span class="n">components</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">unique_components</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">unique_components</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">invalid_value_error</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -626,6 +629,9 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[CompositionCalculator]: Composition calculator&quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">independent_compositions</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[int]: Number independent composition axes, :math:`k`.&quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">enumerated</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: Keys of enumerated standard axes</span>
 
@@ -683,6 +689,11 @@ document.write(`
             <span class="n">allowed_occs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed_occs</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">include_va</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;include_va&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">independent_compositions</span> <span class="o">=</span> <span class="n">_independent_compositions</span><span class="p">(</span>
+            <span class="n">components</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">components</span><span class="p">(),</span>
+            <span class="n">allowed_occs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed_occs</span><span class="p">,</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="CompositionAxes.load">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.CompositionAxes.load.html#casm.project.CompositionAxes.load">[docs]</a>
@@ -813,12 +824,25 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">print_current_axes</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">config_composition</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConfigCompositionCalculator</span><span class="p">:</span>
+<div class="viewcode-block" id="CompositionAxes.make_config_comp_calculator">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.CompositionAxes.make_config_comp_calculator.html#casm.project.CompositionAxes.make_config_comp_calculator">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_config_comp_calculator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConfigCompositionCalculator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a configuration composition calculator using the current axes.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        chemical_comp_calculator: casm.configuration.ConfigCompositionCalculator</span>
+<span class="sd">            A configuration composition calculator for the chemical composition axes,</span>
+<span class="sd">            using the currently selected parametric composition axes (may be None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">converter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_axes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">converter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_axes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_axes</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ConfigCompositionCalculator</span><span class="p">(</span>
             <span class="n">calculator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="p">,</span>
-            <span class="n">converter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_axes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_axes</span><span class="p">),</span>
-        <span class="p">)</span>
+            <span class="n">converter</span><span class="o">=</span><span class="n">converter</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="CompositionAxes.init">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.CompositionAxes.init.html#casm.project.CompositionAxes.init">[docs]</a>
@@ -839,8 +863,8 @@ document.write(`
 <span class="sd">        components: Union[str, list[str], None] = None</span>
 <span class="sd">            The requested component order in the composition vectors. If None, the</span>
 <span class="sd">            components are listed in the order found in `allowed_occs`. If the string</span>
-<span class="sd">            &quot;sorted&quot;, the components are sorted alphabetically. If a list, the components</span>
-<span class="sd">            are listed in the order given in the list.</span>
+<span class="sd">            &quot;sorted&quot;, the components are sorted alphabetically. If a list, the</span>
+<span class="sd">            components are listed in the order given in the list.</span>
 <span class="sd">        path: Optional[pathlib.Path] = None,</span>
 <span class="sd">            Path to the axes file, for `load` and `commit`.</span>
 <span class="sd">        tol: float = libcasm.casmglobal.TOL</span>
@@ -855,6 +879,18 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">CompositionAxes</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
         <span class="n">value</span><span class="o">.</span><span class="n">allowed_occs</span> <span class="o">=</span> <span class="n">allowed_occs</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">independent_compositions</span> <span class="o">=</span> <span class="n">_independent_compositions</span><span class="p">(</span>
+            <span class="n">components</span><span class="o">=</span><span class="n">components</span><span class="p">,</span>
+            <span class="n">allowed_occs</span><span class="o">=</span><span class="n">allowed_occs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">independent_compositions</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">CompositionCalculator</span><span class="p">(</span>
+                <span class="n">components</span><span class="o">=</span><span class="n">components</span><span class="p">,</span>
+                <span class="n">allowed_occs</span><span class="o">=</span><span class="n">allowed_occs</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span>
+
         <span class="n">value</span><span class="o">.</span><span class="n">calculator</span><span class="p">,</span> <span class="n">enumerated_axes</span> <span class="o">=</span> <span class="n">make_standard_axes</span><span class="p">(</span>
             <span class="n">components</span><span class="o">=</span><span class="n">components</span><span class="p">,</span>
             <span class="n">allowed_occs</span><span class="o">=</span><span class="n">allowed_occs</span><span class="p">,</span>
@@ -892,8 +928,8 @@ document.write(`
 <span class="sd">        components: Union[str, list[str], None] = None</span>
 <span class="sd">            The requested component order in the composition vectors. If None, the</span>
 <span class="sd">            components are listed in the order found in `allowed_occs`. If the string</span>
-<span class="sd">            &quot;sorted&quot;, the components are sorted alphabetically. If a list, the components</span>
-<span class="sd">            are listed in the order given in the list.</span>
+<span class="sd">            &quot;sorted&quot;, the components are sorted alphabetically. If a list, the</span>
+<span class="sd">            components are listed in the order given in the list.</span>
 <span class="sd">        path: Optional[pathlib.Path] = None,</span>
 <span class="sd">            Path to the axes file, for `load` and `commit`.</span>
 <span class="sd">        tol: float = libcasm.casmglobal.TOL</span>
@@ -937,8 +973,8 @@ document.write(`
 <span class="sd">        components: Union[str, list[str], None] = None</span>
 <span class="sd">            The requested component order in the composition vectors. If None, the</span>
 <span class="sd">            components are listed in the order found in `allowed_occs`. If the string</span>
-<span class="sd">            &quot;sorted&quot;, the components are sorted alphabetically. If a list, the components</span>
-<span class="sd">            are listed in the order given in the list.</span>
+<span class="sd">            &quot;sorted&quot;, the components are sorted alphabetically. If a list, the</span>
+<span class="sd">            components are listed in the order given in the list.</span>
 <span class="sd">        path: Optional[pathlib.Path] = None,</span>
 <span class="sd">            Path to the axes file, for `load` and `commit`.</span>
 <span class="sd">        tol: float = libcasm.casmglobal.TOL</span>

@@ -454,6 +454,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span> <span class="o">=</span> <span class="s2">&quot;basis_sets&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span> <span class="o">=</span> <span class="s2">&quot;training_data&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__calculation_settings_dir</span> <span class="o">=</span> <span class="s2">&quot;calculation_settings&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__import_dir</span> <span class="o">=</span> <span class="s2">&quot;imports&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__fit_dir</span> <span class="o">=</span> <span class="s2">&quot;fits&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span> <span class="o">=</span> <span class="s2">&quot;settings&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__sym_dir</span> <span class="o">=</span> <span class="s2">&quot;symmetry&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span> <span class="o">=</span> <span class="s2">&quot;cluster_expansions&quot;</span>
@@ -464,14 +466,16 @@ document.write(`
 <div class="viewcode-block" id="DirectoryStructure.all_enum">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_enum.html#casm.project.DirectoryStructure.all_enum">[docs]</a>
     <span class="k">def</span> <span class="nf">all_enum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all enumeration names&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all enumeration</span>
+<span class="sd">        names&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;enum&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__enum_dir</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.all_bset">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_bset.html#casm.project.DirectoryStructure.all_bset">[docs]</a>
     <span class="k">def</span> <span class="nf">all_bset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all basis set names&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all basis set</span>
+<span class="sd">        names&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;bset&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bset_dir</span><span class="p">)</span></div>
 
 
@@ -487,14 +491,16 @@ document.write(`
 <div class="viewcode-block" id="DirectoryStructure.all_ref">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_ref.html#casm.project.DirectoryStructure.all_ref">[docs]</a>
     <span class="k">def</span> <span class="nf">all_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all ref names for a given calctype&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all ref names for</span>
+<span class="sd">        a given calctype&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">calctype</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.all_clex_name">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_clex_name.html#casm.project.DirectoryStructure.all_clex_name">[docs]</a>
     <span class="k">def</span> <span class="nf">all_clex_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all cluster expansion names&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check filesystem directory structure and return list of all cluster</span>
+<span class="sd">        expansion names&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;clex&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clex_dir</span><span class="p">)</span></div>
 
 
@@ -513,9 +519,21 @@ document.write(`
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="DirectoryStructure.all_systems">
-<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_systems.html#casm.project.DirectoryStructure.all_systems">[docs]</a>
-    <span class="k">def</span> <span class="nf">all_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryStructure.all_import">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_import.html#casm.project.DirectoryStructure.all_import">[docs]</a>
+    <span class="k">def</span> <span class="nf">all_import</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;import&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__import_dir</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DirectoryStructure.all_fit">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_fit.html#casm.project.DirectoryStructure.all_fit">[docs]</a>
+    <span class="k">def</span> <span class="nf">all_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;fit&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fit_dir</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DirectoryStructure.all_system">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.all_system.html#casm.project.DirectoryStructure.all_system">[docs]</a>
+    <span class="k">def</span> <span class="nf">all_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__all_settings</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system_dir</span><span class="p">)</span></div>
 
 
@@ -746,7 +764,7 @@ document.write(`
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns path to directory containing global clexulator&quot;&quot;&quot;</span>
         <span class="n">bset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bset</span><span class="p">(</span><span class="n">clex</span><span class="o">=</span><span class="n">clex</span><span class="p">,</span> <span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.clexulator_src">
@@ -756,10 +774,18 @@ document.write(`
         <span class="n">projectname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">clex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClexDescription</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">bset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">i_equiv</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns path to global clexulator source file&quot;&quot;&quot;</span>
         <span class="n">bset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bset</span><span class="p">(</span><span class="n">clex</span><span class="o">=</span><span class="n">clex</span><span class="p">,</span> <span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.cc&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">i_equiv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.cc&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
+                <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">i_equiv</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.cc&quot;</span><span class="p">)</span>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.clexulator_o">
@@ -769,10 +795,18 @@ document.write(`
         <span class="n">projectname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">clex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClexDescription</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">bset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">i_equiv</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns path to global clexulator.o file&quot;&quot;&quot;</span>
         <span class="n">bset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bset</span><span class="p">(</span><span class="n">clex</span><span class="o">=</span><span class="n">clex</span><span class="p">,</span> <span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.o&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">i_equiv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.o&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
+                <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">i_equiv</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.o&quot;</span><span class="p">)</span>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.clexulator_so">
@@ -782,10 +816,18 @@ document.write(`
         <span class="n">projectname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">clex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClexDescription</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">bset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">i_equiv</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns path to global clexulator so file&quot;&quot;&quot;</span>
         <span class="n">bset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bset</span><span class="p">(</span><span class="n">clex</span><span class="o">=</span><span class="n">clex</span><span class="p">,</span> <span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.so&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">i_equiv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.so&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span><span class="p">(</span><span class="n">bset</span><span class="o">=</span><span class="n">bset</span><span class="p">)</span>
+                <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">i_equiv</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">projectname</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_Clexulator_</span><span class="si">{</span><span class="n">bset</span><span class="si">}</span><span class="s2">.so&quot;</span><span class="p">)</span>
+            <span class="p">)</span></div>
 
 
     <span class="c1"># -- Calculations and reference --------</span>
@@ -800,7 +842,8 @@ document.write(`
 <div class="viewcode-block" id="DirectoryStructure.configuration_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.configuration_dir.html#casm.project.DirectoryStructure.configuration_dir">[docs]</a>
     <span class="k">def</span> <span class="nf">configuration_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return configuration directory path (configname has format SCELV_A_B_C_D_E_F/I)&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return configuration directory path (configname has format</span>
+<span class="sd">        SCELV_A_B_C_D_E_F/I)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span> <span class="o">/</span> <span class="n">calc_subdir</span> <span class="o">/</span> <span class="n">configname</span></div>
 
 
@@ -830,13 +873,14 @@ document.write(`
     <span class="k">def</span> <span class="nf">calctype_dir</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">clex</span><span class="p">:</span> <span class="n">ClexDescription</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Return calctype directory path (e.g. training_data/$(calc_subdir)/SCEL...../0/calctype.default&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Return calctype directory path (e.g.</span>
+<span class="sd">        training_data/$(calc_subdir)/SCEL...../0/calctype.default&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span>
             <span class="n">clex</span><span class="o">.</span><span class="n">calctype</span>
         <span class="p">)</span></div>
 
 
-    <span class="c1">## v1 calc_settings_dir ##</span>
+    <span class="c1"># -- calc_settings_dir - v1 --------</span>
 
 <div class="viewcode-block" id="DirectoryStructure.calc_settings_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.calc_settings_dir.html#casm.project.DirectoryStructure.calc_settings_dir">[docs]</a>
@@ -853,7 +897,8 @@ document.write(`
 <div class="viewcode-block" id="DirectoryStructure.calctype_settings_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.calctype_settings_dir.html#casm.project.DirectoryStructure.calctype_settings_dir">[docs]</a>
     <span class="k">def</span> <span class="nf">calctype_settings_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for global settings from calctype&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for global settings from</span>
+<span class="sd">        calctype&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calc_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">)</span></div>
 
 
@@ -865,7 +910,8 @@ document.write(`
         <span class="n">clex</span><span class="p">:</span> <span class="n">ClexDescription</span><span class="p">,</span>
         <span class="n">calc_subdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for supercell specific settings&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for supercell specific</span>
+<span class="sd">        settings&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">supercell_dir</span><span class="p">(</span><span class="n">scelname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">)</span>
             <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span>
@@ -881,7 +927,8 @@ document.write(`
         <span class="n">clex</span><span class="p">:</span> <span class="n">ClexDescription</span><span class="p">,</span>
         <span class="n">calc_subdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for configuration specific settings&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return calculation settings directory path, for configuration specific</span>
+<span class="sd">        settings&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">configuration_dir</span><span class="p">(</span><span class="n">configname</span><span class="p">,</span> <span class="n">calc_subdir</span><span class="p">)</span>
             <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_dir</span>
@@ -912,9 +959,7 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_settings_dir</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">calctype</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ref</span><span class="p">(</span><span class="n">clex</span><span class="o">.</span><span class="n">ref</span><span class="p">)</span></div>
 
 
-    <span class="c1">## v2 calc_settings_dir ##</span>
-
-    <span class="c1"># -- Enumerations --------</span>
+    <span class="c1"># -- calc_settings_dir - v2 --------</span>
 
 <div class="viewcode-block" id="DirectoryStructure.calctype_settings_dir_v2">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.calctype_settings_dir_v2.html#casm.project.DirectoryStructure.calctype_settings_dir_v2">[docs]</a>
@@ -922,6 +967,11 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return global calculation settings directory path (new v2.0)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calculation_settings_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">)</span></div>
 
+
+    <span class="c1"># -- Enumerations --------</span>
+
+    <span class="c1"># Re-organized in v2 use hierarchy: calctype / supercell / config</span>
+    <span class="c1"># to make it easier to work with all calculations of a given type</span>
 
 <div class="viewcode-block" id="DirectoryStructure.enum_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.enum_dir.html#casm.project.DirectoryStructure.enum_dir">[docs]</a>
@@ -932,35 +982,48 @@ document.write(`
 
 <div class="viewcode-block" id="DirectoryStructure.enum_calctype_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.enum_calctype_dir.html#casm.project.DirectoryStructure.enum_calctype_dir">[docs]</a>
-    <span class="k">def</span> <span class="nf">enum_calctype_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">enum_calctype_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return global calculation settings directory path (new v2.0)&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span>
-            <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span>
-            <span class="o">/</span> <span class="n">configname</span>
-            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DirectoryStructure.enum_calc_dir">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.enum_calc_dir.html#casm.project.DirectoryStructure.enum_calc_dir">[docs]</a>
+    <span class="k">def</span> <span class="nf">enum_calc_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return global calculation settings directory path (new v2.0)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_calctype_dir</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="n">enum</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="n">calctype</span><span class="p">)</span> <span class="o">/</span> <span class="n">configname</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.enum_config_file">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.enum_config_file.html#casm.project.DirectoryStructure.enum_config_file">[docs]</a>
-    <span class="k">def</span> <span class="nf">enum_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to config.json for a configuration in an enumeration (new v2.0)&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span> <span class="o">/</span> <span class="n">configname</span> <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span></div>
+    <span class="k">def</span> <span class="nf">enum_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to config.json for a configuration in an enumeration</span>
+<span class="sd">        (new v2.0)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enum_calc_dir</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="n">enum</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="n">calctype</span><span class="p">,</span> <span class="n">configname</span><span class="o">=</span><span class="n">configname</span><span class="p">)</span>
+            <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.enum_structure_file">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.enum_structure_file.html#casm.project.DirectoryStructure.enum_structure_file">[docs]</a>
-    <span class="k">def</span> <span class="nf">enum_structure_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to structure.json for a configuration in an enumeration (new v2.0)&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span> <span class="o">/</span> <span class="n">configname</span> <span class="o">/</span> <span class="s2">&quot;structure.json&quot;</span></div>
+    <span class="k">def</span> <span class="nf">enum_structure_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to structure.json for a configuration in an enumeration</span>
+<span class="sd">        (new v2.0)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enum_calc_dir</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="n">enum</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="n">calctype</span><span class="p">,</span> <span class="n">configname</span><span class="o">=</span><span class="n">configname</span><span class="p">)</span>
+            <span class="o">/</span> <span class="s2">&quot;structure.json&quot;</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.enum_POS_file">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.enum_POS_file.html#casm.project.DirectoryStructure.enum_POS_file">[docs]</a>
-    <span class="k">def</span> <span class="nf">enum_POS_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">enum_POS_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">configname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calctype</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to POS for a configuration in an enumeration (new v2.0)&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span> <span class="o">/</span> <span class="n">configname</span> <span class="o">/</span> <span class="s2">&quot;POS&quot;</span></div>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enum_calc_dir</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="n">enum</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="n">calctype</span><span class="p">,</span> <span class="n">configname</span><span class="o">=</span><span class="n">configname</span><span class="p">)</span>
+            <span class="o">/</span> <span class="s2">&quot;POS&quot;</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DirectoryStructure.enum_structure_with_properties_file">
@@ -971,15 +1034,12 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to structure_with_properties.json for a configuration in an</span>
 <span class="sd">        enumeration (new v2.0)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">(</span><span class="n">enum</span><span class="p">)</span>
-            <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span>
-            <span class="o">/</span> <span class="n">configname</span>
-            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__calctype</span><span class="p">(</span><span class="n">calctype</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enum_calc_dir</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="n">enum</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="n">calctype</span><span class="p">,</span> <span class="n">configname</span><span class="o">=</span><span class="n">configname</span><span class="p">)</span>
             <span class="o">/</span> <span class="s2">&quot;structure_with_properties.json&quot;</span>
         <span class="p">)</span></div>
 
 
-    <span class="c1">## Composition axes ##</span>
+    <span class="c1"># -- Composition axes --------</span>
 
 <div class="viewcode-block" id="DirectoryStructure.composition_axes">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.composition_axes.html#casm.project.DirectoryStructure.composition_axes">[docs]</a>
@@ -1021,7 +1081,7 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;chemical_reference.json&quot;</span></div>
 
 
-    <span class="c1"># -- Cluster expansions --------</span>
+    <span class="c1"># -- Cluster expansions - v1 --------</span>
 
 <div class="viewcode-block" id="DirectoryStructure.property_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.property_dir.html#casm.project.DirectoryStructure.property_dir">[docs]</a>
@@ -1074,13 +1134,174 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eci_dir</span><span class="p">(</span><span class="n">clex</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;eci.json&quot;</span></div>
 
 
-    <span class="c1"># -- Systems --------</span>
+    <span class="c1"># -- Imports - v2 --------</span>
+
+<div class="viewcode-block" id="DirectoryStructure.import_dir">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.import_dir.html#casm.project.DirectoryStructure.import_dir">[docs]</a>
+    <span class="k">def</span> <span class="nf">import_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to directory contain structure import info&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__import_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__import</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DirectoryStructure.import_settings">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.import_settings.html#casm.project.DirectoryStructure.import_settings">[docs]</a>
+    <span class="k">def</span> <span class="nf">import_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to the file contain structure import settings&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__import_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__import</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;settings.json&quot;</span></div>
+
+
+    <span class="c1"># -- Fits - v2 --------</span>
+
+<div class="viewcode-block" id="DirectoryStructure.fit_dir">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.fit_dir.html#casm.project.DirectoryStructure.fit_dir">[docs]</a>
+    <span class="k">def</span> <span class="nf">fit_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to directory containing fitting data&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fit_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fit</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span></div>
+
+
+    <span class="c1"># -- Systems - v2 --------</span>
 
 <div class="viewcode-block" id="DirectoryStructure.system_dir">
 <a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.system_dir.html#casm.project.DirectoryStructure.system_dir">[docs]</a>
-    <span class="k">def</span> <span class="nf">system_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to directory contain system info&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system</span><span class="p">(</span><span class="n">system</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">system_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to directory containing system info</span>
+
+<span class="sd">        For a basic system with a single set of parameters, the system information</span>
+<span class="sd">        is expected to be stored in a directory named `system.&lt;id&gt;`:</span>
+
+<span class="sd">        .. code-block:: shell</span>
+
+<span class="sd">            systems/</span>
+<span class="sd">            └── system.&lt;id&gt;/</span>
+<span class="sd">                ├── formation_energy_eci.json</span>
+<span class="sd">                ├── system.json</span>
+<span class="sd">                ...</span>
+
+<span class="sd">        For statistics, related systems may be stored in subdirectories as:</span>
+
+<span class="sd">        .. code-block:: shell</span>
+
+<span class="sd">            systems/</span>
+<span class="sd">            └── system.&lt;id&gt;/</span>
+<span class="sd">                ├── 0/</span>
+<span class="sd">                │   ├── formation_energy_eci.0.json</span>
+<span class="sd">                │   ├── system.0.json</span>
+<span class="sd">                │   ...</span>
+<span class="sd">                ├── 1/</span>
+<span class="sd">                │   ├── formation_energy_eci.1.json</span>
+<span class="sd">                │   ├── system.1.json</span>
+<span class="sd">                │   ...</span>
+<span class="sd">                └── 2/</span>
+<span class="sd">                    ├── formation_energy_eci.2.json</span>
+<span class="sd">                    ├── system.2.json</span>
+<span class="sd">                    ...</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        system: str</span>
+<span class="sd">            The system identifier</span>
+<span class="sd">        index: Optional[int] = None</span>
+<span class="sd">            The index of the sampled system. If None, then the path to the</span>
+<span class="sd">            system directory is returned; otherwise the path to the sampled</span>
+<span class="sd">            system subdirectory is returned</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        system_dir: pathlib.Path</span>
+<span class="sd">            Path to the system directory or sampled system subdirectory</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DirectoryStructure.system_count">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.system_count.html#casm.project.DirectoryStructure.system_count">[docs]</a>
+    <span class="k">def</span> <span class="nf">system_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return number of sampled systems</span>
+
+<span class="sd">        For a system with a single set of parameters, the system information</span>
+<span class="sd">        is expected to be stored in a directory named `system.&lt;id&gt;`:</span>
+
+<span class="sd">        .. code-block:: shell</span>
+
+<span class="sd">            systems/</span>
+<span class="sd">            └── system.&lt;id&gt;/</span>
+<span class="sd">                ├── formation_energy_eci.json</span>
+<span class="sd">                ├── system.json</span>
+<span class="sd">                ...</span>
+
+<span class="sd">        For statistics, sampled systems may be stored in subdirectories as:</span>
+
+<span class="sd">        .. code-block:: shell</span>
+
+<span class="sd">            systems/</span>
+<span class="sd">            └── system.&lt;id&gt;/</span>
+<span class="sd">                ├── 0/</span>
+<span class="sd">                │   ├── formation_energy_eci.0.json</span>
+<span class="sd">                │   ├── system.0.json</span>
+<span class="sd">                │   ...</span>
+<span class="sd">                ├── 1/</span>
+<span class="sd">                │   ├── formation_energy_eci.1.json</span>
+<span class="sd">                │   ├── system.1.json</span>
+<span class="sd">                │   ...</span>
+<span class="sd">                └── 2/</span>
+<span class="sd">                    ├── formation_energy_eci.2.json</span>
+<span class="sd">                    ├── system.2.json</span>
+<span class="sd">                    ...</span>
+
+
+<span class="sd">        The `system_count` gives the number of sampled systems.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        count: int</span>
+<span class="sd">            The number of sampled systems. If no subdirectory `0` exists, then</span>
+<span class="sd">            0 is returned.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_dir</span><span class="p">(</span><span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">subdir</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">subdir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="n">subdir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">subdir</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">count</span></div>
+
+
+<div class="viewcode-block" id="DirectoryStructure.system_file">
+<a class="viewcode-back" href="../../../reference/casm/_autosummary/casm.project.DirectoryStructure.system_file.html#casm.project.DirectoryStructure.system_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">system_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return path to a system file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        system: str</span>
+<span class="sd">            The system identifier</span>
+<span class="sd">        index: Optional[int] = None</span>
+<span class="sd">            The index of the related system. If None, then the path to the</span>
+<span class="sd">            system file is returned, otherwise the path to the sampled</span>
+<span class="sd">            system file is returned.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        system_file: pathlib.Path</span>
+<span class="sd">            Path to the system or sampled system file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system_dir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;system.json&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+                <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system_dir</span>
+                <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__system</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+                <span class="o">/</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                <span class="o">/</span> <span class="s2">&quot;system.json&quot;</span>
+            <span class="p">)</span></div>
 
 
     <span class="c1"># private:</span>
@@ -1102,6 +1323,12 @@ document.write(`
 
     <span class="k">def</span> <span class="nf">__eci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eci</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;eci.&quot;</span> <span class="o">+</span> <span class="n">eci</span>
+
+    <span class="k">def</span> <span class="nf">__import</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">import_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;import.&quot;</span> <span class="o">+</span> <span class="n">import_id</span>
+
+    <span class="k">def</span> <span class="nf">__fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;fit.&quot;</span> <span class="o">+</span> <span class="n">fit</span>
 
     <span class="k">def</span> <span class="nf">__system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;system.&quot;</span> <span class="o">+</span> <span class="n">system</span>
