@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.clexwriter._methods &#8212; casm-bset 2.0a3 documentation</title>
+    <title>casm.bset.clexwriter._methods &#8212; casm-bset 2.0a4 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../../_static/documentation_options.js?v=8786b3bd"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/clexwriter/_methods';</script>
@@ -418,7 +418,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">jinja2</span>
 <span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedList</span>
@@ -455,6 +455,8 @@ document.write(`
     <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
     <span class="n">functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]]],</span>
     <span class="n">linear_function_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make the neighborhood lists for the functions</span>
 
@@ -488,6 +490,15 @@ document.write(`
 <span class="sd">        all functions will be included in the Clexulator. Otherwise,</span>
 <span class="sd">        only the specified functions will be included in the Clexulator</span>
 
+<span class="sd">    make_variable_name_f: Optional[Callable] = None</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">        Custom classes should have the same `__call__` signature as</span>
+<span class="sd">        :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">        `occ_var_name` and `occ_var_desc` attributes.</span>
+
+<span class="sd">    local_discrete_dof: Optional[list[str]] = None</span>
+<span class="sd">        The types of local discrete degree of freedom (DoF).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -566,6 +577,8 @@ document.write(`
                 <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                 <span class="n">orbit</span><span class="o">=</span><span class="n">clusters</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">],</span>
                 <span class="n">orbit_functions</span><span class="o">=</span><span class="n">orbit_functions</span><span class="p">,</span>
+                <span class="n">make_variable_name_f</span><span class="o">=</span><span class="n">make_variable_name_f</span><span class="p">,</span>
+                <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">local_discrete_dof</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="c1"># Note: point_functions contains duplicates, but that&#39;s OK for generating</span>
@@ -944,6 +957,8 @@ document.write(`
     <span class="n">occ_site_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
     <span class="n">cpp_fmt</span><span class="p">:</span> <span class="n">CppFormatProperties</span><span class="p">,</span>
     <span class="n">linear_function_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">local_discrete_dof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert clusters and functions to data used by Jinja templates to write the \</span>
 <span class="sd">    point correlation evaluating methods.</span>
@@ -984,6 +999,14 @@ document.write(`
 <span class="sd">        The linear indices of the functions that will be included. If None,</span>
 <span class="sd">        all functions will be included in the Clexulator. Otherwise,</span>
 <span class="sd">        only the specified functions will be included in the Clexulator</span>
+<span class="sd">    make_variable_name_f: Optional[Callable] = None</span>
+<span class="sd">        Allows specifying a custom class to construct variable names. The default</span>
+<span class="sd">        class used is :class:`~casm.bset.cluster_functions.MakeVariableName`.</span>
+<span class="sd">        Custom classes should have the same `__call__` signature as</span>
+<span class="sd">        :class:`~casm.bset.cluster_functions.MakeVariableName`, and have</span>
+<span class="sd">        `occ_var_name` and `occ_var_desc` attributes.</span>
+<span class="sd">    local_discrete_dof: Optional[list[str]] = None</span>
+<span class="sd">        The types of local discrete degree of freedom (DoF).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1057,6 +1080,8 @@ document.write(`
                 <span class="n">prim_neighbor_list</span><span class="o">=</span><span class="n">prim_neighbor_list</span><span class="p">,</span>
                 <span class="n">orbit</span><span class="o">=</span><span class="n">orbit</span><span class="p">,</span>
                 <span class="n">orbit_functions</span><span class="o">=</span><span class="n">functions</span><span class="p">[</span><span class="n">i_orbit</span><span class="p">],</span>
+                <span class="n">make_variable_name_f</span><span class="o">=</span><span class="n">make_variable_name_f</span><span class="p">,</span>
+                <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">local_discrete_dof</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">point_functions</span> <span class="o">=</span> <span class="n">make_local_point_functions</span><span class="p">(</span>
@@ -1115,6 +1140,8 @@ document.write(`
         <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
         <span class="n">cpp_fmt</span><span class="o">=</span><span class="n">CppFormatProperties</span><span class="p">(),</span>
         <span class="n">linear_function_indices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">make_variable_name_f</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">_make_variable_name_f</span><span class="p">,</span>
+        <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span>
@@ -1383,6 +1410,8 @@ document.write(`
             <span class="n">occ_site_functions</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions</span><span class="p">,</span>
             <span class="n">occ_site_functions_info</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">occ_site_functions_info</span><span class="p">,</span>
             <span class="n">linear_function_indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_function_indices</span><span class="p">,</span>
+            <span class="n">make_variable_name_f</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">_make_variable_name_f</span><span class="p">,</span>
+            <span class="n">local_discrete_dof</span><span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="n">local_discrete_dof</span><span class="p">,</span>
             <span class="n">cpp_fmt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cpp_fmt</span><span class="p">,</span>
             <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
         <span class="p">)</span>

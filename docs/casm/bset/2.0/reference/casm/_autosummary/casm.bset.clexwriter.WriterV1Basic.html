@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>WriterV1Basic &#8212; casm-bset 2.0a3 documentation</title>
+    <title>WriterV1Basic &#8212; casm-bset 2.0a4 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../_static/documentation_options.js?v=4c0f2370"></script>
+    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/casm/_autosummary/casm.bset.clexwriter.WriterV1Basic';</script>
@@ -726,6 +726,8 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">occ_site_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">occ_site_functions_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">linear_function_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">make_variable_name_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">local_discrete_dof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">cpp_fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="casm.bset.clexwriter.CppFormatProperties.html#casm.bset.clexwriter.CppFormatProperties" title="casm.bset.clexwriter._cpp_str.CppFormatProperties"><span class="pre">CppFormatProperties</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
 </dl>
@@ -792,6 +794,12 @@ index.</p></li>
 all functions will be included in the Clexulator. Otherwise,
 only the specified functions will be included in the Clexulator. This
 is an experimental feature.</p></li>
+<li><p><strong>make_variable_name_f</strong> (<em>Optional</em><em>[</em><em>Callable</em><em>] </em><em>= None</em>) – Allows specifying a custom class to construct variable names. The default
+class used is <a class="reference internal" href="casm.bset.cluster_functions.MakeVariableName.html#casm.bset.cluster_functions.MakeVariableName" title="casm.bset.cluster_functions.MakeVariableName"><code class="xref py py-class docutils literal notranslate"><span class="pre">MakeVariableName</span></code></a>.
+Custom classes should have the same <cite>__call__</cite> signature as
+<a class="reference internal" href="casm.bset.cluster_functions.MakeVariableName.html#casm.bset.cluster_functions.MakeVariableName" title="casm.bset.cluster_functions.MakeVariableName"><code class="xref py py-class docutils literal notranslate"><span class="pre">MakeVariableName</span></code></a>, and have
+<cite>occ_var_name</cite> and <cite>occ_var_desc</cite> attributes.</p></li>
+<li><p><strong>local_discrete_dof</strong> (<em>Optional</em><em>[</em><em>list</em><em>[</em><em>str</em><em>]</em><em>] </em><em>= None</em>) – The types of local discrete degree of freedom (DoF).</p></li>
 <li><p><strong>cpp_fmt</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="casm.bset.clexwriter.CppFormatProperties.html#casm.bset.clexwriter.CppFormatProperties" title="casm.bset.clexwriter.CppFormatProperties"><em>CppFormatProperties</em></a><em>] </em><em>= None</em><em>,</em>) – <p>C++ string formatting properties. If None, the default values are used.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">CppFormatProperties</span><span class="p">(</span>
     <span class="n">coeff_fmt_spec</span><span class="o">=</span><span class="s2">&quot;.10f&quot;</span><span class="p">,</span>
