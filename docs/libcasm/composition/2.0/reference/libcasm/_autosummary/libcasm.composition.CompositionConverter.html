@@ -8,48 +8,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CompositionConverter &#8212; libcasm-composition 2.0a4 documentation</title>
+    <title>CompositionConverter &#8212; libcasm-composition 2.0.0 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="icon" sizes="32x32" type="image/png" href="../../../_static/favicon-32x32.png?v=f9ece728" />
-    <link rel="icon" sizes="16x16" type="image/png" href="../../../_static/favicon-16x16.png?v=dad9ad5b" />
-    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../_static/apple-touch-icon.png?v=16836a53" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=8786b3bd"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.composition.CompositionConverter';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="axes" href="libcasm.composition.CompositionConverter.axes.html" />
     <link rel="prev" title="vacancy_names" href="libcasm.composition.CompositionCalculator.vacancy_names.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
   </head>
   
   
@@ -57,32 +59,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -90,7 +76,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -98,20 +83,27 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../../index.html">
@@ -126,7 +118,7 @@
     
     
     <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
-    <script>document.write(`<img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+    <img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
   
   
     <p class="title logo__title">libcasm-composition</p>
@@ -140,28 +132,22 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="../index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -173,31 +159,23 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -208,7 +186,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/CASMcode_composition/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/CASMcode_composition/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -220,7 +198,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/libcasm-composition/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/libcasm-composition/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -232,31 +210,31 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
-    </label>
+    </button>
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -265,31 +243,28 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="../index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Reference
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -299,17 +274,13 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -320,7 +291,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/CASMcode_composition/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/CASMcode_composition/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -332,7 +303,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/libcasm-composition/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/libcasm-composition/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -347,7 +318,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.composition.html">libcasm.composition</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="libcasm.composition.html">libcasm.composition</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.get_occupant.html">get_occupant</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_chemical_subsystems.html">make_chemical_subsystems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.make_composition_space.html">make_composition_space</a></li>
@@ -361,7 +332,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.print_axes_summary.html">print_axes_summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.print_axes_table.html">print_axes_table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libcasm.composition.set_occupant.html">set_occupant</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.CompositionCalculator.html">CompositionCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.CompositionCalculator.html">CompositionCalculator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.allowed_occs.html">allowed_occs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.components.html">components</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.from_dict.html">from_dict</a></li>
@@ -372,8 +343,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.to_dict.html">to_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionCalculator.vacancy_names.html">vacancy_names</a></li>
 </ul>
-</li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">CompositionConverter</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">CompositionConverter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.axes.html">axes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.components.html">components</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.dmol_composition.html">dmol_composition</a></li>
@@ -396,8 +367,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.param_formula.html">param_formula</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.CompositionConverter.to_dict.html">to_dict</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.html">FormationEnergyCalculator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.html">FormationEnergyCalculator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.formation_energy.html">formation_energy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.from_dict.html">from_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.reference_energy.html">reference_energy</a></li>
@@ -407,9 +378,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.energy_ref.html">energy_ref</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libcasm.composition.FormationEnergyCalculator.h.html">h</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 </div>
 </nav></div>
@@ -417,29 +388,32 @@ document.write(`
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
         <div class="header-article-item">
 
-
-
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -453,7 +427,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="libcasm.composition.html" class="nav-link">libcasm.composition</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">CompositionConverter</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">CompositionConverter</span></li>
   </ul>
 </nav>
 </div>
@@ -468,19 +442,19 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="compositionconverter">
 <h1>CompositionConverter<a class="headerlink" href="#compositionconverter" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="libcasm.composition.CompositionConverter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.composition.</span></span><span class="sig-name descname"><span class="pre">CompositionConverter</span></span><span class="sig-paren">(</span>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libcasm.composition.</span></span><span class="sig-name descname"><span class="pre">CompositionConverter</span></span><span class="sig-paren">(</span>
 
 <dl>
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.composition.CompositionConverter" title="libcasm.composition._composition.CompositionConverter"><span class="pre">CompositionConverter</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">origin_and_end_members</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">n</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'VA',</span> <span class="pre">'va',</span> <span class="pre">'Va'}</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'va',</span> <span class="pre">'VA',</span> <span class="pre">'Va'}</span></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span><a class="headerlink" href="#libcasm.composition.CompositionConverter" title="Link to this definition">#</a></dt>
@@ -543,73 +517,74 @@ An exception is raised if more than one component is a vacancy.</p></li>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.axes.html#libcasm.composition.CompositionConverter.axes" title="libcasm.composition.CompositionConverter.axes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axes</span></code></a></p></td>
-<td><p>A list <code class="docutils literal notranslate"><span class="pre">[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;,</span> <span class="pre">...]</span></code> of size <span class="math notranslate nohighlight">\(k\)</span>.</p></td>
+<td><p>axes(self: libcasm.composition._composition.CompositionConverter) -&gt; list[str]</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.components.html#libcasm.composition.CompositionConverter.components" title="libcasm.composition.CompositionConverter.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a></p></td>
-<td><p>The order of components in mol composition vectors.</p></td>
+<td><p>components(self: libcasm.composition._composition.CompositionConverter) -&gt; list[str]</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.dmol_composition.html#libcasm.composition.CompositionConverter.dmol_composition" title="libcasm.composition.CompositionConverter.dmol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dmol_composition</span></code></a></p></td>
-<td><p>Convert a change in parametric composition, <span class="math notranslate nohighlight">\(d\vec{x}\)</span>, to a change in number per unit cell, <span class="math notranslate nohighlight">\(d\vec{n}\)</span>.</p></td>
+<td><p>dmol_composition(self: libcasm.composition._composition.CompositionConverter, dx: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.dparam_composition.html#libcasm.composition.CompositionConverter.dparam_composition" title="libcasm.composition.CompositionConverter.dparam_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dparam_composition</span></code></a></p></td>
-<td><p>Convert a change in number per unit cell, <span class="math notranslate nohighlight">\(d\vec{n}\)</span>, to change in parametric composition, <span class="math notranslate nohighlight">\(d\vec{x}\)</span>.</p></td>
+<td><p>dparam_composition(self: libcasm.composition._composition.CompositionConverter, dn: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member.html#libcasm.composition.CompositionConverter.end_member" title="libcasm.composition.CompositionConverter.end_member"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member</span></code></a></p></td>
-<td><p>The mol composition of the i-th parameteric composition end member.</p></td>
+<td><p>end_member(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member_formula.html#libcasm.composition.CompositionConverter.end_member_formula" title="libcasm.composition.CompositionConverter.end_member_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member_formula</span></code></a></p></td>
-<td><p>Return formula for the i-th end member, <span class="math notranslate nohighlight">\(\vec{n}_0 + \vec{q}_i\)</span>.</p></td>
+<td><p>end_member_formula(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; str</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.from_dict.html#libcasm.composition.CompositionConverter.from_dict" title="libcasm.composition.CompositionConverter.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a></p></td>
-<td><p>Construct a CompositionConverter from a Python dict.</p></td>
+<td><p>from_dict(arg0: json) -&gt; libcasm.composition._composition.CompositionConverter</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.independent_compositions.html#libcasm.composition.CompositionConverter.independent_compositions" title="libcasm.composition.CompositionConverter.independent_compositions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">independent_compositions</span></code></a></p></td>
-<td><p>The dimensionality of the composition space, <span class="math notranslate nohighlight">\(k\)</span>.</p></td>
+<td><p>independent_compositions(self: libcasm.composition._composition.CompositionConverter) -&gt; int</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.matrixQ.html#libcasm.composition.CompositionConverter.matrixQ" title="libcasm.composition.CompositionConverter.matrixQ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixQ</span></code></a></p></td>
-<td><p>Return the matrix  <span class="math notranslate nohighlight">\(Q\)</span>.</p></td>
+<td><p>matrixQ(self: libcasm.composition._composition.CompositionConverter) -&gt; numpy.ndarray[numpy.float64[m, n]]</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.matrixR.html#libcasm.composition.CompositionConverter.matrixR" title="libcasm.composition.CompositionConverter.matrixR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixR</span></code></a></p></td>
-<td><p>Return the matrix <span class="math notranslate nohighlight">\(R^{\mathsf{T}}\)</span>.</p></td>
+<td><p>matrixR(self: libcasm.composition._composition.CompositionConverter) -&gt; numpy.ndarray[numpy.float64[m, n]]</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_component_formula.html#libcasm.composition.CompositionConverter.mol_component_formula" title="libcasm.composition.CompositionConverter.mol_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_component_formula</span></code></a></p></td>
-<td><p>Return formula for the i-th mol composition component, <span class="math notranslate nohighlight">\(n_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
+<td><p>mol_component_formula(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; str</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_composition.html#libcasm.composition.CompositionConverter.mol_composition" title="libcasm.composition.CompositionConverter.mol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_composition</span></code></a></p></td>
-<td><p>Convert parametric composition, <span class="math notranslate nohighlight">\(\vec{x}\)</span>, to number per unit cell, <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
+<td><p>mol_composition(self: libcasm.composition._composition.CompositionConverter, x: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_formula.html#libcasm.composition.CompositionConverter.mol_formula" title="libcasm.composition.CompositionConverter.mol_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_formula</span></code></a></p></td>
-<td><p>Return formula for <span class="math notranslate nohighlight">\(\vec{n}\)</span> in terms of <span class="math notranslate nohighlight">\(\vec{x}\)</span> (ex: &quot;A(a)B(1-a)&quot;).</p></td>
+<td><p>mol_formula(self: libcasm.composition._composition.CompositionConverter) -&gt; str</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.origin.html#libcasm.composition.CompositionConverter.origin" title="libcasm.composition.CompositionConverter.origin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin</span></code></a></p></td>
-<td><p>The mol composition of the parameteric composition axes origin.</p></td>
+<td><p>origin(self: libcasm.composition._composition.CompositionConverter) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.origin_formula.html#libcasm.composition.CompositionConverter.origin_formula" title="libcasm.composition.CompositionConverter.origin_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin_formula</span></code></a></p></td>
-<td><p>Return formula for the origin composition, <span class="math notranslate nohighlight">\(\vec{n}_0\)</span>.</p></td>
+<td><p>origin_formula(self: libcasm.composition._composition.CompositionConverter) -&gt; str</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot.html#libcasm.composition.CompositionConverter.param_chem_pot" title="libcasm.composition.CompositionConverter.param_chem_pot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot</span></code></a></p></td>
-<td><p>Convert <span class="math notranslate nohighlight">\(dG/dn\)</span> to <span class="math notranslate nohighlight">\(dG/dx\)</span>.</p></td>
+<td><p>param_chem_pot(self: libcasm.composition._composition.CompositionConverter, chem_pot: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot_formula.html#libcasm.composition.CompositionConverter.param_chem_pot_formula" title="libcasm.composition.CompositionConverter.param_chem_pot_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot_formula</span></code></a></p></td>
-<td><p>Return formula for the parametric composition conjugate potential in terms of the chemical potentials.</p></td>
+<td><p>param_chem_pot_formula(self: libcasm.composition._composition.CompositionConverter, i: int, include_va: bool = False) -&gt; str</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_component_formula.html#libcasm.composition.CompositionConverter.param_component_formula" title="libcasm.composition.CompositionConverter.param_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_component_formula</span></code></a></p></td>
-<td><p>Return formula for the i-th parametric composition component, <span class="math notranslate nohighlight">\(x_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
+<td><p>param_component_formula(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; str</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_composition.html#libcasm.composition.CompositionConverter.param_composition" title="libcasm.composition.CompositionConverter.param_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_composition</span></code></a></p></td>
-<td><p>Convert number per unit cell, <span class="math notranslate nohighlight">\(\vec{n}\)</span>, to parametric composition, <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
+<td><p>param_composition(self: libcasm.composition._composition.CompositionConverter, n: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_formula.html#libcasm.composition.CompositionConverter.param_formula" title="libcasm.composition.CompositionConverter.param_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_formula</span></code></a></p></td>
-<td><p>Return formula for <span class="math notranslate nohighlight">\(\vec{x}\)</span> in terms of <span class="math notranslate nohighlight">\(\vec{n}\)</span> (ex: &quot;a(0.5+0.5A-0.5B)&quot;).</p></td>
+<td><p>param_formula(self: libcasm.composition._composition.CompositionConverter) -&gt; str</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.to_dict.html#libcasm.composition.CompositionConverter.to_dict" title="libcasm.composition.CompositionConverter.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a></p></td>
-<td><p>Represent a CompositionConverter as a Python dict.</p></td>
+<td><p>to_dict(self: libcasm.composition._composition.CompositionConverter) -&gt; json</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </dd></dl>
 
 </section>
@@ -621,7 +596,7 @@ An exception is raised if more than one component is a vacancy.</p></li>
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -649,27 +624,30 @@ An exception is raised if more than one component is a vacancy.</p></li>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
-
-  <div class="page-toc tocsection onthispage">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.composition.CompositionConverter"><code class="docutils literal notranslate"><span class="pre">CompositionConverter</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../../../_sources/reference/libcasm/_autosummary/libcasm.composition.CompositionConverter.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reference/libcasm/_autosummary/libcasm.composition.CompositionConverter.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -684,8 +662,8 @@ An exception is raised if more than one component is a vacancy.</p></li>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -705,7 +683,7 @@ An exception is raised if more than one component is a vacancy.</p></li>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>
@@ -718,7 +696,8 @@ An exception is raised if more than one component is a vacancy.</p></li>
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
