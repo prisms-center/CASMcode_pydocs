@@ -55,7 +55,7 @@ Install:
 
     pip install libcasm-xtal
 
-Docs: `[2.0a12] <../../libcasm/xtal/2.0/>`_
+Docs: `[2.0.1] <../../libcasm/xtal/2.0/>`_
 
 Links: |GitHub_xtal|_ |PyPI_xtal|_
 
