@@ -125,7 +125,7 @@ Packages:
   - Methods for evaluating cluster expansion basis functions and cluster expansion values
   - Methods for evaluating order parameters
 
-This package does not include cluster expansion basis function generation, but uses basis functions that have been generated elsewhere (i.e. `casm bset`) and written as CASM clexulator source code.
+This package does not include cluster expansion basis function generation, but uses basis functions that have been generated elsewhere (i.e. `casm-bset`) and written as CASM clexulator source code.
 
 Install:
 
@@ -134,7 +134,7 @@ Install:
     pip install libcasm-clexulator
 
 
-Docs: `[2.0a7] <../../libcasm/clexulator/2.0/>`_
+Docs: `[2.0.0] <../../libcasm/clexulator/2.0/>`_
 
 Links: |GitHub_clexulator|_ |PyPI_clexulator|_
 
