@@ -11,6 +11,8 @@ Includes:
 - libcasm-configuration: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/)
 - libcasm-monte: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/monte/2.0/)
 - libcasm-clexmonte: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexmonte/2.0/)
+- casm-bset: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/casm/bset/2.0/)
+- casm-project: [[prerelease]](https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/)
 
-Also:
+Also, for CASM v1:
 - casm-python: [[1.0]](https://prisms-center.github.io/CASMcode_pydocs/1.0/) [[0.3]](https://prisms-center.github.io/CASMcode_pydocs/0.3/)
