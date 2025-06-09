@@ -454,7 +454,7 @@
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#libcasm.composition.CompositionConverter" title="libcasm.composition._composition.CompositionConverter"><span class="pre">CompositionConverter</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">origin_and_end_members</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">[</span></span><span class="pre">m</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">n</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'va',</span> <span class="pre">'VA',</span> <span class="pre">'Va'}</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">vacancy_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'VA',</span> <span class="pre">'Va',</span> <span class="pre">'va'}</span></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span><a class="headerlink" href="#libcasm.composition.CompositionConverter" title="Link to this definition">#</a></dt>
@@ -519,68 +519,68 @@ An exception is raised if more than one component is a vacancy.</p></li>
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.axes.html#libcasm.composition.CompositionConverter.axes" title="libcasm.composition.CompositionConverter.axes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axes</span></code></a></p></td>
-<td><p>axes(self: libcasm.composition._composition.CompositionConverter) -&gt; list[str]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.axes.html#libcasm.composition.CompositionConverter.axes" title="libcasm.composition.CompositionConverter.axes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axes</span></code></a>(…)</p></td>
+<td><p>A list <code class="docutils literal notranslate"><span class="pre">[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;,</span> <span class="pre">...]</span></code> of size <span class="math notranslate nohighlight">\(k\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.components.html#libcasm.composition.CompositionConverter.components" title="libcasm.composition.CompositionConverter.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a></p></td>
-<td><p>components(self: libcasm.composition._composition.CompositionConverter) -&gt; list[str]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.components.html#libcasm.composition.CompositionConverter.components" title="libcasm.composition.CompositionConverter.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a>(…)</p></td>
+<td><p>The order of components in mol composition vectors.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.dmol_composition.html#libcasm.composition.CompositionConverter.dmol_composition" title="libcasm.composition.CompositionConverter.dmol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dmol_composition</span></code></a></p></td>
-<td><p>dmol_composition(self: libcasm.composition._composition.CompositionConverter, dx: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.dmol_composition.html#libcasm.composition.CompositionConverter.dmol_composition" title="libcasm.composition.CompositionConverter.dmol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dmol_composition</span></code></a>(…)</p></td>
+<td><p>Convert a change in parametric composition, <span class="math notranslate nohighlight">\(d\vec{x}\)</span>, to a change in number per unit cell, <span class="math notranslate nohighlight">\(d\vec{n}\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.dparam_composition.html#libcasm.composition.CompositionConverter.dparam_composition" title="libcasm.composition.CompositionConverter.dparam_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dparam_composition</span></code></a></p></td>
-<td><p>dparam_composition(self: libcasm.composition._composition.CompositionConverter, dn: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.dparam_composition.html#libcasm.composition.CompositionConverter.dparam_composition" title="libcasm.composition.CompositionConverter.dparam_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dparam_composition</span></code></a>(…)</p></td>
+<td><p>Convert a change in number per unit cell, <span class="math notranslate nohighlight">\(d\vec{n}\)</span>, to change in parametric composition, <span class="math notranslate nohighlight">\(d\vec{x}\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member.html#libcasm.composition.CompositionConverter.end_member" title="libcasm.composition.CompositionConverter.end_member"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member</span></code></a></p></td>
-<td><p>end_member(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member.html#libcasm.composition.CompositionConverter.end_member" title="libcasm.composition.CompositionConverter.end_member"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member</span></code></a>(…)</p></td>
+<td><p>The mol composition of the i-th parameteric composition end member.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member_formula.html#libcasm.composition.CompositionConverter.end_member_formula" title="libcasm.composition.CompositionConverter.end_member_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member_formula</span></code></a></p></td>
-<td><p>end_member_formula(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; str</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.end_member_formula.html#libcasm.composition.CompositionConverter.end_member_formula" title="libcasm.composition.CompositionConverter.end_member_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_member_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for the i-th end member, <span class="math notranslate nohighlight">\(\vec{n}_0 + \vec{q}_i\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.from_dict.html#libcasm.composition.CompositionConverter.from_dict" title="libcasm.composition.CompositionConverter.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a></p></td>
-<td><p>from_dict(arg0: json) -&gt; libcasm.composition._composition.CompositionConverter</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.from_dict.html#libcasm.composition.CompositionConverter.from_dict" title="libcasm.composition.CompositionConverter.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict</span></code></a>(…)</p></td>
+<td><p>Construct a CompositionConverter from a Python dict.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.independent_compositions.html#libcasm.composition.CompositionConverter.independent_compositions" title="libcasm.composition.CompositionConverter.independent_compositions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">independent_compositions</span></code></a></p></td>
-<td><p>independent_compositions(self: libcasm.composition._composition.CompositionConverter) -&gt; int</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.independent_compositions.html#libcasm.composition.CompositionConverter.independent_compositions" title="libcasm.composition.CompositionConverter.independent_compositions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">independent_compositions</span></code></a>(…)</p></td>
+<td><p>The dimensionality of the composition space, <span class="math notranslate nohighlight">\(k\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.matrixQ.html#libcasm.composition.CompositionConverter.matrixQ" title="libcasm.composition.CompositionConverter.matrixQ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixQ</span></code></a></p></td>
-<td><p>matrixQ(self: libcasm.composition._composition.CompositionConverter) -&gt; numpy.ndarray[numpy.float64[m, n]]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.matrixQ.html#libcasm.composition.CompositionConverter.matrixQ" title="libcasm.composition.CompositionConverter.matrixQ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixQ</span></code></a>(…)</p></td>
+<td><p>Return the matrix  <span class="math notranslate nohighlight">\(Q\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.matrixR.html#libcasm.composition.CompositionConverter.matrixR" title="libcasm.composition.CompositionConverter.matrixR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixR</span></code></a></p></td>
-<td><p>matrixR(self: libcasm.composition._composition.CompositionConverter) -&gt; numpy.ndarray[numpy.float64[m, n]]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.matrixR.html#libcasm.composition.CompositionConverter.matrixR" title="libcasm.composition.CompositionConverter.matrixR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixR</span></code></a>(…)</p></td>
+<td><p>Return the matrix <span class="math notranslate nohighlight">\(R^{\mathsf{T}}\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_component_formula.html#libcasm.composition.CompositionConverter.mol_component_formula" title="libcasm.composition.CompositionConverter.mol_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_component_formula</span></code></a></p></td>
-<td><p>mol_component_formula(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; str</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_component_formula.html#libcasm.composition.CompositionConverter.mol_component_formula" title="libcasm.composition.CompositionConverter.mol_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_component_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for the i-th mol composition component, <span class="math notranslate nohighlight">\(n_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_composition.html#libcasm.composition.CompositionConverter.mol_composition" title="libcasm.composition.CompositionConverter.mol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_composition</span></code></a></p></td>
-<td><p>mol_composition(self: libcasm.composition._composition.CompositionConverter, x: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_composition.html#libcasm.composition.CompositionConverter.mol_composition" title="libcasm.composition.CompositionConverter.mol_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_composition</span></code></a>(…)</p></td>
+<td><p>Convert parametric composition, <span class="math notranslate nohighlight">\(\vec{x}\)</span>, to number per unit cell, <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_formula.html#libcasm.composition.CompositionConverter.mol_formula" title="libcasm.composition.CompositionConverter.mol_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_formula</span></code></a></p></td>
-<td><p>mol_formula(self: libcasm.composition._composition.CompositionConverter) -&gt; str</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.mol_formula.html#libcasm.composition.CompositionConverter.mol_formula" title="libcasm.composition.CompositionConverter.mol_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mol_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for <span class="math notranslate nohighlight">\(\vec{n}\)</span> in terms of <span class="math notranslate nohighlight">\(\vec{x}\)</span> (ex: &quot;A(a)B(1-a)&quot;).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.origin.html#libcasm.composition.CompositionConverter.origin" title="libcasm.composition.CompositionConverter.origin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin</span></code></a></p></td>
-<td><p>origin(self: libcasm.composition._composition.CompositionConverter) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.origin.html#libcasm.composition.CompositionConverter.origin" title="libcasm.composition.CompositionConverter.origin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin</span></code></a>(…)</p></td>
+<td><p>The mol composition of the parameteric composition axes origin.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.origin_formula.html#libcasm.composition.CompositionConverter.origin_formula" title="libcasm.composition.CompositionConverter.origin_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin_formula</span></code></a></p></td>
-<td><p>origin_formula(self: libcasm.composition._composition.CompositionConverter) -&gt; str</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.origin_formula.html#libcasm.composition.CompositionConverter.origin_formula" title="libcasm.composition.CompositionConverter.origin_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origin_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for the origin composition, <span class="math notranslate nohighlight">\(\vec{n}_0\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot.html#libcasm.composition.CompositionConverter.param_chem_pot" title="libcasm.composition.CompositionConverter.param_chem_pot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot</span></code></a></p></td>
-<td><p>param_chem_pot(self: libcasm.composition._composition.CompositionConverter, chem_pot: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot.html#libcasm.composition.CompositionConverter.param_chem_pot" title="libcasm.composition.CompositionConverter.param_chem_pot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot</span></code></a>(…)</p></td>
+<td><p>Convert <span class="math notranslate nohighlight">\(dG/dn\)</span> to <span class="math notranslate nohighlight">\(dG/dx\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot_formula.html#libcasm.composition.CompositionConverter.param_chem_pot_formula" title="libcasm.composition.CompositionConverter.param_chem_pot_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot_formula</span></code></a></p></td>
-<td><p>param_chem_pot_formula(self: libcasm.composition._composition.CompositionConverter, i: int, include_va: bool = False) -&gt; str</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_chem_pot_formula.html#libcasm.composition.CompositionConverter.param_chem_pot_formula" title="libcasm.composition.CompositionConverter.param_chem_pot_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_chem_pot_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for the parametric composition conjugate potential in terms of the chemical potentials.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_component_formula.html#libcasm.composition.CompositionConverter.param_component_formula" title="libcasm.composition.CompositionConverter.param_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_component_formula</span></code></a></p></td>
-<td><p>param_component_formula(self: libcasm.composition._composition.CompositionConverter, i: int) -&gt; str</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_component_formula.html#libcasm.composition.CompositionConverter.param_component_formula" title="libcasm.composition.CompositionConverter.param_component_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_component_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for the i-th parametric composition component, <span class="math notranslate nohighlight">\(x_i\)</span>, in terms of <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_composition.html#libcasm.composition.CompositionConverter.param_composition" title="libcasm.composition.CompositionConverter.param_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_composition</span></code></a></p></td>
-<td><p>param_composition(self: libcasm.composition._composition.CompositionConverter, n: numpy.ndarray[numpy.float64[m, 1]]) -&gt; numpy.ndarray[numpy.float64[m, 1]]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_composition.html#libcasm.composition.CompositionConverter.param_composition" title="libcasm.composition.CompositionConverter.param_composition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_composition</span></code></a>(…)</p></td>
+<td><p>Convert number per unit cell, <span class="math notranslate nohighlight">\(\vec{n}\)</span>, to parametric composition, <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_formula.html#libcasm.composition.CompositionConverter.param_formula" title="libcasm.composition.CompositionConverter.param_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_formula</span></code></a></p></td>
-<td><p>param_formula(self: libcasm.composition._composition.CompositionConverter) -&gt; str</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.param_formula.html#libcasm.composition.CompositionConverter.param_formula" title="libcasm.composition.CompositionConverter.param_formula"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param_formula</span></code></a>(…)</p></td>
+<td><p>Return formula for <span class="math notranslate nohighlight">\(\vec{x}\)</span> in terms of <span class="math notranslate nohighlight">\(\vec{n}\)</span> (ex: &quot;a(0.5+0.5A-0.5B)&quot;).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.to_dict.html#libcasm.composition.CompositionConverter.to_dict" title="libcasm.composition.CompositionConverter.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a></p></td>
-<td><p>to_dict(self: libcasm.composition._composition.CompositionConverter) -&gt; json</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="libcasm.composition.CompositionConverter.to_dict.html#libcasm.composition.CompositionConverter.to_dict" title="libcasm.composition.CompositionConverter.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>(…)</p></td>
+<td><p>Represent a CompositionConverter as a Python dict.</p></td>
 </tr>
 </tbody>
 </table>
@@ -639,15 +639,6 @@ An exception is raised if more than one component is a vacancy.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libcasm.composition.CompositionConverter"><code class="docutils literal notranslate"><span class="pre">CompositionConverter</span></code></a></li>
 </ul>
   </nav></div>
-
-  <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../../_sources/reference/libcasm/_autosummary/libcasm.composition.CompositionConverter.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
 
 </div></div>
               
