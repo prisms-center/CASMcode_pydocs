@@ -220,7 +220,7 @@ For a ternary alloy, the Chebychev site basis functions used by CASM have the va
 
     \pmb{\varphi} = \begin{bmatrix}
     1 & 1 & 1\\
-    -3/\sqrt{6} & 0 & -3/\sqrt{6} \\
+    -3/\sqrt{6} & 0 & 3/\sqrt{6} \\
     -\sqrt{2}/2 & \sqrt{2} & -\sqrt{2}/2
     \end{bmatrix}.
 
