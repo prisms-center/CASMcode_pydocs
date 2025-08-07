@@ -13,39 +13,41 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="icon" sizes="32x32" type="image/png" href="_static/favicon-32x32.png?v=f9ece728" />
-    <link rel="icon" sizes="16x16" type="image/png" href="_static/favicon-16x16.png?v=dad9ad5b" />
-    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="_static/apple-touch-icon.png?v=16836a53" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=1d1c7082" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="icon" href="_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
   </head>
   
   
@@ -53,32 +55,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -86,7 +72,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -94,20 +79,27 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -122,7 +114,7 @@
     
     
     <img src="_static/small_logo.svg" class="logo__image only-light" alt=""/>
-    <script>document.write(`<img src="_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+    <img src="_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
   
   
     <p class="title logo__title">casm-project</p>
@@ -136,42 +128,36 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="usage.html">
-                        Usage
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="reference/casm/index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="usage.html">
+    Usage
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="bibliography.html">
-                        Bibliography
-                      </a>
-                    </li>
-                
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="bibliography.html">
+    Bibliography
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -183,31 +169,23 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -218,7 +196,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -230,7 +208,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -242,27 +220,29 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -271,45 +251,42 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="usage.html">
-                        Usage
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="reference/casm/index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="usage.html">
+    Usage
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="bibliography.html">
-                        Bibliography
-                      </a>
-                    </li>
-                
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="bibliography.html">
+    Bibliography
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -319,17 +296,13 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -340,7 +313,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -352,7 +325,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -363,26 +336,31 @@ document.write(`
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article"></div>
+              <div class="bd-header-article d-print-none"></div>
               
               
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
 
 <h1 id="index">Index</h1>
@@ -414,9 +392,17 @@ document.write(`
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.add_application.html#casm.project.plot.add_application">add_application() (in module casm.project.plot)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.add_clex.html#casm.project.ProjectSettings.add_clex">add_clex() (casm.project.ProjectSettings method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.all.html#casm.project.enum.ConfigSelection.all">all (casm.project.enum.ConfigSelection property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetCommand.all.html#casm.project.bset.BsetCommand.all">all() (casm.project.bset.BsetCommand method)</a>
 
       <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.CalcCommand.all.html#casm.project.calc.CalcCommand.all">(casm.project.calc.CalcCommand method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.all.html#casm.project.enum.EnumCommand.all">(casm.project.enum.EnumCommand method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FitCommand.all.html#casm.project.fit.FitCommand.all">(casm.project.fit.FitCommand method)</a>
@@ -430,12 +416,16 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_calctype.html#casm.project.DirectoryStructure.all_calctype">all_calctype() (casm.project.DirectoryStructure method)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_clex_name.html#casm.project.DirectoryStructure.all_clex_name">all_clex_name() (casm.project.DirectoryStructure method)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_calctype_v2.html#casm.project.DirectoryStructure.all_calctype_v2">all_calctype_v2() (casm.project.DirectoryStructure method)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_eci.html#casm.project.DirectoryStructure.all_eci">all_eci() (casm.project.DirectoryStructure method)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_clex_name.html#casm.project.DirectoryStructure.all_clex_name">all_clex_name() (casm.project.DirectoryStructure method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.all_config_selections.html#casm.project.enum.EnumData.all_config_selections">all_config_selections() (casm.project.enum.EnumData method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_eci.html#casm.project.DirectoryStructure.all_eci">all_eci() (casm.project.DirectoryStructure method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_enum.html#casm.project.DirectoryStructure.all_enum">all_enum() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.all_fit.html#casm.project.DirectoryStructure.all_fit">all_fit() (casm.project.DirectoryStructure method)</a>
@@ -453,6 +443,8 @@ document.write(`
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.allowed_occs.html#casm.project.CompositionAxes.allowed_occs">allowed_occs (casm.project.CompositionAxes attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.json_io.Any.html#casm.project.json_io.Any">Any (class in casm.project.json_io)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ServerCache.app.html#casm.project.plot.ServerCache.app">app (casm.project.plot.ServerCache attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.html#casm.project.ase_utils.AseVaspTool">AseVaspTool (class in casm.project.ase_utils)</a>
 </li>
@@ -492,19 +484,45 @@ document.write(`
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.cabinet.html#casm.project.plot.ViewAtomicStructure.cabinet">cabinet (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.calc.html#casm.project.Project.calc">calc (casm.project.Project property)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_dir.html#casm.project.enum.ConfigSelectionRecord.calc_dir">calc_dir (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_dir_tgz.html#casm.project.enum.ConfigSelectionRecord.calc_dir_tgz">calc_dir_tgz (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_jobid.html#casm.project.enum.ConfigSelectionRecord.calc_jobid">calc_jobid (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_runtime.html#casm.project.enum.ConfigSelectionRecord.calc_runtime">calc_runtime (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.calc_settings_dir.html#casm.project.DirectoryStructure.calc_settings_dir">calc_settings_dir() (casm.project.DirectoryStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_starttime.html#casm.project.enum.ConfigSelectionRecord.calc_starttime">calc_starttime (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_status.html#casm.project.enum.ConfigSelectionRecord.calc_status">calc_status (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_status_data.html#casm.project.enum.ConfigSelectionRecord.calc_status_data">calc_status_data (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calc_stoptime.html#casm.project.enum.ConfigSelectionRecord.calc_stoptime">calc_stoptime (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.calc.CalcCommand.html#casm.project.calc.CalcCommand">CalcCommand (class in casm.project.calc)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ClexDescription.html#casm.project.ClexDescription.calctype">calctype (casm.project.ClexDescription attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.calctype_dir.html#casm.project.DirectoryStructure.calctype_dir">calctype_dir() (casm.project.DirectoryStructure method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.calctype_dir.html#casm.project.enum.EnumData.calctype_dir">(casm.project.enum.EnumData method)</a>
 </li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.calctype_settings_dir.html#casm.project.DirectoryStructure.calctype_settings_dir">calctype_settings_dir() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.calctype_settings_dir_v2.html#casm.project.DirectoryStructure.calctype_settings_dir_v2">calctype_settings_dir_v2() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.calculated_properties.html#casm.project.DirectoryStructure.calculated_properties">calculated_properties() (casm.project.DirectoryStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.calculated_structure_with_properties.html#casm.project.enum.ConfigSelectionRecord.calculated_structure_with_properties">calculated_structure_with_properties (casm.project.enum.ConfigSelectionRecord property)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.calculator.html#casm.project.CompositionAxes.calculator">calculator (casm.project.CompositionAxes attribute)</a>
 
@@ -534,6 +552,13 @@ document.write(`
 </li>
       </ul></li>
       <li>
+    casm.project.calc
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.html#module-casm.project.calc">module</a>
+</li>
+      </ul></li>
+      <li>
     casm.project.enum
 
       <ul>
@@ -552,6 +577,13 @@ document.write(`
 
       <ul>
         <li><a href="reference/casm/_autosummary/casm.project.json_io.html#module-casm.project.json_io">module</a>
+</li>
+      </ul></li>
+      <li>
+    casm.project.plot
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.html#module-casm.project.plot">module</a>
 </li>
       </ul></li>
       <li>
@@ -581,14 +613,34 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.check.html#casm.project.enum.ConfigEnumRunner.check">check() (casm.project.enum.ConfigEnumRunner method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_comp_per_supercell.html#casm.project.enum.ConfigSelectionRecord.chemical_comp_per_supercell">chemical_comp_per_supercell (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_comp_per_unitcell.html#casm.project.enum.ConfigSelectionRecord.chemical_comp_per_unitcell">chemical_comp_per_unitcell (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_comp_species_frac.html#casm.project.enum.ConfigSelectionRecord.chemical_comp_species_frac">chemical_comp_species_frac (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.chemical_components.html#casm.project.enum.ConfigSelection.chemical_components">chemical_components (casm.project.enum.ConfigSelection property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.chemical_composition_axes.html#casm.project.Project.chemical_composition_axes">chemical_composition_axes (casm.project.Project attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.chemical_composition_axes.html#casm.project.DirectoryStructure.chemical_composition_axes">chemical_composition_axes() (casm.project.DirectoryStructure method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_param_comp.html#casm.project.enum.ConfigSelectionRecord.chemical_param_comp">chemical_param_comp (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.chemical_reference.html#casm.project.DirectoryStructure.chemical_reference">chemical_reference() (casm.project.DirectoryStructure method)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.clean.html#casm.project.bset.BsetData.clean">clean() (casm.project.bset.BsetData method)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_sublat_comp_per_supercell.html#casm.project.enum.ConfigSelectionRecord.chemical_sublat_comp_per_supercell">chemical_sublat_comp_per_supercell() (casm.project.enum.ConfigSelectionRecord method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_sublat_comp_per_unitcell.html#casm.project.enum.ConfigSelectionRecord.chemical_sublat_comp_per_unitcell">chemical_sublat_comp_per_unitcell() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.chemical_sublat_comp_species_frac.html#casm.project.enum.ConfigSelectionRecord.chemical_sublat_comp_species_frac">chemical_sublat_comp_species_frac() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.clean.html#casm.project.bset.BsetData.clean">clean() (casm.project.bset.BsetData method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.clean.html#casm.project.enum.ConfigSelection.clean">(casm.project.enum.ConfigSelection method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.fit.FittingData.clear.html#casm.project.fit.FittingData.clear">clear() (casm.project.fit.FittingData method)</a>
 
       <ul>
@@ -597,14 +649,16 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.system.SystemData.clear.html#casm.project.system.SystemData.clear">(casm.project.system.SystemData method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.clex.html#casm.project.enum.ConfigSelection.clex">clex (casm.project.enum.ConfigSelection attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.clex_basis_specs.html#casm.project.bset.BsetData.clex_basis_specs">clex_basis_specs (casm.project.bset.BsetData attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ClexDescription.html#casm.project.ClexDescription">ClexDescription (class in casm.project)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.clexulator_dir.html#casm.project.DirectoryStructure.clexulator_dir">clexulator_dir() (casm.project.DirectoryStructure method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.clexulator_o.html#casm.project.DirectoryStructure.clexulator_o">clexulator_o() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.clexulator_so.html#casm.project.DirectoryStructure.clexulator_so">clexulator_so() (casm.project.DirectoryStructure method)</a>
@@ -622,6 +676,8 @@ document.write(`
       <ul>
         <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.commit.html#casm.project.CompositionAxes.commit">(casm.project.CompositionAxes method)</a>
 </li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.commit.html#casm.project.enum.ConfigSelection.commit">(casm.project.enum.ConfigSelection method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.commit.html#casm.project.enum.EnumData.commit">(casm.project.enum.EnumData method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FittingData.commit.html#casm.project.fit.FittingData.commit">(casm.project.fit.FittingData method)</a>
@@ -631,11 +687,21 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.system.SystemData.commit.html#casm.project.system.SystemData.commit">(casm.project.system.SystemData method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.commit_settings.html#casm.project.Project.commit_settings">commit_settings() (casm.project.Project method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.component_params.html#casm.project.plot.ViewAtomicStructure.component_params">component_params (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.component_params_keys.html#casm.project.plot.ViewAtomicStructure.component_params_keys">component_params_keys (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.ConfigCompositionCalculator.components.html#casm.project.ConfigCompositionCalculator.components">components (casm.project.ConfigCompositionCalculator property)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.composition_axes.html#casm.project.DirectoryStructure.composition_axes">composition_axes() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.html#casm.project.CompositionAxes">CompositionAxes (class in casm.project)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.compress_calc_dir.html#casm.project.enum.ConfigSelectionRecord.compress_calc_dir">compress_calc_dir() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.compress_training_data.html#casm.project.enum.EnumData.compress_training_data">compress_training_data() (casm.project.enum.EnumData method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.config_enum.html#casm.project.enum.ConfigEnumRunner.config_enum">config_enum (casm.project.enum.ConfigEnumRunner attribute)</a>
 </li>
@@ -645,6 +711,8 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.config_props.html#casm.project.DirectoryStructure.config_props">config_props() (casm.project.DirectoryStructure method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.config_selection.html#casm.project.enum.EnumData.config_selection">config_selection() (casm.project.enum.EnumData method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.sym.SymCommand.config_space_analysis.html#casm.project.sym.SymCommand.config_space_analysis">config_space_analysis() (casm.project.sym.SymCommand method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ConfigCompositionCalculator.html#casm.project.ConfigCompositionCalculator">ConfigCompositionCalculator (class in casm.project)</a>
@@ -653,19 +721,43 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.html#casm.project.enum.ConfigEnumRunner">ConfigEnumRunner (class in casm.project.enum)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.html#casm.project.enum.ConfigSelection">ConfigSelection (class in casm.project.enum)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.html#casm.project.enum.ConfigSelectionRecord">ConfigSelectionRecord (class in casm.project.enum)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.configuration.html#casm.project.enum.ConfigSelectionRecord.configuration">configuration (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.configuration_calc_settings_dir.html#casm.project.DirectoryStructure.configuration_calc_settings_dir">configuration_calc_settings_dir() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.configuration_dir.html#casm.project.DirectoryStructure.configuration_dir">configuration_dir() (casm.project.DirectoryStructure method)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.configuration_list.html#casm.project.enum.EnumData.configuration_list">configuration_list (casm.project.enum.EnumData attribute)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.configuration_id_by_supercell_name.html#casm.project.plot.ConfigurationSetDashboard.configuration_id_by_supercell_name">configuration_id_by_supercell_name (casm.project.plot.ConfigurationSetDashboard attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.configuration_list.html#casm.project.enum.EnumData.configuration_list">configuration_list (casm.project.enum.EnumData attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.configuration_list.html#casm.project.plot.ConfigurationListDashboard.configuration_list">(casm.project.plot.ConfigurationListDashboard attribute)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.configuration_set.html#casm.project.enum.EnumData.configuration_set">configuration_set (casm.project.enum.EnumData attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.configuration_set.html#casm.project.plot.ConfigurationSetDashboard.configuration_set">(casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.html#casm.project.plot.ConfigurationListDashboard">ConfigurationListDashboard (class in casm.project.plot)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.html#casm.project.plot.ConfigurationSetDashboard">ConfigurationSetDashboard (class in casm.project.plot)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ConfigCompositionCalculator.converter.html#casm.project.ConfigCompositionCalculator.converter">converter (casm.project.ConfigCompositionCalculator property)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetCommand.copy.html#casm.project.bset.BsetCommand.copy">copy() (casm.project.bset.BsetCommand method)</a>
 
       <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.CalcCommand.copy.html#casm.project.calc.CalcCommand.copy">(casm.project.calc.CalcCommand method)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.copy.html#casm.project.enum.ConfigSelection.copy">(casm.project.enum.ConfigSelection method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.copy.html#casm.project.enum.EnumCommand.copy">(casm.project.enum.EnumCommand method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FitCommand.copy.html#casm.project.fit.FitCommand.copy">(casm.project.fit.FitCommand method)</a>
@@ -676,6 +768,10 @@ document.write(`
 </li>
       </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.ConfigCorrCalculator.corr_f.html#casm.project.bset.ConfigCorrCalculator.corr_f">corr_f() (casm.project.bset.ConfigCorrCalculator method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.corr_per_supercell.html#casm.project.enum.ConfigSelectionRecord.corr_per_supercell">corr_per_supercell (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.corr_per_unitcell.html#casm.project.enum.ConfigSelectionRecord.corr_per_unitcell">corr_per_unitcell (casm.project.enum.ConfigSelectionRecord property)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.fit.FittingData.correlations_per_unitcell.html#casm.project.fit.FittingData.correlations_per_unitcell">correlations_per_unitcell (casm.project.fit.FittingData attribute)</a>
 </li>
@@ -695,21 +791,35 @@ document.write(`
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.data.html#casm.project.enum.ConfigSelectionRecord.data">data (casm.project.enum.ConfigSelectionRecord attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.default_clex.html#casm.project.ProjectSettings.default_clex">default_clex (casm.project.ProjectSettings attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.default_clex_name.html#casm.project.ProjectSettings.default_clex_name">default_clex_name (casm.project.ProjectSettings attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.desc.html#casm.project.enum.ConfigEnumRunner.desc">desc (casm.project.enum.ConfigEnumRunner attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.deselect.html#casm.project.enum.ConfigSelection.deselect">deselect() (casm.project.enum.ConfigSelection method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.deselect.html#casm.project.enum.ConfigSelectionRecord.deselect">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.deselect_all.html#casm.project.enum.ConfigSelection.deselect_all">deselect_all() (casm.project.enum.ConfigSelection method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.deselect_if.html#casm.project.enum.ConfigSelection.deselect_if">deselect_if() (casm.project.enum.ConfigSelection method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.Project.dir.html#casm.project.Project.dir">dir (casm.project.Project attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.html#casm.project.DirectoryStructure">DirectoryStructure (class in casm.project)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.display_functions.html#casm.project.bset.BsetData.display_functions">display_functions() (casm.project.bset.BsetData method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.display_occ_site_functions.html#casm.project.bset.BsetData.display_occ_site_functions">display_occ_site_functions() (casm.project.bset.BsetData method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.doc.html#casm.project.plot.ViewAtomicStructure.doc">doc (casm.project.plot.ViewAtomicStructure attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.sym.SymCommand.dof_space_analysis.html#casm.project.sym.SymCommand.dof_space_analysis">dof_space_analysis() (casm.project.sym.SymCommand method)</a>
 </li>
@@ -743,10 +853,10 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.enum_dir.html#casm.project.enum.EnumData.enum_dir">enum_dir (casm.project.enum.EnumData attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.enum_dir.html#casm.project.DirectoryStructure.enum_dir">enum_dir() (casm.project.DirectoryStructure method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.structure_import.StructureImportData.enum_id.html#casm.project.structure_import.StructureImportData.enum_id">enum_id (casm.project.structure_import.StructureImportData attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.enum_POS_file.html#casm.project.DirectoryStructure.enum_POS_file">enum_POS_file() (casm.project.DirectoryStructure method)</a>
@@ -763,6 +873,8 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.enumerator_has_enum_index.html#casm.project.enum.ConfigEnumRunner.enumerator_has_enum_index">enumerator_has_enum_index (casm.project.enum.ConfigEnumRunner attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.erase.html#casm.project.enum.ConfigSelection.erase">erase() (casm.project.enum.ConfigSelection method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.event_list.html#casm.project.DirectoryStructure.event_list">event_list() (casm.project.DirectoryStructure method)</a>
 </li>
   </ul></td>
@@ -772,6 +884,8 @@ document.write(`
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.factor_group.html#casm.project.DirectoryStructure.factor_group">factor_group() (casm.project.DirectoryStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.figure_source.html#casm.project.plot.ViewAtomicStructure.figure_source">figure_source (casm.project.plot.ViewAtomicStructure attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.filter_f.html#casm.project.enum.ConfigEnumRunner.filter_f">filter_f (casm.project.enum.ConfigEnumRunner attribute)</a>
 </li>
@@ -798,6 +912,8 @@ document.write(`
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FittingData.from_dict.html#casm.project.fit.FittingData.from_dict">(casm.project.fit.FittingData static method)</a>
 </li>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructureParams.from_dict.html#casm.project.plot.ViewAtomicStructureParams.from_dict">(casm.project.plot.ViewAtomicStructureParams static method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.from_dict.html#casm.project.ProjectSettings.from_dict">(casm.project.ProjectSettings static method)</a>
 </li>
       </ul></li>
@@ -807,9 +923,17 @@ document.write(`
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.generic_dof_types.html#casm.project.Project.generic_dof_types">generic_dof_types (casm.project.Project property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetCommand.get.html#casm.project.bset.BsetCommand.get">get() (casm.project.bset.BsetCommand method)</a>
 
       <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.CalcCommand.get.html#casm.project.calc.CalcCommand.get">(casm.project.calc.CalcCommand method)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.get.html#casm.project.enum.ConfigSelection.get">(casm.project.enum.ConfigSelection method)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.get.html#casm.project.enum.ConfigSelectionRecord.get">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.get.html#casm.project.enum.EnumCommand.get">(casm.project.enum.EnumCommand method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FitCommand.get.html#casm.project.fit.FitCommand.get">(casm.project.fit.FitCommand method)</a>
@@ -821,6 +945,14 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.json_io.get.html#casm.project.json_io.get">(in module casm.project.json_io)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.get_clex.html#casm.project.ProjectSettings.get_clex">get_clex() (casm.project.ProjectSettings method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ServerCache.get_project.html#casm.project.plot.ServerCache.get_project">get_project() (casm.project.plot.ServerCache method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.global_dof_types.html#casm.project.Project.global_dof_types">global_dof_types (casm.project.Project property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -843,12 +975,12 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.import_dir.html#casm.project.DirectoryStructure.import_dir">import_dir() (casm.project.DirectoryStructure method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.import_settings.html#casm.project.DirectoryStructure.import_settings">import_settings() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.incar_path.html#casm.project.ase_utils.AseVaspTool.incar_path">incar_path (casm.project.ase_utils.AseVaspTool attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.include_va.html#casm.project.CompositionAxes.include_va">include_va (casm.project.CompositionAxes attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.independent_compositions.html#casm.project.CompositionAxes.independent_compositions">independent_compositions (casm.project.CompositionAxes attribute)</a>
@@ -862,6 +994,14 @@ document.write(`
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.init_chemical_axes.html#casm.project.CompositionAxes.init_chemical_axes">init_chemical_axes() (casm.project.CompositionAxes static method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.init_occupant_axes.html#casm.project.CompositionAxes.init_occupant_axes">init_occupant_axes() (casm.project.CompositionAxes static method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.insert.html#casm.project.enum.ConfigSelection.insert">insert() (casm.project.enum.ConfigSelection method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.insert_all.html#casm.project.enum.ConfigSelection.insert_all">insert_all() (casm.project.enum.ConfigSelection method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.is_calculated.html#casm.project.enum.ConfigSelectionRecord.is_calculated">is_calculated (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.is_selected.html#casm.project.enum.ConfigSelectionRecord.is_selected">is_selected (casm.project.enum.ConfigSelectionRecord property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -879,6 +1019,8 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.last.html#casm.project.enum.EnumCommand.last">last (casm.project.enum.EnumCommand attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.lattice_cell_source.html#casm.project.plot.ViewAtomicStructure.lattice_cell_source">lattice_cell_source (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.lattice_point_group.html#casm.project.DirectoryStructure.lattice_point_group">lattice_point_group() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.lin_alg_tol.html#casm.project.ProjectSettings.lin_alg_tol">lin_alg_tol (casm.project.ProjectSettings attribute)</a>
@@ -892,6 +1034,8 @@ document.write(`
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetCommand.list.html#casm.project.bset.BsetCommand.list">list() (casm.project.bset.BsetCommand method)</a>
 
       <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.CalcCommand.list.html#casm.project.calc.CalcCommand.list">(casm.project.calc.CalcCommand method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.list.html#casm.project.enum.EnumCommand.list">(casm.project.enum.EnumCommand method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FitCommand.list.html#casm.project.fit.FitCommand.list">(casm.project.fit.FitCommand method)</a>
@@ -917,6 +1061,12 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.system.SystemData.load.html#casm.project.system.SystemData.load">(casm.project.system.SystemData method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.load_settings.html#casm.project.Project.load_settings">load_settings() (casm.project.Project method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.local_continuous_dof_types.html#casm.project.Project.local_continuous_dof_types">local_continuous_dof_types (casm.project.Project property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.local_discrete_dof_types.html#casm.project.Project.local_discrete_dof_types">local_discrete_dof_types (casm.project.Project property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -931,6 +1081,8 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.make_calculator.html#casm.project.ase_utils.AseVaspTool.make_calculator">make_calculator() (casm.project.ase_utils.AseVaspTool method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.make_cartesian_view_basis.html#casm.project.plot.make_cartesian_view_basis">make_cartesian_view_basis() (in module casm.project.plot)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.ase_utils.make_casm_structure.html#casm.project.ase_utils.make_casm_structure">make_casm_structure() (in module casm.project.ase_utils)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.make_chemical_comp_calculator.html#casm.project.Project.make_chemical_comp_calculator">make_chemical_comp_calculator() (casm.project.Project method)</a>
@@ -943,9 +1095,19 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.make_default.html#casm.project.ProjectSettings.make_default">make_default() (casm.project.ProjectSettings static method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.make_layout.html#casm.project.plot.ConfigurationListDashboard.make_layout">make_layout() (casm.project.plot.ConfigurationListDashboard method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.make_layout.html#casm.project.plot.ConfigurationSetDashboard.make_layout">(casm.project.plot.ConfigurationSetDashboard method)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.StructureDashboard.make_layout.html#casm.project.plot.StructureDashboard.make_layout">(casm.project.plot.StructureDashboard method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.make_local_clexulator.html#casm.project.bset.BsetData.make_local_clexulator">make_local_clexulator() (casm.project.bset.BsetData method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.make_occupant_comp_calculator.html#casm.project.Project.make_occupant_comp_calculator">make_occupant_comp_calculator() (casm.project.Project method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.make_plot.html#casm.project.plot.ViewAtomicStructure.make_plot">make_plot() (casm.project.plot.ViewAtomicStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.make_symmetrized_lattice.html#casm.project.make_symmetrized_lattice">make_symmetrized_lattice() (in module casm.project)</a>
 </li>
@@ -957,10 +1119,12 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.structure_import.map_structure.html#casm.project.structure_import.map_structure">map_structure() (in module casm.project.structure_import)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.master_selection.html#casm.project.DirectoryStructure.master_selection">master_selection() (casm.project.DirectoryStructure method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.marker_size_scale.html#casm.project.plot.ViewAtomicStructure.marker_size_scale">marker_size_scale (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.master_selection.html#casm.project.DirectoryStructure.master_selection">master_selection() (casm.project.DirectoryStructure method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.merge.html#casm.project.enum.EnumCommand.merge">merge() (casm.project.enum.EnumCommand method)</a>
 
       <ul>
@@ -991,11 +1155,15 @@ document.write(`
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.bset.html#module-casm.project.bset">casm.project.bset</a>
 </li>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.html#module-casm.project.calc">casm.project.calc</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.html#module-casm.project.enum">casm.project.enum</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.html#module-casm.project.fit">casm.project.fit</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.json_io.html#module-casm.project.json_io">casm.project.json_io</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.html#module-casm.project.plot">casm.project.plot</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.structure_import.html#module-casm.project.structure_import">casm.project.structure_import</a>
 </li>
@@ -1028,15 +1196,27 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.n_per_commit.html#casm.project.enum.ConfigEnumRunner.n_per_commit">n_per_commit (casm.project.enum.ConfigEnumRunner attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.bset.ConfigCorrCalculator.n_point_corr.html#casm.project.bset.ConfigCorrCalculator.n_point_corr">n_point_corr (casm.project.bset.ConfigCorrCalculator property)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.n_selected.html#casm.project.enum.ConfigSelection.n_selected">n_selected (casm.project.enum.ConfigSelection property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.n_since_last_commit.html#casm.project.enum.ConfigEnumRunner.n_since_last_commit">n_since_last_commit (casm.project.enum.ConfigEnumRunner attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.n_total.html#casm.project.enum.ConfigSelection.n_total">n_total (casm.project.enum.ConfigSelection property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.n_unitcells.html#casm.project.enum.ConfigSelectionRecord.n_unitcells">n_unitcells (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.n_unselected.html#casm.project.enum.ConfigSelection.n_unselected">n_unselected (casm.project.enum.ConfigSelection property)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ClexDescription.html#casm.project.ClexDescription.name">name (casm.project.ClexDescription attribute)</a>
 
       <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.name.html#casm.project.enum.ConfigSelection.name">(casm.project.enum.ConfigSelection attribute)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.name.html#casm.project.enum.ConfigSelectionRecord.name">(casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.Project.name.html#casm.project.Project.name">(casm.project.Project attribute)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.name.html#casm.project.ProjectSettings.name">(casm.project.ProjectSettings attribute)</a>
@@ -1054,17 +1234,31 @@ document.write(`
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_cluster.html#casm.project.enum.EnumData.occ_by_cluster">occ_by_cluster() (casm.project.enum.EnumData method)</a>
-</li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell.html#casm.project.enum.EnumData.occ_by_supercell">occ_by_supercell() (casm.project.enum.EnumData method)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell_list.html#casm.project.enum.EnumData.occ_by_supercell_list">occ_by_supercell_list() (casm.project.enum.EnumData method)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_comp_per_supercell.html#casm.project.enum.ConfigSelectionRecord.occupant_comp_per_supercell">occupant_comp_per_supercell (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_comp_per_unitcell.html#casm.project.enum.ConfigSelectionRecord.occupant_comp_per_unitcell">occupant_comp_per_unitcell (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_comp_species_frac.html#casm.project.enum.ConfigSelectionRecord.occupant_comp_species_frac">occupant_comp_species_frac (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.occupant_components.html#casm.project.enum.ConfigSelection.occupant_components">occupant_components (casm.project.enum.ConfigSelection property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.Project.occupant_composition_axes.html#casm.project.Project.occupant_composition_axes">occupant_composition_axes (casm.project.Project attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/casm/_autosummary/casm.project.Project.occupant_composition_axes.html#casm.project.Project.occupant_composition_axes">occupant_composition_axes (casm.project.Project attribute)</a>
-</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.occupant_composition_axes.html#casm.project.DirectoryStructure.occupant_composition_axes">occupant_composition_axes() (casm.project.DirectoryStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_param_comp.html#casm.project.enum.ConfigSelectionRecord.occupant_param_comp">occupant_param_comp (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_sublat_comp_per_supercell.html#casm.project.enum.ConfigSelectionRecord.occupant_sublat_comp_per_supercell">occupant_sublat_comp_per_supercell() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_sublat_comp_per_unitcell.html#casm.project.enum.ConfigSelectionRecord.occupant_sublat_comp_per_unitcell">occupant_sublat_comp_per_unitcell() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.occupant_sublat_comp_species_frac.html#casm.project.enum.ConfigSelectionRecord.occupant_sublat_comp_species_frac">occupant_sublat_comp_species_frac() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.options.html#casm.project.plot.ConfigurationListDashboard.options">options (casm.project.plot.ConfigurationListDashboard attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.out.html#casm.project.bset.BsetData.out">out (casm.project.bset.BsetData attribute)</a>
 </li>
@@ -1078,10 +1272,14 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.fit.FittingData.parametric_compositions.html#casm.project.fit.FittingData.parametric_compositions">parametric_compositions (casm.project.fit.FittingData attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.parent.html#casm.project.enum.ConfigSelectionRecord.parent">parent (casm.project.enum.ConfigSelectionRecord attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.path.html#casm.project.CompositionAxes.path">path (casm.project.CompositionAxes attribute)</a>
 
       <ul>
         <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.path.html#casm.project.DirectoryStructure.path">(casm.project.DirectoryStructure attribute)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.path.html#casm.project.enum.ConfigSelection.path">(casm.project.enum.ConfigSelection property)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.Project.path.html#casm.project.Project.path">(casm.project.Project attribute)</a>
 </li>
@@ -1102,14 +1300,20 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.ConfigCompositionCalculator.per_unitcell.html#casm.project.ConfigCompositionCalculator.per_unitcell">(casm.project.ConfigCompositionCalculator method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.plot.html#casm.project.plot.ViewAtomicStructure.plot">plot (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.POS.html#casm.project.DirectoryStructure.POS">POS() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.possible_axes.html#casm.project.CompositionAxes.possible_axes">possible_axes (casm.project.CompositionAxes attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.json_io.pretty_json.html#casm.project.json_io.pretty_json">pretty_json() (in module casm.project.json_io)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.Project.prim.html#casm.project.Project.prim">prim (casm.project.Project attribute)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.StructureDashboard.prim.html#casm.project.plot.StructureDashboard.prim">prim (casm.project.plot.StructureDashboard attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.Project.prim.html#casm.project.Project.prim">(casm.project.Project attribute)</a>
 </li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.prim.html#casm.project.DirectoryStructure.prim">prim() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.prim_neighbor_list.html#casm.project.Project.prim_neighbor_list">prim_neighbor_list (casm.project.Project attribute)</a>
@@ -1122,10 +1326,10 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.print_commits.html#casm.project.enum.ConfigEnumRunner.print_commits">print_commits (casm.project.enum.ConfigEnumRunner attribute)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.sym.SymCommand.print_crystal_point_group.html#casm.project.sym.SymCommand.print_crystal_point_group">print_crystal_point_group() (casm.project.sym.SymCommand method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.sym.SymCommand.print_crystal_point_group.html#casm.project.sym.SymCommand.print_crystal_point_group">print_crystal_point_group() (casm.project.sym.SymCommand method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.print_current_axes.html#casm.project.CompositionAxes.print_current_axes">print_current_axes() (casm.project.CompositionAxes method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.sym.SymCommand.print_factor_group.html#casm.project.sym.SymCommand.print_factor_group">print_factor_group() (casm.project.sym.SymCommand method)</a>
@@ -1162,6 +1366,8 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.system.SystemData.proj.html#casm.project.system.SystemData.proj">(casm.project.system.SystemData attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ServerCache.project.html#casm.project.plot.ServerCache.project">project (casm.project.plot.ServerCache attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.html#casm.project.Project">Project (class in casm.project)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.project_path.html#casm.project.project_path">project_path() (in module casm.project)</a>
@@ -1200,11 +1406,13 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.ref_dir.html#casm.project.DirectoryStructure.ref_dir">ref_dir() (casm.project.DirectoryStructure method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetCommand.remove.html#casm.project.bset.BsetCommand.remove">remove() (casm.project.bset.BsetCommand method)</a>
 
       <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.calc.CalcCommand.remove.html#casm.project.calc.CalcCommand.remove">(casm.project.calc.CalcCommand method)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.remove.html#casm.project.enum.ConfigSelection.remove">(casm.project.enum.ConfigSelection method)</a>
+</li>
         <li><a href="reference/casm/_autosummary/casm.project.enum.EnumCommand.remove.html#casm.project.enum.EnumCommand.remove">(casm.project.enum.EnumCommand method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FitCommand.remove.html#casm.project.fit.FitCommand.remove">(casm.project.fit.FitCommand method)</a>
@@ -1214,10 +1422,38 @@ document.write(`
         <li><a href="reference/casm/_autosummary/casm.project.system.SystemCommand.remove.html#casm.project.system.SystemCommand.remove">(casm.project.system.SystemCommand method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.required_properties.html#casm.project.ProjectSettings.required_properties">required_properties (casm.project.ProjectSettings attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.reset_view.html#casm.project.plot.ConfigurationListDashboard.reset_view">reset_view() (casm.project.plot.ConfigurationListDashboard method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.reset_view.html#casm.project.plot.ConfigurationSetDashboard.reset_view">(casm.project.plot.ConfigurationSetDashboard method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.root_dir.html#casm.project.DirectoryStructure.root_dir">root_dir() (casm.project.DirectoryStructure method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.rotate_view_basis.html#casm.project.plot.ViewAtomicStructure.rotate_view_basis">rotate_view_basis() (casm.project.plot.ViewAtomicStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.run_python_script.html#casm.project.enum.ConfigSelection.run_python_script">run_python_script() (casm.project.enum.ConfigSelection method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.run_python_script.html#casm.project.enum.ConfigSelectionRecord.run_python_script">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.run_shell_script.html#casm.project.enum.ConfigSelection.run_shell_script">run_shell_script() (casm.project.enum.ConfigSelection method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.run_shell_script.html#casm.project.enum.ConfigSelectionRecord.run_shell_script">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.run_subprocess.html#casm.project.enum.ConfigSelection.run_subprocess">run_subprocess() (casm.project.enum.ConfigSelection method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.run_subprocess.html#casm.project.enum.ConfigSelectionRecord.run_subprocess">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1228,11 +1464,75 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.scel_list.html#casm.project.DirectoryStructure.scel_list">scel_list() (casm.project.DirectoryStructure method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.select.html#casm.project.enum.ConfigSelection.select">select() (casm.project.enum.ConfigSelection method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.select.html#casm.project.enum.ConfigSelectionRecord.select">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.select_all.html#casm.project.enum.ConfigSelection.select_all">select_all() (casm.project.enum.ConfigSelection method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.select_if.html#casm.project.enum.ConfigSelection.select_if">select_if() (casm.project.enum.ConfigSelection method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.selected.html#casm.project.enum.ConfigSelection.selected">selected (casm.project.enum.ConfigSelection property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.selected_configuration.html#casm.project.plot.ConfigurationListDashboard.selected_configuration">selected_configuration (casm.project.plot.ConfigurationListDashboard attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.selected_configuration.html#casm.project.plot.ConfigurationSetDashboard.selected_configuration">(casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.selected_configuration_id.html#casm.project.plot.ConfigurationSetDashboard.selected_configuration_id">selected_configuration_id (casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.selected_configuration_index.html#casm.project.plot.ConfigurationListDashboard.selected_configuration_index">selected_configuration_index (casm.project.plot.ConfigurationListDashboard attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.selected_configuration_name.html#casm.project.plot.ConfigurationListDashboard.selected_configuration_name">selected_configuration_name (casm.project.plot.ConfigurationListDashboard attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.selected_configuration_name.html#casm.project.plot.ConfigurationSetDashboard.selected_configuration_name">(casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.selected_page_number.html#casm.project.plot.ConfigurationListDashboard.selected_page_number">selected_page_number (casm.project.plot.ConfigurationListDashboard attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.selected_structure.html#casm.project.plot.ConfigurationListDashboard.selected_structure">selected_structure (casm.project.plot.ConfigurationListDashboard attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.selected_structure.html#casm.project.plot.ConfigurationSetDashboard.selected_structure">(casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.StructureDashboard.selected_structure.html#casm.project.plot.StructureDashboard.selected_structure">(casm.project.plot.StructureDashboard attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.StructureDashboard.selected_structure_name.html#casm.project.plot.StructureDashboard.selected_structure_name">selected_structure_name (casm.project.plot.StructureDashboard attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.selected_supercell_name.html#casm.project.plot.ConfigurationSetDashboard.selected_supercell_name">selected_supercell_name (casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ServerCache.html#casm.project.plot.ServerCache">ServerCache (class in casm.project.plot)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.set.html#casm.project.enum.ConfigSelectionRecord.set">set() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.set_bspecs.html#casm.project.bset.BsetData.set_bspecs">set_bspecs() (casm.project.bset.BsetData method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.set_configuration_id.html#casm.project.plot.ConfigurationSetDashboard.set_configuration_id">set_configuration_id() (casm.project.plot.ConfigurationSetDashboard method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationListDashboard.set_configuration_index.html#casm.project.plot.ConfigurationListDashboard.set_configuration_index">set_configuration_index() (casm.project.plot.ConfigurationListDashboard method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.set_configuration_name.html#casm.project.plot.ConfigurationSetDashboard.set_configuration_name">set_configuration_name() (casm.project.plot.ConfigurationSetDashboard method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.set_current_axes.html#casm.project.CompositionAxes.set_current_axes">set_current_axes() (casm.project.CompositionAxes method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.set_default_clex.html#casm.project.ProjectSettings.set_default_clex">set_default_clex() (casm.project.ProjectSettings method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.set_include_va.html#casm.project.CompositionAxes.set_include_va">set_include_va() (casm.project.CompositionAxes method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.set_selected.html#casm.project.enum.ConfigSelection.set_selected">set_selected() (casm.project.enum.ConfigSelection method)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.set_selected.html#casm.project.enum.ConfigSelectionRecord.set_selected">(casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.set_structure.html#casm.project.plot.ViewAtomicStructure.set_structure">set_structure() (casm.project.plot.ViewAtomicStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.set_supercell_name.html#casm.project.plot.ConfigurationSetDashboard.set_supercell_name">set_supercell_name() (casm.project.plot.ConfigurationSetDashboard method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.settings.html#casm.project.Project.settings">settings (casm.project.Project attribute)</a>
 </li>
@@ -1240,11 +1540,33 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ase_utils.AseVaspTool.setups.html#casm.project.ase_utils.AseVaspTool.setups">setups (casm.project.ase_utils.AseVaspTool attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.source.html#casm.project.enum.ConfigSelectionRecord.source">source (casm.project.enum.ConfigSelectionRecord property)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.source.html#casm.project.plot.ViewAtomicStructure.source">(casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.ConfigCompositionCalculator.species_frac.html#casm.project.ConfigCompositionCalculator.species_frac">species_frac() (casm.project.ConfigCompositionCalculator method)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.start_applications.html#casm.project.plot.start_applications">start_applications() (in module casm.project.plot)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.structure.html#casm.project.enum.ConfigSelectionRecord.structure">structure (casm.project.enum.ConfigSelectionRecord property)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.structure.html#casm.project.plot.ViewAtomicStructure.structure">(casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.Project.structure_import.html#casm.project.Project.structure_import">structure_import (casm.project.Project property)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.structure_json.html#casm.project.DirectoryStructure.structure_json">structure_json() (casm.project.DirectoryStructure method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.structure_name.html#casm.project.plot.ViewAtomicStructure.structure_name">structure_name (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.structure_with_vacancies.html#casm.project.enum.ConfigSelectionRecord.structure_with_vacancies">structure_with_vacancies (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.StructureDashboard.html#casm.project.plot.StructureDashboard">StructureDashboard (class in casm.project.plot)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.structure_import.StructureImportCommand.html#casm.project.structure_import.StructureImportCommand">StructureImportCommand (class in casm.project.structure_import)</a>
 </li>
@@ -1252,14 +1574,20 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.structure_import.StructureImportData.structures.html#casm.project.structure_import.StructureImportData.structures">structures (casm.project.structure_import.StructureImportData attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.supercell.html#casm.project.enum.ConfigSelectionRecord.supercell">supercell (casm.project.enum.ConfigSelectionRecord property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.supercell_calc_settings_dir.html#casm.project.DirectoryStructure.supercell_calc_settings_dir">supercell_calc_settings_dir() (casm.project.DirectoryStructure method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.supercell_dir.html#casm.project.DirectoryStructure.supercell_dir">supercell_dir() (casm.project.DirectoryStructure method)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.supercell_list.html#casm.project.enum.EnumData.supercell_list">supercell_list (casm.project.enum.EnumData attribute)</a>
 </li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.supercell_name.html#casm.project.enum.ConfigSelectionRecord.supercell_name">supercell_name (casm.project.enum.ConfigSelectionRecord property)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ConfigurationSetDashboard.supercell_name.html#casm.project.plot.ConfigurationSetDashboard.supercell_name">(casm.project.plot.ConfigurationSetDashboard attribute)</a>
+</li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.supercell_set.html#casm.project.enum.EnumData.supercell_set">supercell_set (casm.project.enum.EnumData attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.supercells_by_volume.html#casm.project.enum.EnumData.supercells_by_volume">supercells_by_volume() (casm.project.enum.EnumData method)</a>
@@ -1272,8 +1600,12 @@ document.write(`
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.symmetry_dir.html#casm.project.DirectoryStructure.symmetry_dir">symmetry_dir() (casm.project.DirectoryStructure method)</a>
 </li>
-      <li><a href="reference/casm/_autosummary/casm.project.Project.system.html#casm.project.Project.system">system (casm.project.Project property)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.system.html#casm.project.plot.ViewAtomicStructure.system">system (casm.project.plot.ViewAtomicStructure attribute)</a>
+
+      <ul>
+        <li><a href="reference/casm/_autosummary/casm.project.Project.system.html#casm.project.Project.system">(casm.project.Project property)</a>
 </li>
+      </ul></li>
       <li><a href="reference/casm/_autosummary/casm.project.system.SystemData.system_count.html#casm.project.system.SystemData.system_count">system_count (casm.project.system.SystemData attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.DirectoryStructure.system_count.html#casm.project.DirectoryStructure.system_count">system_count() (casm.project.DirectoryStructure method)</a>
@@ -1294,12 +1626,16 @@ document.write(`
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.tabulate_calc_status.html#casm.project.enum.ConfigSelection.tabulate_calc_status">tabulate_calc_status() (casm.project.enum.ConfigSelection method)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.ClexDescription.to_dict.html#casm.project.ClexDescription.to_dict">to_dict() (casm.project.ClexDescription method)</a>
 
       <ul>
         <li><a href="reference/casm/_autosummary/casm.project.CompositionAxes.to_dict.html#casm.project.CompositionAxes.to_dict">(casm.project.CompositionAxes method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.fit.FittingData.to_dict.html#casm.project.fit.FittingData.to_dict">(casm.project.fit.FittingData method)</a>
+</li>
+        <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructureParams.to_dict.html#casm.project.plot.ViewAtomicStructureParams.to_dict">(casm.project.plot.ViewAtomicStructureParams method)</a>
 </li>
         <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.to_dict.html#casm.project.ProjectSettings.to_dict">(casm.project.ProjectSettings method)</a>
 </li>
@@ -1310,7 +1646,17 @@ document.write(`
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelectionRecord.uncompress_calc_dir.html#casm.project.enum.ConfigSelectionRecord.uncompress_calc_dir">uncompress_calc_dir() (casm.project.enum.ConfigSelectionRecord method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.EnumData.uncompress_training_data.html#casm.project.enum.EnumData.uncompress_training_data">uncompress_training_data() (casm.project.enum.EnumData method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigSelection.unselected.html#casm.project.enum.ConfigSelection.unselected">unselected (casm.project.enum.ConfigSelection property)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.update.html#casm.project.bset.BsetData.update">update() (casm.project.bset.BsetData method)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.update_view_basis.html#casm.project.plot.ViewAtomicStructure.update_view_basis">update_view_basis() (casm.project.plot.ViewAtomicStructure method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1318,13 +1664,25 @@ document.write(`
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.v1.html#casm.project.plot.ViewAtomicStructure.v1">v1 (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.v2.html#casm.project.plot.ViewAtomicStructure.v2">v2 (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
       <li><a href="reference/casm/_autosummary/casm.project.enum.ConfigEnumRunner.verbose.html#casm.project.enum.ConfigEnumRunner.verbose">verbose (casm.project.enum.ConfigEnumRunner attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.version.html#casm.project.bset.BsetData.version">version (casm.project.bset.BsetData attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/casm/_autosummary/casm.project.bset.BsetData.version.html#casm.project.bset.BsetData.version">version (casm.project.bset.BsetData attribute)</a>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.view_basis.html#casm.project.plot.ViewAtomicStructure.view_basis">view_basis (casm.project.plot.ViewAtomicStructure attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.view_basis_inv.html#casm.project.plot.ViewAtomicStructure.view_basis_inv">view_basis_inv (casm.project.plot.ViewAtomicStructure attribute)</a>
 </li>
       <li><a href="reference/casm/_autosummary/casm.project.ProjectSettings.view_command.html#casm.project.ProjectSettings.view_command">view_command (casm.project.ProjectSettings attribute)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructure.html#casm.project.plot.ViewAtomicStructure">ViewAtomicStructure (class in casm.project.plot)</a>
+</li>
+      <li><a href="reference/casm/_autosummary/casm.project.plot.ViewAtomicStructureParams.html#casm.project.plot.ViewAtomicStructureParams">ViewAtomicStructureParams (class in casm.project.plot)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1345,7 +1703,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
 </div>
@@ -1366,8 +1724,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1387,7 +1745,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>
@@ -1400,7 +1758,8 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
