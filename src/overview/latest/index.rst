@@ -269,8 +269,22 @@ Docs: `[2.0.0] <../../libcasm/clexmonte/2.0/>`_
 Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
 
+casm-tools
+----------
+The casm-tools package provides pure Python CLI tools and helper functions. This includes:
+
+- casm-calc: Setup, run, and import results of structure calculations
+- casm-map: Structure mapping and import
+- casm.tools.shared: Helper functions for I/O, integrating with ASE, and context
+  managers.
+
+Docs: `[2.0a2] <../../casm/tools/2.0/>`_
+
+Links: |GitHub_project|_ |PyPI_project|_
+
+
 casm-project
------------------
+------------
 
 **Note**: casm-project is under development and not yet released. The interface may change in future releases.
 

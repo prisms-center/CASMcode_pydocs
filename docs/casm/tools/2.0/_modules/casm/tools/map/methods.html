@@ -1,0 +1,1069 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casm.tools.map.methods &#8212; casm-tools 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/tools/map/methods';</script>
+    <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">casm-tools</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_tools/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-tools/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_tools/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-tools/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">casm.tools.map.methods</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for casm.tools.map.methods</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Methods used to implement ``casm-map``&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">config_io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.mapping.info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mapinfo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.mapping.methods</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mapmethods</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym_info</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_suppress_output</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">devnull</span><span class="p">:</span>
+        <span class="c1"># Save the original file descriptors for stdout and stderr</span>
+        <span class="n">old_stdout_fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">dup</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+        <span class="n">old_stderr_fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">dup</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Redirect stdout and stderr to /dev/null</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">devnull</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">devnull</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+            <span class="c1"># Call the function</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Restore the original file descriptors</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">old_stdout_fd</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">old_stderr_fd</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">old_stdout_fd</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">old_stderr_fd</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_symgroup_classification</span><span class="p">(</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+    <span class="n">symgroup</span><span class="p">:</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Call symgroup_to_dict_with_group_classification with suppressed spglib output.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_suppress_output</span><span class="p">(</span>
+        <span class="n">config_io</span><span class="o">.</span><span class="n">symgroup_to_dict_with_group_classification</span><span class="p">,</span>
+        <span class="n">obj</span><span class="p">,</span>
+        <span class="n">symgroup</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="make_child_transformation_matrix_to_super">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_child_transformation_matrix_to_super.html#casm.tools.map.methods.make_child_transformation_matrix_to_super">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_child_transformation_matrix_to_super</span><span class="p">(</span>
+    <span class="n">parent_lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">child_lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the transformation matrix to a child superstructure from the parent and</span>
+<span class="sd">    structure mapping.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent_lattice : libcasm.xtal.Lattice</span>
+<span class="sd">        The parent lattice.</span>
+<span class="sd">    child_lattice : libcasm.xtal.Lattice</span>
+<span class="sd">        The child lattice.</span>
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    child_transformation_matrix_to_super : np.ndarray</span>
+<span class="sd">        The transformation matrix from the child structure to the superstructure</span>
+<span class="sd">        that was mapped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># F * L_1 * T_1 * N = L_2 * T_2</span>
+
+    <span class="n">smap</span> <span class="o">=</span> <span class="n">structure_mapping</span>
+    <span class="n">lmap</span> <span class="o">=</span> <span class="n">smap</span><span class="o">.</span><span class="n">lattice_mapping</span><span class="p">()</span>
+
+    <span class="n">F</span> <span class="o">=</span> <span class="n">lmap</span><span class="o">.</span><span class="n">deformation_gradient</span><span class="p">()</span>
+    <span class="n">L1</span> <span class="o">=</span> <span class="n">parent_lattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span>
+    <span class="n">L2</span> <span class="o">=</span> <span class="n">child_lattice</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span>
+    <span class="n">T1</span> <span class="o">=</span> <span class="n">lmap</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span><span class="p">()</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">lmap</span><span class="o">.</span><span class="n">reorientation</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L2</span><span class="p">,</span> <span class="n">F</span> <span class="o">@</span> <span class="n">L1</span> <span class="o">@</span> <span class="n">T1</span> <span class="o">@</span> <span class="n">N</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_child_superstructure">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_child_superstructure.html#casm.tools.map.methods.make_child_superstructure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_child_superstructure</span><span class="p">(</span>
+    <span class="n">parent_lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">child</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a child superstructure from the parent and structure mapping.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent_lattice : libcasm.xtal.Lattice</span>
+<span class="sd">        The parent lattice.</span>
+<span class="sd">    child : libcasm.xtal.Structure</span>
+<span class="sd">        The child structure.</span>
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    libcasm.xtal.Structure</span>
+<span class="sd">        The child superstructure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T2</span> <span class="o">=</span> <span class="n">make_child_transformation_matrix_to_super</span><span class="p">(</span>
+        <span class="n">parent_lattice</span><span class="o">=</span><span class="n">parent_lattice</span><span class="p">,</span>
+        <span class="n">child_lattice</span><span class="o">=</span><span class="n">child</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+        <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">T2_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_superstructure</span><span class="p">(</span>
+        <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">T2_int</span><span class="p">,</span>
+        <span class="n">structure</span><span class="o">=</span><span class="n">child</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_mapped_child_superstructure">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_mapped_child_superstructure.html#casm.tools.map.methods.make_mapped_child_superstructure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_mapped_child_superstructure</span><span class="p">(</span>
+    <span class="n">parent_lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">child</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a mapped child superstructure from the parent and structure mapping.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent_lattice : xtal.Lattice</span>
+<span class="sd">        The parent lattice.</span>
+<span class="sd">    child : xtal.Structure</span>
+<span class="sd">        The child structure.</span>
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+<span class="sd">    f : float</span>
+<span class="sd">        The interpolation factor, where a value of 0.0 corresponds to the ideal parent</span>
+<span class="sd">        superstructure and a value of 1.0 corresponds to the mapped child</span>
+<span class="sd">        superstructure.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    xtal.Structure</span>
+<span class="sd">        The mapped child superstructure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">mapmethods</span><span class="o">.</span><span class="n">make_mapped_structure</span><span class="p">(</span>
+        <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="o">.</span><span class="n">interpolated</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
+        <span class="n">unmapped_structure</span><span class="o">=</span><span class="n">make_child_superstructure</span><span class="p">(</span>
+            <span class="n">parent_lattice</span><span class="o">=</span><span class="n">parent_lattice</span><span class="p">,</span>
+            <span class="n">child</span><span class="o">=</span><span class="n">child</span><span class="p">,</span>
+            <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_within</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_primitive_structure</span><span class="p">(</span><span class="n">init_structure</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_primitive_prim</span><span class="p">(</span>
+        <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="o">.</span><span class="n">from_atom_coordinates</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">init_structure</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">prim_structure</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">(</span>
+        <span class="n">lattice</span><span class="o">=</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+        <span class="n">atom_coordinate_frac</span><span class="o">=</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">coordinate_frac</span><span class="p">(),</span>
+        <span class="n">atom_type</span><span class="o">=</span><span class="p">[</span><span class="n">occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">occ</span> <span class="ow">in</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">occ_dof</span><span class="p">()],</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">prim_structure</span>
+
+
+<div class="viewcode-block" id="is_equivalent_chain">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.is_equivalent_chain.html#casm.tools.map.methods.is_equivalent_chain">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_equivalent_chain</span><span class="p">(</span>
+    <span class="n">chain_A</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+    <span class="n">chain_B</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if two chains of structures are equivalent.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chain_A : list[libcasm.xtal.Structure]</span>
+<span class="sd">        The first chain of structures. Expects all structures to be in</span>
+<span class="sd">        canonical form.</span>
+
+<span class="sd">    chain_B : list[libcasm.xtal.Structure]</span>
+<span class="sd">        The second chain of structures. Expects all structures to be in</span>
+<span class="sd">        canonical form.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    True if the chains are equivalent, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chain_A</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chain_B</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">s_A</span><span class="p">,</span> <span class="n">s_B</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">chain_A</span><span class="p">,</span> <span class="n">chain_B</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">s_A</span><span class="o">.</span><span class="n">is_equivalent_to</span><span class="p">(</span><span class="n">s_B</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="chain_is_in_orbit">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.chain_is_in_orbit.html#casm.tools.map.methods.chain_is_in_orbit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chain_is_in_orbit</span><span class="p">(</span>
+    <span class="n">chain</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+    <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a chain of structures is in a given orbit.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chain : list[libcasm.xtal.Structure]</span>
+<span class="sd">        The chain of structures. Expects all structures to be in</span>
+<span class="sd">        canonical form.</span>
+
+<span class="sd">    orbit : list[list[libcasm.xtal.Structure]]</span>
+<span class="sd">        The orbit of chains of structures. Expects all structures to be in</span>
+<span class="sd">        canonical form.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    True if the chain is in the orbit, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">existing</span> <span class="ow">in</span> <span class="n">orbit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_equivalent_chain</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">existing</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="make_primitive_chain">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_primitive_chain.html#casm.tools.map.methods.make_primitive_chain">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_primitive_chain</span><span class="p">(</span>
+    <span class="n">parent_lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">child</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+    <span class="n">f_chain</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a chain of primitive structures interpolating between the parent and child.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent_lattice : xtal.Lattice</span>
+<span class="sd">        The parent lattice.</span>
+
+<span class="sd">    child : xtal.Structure</span>
+<span class="sd">        The child structure.</span>
+
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+
+<span class="sd">    f_chain : list[float]</span>
+<span class="sd">        The interpolation factors for the structures in the chain, where a value of 0.0</span>
+<span class="sd">        corresponds to the ideal parent structure and a value of 1.0 corresponds</span>
+<span class="sd">        to the mapped child structure.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    primitive_chain : list[xtal.Structure]</span>
+<span class="sd">        A list of primitive structures interpolating between the parent and child.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unmapped_structure</span> <span class="o">=</span> <span class="n">make_child_superstructure</span><span class="p">(</span>
+        <span class="n">parent_lattice</span><span class="o">=</span><span class="n">parent_lattice</span><span class="p">,</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">child</span><span class="p">,</span>
+        <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_interpolated_primitive_structure</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make an interpolated, primitive, prototype structure.&quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">mapmethods</span><span class="o">.</span><span class="n">make_mapped_structure</span><span class="p">(</span>
+            <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="o">.</span><span class="n">interpolated</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
+            <span class="n">unmapped_structure</span><span class="o">=</span><span class="n">unmapped_structure</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_make_primitive_structure</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_within</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+    <span class="n">primitive_chain</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">f_chain</span><span class="p">:</span>
+        <span class="n">primitive_chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_make_interpolated_primitive_structure</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">primitive_chain</span></div>
+
+
+
+<div class="viewcode-block" id="make_chain_orbit">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_chain_orbit.html#casm.tools.map.methods.make_chain_orbit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_chain_orbit</span><span class="p">(</span>
+    <span class="n">chain_prototype</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+    <span class="n">parent_prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an orbit of chains of structures from a prototype chain.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chain_prototype : list[libcasm.xtal.Structure]</span>
+<span class="sd">        A prototype chain of structures.</span>
+<span class="sd">    parent_prim : casmconfig.Prim</span>
+<span class="sd">        Parent structure, as a Prim. The factor group of this Prim will be used</span>
+<span class="sd">        to generate the orbit of equivalent chains.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    chain_orbit : list[list[libcasm.xtal.Structure]]</span>
+<span class="sd">        A list of chains, where each element is a distinct chain that is equivalent by a</span>
+<span class="sd">        symmetry operation in the factor group of the parent Prim.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chain_orbit</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">parent_prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span>
+        <span class="n">chain</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">chain_prototype</span><span class="p">:</span>
+            <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">make_canonical_structure</span><span class="p">(</span><span class="n">op</span> <span class="o">*</span> <span class="n">structure</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">chain_is_in_orbit</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">chain_orbit</span><span class="p">):</span>
+            <span class="n">chain_orbit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">chain_orbit</span></div>
+
+
+
+<div class="viewcode-block" id="make_primitive_chain_orbit">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_primitive_chain_orbit.html#casm.tools.map.methods.make_primitive_chain_orbit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_primitive_chain_orbit</span><span class="p">(</span>
+    <span class="n">parent_prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+    <span class="n">child</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+    <span class="n">f_chain</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an orbit of chains of primitive structures mapping between the parent and</span>
+<span class="sd">    child.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent_prim : casmconfig.Prim</span>
+<span class="sd">        Parent structure, as a Prim. The factor group of this Prim will be used</span>
+<span class="sd">        to generate the orbit of equivalent chains.</span>
+<span class="sd">    child : xtal.Structure</span>
+<span class="sd">        The child structure.</span>
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+<span class="sd">    f_chain : list[float]</span>
+<span class="sd">        The interpolation factors for the structures in the chain, where a value of 0.0</span>
+<span class="sd">        corresponds to the ideal parent structure and a value of 1.0 corresponds</span>
+<span class="sd">        to the mapped child structure.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    primitive_chain_orbit : list[list[xtal.Structure]]</span>
+<span class="sd">        A list of chains, where each element is a distinct chain that is equivalent by a</span>
+<span class="sd">        symmetry operation in the factor group of the parent Prim. The structures in</span>
+<span class="sd">        each chain are made primitive.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">make_chain_orbit</span><span class="p">(</span>
+        <span class="n">chain_prototype</span><span class="o">=</span><span class="n">make_primitive_chain</span><span class="p">(</span>
+            <span class="n">parent_lattice</span><span class="o">=</span><span class="n">parent_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+            <span class="n">child</span><span class="o">=</span><span class="n">child</span><span class="p">,</span>
+            <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="p">,</span>
+            <span class="n">f_chain</span><span class="o">=</span><span class="n">f_chain</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">parent_prim</span><span class="o">=</span><span class="n">parent_prim</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="parent_supercell_factor_group_size">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.parent_supercell_factor_group_size.html#casm.tools.map.methods.parent_supercell_factor_group_size">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parent_supercell_factor_group_size</span><span class="p">(</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+    <span class="n">supercell_set</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the size of the factor group of the parent supercell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+<span class="sd">    supercell_set : casmconfig.SupercellSet</span>
+<span class="sd">        A :class:`~libcasm.configuration.SupercellSet` object that allows re-using</span>
+<span class="sd">        supercell information.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    factor_group_size : int</span>
+<span class="sd">        The size of the factor group of the supercell corresponding to the parent</span>
+<span class="sd">        superstructure.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">structure_mapping</span><span class="o">.</span><span class="n">lattice_mapping</span><span class="p">()</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span><span class="p">()</span>
+    <span class="n">T_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="n">supercell_set</span><span class="o">.</span><span class="n">add_by_transformation_matrix_to_super</span><span class="p">(</span>
+        <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">T_int</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_supercell_info">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_supercell_info.html#casm.tools.map.methods.make_supercell_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_supercell_info</span><span class="p">(</span>
+    <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary with information about the supercell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    supercell : casmconfig.Supercell</span>
+<span class="sd">        A supercell.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data: dict</span>
+<span class="sd">        A dictionary containing information about the supercell, including:</span>
+
+<span class="sd">        - volume: The volume of the supercell relative to the prim.</span>
+<span class="sd">        - factor_group_size: The size of the factor group of the supercell.</span>
+<span class="sd">        - spacegroup_type: The space group type of the supercell, determined by spglib</span>
+<span class="sd">          from the symmetry determined by CASM.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">T_int</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span>
+    <span class="n">info</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">T_int</span><span class="p">)))</span>
+    <span class="n">default_config</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">)</span>
+    <span class="n">symgroup</span> <span class="o">=</span> <span class="n">supercell</span><span class="o">.</span><span class="n">factor_group</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_symgroup_classification</span><span class="p">(</span>
+        <span class="n">obj</span><span class="o">=</span><span class="n">default_config</span><span class="p">,</span>
+        <span class="n">symgroup</span><span class="o">=</span><span class="n">symgroup</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">info</span><span class="p">[</span><span class="s2">&quot;factor_group_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">symgroup</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+
+    <span class="c1"># This handles getting the supercell crystal symmetry</span>
+    <span class="n">classification</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">classification</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spacegroup_type_from_casm_symmetry&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">][</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">classification</span><span class="p">[</span><span class="s2">&quot;spacegroup_type_from_casm_symmetry&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">info</span></div>
+
+
+
+<div class="viewcode-block" id="make_parent_supercell_info">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_parent_supercell_info.html#casm.tools.map.methods.make_parent_supercell_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_parent_supercell_info</span><span class="p">(</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+    <span class="n">parent_prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary with information about the parent supercell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    structure_mapping : libcasm.mapping.info.StructureMapping</span>
+<span class="sd">        The structure mapping between the parent and child structures.</span>
+<span class="sd">    parent_prim : casmconfig.Prim</span>
+<span class="sd">        The parent structure, as a Prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data: dict</span>
+<span class="sd">        A dictionary containing information about the supercell, including:</span>
+
+<span class="sd">        - volume: The volume of the supercell relative to `child_prim`.</span>
+<span class="sd">        - factor_group_size: The size of the factor group of the supercell.</span>
+<span class="sd">        - spacegroup_type: The space group type of the supercell, determined by spglib</span>
+<span class="sd">          from the symmetry determined by CASM.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">structure_mapping</span><span class="o">.</span><span class="n">lattice_mapping</span><span class="p">()</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span><span class="p">()</span>
+    <span class="n">T_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">supercell</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">(</span>
+        <span class="n">prim</span><span class="o">=</span><span class="n">parent_prim</span><span class="p">,</span>
+        <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">T_int</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">make_supercell_info</span><span class="p">(</span><span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_child_supercell_info">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_child_supercell_info.html#casm.tools.map.methods.make_child_supercell_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_child_supercell_info</span><span class="p">(</span>
+    <span class="n">T_child</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">child_prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary with information about the child supercell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T_child : np.ndarray[np.int[3,3]]</span>
+<span class="sd">        The transformation matrix to the child superstructure, :math:`T_2`.</span>
+<span class="sd">    child_prim : casmconfig.Prim</span>
+<span class="sd">        The child structure, as a Prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data: dict</span>
+<span class="sd">        A dictionary containing information about the supercell, including:</span>
+
+<span class="sd">        - volume: The volume of the supercell relative to `child_prim`.</span>
+<span class="sd">        - factor_group_size: The size of the factor group of the supercell.</span>
+<span class="sd">        - spacegroup_type: The space group type of the supercell, determined by spglib</span>
+<span class="sd">          from the symmetry determined by CASM.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T_child</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">supercell</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">(</span>
+        <span class="n">prim</span><span class="o">=</span><span class="n">child_prim</span><span class="p">,</span>
+        <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">T_int</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">make_supercell_info</span><span class="p">(</span><span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="make_chain_info">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.make_chain_info.html#casm.tools.map.methods.make_chain_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_chain_info</span><span class="p">(</span>
+    <span class="n">chain</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+    <span class="n">parent_prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary with information about the structures in a chain.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chain: list[libcasm.xtal.Structure]</span>
+<span class="sd">        A chain of structures.</span>
+<span class="sd">    parent_prim : casmconfig.Prim</span>
+<span class="sd">        The parent structure, as a Prim.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    chain_info: list[dict]</span>
+<span class="sd">        A ``list[dict]``, with one dictionary for each structure in the chain,</span>
+<span class="sd">        including:</span>
+
+<span class="sd">        - volume: The volume of the structure relative to `parent_prim`.</span>
+<span class="sd">        - factor_group_size: The size of the factor group of the structure.</span>
+<span class="sd">        - spacegroup_type: The space group type of the structure, determined by spglib</span>
+<span class="sd">          from the symmetry determined by CASM.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chain_info</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">vol_parent</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">parent_prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span><span class="o">.</span><span class="n">volume</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Get the volume w.r.t. the prim of the interpolated structure</span>
+        <span class="n">vol_structure</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span><span class="o">.</span><span class="n">volume</span><span class="p">())</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vol_structure</span> <span class="o">/</span> <span class="n">vol_parent</span>
+
+        <span class="c1"># Get the space group of the interpolated structure</span>
+        <span class="n">tmp_prim</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span>
+            <span class="n">xtal_prim</span><span class="o">=</span><span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="o">.</span><span class="n">from_atom_coordinates</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">_get_symgroup_classification</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">tmp_prim</span><span class="p">,</span>
+            <span class="n">symgroup</span><span class="o">=</span><span class="n">tmp_prim</span><span class="o">.</span><span class="n">factor_group</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;factor_group_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_prim</span><span class="o">.</span><span class="n">factor_group</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+
+        <span class="n">classification</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">classification</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spacegroup_type_from_casm_symmetry&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">][</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spacegroup_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">classification</span><span class="p">[</span>
+                <span class="s2">&quot;spacegroup_type_from_casm_symmetry&quot;</span>
+            <span class="p">]</span>
+
+        <span class="n">chain_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chain_info</span></div>
+
+
+
+<div class="viewcode-block" id="parent_supercell_size">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.parent_supercell_size.html#casm.tools.map.methods.parent_supercell_size">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parent_supercell_size</span><span class="p">(</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the size of the parent superstructure the child superstructure was mapped</span>
+<span class="sd">    to, relative to the size of the parent structure.&quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">structure_mapping</span><span class="o">.</span><span class="n">lattice_mapping</span><span class="p">()</span><span class="o">.</span><span class="n">transformation_matrix_to_super</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">T</span><span class="p">))))</span></div>
+
+
+
+<div class="viewcode-block" id="child_supercell_size">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.tools.map.methods.child_supercell_size.html#casm.tools.map.methods.child_supercell_size">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">child_supercell_size</span><span class="p">(</span>
+    <span class="n">parent_lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">child</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">structure_mapping</span><span class="p">:</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">StructureMapping</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the size of the child superstructure that was mapped to the parent</span>
+<span class="sd">    superstructure, relative to the size of the child structure.&quot;&quot;&quot;</span>
+    <span class="n">T_child</span> <span class="o">=</span> <span class="n">make_child_transformation_matrix_to_super</span><span class="p">(</span>
+        <span class="n">parent_lattice</span><span class="o">=</span><span class="n">parent_lattice</span><span class="p">,</span>
+        <span class="n">child_lattice</span><span class="o">=</span><span class="n">child</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+        <span class="n">structure_mapping</span><span class="o">=</span><span class="n">structure_mapping</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">T_child</span><span class="p">))))</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

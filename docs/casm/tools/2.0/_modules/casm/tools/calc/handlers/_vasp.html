@@ -1,0 +1,1263 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casm.tools.calc.handlers._vasp &#8212; casm-tools 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/tools/calc/handlers/_vasp';</script>
+    <link rel="icon" href="../../../../../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">casm-tools</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_tools/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-tools/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_tools/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-tools/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">casm.tools.calc.handlers._vasp</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for casm.tools.calc.handlers._vasp</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Vasp calculation report handlers&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tarfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.ase_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">AseVaspTool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.json_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_required</span><span class="p">,</span> <span class="n">safe_dump</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ReportHandlerBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_calcdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a path is a calculation directory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path: Union[pathlib.Path, tarfile.TarInfo]</span>
+<span class="sd">            The path or archive member to check.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value: bool</span>
+<span class="sd">            True if the path is a calculation directory, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the calculation is complete</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: Union[pathlib.Path, tarfile.TarInfo]</span>
+<span class="sd">            The calculation directory, as a path or tarfile member.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value: bool</span>
+<span class="sd">            True if the calculation is complete, False otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the status of a calculation directory</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: pathlib.Path</span>
+<span class="sd">            The calculation directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        status: str</span>
+<span class="sd">            The status of the calculation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Report calculation results as a Python dict</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: pathlib.Path</span>
+<span class="sd">            The calculation directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The calculated structure with properties, as a Python dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_path</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make the path for an output file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target: pathlib.Path</span>
+<span class="sd">            The target directory or file for which the output is constructed.</span>
+<span class="sd">        suffix: str</span>
+<span class="sd">            A suffix to append to the target, e.g. &quot;.complete.json&quot; or &quot;.results.json&quot;,</span>
+<span class="sd">            to create the output path.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        path: pathlib.Path</span>
+<span class="sd">            An output path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="ArchiveReportHandler">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.ArchiveReportHandler.html#casm.tools.calc.handlers.ArchiveReportHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ArchiveReportHandler</span><span class="p">(</span><span class="n">ReportHandlerBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for handling reporting results from archive files</span>
+<span class="sd">    (either .tar.gz or .tgz)</span>
+
+<span class="sd">    This class is not meant to be used directly, but rather as a base class for</span>
+<span class="sd">    specific report handlers that implement the methods for specific layouts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">archive</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[tarfile.TarFile]: If this handler is used to report results from a</span>
+<span class="sd">        tar archive, this will be set to the opened tarfile. If this handler is used</span>
+<span class="sd">        to report results from a directory, this will be None.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_getmember</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a tarfile member by path or return None if it does not exist&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in CasmV1VaspReportHandler._getmember: &quot;</span> <span class="s2">&quot;archive is not set.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">getmember</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_member_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check by path if a tarfile member exists&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_member_isdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check by path if a tarfile member exists and is a directory&quot;&quot;&quot;</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">member</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">member</span><span class="o">.</span><span class="n">isdir</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_member_isfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check by path if a tarfile member exists and is a file&quot;&quot;&quot;</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">member</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">member</span><span class="o">.</span><span class="n">isfile</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read a tarfile member by path and return its content as a string&quot;&quot;&quot;</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Member </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> not found in archive.&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_json_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load a tarfile JSON file member by path&quot;&quot;&quot;</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Member </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> not found in archive.&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="VaspArchiveReportHandler">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.VaspArchiveReportHandler.html#casm.tools.calc.handlers.VaspArchiveReportHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">VaspArchiveReportHandler</span><span class="p">(</span><span class="n">ArchiveReportHandler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for handling reporting results from VASP calculations stored in</span>
+<span class="sd">    a directory or an archive file (either .tar.gz or .tgz)</span>
+
+<span class="sd">    This class is not meant to be used directly, but rather as a base class for</span>
+<span class="sd">    specific report handlers that implement the methods for specific layouts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">tool</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">structure_relpath</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">config_relpath</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This class is a base class for handling reporting results from VASP archive</span>
+<span class="sd">        files. It is not meant to be used directly, but rather as a base class for</span>
+<span class="sd">        specific VASP archive handlers that implement the methods for specific VASP</span>
+<span class="sd">        archive formats.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        update: bool</span>
+<span class="sd">            If True, the report will be run even if the</span>
+<span class="sd">            &quot;structure_with_properties.json&quot; file already exists in the calculation</span>
+<span class="sd">            directory. If False, the report will only be run if that file does not</span>
+<span class="sd">            exist.</span>
+<span class="sd">        tool : Any</span>
+<span class="sd">            A tool to use for reporting results, expected to have a `report` method</span>
+<span class="sd">            with signature ``tool.report(calc_dir: pathlib.Path)``. By default,</span>
+<span class="sd">            an :class:`~casm.tools.shared.ase_utils.AseVaspTool` will be created.</span>
+<span class="sd">        structure_relpath: pathlib.Path</span>
+<span class="sd">            The relative path to the structure file from the calculation directory.</span>
+<span class="sd">        config_relpath: pathlib.Path</span>
+<span class="sd">            The relative path to the configuration file from the calculation directory.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">tool</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tool</span> <span class="o">=</span> <span class="n">AseVaspTool</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">update</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: If True, the report will be run even if the </span>
+<span class="sd">        &quot;structure_with_properties.json&quot; file already exists in the calculation</span>
+<span class="sd">        directory. If False, the report will only be run if that file does not</span>
+<span class="sd">        exist.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool</span> <span class="o">=</span> <span class="n">tool</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: A tool to use for reporting results, expected to have a `report` method</span>
+<span class="sd">        with signature ``tool.report(calc_dir: pathlib.Path)``.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure_relpath</span> <span class="o">=</span> <span class="n">structure_relpath</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The relative path to the structure file from the calculation </span>
+<span class="sd">        directory.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_relpath</span> <span class="o">=</span> <span class="n">config_relpath</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The relative path to the configuration file from the calculation</span>
+<span class="sd">        directory.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span> <span class="o">=</span> <span class="s2">&quot;status.json&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The name of the sentinel file that indicates the parent</span>
+<span class="sd">        directory is a calculation directory.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VaspArchiveReportHandler.is_complete">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.VaspArchiveReportHandler.is_complete.html#casm.tools.calc.handlers.VaspArchiveReportHandler.is_complete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the calculation is complete</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        A calculation directory is considered complete if it contains a &quot;status.json&quot;</span>
+<span class="sd">        file with attribute ``&quot;status&quot;: True``. Completed calculations are expected</span>
+<span class="sd">        to have an &quot;OUTCAR&quot; or &quot;OUTCAR.gz&quot; file in a &quot;run.final&quot; directory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: Union[pathlib.Path, tarfile.TarInfo]</span>
+<span class="sd">            The calculation directory, as a path or tarfile member.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value: bool</span>
+<span class="sd">            True if the calculation is complete, False otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">calcdir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_json_member</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_required</span><span class="p">(</span><span class="n">calcdir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;complete&quot;</span></div>
+
+
+<div class="viewcode-block" id="VaspArchiveReportHandler.status">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.VaspArchiveReportHandler.status.html#casm.tools.calc.handlers.VaspArchiveReportHandler.status">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the status of a calculation directory</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This method reads the &quot;status.json&quot; file in the calculation directory and</span>
+<span class="sd">        returns its `&quot;status&quot;` attribute value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: pathlib.Path</span>
+<span class="sd">            The calculation directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        status: str</span>
+<span class="sd">            The value of the `&quot;status&quot;` attribute in the &quot;status.json&quot; file. If the</span>
+<span class="sd">            file does not exist a FileNotFoundError exception is raised. If the file</span>
+<span class="sd">            cannot be read, or does not contain a `&quot;status&quot;` attribute, a ValueError</span>
+<span class="sd">            exception is raised.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">calcdir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_json_member</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_required</span><span class="p">(</span><span class="n">calcdir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid status for </span><span class="si">{</span><span class="n">calcdir</span><span class="si">}</span><span class="s2">: &#39;status&#39; attribute not found in &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid status value type for </span><span class="si">{</span><span class="n">calcdir</span><span class="si">}</span><span class="s2">: expected str, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">status</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_report_archive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Report the structure with properties from an archived calculation directory</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: pathlib.Path</span>
+<span class="sd">            The calculation directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The calculation data, as a Python dict, containing:</span>
+
+<span class="sd">            - &quot;structure_with_properties&quot;: ``dict``, The final structure with</span>
+<span class="sd">              properties.</span>
+<span class="sd">            - &quot;structure&quot;: ``Optional[dict]``, The initial structure, if present.</span>
+<span class="sd">            - &quot;config&quot;: ``Optional[dict]``, The initial configuration, if present.</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="n">calcdir_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">calcdir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">structure_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">calcdir_path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure_relpath</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking structure path:&quot;</span><span class="p">,</span> <span class="n">structure_path</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">structure_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">member</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found structure file&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="n">config_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">calcdir_path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_relpath</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking config path:&quot;</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">member</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found config file&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># If not force updating, check if the</span>
+        <span class="c1"># structure_with_properties.json file already exists</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
+            <span class="n">structure_with_properties_path</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">calcdir_path</span> <span class="o">/</span> <span class="s2">&quot;structure_with_properties.json&quot;</span>
+            <span class="p">)</span>
+            <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">structure_with_properties_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">member</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found existing structure_with_properties.json in&quot;</span><span class="p">,</span> <span class="n">calcdir_path</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">()</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;structure_with_properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">data</span>
+
+        <span class="c1"># If force updating, or the file does not exist, find the OUTCAR and</span>
+        <span class="c1"># report the structure</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">run_final</span> <span class="o">=</span> <span class="n">calcdir_path</span> <span class="o">/</span> <span class="s2">&quot;run.final&quot;</span>
+            <span class="n">outcar_file</span> <span class="o">=</span> <span class="n">run_final</span> <span class="o">/</span> <span class="s2">&quot;OUTCAR&quot;</span>
+            <span class="n">outcar_member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">outcar_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">outcar_member</span><span class="p">:</span>
+                <span class="n">extract_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;extract&quot;</span><span class="p">)</span>
+                <span class="n">extract_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">outcar_member</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_in</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">extract_dir</span> <span class="o">/</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_out</span><span class="p">:</span>
+                        <span class="n">f_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_in</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+                <span class="n">casm_structure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">calc_dir</span><span class="o">=</span><span class="n">extract_dir</span><span class="p">)</span>
+
+                <span class="c1"># remove extract_dir after use:</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">extract_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+                <span class="n">extract_dir</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">outcar_gz_file</span> <span class="o">=</span> <span class="n">run_final</span> <span class="o">/</span> <span class="s2">&quot;OUTCAR.gz&quot;</span>
+                <span class="n">outcar_gz_member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getmember</span><span class="p">(</span><span class="n">outcar_gz_file</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">outcar_gz_member</span><span class="p">:</span>
+                    <span class="c1"># This work pretty well:</span>
+                    <span class="n">extract_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;extract&quot;</span><span class="p">)</span>
+                    <span class="n">extract_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">outcar_gz_member</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
+                        <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_in</span><span class="p">:</span>
+                            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">extract_dir</span> <span class="o">/</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_out</span><span class="p">:</span>
+                                <span class="n">f_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_in</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+                    <span class="n">casm_structure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">calc_dir</span><span class="o">=</span><span class="n">extract_dir</span><span class="p">)</span>
+
+                    <span class="c1"># remove extract_dir after use:</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">extract_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+                    <span class="n">extract_dir</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Neither OUTCAR nor OUTCAR.gz found in </span><span class="si">{</span><span class="n">run_final</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;structure_with_properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">calcdir</span><span class="si">}</span><span class="s2">: failed to report&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_report_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Report the structure with properties from a calculation directory</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: pathlib.Path</span>
+<span class="sd">            The calculation directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The calculation data, as a Python dict, containing:</span>
+
+<span class="sd">            - &quot;structure_with_properties&quot;: ``dict``, The final structure with</span>
+<span class="sd">              properties.</span>
+<span class="sd">            - &quot;structure&quot;: ``Optional[dict]``, The initial structure, if present.</span>
+<span class="sd">            - &quot;config&quot;: ``Optional[dict]``, The initial configuration, if present.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="n">structure_path</span> <span class="o">=</span> <span class="n">calcdir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure_relpath</span>
+        <span class="k">if</span> <span class="n">structure_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_required</span><span class="p">(</span><span class="n">structure_path</span><span class="p">)</span>
+
+        <span class="n">config_path</span> <span class="o">=</span> <span class="n">calcdir</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_relpath</span>
+        <span class="k">if</span> <span class="n">config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_required</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+
+        <span class="n">structure_with_properties_path</span> <span class="o">=</span> <span class="n">calcdir</span> <span class="o">/</span> <span class="s2">&quot;structure_with_properties.json&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">structure_with_properties_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;structure_with_properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_required</span><span class="p">(</span>
+                    <span class="n">structure_with_properties_path</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">data</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">run_final</span> <span class="o">=</span> <span class="n">calcdir</span> <span class="o">/</span> <span class="s2">&quot;run.final&quot;</span>
+            <span class="n">casm_structure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">calc_dir</span><span class="o">=</span><span class="n">run_final</span><span class="p">)</span>
+            <span class="n">casm_structure_data</span> <span class="o">=</span> <span class="n">casm_structure</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;structure_with_properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">casm_structure_data</span>
+            <span class="n">safe_dump</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">casm_structure_data</span><span class="p">,</span>
+                <span class="n">path</span><span class="o">=</span><span class="n">structure_with_properties_path</span><span class="p">,</span>
+                <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">calcdir</span><span class="si">}</span><span class="s2">: failed to report&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+<div class="viewcode-block" id="VaspArchiveReportHandler.report">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.VaspArchiveReportHandler.report.html#casm.tools.calc.handlers.VaspArchiveReportHandler.report">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calcdir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the structure_with_properties.json file, and return its value as a</span>
+<span class="sd">        Python dict</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This method also writes `calcdir / structure_with_properties.json`</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calcdir: pathlib.Path</span>
+<span class="sd">            The calculation directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data: dict</span>
+<span class="sd">            The calculation data, as a Python dict, containing:</span>
+
+<span class="sd">            - &quot;structure_with_properties&quot;: ``dict``, The final structure with</span>
+<span class="sd">              properties.</span>
+<span class="sd">            - &quot;structure&quot;: ``Optional[dict]``, The initial structure, if present.</span>
+<span class="sd">            - &quot;config&quot;: ``Optional[dict]``, The initial configuration, if present.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">calcdir</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_report_archive</span><span class="p">(</span><span class="n">calcdir</span><span class="o">=</span><span class="n">calcdir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_report_directory</span><span class="p">(</span><span class="n">calcdir</span><span class="o">=</span><span class="n">calcdir</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CasmV1VaspReportHandler">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.CasmV1VaspReportHandler.html#casm.tools.calc.handlers.CasmV1VaspReportHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CasmV1VaspReportHandler</span><span class="p">(</span><span class="n">VaspArchiveReportHandler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handler for VASP calculations stored in the CASM v1 directory structure</span>
+
+<span class="sd">    This works for calculations with the following directory structure:</span>
+
+<span class="sd">    .. code-block:: text</span>
+
+<span class="sd">        dir/</span>
+<span class="sd">        ├── &lt;configuration_name&gt;/</span>
+<span class="sd">        │   ├── config.json</span>
+<span class="sd">        │   ├── structure.json</span>
+<span class="sd">        │   ├── calctype.&lt;calc_id&gt;/</span>
+<span class="sd">        │   │   ├── ...</span>
+<span class="sd">        │   │   ├── run.final/OUTCAR</span>
+<span class="sd">        │   │   ├── run.final/OUTCAR.gz</span>
+<span class="sd">        │   │   └── structure_with_properties.json</span>
+<span class="sd">        ...</span>
+
+<span class="sd">    When the handler is used is run on `dir`, it assumes that:</span>
+
+<span class="sd">    1. All subdirectories named &quot;calctype.&lt;calc_id&gt;&quot; are calculation directories.</span>
+<span class="sd">    2. A calculation directory with a &quot;run.final&quot; directory containing either</span>
+<span class="sd">       an &quot;OUTCAR&quot; or &quot;OUTCAR.gz&quot; file is complete. Otherwise, the calculation is</span>
+<span class="sd">       incomplete.</span>
+<span class="sd">    3. The &quot;config.json&quot; and &quot;structure.json&quot; files are optional, but may be present</span>
+<span class="sd">       if the calculation was setup from a CASM configuration or structure.</span>
+
+<span class="sd">    If :func:`CasmV1VaspReportHandler.report` is run on a completed calculation</span>
+<span class="sd">    directory, it will parse the results from the &quot;OUTCAR&quot; or &quot;OUTCAR.gz&quot; file, and</span>
+<span class="sd">    store the resulting &quot;structure_with_properties.json&quot; file in the calculation</span>
+<span class="sd">    directory. It will also collect the &quot;config.json&quot; and &quot;structure.json&quot; values if</span>
+<span class="sd">    they are present.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">calc_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">tool</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calc_id : str</span>
+<span class="sd">            The calculation ID. This is used to identify calculation directories, which</span>
+<span class="sd">            are expected to be named &quot;calctype.&quot; + calc_id. For example, if calc_id is</span>
+<span class="sd">            &quot;gga&quot;, then the calculation directories are expected to be named</span>
+<span class="sd">            &quot;calctype.gga&quot;.</span>
+<span class="sd">        update: bool = False</span>
+<span class="sd">            If True, the report will be run even if the</span>
+<span class="sd">            &quot;structure_with_properties.json&quot; file already exists in the calculation</span>
+<span class="sd">            directory. If False, the report will only be run if that file does not</span>
+<span class="sd">            exist.</span>
+<span class="sd">        tool : Optional[Any] = None</span>
+<span class="sd">            A tool to use for reporting results, expected to have a `report` method</span>
+<span class="sd">            with signature ``tool.report(calc_dir: pathlib.Path)``. By default,</span>
+<span class="sd">            a :class:`~casm.tools.shared.ase_utils.AseVaspTool` will be created.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">update</span><span class="o">=</span><span class="n">update</span><span class="p">,</span>
+            <span class="n">tool</span><span class="o">=</span><span class="n">tool</span><span class="p">,</span>
+            <span class="n">structure_relpath</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;structure.json&quot;</span><span class="p">,</span>
+            <span class="n">config_relpath</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The calculation ID. This is used to identify calculation directories,</span>
+<span class="sd">        which are expected to be named &quot;calctype.&quot; + calc_id. For example, if calc_id is</span>
+<span class="sd">        &quot;parameter_set_2&quot;, then the calculation directories are expected to be named</span>
+<span class="sd">        &quot;calctype.parameter_set_2&quot;.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CasmV1VaspReportHandler.is_calcdir">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.CasmV1VaspReportHandler.is_calcdir.html#casm.tools.calc.handlers.CasmV1VaspReportHandler.is_calcdir">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_calcdir</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a path is a calculation directory</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        If `path` is a directory and its name is ``&quot;calctype.&quot; + self.calc_id``, then</span>
+<span class="sd">        it is a calculation directory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path: Union[pathlib.Path, tarfile.TarInfo]</span>
+<span class="sd">            The path or archive member to check.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value: bool</span>
+<span class="sd">            True if the path is a calculation directory, False otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">):</span>
+            <span class="c1"># If path is a tarfile member, check its name</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="s2">&quot;calctype.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_id</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_member_exists</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="s2">&quot;calctype.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CasmV1VaspReportHandler.output_path">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.CasmV1VaspReportHandler.output_path.html#casm.tools.calc.handlers.CasmV1VaspReportHandler.output_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_path</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make the path for an output file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target: pathlib.Path</span>
+<span class="sd">            The target directory or file for which the output is constructed.</span>
+<span class="sd">        suffix: str</span>
+<span class="sd">            A suffix to append to the target, e.g. &quot;.complete.json&quot; or &quot;.results.json&quot;,</span>
+<span class="sd">            to create the output path.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        path: pathlib.Path</span>
+<span class="sd">            An output path. If `target` is ``&quot;path/to/training_data&quot;` and `suffix` is</span>
+<span class="sd">            ``&quot;.results.json&quot;``, then the output path will be</span>
+<span class="sd">            ``&quot;path/to/training_data.&lt;calc_id&gt;.results.json&quot;``.</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">target</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_id</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CasmVaspReportHandler">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.CasmVaspReportHandler.html#casm.tools.calc.handlers.CasmVaspReportHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CasmVaspReportHandler</span><span class="p">(</span><span class="n">VaspArchiveReportHandler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handler for reporting VASP calculations</span>
+
+<span class="sd">    This works for calculations which can be identified by a &quot;status.json&quot; file</span>
+<span class="sd">    in the calculation directory:</span>
+
+<span class="sd">    .. code-block:: text</span>
+
+<span class="sd">        dir/</span>
+<span class="sd">        ├── &lt;configuration_name&gt;/</span>
+<span class="sd">        │   ├── config.json</span>
+<span class="sd">        │   ├── structure.json</span>
+<span class="sd">        │   ├── status.json</span>
+<span class="sd">        │   ├── ...</span>
+<span class="sd">        │   ├── run.final/OUTCAR</span>
+<span class="sd">        │   ├── run.final/OUTCAR.gz</span>
+<span class="sd">        │   └── structure_with_properties.json</span>
+<span class="sd">        ...</span>
+
+<span class="sd">    When the handler is used is run on `dir`, it assumes that:</span>
+
+<span class="sd">    1. Any subdirectory containing a file named &quot;status.json&quot; is a calculation</span>
+<span class="sd">       directory.</span>
+<span class="sd">    2. A calculation directory with a &quot;status.json&quot; file containing</span>
+<span class="sd">       ``&quot;status&quot;: &quot;complete&quot;`` in a top-level JSON attribute is complete. Otherwise,</span>
+<span class="sd">       the calculation is incomplete. Completed calculations are expected to have</span>
+<span class="sd">       an &quot;OUTCAR&quot; or &quot;OUTCAR.gz&quot; file in a &quot;run.final&quot; directory.</span>
+
+<span class="sd">    If :func:`CasmVaspReportHandler.report` is run on a completed calculation</span>
+<span class="sd">    directory, it will parse the results from the &quot;OUTCAR&quot; or &quot;OUTCAR.gz&quot; file, and</span>
+<span class="sd">    store the resulting &quot;structure_with_properties.json&quot; file in the calculation</span>
+<span class="sd">    directory.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">tool</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        update: bool = False</span>
+<span class="sd">            If True, the report will be run even if the</span>
+<span class="sd">            &quot;structure_with_properties.json&quot; file already exists in the calculation</span>
+<span class="sd">            directory. If False, the report will only be run if that file does not</span>
+<span class="sd">            exist.</span>
+<span class="sd">        tool : Optional[Any] = None</span>
+<span class="sd">            A tool to use for reporting results, expected to have a `report` method</span>
+<span class="sd">            with signature ``tool.report(calc_dir: pathlib.Path)``. By default,</span>
+<span class="sd">            an `AseVaspTool` will be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">update</span><span class="o">=</span><span class="n">update</span><span class="p">,</span>
+            <span class="n">tool</span><span class="o">=</span><span class="n">tool</span><span class="p">,</span>
+            <span class="n">structure_relpath</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;structure.json&quot;</span><span class="p">),</span>
+            <span class="n">config_relpath</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="CasmVaspReportHandler.is_calcdir">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.CasmVaspReportHandler.is_calcdir.html#casm.tools.calc.handlers.CasmVaspReportHandler.is_calcdir">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_calcdir</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a path is a calculation directory</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        If `path` is a directory and its name is ``&quot;calctype.&quot; + self.calc_id``, then</span>
+<span class="sd">        it is a calculation directory.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path: Union[pathlib.Path, tarfile.TarInfo]</span>
+<span class="sd">            The path or archive member to check.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value: bool</span>
+<span class="sd">            True if the path is a calculation directory, False otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_member_exists</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CasmVaspReportHandler.output_path">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.calc.handlers.CasmVaspReportHandler.output_path.html#casm.tools.calc.handlers.CasmVaspReportHandler.output_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">output_path</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make the path for an output file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target: pathlib.Path</span>
+<span class="sd">            The target directory or file for which the output is constructed.</span>
+<span class="sd">        suffix: str</span>
+<span class="sd">            A suffix to append to the target, e.g. &quot;.complete.json&quot; or &quot;.results.json&quot;,</span>
+<span class="sd">            to create the output path.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        path: pathlib.Path</span>
+<span class="sd">            An output path. If `target` is ``&quot;path/to/training_data&quot;` and `suffix` is</span>
+<span class="sd">            ``&quot;.results.json&quot;``, then the output path will be</span>
+<span class="sd">            ``&quot;path/to/training_data.results.json&quot;``.</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">target</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

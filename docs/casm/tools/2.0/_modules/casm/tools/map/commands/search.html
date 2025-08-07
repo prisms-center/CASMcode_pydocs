@@ -1,0 +1,1288 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casm.tools.map.commands.search &#8212; casm-tools 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/tools/map/commands/search';</script>
+    <link rel="icon" href="../../../../../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">casm-tools</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_tools/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-tools/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../reference/casm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_tools/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-tools/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">casm.tools.map.commands.search</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for casm.tools.map.commands.search</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implements ``casm-map search ...``&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+
+
+<span class="c1"># &lt;-- max width = 80 characters                            --&gt; #</span>
+<span class="c1">################################################################</span>
+<div class="viewcode-block" id="print_desc">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.map.commands.search.print_desc.html#casm.tools.map.commands.search.print_desc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_desc</span><span class="p">():</span>
+    <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># The `casm-map search` command:</span>
+
+<span class="s2">## Method</span>
+
+<span class="s2">The `casm-map search` command is intended for finding mappings </span>
+<span class="s2">between two crystal structures that have the same stoichiometry, </span>
+<span class="s2">and where no sites that allow vacancies or alloying exist in the</span>
+<span class="s2">parent structure.</span>
+
+<span class="s2">The `casm-map search` command reads a parent and child structure </span>
+<span class="s2">file, validates the structures have the same stoichiometry, </span>
+<span class="s2">searches for mappings, and writes the results to a </span>
+<span class="s2">`mappings.json` file in a specified results directory. </span>
+
+<span class="s2">Mappings are found using the search method described in Ref. </span>
+<span class="s2">[2], applied to the case that the parent structure specifies one</span>
+<span class="s2">and only one atom type occupying each site. In summary, this does</span>
+<span class="s2">the following:</span>
+
+<span class="s2">1. Make superstructures of the child structure, for a specified </span>
+<span class="s2">   range of sizes. The default includes only the minimum size </span>
+<span class="s2">   superstructures which have the same number of atoms as a </span>
+<span class="s2">   superstructure of the parent structure.</span>
+<span class="s2">2. For each child superstructure, make superstructures of the </span>
+<span class="s2">   parent structure which have the same number of atoms as the </span>
+<span class="s2">   child superstructure.</span>
+<span class="s2">3. For each pair of parent and child superstructures, find the </span>
+<span class="s2">   `lattice_k_best` lowest lattice cost mappings. </span>
+<span class="s2">4. For each lattice mapping, use atoms from the minority type to </span>
+<span class="s2">   generate a minimal set of trial translations. For each trial </span>
+<span class="s2">   translation, find the best structure mapping and add it as a </span>
+<span class="s2">   &quot;node&quot; in the search queue.</span>
+<span class="s2">5. While there are nodes in the search queue, find next-best </span>
+<span class="s2">   structure mappings, keeping the `k_best` mappings with the </span>
+<span class="s2">   lowest total mapping cost.</span>
+<span class="s2">6. Deduplicate the results by comparing interpolated structures </span>
+<span class="s2">   on the path between the parent and mapped child.</span>
+
+
+<span class="s2">## Results</span>
+
+<span class="s2">Results are written to a JSON file in the specified results </span>
+<span class="s2">directory and a summary table is printed to the console.</span>
+
+<span class="s2">Results are written to:</span>
+
+<span class="s2">    &lt;results_dir&gt;/</span>
+<span class="s2">    ├── mappings.json</span>
+<span class="s2">    └── options_history.json</span>
+
+
+<span class="s2">The `mappings.json` output file contains:</span>
+
+<span class="s2">    &quot;parent&quot;: libcasm.xtal.Structure</span>
+<span class="s2">        The parent structure.</span>
+<span class="s2">    &quot;child&quot;: libcasm.xtal.Structure</span>
+<span class="s2">        The child structure.</span>
+<span class="s2">    &quot;mappings&quot;: list[libcasm.mapping.info.ScoredStructureMapping]</span>
+<span class="s2">        The list of scored structure mappings found between a </span>
+<span class="s2">        superstructure of the parent and a superstructure of the </span>
+<span class="s2">        child.</span>
+<span class="s2">    &quot;uuids&quot;: list[str]</span>
+<span class="s2">        A list of UUIDs for the mappings, one per mapping.</span>
+
+<span class="s2">The `options_history.json` output file is a JSON list with the </span>
+<span class="s2">history of options used for the search. When `casm-map search` </span>
+<span class="s2">is re-run with the `--merge` option new results are merged with </span>
+<span class="s2">existing results and the options used are appended to the list </span>
+<span class="s2">in this file.</span>
+
+
+<span class="s2">## Mapping non-primitive structures</span>
+
+<span class="s2">For a general mapping search, it is recommended to use primitive </span>
+<span class="s2">cells of the structures being mapped. The program will continue </span>
+<span class="s2">if the input structures are not primitive, but it will also </span>
+<span class="s2">print a notice and write files named `parent.primitive.json` and </span>
+<span class="s2">`child.primitive.json` containing the primitive structures. </span>
+<span class="s2">These can be used to re-run the search command with the </span>
+<span class="s2">primitive structures.</span>
+
+
+<span class="s2">## Mapping relaxations from known starting structures</span>
+
+<span class="s2">When mapping a relaxed structure (child) from a known starting </span>
+<span class="s2">structure (parent), the `--fix-parent` option can be used to </span>
+<span class="s2">skip searching over parent superstructures and lattice </span>
+<span class="s2">reorientations. The deformation gradient is still calculated and</span>
+<span class="s2">atom mapping is still performed.</span>
+
+
+<span class="s2">## Forcing and suppressing atom mappings</span>
+
+<span class="s2">The `--forced-on` option can be used to constrain the atom</span>
+<span class="s2">mapping search and force the mapping of specific atoms from</span>
+<span class="s2">the child structure to specific sites in the parent structure.</span>
+
+<span class="s2">The `--forced-off` option can be used to suppress the mapping</span>
+<span class="s2">of specific atoms from the child structure to specific atoms in</span>
+<span class="s2">the parent structure.</span>
+
+
+<span class="s2">## Mapping relaxations with fixed atoms</span>
+
+<span class="s2">By default, mean displacements are removed from the atom </span>
+<span class="s2">mappings. For relaxations where some atom positions are fixed, </span>
+<span class="s2">it may be desirable to suppress this with the</span>
+<span class="s2">`--no-remove-mean-displacement` option. If this option is </span>
+<span class="s2">provided, then `--forced-on` must be specify at least one atom </span>
+<span class="s2">mapping. A trial translation resulting in an displacement of</span>
+<span class="s2">zero is generated for each forced mapping.</span>
+
+
+<span class="s2">## Parameters</span>
+
+<span class="s2">Total mapping options:</span>
+
+<span class="s2">--max-n-atoms: Optional[int]=None</span>
+<span class="s2">    The maximum number of atoms in superstructures to include</span>
+<span class="s2">    in the search. By default, the least common multiple of </span>
+<span class="s2">    the number of atoms in the child and parent structures is</span>
+<span class="s2">    used.</span>
+<span class="s2">--min-n-atoms: int=1</span>
+<span class="s2">    The minimum number of atoms in superstructures to include</span>
+<span class="s2">    in the search.</span>
+<span class="s2">--min-total-cost: float=0.0</span>
+<span class="s2">    Only mappings with a total cost greater than or equal to </span>
+<span class="s2">    this value are included in the final results.</span>
+<span class="s2">--max-total-cost: float=0.3</span>
+<span class="s2">    Only mappings with a total cost less than or equal to this </span>
+<span class="s2">    value are included in the final results. </span>
+<span class="s2">--k-best: int=100</span>
+<span class="s2">    Keep the `k_best` mappings with lowest total cost that also </span>
+<span class="s2">    satisfy the min/max total cost criteria. Approximate ties </span>
+<span class="s2">    with the current `k_best`-ranked result are also kept.</span>
+<span class="s2">--cost-tol: float=1e-5</span>
+<span class="s2">    The cost tolerance for approximate ties. If the total cost </span>
+<span class="s2">    of a mapping is within this value of the current </span>
+<span class="s2">    `k_best`-ranked result, it is also kept in the results.</span>
+<span class="s2">--lattice-cost-weight: float=0.5</span>
+<span class="s2">    The fraction of the total cost that is due to the lattice </span>
+<span class="s2">    mapping cost. The remaining fraction is due to the atom </span>
+<span class="s2">    mapping cost.</span>
+<span class="s2">--iso-cost: bool=False</span>
+<span class="s2">    If given, use isotropic strain and displacement costs for</span>
+<span class="s2">    the lattice and atom mapping costs, respectively. If not</span>
+<span class="s2">    given, use symmetry-breaking strain and displacement costs.</span>
+<span class="s2">    To set separately, use `--iso-strain-cost` or </span>
+<span class="s2">    `--iso-disp-cost`.</span>
+<span class="s2">--no-remove-mean-displacement: bool=False</span>
+<span class="s2">    If given, do not remove the mean displacement from the </span>
+<span class="s2">    structure mappings. By default, the mean displacement is</span>
+<span class="s2">    removed from the structure mappings.</span>
+<span class="s2">--fix-parent: bool=False</span>
+<span class="s2">    If given, skip searching over parent superstructures and </span>
+<span class="s2">    lattice reorientations. The deformation gradient is still </span>
+<span class="s2">    calculated and atom mapping is still performed. The parent</span>
+<span class="s2">    and child are required to have the same number of atoms.</span>
+<span class="s2">    </span>
+
+<span class="s2">Lattice mapping options:</span>
+
+<span class="s2">--iso-strain-cost: bool=False</span>
+<span class="s2">    If given, use the isotropic strain cost for the lattice </span>
+<span class="s2">    mapping cost.</span>
+<span class="s2">--min-lattice-cost: float=0.0</span>
+<span class="s2">    Only lattice mappings with a lattice cost greater than or </span>
+<span class="s2">    equal to this value are used to find structure mappings.</span>
+<span class="s2">--max-lattice-cost: float=0.6</span>
+<span class="s2">    Only lattice mappings with a lattice cost less than or equal</span>
+<span class="s2">    to this value are used to find structure mappings.</span>
+<span class="s2">--lattice-k-best: int=10</span>
+<span class="s2">    Use the `lattice_k_best` lattice mappings with lowest </span>
+<span class="s2">    lattice cost (subject to the `min_lattice_cost` / </span>
+<span class="s2">    `max_lattice_cost` limits) for each parent/child </span>
+<span class="s2">    superstructure pair to find structure mappings.</span>
+<span class="s2">--lattice-reorientation-range: int=1</span>
+<span class="s2">    The absolute value of the maximum element in the lattice </span>
+<span class="s2">    mapping reorientation matrix, N. This determines how many </span>
+<span class="s2">    equivalent lattice vector reorientations are checked. </span>
+<span class="s2">    Increasing the value results in more checks. The value 1 is </span>
+<span class="s2">    generally expected to be sufficient because reduced cell </span>
+<span class="s2">    lattices are compared internally.</span>
+
+<span class="s2">Atom mapping options:</span>
+
+<span class="s2">--iso-disp-cost: bool=False</span>
+<span class="s2">    If given, use the isotropic displacement cost method for </span>
+<span class="s2">    the atom mapping cost.</span>
+<span class="s2">--forced-on: Optional[str]=None</span>
+<span class="s2">    If given, a JSON representation of a list[tuple[int,int]]</span>
+<span class="s2">    giving forced atom mapping. The first element of each tuple </span>
+<span class="s2">    is a parent structure site index and the second element is a</span>
+<span class="s2">    child structure atom index. Indices start from 0. For </span>
+<span class="s2">    example, `--forced-on &quot;[[0,0],[2,3]]&quot;` specifies that the </span>
+<span class="s2">    first atom in the child structure (index 0) must be mapped </span>
+<span class="s2">    to the first site (index 0) in the parent structure, and the</span>
+<span class="s2">    fourth atom (index 3) in the child structure must be mapped </span>
+<span class="s2">    to the third site (index 2) in the parent structure.</span>
+<span class="s2">--forced-off: Optional[str]=None</span>
+<span class="s2">    If given, a JSON representation of a list[tuple[int,int]] </span>
+<span class="s2">    giving suppressed atom mappings. The first element of each </span>
+<span class="s2">    tuple is a parent structure site index and the second </span>
+<span class="s2">    element is a child structure atom index. Indices start from </span>
+<span class="s2">    0. For example, `--forced-off &quot;[[0,2],[0,3]]&quot;` specifies </span>
+<span class="s2">    that the third atom (index 2) in the child structure must </span>
+<span class="s2">    not be mapped to the first site (index 0) in the parent </span>
+<span class="s2">    structure, and the fourth atom (index 3) in the child </span>
+<span class="s2">    structure must also not be mapped to the first site </span>
+<span class="s2">    (index 0) in the parent structure.</span>
+<span class="s2">    </span>
+<span class="s2">Deduplication options:</span>
+
+<span class="s2">--dedup-interp-factors: Optional[str]=None</span>
+<span class="s2">    If given, a JSON representation of a list[float] giving </span>
+<span class="s2">    interpolation factors to use for deduplication. A value of</span>
+<span class="s2">    0.0 corresponds to the parent structure and a value of</span>
+<span class="s2">    1.0 corresponds to the mapped child structure. If None, the </span>
+<span class="s2">    default, equivalent to ``&quot;[0.5,1.0]&quot;``, is used.</span>
+
+<span class="s2">Input options:</span>
+
+<span class="s2">--format: Optional[str]=None</span>
+<span class="s2">    Specify the format for reading the structure files. If not </span>
+<span class="s2">    specified, the format is inferred from the file suffix. </span>
+<span class="s2">    Supported formats include &#39;vasp&#39;, &#39;casm&#39;, and any format </span>
+<span class="s2">    recognized by `ase.io.read` if ASE is installed.</span>
+<span class="s2">--parent-format: Optional[str]=None</span>
+<span class="s2">    Same as `--format`, but overrides it to specify the format </span>
+<span class="s2">    for reading the parent structure file.</span>
+<span class="s2">--child-format: Optional[str]=None</span>
+<span class="s2">    Same as `--format`, but overrides it to specify the format </span>
+<span class="s2">    for reading the child structure file.</span>
+<span class="s2">--options: Optional[pathlib.Path]=None</span>
+<span class="s2">    Path to a JSON file containing options to use instead of</span>
+<span class="s2">    reading them from command line arguments. See (TODO) for</span>
+<span class="s2">    the format of the options file.</span>
+<span class="s2">    </span>
+<span class="s2">Output options:</span>
+
+<span class="s2">--results-dir: str=&quot;results&quot;</span>
+<span class="s2">    Directory where results are written. A new directory will be </span>
+<span class="s2">    created. If the directory already exists, the program exits </span>
+<span class="s2">    with an error unless --merge is used.</span>
+<span class="s2">--merge: bool=False</span>
+<span class="s2">    If given, read existing results and merge new results. If </span>
+<span class="s2">    not given, the program will exit with an error if the </span>
+<span class="s2">    results directory already exists.</span>
+
+<span class="s2">Additional options:</span>
+
+<span class="s2">--next: bool=False</span>
+<span class="s2">    Shortcut which reads the last used options from the results</span>
+<span class="s2">    directory (if results exist) and increases `--max-n-atoms`</span>
+<span class="s2">    and `--min-n-atoms` to the next greatest common multiple of </span>
+<span class="s2">    the number of atoms in the child and parent structures while </span>
+<span class="s2">    keeping all other options the same. New results are merged </span>
+<span class="s2">    with existing results. If no results exist, only the least </span>
+<span class="s2">    common multiple of the number of atoms in the child and</span>
+<span class="s2">    parent structures is searched.</span>
+<span class="s2">    </span>
+
+<span class="s2">## Citing</span>
+
+<span class="s2">A suggested way to cite this program is as follows:</span>
+
+<span class="s2">&quot;Structure mappings were found by the method of Thomas et al. </span>
+<span class="s2">[1] using the `casm-map` program [2] provided by CASM [3].&quot;</span>
+
+<span class="s2">## References</span>
+
+<span class="s2">[1] J. C. Thomas, A. R. Natarajan, and A. Van der Ven, Comparing </span>
+<span class="s2">    crystal structures with symmetry and geometry, npj </span>
+<span class="s2">    Computational Materials, 7 (2021), 164.</span>
+<span class="s2">[2] B. Puchala, J. Thomas, and A. Van der Ven, &quot;casm-map...&quot;.</span>
+<span class="s2">[3] B. Puchala, J. C. Thomas, A. R. Natarajan, J. G. Goiri, </span>
+<span class="s2">    S. S. Behara, J. L. Kaufman, A. Van der Ven, CASM—A software</span>
+<span class="s2">    package for first-principles based study of multicomponent </span>
+<span class="s2">    crystalline solids, Computational Materials Science 217 </span>
+<span class="s2">    (2023) 111897.</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span></div>
+
+
+
+<span class="n">_other_desc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">--parent-superstructure: Optional[pathlib.Path]=None</span>
+<span class="s2">    A file containing the parent superstructure. If given, skip </span>
+<span class="s2">    searching over superstructures and lattice reorientations. </span>
+<span class="s2">    The deformation gradient is still calculated and atom </span>
+<span class="s2">    mapping is still performed. The specified file must be a </span>
+<span class="s2">    valid structure file, but only the lattice is actually used.</span>
+<span class="s2">--output-format: Optional[str]=None</span>
+<span class="s2">    The format for writing structure files. If not specified, </span>
+<span class="s2">    the format is inferred from the child format. Supported </span>
+<span class="s2">    formats include &#39;vasp&#39;, &#39;casm&#39;, and any format recognized by</span>
+<span class="s2">    `ase.io.write` if ASE is installed.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_parent_format</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">parent_format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="o">.</span><span class="n">parent_format</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_child_format</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">child_format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="o">.</span><span class="n">child_format</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="run_search">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.map.commands.search.run_search.html#casm.tools.map.commands.search.run_search">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_search</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements ``casm-map search ...``</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    args : argparse.Namespace</span>
+<span class="sd">        The parsed arguments from the command line.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    code: int</span>
+<span class="sd">        A return code indicating success (0) or failure (non-zero).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.map</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">StructureMappingSearch</span><span class="p">,</span>
+        <span class="n">StructureMappingSearchOptions</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.json_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_optional</span><span class="p">,</span> <span class="n">read_required</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.structure_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_structure</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">desc</span><span class="p">:</span>
+        <span class="n">print_desc</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">prim</span><span class="p">:</span>
+        <span class="n">parent_prim</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">read_required</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">prim</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ParentPrim:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">parent_prim</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">parent_prim</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">read_structure</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">_get_parent_format</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parent:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="n">child</span> <span class="o">=</span> <span class="n">read_structure</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">child</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">_get_child_format</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Child:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read_required</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">StructureMappingSearchOptions</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">lattice_mapping_cost_method</span> <span class="o">=</span> <span class="s2">&quot;symmetry_breaking_strain_cost&quot;</span>
+        <span class="n">atom_mapping_cost_method</span> <span class="o">=</span> <span class="s2">&quot;symmetry_breaking_disp_cost&quot;</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">iso_cost</span><span class="p">:</span>
+            <span class="n">lattice_mapping_cost_method</span> <span class="o">=</span> <span class="s2">&quot;isotropic_strain_cost&quot;</span>
+            <span class="n">atom_mapping_cost_method</span> <span class="o">=</span> <span class="s2">&quot;isotropic_disp_cost&quot;</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">iso_strain_cost</span><span class="p">:</span>
+            <span class="n">lattice_mapping_cost_method</span> <span class="o">=</span> <span class="s2">&quot;isotropic_strain_cost&quot;</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">iso_disp_cost</span><span class="p">:</span>
+            <span class="n">atom_mapping_cost_method</span> <span class="o">=</span> <span class="s2">&quot;isotropic_disp_cost&quot;</span>
+
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">StructureMappingSearchOptions</span><span class="p">(</span>
+            <span class="n">max_n_atoms</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">max_n_atoms</span><span class="p">,</span>
+            <span class="n">min_n_atoms</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">min_n_atoms</span><span class="p">,</span>
+            <span class="n">child_transformation_matrix_to_super_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">parent_transformation_matrix_to_super_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">total_min_cost</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">min_total_cost</span><span class="p">,</span>
+            <span class="n">total_max_cost</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">max_total_cost</span><span class="p">,</span>
+            <span class="n">total_k_best</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">k_best</span><span class="p">,</span>
+            <span class="n">no_remove_mean_displacement</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">no_remove_mean_displacement</span><span class="p">,</span>
+            <span class="n">fix_parent</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">fix_parent</span><span class="p">,</span>
+            <span class="n">lattice_cost_weight</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">lattice_cost_weight</span><span class="p">,</span>
+            <span class="n">cost_tol</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">cost_tol</span><span class="p">,</span>
+            <span class="n">lattice_mapping_min_cost</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">min_lattice_cost</span><span class="p">,</span>
+            <span class="n">lattice_mapping_max_cost</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">max_lattice_cost</span><span class="p">,</span>
+            <span class="n">lattice_mapping_k_best</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">lattice_k_best</span><span class="p">,</span>
+            <span class="n">lattice_mapping_reorientation_range</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">lattice_reorientation_range</span><span class="p">,</span>
+            <span class="n">lattice_mapping_cost_method</span><span class="o">=</span><span class="n">lattice_mapping_cost_method</span><span class="p">,</span>
+            <span class="n">atom_mapping_cost_method</span><span class="o">=</span><span class="n">atom_mapping_cost_method</span><span class="p">,</span>
+            <span class="n">forced_on</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">forced_on</span><span class="p">,</span>
+            <span class="n">forced_off</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">forced_off</span><span class="p">,</span>
+            <span class="n">deduplication_interpolation_factors</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dedup_interp_factors</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># --merge option</span>
+    <span class="n">merge</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">merge</span>
+
+    <span class="c1"># --next option:</span>
+    <span class="c1">#     run search with next greatest common multiple number of atoms and</span>
+    <span class="c1">#     all other options the same; set merge=True</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+        <span class="n">n_atoms_parent</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">atom_type</span><span class="p">())</span>
+        <span class="n">n_atoms_child</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">atom_type</span><span class="p">())</span>
+        <span class="n">n_atoms_lcm</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">n_atoms_parent</span><span class="p">,</span> <span class="n">n_atoms_child</span><span class="p">)</span>
+
+        <span class="n">results_dir</span> <span class="o">=</span> <span class="s2">&quot;results&quot;</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">results_dir</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">results_dir</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read_optional</span><span class="p">(</span><span class="n">results_dir</span> <span class="o">/</span> <span class="s2">&quot;options_history.json&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+        <span class="n">options_history</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">StructureMappingSearchOptions</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span>
+        <span class="p">]</span>
+        <span class="n">last_max_n_atoms</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">options_history</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">options_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max_n_atoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">last_max_n_atoms</span> <span class="o">=</span> <span class="n">n_atoms_lcm</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">last_max_n_atoms</span> <span class="o">=</span> <span class="n">options_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max_n_atoms</span>
+
+        <span class="k">if</span> <span class="n">last_max_n_atoms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">next_max_n_atoms</span> <span class="o">=</span> <span class="n">n_atoms_lcm</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">next_max_n_atoms</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">next_max_n_atoms</span> <span class="o">&lt;=</span> <span class="n">last_max_n_atoms</span><span class="p">:</span>
+                <span class="n">next_max_n_atoms</span> <span class="o">+=</span> <span class="n">n_atoms_lcm</span>
+
+        <span class="n">opt</span><span class="o">.</span><span class="n">max_n_atoms</span> <span class="o">=</span> <span class="n">next_max_n_atoms</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">min_n_atoms</span> <span class="o">=</span> <span class="n">next_max_n_atoms</span>
+        <span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">--next: </span>
+<span class="s2">    Expanding search to next greatest common multiple number</span>
+<span class="s2">    of atoms (</span><span class="si">{</span><span class="n">next_max_n_atoms</span><span class="si">}</span><span class="s2"> atoms) and merging results.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Options:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="n">StructureMappingSearch</span><span class="p">(</span><span class="n">opt</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span>
+        <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span>
+        <span class="n">parent_prim</span><span class="o">=</span><span class="n">parent_prim</span><span class="p">,</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">child</span><span class="p">,</span>
+        <span class="n">results_dir</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">results_dir</span><span class="p">,</span>
+        <span class="n">merge</span><span class="o">=</span><span class="n">merge</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">code</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_forced_on</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+    <span class="n">type_exception</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span>
+        <span class="s2">&quot;The --forced-on option must be a JSON list[tuple[int,int]].&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">value_exception</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span>
+        <span class="s2">&quot;For the --forced-on option, &quot;</span>
+        <span class="s2">&quot;all parent site indices (first index in each pair) must be unique, &quot;</span>
+        <span class="s2">&quot;and all child atom indices (second index in each pair) must be unique.&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">forced_on</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">type_exception</span>
+
+    <span class="c1"># Ensure that forced_on is a list of tuples[int, int]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">forced_on</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">type_exception</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">forced_on</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">type_exception</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">type_exception</span>
+
+    <span class="c1"># check that all first indices are unique:</span>
+    <span class="n">seen_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">forced_on</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">seen_indices</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">value_exception</span>
+        <span class="n">seen_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># check that all second indices are unique:</span>
+    <span class="n">seen_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">forced_on</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">seen_indices</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">value_exception</span>
+        <span class="n">seen_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">forced_on</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_forced_off</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+    <span class="n">exception</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span>
+        <span class="s2">&quot;The --forced-off option must be a JSON list[tuple[int,int]].&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">forced_off</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exception</span>
+
+    <span class="c1"># Ensure that forced_off is a list of tuples[int, int]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">forced_off</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">exception</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">forced_off</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exception</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">exception</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">forced_off</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_dedup_interp_factors</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+    <span class="n">exception</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span>
+        <span class="s2">&quot;The --dedup-interp-factors option must be a JSON list of floats.&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dedup_interp_factors</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exception</span>
+
+    <span class="c1"># Ensure that dedup_interp_factors is a list of floats</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dedup_interp_factors</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">exception</span>
+
+    <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">dedup_interp_factors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">exception</span>
+
+    <span class="k">return</span> <span class="n">dedup_interp_factors</span>
+
+
+<div class="viewcode-block" id="make_search_parser">
+<a class="viewcode-back" href="../../../../../reference/casm/_autosummary/casm.tools.map.commands.search.make_search_parser.html#casm.tools.map.commands.search.make_search_parser">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_search_parser</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="c1">### casm-map search ...</span>
+    <span class="n">search</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;search&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Search for structure mappings&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">search</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">run_search</span><span class="p">)</span>
+
+    <span class="c1">### Positional arguments</span>
+    <span class="n">positional</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Positional arguments&quot;</span><span class="p">)</span>
+    <span class="n">positional</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Parent structure file&quot;</span><span class="p">)</span>
+    <span class="n">positional</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Child structure file&quot;</span><span class="p">)</span>
+
+    <span class="c1">### Total mapping options</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Total mapping options&quot;</span><span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--min-n-atoms&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Minimum number of atoms in superstructures (default=1).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--max-n-atoms&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Maximum number of atoms in superstructures &quot;</span>
+            <span class="s2">&quot;(default= lcm of parent/child ).&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--min-total-cost&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Minimum total cost (default=0.0).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--max-total-cost&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Maximum total cost (default=0.3).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--k-best&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Total number of mapping results.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--cost-tol&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Cost tolerance for approximate ties (default=1e-5).&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--lattice-cost-weight&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Fraction of total cost due to lattice cost (default=0.5).&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--iso-cost&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Use isotropic strain and disp costs &quot;</span>
+            <span class="s2">&quot;(default= use symmetry-breaking strain and disp costs).&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--no-remove-mean-displacement&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Do not remove the mean displacement from the structure mappings. &quot;</span>
+            <span class="s2">&quot;(default= remove mean displacement ).&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="c1"># total.add_argument(</span>
+    <span class="c1">#     &quot;--parent-superstructure&quot;,</span>
+    <span class="c1">#     metavar=&quot;PARENT_SUPERSTRUCTURE&quot;,</span>
+    <span class="c1">#     type=pathlib.Path,</span>
+    <span class="c1">#     default=None,</span>
+    <span class="c1">#     help=(</span>
+    <span class="c1">#         &quot;Parent superstructure file. Fixes the parent superstructure using &quot;</span>
+    <span class="c1">#         &quot;the lattice of the specified structure file &quot;</span>
+    <span class="c1">#         &quot;(default= search over parent superstructures ).&quot;</span>
+    <span class="c1">#     ),</span>
+    <span class="c1"># )</span>
+    <span class="n">total</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--fix-parent&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Map to parent structure as provided; skip checking superstructures &quot;</span>
+            <span class="s2">&quot;and lattice reorientations.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Lattice mapping options</span>
+    <span class="n">latmap</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Lattice mapping options&quot;</span><span class="p">)</span>
+    <span class="n">latmap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--iso-strain-cost&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Use isotropic strain cost for the lattice mapping cost. &quot;</span>
+            <span class="s2">&quot;(default= use symmetry-breaking strain cost ).&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">latmap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--min-lattice-cost&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Minimum lattice cost (default=0.0). &quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">latmap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--max-lattice-cost&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Maximum lattice cost (default=1e20). &quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">latmap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--lattice-k-best&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of lattice mappings per parent/child superstructure (default=10).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">latmap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--lattice-reorientation-range&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Max lattice reorientation matrix element (default=1).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Atom mapping options</span>
+    <span class="n">atommap</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Atom mapping options&quot;</span><span class="p">)</span>
+    <span class="n">atommap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--iso-disp-cost&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Use isotropic disp cost for the atom mapping cost. &quot;</span>
+            <span class="s2">&quot;(default= use symmetry-breaking disp cost ).&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">atommap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--forced-on&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">_validate_forced_on</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Force specific atom mappings (JSON list[tuple[int,int]]).&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">atommap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--forced-off&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">_validate_forced_off</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Suppress specific atom mappings (JSON list[tuple[int,int]])&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Deduplication options</span>
+    <span class="n">dedup</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Deduplication options&quot;</span><span class="p">)</span>
+    <span class="n">dedup</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--dedup-interp-factors&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">_validate_dedup_interp_factors</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Interpolation factors for deduplication (JSON list[float]).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Input options</span>
+    <span class="nb">input</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Input options&quot;</span><span class="p">)</span>
+    <span class="nb">input</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--prim&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Read a CASM Prim and map child structure onto allowed sites. It is &quot;</span>
+            <span class="s2">&quot;required to also set --fix-parent).&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nb">input</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--format&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Structure files format (default= inferred from file suffix ).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nb">input</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--parent-format&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Parent structure file format (overrides --format).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nb">input</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--child-format&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Child structure file format (overrides --format).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nb">input</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--options&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;JSON file containing options to use instead of &quot;</span>
+            <span class="s2">&quot;reading them from command line arguments.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Output options</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Output options&quot;</span><span class="p">)</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--results-dir&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">),</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory where results are written (default=results).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--merge&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Merge new results into existing results.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Additional options</span>
+    <span class="n">additional</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Additional options&quot;</span><span class="p">)</span>
+    <span class="n">additional</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--next&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Expand previous search to include next greatest common multiple number &quot;</span>
+            <span class="s2">&quot;of atoms.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1">### Other options:</span>
+    <span class="n">other</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;Other options&quot;</span><span class="p">)</span>
+    <span class="n">other</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--desc&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print an extended description of the method and parameters.&quot;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
