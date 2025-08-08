@@ -32,7 +32,7 @@ Install:
 
     pip install libcasm-global
 
-Docs: `[2.0.6] <../../libcasm/global/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/global/2.0/>`_
 
 Links: |GitHub_global|_ |PyPI_global|_
 
@@ -55,7 +55,7 @@ Install:
 
     pip install libcasm-xtal
 
-Docs: `[2.0.1] <../../libcasm/xtal/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/xtal/2.0/>`_
 
 Links: |GitHub_xtal|_ |PyPI_xtal|_
 
@@ -79,7 +79,7 @@ Install:
 
     pip install libcasm-composition
 
-Docs: `[2.0.0] <../../libcasm/composition/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/composition/2.0/>`_
 
 Links: |GitHub_composition|_ |PyPI_composition|_
 
@@ -105,7 +105,7 @@ Install:
     pip install libcasm-mapping
 
 
-Docs: `[2.0.1] <../../libcasm/mapping/2.0/>`_
+Docs: `[2.3.0] <../../libcasm/mapping/2.0/>`_
 
 Links: |GitHub_mapping|_ |PyPI_mapping|_
 
@@ -134,7 +134,7 @@ Install:
     pip install libcasm-clexulator
 
 
-Docs: `[2.0.0] <../../libcasm/clexulator/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/clexulator/2.0/>`_
 
 Links: |GitHub_clexulator|_ |PyPI_clexulator|_
 
@@ -189,7 +189,7 @@ Install:
     pip install libcasm-configuration
 
 
-Docs: `[2.0.0] <../../libcasm/configuration/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/configuration/2.0/>`_
 
 Links: |GitHub_configuration|_ |PyPI_configuration|_
 
@@ -218,7 +218,7 @@ Configuration:
 - See the `casm-bset documentation <https://prisms-center.github.io/CASMcode_pydocs/casm/bset/2.0/installation.html#environment-variable-configuration>`_ for environment configuration instructions.
 
 
-Docs: `[2.0.0] <../../casm/bset/2.0/>`_
+Docs: `[2.1.0] <../../casm/bset/2.0/>`_
 
 Links: |GitHub_bset|_ |PyPI_bset|_
 
@@ -247,7 +247,7 @@ Install:
     pip install libcasm-monte
 
 
-Docs: `[2.0.0] <../../libcasm/monte/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/monte/2.0/>`_
 
 Links: |GitHub_monte|_ |PyPI_monte|_
 
@@ -264,7 +264,7 @@ Install:
     pip install libcasm-clexmonte
 
 
-Docs: `[2.0.0] <../../libcasm/clexmonte/2.0/>`_
+Docs: `[2.2.0] <../../libcasm/clexmonte/2.0/>`_
 
 Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
