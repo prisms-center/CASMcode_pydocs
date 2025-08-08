@@ -286,8 +286,6 @@ Links: |GitHub_project|_ |PyPI_project|_
 casm-project
 ------------
 
-**Note**: casm-project is under development and not yet released. The interface may change in future releases.
-
 The casm-project package makes it easier to construct, fit, and use a cluster expansion in CASM version >= 2 by:
 
 - providing quick access to the most commonly used methods,
@@ -295,7 +293,7 @@ The casm-project package makes it easier to construct, fit, and use a cluster ex
 - automatically writing the results to the standard location in a CASM project directory.
 
 
-Docs: `[prerelease] <../../casm/project/2.0/>`_
+Docs: `[2.0a1] <../../casm/project/2.0/>`_
 
 Links: |GitHub_project|_ |PyPI_project|_
 
