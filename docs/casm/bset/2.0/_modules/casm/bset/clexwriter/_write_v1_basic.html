@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.clexwriter._write_v1_basic &#8212; casm-bset 2.0.0 documentation</title>
+    <title>casm.bset.clexwriter._write_v1_basic &#8212; casm-bset 2.1.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/documentation_options.js?v=20623aea"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/clexwriter/_write_v1_basic';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.1" />
   </head>
   
   
@@ -390,25 +390,25 @@
                 <article class="bd-article">
                   
   <h1>Source code for casm.bset.clexwriter._write_v1_basic</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">casmclust</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">from</span> <span class="nn">casm.bset.clexwriter._cpp_str</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.clusterography</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmclust</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.clexwriter._cpp_str</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CppFormatProperties</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions</span> <span class="kn">import</span> <span class="n">get_occ_site_functions</span>
-<span class="kn">from</span> <span class="nn">casm.bset.polynomial_functions</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.cluster_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_occ_site_functions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.polynomial_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PolynomialFunction</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PrimNeighborList</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">._methods</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._methods</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">make_neighborhoods</span><span class="p">,</span>
     <span class="n">make_orbit_bfuncs</span><span class="p">,</span>
     <span class="n">make_site_bfuncs</span><span class="p">,</span>
@@ -417,14 +417,14 @@
 
 <div class="viewcode-block" id="WriterV1Basic">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.WriterV1Basic.html#casm.bset.clexwriter.WriterV1Basic">[docs]</a>
-<span class="k">class</span> <span class="nc">WriterV1Basic</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WriterV1Basic</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates the variables needed for the `v1.basic` Clexulator, the</span>
 <span class="sd">    standard CASM v1 compatible Clexulator (no automatic differentiation)&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="WriterV1Basic.template_name">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.WriterV1Basic.template_name.html#casm.bset.clexwriter.WriterV1Basic.template_name">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">template_name</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">template_name</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The name of the template file used by this writer</span>
 
 <span class="sd">        Returns</span>
@@ -437,7 +437,7 @@
         <span class="k">return</span> <span class="s2">&quot;v1.basic/Clexulator.cpp&quot;</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -716,7 +716,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">## set nlist_size</span>
-        <span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
         <span class="n">nlist_size</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">bijk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete_neighborhood</span><span class="p">[</span><span class="s2">&quot;sites&quot;</span><span class="p">]:</span>
@@ -982,7 +982,7 @@
 
 <div class="viewcode-block" id="WriterV1Basic.variables">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.clexwriter.WriterV1Basic.variables.html#casm.bset.clexwriter.WriterV1Basic.variables">[docs]</a>
-    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a dictionary with variables to be rendered using a Jinja2 template.</span>
 
 <span class="sd">        Returns</span>

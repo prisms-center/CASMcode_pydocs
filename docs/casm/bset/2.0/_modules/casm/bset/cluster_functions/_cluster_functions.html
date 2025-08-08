@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.0.0 documentation</title>
+    <title>casm.bset.cluster_functions._cluster_functions &#8212; casm-bset 2.1.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/documentation_options.js?v=20623aea"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_cluster_functions';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.1" />
   </head>
   
   
@@ -390,46 +390,46 @@
                 <article class="bd-article">
                   
   <h1>Source code for casm.bset.cluster_functions._cluster_functions</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">casmclust</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration.io</span> <span class="k">as</span> <span class="nn">config_io</span>
-<span class="kn">import</span> <span class="nn">libcasm.sym_info</span> <span class="k">as</span> <span class="nn">sym_info</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
-<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._discrete_functions</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.clusterography</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmclust</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">config_io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym_info</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.cluster_functions._discrete_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_occ_site_functions</span><span class="p">,</span>
     <span class="n">make_occ_site_functions</span><span class="p">,</span>
     <span class="n">make_occ_site_functions_info</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._matrix_rep</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.cluster_functions._matrix_rep</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MakeVariableName</span><span class="p">,</span>
     <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
     <span class="n">make_variable_name</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions._misc</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.cluster_functions._misc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">orbits_to_dict</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">casm.bset.polynomial_functions</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.polynomial_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ExponentSumConstraint</span><span class="p">,</span>
     <span class="n">FunctionRep</span><span class="p">,</span>
     <span class="n">PolynomialFunction</span><span class="p">,</span>
     <span class="n">Variable</span><span class="p">,</span>
     <span class="n">make_symmetry_adapted_polynomials</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">make_default_prim_neighbor_list</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">._clex_basis_specs</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._clex_basis_specs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ClexBasisSpecs</span><span class="p">,</span>
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_get_dof_types</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_dof_types</span><span class="p">(</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">dofs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">]:</span>
@@ -494,7 +494,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">global_dof</span><span class="p">,</span> <span class="n">local_continuous_dof</span><span class="p">,</span> <span class="n">local_discrete_dof</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_default_nlist_sublat_indices</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_default_nlist_sublat_indices</span><span class="p">(</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Default sublattice indices for PrimNeighborList</span>
@@ -525,7 +525,7 @@
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">sublat_indices</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_make_orbits_data</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_orbits_data</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">clex_basis_specs</span><span class="p">:</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span>
     <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
@@ -545,7 +545,7 @@
             <span class="s2">&quot;This method requires a null cluster orbit.&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_brief_desc</span><span class="p">(</span><span class="n">op</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_brief_desc</span><span class="p">(</span><span class="n">op</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">sym_info</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymInfo</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">lattice</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">coordinate_mode</span> <span class="o">==</span> <span class="s2">&quot;cart&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">brief_cart</span><span class="p">()</span>
@@ -620,7 +620,7 @@
     <span class="k">return</span> <span class="n">orbits_data</span>
 
 
-<span class="k">def</span> <span class="nf">_make_occ_site_function_basis_data</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_occ_site_function_basis_data</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">occ_site_function</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
 <span class="p">):</span>
@@ -685,7 +685,7 @@
     <span class="k">return</span> <span class="n">data</span>
 
 
-<span class="k">def</span> <span class="nf">_make_site_functions_data</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_site_functions_data</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">occ_site_functions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]],</span>
 <span class="p">):</span>
@@ -752,7 +752,7 @@
     <span class="k">return</span> <span class="n">site_functions_data</span>
 
 
-<span class="k">def</span> <span class="nf">update_variables</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_variables</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
     <span class="n">function</span><span class="p">:</span> <span class="n">PolynomialFunction</span><span class="p">,</span>
@@ -814,7 +814,7 @@
             <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">make_equivalent_cluster_basis_sets</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_equivalent_cluster_basis_sets</span><span class="p">(</span>
     <span class="n">prototype_cluster_basis_set</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>
     <span class="n">equivalence_map_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
     <span class="n">equivalence_map_inv_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
@@ -877,7 +877,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">orbit</span><span class="p">,</span> <span class="n">orbit_basis_sets</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">make_constraints</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_constraints</span><span class="p">(</span>
     <span class="n">prototype_cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
     <span class="n">prototype_variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span>
     <span class="n">prototype_variable_subsets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
@@ -950,7 +950,7 @@
 
 <div class="viewcode-block" id="ClusterFunctionsBuilder">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.html#casm.bset.cluster_functions.ClusterFunctionsBuilder">[docs]</a>
-<span class="k">class</span> <span class="nc">ClusterFunctionsBuilder</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClusterFunctionsBuilder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Constructs cluster functions</span>
 
 <span class="sd">    Notes</span>
@@ -996,7 +996,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">generating_group</span><span class="p">:</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
@@ -1437,10 +1437,10 @@
 
 <div class="viewcode-block" id="ClusterFunctionsBuilder.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.to_dict.html#casm.bset.cluster_functions.ClusterFunctionsBuilder.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
 
-        <span class="k">def</span> <span class="nf">_clusters_data</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_clusters_data</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
             <span class="n">clusters_data</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">orbit_clusters</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">:</span>
                 <span class="n">orbit_clusters_data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1449,7 +1449,7 @@
                 <span class="n">clusters_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orbit_clusters_data</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">clusters_data</span>
 
-        <span class="k">def</span> <span class="nf">_functions_data</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_functions_data</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
             <span class="n">functions_data</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">orbit_functions</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
                 <span class="n">orbit_functions_data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1549,12 +1549,12 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_min_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_min_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_prototype</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">_max_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_max_poly_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbit_prototype</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_discrete</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_prototype</span><span class="p">)</span>
         <span class="n">branch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbit_prototype</span><span class="p">)</span>
@@ -1565,7 +1565,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">branch</span>
 
-    <span class="k">def</span> <span class="nf">_build_prototype_basis_set</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_prototype_basis_set</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">i_orbit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">cluster</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
@@ -1689,7 +1689,7 @@
         <span class="n">orbit_matrix_rep_builder</span> <span class="o">=</span> <span class="n">builder</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">prototype_basis_set</span><span class="p">,</span> <span class="n">orbit_matrix_rep_builder</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_build_orbit_basis_sets</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_orbit_basis_sets</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">i_orbit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">orbit_matrix_rep_builder</span><span class="p">:</span> <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
@@ -1788,7 +1788,7 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="n">orbit_basis_sets</span><span class="p">,</span> <span class="n">orbit_clusters</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_build_equivalent_orbit_basis_sets</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_equivalent_orbit_basis_sets</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">i_orbit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">orbit_matrix_rep_builder</span><span class="p">:</span> <span class="n">OrbitMatrixRepBuilder</span><span class="p">,</span>
@@ -1935,7 +1935,7 @@
 
 <div class="viewcode-block" id="ClusterFunctionsBuilder.basis_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.basis_dict.html#casm.bset.cluster_functions.ClusterFunctionsBuilder.basis_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">basis_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">clex_basis_specs</span><span class="p">:</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span>
         <span class="n">coordinate_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;frac&quot;</span><span class="p">,</span>
@@ -1983,7 +1983,7 @@
 
 <div class="viewcode-block" id="ClusterFunctionsBuilder.equivalents_info_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalents_info_dict.html#casm.bset.cluster_functions.ClusterFunctionsBuilder.equivalents_info_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">equivalents_info_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">equivalents_info_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Generate the CASM equivalents_info.json data</span>
 
 <span class="sd">        Returns</span>
@@ -2058,7 +2058,7 @@
 
 <div class="viewcode-block" id="make_point_functions">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_point_functions.html#casm.bset.cluster_functions.make_point_functions">[docs]</a>
-<span class="k">def</span> <span class="nf">make_point_functions</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_point_functions</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
@@ -2166,7 +2166,7 @@
 
 <div class="viewcode-block" id="make_local_point_functions">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_local_point_functions.html#casm.bset.cluster_functions.make_local_point_functions">[docs]</a>
-<span class="k">def</span> <span class="nf">make_local_point_functions</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_local_point_functions</span><span class="p">(</span>
     <span class="n">prim_neighbor_list</span><span class="p">:</span> <span class="n">PrimNeighborList</span><span class="p">,</span>
     <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
     <span class="n">orbit_functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]],</span>

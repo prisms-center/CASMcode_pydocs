@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.polynomial_functions._polynomial_function &#8212; casm-bset 2.0.0 documentation</title>
+    <title>casm.bset.polynomial_functions._polynomial_function &#8212; casm-bset 2.1.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/documentation_options.js?v=20623aea"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/polynomial_functions/_polynomial_function';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.1" />
   </head>
   
   
@@ -390,26 +390,26 @@
                 <article class="bd-article">
                   
   <h1>Source code for casm.bset.polynomial_functions._polynomial_function</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">opt_einsum</span>
-<span class="kn">import</span> <span class="nn">sparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">opt_einsum</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sparse</span>
 
-<span class="kn">from</span> <span class="nn">casm.bset.misc</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.misc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">factor_by_mode</span><span class="p">,</span>
     <span class="n">irrational_to_tex_string</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.counter</span> <span class="kn">import</span> <span class="n">IntCounter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.counter</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntCounter</span>
 
 
 <div class="viewcode-block" id="is_canonical_coord">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.is_canonical_coord.html#casm.bset.polynomial_functions.is_canonical_coord">[docs]</a>
-<span class="k">def</span> <span class="nf">is_canonical_coord</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_canonical_coord</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a 1d array of tensor coordinates is sorted in decreasing order&quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -421,13 +421,13 @@
 
 <div class="viewcode-block" id="make_canonical_coord">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.make_canonical_coord.html#casm.bset.polynomial_functions.make_canonical_coord">[docs]</a>
-<span class="k">def</span> <span class="nf">make_canonical_coord</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_canonical_coord</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a copy of a 1d array of tensor coordinates, sorted in decreasing order&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">is_lowest_equivalent_coord</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_lowest_equivalent_coord</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a 1d array of tensor coordinates is sorted in ascending order&quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -436,14 +436,14 @@
     <span class="k">return</span> <span class="kc">True</span>
 
 
-<span class="k">def</span> <span class="nf">make_lowest_equivalent_coord</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_lowest_equivalent_coord</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a copy of a 1d array of tensor coordinates, sorted in ascending order&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="tensor_coord_to_monomial_exponents">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.tensor_coord_to_monomial_exponents.html#casm.bset.polynomial_functions.tensor_coord_to_monomial_exponents">[docs]</a>
-<span class="k">def</span> <span class="nf">tensor_coord_to_monomial_exponents</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_size</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tensor_coord_to_monomial_exponents</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_size</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert tensor coordinates to vector of exponents form</span>
 
 <span class="sd">    Example 1:</span>
@@ -490,7 +490,7 @@
 
 <div class="viewcode-block" id="monomial_exponents_to_tensor_coord">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.monomial_exponents_to_tensor_coord.html#casm.bset.polynomial_functions.monomial_exponents_to_tensor_coord">[docs]</a>
-<span class="k">def</span> <span class="nf">monomial_exponents_to_tensor_coord</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">monomial_exponents_to_tensor_coord</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert vectors of monomial exponents to tensor coordinates</span>
 
 <span class="sd">    Parameters</span>
@@ -520,7 +520,7 @@
 
 <div class="viewcode-block" id="FunctionRep">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.FunctionRep.html#casm.bset.polynomial_functions.FunctionRep">[docs]</a>
-<span class="k">class</span> <span class="nc">FunctionRep</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FunctionRep</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Symmetry operation representation used to transform PolynomialFunction</span>
 
 <span class="sd">    Currently, symmetry is applied to tensor coefficients using einstein summation</span>
@@ -530,7 +530,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">matrix_rep</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="p">):</span>
@@ -553,7 +553,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sparse_matrix_rep</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">COO</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">matrix_rep</span><span class="p">)</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;sparse.COO: The `matrix_rep` as a sparse.COO array.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="n">PolynomialFunction</span><span class="p">):</span>
             <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhs</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -619,7 +619,7 @@
 
 <div class="viewcode-block" id="Variable">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.Variable.html#casm.bset.polynomial_functions.Variable">[docs]</a>
-<span class="k">class</span> <span class="nc">Variable</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Variable</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents a variable in a PolynomialFunction</span>
 
 <span class="sd">    This class is used to keep the information necessary for collecting the degree</span>
@@ -627,7 +627,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -727,7 +727,7 @@
 
 <div class="viewcode-block" id="Variable.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.Variable.to_dict.html#casm.bset.polynomial_functions.Variable.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
@@ -746,7 +746,7 @@
 <div class="viewcode-block" id="Variable.from_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.Variable.from_dict.html#casm.bset.polynomial_functions.Variable.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Variable</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
             <span class="n">key</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">],</span>
@@ -757,7 +757,7 @@
         <span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neighborhood_site_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">VariableData</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
@@ -777,17 +777,17 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">neighborhood_site_index</span><span class="p">,</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_tuple</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Variable</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_tuple</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_to_tuple</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">is_subcluster_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span> <span class="n">n_sites</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_subcluster_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span> <span class="n">n_sites</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="n">site_included</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_sites</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
         <span class="n">csi</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">cluster_site_index</span>
@@ -801,7 +801,7 @@
 
 <div class="viewcode-block" id="PolynomialFunction">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.html#casm.bset.polynomial_functions.PolynomialFunction">[docs]</a>
-<span class="k">class</span> <span class="nc">PolynomialFunction</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PolynomialFunction</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents a polynomial function as a sum monomial terms of the same order</span>
 
 <span class="sd">    For example, if there are two variables, :math:`\vec{x} = [x_1, x_2]`,</span>
@@ -825,7 +825,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">coeff</span><span class="p">:</span> <span class="n">sparse</span><span class="o">.</span><span class="n">COO</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span>
@@ -912,7 +912,7 @@
 <div class="viewcode-block" id="PolynomialFunction.zeros">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.zeros.html#casm.bset.polynomial_functions.PolynomialFunction.zeros">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">zeros</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">zeros</span><span class="p">(</span>
         <span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
         <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span>
         <span class="n">variable_subsets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
@@ -940,7 +940,7 @@
         <span class="c1"># Note: Constructing a zero-value sparse.COO gives a DeprecationWarning</span>
         <span class="c1"># in sparse 0.14.0, but it is erroneous and should not in the next release</span>
         <span class="c1"># (see https://github.com/pydata/sparse/pull/581)</span>
-        <span class="kn">import</span> <span class="nn">warnings</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
         <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
             <span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
@@ -958,14 +958,14 @@
 
 <div class="viewcode-block" id="PolynomialFunction.order">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.order.html#casm.bset.polynomial_functions.PolynomialFunction.order">[docs]</a>
-    <span class="k">def</span> <span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the polynomial order&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PolynomialFunction.prune">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.prune.html#casm.bset.polynomial_functions.PolynomialFunction.prune">[docs]</a>
-    <span class="k">def</span> <span class="nf">prune</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prune</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update to remove sparse tensor components that are approximately zero.&quot;&quot;&quot;</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">COO</span><span class="p">(</span>
@@ -980,13 +980,13 @@
 
 <div class="viewcode-block" id="PolynomialFunction.copy">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.copy.html#casm.bset.polynomial_functions.PolynomialFunction.copy">[docs]</a>
-    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PolynomialFunction.monomials">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.monomials.html#casm.bset.polynomial_functions.PolynomialFunction.monomials">[docs]</a>
-    <span class="k">def</span> <span class="nf">monomials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">monomials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return individual monomials</span>
 
 <span class="sd">        Returns</span>
@@ -1014,21 +1014,21 @@
         <span class="k">return</span> <span class="n">monomials</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__isub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">PolynomialFunctionType</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__isub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">PolynomialFunctionType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">-=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">coeff</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">make_canonical</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">monomial_exponents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensor_coords_to_monomial_exponents</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">PolynomialFunctionType</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">PolynomialFunctionType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">+=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">coeff</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">make_canonical</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">monomial_exponents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensor_coords_to_monomial_exponents</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">*=</span> <span class="n">c</span>
             <span class="k">return</span> <span class="bp">self</span>
@@ -1054,17 +1054,17 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">result</span> <span class="o">*=</span> <span class="n">c</span>
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">*</span> <span class="n">c</span>
 
 <div class="viewcode-block" id="PolynomialFunction.can_factor_by">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.can_factor_by.html#casm.bset.polynomial_functions.PolynomialFunction.can_factor_by">[docs]</a>
-    <span class="k">def</span> <span class="nf">can_factor_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">:</span> <span class="n">Variable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_factor_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">:</span> <span class="n">Variable</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a variable can be factored out of this polynomial</span>
 
 <span class="sd">        Parameters</span>
@@ -1087,7 +1087,7 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__itruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__itruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">/=</span> <span class="n">c</span>
             <span class="k">return</span> <span class="bp">self</span>
@@ -1113,14 +1113,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">result</span> <span class="o">/=</span> <span class="n">c</span>
         <span class="k">return</span> <span class="n">result</span>
 
 <div class="viewcode-block" id="PolynomialFunction.make_canonical">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.make_canonical.html#casm.bset.polynomial_functions.PolynomialFunction.make_canonical">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_canonical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_canonical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Shift sparse tensor values from non-canonical coordinates to canonical \</span>
 <span class="sd">        coordinates and prune zeros</span>
 
@@ -1193,7 +1193,7 @@
 
 <div class="viewcode-block" id="PolynomialFunction.tensor_coords_to_monomial_exponents">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.tensor_coords_to_monomial_exponents.html#casm.bset.polynomial_functions.PolynomialFunction.tensor_coords_to_monomial_exponents">[docs]</a>
-    <span class="k">def</span> <span class="nf">tensor_coords_to_monomial_exponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tensor_coords_to_monomial_exponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return sparse tensor coords as a list of vectors of monomial exponents</span>
 
 <span class="sd">        Returns</span>
@@ -1214,7 +1214,7 @@
 
 <div class="viewcode-block" id="PolynomialFunction.scalar_product">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.scalar_product.html#casm.bset.polynomial_functions.PolynomialFunction.scalar_product">[docs]</a>
-    <span class="k">def</span> <span class="nf">scalar_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">PolynomialFunctionType</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scalar_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">:</span> <span class="n">PolynomialFunctionType</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Scalar product</span>
 
 <span class="sd">        Evaluates the Frobenius scalar product, :math:`\langle f, g \rangle_F`, of two</span>
@@ -1279,12 +1279,12 @@
 
 <div class="viewcode-block" id="PolynomialFunction.normalize">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.normalize.html#casm.bset.polynomial_functions.PolynomialFunction.normalize">[docs]</a>
-    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scalar_product</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">coords</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">coeff</span><span class="o">.</span><span class="n">coords</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -1298,22 +1298,22 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">rhs</span> <span class="o">&lt;</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">rhs</span> <span class="o">&lt;</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">rhs</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">rhs</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rhs</span> <span class="o">&lt;</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">rhs</span> <span class="ow">or</span> <span class="n">rhs</span> <span class="o">&lt;</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">_basic_print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_basic_print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Basic printing for development&quot;&quot;&quot;</span>
         <span class="n">limit</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="n">max_pow</span> <span class="o">=</span> <span class="mi">2</span>
@@ -1342,7 +1342,7 @@
 
 <div class="viewcode-block" id="PolynomialFunction.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.to_dict.html#casm.bset.polynomial_functions.PolynomialFunction.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent as a Python dict&quot;&quot;&quot;</span>
         <span class="n">limit</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="n">max_pow</span> <span class="o">=</span> <span class="mi">2</span>
@@ -1380,7 +1380,7 @@
 <div class="viewcode-block" id="PolynomialFunction.from_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.from_dict.html#casm.bset.polynomial_functions.PolynomialFunction.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct from a Python dict&quot;&quot;&quot;</span>
         <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">Variable</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]]</span>
         <span class="n">variable_subsets</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;variable_subsets&quot;</span><span class="p">]</span>
@@ -1398,7 +1398,7 @@
 
 <div class="viewcode-block" id="PolynomialFunction.latex_formula">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.PolynomialFunction.latex_formula.html#casm.bset.polynomial_functions.PolynomialFunction.latex_formula">[docs]</a>
-    <span class="k">def</span> <span class="nf">latex_formula</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">latex_formula</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Latex printing for development</span>
@@ -1436,7 +1436,7 @@
         <span class="k">return</span> <span class="n">latex_formula</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;*+ &quot;</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_latex_print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_latex_print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Latex printing for development</span>
 <span class="sd">        It might be good to take variables as strings.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">latex_formula</span><span class="p">())</span></div>
@@ -1445,7 +1445,7 @@
 
 <div class="viewcode-block" id="monomial_inner_product">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.monomial_inner_product.html#casm.bset.polynomial_functions.monomial_inner_product">[docs]</a>
-<span class="k">def</span> <span class="nf">monomial_inner_product</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">monomial_inner_product</span><span class="p">(</span>
     <span class="n">a_coeff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">n_a</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
     <span class="n">b_coeff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -1524,7 +1524,7 @@
 
 <div class="viewcode-block" id="gram_schmidt">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.gram_schmidt.html#casm.bset.polynomial_functions.gram_schmidt">[docs]</a>
-<span class="k">def</span> <span class="nf">gram_schmidt</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gram_schmidt</span><span class="p">(</span>
     <span class="n">functions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PolynomialFunction</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply the Gram-Schmidt procedure to orthonormalize a list of PolynomialFunction</span>
@@ -1558,10 +1558,10 @@
 
 <div class="viewcode-block" id="ExponentSumConstraint">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.ExponentSumConstraint.html#casm.bset.polynomial_functions.ExponentSumConstraint">[docs]</a>
-<span class="k">class</span> <span class="nc">ExponentSumConstraint</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExponentSumConstraint</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data structure that specifies an exponent sum for filtering monomials&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
         <span class="nb">sum</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
@@ -1590,7 +1590,7 @@
 
 <div class="viewcode-block" id="ExponentSumConstraint.satisfied">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.ExponentSumConstraint.satisfied.html#casm.bset.polynomial_functions.ExponentSumConstraint.satisfied">[docs]</a>
-    <span class="k">def</span> <span class="nf">satisfied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monomial_exponents</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">satisfied</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monomial_exponents</span><span class="p">):</span>
         <span class="n">curr_sum</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i_var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
             <span class="n">curr_sum</span> <span class="o">+=</span> <span class="n">monomial_exponents</span><span class="p">[</span><span class="n">i_var</span><span class="p">]</span>
@@ -1599,7 +1599,7 @@
 
 <div class="viewcode-block" id="ExponentSumConstraint.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.ExponentSumConstraint.to_dict.html#casm.bset.polynomial_functions.ExponentSumConstraint.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent as a Python dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum</span><span class="p">}</span></div>
 
@@ -1607,7 +1607,7 @@
 <div class="viewcode-block" id="ExponentSumConstraint.from_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.ExponentSumConstraint.from_dict.html#casm.bset.polynomial_functions.ExponentSumConstraint.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct from a Python dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ExponentSumConstraint</span><span class="p">(</span>
             <span class="n">variables</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">],</span>
@@ -1617,7 +1617,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">all_constraints_satisfied</span><span class="p">(</span><span class="n">constraints</span><span class="p">,</span> <span class="n">monomial_exponents</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">all_constraints_satisfied</span><span class="p">(</span><span class="n">constraints</span><span class="p">,</span> <span class="n">monomial_exponents</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">constraints</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">constraint</span><span class="o">.</span><span class="n">satisfied</span><span class="p">(</span><span class="n">monomial_exponents</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -1626,7 +1626,7 @@
 
 <div class="viewcode-block" id="make_symmetry_adapted_polynomials">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.polynomial_functions.make_symmetry_adapted_polynomials.html#casm.bset.polynomial_functions.make_symmetry_adapted_polynomials">[docs]</a>
-<span class="k">def</span> <span class="nf">make_symmetry_adapted_polynomials</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_symmetry_adapted_polynomials</span><span class="p">(</span>
     <span class="n">matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variable</span><span class="p">],</span>
     <span class="n">variable_subsets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>

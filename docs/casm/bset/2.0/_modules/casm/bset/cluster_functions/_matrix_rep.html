@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casm.bset.cluster_functions._matrix_rep &#8212; casm-bset 2.0.0 documentation</title>
+    <title>casm.bset.cluster_functions._matrix_rep &#8212; casm-bset 2.1.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/documentation_options.js?v=20623aea"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/bset/cluster_functions/_matrix_rep';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.1" />
   </head>
   
   
@@ -390,18 +390,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for casm.bset.cluster_functions._matrix_rep</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.sym_info</span> <span class="k">as</span> <span class="nn">casmsyminfo</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
-<span class="kn">from</span> <span class="nn">casm.bset.polynomial_functions</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmsyminfo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.polynomial_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Variable</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.clusterography</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clusterography</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Cluster</span><span class="p">,</span>
     <span class="n">make_cluster_group</span><span class="p">,</span>
     <span class="n">make_integral_site_coordinate_symgroup_rep</span><span class="p">,</span>
@@ -413,21 +413,21 @@
     <span class="n">make_periodic_equivalence_map_indices</span><span class="p">,</span>
     <span class="n">make_periodic_orbit</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.sym_info</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SymGroup</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">._discrete_functions</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._discrete_functions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_occ_site_functions</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._misc</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._misc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">make_equivalents_generators</span><span class="p">,</span>
 <span class="p">)</span>
 
 
 <div class="viewcode-block" id="make_global_dof_matrix_rep">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_global_dof_matrix_rep.html#casm.bset.cluster_functions.make_global_dof_matrix_rep">[docs]</a>
-<span class="k">def</span> <span class="nf">make_global_dof_matrix_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_global_dof_matrix_rep</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">):</span>
@@ -452,7 +452,7 @@
 
 <div class="viewcode-block" id="make_cluster_dof_info">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_cluster_dof_info.html#casm.bset.cluster_functions.make_cluster_dof_info">[docs]</a>
-<span class="k">def</span> <span class="nf">make_cluster_dof_info</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cluster_dof_info</span><span class="p">(</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">,</span>
     <span class="n">local_dof_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
 <span class="p">):</span>
@@ -493,7 +493,7 @@
 
 <div class="viewcode-block" id="make_cluster_permutation_rep">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_cluster_permutation_rep.html#casm.bset.cluster_functions.make_cluster_permutation_rep">[docs]</a>
-<span class="k">def</span> <span class="nf">make_cluster_permutation_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cluster_permutation_rep</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">,</span>
     <span class="n">cluster_group</span><span class="p">:</span> <span class="n">SymGroup</span><span class="p">,</span>
@@ -578,7 +578,7 @@
         <span class="n">xtal_prim</span><span class="o">=</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">find_site_index</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_site_index</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">test_index</span><span class="p">,</span> <span class="n">test_site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sites</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">test_site</span> <span class="o">==</span> <span class="n">site</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">test_index</span>
@@ -603,7 +603,7 @@
 
 <div class="viewcode-block" id="make_equivalence_map_site_rep">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_equivalence_map_site_rep.html#casm.bset.cluster_functions.make_equivalence_map_site_rep">[docs]</a>
-<span class="k">def</span> <span class="nf">make_equivalence_map_site_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_equivalence_map_site_rep</span><span class="p">(</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">equivalence_map_ops</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinateRep</span><span class="p">]]:</span>
@@ -634,7 +634,7 @@
 
 <div class="viewcode-block" id="MakeVariableName">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.MakeVariableName.html#casm.bset.cluster_functions.MakeVariableName">[docs]</a>
-<span class="k">class</span> <span class="nc">MakeVariableName</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MakeVariableName</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to construct variable names for DoF</span>
 
 <span class="sd">    - For continuous DoF, use the :class:`DoFSetBasis` axis names</span>
@@ -645,7 +645,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">occ_var_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">occ_var_desc</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -675,7 +675,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_name</span> <span class="o">=</span> <span class="n">occ_var_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_desc</span> <span class="o">=</span> <span class="n">occ_var_desc</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -688,7 +688,7 @@
         <span class="k">if</span> <span class="n">local_discrete_dof</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">local_discrete_dof</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">make_variable_symbol</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sublattice_index</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">make_variable_symbol</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sublattice_index</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">sublattice_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">dof</span> <span class="o">=</span> <span class="n">xtal_prim</span><span class="o">.</span><span class="n">local_dof</span><span class="p">()[</span><span class="n">sublattice_index</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
@@ -720,7 +720,7 @@
 
 <div class="viewcode-block" id="MakeVariableName.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.MakeVariableName.to_dict.html#casm.bset.cluster_functions.MakeVariableName.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent the MakeVariableName object as a Python dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;occ_var_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_var_name</span><span class="p">,</span>
@@ -731,7 +731,7 @@
 <div class="viewcode-block" id="MakeVariableName.from_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.MakeVariableName.from_dict.html#casm.bset.cluster_functions.MakeVariableName.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a MakeVariableName object from a Python dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">MakeVariableName</span><span class="p">(</span>
             <span class="n">occ_var_name</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;occ_var_name&quot;</span><span class="p">),</span>
@@ -741,7 +741,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">make_variable_name</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_variable_name</span><span class="p">(</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">sublattice_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -767,7 +767,7 @@
 
 <div class="viewcode-block" id="make_global_variables">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_global_variables.html#casm.bset.cluster_functions.make_global_variables">[docs]</a>
-<span class="k">def</span> <span class="nf">make_global_variables</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_global_variables</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">make_variable_name_f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -800,7 +800,7 @@
     <span class="k">if</span> <span class="n">make_variable_name_f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">make_variable_name_f</span> <span class="o">=</span> <span class="n">make_variable_name</span>
 
-    <span class="k">def</span> <span class="nf">find_dof_basis_set</span><span class="p">(</span><span class="n">global_dof</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_dof_basis_set</span><span class="p">(</span><span class="n">global_dof</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">_dof_basis_set</span> <span class="ow">in</span> <span class="n">global_dof</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">_dof_basis_set</span><span class="o">.</span><span class="n">dofname</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">_dof_basis_set</span>
@@ -833,7 +833,7 @@
 
 <div class="viewcode-block" id="make_cluster_variables">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_cluster_variables.html#casm.bset.cluster_functions.make_cluster_variables">[docs]</a>
-<span class="k">def</span> <span class="nf">make_cluster_variables</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cluster_variables</span><span class="p">(</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">,</span>
@@ -909,7 +909,7 @@
 
     <span class="k">else</span><span class="p">:</span>
 
-        <span class="k">def</span> <span class="nf">find_dof_basis_set</span><span class="p">(</span><span class="n">local_dof</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">find_dof_basis_set</span><span class="p">(</span><span class="n">local_dof</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">_dof_basis_set</span> <span class="ow">in</span> <span class="n">local_dof</span><span class="p">[</span><span class="n">b</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="n">_dof_basis_set</span><span class="o">.</span><span class="n">dofname</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">_dof_basis_set</span>
@@ -948,7 +948,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">make_equivalence_map_clusters</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_equivalence_map_clusters</span><span class="p">(</span>
     <span class="n">orbit</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Cluster</span><span class="p">],</span>
     <span class="n">equivalence_map_site_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinateRep</span><span class="p">]],</span>
 <span class="p">):</span>
@@ -986,7 +986,7 @@
     <span class="k">return</span> <span class="n">equivalence_map_clusters</span>
 
 
-<span class="k">def</span> <span class="nf">make_cluster_matrix_rep_no_permutation</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cluster_matrix_rep_no_permutation</span><span class="p">(</span>
     <span class="n">local_dof_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">,</span>
     <span class="n">prim_factor_group</span><span class="p">:</span> <span class="n">SymGroup</span><span class="p">,</span>
@@ -1072,7 +1072,7 @@
 
 <div class="viewcode-block" id="make_equivalence_map_matrix_rep">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_equivalence_map_matrix_rep.html#casm.bset.cluster_functions.make_equivalence_map_matrix_rep">[docs]</a>
-<span class="k">def</span> <span class="nf">make_equivalence_map_matrix_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_equivalence_map_matrix_rep</span><span class="p">(</span>
     <span class="n">local_dof_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
     <span class="n">prototype_cluster</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">,</span>
     <span class="n">symgroup</span><span class="p">:</span> <span class="n">SymGroup</span><span class="p">,</span>
@@ -1173,7 +1173,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">make_phenomenal_generating_matrix_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_phenomenal_generating_matrix_rep</span><span class="p">(</span>
     <span class="n">generating_group</span><span class="p">:</span> <span class="n">casmsyminfo</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
     <span class="n">local_dof_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
     <span class="n">equivalence_map_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Cluster</span><span class="p">]],</span>
@@ -1296,7 +1296,7 @@
 
 <div class="viewcode-block" id="make_cluster_matrix_rep">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.make_cluster_matrix_rep.html#casm.bset.cluster_functions.make_cluster_matrix_rep">[docs]</a>
-<span class="k">def</span> <span class="nf">make_cluster_matrix_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cluster_matrix_rep</span><span class="p">(</span>
     <span class="n">local_dof_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
     <span class="n">cluster</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">,</span>
     <span class="n">cluster_group</span><span class="p">:</span> <span class="n">SymGroup</span><span class="p">,</span>
@@ -1356,7 +1356,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">make_occ_site_functions_matrix_rep</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_occ_site_functions_matrix_rep</span><span class="p">(</span>
     <span class="n">indicator_matrix_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]],</span>
     <span class="n">integral_site_coordinate_symgroup_rep</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinateRep</span><span class="p">],</span>
     <span class="n">occ_site_functions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1503,7 +1503,7 @@
 
 <div class="viewcode-block" id="ClusterMatrixRepBuilder">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterMatrixRepBuilder.html#casm.bset.cluster_functions.ClusterMatrixRepBuilder">[docs]</a>
-<span class="k">class</span> <span class="nc">ClusterMatrixRepBuilder</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClusterMatrixRepBuilder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds cluster matrix representations of symmetry operations for generating \</span>
 <span class="sd">    symmetry adapted polynomial functions on a particular cluster, for a single local \</span>
 <span class="sd">    degree of freedom (DoF)</span>
@@ -1536,7 +1536,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">generating_group</span><span class="p">:</span> <span class="n">casmsyminfo</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
@@ -1762,7 +1762,7 @@
 
 <div class="viewcode-block" id="ClusterMatrixRepBuilder.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.ClusterMatrixRepBuilder.to_dict.html#casm.bset.cluster_functions.ClusterMatrixRepBuilder.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent the ClusterMatrixRepBuilder as a Python dict&quot;&quot;&quot;</span>
 
         <span class="c1"># This is primarily intended for use by</span>
@@ -1787,7 +1787,7 @@
 
 <div class="viewcode-block" id="OrbitMatrixRepBuilder">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.OrbitMatrixRepBuilder.html#casm.bset.cluster_functions.OrbitMatrixRepBuilder">[docs]</a>
-<span class="k">class</span> <span class="nc">OrbitMatrixRepBuilder</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OrbitMatrixRepBuilder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds cluster matrix representations of symmetry operations for generating \</span>
 <span class="sd">    polynomial functions on an orbit of clusters, coupling all local and global DoFs</span>
 
@@ -1847,7 +1847,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">generating_group</span><span class="p">:</span> <span class="n">casmsyminfo</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
@@ -2272,7 +2272,7 @@
 
 <div class="viewcode-block" id="OrbitMatrixRepBuilder.to_dict">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.bset.cluster_functions.OrbitMatrixRepBuilder.to_dict.html#casm.bset.cluster_functions.OrbitMatrixRepBuilder.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Store the OrbitMatrixRepBuilder in a dictionary.&quot;&quot;&quot;</span>
 
         <span class="c1"># This is primarily intended for use by ClusterFunctionsBuilder.to_dict(),</span>
@@ -2371,7 +2371,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_make_orbit_and_equivalence_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_orbit_and_equivalence_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>
         <span class="n">phenomenal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span>
         <span class="n">cluster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span>
@@ -2448,7 +2448,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_site_rep</span> <span class="o">=</span> <span class="n">equivalence_map_site_rep</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_clusters</span> <span class="o">=</span> <span class="n">equivalence_map_clusters</span>
 
-    <span class="k">def</span> <span class="nf">_make_phenomenal_generators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_phenomenal_generators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>
         <span class="n">phenomenal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span>
         <span class="n">generating_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generating_group</span>
@@ -2475,7 +2475,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_indices</span> <span class="o">=</span> <span class="n">phenomenal_generating_indices</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal_generating_site_rep</span> <span class="o">=</span> <span class="n">phenomenal_generating_site_rep</span>
 
-    <span class="k">def</span> <span class="nf">_make_global_dof_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_global_dof_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Note: global DoF info could be factored out of each individual orbit</span>
 
         <span class="c1"># Data used</span>
@@ -2520,7 +2520,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">global_matrix_rep</span> <span class="o">=</span> <span class="n">global_matrix_rep</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">global_inv_matrix_rep</span> <span class="o">=</span> <span class="n">global_inv_matrix_rep</span>
 
-    <span class="k">def</span> <span class="nf">_make_local_dof_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_local_dof_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>
         <span class="n">local_dof</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_dof</span>
         <span class="n">prim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prim</span>
@@ -2598,7 +2598,7 @@
             <span class="n">local_phenomenal_generating_inv_matrix_rep</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_make_coupled_prototype_matrix_rep_and_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_coupled_prototype_matrix_rep_and_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>
         <span class="n">cluster_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_group</span>
         <span class="n">local_prototype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_prototype</span>
@@ -2648,7 +2648,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">prototype_variables</span> <span class="o">=</span> <span class="n">prototype_variables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prototype_variable_subsets</span> <span class="o">=</span> <span class="n">prototype_variable_subsets</span>
 
-    <span class="k">def</span> <span class="nf">_make_equivalence_map_matrix_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_equivalence_map_matrix_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>
         <span class="n">generating_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generating_group</span>
         <span class="n">equivalence_map_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_ops</span>
@@ -2698,7 +2698,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_matrix_rep</span> <span class="o">=</span> <span class="n">equivalence_map_matrix_rep</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_inv_matrix_rep</span> <span class="o">=</span> <span class="n">equivalence_map_inv_matrix_rep</span>
 
-    <span class="k">def</span> <span class="nf">_make_phenomenal_generating_matrix_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_phenomenal_generating_matrix_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Data used</span>
         <span class="n">phenomenal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenomenal</span>
         <span class="n">equivalence_map_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">equivalence_map_ops</span>
