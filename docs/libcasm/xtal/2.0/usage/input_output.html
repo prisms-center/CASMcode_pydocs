@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Input and output &#8212; libcasm-xtal 2.0.1 documentation</title>
+    <title>Input and output &#8212; libcasm-xtal 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../_static/documentation_options.js?v=b21de401"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/input_output';</script>
@@ -50,7 +50,7 @@
     <link rel="prev" title="Structure construction and symmetry analysis" href="structure.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -430,7 +430,7 @@
 <h2>Converting to and from Python types<a class="headerlink" href="#converting-to-and-from-python-types" title="Link to this heading">#</a></h2>
 <p>Important CASM classes have <code class="docutils literal notranslate"><span class="pre">to_dict</span></code> / <code class="docutils literal notranslate"><span class="pre">to_list</span></code> and <code class="docutils literal notranslate"><span class="pre">from_dict</span></code> / <code class="docutils literal notranslate"><span class="pre">from_list</span></code> methods so they can be converted to and from plain Python types.</p>
 <p>For example, a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Lattice.html#libcasm.xtal.Lattice" title="libcasm.xtal.Lattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">xtal.Lattice</span></code></a> can be constructed from a Python dict containing the lattice vectors using:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 <span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
     <span class="s2">&quot;lattice_vectors&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">[</span><span class="mf">4.471006</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>         <span class="c1"># vector a</span>
@@ -451,8 +451,8 @@
 <h2>JSON serialization<a class="headerlink" href="#json-serialization" title="Link to this heading">#</a></h2>
 <p>CASM projects primarily use the JSON format to save data in files.</p>
 <p>For example, to read <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="libcasm.xtal.Prim"><code class="xref py py-class docutils literal notranslate"><span class="pre">xtal.Prim</span></code></a> from a <code class="docutils literal notranslate"><span class="pre">prim.json</span></code> JSON file, use:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;prim.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">prim</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>

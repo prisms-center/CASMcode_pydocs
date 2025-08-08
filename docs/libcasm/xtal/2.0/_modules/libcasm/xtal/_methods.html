@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.xtal._methods &#8212; libcasm-xtal 2.0.1 documentation</title>
+    <title>libcasm.xtal._methods &#8212; libcasm-xtal 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,15 +38,16 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/xtal/_methods';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -403,20 +404,20 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.xtal._methods</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.casmglobal</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal._xtal</span> <span class="k">as</span> <span class="nn">_xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.casmglobal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal._xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_xtal</span>
 
 
 <div class="viewcode-block" id="make_primitive">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_primitive.html#libcasm.xtal.make_primitive">[docs]</a>
-<span class="k">def</span> <span class="nf">make_primitive</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_primitive</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make the primitive cell of a Prim or atomic Structure</span>
@@ -451,7 +452,7 @@
 
 <div class="viewcode-block" id="make_canonical">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_canonical.html#libcasm.xtal.make_canonical">[docs]</a>
-<span class="k">def</span> <span class="nf">make_canonical</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_canonical</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an equivalent Lattice, Prim, or Structure with the canonical form</span>
@@ -483,7 +484,7 @@
 
 <div class="viewcode-block" id="make_crystal_point_group">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_crystal_point_group.html#libcasm.xtal.make_crystal_point_group">[docs]</a>
-<span class="k">def</span> <span class="nf">make_crystal_point_group</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_crystal_point_group</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make the crystal point group of a Prim or Structure</span>
@@ -514,7 +515,7 @@
 
 <div class="viewcode-block" id="make_factor_group">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_factor_group.html#libcasm.xtal.make_factor_group">[docs]</a>
-<span class="k">def</span> <span class="nf">make_factor_group</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_factor_group</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make the factor group of a Prim or Structure</span>
@@ -557,7 +558,7 @@
 
 <div class="viewcode-block" id="make_within">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_within.html#libcasm.xtal.make_within">[docs]</a>
-<span class="k">def</span> <span class="nf">make_within</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_within</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an equivalent Prim or Structure with all site coordinates within the \</span>
@@ -586,8 +587,8 @@
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">total_ordering</span>
-<span class="k">class</span> <span class="nc">ApproximateFloatArray</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ApproximateFloatArray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">casmglobal</span><span class="o">.</span><span class="n">TOL</span><span class="p">,</span>
@@ -610,7 +611,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">abs_tol</span> <span class="o">=</span> <span class="n">abs_tol</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">arr</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">)):</span>
@@ -618,7 +619,7 @@
                 <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">arr</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">)):</span>
@@ -655,7 +656,7 @@
 
 <div class="viewcode-block" id="make_structure_atom_info">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_structure_atom_info.html#libcasm.xtal.make_structure_atom_info">[docs]</a>
-<span class="k">def</span> <span class="nf">make_structure_atom_info</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_structure_atom_info</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">StructureAtomInfo</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a list of StructureAtomInfo from a Structure</span>
@@ -678,7 +679,7 @@
     <span class="n">atom_properties</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">atom_properties</span><span class="p">()</span>
 
     <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="kn">import</span> <span class="nn">copy</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atom_type</span><span class="p">)):</span>
         <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -696,7 +697,7 @@
 
 <div class="viewcode-block" id="make_structure_from_atom_info">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.make_structure_from_atom_info.html#libcasm.xtal.make_structure_from_atom_info">[docs]</a>
-<span class="k">def</span> <span class="nf">make_structure_from_atom_info</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_structure_from_atom_info</span><span class="p">(</span>
     <span class="n">lattice</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
     <span class="n">atoms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StructureAtomInfo</span><span class="p">],</span>
     <span class="n">global_properties</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>
@@ -754,7 +755,7 @@
 
 <div class="viewcode-block" id="sort_structure_by_atom_info">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_info.html#libcasm.xtal.sort_structure_by_atom_info">[docs]</a>
-<span class="k">def</span> <span class="nf">sort_structure_by_atom_info</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_structure_by_atom_info</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">StructureAtomInfo</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -801,7 +802,7 @@
 
 <div class="viewcode-block" id="sort_structure_by_atom_type">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_type.html#libcasm.xtal.sort_structure_by_atom_type">[docs]</a>
-<span class="k">def</span> <span class="nf">sort_structure_by_atom_type</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_structure_by_atom_type</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
     <span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
@@ -835,7 +836,7 @@
 
 <div class="viewcode-block" id="sort_structure_by_atom_coordinate_frac">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_coordinate_frac.html#libcasm.xtal.sort_structure_by_atom_coordinate_frac">[docs]</a>
-<span class="k">def</span> <span class="nf">sort_structure_by_atom_coordinate_frac</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_structure_by_atom_coordinate_frac</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
     <span class="n">order</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cba&quot;</span><span class="p">,</span>
     <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">casmglobal</span><span class="o">.</span><span class="n">TOL</span><span class="p">,</span>
@@ -868,7 +869,7 @@
 <span class="sd">        For non-atomic structure, if ``len(structure.mol_type()) != 0``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">compare_f</span><span class="p">(</span><span class="n">atom_info</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_f</span><span class="p">(</span><span class="n">atom_info</span><span class="p">):</span>
         <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span>
@@ -893,7 +894,7 @@
 
 <div class="viewcode-block" id="sort_structure_by_atom_coordinate_cart">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_coordinate_cart.html#libcasm.xtal.sort_structure_by_atom_coordinate_cart">[docs]</a>
-<span class="k">def</span> <span class="nf">sort_structure_by_atom_coordinate_cart</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_structure_by_atom_coordinate_cart</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
     <span class="n">order</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;zyx&quot;</span><span class="p">,</span>
     <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">casmglobal</span><span class="o">.</span><span class="n">TOL</span><span class="p">,</span>
@@ -926,7 +927,7 @@
 <span class="sd">        For non-atomic structure, if ``len(structure.mol_type()) != 0``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">compare_f</span><span class="p">(</span><span class="n">atom_info</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_f</span><span class="p">(</span><span class="n">atom_info</span><span class="p">):</span>
         <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
@@ -951,7 +952,7 @@
 
 <div class="viewcode-block" id="substitute_structure_species">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.substitute_structure_species.html#libcasm.xtal.substitute_structure_species">[docs]</a>
-<span class="k">def</span> <span class="nf">substitute_structure_species</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">substitute_structure_species</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
     <span class="n">substitutions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
@@ -987,7 +988,7 @@
 
 <div class="viewcode-block" id="filter_structure_by_atom_info">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.filter_structure_by_atom_info.html#libcasm.xtal.filter_structure_by_atom_info">[docs]</a>
-<span class="k">def</span> <span class="nf">filter_structure_by_atom_info</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_structure_by_atom_info</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
     <span class="nb">filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">StructureAtomInfo</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
@@ -1027,7 +1028,7 @@
 
 <div class="viewcode-block" id="combine_structures">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.combine_structures.html#libcasm.xtal.combine_structures">[docs]</a>
-<span class="k">def</span> <span class="nf">combine_structures</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">combine_structures</span><span class="p">(</span>
     <span class="n">structures</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
     <span class="n">lattice</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">global_properties</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>

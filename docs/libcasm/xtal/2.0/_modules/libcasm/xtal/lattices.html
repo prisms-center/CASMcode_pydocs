@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.xtal.lattices &#8212; libcasm-xtal 2.0.1 documentation</title>
+    <title>libcasm.xtal.lattices &#8212; libcasm-xtal 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,15 +38,16 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/xtal/lattices';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -403,17 +404,17 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.xtal.lattices</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span>
 
 
 <div class="viewcode-block" id="from_lattice_parameters">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.from_lattice_parameters.html#libcasm.xtal.lattices.from_lattice_parameters">[docs]</a>
-<span class="k">def</span> <span class="nf">from_lattice_parameters</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">from_lattice_parameters</span><span class="p">(</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a lattice from lattice parameters</span>
@@ -441,7 +442,7 @@
 <span class="sd">    lattice : xtal.Lattice</span>
 <span class="sd">        A lattice with the specified lattice parameters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">sin</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">sin</span>
 
     <span class="n">_alpha</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
     <span class="n">_beta</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
@@ -471,7 +472,7 @@
 
 <div class="viewcode-block" id="cubic">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.cubic.html#libcasm.xtal.lattices.cubic">[docs]</a>
-<span class="k">def</span> <span class="nf">cubic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cubic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a cubic lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -490,7 +491,7 @@
 
 <div class="viewcode-block" id="tetragonal">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.tetragonal.html#libcasm.xtal.lattices.tetragonal">[docs]</a>
-<span class="k">def</span> <span class="nf">tetragonal</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tetragonal</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a tetragonal lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -519,7 +520,7 @@
 
 <div class="viewcode-block" id="hexagonal">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.hexagonal.html#libcasm.xtal.lattices.hexagonal">[docs]</a>
-<span class="k">def</span> <span class="nf">hexagonal</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hexagonal</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a hexagonal lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -548,7 +549,7 @@
 
 <div class="viewcode-block" id="orthorhombic">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.orthorhombic.html#libcasm.xtal.lattices.orthorhombic">[docs]</a>
-<span class="k">def</span> <span class="nf">orthorhombic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">orthorhombic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct an orthorhombic lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -579,7 +580,7 @@
 
 <div class="viewcode-block" id="rhombohedral">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.rhombohedral.html#libcasm.xtal.lattices.rhombohedral">[docs]</a>
-<span class="k">def</span> <span class="nf">rhombohedral</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rhombohedral</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a rhombohedral lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -601,7 +602,7 @@
 
 <div class="viewcode-block" id="monoclinic">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.monoclinic.html#libcasm.xtal.lattices.monoclinic">[docs]</a>
-<span class="k">def</span> <span class="nf">monoclinic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">monoclinic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a monoclinic lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -627,7 +628,7 @@
 
 <div class="viewcode-block" id="triclinic">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.triclinic.html#libcasm.xtal.lattices.triclinic">[docs]</a>
-<span class="k">def</span> <span class="nf">triclinic</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">triclinic</span><span class="p">(</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a triclinic lattice</span>
@@ -661,7 +662,7 @@
 
 <div class="viewcode-block" id="BCC">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.BCC.html#libcasm.xtal.lattices.BCC">[docs]</a>
-<span class="k">def</span> <span class="nf">BCC</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">BCC</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a primitive BCC lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -697,7 +698,7 @@
 
 <div class="viewcode-block" id="FCC">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.FCC.html#libcasm.xtal.lattices.FCC">[docs]</a>
-<span class="k">def</span> <span class="nf">FCC</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">FCC</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a primitive FCC lattice</span>
 
 <span class="sd">    Parameters</span>
@@ -733,7 +734,7 @@
 
 <div class="viewcode-block" id="HCP">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.xtal.lattices.HCP.html#libcasm.xtal.lattices.HCP">[docs]</a>
-<span class="k">def</span> <span class="nf">HCP</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">HCP</span><span class="p">(</span>
     <span class="n">r</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a primitive HCP lattice</span>

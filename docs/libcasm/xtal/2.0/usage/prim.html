@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Primitive crystal structure construction and symmetry analysis &#8212; libcasm-xtal 2.0.1 documentation</title>
+    <title>Primitive crystal structure construction and symmetry analysis &#8212; libcasm-xtal 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../_static/documentation_options.js?v=b21de401"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -51,7 +51,7 @@
     <link rel="prev" title="Lattice construction and symmetry analysis" href="lattice.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -439,8 +439,8 @@
 <section id="occupation-dof">
 <h2>Occupation DoF<a class="headerlink" href="#occupation-dof" title="Link to this heading">#</a></h2>
 <p>The following is an example of prim construction, including atomic occupation DoF only:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
 <span class="c1"># Lattice vectors</span>
 <span class="n">lattice_column_vector_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
@@ -713,7 +713,7 @@
 </div>
 <p><strong>Example: Strain DoF, user-specified basis</strong></p>
 <p>It is possible to restrict the dimension of allowed strain DoF, or rotate the strain basis, by providing a user-specified basis. The following restricts strain to exclude shear strains:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
 <span class="c1"># Global continuous degrees of freedom (DoF)</span>
 <span class="n">Hstrain_dof</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">DoFSetBasis</span><span class="p">(</span>
     <span class="n">dofname</span><span class="o">=</span><span class="s2">&quot;Hstrain&quot;</span><span class="p">,</span>
@@ -738,7 +738,7 @@
 <section id="common-prim">
 <h2>Common prim<a class="headerlink" href="#common-prim" title="Link to this heading">#</a></h2>
 <p>Some common prim can be constructed using the convenience methods in <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.prims.html#module-libcasm.xtal.prims" title="libcasm.xtal.prims"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.xtal.prims</span></code></a>. For example, a binary FCC prim with conventional cubic lattice parameter <cite>a</cite> equal to 6.60 can be constructed using the following:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">libcasm.xtal.prims</span> <span class="k">as</span> <span class="nn">xtal_prims</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal.prims</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal_prims</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">fcc_prim</span> <span class="o">=</span> <span class="n">xtal_prims</span><span class="o">.</span><span class="n">FCC</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">6.60</span><span class="p">,</span> <span class="n">occ_dof</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">fcc_prim</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
 <span class="p">{</span>
