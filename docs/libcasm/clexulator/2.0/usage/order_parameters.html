@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Evaluating order parameters &#8212; libcasm-clexulator 2.0.0 documentation</title>
+    <title>Evaluating order parameters &#8212; libcasm-clexulator 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=b21de401"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -51,7 +51,7 @@
     <link rel="prev" title="Cluster expansion details" href="cluster_expansion_details.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -511,9 +511,9 @@
 <section id="construction">
 <h2>Construction<a class="headerlink" href="#construction" title="Link to this heading">#</a></h2>
 <p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.html#libcasm.clexulator.OrderParameter" title="libcasm.clexulator.OrderParameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderParameter</span></code></a> calculator can be constructed as follows:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
-<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DoFSpace</span><span class="p">,</span> <span class="n">OrderParameter</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -535,8 +535,8 @@
 <p>An OrderParameter instance is set to calculate order parameters in one supercell at a time, using the appropriate <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>. This can be set or changed using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> method.</p>
 <p>Order parameters are calculated for a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance that can be specified using the call operator, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> method, or the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.set.html#libcasm.clexulator.ClusterExpansion.set" title="libcasm.clexulator.ClusterExpansion.set"><code class="xref py py-func docutils literal notranslate"><span class="pre">set()</span></code></a> method.</p>
 <p>Default configuration degree of freedom (DoF) values in a particular supercell can be constructed and the OrderParameter instance updated to evaluate using those values as follows:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
-<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">make_default_config_dof_values</span><span class="p">,</span>
 <span class="p">)</span>
 

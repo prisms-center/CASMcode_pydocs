@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cluster expansion details &#8212; libcasm-clexulator 2.0.0 documentation</title>
+    <title>Cluster expansion details &#8212; libcasm-clexulator 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=b21de401"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/cluster_expansion_details';</script>
@@ -50,7 +50,7 @@
     <link rel="prev" title="Evaluating a local cluster expansion" href="local_cluster_expansion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -474,7 +474,7 @@
 <section id="constructing-a-clexulator">
 <h2>Constructing a Clexulator<a class="headerlink" href="#constructing-a-clexulator" title="Link to this heading">#</a></h2>
 <p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a> is constructed using a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> and the path to a CASM clexulator source file, using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_clexulator.html#libcasm.clexulator.make_clexulator" title="libcasm.clexulator.make_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_clexulator</span></code></a>:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
 <span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">PrimNeighborList</span><span class="p">()</span>
 <span class="n">clexulator</span> <span class="o">=</span> <span class="n">make_clexulator</span><span class="p">(</span>
     <span class="n">source</span><span class="o">=</span><span class="s2">&quot;/path/to/.../&lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc&quot;</span><span class="p">,</span>
@@ -487,7 +487,7 @@
 <section id="constructing-a-localclexulator">
 <h2>Constructing a LocalClexulator<a class="headerlink" href="#constructing-a-localclexulator" title="Link to this heading">#</a></h2>
 <p>A <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.LocalClexulator.html#libcasm.clexulator.LocalClexulator" title="libcasm.clexulator.LocalClexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalClexulator</span></code></a> is constructed in a similar manner as <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.Clexulator.html#libcasm.clexulator.Clexulator" title="libcasm.clexulator.Clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Clexulator</span></code></a>, using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_local_clexulator.html#libcasm.clexulator.make_local_clexulator" title="libcasm.clexulator.make_local_clexulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">make_local_clexulator</span></code></a>:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_local_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_local_clexulator</span><span class="p">,</span> <span class="n">PrimNeighborList</span>
 <span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">PrimNeighborList</span><span class="p">()</span>
 <span class="n">local_clexulator</span> <span class="o">=</span> <span class="n">make_local_clexulator</span><span class="p">(</span>
     <span class="n">source</span><span class="o">=</span><span class="s2">&quot;/path/to/.../&lt;primname&gt;_Clexulator_&lt;bsetname&gt;.cc&quot;</span><span class="p">,</span>

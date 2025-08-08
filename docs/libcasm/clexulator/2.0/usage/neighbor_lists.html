@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Neighbor lists &#8212; libcasm-clexulator 2.0.0 documentation</title>
+    <title>Neighbor lists &#8212; libcasm-clexulator 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=b21de401"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -51,7 +51,7 @@
     <link rel="prev" title="Evaluating order parameters" href="order_parameters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -424,9 +424,9 @@
 <section id="constructing-neighbor-lists">
 <h2>Constructing neighbor lists<a class="headerlink" href="#constructing-neighbor-lists" title="Link to this heading">#</a></h2>
 <p>In most cases, CASM chooses an appropriate set of default parameters for the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> automatically from the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> using the factory function <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.make_default_prim_neighbor_list.html#libcasm.clexulator.make_default_prim_neighbor_list" title="libcasm.clexulator.make_default_prim_neighbor_list"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_default_prim_neighbor_list()</span></code></a> as in the following example:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal.prims</span> <span class="k">as</span> <span class="nn">xtal_prims</span>
-<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">make_default_prim_neighbor_list</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal.prims</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal_prims</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_default_prim_neighbor_list</span>
 
 <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">xtal_prims</span><span class="o">.</span><span class="n">HCP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">occ_dof</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
 <span class="n">prim_neighbor_list</span> <span class="o">=</span> <span class="n">make_default_prim_neighbor_list</span><span class="p">(</span><span class="n">xtal_prim</span><span class="p">)</span>
@@ -443,7 +443,7 @@
 </pre></div>
 </div>
 <p>To get the neighbor list index for a particular site relative to the origin unit cell, use the method  <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.neighbor_index.html#libcasm.clexulator.PrimNeighborList.neighbor_index" title="libcasm.clexulator.PrimNeighborList.neighbor_index"><code class="xref py py-class docutils literal notranslate"><span class="pre">neighbor_index</span></code></a> (which will also automatically expand the list if necessary).</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">site</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">IntegralSiteCoordinate</span><span class="p">(</span>
     <span class="n">sublattice</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -464,7 +464,7 @@
 </div>
 <p>To efficiently find DoF values on neighboring sites in a particular supercell, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a> generates (for every unit cell in the supercell) a list of the linear site indices of the neighboring sites which can be used to read DoF values from a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance.</p>
 <p>For a given supercell, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.SuperNeighborList.html#libcasm.clexulator.SuperNeighborList" title="libcasm.clexulator.SuperNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">SuperNeighborList</span></code></a> can be constructed from a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.PrimNeighborList.html#libcasm.clexulator.PrimNeighborList" title="libcasm.clexulator.PrimNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimNeighborList</span></code></a> and the transformation matrix defining the supercell.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="n">SuperNeighborList</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">SuperNeighborList</span>
 
 <span class="c1"># transformation_matrix_to_super: numpy.ndarray[numpy.int64[3, 3]</span>
 <span class="n">transformation_matrix_to_super</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
