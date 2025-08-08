@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>set_custom_event_state_calculation &#8212; libcasm-clexmonte 2.0.0 documentation</title>
+    <title>set_custom_event_state_calculation &#8212; libcasm-clexmonte 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -52,7 +52,7 @@
     <link rel="prev" title="set_abnormal_event_handling_off" href="libcasm.clexmonte.MonteEventData.set_abnormal_event_handling_off.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -947,7 +947,7 @@
 <dl>
 <dd><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.clexmonte.MonteEventData.html#libcasm.clexmonte.MonteEventData" title="libcasm.clexmonte._clexmonte_monte_calculator.MonteEventData"><span class="pre">MonteEventData</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">event_type_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libcasm.clexmonte.EventState.html#libcasm.clexmonte.EventState" title="libcasm.clexmonte._clexmonte_monte_calculator.EventState"><span class="pre">EventState</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="libcasm.clexmonte.EventStateCalculator.html#libcasm.clexmonte.EventStateCalculator" title="libcasm.clexmonte._clexmonte_monte_calculator.EventStateCalculator"><span class="pre">EventStateCalculator</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="libcasm.clexmonte.EventState.html#libcasm.clexmonte.EventState" title="libcasm.clexmonte._clexmonte_monte_calculator.EventState"><span class="pre">EventState</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="libcasm.clexmonte.EventStateCalculator.html#libcasm.clexmonte.EventStateCalculator" title="libcasm.clexmonte._clexmonte_monte_calculator.EventStateCalculator"><span class="pre">EventStateCalculator</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 </dl>
 
 <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#libcasm.clexmonte.MonteEventData.set_custom_event_state_calculation" title="Link to this definition">#</a></dt>
@@ -977,9 +977,9 @@ the end of a simulation.</p></li>
 <p>Other event state properties are optional.</p>
 <p>The default event state calculation function calculates event state
 properties as if by:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.clexmonte</span> <span class="k">as</span> <span class="nn">clexmonte</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.clexmonte</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">clexmonte</span>
 
-<span class="k">def</span> <span class="nf">default_event_state_calculation</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">default_event_state_calculation</span><span class="p">(</span>
     <span class="n">event_state</span><span class="p">:</span> <span class="n">clexmonte</span><span class="o">.</span><span class="n">EventState</span><span class="p">,</span>
     <span class="n">event_state_calculator</span><span class="p">:</span> <span class="n">clexmonte</span><span class="o">.</span><span class="n">EventStateCalculator</span><span class="p">,</span>
 <span class="p">):</span>

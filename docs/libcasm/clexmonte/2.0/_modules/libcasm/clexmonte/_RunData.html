@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.clexmonte._RunData &#8212; libcasm-clexmonte 2.0.0 documentation</title>
+    <title>libcasm.clexmonte._RunData &#8212; libcasm-clexmonte 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,16 +38,17 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/clexmonte/_RunData';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -390,17 +391,17 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.clexmonte._RunData</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">libcasm.configuration</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SupercellSet</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.monte</span> <span class="kn">import</span> <span class="n">ValueMap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValueMap</span>
 
-<span class="kn">from</span> <span class="nn">._clexmonte_state</span> <span class="kn">import</span> <span class="n">MonteCarloState</span>
-<span class="kn">from</span> <span class="nn">.parsing</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._clexmonte_state</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloState</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.parsing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">optional_from_dict</span><span class="p">,</span>
     <span class="n">required_from_dict</span><span class="p">,</span>
     <span class="n">required_int_array_from_dict</span><span class="p">,</span>
@@ -410,7 +411,7 @@
 
 <div class="viewcode-block" id="RunData">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.RunData.html#libcasm.clexmonte.RunData">[docs]</a>
-<span class="k">class</span> <span class="nc">RunData</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RunData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data structure to store data for each run in a series</span>
 
 <span class="sd">    RunData is used by :class:`~libcasm.clexmonte.IncrementalConditionsStateGenerator`</span>
@@ -423,7 +424,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">initial_state</span><span class="p">:</span> <span class="n">MonteCarloState</span><span class="p">,</span>
         <span class="n">final_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MonteCarloState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -466,7 +467,7 @@
 
 <div class="viewcode-block" id="RunData.to_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.RunData.to_dict.html#libcasm.clexmonte.RunData.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">write_initial_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">write_final_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -518,7 +519,7 @@
 <div class="viewcode-block" id="RunData.from_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.RunData.from_dict.html#libcasm.clexmonte.RunData.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span>
         <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
         <span class="n">supercells</span><span class="p">:</span> <span class="n">SupercellSet</span><span class="p">,</span>
     <span class="p">):</span>
@@ -542,7 +543,7 @@
 
 <div class="viewcode-block" id="RunDataOutputParams">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.RunDataOutputParams.html#libcasm.clexmonte.RunDataOutputParams">[docs]</a>
-<span class="k">class</span> <span class="nc">RunDataOutputParams</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RunDataOutputParams</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters controlling saving and write run data for a series of runs</span>
 
 <span class="sd">    RunDataOutputParams is used by</span>
@@ -555,7 +556,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">do_save_all_initial_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">do_save_all_final_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -614,7 +615,7 @@
 
 <div class="viewcode-block" id="RunDataOutputParams.to_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.RunDataOutputParams.to_dict.html#libcasm.clexmonte.RunDataOutputParams.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">write_initial_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">write_final_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -634,7 +635,7 @@
 <div class="viewcode-block" id="RunDataOutputParams.from_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.RunDataOutputParams.from_dict.html#libcasm.clexmonte.RunDataOutputParams.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span>
         <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct RunDataOutputParams from a Python dict&quot;&quot;&quot;</span>

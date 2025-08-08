@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.clexmonte._IncrementalConditionsStateGenerator &#8212; libcasm-clexmonte 2.0.0 documentation</title>
+    <title>libcasm.clexmonte._IncrementalConditionsStateGenerator &#8212; libcasm-clexmonte 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,16 +38,17 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/clexmonte/_IncrementalConditionsStateGenerator';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -390,24 +391,24 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.clexmonte._IncrementalConditionsStateGenerator</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
 
-<span class="kn">from</span> <span class="nn">libcasm.configuration</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SupercellSet</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.monte</span> <span class="kn">import</span> <span class="n">ValueMap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValueMap</span>
 
-<span class="kn">from</span> <span class="nn">._clexmonte_state</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._clexmonte_state</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MonteCarloState</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._FixedConfigGenerator</span> <span class="kn">import</span> <span class="n">FixedConfigGenerator</span>
-<span class="kn">from</span> <span class="nn">._RunData</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._FixedConfigGenerator</span><span class="w"> </span><span class="kn">import</span> <span class="n">FixedConfigGenerator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._RunData</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">RunData</span><span class="p">,</span>
     <span class="n">RunDataOutputParams</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.parsing</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.parsing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">optional_from_dict</span><span class="p">,</span>
     <span class="n">required_from_dict</span><span class="p">,</span>
     <span class="n">to_dict</span><span class="p">,</span>
@@ -416,13 +417,13 @@
 
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.html#libcasm.clexmonte.IncrementalConditionsStateGenerator">[docs]</a>
-<span class="k">class</span> <span class="nc">IncrementalConditionsStateGenerator</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IncrementalConditionsStateGenerator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A `StateGenerator` - Generates the initial state for a series of Monte Carlo \</span>
 <span class="sd">    runs as a linear path in thermodynamic conditions space</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">output_params</span><span class="p">:</span> <span class="n">RunDataOutputParams</span><span class="p">,</span>
         <span class="n">initial_conditions</span><span class="p">:</span> <span class="n">ValueMap</span><span class="p">,</span>
@@ -476,12 +477,12 @@
             <span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if all requested runs have been completed&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_completed_runs</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_states</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">next_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MonteCarloState</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">next_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MonteCarloState</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct and return the next state</span>
 
 <span class="sd">        Returns</span>
@@ -523,7 +524,7 @@
 
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator.append">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.append.html#libcasm.clexmonte.IncrementalConditionsStateGenerator.append">[docs]</a>
-    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_data</span><span class="p">:</span> <span class="n">RunData</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_data</span><span class="p">:</span> <span class="n">RunData</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Append a completed run</span>
 
 <span class="sd">        Notes</span>
@@ -545,18 +546,18 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RunData</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RunData</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The list of completed runs&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_completed_runs</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">n_completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of completed runs&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_completed_runs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator.read_completed_runs">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.read_completed_runs.html#libcasm.clexmonte.IncrementalConditionsStateGenerator.read_completed_runs">[docs]</a>
-    <span class="k">def</span> <span class="nf">read_completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read completed runs data</span>
 
 <span class="sd">        Notes</span>
@@ -586,7 +587,7 @@
 
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator.write_completed_runs">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.write_completed_runs.html#libcasm.clexmonte.IncrementalConditionsStateGenerator.write_completed_runs">[docs]</a>
-    <span class="k">def</span> <span class="nf">write_completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_completed_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write completed runs data</span>
 
 <span class="sd">        Notes</span>
@@ -614,7 +615,7 @@
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator.methodname">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.methodname.html#libcasm.clexmonte.IncrementalConditionsStateGenerator.methodname">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">methodname</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">methodname</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the method name &quot;incremental&quot; &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="s2">&quot;incremental&quot;</span></div>
@@ -622,7 +623,7 @@
 
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator.to_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.to_dict.html#libcasm.clexmonte.IncrementalConditionsStateGenerator.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert IncrementalConditionsStateGenerator to a Python dict</span>
@@ -650,7 +651,7 @@
 <div class="viewcode-block" id="IncrementalConditionsStateGenerator.from_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.IncrementalConditionsStateGenerator.from_dict.html#libcasm.clexmonte.IncrementalConditionsStateGenerator.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span>
         <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
         <span class="n">supercells</span><span class="p">:</span> <span class="n">SupercellSet</span><span class="p">,</span>
         <span class="n">modifying_functions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">MonteCarloState</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>
