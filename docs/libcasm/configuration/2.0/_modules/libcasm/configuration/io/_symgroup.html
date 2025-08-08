@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.configuration.io._symgroup &#8212; libcasm-configuration 2.0.0 documentation</title>
+    <title>libcasm.configuration.io._symgroup &#8212; libcasm-configuration 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/configuration/io/_symgroup';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -379,21 +379,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.configuration.io._symgroup</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration.io.tools</span> <span class="k">as</span> <span class="nn">io_tools</span>
-<span class="kn">import</span> <span class="nn">libcasm.sym_info</span> <span class="k">as</span> <span class="nn">sym_info</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration.io.tools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">io_tools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym_info</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
-<span class="kn">from</span> <span class="nn">.spglib</span> <span class="kn">import</span> <span class="n">asdict</span> <span class="k">as</span> <span class="n">spg_asdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.spglib</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span> <span class="k">as</span> <span class="n">spg_asdict</span>
 
 
 <div class="viewcode-block" id="symgroup_to_dict_with_group_classification">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.configuration.io.symgroup_to_dict_with_group_classification.html#libcasm.configuration.io.symgroup_to_dict_with_group_classification">[docs]</a>
-<span class="k">def</span> <span class="nf">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">symgroup_to_dict_with_group_classification</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">:</span> <span class="n">io_tools</span><span class="o">.</span><span class="n">CasmObjectWithLattice</span><span class="p">,</span>
     <span class="n">symgroup</span><span class="p">:</span> <span class="n">sym_info</span><span class="o">.</span><span class="n">SymGroup</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -463,13 +463,13 @@
     <span class="n">data</span> <span class="o">=</span> <span class="n">symgroup</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">spglib</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">spglib</span>
 
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="n">data</span><span class="p">[</span><span class="s2">&quot;group_classification&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">data</span>
 
-    <span class="kn">from</span> <span class="nn">.spglib</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.spglib</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
         <span class="n">as_cell</span><span class="p">,</span>
         <span class="n">get_magnetic_spacegroup_type_from_symmetry</span><span class="p">,</span>
         <span class="n">get_magnetic_symmetry_dataset</span><span class="p">,</span>

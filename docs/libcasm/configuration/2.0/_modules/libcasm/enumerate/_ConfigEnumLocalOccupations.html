@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._ConfigEnumLocalOccupations &#8212; libcasm-configuration 2.0.0 documentation</title>
+    <title>libcasm.enumerate._ConfigEnumLocalOccupations &#8212; libcasm-configuration 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_ConfigEnumLocalOccupations';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -376,22 +376,22 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.enumerate._ConfigEnumLocalOccupations</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">casmclust</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.local_configuration</span> <span class="k">as</span> <span class="nn">casmlocal</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.clusterography</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmclust</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.local_configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmlocal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
-<span class="kn">from</span> <span class="nn">._enumerate</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._enumerate</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">make_distinct_local_cluster_sites</span><span class="p">,</span>
     <span class="n">make_distinct_local_perturbations</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._make_distinct_super_configurations</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._make_distinct_super_configurations</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">make_distinct_super_configurations</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._point_defect_supercell_methods</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._point_defect_supercell_methods</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">has_required_sites</span><span class="p">,</span>
     <span class="n">make_required_sites</span><span class="p">,</span>
 <span class="p">)</span>
@@ -399,7 +399,7 @@
 
 <div class="viewcode-block" id="make_distinct_local_configurations">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.make_distinct_local_configurations.html#libcasm.enumerate.make_distinct_local_configurations">[docs]</a>
-<span class="k">def</span> <span class="nf">make_distinct_local_configurations</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_distinct_local_configurations</span><span class="p">(</span>
     <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
     <span class="n">event_info</span><span class="p">:</span> <span class="n">casmlocal</span><span class="o">.</span><span class="n">OccEventSymInfo</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;background&quot;</span><span class="p">,</span>
@@ -443,7 +443,7 @@
             <span class="n">event_init</span> <span class="o">=</span> <span class="n">event_supercell_info</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
             <span class="n">event_group_rep</span> <span class="o">=</span> <span class="n">event_supercell_info</span><span class="o">.</span><span class="n">event_group_rep</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
 
-            <span class="k">def</span> <span class="nf">_is_suborbit_generator_op</span><span class="p">(</span><span class="n">rep_init</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">_is_suborbit_generator_op</span><span class="p">(</span><span class="n">rep_init</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">event_op</span> <span class="ow">in</span> <span class="n">event_group_rep</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">background_op</span> <span class="ow">in</span> <span class="n">background_group</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">background_op</span> <span class="o">*</span> <span class="n">rep_init</span> <span class="o">*</span> <span class="n">event_op</span> <span class="o">&lt;</span> <span class="n">rep_init</span><span class="p">:</span>
@@ -513,7 +513,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_make_local_orbits_data</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_local_orbits_data</span><span class="p">(</span>
     <span class="n">local_orbits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]]],</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">phenomenal_clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">],</span>
@@ -563,7 +563,7 @@
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupationsReference">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupationsReference.html#libcasm.enumerate.ConfigEnumLocalOccupationsReference">[docs]</a>
-<span class="k">class</span> <span class="nc">ConfigEnumLocalOccupationsReference</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigEnumLocalOccupationsReference</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data structure for storing contextual information common for results from</span>
 <span class="sd">    :class:`~libcasm.local_configuration.ConfigEnumLocalOccupations`.</span>
 
@@ -572,7 +572,7 @@
 <span class="sd">    Individual results are returned as instances of :class:`Result`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">event_info</span><span class="p">:</span> <span class="n">casmlocal</span><span class="o">.</span><span class="n">OccEventSymInfo</span><span class="p">,</span>
         <span class="n">event_supercell_info</span><span class="p">:</span> <span class="n">casmlocal</span><span class="o">.</span><span class="n">OccEventSupercellSymInfo</span><span class="p">,</span>
@@ -782,7 +782,7 @@
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupationsReference.to_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupationsReference.to_dict.html#libcasm.enumerate.ConfigEnumLocalOccupationsReference.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">write_prim_basis</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
@@ -832,14 +832,14 @@
         <span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
 
 
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupationsResult">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupationsResult.html#libcasm.enumerate.ConfigEnumLocalOccupationsResult">[docs]</a>
-<span class="k">class</span> <span class="nc">ConfigEnumLocalOccupationsResult</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigEnumLocalOccupationsResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data structure for returning enumerated LocalConfiguration along with</span>
 <span class="sd">    contextual information</span>
 
@@ -848,7 +848,7 @@
 <span class="sd">    perturbations. Individual results are returned as instances of Result.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">reference</span><span class="p">:</span> <span class="n">ConfigEnumLocalOccupationsReference</span><span class="p">,</span>
     <span class="p">):</span>
@@ -903,7 +903,7 @@
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupationsResult.to_dict">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupationsResult.to_dict.html#libcasm.enumerate.ConfigEnumLocalOccupationsResult.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Represent the ConfigEnumLocalOccupationsResult as a Python dict.</span>
 
 <span class="sd">        Returns</span>
@@ -925,12 +925,12 @@
         <span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">_print_local_orbits_summary</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_print_local_orbits_summary</span><span class="p">(</span>
     <span class="n">local_orbits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">]],</span>
     <span class="n">xtal_prim</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">phenomenal</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">Cluster</span><span class="p">,</span>
@@ -965,10 +965,10 @@
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupations">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupations.html#libcasm.enumerate.ConfigEnumLocalOccupations">[docs]</a>
-<span class="k">class</span> <span class="nc">ConfigEnumLocalOccupations</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigEnumLocalOccupations</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate occupations in the local environment of an event.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">event_info</span><span class="p">:</span> <span class="n">casmlocal</span><span class="o">.</span><span class="n">OccEventSymInfo</span><span class="p">,</span>
         <span class="n">supercell_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1010,7 +1010,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;bool: If True, print additional information about the enumeration process.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_make_prim_local_orbits</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_prim_local_orbits</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">cluster_specs</span><span class="p">:</span> <span class="n">casmclust</span><span class="o">.</span><span class="n">ClusterSpecs</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
@@ -1054,7 +1054,7 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">prim_local_orbits</span>
 
-    <span class="k">def</span> <span class="nf">_check_supercell_symmetry</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_supercell_symmetry</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">initial_configuration</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
@@ -1135,7 +1135,7 @@
                     <span class="s1">&#39;and `fix` != &quot;both&quot;.&#39;</span>
                 <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_yield_results</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_yield_results</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">result</span><span class="p">,</span>
         <span class="n">i_initial</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -1268,7 +1268,7 @@
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupations.by_cluster">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupations.by_cluster.html#libcasm.enumerate.ConfigEnumLocalOccupations.by_cluster">[docs]</a>
-    <span class="k">def</span> <span class="nf">by_cluster</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">by_cluster</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
@@ -1355,7 +1355,7 @@
             <span class="k">yield</span> <span class="n">result</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_check_for_distinct_super_configurations</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_for_distinct_super_configurations</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
@@ -1413,7 +1413,7 @@
 
         <span class="k">return</span> <span class="n">super_backgrounds</span>
 
-    <span class="k">def</span> <span class="nf">_make_event_supercell_info</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_event_supercell_info</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
     <span class="p">):</span>
@@ -1432,7 +1432,7 @@
 
 <div class="viewcode-block" id="ConfigEnumLocalOccupations.by_cluster_specs">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumLocalOccupations.by_cluster_specs.html#libcasm.enumerate.ConfigEnumLocalOccupations.by_cluster_specs">[docs]</a>
-    <span class="k">def</span> <span class="nf">by_cluster_specs</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">by_cluster_specs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>

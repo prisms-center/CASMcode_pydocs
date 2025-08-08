@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._ConfigEnumMeshGrid &#8212; libcasm-configuration 2.0.0 documentation</title>
+    <title>libcasm.enumerate._ConfigEnumMeshGrid &#8212; libcasm-configuration 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_ConfigEnumMeshGrid';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -376,27 +376,27 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.enumerate._ConfigEnumMeshGrid</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.casmglobal</span>
-<span class="kn">import</span> <span class="nn">libcasm.clexulator</span> <span class="k">as</span> <span class="nn">casmclex</span>
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.counter</span>
-<span class="kn">from</span> <span class="nn">libcasm.configuration._misc</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.casmglobal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmclex</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration._misc</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">equivalent_order_parameters_index</span><span class="p">,</span>
     <span class="n">make_canonical_order_parameters</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.irreps</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.irreps</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SubWedge</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">array_like</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;array_like&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_is_corner_point</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_corner_point</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">shape_factor</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">abs_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">casmglobal</span><span class="o">.</span><span class="n">TOL</span><span class="p">,</span>
@@ -406,7 +406,7 @@
     <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="k">def</span> <span class="nf">_subwedge_counter</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_subwedge_counter</span><span class="p">(</span>
     <span class="n">subwedge</span><span class="p">:</span> <span class="n">SubWedge</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -445,7 +445,7 @@
 
 <div class="viewcode-block" id="meshgrid_points">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.meshgrid_points.html#libcasm.enumerate.meshgrid_points">[docs]</a>
-<span class="k">def</span> <span class="nf">meshgrid_points</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">meshgrid_points</span><span class="p">(</span>
     <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
     <span class="n">dof_space</span><span class="p">:</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">,</span>
     <span class="n">xi</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">array_like</span><span class="p">],</span>
@@ -517,7 +517,7 @@
 
 <div class="viewcode-block" id="irreducible_wedge_points">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.irreducible_wedge_points.html#libcasm.enumerate.irreducible_wedge_points">[docs]</a>
-<span class="k">def</span> <span class="nf">irreducible_wedge_points</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">irreducible_wedge_points</span><span class="p">(</span>
     <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
     <span class="n">dof_space</span><span class="p">:</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">,</span>
     <span class="n">irreducible_wedge</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SubWedge</span><span class="p">],</span>
@@ -623,10 +623,10 @@
 
 <div class="viewcode-block" id="ConfigEnumMeshGrid">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumMeshGrid.html#libcasm.enumerate.ConfigEnumMeshGrid">[docs]</a>
-<span class="k">class</span> <span class="nc">ConfigEnumMeshGrid</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConfigEnumMeshGrid</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate configuration with continuous DoF values in a mesh grid&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
         <span class="n">supercell_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -653,48 +653,48 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_subwedge_index</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">prim</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prim</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The Prim&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">supercell_set</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supercell_set</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSet</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;If not None, generated :class:`~casmconfig.Supercell` are constructed by</span>
 <span class="sd">        adding in the :class:`~casmconfig.SupercellSet`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supercell_set</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;During enumeration, `background` is set to the current background</span>
 <span class="sd">        configuration in which enumeration is performed.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_background</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dof_space</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dof_space</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;During enumeration, `dof_space` is set to the current DoFspace in which</span>
 <span class="sd">        enumeration is performed.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dof_space</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">enum_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enum_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;During enumeration, `enum_index` is incremented to count over the</span>
 <span class="sd">        combinations of background configuration and dof space on which enumeration is</span>
 <span class="sd">        performed, starting from 0.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enum_index</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">order_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;During enumeration, `order_parameters` is set to the current order parameter</span>
 <span class="sd">        values use to construct the generated configuration.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_parameters</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">subwedge_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">subwedge_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;During enumeration by irreducible wedge, `subwedge_index` is set to the</span>
 <span class="sd">        index of the current SubWedge of the irreducible wedge.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subwedge_index</span>
 
-    <span class="k">def</span> <span class="nf">_by_grid_coordinates</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_by_grid_coordinates</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">dof_space</span><span class="p">:</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">,</span>
@@ -787,7 +787,7 @@
 
 <div class="viewcode-block" id="ConfigEnumMeshGrid.by_grid_coordinates">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumMeshGrid.by_grid_coordinates.html#libcasm.enumerate.ConfigEnumMeshGrid.by_grid_coordinates">[docs]</a>
-    <span class="k">def</span> <span class="nf">by_grid_coordinates</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">by_grid_coordinates</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">dof_space</span><span class="p">:</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">,</span>
@@ -845,7 +845,7 @@
 
 <div class="viewcode-block" id="ConfigEnumMeshGrid.by_range">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumMeshGrid.by_range.html#libcasm.enumerate.ConfigEnumMeshGrid.by_range">[docs]</a>
-    <span class="k">def</span> <span class="nf">by_range</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">by_range</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">dof_space</span><span class="p">:</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">,</span>
@@ -947,7 +947,7 @@
 
 <div class="viewcode-block" id="ConfigEnumMeshGrid.by_irreducible_wedge">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.enumerate.ConfigEnumMeshGrid.by_irreducible_wedge.html#libcasm.enumerate.ConfigEnumMeshGrid.by_irreducible_wedge">[docs]</a>
-    <span class="k">def</span> <span class="nf">by_irreducible_wedge</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">by_irreducible_wedge</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">dof_space</span><span class="p">:</span> <span class="n">casmclex</span><span class="o">.</span><span class="n">DoFSpace</span><span class="p">,</span>

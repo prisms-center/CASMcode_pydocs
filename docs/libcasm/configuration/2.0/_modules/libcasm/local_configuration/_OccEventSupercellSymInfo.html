@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.local_configuration._OccEventSupercellSymInfo &#8212; libcasm-configuration 2.0.0 documentation</title>
+    <title>libcasm.local_configuration._OccEventSupercellSymInfo &#8212; libcasm-configuration 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/local_configuration/_OccEventSupercellSymInfo';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -376,19 +376,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.local_configuration._OccEventSupercellSymInfo</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.configuration</span> <span class="k">as</span> <span class="nn">casmconfig</span>
-<span class="kn">import</span> <span class="nn">libcasm.occ_events</span> <span class="k">as</span> <span class="nn">occ_events</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.occ_events</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">occ_events</span>
 
-<span class="kn">from</span> <span class="nn">._local_configuration</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._local_configuration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">_make_canonical_local_configuration_about_event</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._methods</span> <span class="kn">import</span> <span class="n">make_occevent_suborbits</span>
-<span class="kn">from</span> <span class="nn">._OccEventPrimSymInfo</span> <span class="kn">import</span> <span class="n">OccEventPrimSymInfo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_occevent_suborbits</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._OccEventPrimSymInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">OccEventPrimSymInfo</span>
 
 
-<span class="k">def</span> <span class="nf">_copy_apply_prim_factor_group_index</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_copy_apply_prim_factor_group_index</span><span class="p">(</span>
     <span class="n">prim_factor_group_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">prim</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span>
     <span class="n">occ_event</span><span class="p">:</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span>
@@ -419,7 +419,7 @@
     <span class="k">return</span> <span class="n">rep</span> <span class="o">*</span> <span class="n">occ_event</span>
 
 
-<span class="k">def</span> <span class="nf">_make_consistent_suborbits</span><span class="p">(</span><span class="n">suborbits</span><span class="p">,</span> <span class="n">event_prim_info</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_consistent_suborbits</span><span class="p">(</span><span class="n">suborbits</span><span class="p">,</span> <span class="n">event_prim_info</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure `suborbits` events are consistent with `event_prim_info.events`&quot;&quot;&quot;</span>
     <span class="n">default_supercell</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">(</span>
         <span class="n">prim</span><span class="o">=</span><span class="n">event_prim_info</span><span class="o">.</span><span class="n">prim</span><span class="p">,</span>
@@ -446,7 +446,7 @@
     <span class="k">return</span> <span class="n">suborbits_out</span>
 
 
-<span class="k">def</span> <span class="nf">_get_suborbit_index</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">suborbits</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_suborbit_index</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">suborbits</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i_suborbit</span><span class="p">,</span> <span class="n">suborbit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">suborbits</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">suborbit_event</span> <span class="ow">in</span> <span class="n">suborbit</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">suborbit_event</span><span class="p">:</span>
@@ -458,10 +458,10 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.html#libcasm.local_configuration.OccEventSupercellSymInfo">[docs]</a>
-<span class="k">class</span> <span class="nc">OccEventSupercellSymInfo</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OccEventSupercellSymInfo</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about an OccEvent with respect to a supercell factor group&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">event_prim_info</span><span class="p">:</span> <span class="n">OccEventPrimSymInfo</span><span class="p">,</span>
         <span class="n">supercell</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Supercell</span><span class="p">,</span>
@@ -506,7 +506,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.suborbit_prototype">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.suborbit_prototype.html#libcasm.local_configuration.OccEventSupercellSymInfo.suborbit_prototype">[docs]</a>
-    <span class="k">def</span> <span class="nf">suborbit_prototype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suborbit_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">suborbit_prototype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suborbit_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the prototype event for the suborbit at the given index</span>
 
 <span class="sd">        Parameters</span>
@@ -524,7 +524,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.suborbit_prototype_equivalent_index">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.suborbit_prototype_equivalent_index.html#libcasm.local_configuration.OccEventSupercellSymInfo.suborbit_prototype_equivalent_index">[docs]</a>
-    <span class="k">def</span> <span class="nf">suborbit_prototype_equivalent_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suborbit_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">suborbit_prototype_equivalent_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suborbit_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the equivalent index of the prototype event for the suborbit at the</span>
 <span class="sd">        given index</span>
 
@@ -543,7 +543,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.event_group_rep">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.event_group_rep.html#libcasm.local_configuration.OccEventSupercellSymInfo.event_group_rep">[docs]</a>
-    <span class="k">def</span> <span class="nf">event_group_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">event_group_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the SupercellSymOp representation for the invariant group of the</span>
 <span class="sd">        specified equivalent event.</span>
 
@@ -570,7 +570,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.supercell_rep">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.supercell_rep.html#libcasm.local_configuration.OccEventSupercellSymInfo.supercell_rep">[docs]</a>
-    <span class="k">def</span> <span class="nf">supercell_rep</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supercell_rep</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">initial</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
         <span class="n">final</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
@@ -663,7 +663,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.canonical_pos">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.canonical_pos.html#libcasm.local_configuration.OccEventSupercellSymInfo.canonical_pos">[docs]</a>
-    <span class="k">def</span> <span class="nf">canonical_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">canonical_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the canonical equivalent event position</span>
 
 <span class="sd">        Parameters</span>
@@ -684,7 +684,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.coordinate">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.coordinate.html#libcasm.local_configuration.OccEventSupercellSymInfo.coordinate">[docs]</a>
-    <span class="k">def</span> <span class="nf">coordinate</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coordinate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">occ_event</span><span class="p">:</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span>
     <span class="p">):</span>
@@ -717,7 +717,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.standardized_and_within">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.standardized_and_within.html#libcasm.local_configuration.OccEventSupercellSymInfo.standardized_and_within">[docs]</a>
-    <span class="k">def</span> <span class="nf">standardized_and_within</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">standardized_and_within</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">occ_event</span><span class="p">:</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span>
     <span class="p">):</span>
@@ -740,7 +740,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.copy_apply_supercell_symop">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.copy_apply_supercell_symop.html#libcasm.local_configuration.OccEventSupercellSymInfo.copy_apply_supercell_symop">[docs]</a>
-    <span class="k">def</span> <span class="nf">copy_apply_supercell_symop</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">copy_apply_supercell_symop</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">op</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">SupercellSymOp</span><span class="p">,</span>
         <span class="n">occ_event</span><span class="p">:</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span>
@@ -773,7 +773,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.event">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.event.html#libcasm.local_configuration.OccEventSupercellSymInfo.event">[docs]</a>
-    <span class="k">def</span> <span class="nf">event</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">event</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
     <span class="p">):</span>
@@ -796,7 +796,7 @@
 
 <div class="viewcode-block" id="OccEventSupercellSymInfo.make_canonical_local_configuration">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.local_configuration.OccEventSupercellSymInfo.make_canonical_local_configuration.html#libcasm.local_configuration.OccEventSupercellSymInfo.make_canonical_local_configuration">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_canonical_local_configuration</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_canonical_local_configuration</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Configuration</span><span class="p">,</span>
         <span class="n">pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>

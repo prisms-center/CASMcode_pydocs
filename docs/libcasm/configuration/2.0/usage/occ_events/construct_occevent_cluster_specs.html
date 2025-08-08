@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Constructing local-cluster orbits &#8212; libcasm-configuration 2.0.0 documentation</title>
+    <title>Constructing local-cluster orbits &#8212; libcasm-configuration 2.2.0 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/occ_events/construct_occevent_cluster_specs';</script>
@@ -50,7 +50,7 @@
     <link rel="prev" title="Occupation event basics" href="construct_occevent.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -406,8 +406,8 @@
 <p>To generate local-cluster orbits, and from them local basis functions, one prototype <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> from the orbit of symmetrically equivalent <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> must be provided.</p>
 <p>While any element of the orbit may be used, it is conventional to use the <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> in canonical form, which by convention in CASM is the orbit element that compares as greatest.</p>
 <p>The canonical <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> can be obtained by <a class="reference internal" href="construct_occevent.html#orbits-of-occevent"><span class="std std-ref">constucting an orbit</span></a> and choosing the last element, or directly using <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.make_canonical_occevent.html#libcasm.occ_events.make_canonical_occevent" title="libcasm.occ_events.make_canonical_occevent"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_canonical_occevent()</span></code></a>:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.occ_events</span> <span class="k">as</span> <span class="nn">occ_events</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.occ_events</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">occ_events</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
 <span class="n">xtal_prim</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">occ_event</span> <span class="o">=</span> <span class="n">occ_events</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -453,13 +453,13 @@ exchange.)</p></li>
 <p>Enumerated <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> represent symmetrically distinct trajectories of occupants, considering only the initial and final positions, and how the occupants permute amongst them, but not the complete transformation pathway. In real materials, there are some cases in which there may be multiple distinct pathways that are represented by the same <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a>. In this case, it is possible to include duplicate <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> with different names in a CASM project for input to kinetic Monte Carlo calculations.</p>
 </div>
 <p>The following example script demonstrates enumerating distinct <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a>, in an FCC Prim with “A” and “B” atoms and vacancies, including exchange on triplet sites, using the default filters:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">libcasm.clusterography</span> <span class="k">as</span> <span class="nn">clust</span>
-<span class="kn">import</span> <span class="nn">libcasm.occ_events</span> <span class="k">as</span> <span class="nn">occ_events</span>
-<span class="kn">import</span> <span class="nn">libcasm.sym_info</span> <span class="k">as</span> <span class="nn">sym_info</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal</span> <span class="k">as</span> <span class="nn">xtal</span>
-<span class="kn">import</span> <span class="nn">libcasm.xtal.prims</span> <span class="k">as</span> <span class="nn">xtal_prims</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.clusterography</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">clust</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.occ_events</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">occ_events</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym_info</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal.prims</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal_prims</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># ideal atom radius</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="p">((</span><span class="mi">4</span><span class="o">*</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span><span class="mf">2.</span><span class="p">)</span> <span class="c1"># conventional FCC lattice parameter</span>
@@ -632,8 +632,8 @@ exchange.)</p></li>
 <section id="occevent-invariant-group">
 <h2>OccEvent invariant group<a class="headerlink" href="#occevent-invariant-group" title="Link to this heading">#</a></h2>
 <p>The subgroup of the prim factor group that leaves an <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.OccEvent.html#libcasm.occ_events.OccEvent" title="libcasm.occ_events.OccEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OccEvent</span></code></a> invariant is the generating group for local basis functions of properties of that event. It can be constructed explicitly using <a class="reference internal" href="../../reference/libcasm/_autosummary/libcasm.occ_events.make_occevent_group.html#libcasm.occ_events.make_occevent_group" title="libcasm.occ_events.make_occevent_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_occevent_group()</span></code></a>:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">libcasm.occ_events</span> <span class="k">as</span> <span class="nn">occ_events</span>
-<span class="kn">import</span> <span class="nn">libcasm.sym_info</span> <span class="k">as</span> <span class="nn">sym_info</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.occ_events</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">occ_events</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.sym_info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym_info</span>
 
 <span class="c1"># xtal_prim: xtal.Prim</span>
 <span class="c1"># occ_event: occ_events.OccEvent</span>
