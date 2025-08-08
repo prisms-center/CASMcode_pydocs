@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.composition._methods &#8212; libcasm-composition 2.0.0 documentation</title>
+    <title>libcasm.composition._methods &#8212; libcasm-composition 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,15 +38,16 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/composition/_methods';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -361,15 +362,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.composition._methods</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.casmglobal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.casmglobal</span>
 
-<span class="kn">from</span> <span class="nn">._composition</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._composition</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CompositionCalculator</span><span class="p">,</span>
     <span class="n">CompositionConverter</span><span class="p">,</span>
     <span class="n">make_standard_origin_and_end_members</span><span class="p">,</span>
@@ -378,7 +379,7 @@
 
 <div class="viewcode-block" id="make_normalized_origin_and_end_members">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.composition.make_normalized_origin_and_end_members.html#libcasm.composition.make_normalized_origin_and_end_members">[docs]</a>
-<span class="k">def</span> <span class="nf">make_normalized_origin_and_end_members</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_normalized_origin_and_end_members</span><span class="p">(</span>
     <span class="n">origin_and_end_members</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">casmglobal</span><span class="o">.</span><span class="n">TOL</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
@@ -434,7 +435,7 @@
 
 <div class="viewcode-block" id="make_standard_axes">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.composition.make_standard_axes.html#libcasm.composition.make_standard_axes">[docs]</a>
-<span class="k">def</span> <span class="nf">make_standard_axes</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_standard_axes</span><span class="p">(</span>
     <span class="n">allowed_occs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">components</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">vacancy_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -538,7 +539,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_print_table</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_print_table</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
     <span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">headers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
@@ -568,7 +569,7 @@
 
 <div class="viewcode-block" id="print_axes_table">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.composition.print_axes_table.html#libcasm.composition.print_axes_table">[docs]</a>
-<span class="k">def</span> <span class="nf">print_axes_table</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_axes_table</span><span class="p">(</span>
     <span class="n">possible_axes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">CompositionConverter</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CompositionConverter</span><span class="p">]],</span>
     <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TextIO</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
@@ -621,7 +622,7 @@
 
 <div class="viewcode-block" id="print_axes_summary">
 <a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.composition.print_axes_summary.html#libcasm.composition.print_axes_summary">[docs]</a>
-<span class="k">def</span> <span class="nf">print_axes_summary</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_axes_summary</span><span class="p">(</span>
     <span class="n">composition_converter</span><span class="p">:</span> <span class="n">CompositionConverter</span><span class="p">,</span>
     <span class="n">include_va</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TextIO</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
