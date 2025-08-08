@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.monte.ising_py._model &#8212; libcasm-monte 2.0.0 documentation</title>
+    <title>libcasm.monte.ising_py._model &#8212; libcasm-monte 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/monte/ising_py/_model';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -392,21 +392,21 @@
   <h1>Source code for libcasm.monte.ising_py._model</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Example Ising model implementation, written in Python&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">numpy.typing</span> <span class="k">as</span> <span class="nn">npt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
 
-<span class="kn">from</span> <span class="nn">libcasm.monte</span> <span class="kn">import</span> <span class="n">ValueMap</span>
-<span class="kn">from</span> <span class="nn">libcasm.monte.events</span> <span class="kn">import</span> <span class="n">IntVector</span><span class="p">,</span> <span class="n">LongVector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValueMap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte.events</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntVector</span><span class="p">,</span> <span class="n">LongVector</span>
 
 
 <div class="viewcode-block" id="IsingConfiguration">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.html#libcasm.monte.ising_py.IsingConfiguration">[docs]</a>
-<span class="k">class</span> <span class="nc">IsingConfiguration</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IsingConfiguration</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ising model configuration, using a np.ndarray</span>
 
 <span class="sd">    Simple configuration supports single site unit cells and supercells without</span>
@@ -414,7 +414,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
         <span class="n">fill_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -441,7 +441,7 @@
 
 <div class="viewcode-block" id="IsingConfiguration.occupation">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.occupation.html#libcasm.monte.ising_py.IsingConfiguration.occupation">[docs]</a>
-    <span class="k">def</span> <span class="nf">occupation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">occupation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current occupation (as a read-only view)&quot;&quot;&quot;</span>
         <span class="n">readonly_view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_occupation</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="n">readonly_view</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
@@ -450,7 +450,7 @@
 
 <div class="viewcode-block" id="IsingConfiguration.set_occupation">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.set_occupation.html#libcasm.monte.ising_py.IsingConfiguration.set_occupation">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_occupation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">occupation</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_occupation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">occupation</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the current occupation, without changing supercell shape/size&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_occupation</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">occupation</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error in set_occupation: shape mismatch&quot;</span><span class="p">)</span>
@@ -459,7 +459,7 @@
 
 <div class="viewcode-block" id="IsingConfiguration.occ">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.occ.html#libcasm.monte.ising_py.IsingConfiguration.occ">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">occ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current occupation of one site&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_occupation</span><span class="p">[</span>
             <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">linear_site_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>
@@ -468,7 +468,7 @@
 
 <div class="viewcode-block" id="IsingConfiguration.set_occ">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.set_occ.html#libcasm.monte.ising_py.IsingConfiguration.set_occ">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_occ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_occ</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_occ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_occ</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the current occupation of one site&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_occupation</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">linear_site_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">new_occ</span>
@@ -478,7 +478,7 @@
 <div class="viewcode-block" id="IsingConfiguration.from_dict">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.from_dict.html#libcasm.monte.ising_py.IsingConfiguration.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IsingConfiguration</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IsingConfiguration</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct from a configuration dict&quot;&quot;&quot;</span>
 
         <span class="n">config</span> <span class="o">=</span> <span class="n">IsingConfiguration</span><span class="p">(</span>
@@ -491,7 +491,7 @@
 
 <div class="viewcode-block" id="IsingConfiguration.to_dict">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.to_dict.html#libcasm.monte.ising_py.IsingConfiguration.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a configuration dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">occupation</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span>
@@ -501,21 +501,21 @@
 
 <div class="viewcode-block" id="IsingConfiguration.within">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.within.html#libcasm.monte.ising_py.IsingConfiguration.within">[docs]</a>
-    <span class="k">def</span> <span class="nf">within</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">within</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get index for periodic equivalent within the array&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">index</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="IsingConfiguration.from_linear_site_index">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.from_linear_site_index.html#libcasm.monte.ising_py.IsingConfiguration.from_linear_site_index">[docs]</a>
-    <span class="k">def</span> <span class="nf">from_linear_site_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_linear_site_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Column-major unrolling index to tuple of np.ndarray indices&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">linear_site_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="IsingConfiguration.to_linear_site_index">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingConfiguration.to_linear_site_index.html#libcasm.monte.ising_py.IsingConfiguration.to_linear_site_index">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_linear_site_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multi_index</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_linear_site_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multi_index</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Tuple of np.ndarray indices to column-major unrolling index&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel_multi_index</span><span class="p">(</span><span class="n">multi_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span></div>
 </div>
@@ -524,7 +524,7 @@
 
 <div class="viewcode-block" id="IsingState">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingState.html#libcasm.monte.ising_py.IsingState">[docs]</a>
-<span class="k">class</span> <span class="nc">IsingState</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IsingState</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ising model state, including configuration and conditions</span>
 
 <span class="sd">    Attributes</span>
@@ -538,7 +538,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">IsingConfiguration</span><span class="p">,</span>
         <span class="n">conditions</span><span class="p">:</span> <span class="n">ValueMap</span><span class="p">,</span>
@@ -551,7 +551,7 @@
 
 <div class="viewcode-block" id="IsingFormationEnergy">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingFormationEnergy.html#libcasm.monte.ising_py.IsingFormationEnergy">[docs]</a>
-<span class="k">class</span> <span class="nc">IsingFormationEnergy</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IsingFormationEnergy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the formation energy of an IsingState</span>
 
 <span class="sd">    .. rubric:: Notes</span>
@@ -577,7 +577,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">lattice_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -607,7 +607,7 @@
 
 <div class="viewcode-block" id="IsingFormationEnergy.set_state">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingFormationEnergy.set_state.html#libcasm.monte.ising_py.IsingFormationEnergy.set_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the state the formation energy is calculated for</span>
 
 <span class="sd">        Parameters</span>
@@ -623,7 +623,7 @@
 
 <div class="viewcode-block" id="IsingFormationEnergy.per_supercell">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingFormationEnergy.per_supercell.html#libcasm.monte.ising_py.IsingFormationEnergy.per_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">per_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates and returns the Ising model formation energy (per supercell)&quot;&quot;&quot;</span>
 
         <span class="c1"># formation energy, E_formation = -\sum_{NN} J s_i s_j</span>
@@ -648,13 +648,13 @@
 
 <div class="viewcode-block" id="IsingFormationEnergy.per_unitcell">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingFormationEnergy.per_unitcell.html#libcasm.monte.ising_py.IsingFormationEnergy.per_unitcell">[docs]</a>
-    <span class="k">def</span> <span class="nf">per_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates and returns the Ising model formation energy (per unitcell)&quot;&quot;&quot;</span>
         <span class="c1"># formation energy, e_formation = (-\sum_{NN} J s_i s_j) / n_unitcells</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_supercell</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">n_unitcells</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_single_occ_delta_per_supercell</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_single_occ_delta_per_supercell</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_site_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">new_occ</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -708,7 +708,7 @@
 
 <div class="viewcode-block" id="IsingFormationEnergy.occ_delta_per_supercell">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingFormationEnergy.occ_delta_per_supercell.html#libcasm.monte.ising_py.IsingFormationEnergy.occ_delta_per_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ_delta_per_supercell</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">occ_delta_per_supercell</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_site_index</span><span class="p">:</span> <span class="n">LongVector</span><span class="p">,</span>
         <span class="n">new_occ</span><span class="p">:</span> <span class="n">IntVector</span><span class="p">,</span>
@@ -752,7 +752,7 @@
             <span class="k">return</span> <span class="n">dE</span></div>
 
 
-    <span class="k">def</span> <span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">IsingFormationEnergy</span><span class="p">(</span>
             <span class="n">J</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">),</span>
             <span class="n">lattice_type</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice_type</span><span class="p">),</span>
@@ -762,7 +762,7 @@
 
 <div class="viewcode-block" id="IsingParamComposition">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingParamComposition.html#libcasm.monte.ising_py.IsingParamComposition">[docs]</a>
-<span class="k">class</span> <span class="nc">IsingParamComposition</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IsingParamComposition</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the parametric composition of an IsingState</span>
 
 <span class="sd">    .. rubric:: Notes</span>
@@ -786,7 +786,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IsingState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
@@ -796,7 +796,7 @@
 
 <div class="viewcode-block" id="IsingParamComposition.set_state">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingParamComposition.set_state.html#libcasm.monte.ising_py.IsingParamComposition.set_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_state</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">,</span>
     <span class="p">):</span>
@@ -816,14 +816,14 @@
 
 <div class="viewcode-block" id="IsingParamComposition.n_independent_compositions">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingParamComposition.n_independent_compositions.html#libcasm.monte.ising_py.IsingParamComposition.n_independent_compositions">[docs]</a>
-    <span class="k">def</span> <span class="nf">n_independent_compositions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_independent_compositions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of independent composition variables&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">1</span></div>
 
 
 <div class="viewcode-block" id="IsingParamComposition.per_supercell">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingParamComposition.per_supercell.html#libcasm.monte.ising_py.IsingParamComposition.per_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">per_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates and returns the parametric composition (per_supercell)&quot;&quot;&quot;</span>
         <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">n_variable_sites</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">n_variable_sites</span>
@@ -834,14 +834,14 @@
 
 <div class="viewcode-block" id="IsingParamComposition.per_unitcell">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingParamComposition.per_unitcell.html#libcasm.monte.ising_py.IsingParamComposition.per_unitcell">[docs]</a>
-    <span class="k">def</span> <span class="nf">per_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates and returns the parametric composition (per_unitcell)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_supercell</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">n_unitcells</span></div>
 
 
 <div class="viewcode-block" id="IsingParamComposition.occ_delta_per_supercell">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingParamComposition.occ_delta_per_supercell.html#libcasm.monte.ising_py.IsingParamComposition.occ_delta_per_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ_delta_per_supercell</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">occ_delta_per_supercell</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_site_index</span><span class="p">:</span> <span class="n">LongVector</span><span class="p">,</span>
         <span class="n">new_occ</span><span class="p">:</span> <span class="n">IntVector</span><span class="p">,</span>
@@ -862,10 +862,10 @@
 
 <div class="viewcode-block" id="IsingSystem">
 <a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.IsingSystem.html#libcasm.monte.ising_py.IsingSystem">[docs]</a>
-<span class="k">class</span> <span class="nc">IsingSystem</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IsingSystem</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Holds methods and data for calculating Ising system properties&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">formation_energy_calculator</span><span class="p">:</span> <span class="n">IsingFormationEnergy</span><span class="p">,</span>
         <span class="n">param_composition_calculator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IsingParamComposition</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

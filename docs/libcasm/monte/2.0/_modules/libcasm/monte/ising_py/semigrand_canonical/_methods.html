@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.monte.ising_py.semigrand_canonical._methods &#8212; libcasm-monte 2.0.0 documentation</title>
+    <title>libcasm.monte.ising_py.semigrand_canonical._methods &#8212; libcasm-monte 2.2.0 documentation</title>
   
   
   
@@ -29,7 +29,7 @@
   <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=1d1c7082" />
   
   <!-- So that users can add custom icons -->
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/monte/ising_py/semigrand_canonical/_methods';</script>
@@ -47,7 +47,7 @@
     <link rel="search" title="Search" href="../../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.0" />
+  <meta name="docsearch:version" content="2.2" />
   </head>
   
   
@@ -390,31 +390,31 @@
                 <article class="bd-article">
                   
   <h1>Source code for libcasm.monte.ising_py.semigrand_canonical._methods</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">libcasm.casmglobal</span> <span class="k">as</span> <span class="nn">casmglobal</span>
-<span class="kn">import</span> <span class="nn">libcasm.monte.events</span> <span class="k">as</span> <span class="nn">mcevents</span>
-<span class="kn">from</span> <span class="nn">libcasm.monte</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.casmglobal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmglobal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.monte.events</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mcevents</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MethodLog</span><span class="p">,</span>
     <span class="n">RandomNumberEngine</span><span class="p">,</span>
     <span class="n">RandomNumberGenerator</span><span class="p">,</span>
     <span class="n">ValueMap</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.monte.ising_py</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte.ising_py</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">IsingFormationEnergy</span><span class="p">,</span>
     <span class="n">IsingParamComposition</span><span class="p">,</span>
     <span class="n">IsingState</span><span class="p">,</span>
     <span class="n">IsingSystem</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.monte.sampling</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.monte.sampling</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CompletionCheck</span><span class="p">,</span>
     <span class="n">CompletionCheckParams</span><span class="p">,</span>
     <span class="n">Sampler</span><span class="p">,</span>
@@ -428,10 +428,10 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalConditions">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions">[docs]</a>
-<span class="k">class</span> <span class="nc">SemiGrandCanonicalConditions</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SemiGrandCanonicalConditions</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Semi-grand canonical ensemble thermodynamic conditions&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">exchange_potential</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
@@ -459,7 +459,7 @@
 <div class="viewcode-block" id="SemiGrandCanonicalConditions.from_values">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.from_values.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.from_values">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_values</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">ValueMap</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SemiGrandCanonicalConditions</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_values</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">ValueMap</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SemiGrandCanonicalConditions</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct from a conditions ValueMap&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s2">&quot;temperature&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">scalar_values</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Missing required condition: &quot;temperature&quot;&#39;</span><span class="p">)</span>
@@ -473,7 +473,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalConditions.to_values">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.to_values.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.to_values">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValueMap</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValueMap</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a conditions ValueMap&quot;&quot;&quot;</span>
         <span class="n">values</span> <span class="o">=</span> <span class="n">ValueMap</span><span class="p">()</span>
         <span class="n">values</span><span class="o">.</span><span class="n">scalar_values</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span>
@@ -484,7 +484,7 @@
 <div class="viewcode-block" id="SemiGrandCanonicalConditions.from_dict">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.from_dict.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.from_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SemiGrandCanonicalConditions</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SemiGrandCanonicalConditions</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct from a conditions dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SemiGrandCanonicalConditions</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">ValueMap</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
 
@@ -492,7 +492,7 @@
 <div class="viewcode-block" id="SemiGrandCanonicalConditions.to_dict">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.to_dict.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalConditions.to_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a conditions dict&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_values</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div>
 </div>
@@ -501,7 +501,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalPotential">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential">[docs]</a>
-<span class="k">class</span> <span class="nc">SemiGrandCanonicalPotential</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SemiGrandCanonicalPotential</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the semi-grand canonical energy and changes in energy</span>
 
 <span class="sd">    Implements the (per_supercell) semi-grand canonical energy:</span>
@@ -512,7 +512,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">system</span><span class="p">:</span> <span class="n">IsingSystem</span><span class="p">,</span>
     <span class="p">):</span>
@@ -561,7 +561,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalPotential.set_state">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.set_state.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.set_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">,</span> <span class="n">conditions</span><span class="p">:</span> <span class="n">SemiGrandCanonicalConditions</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">,</span> <span class="n">conditions</span><span class="p">:</span> <span class="n">SemiGrandCanonicalConditions</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the current Monte Carlo state&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conditions</span> <span class="o">=</span> <span class="n">conditions</span>
@@ -572,7 +572,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalPotential.per_supercell">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.per_supercell.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.per_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">per_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the current Monte Carlo state&quot;&quot;&quot;</span>
         <span class="n">mu_exchange</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditions</span><span class="o">.</span><span class="n">exchange_potential</span>
 
@@ -587,13 +587,13 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalPotential.per_unitcell">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.per_unitcell.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.per_unitcell">[docs]</a>
-    <span class="k">def</span> <span class="nf">per_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">per_unitcell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_supercell</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">n_unitcells</span></div>
 
 
 <div class="viewcode-block" id="SemiGrandCanonicalPotential.occ_delta_per_supercell">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.occ_delta_per_supercell.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalPotential.occ_delta_per_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ_delta_per_supercell</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">occ_delta_per_supercell</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_site_index</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">LongVector</span><span class="p">,</span>
         <span class="n">new_occ</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">IntVector</span><span class="p">,</span>
@@ -618,10 +618,10 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalData">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData">[docs]</a>
-<span class="k">class</span> <span class="nc">SemiGrandCanonicalData</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SemiGrandCanonicalData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Holds semi-grand canonical Metropolis Monte Carlo run data and results&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">sampling_functions</span><span class="p">:</span> <span class="n">StateSamplingFunctionMap</span><span class="p">,</span>
         <span class="n">n_steps_per_pass</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -676,7 +676,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalData.acceptance_rate">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.acceptance_rate.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.acceptance_rate">[docs]</a>
-    <span class="k">def</span> <span class="nf">acceptance_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acceptance_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="n">_n_accept</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_accept</span><span class="p">)</span>
         <span class="n">_n_reject</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_reject</span><span class="p">)</span>
         <span class="n">_total</span> <span class="o">=</span> <span class="n">_n_accept</span> <span class="o">+</span> <span class="n">_n_reject</span>
@@ -685,7 +685,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalData.rejection_rate">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.rejection_rate.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.rejection_rate">[docs]</a>
-    <span class="k">def</span> <span class="nf">rejection_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rejection_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="n">_n_accept</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_accept</span><span class="p">)</span>
         <span class="n">_n_reject</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_reject</span><span class="p">)</span>
         <span class="n">_total</span> <span class="o">=</span> <span class="n">_n_accept</span> <span class="o">+</span> <span class="n">_n_reject</span>
@@ -694,7 +694,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalData.reset">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.reset.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.reset">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset attributes set during `run`&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">sampler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">samplers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">sampler</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -707,7 +707,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalData.to_dict">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.to_dict.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalData.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to dict, excluding samplers</span>
 
 <span class="sd">        Returns</span>
@@ -738,7 +738,7 @@
 
 <div class="viewcode-block" id="default_write_status">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.default_write_status.html#libcasm.monte.ising_py.semigrand_canonical.default_write_status">[docs]</a>
-<span class="k">def</span> <span class="nf">default_write_status</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">default_write_status</span><span class="p">(</span>
     <span class="n">mc_calculator</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">method_log</span><span class="p">:</span> <span class="n">MethodLog</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -794,7 +794,7 @@
 
     <span class="n">results</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">completion_check</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">finish</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">finish</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Things to do when finished&quot;&quot;&quot;</span>
         <span class="n">method_log</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="n">method_log</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
@@ -847,7 +847,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalEventGenerator">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator">[docs]</a>
-<span class="k">class</span> <span class="nc">SemiGrandCanonicalEventGenerator</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SemiGrandCanonicalEventGenerator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Propose and apply semi-grand canonical Ising model events</span>
 
 <span class="sd">    .. rubric:: Constructor</span>
@@ -858,7 +858,7 @@
 <span class="sd">        The current state for which events are proposed and applied</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IsingState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
@@ -879,7 +879,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalEventGenerator.set_state">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.set_state.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.set_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_state</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">,</span>
     <span class="p">):</span>
@@ -897,7 +897,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalEventGenerator.propose">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.propose.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.propose">[docs]</a>
-    <span class="k">def</span> <span class="nf">propose</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">propose</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">random_number_generator</span><span class="p">:</span> <span class="n">RandomNumberGenerator</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">:</span>
@@ -924,7 +924,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalEventGenerator.apply">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.apply.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalEventGenerator.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">occ_event</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">,</span>
     <span class="p">):</span>
@@ -945,10 +945,10 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalCalculator">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalCalculator.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalCalculator">[docs]</a>
-<span class="k">class</span> <span class="nc">SemiGrandCanonicalCalculator</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SemiGrandCanonicalCalculator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A semi-grand canonical Monte Carlo calculator&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">system</span><span class="p">:</span> <span class="n">IsingSystem</span><span class="p">,</span>
     <span class="p">):</span>
@@ -1005,7 +1005,7 @@
 
 <div class="viewcode-block" id="SemiGrandCanonicalCalculator.run">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalCalculator.run.html#libcasm.monte.ising_py.semigrand_canonical.SemiGrandCanonicalCalculator.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">IsingState</span><span class="p">,</span>
         <span class="n">sampling_functions</span><span class="p">:</span> <span class="n">StateSamplingFunctionMap</span><span class="p">,</span>
@@ -1081,7 +1081,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">formation_energy_calculator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">formation_energy_calculator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">param_composition_calculator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">param_composition_calculator</span>
 
-        <span class="k">def</span> <span class="nf">dpotential_f</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">dpotential_f</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">occ_delta_per_supercell</span><span class="p">(</span>
                 <span class="n">e</span><span class="o">.</span><span class="n">linear_site_index</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">new_occ</span>
             <span class="p">)</span>
@@ -1092,10 +1092,10 @@
             <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">propose_event_f</span><span class="p">(</span><span class="n">rng</span><span class="p">:</span> <span class="n">RandomNumberGenerator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">propose_event_f</span><span class="p">(</span><span class="n">rng</span><span class="p">:</span> <span class="n">RandomNumberGenerator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">event_generator</span><span class="o">.</span><span class="n">propose</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">apply_event_f</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">apply_event_f</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">mcevents</span><span class="o">.</span><span class="n">OccEvent</span><span class="p">):</span>
             <span class="n">event_generator</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
         <span class="c1"># construct Monte Carlo data structure</span>
@@ -1184,7 +1184,7 @@
 
 <div class="viewcode-block" id="make_param_composition_f">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.make_param_composition_f.html#libcasm.monte.ising_py.semigrand_canonical.make_param_composition_f">[docs]</a>
-<span class="k">def</span> <span class="nf">make_param_composition_f</span><span class="p">(</span><span class="n">mc_calculator</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_param_composition_f</span><span class="p">(</span><span class="n">mc_calculator</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a parametric composition sampling function</span>
 
 <span class="sd">    The sampling function &quot;param_composition&quot; gets the</span>
@@ -1211,7 +1211,7 @@
 <span class="sd">        A parametric composition sampling function that samples `mc_calculator`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">():</span>
         <span class="c1"># captures a reference to mc_calculator</span>
         <span class="k">return</span> <span class="n">mc_calculator</span><span class="o">.</span><span class="n">param_composition_calculator</span><span class="o">.</span><span class="n">per_unitcell</span><span class="p">()</span>
 
@@ -1229,7 +1229,7 @@
 
 <div class="viewcode-block" id="make_formation_energy_f">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.make_formation_energy_f.html#libcasm.monte.ising_py.semigrand_canonical.make_formation_energy_f">[docs]</a>
-<span class="k">def</span> <span class="nf">make_formation_energy_f</span><span class="p">(</span><span class="n">mc_calculator</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_formation_energy_f</span><span class="p">(</span><span class="n">mc_calculator</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a formation energy (per unitcell) sampling function</span>
 
 <span class="sd">    The sampling function &quot;formation_energy&quot; gets the formation energy</span>
@@ -1251,7 +1251,7 @@
 <span class="sd">        `mc_calculator`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">():</span>
         <span class="c1"># captures a reference to mc_calculator</span>
         <span class="k">return</span> <span class="n">scalar_as_vector</span><span class="p">(</span>
             <span class="n">mc_calculator</span><span class="o">.</span><span class="n">formation_energy_calculator</span><span class="o">.</span><span class="n">per_unitcell</span><span class="p">()</span>
@@ -1268,7 +1268,7 @@
 
 <div class="viewcode-block" id="make_potential_energy_f">
 <a class="viewcode-back" href="../../../../../reference/libcasm/_autosummary/libcasm.monte.ising_py.semigrand_canonical.make_potential_energy_f.html#libcasm.monte.ising_py.semigrand_canonical.make_potential_energy_f">[docs]</a>
-<span class="k">def</span> <span class="nf">make_potential_energy_f</span><span class="p">(</span><span class="n">mc_calculator</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_potential_energy_f</span><span class="p">(</span><span class="n">mc_calculator</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a potential energy (per unitcell) sampling function</span>
 
 <span class="sd">    The sampling function &quot;potential_energy&quot; gets the potential</span>
@@ -1290,7 +1290,7 @@
 <span class="sd">        `mc_calculator`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">():</span>
         <span class="c1"># captures a reference to mc_calculator</span>
         <span class="k">return</span> <span class="n">scalar_as_vector</span><span class="p">(</span><span class="n">mc_calculator</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">per_unitcell</span><span class="p">())</span>
 
