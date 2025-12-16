@@ -105,7 +105,7 @@ Install:
     pip install libcasm-mapping
 
 
-Docs: `[2.3.0] <../../libcasm/mapping/2.0/>`_
+Docs: `[2.4.0] <../../libcasm/mapping/2.0/>`_
 
 Links: |GitHub_mapping|_ |PyPI_mapping|_
 
