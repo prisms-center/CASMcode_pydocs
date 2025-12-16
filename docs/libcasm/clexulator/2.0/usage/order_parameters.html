@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Evaluating order parameters &#8212; libcasm-clexulator 2.2.0 documentation</title>
+    <title>Evaluating order parameters &#8212; libcasm-clexulator 2.3.0 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=b21de401"></script>
+    <script src="../_static/documentation_options.js?v=c3c8ae58"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -51,7 +51,7 @@
     <link rel="prev" title="Cluster expansion details" href="cluster_expansion_details.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.2" />
+  <meta name="docsearch:version" content="2.3" />
   </head>
   
   
@@ -504,7 +504,7 @@
 <p>To calculate the order parameter value, OrderParameter uses:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.DoFSpace.html#libcasm.clexulator.DoFSpace" title="libcasm.clexulator.DoFSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoFSpace</span></code></a>: To specify the order parameter basis</p></li>
-<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>: To perform index conversions</p></li>
+<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>: To perform index conversions</p></li>
 <li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a>: OrderParameter is given a pointer to a ConfigDoFValues instance and calculates the order parameters using the current state of the DoF values</p></li>
 </ul>
 </section>
@@ -532,7 +532,7 @@
 </section>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
-<p>An OrderParameter instance is set to calculate order parameters in one supercell at a time, using the appropriate <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>. This can be set or changed using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> method.</p>
+<p>An OrderParameter instance is set to calculate order parameters in one supercell at a time, using the appropriate <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>. This can be set or changed using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> method.</p>
 <p>Order parameters are calculated for a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> instance that can be specified using the call operator, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> method, or the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ClusterExpansion.set.html#libcasm.clexulator.ClusterExpansion.set" title="libcasm.clexulator.ClusterExpansion.set"><code class="xref py py-func docutils literal notranslate"><span class="pre">set()</span></code></a> method.</p>
 <p>Default configuration degree of freedom (DoF) values in a particular supercell can be constructed and the OrderParameter instance updated to evaluate using those values as follows:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
@@ -564,7 +564,7 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>The <cite>transformation_matrix_to_super</cite> used to construct the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> and <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a> instances and given as the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> argument defines the supercell of the configuration being evaluated and therefore must be the same.</p>
+<p>The <cite>transformation_matrix_to_super</cite> used to construct the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> and <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a> instances and given as the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.OrderParameter.update.html#libcasm.clexulator.OrderParameter.update" title="libcasm.clexulator.OrderParameter.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">update()</span></code></a> argument defines the supercell of the configuration being evaluated and therefore must be the same.</p>
 <p>However, it does not need to be the same supercell as the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.DoFSpace.html#libcasm.clexulator.DoFSpace" title="libcasm.clexulator.DoFSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoFSpace</span></code></a> is defined with. When evaluating the order paramers, if the configuration supercell differs from the the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.DoFSpace.html#libcasm.clexulator.DoFSpace" title="libcasm.clexulator.DoFSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoFSpace</span></code></a> supercell:</p>
 <ul class="simple">
 <li><p>For occupant DoF and local DoF, a commensurate supercell is determined internally and order parameters are evaluated as if the <cite>config_dof_values</cite> are tiled into the commensurate supercell.</p></li>

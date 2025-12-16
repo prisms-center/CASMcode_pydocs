@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>The ConfigDoFValues data structure &#8212; libcasm-clexulator 2.2.0 documentation</title>
+    <title>The ConfigDoFValues data structure &#8212; libcasm-clexulator 2.3.0 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=b21de401"></script>
+    <script src="../_static/documentation_options.js?v=c3c8ae58"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/config_dof_values';</script>
@@ -50,7 +50,7 @@
     <link rel="prev" title="Usage" href="../usage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.2" />
+  <meta name="docsearch:version" content="2.3" />
   </head>
   
   
@@ -440,7 +440,7 @@
 <ul>
 <li><p>The occupant values, for example <cite>[0, 1, 0, 2, 1, …]</cite>, specify the occupant on each site in a supercell.</p></li>
 <li><p>The position in the array is called the <cite>linear_site_index</cite>.</p></li>
-<li><p>The values are indices into the list of allowed occupants, as specified by a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a>, on the associated supercell site.</p></li>
+<li><p>The values are indices into the list of allowed occupants, as specified by a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a>, on the associated supercell site.</p></li>
 <li><p>Sites in the occupation vector are organized in blocks by sublattice:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Occupation vector layout:</span>
 <span class="c1"># [&lt;-- sublattice 0 --&gt;][&lt;-- sublattice 1 --&gt;]...[&lt;-- sublattice n-1 --&gt;]</span>
@@ -448,9 +448,9 @@
 </div>
 </li>
 <li><p>For a particular supercell, each sublattice block is of size <cite>n_unitcells</cite>, the number of unitcells in the supercell</p></li>
-<li><p>In each sublattice block, the sites are ordered according to the <cite>linear_unitcell_index</cite> of a particular unit cell. Conversions between unit cell indices <cite>(i,j,k)</cite> and <cite>linear_unitcell_index</cite> can be done using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.UnitCellIndexConverter.html#libcasm.xtal.UnitCellIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitCellIndexConverter</span></code></a>.</p></li>
-<li><p>Conversions between <cite>linear_site_index</cite> and <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a> (unit cell index <cite>(i,j,k)</cite> and sublattice index <cite>b</cite>) can be done using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>.</p></li>
-<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a> can be used for conversions to and from Cartesian and fractional coordinates.</p></li>
+<li><p>In each sublattice block, the sites are ordered according to the <cite>linear_unitcell_index</cite> of a particular unit cell. Conversions between unit cell indices <cite>(i,j,k)</cite> and <cite>linear_unitcell_index</cite> can be done using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.UnitCellIndexConverter.html#libcasm.xtal.UnitCellIndexConverter" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnitCellIndexConverter</span></code></a>.</p></li>
+<li><p>Conversions between <cite>linear_site_index</cite> and <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a> (unit cell index <cite>(i,j,k)</cite> and sublattice index <cite>b</cite>) can be done using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.SiteIndexConverter.html#libcasm.xtal.SiteIndexConverter" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiteIndexConverter</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.IntegralSiteCoordinate.html#libcasm.xtal.IntegralSiteCoordinate" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegralSiteCoordinate</span></code></a> can be used for conversions to and from Cartesian and fractional coordinates.</p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.local_dof_values.html#libcasm.clexulator.ConfigDoFValues.local_dof_values" title="libcasm.clexulator.ConfigDoFValues.local_dof_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">local_dof_values()</span></code></a>: Local continuous DoF values are accesible as a <cite>numpy.ndarray[numpy.float64[matrix_dim, n_sites]]</cite>, where <cite>n_sites</cite> is the number of sites in the supercell, and <cite>matrix_dim</cite> varies by DoF type and basis type. A DoF type string (i.e. <cite>“disp”</cite> for displacements) is used as a key to access the values array.</p>
@@ -485,7 +485,7 @@
 <li><p>Used for input and output, such as serialization, conversion to <code class="xref py py-func docutils literal notranslate"><span class="pre">Structure()</span></code>, mapping from <code class="xref py py-func docutils literal notranslate"><span class="pre">Structure()</span></code>, etc.</p></li>
 </ul>
 </li>
-<li><p>The “prim DoF basis”, which is specified by the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.DoFSetBasis.html#libcasm.xtal.DoFSetBasis" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoFSetBasis</span></code></a> used to define the space of allowed DoF in a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a></p>
+<li><p>The “prim DoF basis”, which is specified by the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.DoFSetBasis.html#libcasm.xtal.DoFSetBasis" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoFSetBasis</span></code></a> used to define the space of allowed DoF in a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a></p>
 <ul>
 <li><p>Allows specifiying DoF values, including those that have been constrained to a subspace of the full standard DoF space (i.e. two-dimensional displacements, or only isotropic strains) using independent variables</p></li>
 <li><p>Used as the input to cluster expansion and order parameter calculators</p></li>
@@ -532,7 +532,7 @@
 <p class="admonition-title">Note</p>
 <p>There is no change in basis when using <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.to_dict.html#libcasm.clexulator.ConfigDoFValues.to_dict" title="libcasm.clexulator.ConfigDoFValues.to_dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">to_dict</span></code></a> or <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.from_dict.html#libcasm.clexulator.ConfigDoFValues.from_dict" title="libcasm.clexulator.ConfigDoFValues.from_dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">from_dict</span></code></a>, so serialization can be done for <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.clexulator.ConfigDoFValues.html#libcasm.clexulator.ConfigDoFValues" title="libcasm.clexulator.ConfigDoFValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigDoFValues</span></code></a> in either the standard DoF basis or prim DoF basis. However, the recommended convention is that the standard DoF basis is used for input and output.</p>
 </div>
-<p>Conversions to and from other data structures, such as conversion to <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> and mapping from <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="(in libcasm-xtal v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> are outside the scope of this module. See <cite>libcasm-configuration</cite> and <cite>libcasm-mapping</cite> for those type of conversions.</p>
+<p>Conversions to and from other data structures, such as conversion to <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> and mapping from <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="(in libcasm-xtal v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> are outside the scope of this module. See <cite>libcasm-configuration</cite> and <cite>libcasm-mapping</cite> for those type of conversions.</p>
 </section>
 </section>
 
