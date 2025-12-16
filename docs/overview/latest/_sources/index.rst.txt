@@ -79,7 +79,7 @@ Install:
 
     pip install libcasm-composition
 
-Docs: `[2.2.0] <../../libcasm/composition/2.0/>`_
+Docs: `[2.3.0] <../../libcasm/composition/2.0/>`_
 
 Links: |GitHub_composition|_ |PyPI_composition|_
 
