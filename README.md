@@ -3,16 +3,17 @@ Hosts CASM Python documentation
 
 Includes:
 - libcasm overview: [[latest]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/overview/latest/)
-- libcasm-global: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/global/2.0/)
-- libcasm-xtal: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/)
-- libcasm-composition: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/composition/2.0/)
-- libcasm-mapping: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/mapping/2.0/)
-- libcasm-clexulator: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexulator/2.0/)
-- libcasm-configuration: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/)
-- libcasm-monte: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/monte/2.0/)
-- libcasm-clexmonte: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexmonte/2.0/)
-- casm-bset: [[2.0]](https://prisms-center.github.io/CASMcode_pydocs/casm/bset/2.0/)
-- casm-project: [[prerelease]](https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/)
+- libcasm-global: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/global/2.0/)
+- libcasm-xtal: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/)
+- libcasm-composition: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/composition/2.0/)
+- libcasm-mapping: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/mapping/2.0/)
+- libcasm-clexulator: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexulator/2.0/)
+- libcasm-configuration: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/)
+- libcasm-monte: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/monte/2.0/)
+- libcasm-clexmonte: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexmonte/2.0/)
+- casm-bset: [[2]](https://prisms-center.github.io/CASMcode_pydocs/casm/bset/2.0/)
+- casm-project: [[2]](https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/)
+- casm-tools: [[2]](https://prisms-center.github.io/CASMcode_pydocs/casm/tools/2.0/)
 
 Also, for CASM v1:
-- casm-python: [[1.0]](https://prisms-center.github.io/CASMcode_pydocs/1.0/) [[0.3]](https://prisms-center.github.io/CASMcode_pydocs/0.3/)
+- casm-python: [[1.2]](https://prisms-center.github.io/CASMcode_pydocs/casm/python/1.2/) [[1.0]](https://prisms-center.github.io/CASMcode_pydocs/casm/python/1.0/) [[0.3]](https://prisms-center.github.io/CASMcode_pydocs/casm/python/0.3/)
