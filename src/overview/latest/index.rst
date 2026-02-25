@@ -32,7 +32,7 @@ Install:
 
     pip install libcasm-global
 
-Docs: `[2.4.0] <../../libcasm/global/2.0/>`_
+Docs: `[2.4.1] <../../libcasm/global/2.0/>`_
 
 Links: |GitHub_global|_ |PyPI_global|_
 
