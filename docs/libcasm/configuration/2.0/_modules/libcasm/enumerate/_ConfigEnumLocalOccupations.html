@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libcasm.enumerate._ConfigEnumLocalOccupations &#8212; libcasm-configuration 2.2.0 documentation</title>
+    <title>libcasm.enumerate._ConfigEnumLocalOccupations &#8212; libcasm-configuration 2.3.0 documentation</title>
   
   
   
@@ -38,16 +38,16 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/documentation_options.js?v=c3c8ae58"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/enumerate/_ConfigEnumLocalOccupations';</script>
     <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.2" />
+  <meta name="docsearch:version" content="2.3" />
   </head>
   
   
@@ -1037,21 +1037,19 @@
             <span class="n">required_sites</span><span class="o">=</span><span class="n">required_sites</span><span class="p">,</span>
             <span class="n">supercell</span><span class="o">=</span><span class="n">supercell</span><span class="p">,</span>
         <span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span>
-<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">** WARNING: Small supercell / large neighborhood ******</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** Some sites in the neighborhood of the event map   **</span>
-<span class="sd">** onto each other.                                  **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The methods `make_supercells_for_point_defects`,  **</span>
-<span class="sd">** `find_optimal_point_defect_supercells`, and       **</span>
-<span class="sd">** `plot_supercells_for_point_defects` may be useful **</span>
-<span class="sd">** for choosing a supercell that avoids this.        **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">*******************************************************</span>
-<span class="sd">&quot;&quot;&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">** WARNING: Small supercell / large neighborhood ******</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** Some sites in the neighborhood of the event map   **</span>
+<span class="s2">** onto each other.                                  **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The methods `make_supercells_for_point_defects`,  **</span>
+<span class="s2">** `find_optimal_point_defect_supercells`, and       **</span>
+<span class="s2">** `plot_supercells_for_point_defects` may be useful **</span>
+<span class="s2">** for choosing a supercell that avoids this.        **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">*******************************************************</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">prim_local_orbits</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_check_supercell_symmetry</span><span class="p">(</span>
@@ -1084,49 +1082,45 @@
         <span class="c1"># Check that all background_fg_indices are also in scel_fg_indices</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">scel_fg_indices</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">background_fg_indices</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">fix</span> <span class="o">==</span> <span class="s2">&quot;both&quot;</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span>
-<span class="w">                    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">** WARNING: Symmetry reduction due to supercell *******</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The choice of supercell has lower symmetry than   **</span>
-<span class="sd">** the unperturbed background configuration. This    **</span>
-<span class="sd">** is usually undesirable because the calculated     **</span>
-<span class="sd">** energy will depend on the orientation of the      **</span>
-<span class="sd">** event in the supercell.                           **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The methods `make_supercells_for_point_defects`,  **</span>
-<span class="sd">** `find_optimal_point_defect_supercells`, and       **</span>
-<span class="sd">** `plot_supercells_for_point_defects` may be useful **</span>
-<span class="sd">** for choosing a supercell that avoids this.        **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">*******************************************************</span>
-<span class="sd">&quot;&quot;&quot;</span>
-                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">** WARNING: Symmetry reduction due to supercell *******</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The choice of supercell has lower symmetry than   **</span>
+<span class="s2">** the unperturbed background configuration. This    **</span>
+<span class="s2">** is usually undesirable because the calculated     **</span>
+<span class="s2">** energy will depend on the orientation of the      **</span>
+<span class="s2">** event in the supercell.                           **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The methods `make_supercells_for_point_defects`,  **</span>
+<span class="s2">** `find_optimal_point_defect_supercells`, and       **</span>
+<span class="s2">** `plot_supercells_for_point_defects` may be useful **</span>
+<span class="s2">** for choosing a supercell that avoids this.        **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">*******************************************************</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span>
-<span class="w">                    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">** ERROR: Symmetry reduction due to supercell *********</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The choice of supercell has lower symmetry than   **</span>
-<span class="sd">** the unperturbed background configuration. This    **</span>
-<span class="sd">** is usually undesirable because the calculated     **</span>
-<span class="sd">** energy will depend on the orientation of the      **</span>
-<span class="sd">** event in the supercell.                           **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The methods `make_supercells_for_point_defects`,  **</span>
-<span class="sd">** `find_optimal_point_defect_supercells`, and       **</span>
-<span class="sd">** `plot_supercells_for_point_defects` may be useful **</span>
-<span class="sd">** for choosing a supercell that avoids this.        **</span>
-<span class="sd">**</span>
-<span class="sd">** Other options include using `fix=&quot;background&quot;` to **</span>
-<span class="sd">** fix the background configuration orientation, or  **</span>
-<span class="sd">** using `pos` to specify one or more event          ** </span>
-<span class="sd">** positions with `fix=&quot;both&quot;` to indicate that the  **</span>
-<span class="sd">** orientations are specifically requested.          **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">*******************************************************</span>
-<span class="sd">&quot;&quot;&quot;</span>
-                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">** ERROR: Symmetry reduction due to supercell *********</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The choice of supercell has lower symmetry than   **</span>
+<span class="s2">** the unperturbed background configuration. This    **</span>
+<span class="s2">** is usually undesirable because the calculated     **</span>
+<span class="s2">** energy will depend on the orientation of the      **</span>
+<span class="s2">** event in the supercell.                           **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The methods `make_supercells_for_point_defects`,  **</span>
+<span class="s2">** `find_optimal_point_defect_supercells`, and       **</span>
+<span class="s2">** `plot_supercells_for_point_defects` may be useful **</span>
+<span class="s2">** for choosing a supercell that avoids this.        **</span>
+<span class="s2">**</span>
+<span class="s2">** Other options include using `fix=&quot;background&quot;` to **</span>
+<span class="s2">** fix the background configuration orientation, or  **</span>
+<span class="s2">** using `pos` to specify one or more event          ** </span>
+<span class="s2">** positions with `fix=&quot;both&quot;` to indicate that the  **</span>
+<span class="s2">** orientations are specifically requested.          **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">*******************************************************</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">fix</span> <span class="o">!=</span> <span class="s2">&quot;both&quot;</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -1384,25 +1378,23 @@
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">super_backgrounds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">** WARNING: Symmetry reduction due to supercell *******</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The choice of supercell results in symmetrically  **</span>
-<span class="sd">** distinct ways of tiling the background into the   **</span>
-<span class="sd">** supercell. This is usually undesirable because    **</span>
-<span class="sd">** the calculated energy will depend on the          **</span>
-<span class="sd">** orientation of the event and environment in the   **</span>
-<span class="sd">** supercell.                                        **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">** The methods `make_supercells_for_point_defects`,  **</span>
-<span class="sd">** `find_optimal_point_defect_supercells`, and       **</span>
-<span class="sd">** `plot_supercells_for_point_defects` may be useful **</span>
-<span class="sd">** for choosing a supercell that avoids this.        **</span>
-<span class="sd">**                                                   **</span>
-<span class="sd">*******************************************************</span>
-<span class="sd">&quot;&quot;&quot;</span>
-            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">** WARNING: Symmetry reduction due to supercell *******</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The choice of supercell results in symmetrically  **</span>
+<span class="s2">** distinct ways of tiling the background into the   **</span>
+<span class="s2">** supercell. This is usually undesirable because    **</span>
+<span class="s2">** the calculated energy will depend on the          **</span>
+<span class="s2">** orientation of the event and environment in the   **</span>
+<span class="s2">** supercell.                                        **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">** The methods `make_supercells_for_point_defects`,  **</span>
+<span class="s2">** `find_optimal_point_defect_supercells`, and       **</span>
+<span class="s2">** `plot_supercells_for_point_defects` may be useful **</span>
+<span class="s2">** for choosing a supercell that avoids this.        **</span>
+<span class="s2">**                                                   **</span>
+<span class="s2">*******************************************************</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">super_backgrounds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">fix</span> <span class="o">!=</span> <span class="s2">&quot;both&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -1756,7 +1748,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>
