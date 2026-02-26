@@ -247,7 +247,7 @@ Install:
     pip install libcasm-monte
 
 
-Docs: `[2.2.0] <../../libcasm/monte/2.0/>`_
+Docs: `[2.3.0] <../../libcasm/monte/2.0/>`_
 
 Links: |GitHub_monte|_ |PyPI_monte|_
 

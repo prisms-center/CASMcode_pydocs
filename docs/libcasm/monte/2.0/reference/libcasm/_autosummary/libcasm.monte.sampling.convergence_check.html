@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>convergence_check &#8212; libcasm-monte 2.2.0 documentation</title>
+    <title>convergence_check &#8212; libcasm-monte 2.3.0 documentation</title>
   
   
   
@@ -39,9 +39,9 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=b21de401"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/documentation_options.js?v=c3c8ae58"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/libcasm/_autosummary/libcasm.monte.sampling.convergence_check';</script>
     <link rel="icon" href="../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -50,7 +50,7 @@
     <link rel="prev" title="converge" href="libcasm.monte.sampling.converge.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2.2" />
+  <meta name="docsearch:version" content="2.3" />
   </head>
   
   
@@ -1280,7 +1280,7 @@
 <dd><em class="sig-param"><span class="n"><span class="pre">samplers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.monte.sampling.SamplerMap.html#libcasm.monte.sampling.SamplerMap" title="libcasm.monte.sampling._monte_sampling.SamplerMap"><span class="pre">SamplerMap</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.monte.sampling.Sampler.html#libcasm.monte.sampling.Sampler" title="libcasm.monte.sampling._monte_sampling.Sampler"><span class="pre">Sampler</span></a></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">requested_precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionMap.html#libcasm.monte.sampling.RequestedPrecisionMap" title="libcasm.monte.sampling._monte_sampling.RequestedPrecisionMap"><span class="pre">RequestedPrecisionMap</span></a></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">N_samples_for_equilibration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">N_samples_for_equilibration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">SupportsIndex</span></span></em>,</dd>
 <dd><em class="sig-param"><span class="n"><span class="pre">calc_statistics_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing.ArrayLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.float64</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'[m,</span> <span class="pre">1]'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.html#libcasm.monte.sampling.BasicStatistics" title="libcasm.monte.sampling._monte_sampling.BasicStatistics"><span class="pre">BasicStatistics</span></a><span class="p"><span class="pre">]</span></span></span></em>,</dd>
 </dl>
 
@@ -1293,7 +1293,7 @@
 <li><p><strong>sample_weight</strong> (<a class="reference internal" href="libcasm.monte.sampling.Sampler.html#libcasm.monte.sampling.Sampler" title="libcasm.monte.sampling.Sampler"><em>Sampler</em></a>) – Optional weight to give to each to observation.</p></li>
 <li><p><strong>requested_precision</strong> (<a class="reference internal" href="libcasm.monte.sampling.RequestedPrecisionMap.html#libcasm.monte.sampling.RequestedPrecisionMap" title="libcasm.monte.sampling.RequestedPrecisionMap"><em>RequestedPrecisionMap</em></a>) – The requested precision levels for all <a class="reference internal" href="libcasm.monte.sampling.SamplerComponent.html#libcasm.monte.sampling.SamplerComponent" title="libcasm.monte.sampling.SamplerComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerComponent</span></code></a> that are requested to converge.</p></li>
 <li><p><strong>N_samples_for_equilibration</strong> (<em>int</em>) – Number of initial samples to exclude from statistics because the system is out of equilibrium.</p></li>
-<li><p><strong>calc_statistics_f</strong> (<em>function</em>) – Fucntion used to calculate <a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.html#libcasm.monte.sampling.BasicStatistics" title="libcasm.monte.sampling.BasicStatistics"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicStatistics</span></code></a>. For example, an instance of <a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.html#libcasm.monte.sampling.BasicStatistics" title="libcasm.monte.sampling.BasicStatistics"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicStatistics</span></code></a>.</p></li>
+<li><p><strong>calc_statistics_f</strong> (<a class="reference internal" href="libcasm.monte.sampling.GenericSelectedEventFunction.function.html#libcasm.monte.sampling.GenericSelectedEventFunction.function" title="libcasm.monte.sampling.GenericSelectedEventFunction.function"><em>function</em></a>) – Fucntion used to calculate <a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.html#libcasm.monte.sampling.BasicStatistics" title="libcasm.monte.sampling.BasicStatistics"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicStatistics</span></code></a>. For example, an instance of <a class="reference internal" href="libcasm.monte.sampling.BasicStatistics.html#libcasm.monte.sampling.BasicStatistics" title="libcasm.monte.sampling.BasicStatistics"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicStatistics</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1386,7 +1386,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>
