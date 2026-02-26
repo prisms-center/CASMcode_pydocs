@@ -134,7 +134,7 @@ Install:
     pip install libcasm-clexulator
 
 
-Docs: `[2.3.0] <../../libcasm/clexulator/2.0/>`_
+Docs: `[2.3.1] <../../libcasm/clexulator/2.0/>`_
 
 Links: |GitHub_clexulator|_ |PyPI_clexulator|_
 
