@@ -264,7 +264,7 @@ Install:
     pip install libcasm-clexmonte
 
 
-Docs: `[2.2.0] <../../libcasm/clexmonte/2.0/>`_
+Docs: `[2.4.0] <../../libcasm/clexmonte/2.0/>`_
 
 Links: |GitHub_clexmonte|_ |PyPI_clexmonte|_
 
