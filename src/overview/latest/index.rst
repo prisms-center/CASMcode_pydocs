@@ -278,7 +278,7 @@ The casm-tools package provides pure Python CLI tools and helper functions. This
 - casm.tools.shared: Helper functions for I/O, integrating with ASE, and context
   managers.
 
-Docs: `[2.0a2] <../../casm/tools/2.0/>`_
+Docs: `[2.0a3] <../../casm/tools/2.0/>`_
 
 Links: |GitHub_project|_ |PyPI_project|_
 
