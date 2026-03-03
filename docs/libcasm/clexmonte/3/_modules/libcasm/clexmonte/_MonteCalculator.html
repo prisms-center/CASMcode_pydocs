@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>libcasm.clexmonte._MonteCalculator &#8212; libcasm-clexmonte 3.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=22ff1245"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/clexmonte/_MonteCalculator';</script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="3.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">libcasm-clexmonte</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/libcasm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexmonte/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexmonte/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/libcasm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_clexmonte/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-clexmonte/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">libcasm.clexmonte._MonteCalculator</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for libcasm.clexmonte._MonteCalculator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.local_configuration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LocalConfiguration</span><span class="p">,</span>
+    <span class="n">LocalConfigurationList</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._clexmonte_monte_calculator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BaseMonteCalculator</span><span class="p">,</span>
+    <span class="n">MonteCalculatorCore</span><span class="p">,</span>
+    <span class="n">make_canonical_calculator</span><span class="p">,</span>
+    <span class="n">make_kinetic_calculator</span><span class="p">,</span>
+    <span class="n">make_semigrand_canonical_calculator</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._clexmonte_system</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">System</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._system_methods</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">make_system_event_info</span><span class="p">,</span>
+    <span class="n">read_abnormal_events</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">_method_factories</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;semigrand_canonical&quot;</span><span class="p">:</span> <span class="n">make_semigrand_canonical_calculator</span><span class="p">,</span>
+    <span class="s2">&quot;canonical&quot;</span><span class="p">:</span> <span class="n">make_canonical_calculator</span><span class="p">,</span>
+    <span class="s2">&quot;kinetic&quot;</span><span class="p">:</span> <span class="n">make_kinetic_calculator</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="MonteCalculator">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.html#libcasm.clexmonte.MonteCalculator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MonteCalculator</span><span class="p">(</span><span class="n">MonteCalculatorCore</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">BaseMonteCalculator</span><span class="p">],</span>
+        <span class="n">system</span><span class="p">:</span> <span class="n">System</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : Union[str, libcasm.clexmonte.BaseMonteCalculator]</span>
+<span class="sd">            Monte Carlo method name or a :class:`BaseMonteCalculator` instance.</span>
+
+<span class="sd">            If a string, the options are:</span>
+
+<span class="sd">            - &quot;semigrand_canonical&quot;: Metropolis algorithm in the semi-grand</span>
+<span class="sd">              canonical ensemble. Input states require `&quot;temperature&quot;` and</span>
+<span class="sd">              `&quot;param_chem_pot&quot;` conditions.</span>
+<span class="sd">            - &quot;canonical&quot;: Metropolis algorithm in the canonical ensemble.</span>
+<span class="sd">              Input states require `&quot;temperature&quot;` and one of</span>
+<span class="sd">              `&quot;param_composition&quot;` or `&quot;mol_composition&quot;` conditions.</span>
+<span class="sd">            - &quot;kinetic&quot;: Kinetic Monte Carlo method. Input states require</span>
+<span class="sd">              `&quot;temperature&quot;` and one of `&quot;param_composition&quot;` or</span>
+<span class="sd">              `&quot;mol_composition&quot;` conditions.</span>
+
+<span class="sd">            If a :class:`BaseMonteCalculator` instance, it is used directly.</span>
+<span class="sd">            This allows external packages to provide custom calculator</span>
+<span class="sd">            implementations.</span>
+
+<span class="sd">        system : libcasm.clexmonte.System</span>
+<span class="sd">            Cluster expansion model system data. The required data depends on</span>
+<span class="sd">            the calculation method. See links under `method` for what system</span>
+<span class="sd">            data is required for each method.</span>
+
+<span class="sd">        params: Optional[dict] = None</span>
+<span class="sd">            Monte Carlo calculation method parameters. Expected values</span>
+<span class="sd">            depends on the calculation method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_method_factories</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Unknown method: &#39;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Options are: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_method_factories</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="n">base_calculator</span> <span class="o">=</span> <span class="n">_method_factories</span><span class="p">[</span><span class="n">method</span><span class="p">]()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">BaseMonteCalculator</span><span class="p">):</span>
+            <span class="n">base_calculator</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;method&#39; must be a str or BaseMonteCalculator, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">method</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">base_calculator</span><span class="o">=</span><span class="n">base_calculator</span><span class="p">,</span>
+            <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_info</span> <span class="o">=</span> <span class="n">make_system_event_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict[str, libcasm.local_configuration.OccEventSymInfo]: A dictionary of </span>
+<span class="sd">        event info used to construct and transform </span>
+<span class="sd">        :class:`~libcasm.local_configuration.LocalConfiguration`.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MonteCalculator.make_local_configuration">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.make_local_configuration.html#libcasm.clexmonte.MonteCalculator.make_local_configuration">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_local_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a :class:`~libcasm.local_configuration.LocalConfiguration` from the</span>
+<span class="sd">        current state and current selected event.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        local_configuration : libcasm.local_configuration.LocalConfiguration</span>
+<span class="sd">            The local configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selected_event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_event</span>
+        <span class="n">event_type_name</span> <span class="o">=</span> <span class="n">selected_event</span><span class="o">.</span><span class="n">prim_event_data</span><span class="o">.</span><span class="n">event_type_name</span>
+        <span class="n">unitcell_index</span> <span class="o">=</span> <span class="n">selected_event</span><span class="o">.</span><span class="n">event_data</span><span class="o">.</span><span class="n">unitcell_index</span>
+        <span class="n">equivalent_index</span> <span class="o">=</span> <span class="n">selected_event</span><span class="o">.</span><span class="n">prim_event_data</span><span class="o">.</span><span class="n">equivalent_index</span>
+        <span class="k">return</span> <span class="n">LocalConfiguration</span><span class="p">(</span>
+            <span class="n">configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state_data</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">configuration</span><span class="p">,</span>
+            <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">unitcell_index</span><span class="p">,</span> <span class="n">equivalent_index</span><span class="p">),</span>
+            <span class="n">event_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">event_info</span><span class="p">[</span><span class="n">event_type_name</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MonteCalculator.read_abnormal_events">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.read_abnormal_events.html#libcasm.clexmonte.MonteCalculator.read_abnormal_events">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_abnormal_events</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">which</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LocalConfigurationList</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read abnormal events file, if present.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - The `&quot;kinetic&quot;` MonteCalculator method has optional support for writing</span>
+<span class="sd">          the local configuration and event states of abnormal events during a</span>
+<span class="sd">          simulation. This is controlled by the `&quot;abnormal_event_handling&quot;`</span>
+<span class="sd">          MonteCalculator parameter.</span>
+<span class="sd">        - An &quot;encountered_abnormal_events.jsonl&quot; file is written for events that are</span>
+<span class="sd">          encountered and calculated (but may not be selected).</span>
+<span class="sd">        - A &quot;selected_abnormal_events.jsonl&quot; file is written for events that are</span>
+<span class="sd">          selected.</span>
+<span class="sd">        - The files are expected in `self.event_data.output_dir`.</span>
+<span class="sd">        - This function reads the file(s) and returns the local configurations and</span>
+<span class="sd">          event states.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        Read all encountered and selected abnormal events, and print a summary:</span>
+
+<span class="sd">        &gt;&gt;&gt; n, local_configurations, event_data = mc.read_abnormal_events()</span>
+
+<span class="sd">        Read only the encountered abnormal events:</span>
+
+<span class="sd">        &gt;&gt;&gt; n, local_configurations, event_data = mc.read_abnormal_events(</span>
+<span class="sd">            which=&quot;encountered&quot;,</span>
+<span class="sd">        )</span>
+
+<span class="sd">        Read only the selected abnormal events:</span>
+
+<span class="sd">        &gt;&gt;&gt; n, local_configurations, event_data = mc.read_abnormal_events(</span>
+<span class="sd">            which=&quot;selected&quot;,</span>
+<span class="sd">        )</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        which : str = &quot;all&quot;</span>
+<span class="sd">            The type of abnormal events to read. The options are:</span>
+
+<span class="sd">            - &quot;all&quot;: Read all abnormal events.</span>
+<span class="sd">            - &quot;encountered&quot;: Read only the encountered abnormal events from the</span>
+<span class="sd">              &quot;encountered_abnormal_events.jsonl&quot; file, if it exists.</span>
+<span class="sd">            - &quot;selected&quot;: Read only the selected abnormal events from the</span>
+<span class="sd">              &quot;selected_abnormal_events.jsonl&quot; file, if it exists.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        n: Optional[int]</span>
+<span class="sd">            The number of local configurations in the file, or None if the files</span>
+<span class="sd">            do not exist. This is the sum of the number of local configurations of</span>
+<span class="sd">            each event type.</span>
+<span class="sd">        local_configurations : dict[str,</span>
+<span class="sd">        libcasm.local_configuration.LocalConfigurationList]</span>
+<span class="sd">            Local configurations</span>
+<span class="sd">            (:class:`libcasm.local_configuration.LocalConfigurationList`)</span>
+<span class="sd">            for by event type, with the event type name as the key.</span>
+<span class="sd">        event_data : dict[str, list[dict]]</span>
+<span class="sd">            Event info, for the local configurations, by event type, with the event type</span>
+<span class="sd">            name as the key, in the same order as the local configurations. The</span>
+
+<span class="sd">            Example event data, for one local configuration:</span>
+
+<span class="sd">            .. code-block:: Python</span>
+
+<span class="sd">                {</span>
+<span class="sd">                  &quot;event_state&quot;: {</span>
+<span class="sd">                    &quot;Ekra&quot;: 0.7375,</span>
+<span class="sd">                    &quot;dE_activated&quot;: 1.6666666666666665,</span>
+<span class="sd">                    &quot;dE_final&quot;: 1.6666666666666665,</span>
+<span class="sd">                    &quot;formation_energy_delta_corr&quot;: [</span>
+<span class="sd">                        0.0, 0.0, 0.0, -0.8333333333333333, 0.5892558333333333, 0.0,</span>
+<span class="sd">                        0.0, 0.0, 0.0,</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &quot;freq&quot;: 10000000000000.0,</span>
+<span class="sd">                    &quot;is_allowed&quot;: true,</span>
+<span class="sd">                    &quot;is_normal&quot;: false,</span>
+<span class="sd">                    &quot;local_corr&quot;: [1.0, 0.5, 0.0, 0.5, 0.0, 0.25, 0.0, 0.5, 0.0],</span>
+<span class="sd">                    &quot;rate&quot;: 1000704.0785393054</span>
+<span class="sd">                  },</span>
+<span class="sd">                  &quot;linear_site_index&quot;: [212, 122],</span>
+<span class="sd">                  &quot;prim_event_data&quot;: {</span>
+<span class="sd">                    &quot;equivalent_index&quot;: 2,</span>
+<span class="sd">                    &quot;event_type_name&quot;: &quot;B_Va_1NN&quot;,</span>
+<span class="sd">                    &quot;is_forward&quot;: false,</span>
+<span class="sd">                    &quot;occ_final&quot;: [1, 2],</span>
+<span class="sd">                    &quot;occ_init&quot;: [2, 1],</span>
+<span class="sd">                    &quot;prim_event_index&quot;: 17</span>
+<span class="sd">                  },</span>
+<span class="sd">                  &quot;unitcell_index&quot;: 212</span>
+<span class="sd">                }</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="s2">&quot;encountered&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid value for &#39;which&#39;: </span><span class="si">{</span><span class="n">which</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Must be one of [&#39;selected&#39;, &#39;encountered&#39;, &#39;all&#39;]&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">encountered_path</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">event_data</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;encountered_abnormal_events.jsonl&quot;</span>
+        <span class="p">)</span>
+        <span class="n">selected_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_data</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;selected_abnormal_events.jsonl&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">]:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;encountered&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">]:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encountered_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">read_abnormal_events</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">system</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="p">,</span>
+            <span class="n">event_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">event_info</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MonteCalculator.print_selected_event_functions">
+<a class="viewcode-back" href="../../../reference/libcasm/_autosummary/libcasm.clexmonte.MonteCalculator.print_selected_event_functions.html#libcasm.clexmonte.MonteCalculator.print_selected_event_functions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_selected_event_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print a summary of the selected event functions in a MonteCalculator&quot;&quot;&quot;</span>
+
+        <span class="n">all_functions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_event_functions</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+                <span class="n">initial_indent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">subsequent_indent</span><span class="o">=</span><span class="s2">&quot;    &quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">print_generic_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Description = &quot;</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="n">fill</span><span class="p">(</span>
+                        <span class="s2">&quot;  Requires event state = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">requires_event_state</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default order = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">order</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">print_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Description = &quot;</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;shape&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Shape = [] (Scalar)&quot;</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Shape = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Component names = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">component_names</span><span class="p">))</span>
+                        <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;partition_names&quot;</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Partition names = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">partition_names</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;value_labels&quot;</span><span class="p">):</span>
+                    <span class="n">value_labels</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">value_labels</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">value_labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">value_labels</span><span class="p">]</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Value labels = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="n">fill</span><span class="p">(</span>
+                        <span class="s2">&quot;  Requires event state = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">requires_event_state</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;is_log&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">function</span><span class="o">.</span><span class="n">is_log</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Is log = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">is_log</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;initial_begin&quot;</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default initial bin = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">initial_begin</span><span class="p">))</span>
+                    <span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default bin width = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">bin_width</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default max size = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">max_size</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&quot;tol&quot;</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;  Default tol = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">tol</span><span class="p">)))</span>
+                <span class="nb">print</span><span class="p">()</span>
+
+        <span class="n">functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">generic_functions</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected event functions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_generic_functions</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span>
+
+        <span class="n">int_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">discrete_vector_int_functions</span>
+        <span class="n">float_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">discrete_vector_float_functions</span>
+        <span class="n">continuous_1d_functions</span> <span class="o">=</span> <span class="n">all_functions</span><span class="o">.</span><span class="n">continuous_1d_functions</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">int_functions</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">float_functions</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">continuous_1d_functions</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected event data functions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">print_functions</span><span class="p">(</span><span class="n">int_functions</span><span class="p">)</span>
+            <span class="n">print_functions</span><span class="p">(</span><span class="n">float_functions</span><span class="p">)</span>
+            <span class="n">print_functions</span><span class="p">(</span><span class="n">continuous_1d_functions</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
