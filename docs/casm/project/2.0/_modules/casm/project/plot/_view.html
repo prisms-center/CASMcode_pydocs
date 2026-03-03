@@ -30,7 +30,10 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1038f348" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -39,8 +42,15 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/plot/_view';</script>
     <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -139,14 +149,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../usage.html">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
     Reference
   </a>
 </li>
@@ -265,14 +275,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../usage.html">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
     Reference
   </a>
 </li>
@@ -391,7 +401,7 @@
                   
   <h1>Source code for casm.project.plot._view</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -627,6 +637,265 @@
 
 
 
+<div class="viewcode-block" id="CabinetProjection">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.CabinetProjection.html#casm.project.plot.CabinetProjection">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CabinetProjection</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A cabinet perspective projection.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        scale: float = 0.2</span>
+<span class="sd">            A factor indicating fraction of &quot;real&quot; length displayed for vectors</span>
+<span class="sd">            perpendicular to the viewing plane. A typical value is 0.2.</span>
+<span class="sd">        angle: float = math.pi / 6.0</span>
+<span class="sd">            The angle the vectors are displayed at. A typical value is pi/6.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: A factor indicating fraction of &quot;real&quot; length displayed for vectors</span>
+<span class="sd">        perpendicular to the viewing plane.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: The angle the vectors are displayed at.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Cabinet&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: A label for the projection type.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CabinetProjection.apply">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.CabinetProjection.apply.html#casm.project.plot.CabinetProjection.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply the cabinet perspective projection to values.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        values: np.array[np.float[3,n]]</span>
+<span class="sd">            A shape ``(3, n)`` array of values to apply the cabinet perspective to</span>
+<span class="sd">            where the columns are coordinate values in the view basis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">apply_cabinet</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">),</span> <span class="n">values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CabinetProjection.projected_radius">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.CabinetProjection.projected_radius.html#casm.project.plot.CabinetProjection.projected_radius">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">projected_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the projected radius due to cabinet projection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        radius: np.ndarray</span>
+<span class="sd">            A shape `(n,)` array of radii to project.</span>
+<span class="sd">        values: np.ndarray</span>
+<span class="sd">            A shape `(3, n)` array of values in the view basis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        projected_radius: np.ndarray</span>
+<span class="sd">            A shape `(n,)` array of projected radii.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CabinetProjection.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.CabinetProjection.to_dict.html#casm.project.plot.CabinetProjection.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize to a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;cabinet&quot;</span><span class="p">,</span> <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="s2">&quot;angle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="CabinetProjection.from_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.CabinetProjection.from_dict.html#casm.project.plot.CabinetProjection.from_dict">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize from a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;cabinet&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in CabinetProjection.from_dict: Invalid projection type&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">CabinetProjection</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">],</span> <span class="n">angle</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;angle&quot;</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SinglePointProjection">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.SinglePointProjection.html#casm.project.plot.SinglePointProjection">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SinglePointProjection</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single point perspective projection.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">viewer_distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">500.0</span><span class="p">,</span> <span class="n">plane_offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. rubric:: Constructor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        viewer_distance: float = 500.0</span>
+<span class="sd">            The distance from the viewer to the projection plane, in terms of the</span>
+<span class="sd">            3rd coordinate of the view basis.</span>
+<span class="sd">        plane_offset: float = 50.0</span>
+<span class="sd">            The position of the projection plane from the origin of the view basis,</span>
+<span class="sd">            along the 3rd view basis axis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer_distance</span> <span class="o">=</span> <span class="n">viewer_distance</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: The distance from the viewer to the projection plane, in terms of</span>
+<span class="sd">        the 3rd coordinate of the view basis.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plane_offset</span> <span class="o">=</span> <span class="n">plane_offset</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: The position of the projection plane from the origin of the view </span>
+<span class="sd">        basis, along the 3rd view basis axis.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Single point&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: A label for the projection type.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SinglePointProjection.apply">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.SinglePointProjection.apply.html#casm.project.plot.SinglePointProjection.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply the single point perspective projection to values.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        values: np.array[np.float[3,n]]</span>
+<span class="sd">            A shape ``(3, n)`` array of values to apply the single point perspective</span>
+<span class="sd">            projection to, where the columns are coordinate values in the view basis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Apply perspective projection:</span>
+        <span class="c1"># x&#39; = x / (1 + (z_plane - z) / d_viewer)</span>
+        <span class="c1"># y&#39; = y / (1 + (z_plane - z) / d_viewer)</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer_distance</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">delta_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plane_offset</span> <span class="o">-</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">delta_z</span> <span class="o">/</span> <span class="n">d</span>
+            <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">delta_z</span> <span class="o">/</span> <span class="n">d</span></div>
+
+
+    <span class="c1"># Get change in radius due to perspective (i.e. change in x + delta_x):</span>
+<div class="viewcode-block" id="SinglePointProjection.projected_radius">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.SinglePointProjection.projected_radius.html#casm.project.plot.SinglePointProjection.projected_radius">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">projected_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the projected radius due to perspective.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        radius: np.ndarray</span>
+<span class="sd">            A shape `(n,)` array of radii to project.</span>
+<span class="sd">        values: np.ndarray</span>
+<span class="sd">            A shape `(3, n)` array of values in the view basis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        projected_radius: np.ndarray</span>
+<span class="sd">            A shape `(n,)` array of projected radii.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer_distance</span>
+        <span class="n">projected_radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">delta_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plane_offset</span> <span class="o">-</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">projected_radius</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">delta_z</span> <span class="o">/</span> <span class="n">d</span>
+        <span class="k">return</span> <span class="n">projected_radius</span></div>
+
+
+<div class="viewcode-block" id="SinglePointProjection.to_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.SinglePointProjection.to_dict.html#casm.project.plot.SinglePointProjection.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize to a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;single_point&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;viewer_distance&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer_distance</span><span class="p">,</span>
+            <span class="s2">&quot;plane_offset&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">plane_offset</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="SinglePointProjection.from_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.SinglePointProjection.from_dict.html#casm.project.plot.SinglePointProjection.from_dict">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize from a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;single_point&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in SinglePointProjection.from_dict: Invalid projection type&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">SinglePointProjection</span><span class="p">(</span>
+            <span class="n">viewer_distance</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;viewer_distance&quot;</span><span class="p">],</span>
+            <span class="n">plane_offset</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;plane_offset&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">IsometricProjection</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An isometric projection.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. rubric:: Constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Isometric&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: A label for the projection type.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply the isometric projection to values.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        values: np.array[np.float[3,n]]</span>
+<span class="sd">            A shape ``(3, n)`` array of values to apply the isometric projection to,</span>
+<span class="sd">            where the columns are coordinate values in the view basis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Coordinates are already put into isometric view basis, so nothing to do</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">projected_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the projected radius due to isometric projection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        radius: np.ndarray</span>
+<span class="sd">            A shape `(n,)` array of radii to project.</span>
+<span class="sd">        values: np.ndarray</span>
+<span class="sd">            A shape `(3, n)` array of values in the view basis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        projected_radius: np.ndarray</span>
+<span class="sd">            A shape `(n,)` array of projected radii.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize to a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;isometric&quot;</span><span class="p">}</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize from a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;isometric&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Error in IsometricProjection.from_dict: Invalid projection type&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">IsometricProjection</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="make_projection_from_dict">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.make_projection_from_dict.html#casm.project.plot.make_projection_from_dict">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_projection_from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deserialize a projection from a dictionary.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;cabinet&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CabinetProjection</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;single_point&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SinglePointProjection</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;isometric&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">IsometricProjection</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error in make_projection_from_dict: Invalid projection type&quot;</span><span class="p">)</span></div>
+
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">apply_cabinet</span><span class="p">(</span><span class="n">cabinet</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply &#39;cabinet&#39; perspective to values. This is similar to how most people draw</span>
 <span class="sd">    3d shapes (like a kitchen cabinet) by hand.</span>
@@ -651,11 +920,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">make_lattice_cell_data</span><span class="p">(</span>
     <span class="n">lattice</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
     <span class="n">view_basis</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-    <span class="n">cabinet</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">projection</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">shift</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="nb">hex</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span>
+    <span class="n">line_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">line_dash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the lattice cell.</span>
 
@@ -665,11 +937,8 @@
 <span class="sd">        The lattice to plot.</span>
 <span class="sd">    view_basis: np.array</span>
 <span class="sd">        The view basis to use for plotting.</span>
-<span class="sd">    cabinet: Optional[tuple[float, float]] = None</span>
-<span class="sd">        Optional &quot;cabinet&quot; perspective parameters. A tuple, :math:`(f, \theta)`,</span>
-<span class="sd">        where :math:`f` is a factor indicating fraction of &quot;real&quot; length displayed</span>
-<span class="sd">        for vectors perpendicular to the viewing plane, and :math:`\theta` is the</span>
-<span class="sd">        angle the vectors are displayed at. A typical value is ``(0.2, math.pi/6.0)``.</span>
+<span class="sd">    projection: Any = None</span>
+<span class="sd">        A projection to apply to the view. If None, no projection is applied.</span>
 <span class="sd">    center: bool = False</span>
 <span class="sd">        If True, draw lattice so that cell body center is located</span>
 <span class="sd">        at the origin.</span>
@@ -681,6 +950,12 @@
 <span class="sd">    dim: int = 3</span>
 <span class="sd">        Use dim==3 to draw 3d lattice cells, and dim==2 to draw 2d lattice</span>
 <span class="sd">        cells.</span>
+<span class="sd">    color: str = &quot;green&quot;</span>
+<span class="sd">        The color to use for the lattice cell lines.</span>
+<span class="sd">    line_width: float = 2.0</span>
+<span class="sd">        The line width to use for the lattice cell lines.</span>
+<span class="sd">    line_dash: str = &quot;solid&quot;</span>
+<span class="sd">        The line dash to use for the lattice cell lines.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">view_basis_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">view_basis</span><span class="p">)</span>
 
@@ -729,9 +1004,11 @@
     <span class="n">end_cart</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">_end_frac</span>
 
     <span class="n">begin_values</span> <span class="o">=</span> <span class="n">view_basis_inv</span> <span class="o">@</span> <span class="n">begin_cart</span>
-    <span class="n">apply_cabinet</span><span class="p">(</span><span class="n">cabinet</span><span class="p">,</span> <span class="n">begin_values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">projection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">projection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">begin_values</span><span class="p">)</span>
     <span class="n">end_values</span> <span class="o">=</span> <span class="n">view_basis_inv</span> <span class="o">@</span> <span class="n">end_cart</span>
-    <span class="n">apply_cabinet</span><span class="p">(</span><span class="n">cabinet</span><span class="p">,</span> <span class="n">end_values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">projection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">projection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">end_values</span><span class="p">)</span>
 
     <span class="c1"># fig.segment(</span>
     <span class="c1">#     x0=begin_values[0, :],</span>
@@ -742,11 +1019,16 @@
     <span class="c1">#     line_width=2,</span>
     <span class="c1"># )</span>
 
+    <span class="n">size</span> <span class="o">=</span> <span class="n">begin_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;px0&quot;</span><span class="p">:</span> <span class="n">begin_values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span>
         <span class="s2">&quot;py0&quot;</span><span class="p">:</span> <span class="n">begin_values</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span>
         <span class="s2">&quot;px1&quot;</span><span class="p">:</span> <span class="n">end_values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span>
         <span class="s2">&quot;py1&quot;</span><span class="p">:</span> <span class="n">end_values</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span>
+        <span class="s2">&quot;line_color&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span>
+        <span class="s2">&quot;line_width&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">line_width</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span>
+        <span class="s2">&quot;line_dash&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">line_dash</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span>
     <span class="p">}</span>
 </pre></div>
 
@@ -798,7 +1080,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

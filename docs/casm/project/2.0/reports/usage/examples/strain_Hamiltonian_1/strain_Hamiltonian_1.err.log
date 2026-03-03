@@ -1,0 +1,171 @@
+Traceback (most recent call last):
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import math
+import typing
+from datetime import datetime
+import numpy as np
+import libcasm.xtal as xtal
+import libcasm.xtal.lattices as xtal_lattices
+from casm.tools.shared.ase_utils import relax
+from casm.tools.shared.contexts import working_dir
+from casm.tools.shared.json_io import (
+    printpathstr, 
+    read_optional, 
+    read_required, 
+    safe_dump,
+)
+
+def relax_custom_structure(
+    calc_dir: pathlib.Path,
+    casm_structure: xtal.Structure,
+    calculator: typing.Any,
+    fmax: float,
+):
+    calc_dir.mkdir(parents=True, exist_ok=True)
+
+    structure_path = calc_dir / "structure.json"
+    structure_with_properties_path = calc_dir / "structure_with_properties.json"
+    status_path = calc_dir / "status.json"
+
+    data = read_optional(status_path, default=dict())
+    status = data.get("status", "none")
+
+    if status == "complete":
+        data = read_required(structure_with_properties_path)
+        return xtal.Structure.from_dict(data)
+    
+    
+    print("In working directory:", printpathstr(calc_dir))
+    with working_dir(calc_dir):
+
+        # Write structure.json
+        safe_dump(casm_structure.to_dict(), path=structure_path, force=True)
+
+        from datetime import datetime
+
+        # Get the current datetime
+        now = datetime.now()
+        
+        # Convert to ISO 8601 string
+        iso_string = status_path
+        print(f"ISO formatted datetime: {iso_string}")
+
+        # Write status.json
+        status_data = {
+            "status": "setup",
+            "starttime": datetime.now().isoformat(),
+        }
+        safe_dump(status_data, path=status_path, force=True)
+        
+        # Relax structure
+        casm_structure_with_properties, Epot = relax(
+            casm_structure=casm_structure,
+            calculator=calculator,
+            fmax=fmax,
+        )
+        
+        # Write structure_with_properties.json
+        safe_dump(
+            casm_structure_with_properties.to_dict(),
+            path=structure_with_properties_path,
+            force=True,
+        )    
+
+        # Write status.json
+        status_data["status"] = "complete"
+        status_data["stoptime"] = datetime.now().isoformat()
+        safe_dump(status_data, path=status_path, force=True)
+
+    return casm_structure_with_properties
+
+
+def Omega_lattice(
+    r: typing.Optional[float] = None,
+    a: typing.Optional[float] = None,
+    c: typing.Optional[float] = None,
+):
+    """Create the omega structure lattice"""
+    if r is not None:
+        # from a_omega = bcc face diagonal,
+        # a_omega = a_bcc * math.sqrt(2)
+        a = math.sqrt(32/3) * r
+
+        # from volume conservation:
+        c = math.sqrt(8) * r
+    return xtal_lattices.hexagonal(a=a, c=c)
+
+def Omega_structure(
+    r: typing.Optional[float] = None,
+    a: typing.Optional[float] = None,
+    c: typing.Optional[float] = None,
+    z: float = 0.0,
+    atom_type: typing.Union[str,list[str]] = "A",
+    atom_properties: dict[str, np.ndarray] = {},
+    global_properties: dict[str, np.ndarray] = {},
+    conventional=False,
+) -> xtal.Structure:
+    """Create an omega structure, ideal or shuffled"""
+
+    if isinstance(atom_type, str):
+        atom_type = [atom_type, atom_type, atom_type]
+        
+    return xtal.Structure(
+        lattice=Omega_lattice(r=r, a=a, c=c),
+        atom_coordinate_frac=np.array(
+            [
+                [0.0, 0.0, 0.0],
+                [1.0 / 3.0, 2.0 / 3.0, 0.5 + z],
+                [2.0 / 3.0, 1.0 / 3.0, 0.5 - z],
+            ]
+        ).transpose(),
+        atom_type=atom_type,
+        atom_properties=atom_properties,
+        global_properties=global_properties,
+    )
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mImportError[39m                               Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 7[39m
+[32m      5[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mlibcasm[39;00m[34;01m.[39;00m[34;01mxtal[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mxtal[39;00m
+[32m      6[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mlibcasm[39;00m[34;01m.[39;00m[34;01mxtal[39;00m[34;01m.[39;00m[34;01mlattices[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mxtal_lattices[39;00m
+[32m----> [39m[32m7[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mcasm[39;00m[34;01m.[39;00m[34;01mtools[39;00m[34;01m.[39;00m[34;01mshared[39;00m[34;01m.[39;00m[34;01mase_utils[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m relax
+[32m      8[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mcasm[39;00m[34;01m.[39;00m[34;01mtools[39;00m[34;01m.[39;00m[34;01mshared[39;00m[34;01m.[39;00m[34;01mcontexts[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m working_dir
+[32m      9[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mcasm[39;00m[34;01m.[39;00m[34;01mtools[39;00m[34;01m.[39;00m[34;01mshared[39;00m[34;01m.[39;00m[34;01mjson_io[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[32m     10[39m     printpathstr, 
+[32m     11[39m     read_optional, 
+[32m     12[39m     read_required, 
+[32m     13[39m     safe_dump,
+[32m     14[39m )
+
+[31mImportError[39m: cannot import name 'relax' from 'casm.tools.shared.ase_utils' (/Users/bpuchala/.local/conda/envs/CASM_v2_py314/lib/python3.14/site-packages/casm/tools/shared/ase_utils.py)
+

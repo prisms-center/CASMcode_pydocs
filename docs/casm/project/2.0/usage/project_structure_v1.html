@@ -1,0 +1,693 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CASM Project Structure (v1) &#8212; casm-project 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1038f348" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/project_structure_v1';</script>
+    <link rel="icon" href="../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">casm-project</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">CASM Project Structure (v1)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="casm-project-structure-v1">
+<span id="project-structure-v1"></span><h1>CASM Project Structure (v1)<a class="headerlink" href="#casm-project-structure-v1" title="Link to this heading">#</a></h1>
+<p>The CASM project structure standardizes the location of various files used by CASM.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document describes the directory structure for CASM v1 projects. For the latest version of CASM, see <a class="reference internal" href="project_structure.html#project-structure-latest"><span class="std std-ref">CASM Project Structure (latest)</span></a>.</p>
+</div>
+<section id="path-variable-convention">
+<h2>Path variable convention<a class="headerlink" href="#path-variable-convention" title="Link to this heading">#</a></h2>
+<p>In the descriptions that follow, some paths include codes of the form <cite>&lt;variable&gt;</cite> to indicate that there are multiple files or directory paths with varying names but following the same pattern.</p>
+<p>This is used to (i) store data by supercell name (<cite>&lt;supercellname&gt;</cite>) or configuration name (<cite>&lt;configname&gt;</cite>) or (ii) organize  data in parallel directories so users can work on multiple tasks in the same project or compare the results of using different parameters.</p>
+<p>In particular, a CASM project allows storing multiple choices of:
+- <cite>&lt;property&gt;</cite>: the property being expanded
+- <cite>&lt;bset&gt;</cite>: the choice of basis set
+- <cite>&lt;calctype&gt;</cite>: the choice of property calculation method and parameters
+- <cite>&lt;ref&gt;</cite>: the choice of reference states (for formation energy calculations)
+- <cite>&lt;eci&gt;</cite>: the choice of fitting coefficients (effective cluster interactions)</p>
+<p>Additional <cite>&lt;variable&gt;</cite> descriptions include:
+- <cite>&lt;root&gt;</cite>: indicates the CASM project root directory
+- <cite>&lt;title&gt;</cite>: a CASM project is given a <cite>title</cite> in the <cite>prim.json</cite> file used to initialize it
+- <cite>&lt;dof_key&gt;</cite>: a name of degrees of freedom (DoF) listed in <cite>prim.json</cite></p>
+</section>
+<section id="controlling-what-data-is-used-by-default">
+<h2>Controlling what data is used by default<a class="headerlink" href="#controlling-what-data-is-used-by-default" title="Link to this heading">#</a></h2>
+<p>When a CASM project is initialized with <cite>casm init</cite>, default directories are created with names such as <cite>bset.default</cite>, <cite>calctype.default</cite>, etc.</p>
+<p>Either manually or by using <cite>casm settings</cite>, the user may create new directories with custom names such as <cite>bset.occupation</cite>, <cite>bset.chebychev</cite>, <cite>calctype.gga</cite>, <cite>calctype.lda</cite>, etc. to store different choices of basis set, calculation type, etc.</p>
+<p>These directory names must be given the appropriate prefix (i.e. <cite>“bset.”</cite>, <cite>“calctype.”</cite>, etc.) for CASM to recognize them. This is taken care of when they are created using the <cite>casm settings</cite> command. The expected prefixes and default values for new CASM projects are:</p>
+<div class="line-block">
+<div class="line">Variable | Prefix | Default |</div>
+</div>
+<p><a href="#id3"><span class="problematic" id="id4">|-|</span></a>-<a href="#id5"><span class="problematic" id="id6">|-|</span></a>
+| <cite>&lt;property&gt;</cite> | <cite>clex.</cite> | <cite>clex.formation_energy</cite> |
+| <cite>&lt;bset&gt;</cite> | <cite>bset.</cite> | <cite>bset.default</cite> |
+| <cite>&lt;calctype&gt;</cite> | <cite>calctype.</cite> | <cite>calctype.default</cite> |
+| <cite>&lt;ref&gt;</cite> | <cite>ref.</cite> | <cite>ref.default`|
+| `&lt;eci&gt;</cite> | <cite>eci.</cite> | <a href="#id1"><span class="problematic" id="id2">`</span></a>eci.default`|</p>
+<p>The CASM project settings (which can be inspected and modified by <cite>casm settings</cite>) store a list of named cluster expansions specifying which choice of <cite>&lt;property&gt;</cite>, <cite>&lt;bset&gt;</cite>, <cite>&lt;calctype&gt;</cite>, <cite>&lt;ref&gt;</cite>, and <cite>&lt;eci&gt;</cite> are used.</p>
+<p>A default cluster expansion can be configured which indicates which data from which directories to query by default.</p>
+<p>—</p>
+<p>### CASM project directories</p>
+<p>#### CASM project root directory &lt;a name=”root-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id7"><span class="problematic" id="id8">|-|</span></a>-<a href="#id9"><span class="problematic" id="id10">|-|</span></a>
+| <cite>.casm/</cite> | Stores CASM project settings and data | [goto](#casm-dir) |
+| <cite>basis_sets/</cite> | Stores basis set input, results, and generated code | [goto](#basis-sets-dir) |
+| <cite>cluster_expansions/</cite> | Stores cluster expansion fitting coefficients | [goto](#cluster-expansions-dir) |
+| <cite>reports/</cite> | Stores reports generated by <cite>casm import</cite> and <cite>casm update</cite> | |
+| <cite>symmetry/</cite> | Stores symmetry analysis results | [goto](#symmetry-dir) |
+| <cite>training_data/</cite> | Stores calculation settings and results | [goto](#query-plugins-dir) |
+| <cite>LOG</cite> | Logs all casm API commands run for the project | |</p>
+<p>—</p>
+<p>#### Project settings and data directory &lt;a name=”casm-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/.casm/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id11"><span class="problematic" id="id12">|-|</span></a>-<a href="#id13"><span class="problematic" id="id14">|-|</span></a>
+| <cite>jsonDB/</cite> | Directory containing enumerated supercells and configurations | [goto](#jsondb-dir) |
+| <cite>query/</cite> | Directory containing query plugins code | [goto](#query-plugins-dir) |
+| <cite>prim.json</cite> | Primitive crystal structure and allowed degrees of freedom (DoF) | [Prim] |
+| [<cite>composition_axes.json</cite>] | Stores the selected and possible composition axes | [Composition Axes] |
+| [<cite>project_settings.json</cite>] | Stores CASM project settings | [Project Settings] |</p>
+<p>—</p>
+<p>#### JSON database directory &lt;a name=”jsondb-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/.casm/jsonDB</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id15"><span class="problematic" id="id16">|-|</span></a>-<a href="#id17"><span class="problematic" id="id18">|-|</span></a>
+| <cite>config_list.json</cite> | File containing enumerated configurations | |
+| <cite>scel_list.json</cite> | File containing enumerated supercells | |
+| <cite>&lt;calctype&gt;/config_props.json</cite> | File containing calculated properties for a particular calculation type | |</p>
+<p>—</p>
+<p>#### Query plugins directory &lt;a name=”query-plugins-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/.casm/query</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id19"><span class="problematic" id="id20">|-|</span></a>-<a href="#id21"><span class="problematic" id="id22">|-|</span></a>
+| <cite>Configuration/</cite> | Directory for placing configuration query plugin source code | |
+| <cite>Supercell/</cite> | Directory for placing supercell query plugin source code | |</p>
+<p>—</p>
+<p>#### Basis sets directory &lt;a name=”basis-sets-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/basis_sets/&lt;bset&gt;</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id23"><span class="problematic" id="id24">|-|</span></a>-<a href="#id25"><span class="problematic" id="id26">|-|</span></a>
+| <cite>basis.json</cite> | Basis function orbit information | [Basis Set] |
+| <cite>bspecs.json</cite> | Basis set specifications (input file) | [Basis Set Specs] |
+| <cite>clust.json</cite> | Cluster orbit information | [Cluster Orbits] |
+| <cite>&lt;title&gt;_Clexulator.cc</cite> | Generated source code for evaluating basis functions  | |
+| <cite>&lt;title&gt;_Clexulator.o</cite> | Compiled object file for evaluating basis functions  | |
+| <cite>&lt;title&gt;_Clexulator.so</cite> | Compiled shared object file for evaluating basis functions  | |</p>
+<p>—</p>
+<p>#### Cluster expansion ECI directories &lt;a name=”cluster-expansions-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/cluster_expansions/&lt;property&gt;/&lt;bset&gt;/&lt;calctype&gt;/&lt;ref&gt;/&lt;eci&gt;/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id27"><span class="problematic" id="id28">|-|</span></a>-<a href="#id29"><span class="problematic" id="id30">|-|</span></a>
+| <cite>eci.json</cite> | Basis function orbit information, with effective cluster interaction (ECI) values included | [Basis Set] |</p>
+<p>—</p>
+<p>#### Symmetry analysis directory &lt;a name=”symmetry-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/symmetry/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id31"><span class="problematic" id="id32">|-|</span></a>-<a href="#id33"><span class="problematic" id="id34">|-|</span></a>
+| <cite>analysis/&lt;configname&gt;/</cite> | Stores DoFSpace analysis results for enumerated configurations | [goto](#dofspace-dir) |
+| <cite>lattice_point_group.json</cite> | The point group of the [prim] lattice | [Symmetry Group] |
+| <cite>factor_group.json</cite> | The [prim] factor group (a finite description of the crystal space group) | [Symmetry Group] |
+| <cite>crystal_point_group.json</cite> | The group formed by excluding translations from the [prim] factor group operations | [Symmetry Group] |</p>
+<p>—</p>
+<p>#### DoFSpace analysis directories &lt;a name=”dofspace-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/symmetry/analysis/&lt;configname&gt;/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id35"><span class="problematic" id="id36">|-|</span></a>-<a href="#id37"><span class="problematic" id="id38">|-|</span></a>
+| <cite>lattice_point_group.json</cite> | The point group of the configuration’s superlattice | [Symmetry Group] |
+| <cite>factor_group.json</cite> | The configuration’s factor group (a finite description of the crystal space group) | [Symmetry Group] |
+| <cite>crystal_point_group.json</cite> | The group formed by excluding translations from the configuration’s factor group operations | [Symmetry Group] |
+| <cite>dof_space_&lt;dof_key&gt;.json</cite> | A description of the DoF vector space, by specified DoF type  | [DoF Space] |</p>
+<p>—</p>
+<p>#### Configuration directories &lt;a name=”config-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/training_data/&lt;configname&gt;/</cite></p>
+<p>Description:</p>
+<p>The configuration directories are used to store data associated with a particular configuration including its definition and calculated properties.</p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id39"><span class="problematic" id="id40">|-|</span></a>-<a href="#id41"><span class="problematic" id="id42">|-|</span></a>
+| &lt;calctype&gt; | Calculation results directories | [goto](#calc-results-dir) |
+| settings/&lt;calctype&gt; | Configuration specific calculation settings | [goto](#calc-settings-dir) |
+| <cite>POS</cite> | VASP POSCAR file corresponding to the configuration | [POSCAR] |
+| <cite>config.json</cite> | JSON file containing the values degrees of freedom (DoF) defining the configuration | [Configuration] |
+| <cite>structure.json</cite> | The crystal structure corresponding the configuration | [Structure] |</p>
+<p>—</p>
+<p>#### Calculation settings directories &lt;a name=”calc-settings-dir”&gt;&lt;/a&gt;</p>
+<p>Location:</p>
+<p>One of:
+- For configuration specific settings: <cite>&lt;root&gt;/training_data/&lt;configname&gt;/settings/&lt;calctype&gt;/</cite>
+- For supercell specific settings: <cite>&lt;root&gt;/training_data/&lt;supercellname&gt;/settings/&lt;calctype&gt;/</cite>
+- For default settings: <cite>&lt;root&gt;/training_data/settings/&lt;calctype&gt;/</cite></p>
+<p>Description:</p>
+<p>Calculation wrappers for CASM (ex. <cite>casm.vaspwrapper</cite> for running VASP calculations, <cite>casm.qewrapper</cite> for running Quantum Espresso calculations) check for input settings files in the calculation settings directories, using the most local settings for a particular configuration. In most cases, the default settings files are stored in <cite>&lt;root&gt;/training_data/settings/&lt;calctype&gt;/</cite> and used for all configurations. Sometimes it is necessary to provide configuration specific settings to overcome an issue that arises when calculating properties. Rarely, the superell specific settings may be used to set default settings for all configurations in a particular supercell. The implementation is controlled by the wrapper code, but by convention, settings files should be searched on a file-by-file basis, so to set supercell or configuration specific settings it is sufficient to only include the particular files necessary in the supercell or configuration level settings folder.</p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id43"><span class="problematic" id="id44">|-|</span></a>-<a href="#id45"><span class="problematic" id="id46">|-|</span></a>
+| <cite>calc.json</cite> | JSON file containing calculation settings and parameters used to control job submission management software  | |
+| … others … | Calculation type dependent files necessary for input file setup and job execution. See casm.wrapper documentation. | |</p>
+<p>—</p>
+<p>#### Calculation results directories &lt;a name=”calc-results-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/training_data/&lt;configname&gt;/&lt;calctype&gt;/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id47"><span class="problematic" id="id48">|-|</span></a>-<a href="#id49"><span class="problematic" id="id50">|-|</span></a>
+| <cite>properties.calc.json</cite> | CASM structure JSON file containing the calculated lattice, coordinates, and any properties for configuration <cite>&lt;configname&gt;</cite>. This file is read by <cite>casm update</cite> to update the calculated properties | [Structure] |
+| … others … | Calculation type dependent input and output files. See casm.wrapper documentation. |  |</p>
+<p>—</p>
+<p>#### Chemical reference directories &lt;a name=”chemical-reference-dir”&gt;&lt;/a&gt;</p>
+<p>Location: <cite>&lt;root&gt;/training_data/&lt;configname&gt;/&lt;calctype&gt;/&lt;ref&gt;/</cite></p>
+<p>Contents:</p>
+<div class="line-block">
+<div class="line">Name | Description | Format |</div>
+</div>
+<p><a href="#id51"><span class="problematic" id="id52">|-|</span></a>-<a href="#id53"><span class="problematic" id="id54">|-|</span></a>
+| <cite>chemical_reference.json</cite> | Chemical reference states | [Chemical Reference] |</p>
+<p>{% include file_formats_and_locations.md %}</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variable-convention">Path variable convention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-what-data-is-used-by-default">Controlling what data is used by default</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/project_structure_v1.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

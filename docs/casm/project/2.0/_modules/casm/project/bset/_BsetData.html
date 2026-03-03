@@ -13,39 +13,51 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1038f348" />
   
-  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
-    <link rel="icon" sizes="32x32" type="image/png" href="../../../../_static/favicon-32x32.png?v=f9ece728" />
-    <link rel="icon" sizes="16x16" type="image/png" href="../../../../_static/favicon-16x16.png?v=dad9ad5b" />
-    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../../_static/apple-touch-icon.png?v=16836a53" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="../../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/bset/_BsetData';</script>
+    <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
   </head>
   
   
@@ -53,32 +65,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../../search.html"
       method="get">
@@ -86,7 +82,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -94,20 +89,27 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../../../index.html">
@@ -122,7 +124,7 @@
     
     
     <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
-    <script>document.write(`<img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+    <img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
   
   
     <p class="title logo__title">casm-project</p>
@@ -136,42 +138,36 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../usage.html">
-                        Usage
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
+    Usage
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
-                        Bibliography
-                      </a>
-                    </li>
-                
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -183,31 +179,23 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -218,7 +206,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -230,7 +218,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -242,27 +230,29 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -271,45 +261,42 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../usage.html">
-                        Usage
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
+    Usage
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
-                        Bibliography
-                      </a>
-                    </li>
-                
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -319,17 +306,13 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -340,7 +323,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -352,7 +335,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -363,29 +346,32 @@ document.write(`
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
         <div class="header-article-item">
 
-
-
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -396,7 +382,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">casm.project...</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">casm.project.bset._BsetData</span></li>
   </ul>
 </nav>
 </div>
@@ -411,52 +397,52 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <h1>Source code for casm.project.bset._BsetData</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">casm.bset</span> <span class="kn">import</span> <span class="n">build_cluster_functions</span><span class="p">,</span> <span class="n">make_clex_basis_specs</span><span class="p">,</span> <span class="n">write_clexulator</span>
-<span class="kn">from</span> <span class="nn">casm.bset.cluster_functions</span> <span class="kn">import</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span> <span class="n">ClusterFunctionsBuilder</span>
-<span class="kn">from</span> <span class="nn">casm.project.json_io</span> <span class="kn">import</span> <span class="n">printpathstr</span><span class="p">,</span> <span class="n">read_optional</span><span class="p">,</span> <span class="n">safe_dump</span>
-<span class="kn">from</span> <span class="nn">libcasm.clexulator</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_cluster_functions</span><span class="p">,</span> <span class="n">make_clex_basis_specs</span><span class="p">,</span> <span class="n">write_clexulator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.bset.cluster_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span> <span class="n">ClusterFunctionsBuilder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.json_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">printpathstr</span><span class="p">,</span> <span class="n">read_optional</span><span class="p">,</span> <span class="n">safe_dump</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clexulator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Clexulator</span><span class="p">,</span>
     <span class="n">LocalClexulator</span><span class="p">,</span>
     <span class="n">make_clexulator</span><span class="p">,</span>
     <span class="n">make_local_clexulator</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.clusterography</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">ClusterOrbitGenerator</span>
-<span class="kn">from</span> <span class="nn">libcasm.occ_events</span> <span class="kn">import</span> <span class="n">OccEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.clusterography</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">ClusterOrbitGenerator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.occ_events</span><span class="w"> </span><span class="kn">import</span> <span class="n">OccEvent</span>
 
-<span class="kn">from</span> <span class="nn">._ConfigCorrCalculator</span> <span class="kn">import</span> <span class="n">ConfigCorrCalculator</span>
-<span class="kn">from</span> <span class="nn">._display_bset</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._ConfigCorrCalculator</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigCorrCalculator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._display_bset</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DisplayBasisOptions</span><span class="p">,</span>
     <span class="n">display_functions_v2</span><span class="p">,</span>
     <span class="n">display_occ_site_functions_v2</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._print_bset</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._print_bset</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PrettyPrintBasisOptions</span><span class="p">,</span>
     <span class="n">pretty_print_functions_by_orbit</span><span class="p">,</span>
     <span class="n">pretty_print_orbits</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">casm.project</span> <span class="kn">import</span> <span class="n">Project</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">casm.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
 
 
-<span class="k">class</span> <span class="nc">BsetOutputData</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BsetOutputData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads basis set data from the files generated by</span>
 <span class="sd">    :func:`BsetData.update &lt;casm.project.BsetData.update&gt;`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">proj</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Project: CASM project reference&quot;&quot;&quot;</span>
 
@@ -470,7 +456,7 @@ document.write(`
     <span class="c1"># written by write_clexulator</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">basis_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[dict]: A description of a cluster expansion basis set.</span>
 
 <span class="sd">        See the CASM documentation for the</span>
@@ -479,21 +465,21 @@ document.write(`
         <span class="k">return</span> <span class="n">read_optional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;basis.json&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">prototype_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Cluster</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prototype_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Cluster</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;list[Cluster]: The prototype cluster, for each basis function&quot;&quot;&quot;</span>
         <span class="n">orbits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;orbits&quot;</span><span class="p">)</span>
         <span class="n">_prototype_clusters</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">orbit</span> <span class="ow">in</span> <span class="n">orbits</span><span class="p">:</span>
             <span class="n">_prototype</span> <span class="o">=</span> <span class="n">Cluster</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
                 <span class="n">data</span><span class="o">=</span><span class="n">orbit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prototype&quot;</span><span class="p">),</span>
-                <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">(),</span>
+                <span class="n">xtal_prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">prim</span><span class="o">.</span><span class="n">xtal_prim</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">orbit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cluster_functions&quot;</span><span class="p">):</span>
                 <span class="n">_prototype_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_prototype</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_prototype_clusters</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cluster_multiplicity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cluster_multiplicity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;np.ndarray[numpy.float[n_functions]]: The number of clusters per orbit, for</span>
 <span class="sd">        each basis function&quot;&quot;&quot;</span>
         <span class="n">orbits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;orbits&quot;</span><span class="p">)</span>
@@ -505,13 +491,13 @@ document.write(`
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mult</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">cluster_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cluster_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray[numpy.int[n_functions]]: The number of cluster sites, for each</span>
 <span class="sd">        basis function&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_prototypes</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prototype_clusters</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">equivalents_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">equivalents_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[dict]: The equivalents info provides the phenomenal cluster and</span>
 <span class="sd">        local-cluster orbits for all symmetrically equivalent local-cluster expansions,</span>
 <span class="sd">        and the indices of the factor group operations used to construct each equivalent</span>
@@ -526,7 +512,7 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">equivalents_info</span> <span class="o">=</span> <span class="n">read_optional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;equivalents_info.json&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">generated_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generated_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[dict]: Lists of generated files.</span>
 
 <span class="sd">        If available, returns a dict with format:</span>
@@ -542,7 +528,7 @@ document.write(`
         <span class="k">return</span> <span class="n">read_optional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;generated_files.json&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">src_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">src_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[pathlib.Path]: Clexulator source file path&quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generated_files</span>
         <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -553,7 +539,7 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="n">y</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">local_src_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">local_src_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[pathlib.Path]]: Local Clexulator source file paths&quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generated_files</span>
         <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -564,7 +550,7 @@ document.write(`
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[dict]: Variables used to write the Clexulator</span>
 
 <span class="sd">        Values in this file correspond to documented attributes of the class used</span>
@@ -576,7 +562,7 @@ document.write(`
         <span class="k">return</span> <span class="n">read_optional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bset_dir</span> <span class="o">/</span> <span class="s2">&quot;variables.json.gz&quot;</span><span class="p">,</span> <span class="n">gz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">local_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i_equiv</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">local_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i_equiv</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[list[dict]]: Variables used to write LocalClexulator</span>
 
 <span class="sd">        Values in these files correspond to documented attributes of the class used</span>
@@ -592,7 +578,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.html#casm.project.bset.BsetData">[docs]</a>
-<span class="k">class</span> <span class="nc">BsetData</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BsetData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage basis set data for a CASM project</span>
 
 <span class="sd">    The CASM project basis set directory structure:</span>
@@ -662,7 +648,7 @@ document.write(`
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
             <span class="sa">R</span><span class="s2">&quot;^\w+&quot;</span><span class="p">,</span>
             <span class="nb">id</span><span class="p">,</span>
@@ -723,7 +709,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.load">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.load.html#casm.project.bset.BsetData.load">[docs]</a>
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read bspecs.json, meta.json, and writer_params.json.</span>
 
 <span class="sd">        This will replace the current contents of this BsetData object with the</span>
@@ -757,7 +743,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.commit">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.commit.html#casm.project.bset.BsetData.commit">[docs]</a>
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write bspecs.json, meta.json, and writer_params.json</span>
 
 <span class="sd">        Notes:</span>
@@ -834,7 +820,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.clean">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.clean.html#casm.project.bset.BsetData.clean">[docs]</a>
-    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove all generated files associated with the basis set, as read from</span>
 <span class="sd">        generated_files.json&quot;&quot;&quot;</span>
         <span class="c1"># read generated_files.json if it exists</span>
@@ -861,8 +847,8 @@ document.write(`
             <span class="nb">print</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">libcasm.xtal</span> <span class="kn">import</span> <span class="n">pretty_json</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="kn">import</span> <span class="n">pretty_json</span>
 
         <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;BsetData:</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -906,7 +892,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.set_bspecs">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.set_bspecs.html#casm.project.bset.BsetData.set_bspecs">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_bspecs</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bspecs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">clex_basis_specs</span><span class="p">:</span> <span class="n">ClexBasisSpecs</span><span class="p">,</span>
     <span class="p">):</span>
@@ -923,7 +909,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.make_bspecs">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.make_bspecs.html#casm.project.bset.BsetData.make_bspecs">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_bspecs</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_bspecs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">dofs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">max_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
@@ -1010,7 +996,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.build">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.build.html#casm.project.bset.BsetData.build">[docs]</a>
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">make_equivalents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">make_all_local_basis_sets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1066,7 +1052,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.update">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.update.html#casm.project.bset.BsetData.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">no_compile</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">only_compile</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1159,7 +1145,7 @@ document.write(`
                 <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_generated_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abspaths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_generated_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abspaths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the generated_files.json file with the given absolute paths&quot;&quot;&quot;</span>
         <span class="n">generated_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">generated_files</span>
         <span class="k">if</span> <span class="n">generated_files</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1181,7 +1167,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.make_clexulator">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.make_clexulator.html#casm.project.bset.BsetData.make_clexulator">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_clexulator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Clexulator</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_clexulator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Clexulator</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The Clexulator for the basis set, if available.</span>
 
 <span class="sd">        When accessed, the Clexulator will be compiled if it has not yet been compiled,</span>
@@ -1213,7 +1199,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.make_local_clexulator">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.make_local_clexulator.html#casm.project.bset.BsetData.make_local_clexulator">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_local_clexulator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LocalClexulator</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_local_clexulator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LocalClexulator</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The LocalClexulator for the basis set, if available.</span>
 
 <span class="sd">        When accessed, the LocalClexulator will be compiled if it has not yet been</span>
@@ -1251,7 +1237,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.make_corr_calculator">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.make_corr_calculator.html#casm.project.bset.BsetData.make_corr_calculator">[docs]</a>
-    <span class="k">def</span> <span class="nf">make_corr_calculator</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_corr_calculator</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_function_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
@@ -1285,7 +1271,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.print_orbits">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.print_orbits.html#casm.project.bset.BsetData.print_orbits">[docs]</a>
-    <span class="k">def</span> <span class="nf">print_orbits</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_orbits</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_orbit_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">print_invariant_group</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1341,7 +1327,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.print_clusters">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.print_clusters.html#casm.project.bset.BsetData.print_clusters">[docs]</a>
-    <span class="k">def</span> <span class="nf">print_clusters</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_clusters</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_orbit_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">print_invariant_group</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1397,7 +1383,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.print_functions_by_orbit">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.print_functions_by_orbit.html#casm.project.bset.BsetData.print_functions_by_orbit">[docs]</a>
-    <span class="k">def</span> <span class="nf">print_functions_by_orbit</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_functions_by_orbit</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_orbit_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">function_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;prototype&quot;</span><span class="p">,</span>
@@ -1497,7 +1483,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.display_occ_site_functions">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.display_occ_site_functions.html#casm.project.bset.BsetData.display_occ_site_functions">[docs]</a>
-    <span class="k">def</span> <span class="nf">display_occ_site_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">display_occ_site_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Display occupation site basis functions using IPython.display&quot;&quot;&quot;</span>
         <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">variables</span>
         <span class="k">if</span> <span class="n">variables</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1515,7 +1501,7 @@ document.write(`
 
 <div class="viewcode-block" id="BsetData.display_functions">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.bset.BsetData.display_functions.html#casm.project.bset.BsetData.display_functions">[docs]</a>
-    <span class="k">def</span> <span class="nf">display_functions</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">display_functions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">linear_function_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">linear_orbit_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1607,7 +1593,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
 </div>
@@ -1628,8 +1614,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1649,7 +1635,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>
@@ -1662,7 +1648,8 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

@@ -31,7 +31,10 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=1d1c7082" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=1038f348" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -40,8 +43,15 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="icon" href="_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -141,14 +151,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="usage.html">
+  <a class="nav-link nav-internal" href="usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="reference/casm/index.html">
+  <a class="nav-link nav-internal" href="reference/index.html">
     Reference
   </a>
 </li>
@@ -271,14 +281,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="usage.html">
+  <a class="nav-link nav-internal" href="usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="reference/casm/index.html">
+  <a class="nav-link nav-internal" href="reference/index.html">
     Reference
   </a>
 </li>
@@ -368,9 +378,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <a class="only-light reference internal image-reference" href="_images/logo_outline.svg"><img alt="CASM logo" class="only-light" src="_images/logo_outline.svg" style="width: 600px;" />
+  <a class="only-light reference internal image-reference" href="_images/logo_outline.svg"><img alt="CASM logo" class="only-light" src="_images/logo_outline.svg" width="600" />
 </a>
-<a class="only-dark reference internal image-reference" href="_images/logo_dark_outline.svg"><img alt="CASM logo" class="only-dark" src="_images/logo_dark_outline.svg" style="width: 600px;" />
+<a class="only-dark reference internal image-reference" href="_images/logo_dark_outline.svg"><img alt="CASM logo" class="only-dark" src="_images/logo_dark_outline.svg" width="600" />
 </a>
 <section id="casm-project">
 <h1>casm-project<a class="headerlink" href="#casm-project" title="Link to this heading">#</a></h1>
@@ -403,12 +413,10 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#for-contributors">For contributors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage/quick_start.html">Quick start</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference/casm/index.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/casm/_autosummary/casm.project.html">casm.project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/index.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage/project_structure.html">CASM project structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/casm/index.html">API Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
@@ -506,7 +514,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

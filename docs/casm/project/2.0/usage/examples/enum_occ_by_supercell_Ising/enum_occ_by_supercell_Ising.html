@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Enumerate orderings in the 2D Ising model &#8212; casm-project 2.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=1038f348" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=df8f2d03"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/examples/enum_occ_by_supercell_Ising/enum_occ_by_supercell_Ising';</script>
+    <link rel="icon" href="../../../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Reference" href="../../../reference/index.html" />
+    <link rel="prev" title="Enumerate orderings in Si-Ge" href="../enum_occ_by_supercell_SiGe/enum_occ_by_supercell_SiGe.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">casm-project</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../enum_occ_by_supercell_SiGe/enum_occ_by_supercell_SiGe.html">Enumerate orderings in Si-Ge</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Enumerate orderings in the 2D Ising model</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Enumerate orderings in the 2D Ising model</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="enumerate-orderings-in-the-2d-ising-model">
+<h1>Enumerate orderings in the 2D Ising model<a class="headerlink" href="#enumerate-orderings-in-the-2d-ising-model" title="Link to this heading">#</a></h1>
+<section id="specify-the-prim">
+<h2>Specify the “prim”<a class="headerlink" href="#specify-the-prim" title="Link to this heading">#</a></h2>
+<p><strong>This step:</strong></p>
+<ul class="simple">
+<li><p>Defines the primitive crystal structure and allowed degrees of freedom (DoF) for a 2-dimensional Ising model system.</p></li>
+<li><p>Uses occupants named “A.down” and “A.up” to represent “A” atoms with collinear magnetic spin values of -1 and +1, respectively.</p></li>
+</ul>
+<div class="dropdown note admonition">
+<p class="admonition-title"><strong>Notes</strong></p>
+<p>A primitive crystal structure and allowed degrees of freedom (the “prim”) specifies:</p>
+<ul class="simple">
+<li><p>primitive cell lattice vectors</p></li>
+<li><p>crystal basis sites</p></li>
+<li><p>global DoF (none in this case)</p></li>
+<li><p>site DoF (A.up or A.down occupation in this case).</p></li>
+</ul>
+<p>Here the prim is constructed using the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#prim">xtal.Prim</a>.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#prim">xtal.Prim</a>: This is just the prim definition</p></li>
+<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Prim.html#prim">casmconfig.Prim</a>: This is the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/reference/libcasm/_autosummary/libcasm.xtal.Prim.html#prim">xtal.Prim</a>, along with the symmetry representations needed for applying symmetry operations to CASM <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Configuration.html#configuration">Configuration</a></p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Lattice vectors:</span>
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>  <span class="c1"># 1st lattice vector</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>  <span class="c1"># 2nd lattice vector</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span>  <span class="c1"># 3rd lattice vector (will have no effect)</span>
+        <span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>  <span class="c1"># &lt;--- note transpose</span>
+<span class="p">)</span>
+
+<span class="c1"># Basis sites positions, as columns of a matrix,</span>
+<span class="c1"># in fractional coordinates with respect to the lattice vectors</span>
+<span class="n">coordinate_frac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>  <span class="c1"># coordinates of basis site, b=0</span>
+    <span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>  <span class="c1"># &lt;--- note transpose</span>
+
+
+<span class="c1"># Make atomic occupants with a discrete Cmagspin value (as an atom property)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_atom_with_Cmagspin</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make an atomic occupant with a discrete collinear magnetic spin (Cmagspin) value.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Occupant</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>  <span class="c1"># &quot;chemical name&quot; of Occupant</span>
+        <span class="n">atoms</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">xtal</span><span class="o">.</span><span class="n">AtomComponent</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>  <span class="c1"># &quot;chemical name&quot; of the AtomComponent</span>
+                <span class="n">coordinate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+                <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;Cmagspin&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                    <span class="p">)</span>  <span class="c1"># fixed properties of the AtomComponent</span>
+                <span class="p">},</span>
+            <span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># Occupation degrees of freedom (DoF)</span>
+<span class="n">A_down_occ</span> <span class="o">=</span> <span class="n">make_atom_with_Cmagspin</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">A_up_occ</span> <span class="o">=</span> <span class="n">make_atom_with_Cmagspin</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">occupants</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;A.down&quot;</span><span class="p">:</span> <span class="n">A_down_occ</span><span class="p">,</span>  <span class="c1"># &lt;label&gt; : occupant</span>
+    <span class="s2">&quot;A.up&quot;</span><span class="p">:</span> <span class="n">A_up_occ</span><span class="p">,</span>  <span class="c1"># &lt;label&gt; : occupant</span>
+<span class="p">}</span>
+<span class="n">occ_dof</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;A.down&quot;</span><span class="p">,</span> <span class="s2">&quot;A.up&quot;</span><span class="p">],</span>  <span class="c1"># occupants allowed on basis site, b=0</span>
+<span class="p">]</span>
+
+<span class="c1"># Construct the xtal.Prim</span>
+<span class="n">prim</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+    <span class="n">coordinate_frac</span><span class="o">=</span><span class="n">coordinate_frac</span><span class="p">,</span>
+    <span class="n">occ_dof</span><span class="o">=</span><span class="n">occ_dof</span><span class="p">,</span>
+    <span class="n">occupants</span><span class="o">=</span><span class="n">occupants</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Ising_occ&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-casm-project">
+<h2>Create a CASM project<a class="headerlink" href="#create-a-casm-project" title="Link to this heading">#</a></h2>
+<p><strong>This step:</strong></p>
+<ul class="simple">
+<li><p>Initializes a Ising model CASM project using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.Project.init.html#init">Project.init</a>.</p></li>
+<li><p>Prints the prim’s factor group symmetry operations using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.sym.SymCommand.print_factor_group.html#print-factor-group">SymCommand.print_factor_group</a>.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Checking the factor group helps to catch errors in the prim. The factor group is used to determine which configurations and basis functions are symmetrically equivalent.</p>
+</div>
+<div class="dropdown note admonition">
+<p class="admonition-title"><strong>Notes</strong></p>
+<p>A CASM project is a directory containing data related to a particular prim. The CASM project directory structure standardizes the location of various files used by multiple CASM methods. This makes it easier to perform the most common operations and easier to share a project with others.</p>
+<p>The <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.Project.html#project">Project</a> class helps read and write and use CASM project data. A <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.Project.html#project">Project</a> is initialized by specifying a prim and project directory location using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.Project.init.html#init">Project.init</a>. This will:</p>
+<ol class="arabic simple">
+<li><p>Check if the prim has a primitive unit cell with a CASM standard lattice orientation</p></li>
+<li><p>Perform a symmetry analysis</p></li>
+<li><p>Generate some default directories, data, and settings</p></li>
+<li><p>Perform a configuration check</p></li>
+</ol>
+<p>If a project already exists at the specified location, the <em>prim</em> argument to <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.Project.init.html#init">Project.init</a> is ignored and the existing project is loaded.</p>
+<p><strong>Additional notes</strong>:</p>
+<ul class="simple">
+<li><p>Project files that the user should not typically modify directly, including a copy of the prim, are stored in a hidden <em>.casm</em> sub-directory of the CASM project directory. The presense or absence of the <em>.casm</em> directory is used by CASM to detect a CASM project.</p></li>
+<li><p>A description of symmetry analysis in CASM can be found in the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/usage.html">libcasm-xtal usage documentation</a>.</p></li>
+<li><p><a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.sym.SymCommand.print_factor_group.html#print-factor-group">SymCommand.print_factor_group</a> prints symmetry operations using notation which roughly follows the conventions of the <a class="reference external" href="https://it.iucr.org/">International Tables for Crystallography</a>.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">casm.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+
+<span class="c1"># Initialize the project</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Ising_occ&quot;</span><span class="p">,</span>
+    <span class="n">prim</span><span class="o">=</span><span class="n">prim</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Coordinates can be printed in &#39;cart&#39; or &#39;frac&#39; coordinate mode</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Factor group operations:&quot;</span><span class="p">)</span>
+<span class="n">project</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">print_factor_group</span><span class="p">(</span><span class="n">coord</span><span class="o">=</span><span class="s2">&quot;frac&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CASM project already exists at Ising_occ
+Using existing project
+
+Factor group operations:
+0: 1
+1: 4⁺ 0, 0, z
+2: 4⁻ 0, 0, z
+3: 2 0, 0, z
+4: 2 0, y, 0
+5: 2 x, 0, 0
+6: 2 x, -x, 0
+7: 2 x, x, 0
+8: m x, y, 0
+9: m x, 0, z
+10: m 0, y, z
+11: m x, x, z
+12: m x, -x, z
+13: -4⁺ 0, 0, z; 0.0000000 0.0000000 0.0000000
+14: -4⁻ 0, 0, z; 0.0000000 0.0000000 0.0000000
+15: -1 0.0000000 0.0000000 0.0000000
+16: 1′
+17: 4⁺′ 0, 0, z
+18: 4⁻′ 0, 0, z
+19: 2′ 0, 0, z
+20: 2′ 0, y, 0
+21: 2′ x, 0, 0
+22: 2′ x, -x, 0
+23: 2′ x, x, 0
+24: m′ x, y, 0
+25: m′ x, 0, z
+26: m′ 0, y, z
+27: m′ x, x, z
+28: m′ x, -x, z
+29: -4⁺′ 0, 0, z; 0.0000000 0.0000000 0.0000000
+30: -4⁻′ 0, 0, z; 0.0000000 0.0000000 0.0000000
+31: -1′ 0.0000000 0.0000000 0.0000000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="enumerate-symmetrically-unique-configurations">
+<h2>Enumerate symmetrically unique configurations<a class="headerlink" href="#enumerate-symmetrically-unique-configurations" title="Link to this heading">#</a></h2>
+<p><strong>This step:</strong></p>
+<ul class="simple">
+<li><p>Creates an enumeration with id “main” using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumCommand.get.html#get">EnumCommand.get()</a>.</p></li>
+<li><p>Enumerates all symmetrically unique <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Configuration.html#configuration">Configuration</a> in 2d supercells of the first two lattice vectors, up to volume 10, using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell.html#occ-by-supercell">EnumData.occ_by_supercell()</a>.</p></li>
+<li><p>Stores results in a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.ConfigurationSet.html#configurationset">ConfigurationSet</a> and writes it to a file (<em>config_set.json</em>) in the enumeration directory.</p></li>
+</ul>
+<div class="dropdown note admonition">
+<p class="admonition-title"><strong>Notes</strong></p>
+<p>A <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Configuration.html#configuration">Configuration</a> is a compact representation of the unit cell for a crystal structure that is consistent with the DoF specified in the prim. For this Ising model project, a configuration can be specified by:</p>
+<ul class="simple">
+<li><p>the supercell of the prim that is the unit cell for the crystal structure, and</p></li>
+<li><p>an integer occupation array (i.e. [1, 0, 1, …]), indicating if “A.up” or “A.down” is on each site in the supercell.</p></li>
+</ul>
+<p>Enumeration directories are located in a CASM project at:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">enum_dir</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;/</span><span class="n">enumerations</span><span class="o">/</span><span class="n">enum</span><span class="o">.&lt;</span><span class="n">enum_id</span><span class="o">&gt;/</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.html#enumdata">EnumData</a> class helps interact with the saved <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.Configuration.html#configuration">Configuration</a>. An <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.html#enumdata">EnumData</a> object (<em>enum</em>) is created from the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.Project.html#project">Project</a> using <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumCommand.get.html#get">EnumCommand.get()</a> with the enumeration id:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">enum</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell.html#occ-by-supercell">EnumData.occ_by_supercell()</a> method:</p>
+<ul class="simple">
+<li><p>enumerates configurations in a range of supercells specified by their volume with respect to the primitive unit cell volume,</p></li>
+<li><p>inserts enumerated configurations in <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.configuration_set.html#configuration-set">EnumData.configuration_set</a>, and</p></li>
+<li><p>writes <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.configuration_set.html#configuration-set">EnumData.configuration_set</a> to the <em>config_set.json</em> file in the enumeration directory.</p></li>
+</ul>
+<p>CASM implements a strict ordering on configurations, and the configuration which compares greatest to all the other symmetrically equivalent configurations in a supercell is said to be in canonical form. By default, only primitive configurations that are in canonical form are stored by <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell.html#occ-by-supercell">EnumData.occ_by_supercell()</a>. Using this default, if configurations are enumerated from the volume 1 supercell on up, then only symmetrically unique configurations are stored.</p>
+</div>
+<div class="cell tag_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enumerate configurations:</span>
+<span class="c1"># - in supercells with volume 1 to 10</span>
+<span class="c1"># - limit to 2d supercells (the &quot;a&quot; and &quot;b&quot; lattice vectors)</span>
+<span class="c1"># - Configurations are stored in the enumeration&#39;s ConfigurationSet</span>
+<span class="n">enum</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="n">enum</span><span class="o">.</span><span class="n">occ_by_supercell</span><span class="p">(</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">dirs</span><span class="o">=</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-- Begin: Enumerating occupations by supercell --
+
+Enumerate configurations for: SCEL1_1_1_1_0_0_0
+1 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL2_1_2_1_0_0_0
+1 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL2_2_1_1_0_0_1
+1 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL3_1_3_1_0_0_0
+1 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL3_3_1_1_0_0_1
+1 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL4_1_4_1_0_0_0
+2 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL4_4_1_1_0_0_1
+2 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL4_4_1_1_0_0_2
+2 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL4_2_2_1_0_0_0
+1 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL5_1_5_1_0_0_0
+3 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL5_5_1_1_0_0_4
+3 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL5_5_1_1_0_0_2
+2 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL6_1_6_1_0_0_0
+5 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL6_6_1_1_0_0_1
+5 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL6_3_2_1_0_0_1
+5 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL6_2_3_1_0_0_1
+5 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL6_2_3_1_0_0_0
+5 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL7_1_7_1_0_0_0
+8 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL7_7_1_1_0_0_6
+8 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL7_7_1_1_0_0_2
+8 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_1_8_1_0_0_0
+14 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_8_1_1_0_0_1
+14 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_8_1_1_0_0_2
+14 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_8_1_1_0_0_3
+10 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_2_4_1_0_0_1
+14 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_2_4_1_0_0_0
+13 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL8_4_2_1_0_0_2
+8 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL9_1_9_1_0_0_0
+21 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL9_9_1_1_0_0_8
+21 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL9_9_1_1_0_0_2
+21 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL9_9_1_1_0_0_6
+21 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL9_3_3_1_0_0_0
+10 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_1_10_1_0_0_0
+39 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_10_1_1_0_0_1
+39 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_10_1_1_0_0_2
+39 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_10_1_1_0_0_3
+22 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_10_1_1_0_0_6
+39 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_2_5_1_0_0_1
+39 configurations (0 new, 0 excluded by filter)
+Enumerate configurations for: SCEL10_2_5_1_0_0_0
+39 configurations (0 new, 0 excluded by filter)
+  DONE
+
+-- Summary --
+
+  Initial number of configurations: 506
+  Final number of configurations: 506
+Committing...
+
+EnumData:
+- id: main
+- supercell_set: 39 supercells
+- configuration_set: 506 configurations
+overwrite: Ising_occ/enumerations/enum.main/scel_set.json
+overwrite: Ising_occ/enumerations/enum.main/config_set.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="iterate-over-enumerated-configurations">
+<h2>Iterate over enumerated configurations<a class="headerlink" href="#iterate-over-enumerated-configurations" title="Link to this heading">#</a></h2>
+<p><strong>This step:</strong></p>
+<ul class="simple">
+<li><p>Iterates over the first 20 <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.ConfigurationRecord.html#configurationrecord">ConfigurationRecord</a> in <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.configuration_set.html#configuration-set">EnumData.configuration_set</a>.</p></li>
+<li><p>Prints the configuration’s name, occupation indices, atom types, and magnetic spin values.</p></li>
+</ul>
+<div class="dropdown note admonition">
+<p class="admonition-title"><strong>Notes</strong></p>
+<p>For configuration stored in a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.ConfigurationSet.html#configurationset">ConfigurationSet</a>, the configuration name consists of a supercell name and a configuration index. The supercell name (i.e. “SCEL2_2_1_1_0_1_1”) is generated from the transformation matrix that gives the supercell lattice vectors as a linear combination of the primitive cell lattice vectors. The configuration index is a sequential index generated by the <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.ConfigurationSet.html#configurationset">ConfigurationSet</a> for configurations in the same supercell.</p>
+<p>When iterating over <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/libcasm/configuration/2.0/reference/libcasm/_autosummary/libcasm.configuration.ConfigurationRecord.html#configurationrecord">ConfigurationRecord</a> in a <a class="reference external" href="https://prisms-center.github.io/CASMcode_pydocs/casm/project/2.0/reference/casm/_autosummary/casm.project.enum.EnumData.configuration_set.html#configuration-set">EnumData.configuration_set</a>, the ordering is based on sorting the configuration by supercell and then their DoF values, not their configuration name.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate over the first 20 ConfigurationRecord in the ConfigurationSet,</span>
+<span class="c1"># and print:</span>
+<span class="c1"># - the configuration name</span>
+<span class="c1"># - the occupation indices</span>
+<span class="c1"># - the corresponding atom types</span>
+<span class="c1"># - the corresponding Cmagspin value</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;ConfigurationName&quot;</span><span class="si">:</span><span class="s1">24</span><span class="si">}{</span><span class="s2">&quot;OccupationIndices&quot;</span><span class="si">:</span><span class="s1">20</span><span class="si">}{</span><span class="s2">&quot;AtomType&quot;</span><span class="si">:</span><span class="s1">36</span><span class="si">}{</span><span class="s2">&quot;Cmagspin&quot;</span><span class="si">:</span><span class="s1">36</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">116</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">configuration_set</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">configuration_name</span>
+    <span class="n">occupation</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">occupation</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">to_structure</span><span class="p">()</span>
+    <span class="n">atom_type</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">atom_type</span><span class="p">()</span>
+    <span class="n">Cmagspin</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">atom_properties</span><span class="p">()[</span><span class="s2">&quot;Cmagspin&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">24</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">occupation</span><span class="p">)</span><span class="si">:</span><span class="s2">20</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">atom_type</span><span class="p">)</span><span class="si">:</span><span class="s2">36</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">Cmagspin</span><span class="p">)</span><span class="si">:</span><span class="s2">36</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ConfigurationName       OccupationIndices   AtomType                            Cmagspin                            
+--------------------------------------------------------------------------------------------------------------------
+SCEL1_1_1_1_0_0_0/0     [1]                 [&#39;A&#39;]                               [1.]                                
+SCEL2_2_1_1_0_0_1/0     [1 0]               [&#39;A&#39;, &#39;A&#39;]                          [ 1. -1.]                           
+SCEL2_1_2_1_0_0_0/0     [1 0]               [&#39;A&#39;, &#39;A&#39;]                          [ 1. -1.]                           
+SCEL3_3_1_1_0_0_1/0     [1 1 0]             [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                     [ 1.  1. -1.]                       
+SCEL3_1_3_1_0_0_0/0     [1 1 0]             [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                     [ 1.  1. -1.]                       
+SCEL4_4_1_1_0_0_1/0     [1 1 0 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1. -1. -1.]                   
+SCEL4_4_1_1_0_0_1/1     [1 1 1 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1.  1. -1.]                   
+SCEL4_4_1_1_0_0_2/0     [1 1 0 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1. -1. -1.]                   
+SCEL4_4_1_1_0_0_2/1     [1 1 1 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1.  1. -1.]                   
+SCEL4_1_4_1_0_0_0/0     [1 1 0 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1. -1. -1.]                   
+SCEL4_1_4_1_0_0_0/1     [1 1 1 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1.  1. -1.]                   
+SCEL4_2_2_1_0_0_0/0     [1 1 1 0]           [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]                [ 1.  1.  1. -1.]                   
+SCEL5_5_1_1_0_0_4/1     [1 1 0 1 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1. -1.  1. -1.]               
+SCEL5_5_1_1_0_0_4/0     [1 1 1 0 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1.  1. -1. -1.]               
+SCEL5_5_1_1_0_0_4/2     [1 1 1 1 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1.  1.  1. -1.]               
+SCEL5_5_1_1_0_0_2/0     [1 1 1 0 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1.  1. -1. -1.]               
+SCEL5_5_1_1_0_0_2/1     [1 1 1 1 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1.  1.  1. -1.]               
+SCEL5_1_5_1_0_0_0/1     [1 1 0 1 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1. -1.  1. -1.]               
+SCEL5_1_5_1_0_0_0/0     [1 1 1 0 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1.  1. -1. -1.]               
+SCEL5_1_5_1_0_0_0/2     [1 1 1 1 0]         [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]           [ 1.  1.  1.  1. -1.]               
+SCEL6_6_1_1_0_0_1/1     [1 1 0 1 0 0]       [&#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;, &#39;A&#39;]      [ 1.  1. -1.  1. -1. -1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../enum_occ_by_supercell_SiGe/enum_occ_by_supercell_SiGe.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Enumerate orderings in Si-Ge</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../../reference/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-prim">Specify the “prim”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-casm-project">Create a CASM project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerate-symmetrically-unique-configurations">Enumerate symmetrically unique configurations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterate-over-enumerated-configurations">Iterate over enumerated configurations</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/usage/examples/enum_occ_by_supercell_Ising/enum_occ_by_supercell_Ising.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

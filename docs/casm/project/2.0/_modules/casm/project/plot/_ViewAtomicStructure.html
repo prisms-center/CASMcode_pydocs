@@ -30,7 +30,10 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1038f348" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -39,8 +42,15 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/plot/_ViewAtomicStructure';</script>
     <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -139,14 +149,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../usage.html">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
     Reference
   </a>
 </li>
@@ -265,14 +275,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../usage.html">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
     Reference
   </a>
 </li>
@@ -392,11 +402,11 @@
   <h1>Source code for casm.project.plot._ViewAtomicStructure</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.colors.named</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.document</span>  <span class="c1"># Document</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.models</span>  <span class="c1"># ColumnDataSource, Slider</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
@@ -407,9 +417,9 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">._view</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">apply_cabinet</span><span class="p">,</span>
     <span class="n">make_cartesian_view_basis</span><span class="p">,</span>
     <span class="n">make_lattice_cell_data</span><span class="p">,</span>
+    <span class="n">make_projection_from_dict</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">default_component_params_path</span> <span class="o">=</span> <span class="p">(</span>
@@ -445,6 +455,24 @@
 <span class="n">Va_default_line_width</span> <span class="o">=</span> <span class="mf">1.0</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_color_to_rgb</span><span class="p">(</span><span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a color string to an (r, g, b) tuple with values in [0, 1].</span>
+
+<span class="sd">    Supports hex colors (#RGB, #RRGGBB) and CSS named colors (via bokeh).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">named</span><span class="o">.</span><span class="n">NamedColor</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">r</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">b</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_rgb_to_hex</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an (r, g, b) sequence with values in [0, 1] to a hex color string.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;#</span><span class="si">{:02x}{:02x}{:02x}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)),</span>
+        <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">rgb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)),</span>
+        <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">rgb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)),</span>
+    <span class="p">)</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">make_generic_component_params</span><span class="p">(</span><span class="n">chemical_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chemical_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -465,7 +493,8 @@
             <span class="n">line_dash</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span>
         <span class="n">component_params</span><span class="p">[</span><span class="n">chemical_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
-            <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="c1"># size=10,</span>
+            <span class="n">radius_pm</span><span class="o">=</span><span class="mf">175.0</span><span class="p">,</span>
             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
             <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
             <span class="n">line_width</span><span class="o">=</span><span class="n">line_width</span><span class="p">,</span>
@@ -512,11 +541,6 @@
                 <span class="n">chemical_names</span><span class="o">=</span><span class="n">_chemical_names</span>
             <span class="p">)</span>
 
-    <span class="c1"># # Normalize &quot;size&quot; so the mean is 30.0:</span>
-    <span class="n">sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">component_params</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
-    <span class="n">size_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">component_params</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">30.0</span> <span class="o">*</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">size_min</span>
     <span class="k">return</span> <span class="n">component_params</span>
 
 
@@ -555,6 +579,68 @@
     <span class="p">)</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">adjust_color</span><span class="p">(</span><span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a color a bit darker or lighter.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    color: str</span>
+<span class="sd">        The color to adjust. Supports hex colors (#RGB, #RRGGBB) and CSS named</span>
+<span class="sd">        colors.</span>
+<span class="sd">    factor: float</span>
+<span class="sd">        The factor to shift the RGB values by. Must be between -1 and 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    adjusted_color: str</span>
+<span class="sd">        The adjusted color as a hex string.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_color_to_rgb</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.001</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">factor</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="n">rgb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">factor</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">+</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="n">rgb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">rgb</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">factor</span>
+    <span class="n">adjusted_rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_rgb_to_hex</span><span class="p">(</span><span class="n">adjusted_rgb</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_highlight_params</span><span class="p">(</span>
+    <span class="n">component_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">highlight_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cyan&quot;</span><span class="p">,</span>
+    <span class="n">highlight_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">highlight_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">component_params</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">highlight_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;line_alpha&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">component_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="n">new_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="n">new_params</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adjust_color</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span> <span class="n">factor</span><span class="o">=-</span><span class="mf">0.3</span><span class="p">)</span>
+        <span class="n">new_params</span><span class="p">[</span><span class="s2">&quot;line_color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_color</span>
+        <span class="n">new_params</span><span class="p">[</span><span class="s2">&quot;line_width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_width</span>
+        <span class="n">new_params</span><span class="p">[</span><span class="s2">&quot;line_alpha&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">highlight_params</span><span class="p">[</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_sel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_params</span>
+    <span class="k">return</span> <span class="n">highlight_params</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">update_highlight_params</span><span class="p">(</span>
+    <span class="n">component_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">highlight_color</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">highlight_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">component_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_sel&quot;</span><span class="p">):</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;line_color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_color</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;line_width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_width</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;line_alpha&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+
 <div class="viewcode-block" id="ViewAtomicStructureParams">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.ViewAtomicStructureParams.html#casm.project.plot.ViewAtomicStructureParams">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ViewAtomicStructureParams</span><span class="p">:</span>
@@ -566,8 +652,7 @@
         <span class="n">images_m_range</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">marker_size_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">marker_alpha_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">cabinet_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
-        <span class="n">cabinet_angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">,</span>
+        <span class="n">projection</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">component_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">images_a_range</span> <span class="o">=</span> <span class="n">images_a_range</span>
@@ -576,12 +661,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">images_m_range</span> <span class="o">=</span> <span class="n">images_m_range</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">marker_size_scale</span> <span class="o">=</span> <span class="n">marker_size_scale</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">marker_alpha_scale</span> <span class="o">=</span> <span class="n">marker_alpha_scale</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cabinet_scale</span> <span class="o">=</span> <span class="n">cabinet_scale</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cabinet_angle</span> <span class="o">=</span> <span class="n">cabinet_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="n">projection</span>
         <span class="k">if</span> <span class="n">component_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Get first record in configuration set:</span>
             <span class="n">record</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_set</span><span class="p">))</span>
-            <span class="n">component_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_component_params</span><span class="p">(</span>
+            <span class="n">component_params</span> <span class="o">=</span> <span class="n">make_prim_component_params</span><span class="p">(</span>
                 <span class="n">prim</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">prim</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span> <span class="o">=</span> <span class="n">component_params</span>
@@ -597,8 +681,7 @@
             <span class="s2">&quot;images_m_range&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">images_m_range</span><span class="p">,</span>
             <span class="s2">&quot;marker_size_scale&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size_scale</span><span class="p">,</span>
             <span class="s2">&quot;marker_alpha_scale&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_alpha_scale</span><span class="p">,</span>
-            <span class="s2">&quot;cabinet_scale&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabinet_scale</span><span class="p">,</span>
-            <span class="s2">&quot;cabinet_angle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabinet_angle</span><span class="p">,</span>
+            <span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
             <span class="s2">&quot;component_params&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span><span class="p">,</span>
         <span class="p">}</span></div>
 
@@ -615,8 +698,7 @@
             <span class="n">images_m_range</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;images_m_range&quot;</span><span class="p">],</span>
             <span class="n">marker_size_scale</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;marker_size_scale&quot;</span><span class="p">],</span>
             <span class="n">marker_alpha_scale</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;marker_alpha_scale&quot;</span><span class="p">],</span>
-            <span class="n">cabinet_scale</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cabinet_scale&quot;</span><span class="p">],</span>
-            <span class="n">cabinet_angle</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cabinet_angle&quot;</span><span class="p">],</span>
+            <span class="n">projection</span><span class="o">=</span><span class="n">make_projection_from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;projection&quot;</span><span class="p">]),</span>
             <span class="n">component_params</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;component_params&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
 </div>
@@ -631,12 +713,14 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">doc</span><span class="p">:</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">Document</span><span class="p">,</span>
+        <span class="n">lattice_segment_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
         <span class="n">component_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span>
         <span class="n">v1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">v2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">cabinet</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">projection</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">marker_size_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">marker_alpha_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">figure_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        .. rubric:: Constructor</span>
@@ -645,6 +729,17 @@
 <span class="sd">        ----------</span>
 <span class="sd">        doc : bokeh.document.Document</span>
 <span class="sd">            The Bokeh document</span>
+<span class="sd">        lattice_segment_params : dict</span>
+<span class="sd">            A dict of keyword arguments to pass to :func:`bokeh.plotting.figure` when</span>
+<span class="sd">            creating the lattice cell segments. Example:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                lattice_segment_params = dict(</span>
+<span class="sd">                    color=&quot;green&quot;,</span>
+<span class="sd">                    line_width=2,</span>
+<span class="sd">                )</span>
+
 <span class="sd">        component_params : dict[str, dict]</span>
 <span class="sd">            A dict of component name to scatter plot keyword arguments. Every dict</span>
 <span class="sd">            must have the same keys.</span>
@@ -674,15 +769,16 @@
 <span class="sd">        v2: np.ndarray = [0.0, 0.0, 1.0]</span>
 <span class="sd">            A shape `(3,)` array giving the Cartesian vector that should lie along</span>
 <span class="sd">            the vertical axis.</span>
-<span class="sd">        cabinet: Optional[tuple[float, float]] = None</span>
-<span class="sd">            A tuple, :math:`(f, \theta)`, where :math:`f` is a factor indicating</span>
-<span class="sd">            fraction of &quot;real&quot; length displayed for vectors perpendicular to the</span>
-<span class="sd">            viewing plane, and :math:`\theta` is the angle the vectors are displayed</span>
-<span class="sd">            at. A typical value is ``(0.2, math.pi/6.0)``.</span>
+<span class="sd">        projection: Any = None</span>
+<span class="sd">            A projection object that defines how to project 3D coordinates to 2D.</span>
+<span class="sd">            Default is None.</span>
 <span class="sd">        marker_size_scale: float = 1.0</span>
 <span class="sd">            A scale factor to apply to the marker sizes.</span>
 <span class="sd">        marker_alpha_scale: float = 1.0</span>
 <span class="sd">            A scale factor to apply to the marker alpha values.</span>
+<span class="sd">        figure_params: dict = None</span>
+<span class="sd">            A dict of keyword arguments to pass to :func:`bokeh.plotting.figure` when</span>
+<span class="sd">            creating the figure. If None, default parameters are used.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">system</span> <span class="o">=</span> <span class="kc">None</span>
@@ -691,6 +787,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">doc</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;bokeh.document.Document: The Bokeh document, used to add callbacks that</span>
 <span class="sd">        update the figure.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lattice_segment_params</span> <span class="o">=</span> <span class="n">lattice_segment_params</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: A dict of keyword arguments to pass to :func:`bokeh.plotting.figure` </span>
+<span class="sd">        when creating the lattice cell segments. Example:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            lattice_segment_params = dict(</span>
+<span class="sd">                color=&quot;green&quot;,</span>
+<span class="sd">                line_width=2,</span>
+<span class="sd">            )</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span> <span class="o">=</span> <span class="n">component_params</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;dict[str, dict]: A dict of component name to scatter plot keyword arguments.</span>
@@ -716,23 +825,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># make component_params_keys</span>
-        <span class="n">component_params_keys</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">component_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">_params</span> <span class="ow">in</span> <span class="n">component_params</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                <span class="n">keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-                <span class="k">if</span> <span class="n">component_params_keys</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">component_params_keys</span> <span class="o">=</span> <span class="n">keys</span>
-                <span class="k">elif</span> <span class="n">keys</span> <span class="o">!=</span> <span class="n">component_params_keys</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="s2">&quot;Error in ViewConfiguration2d: &quot;</span>
-                        <span class="s2">&quot;component_params must have the same keys for all components&quot;</span>
-                    <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">component_params_keys</span> <span class="o">=</span> <span class="n">component_params_keys</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: The keys of the component_params dict, sorted alphabetically.&quot;&quot;&quot;</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">marker_size_scale</span> <span class="o">=</span> <span class="n">marker_size_scale</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;float: A scale factor to apply to the marker sizes.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker_alpha_scale</span> <span class="o">=</span> <span class="n">marker_alpha_scale</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: A scale factor to apply to the marker alpha values.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;np.ndarray: A shape `(3,)` array giving the Cartesian vector that should lie</span>
@@ -742,14 +839,22 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;np.ndarray: A shape `(3,)` array giving the Cartesian vector that should lie</span>
 <span class="sd">        along the vertical axis.&quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">cabinet</span> <span class="o">=</span> <span class="n">cabinet</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[tuple[float, float]]: Optional &quot;cabinet&quot; perspective parameters.</span>
-<span class="sd">        </span>
-<span class="sd">        A tuple, :math:`(f, \theta)`, where :math:`f` is a factor indicating fraction</span>
-<span class="sd">        of &quot;real&quot; length displayed for vectors perpendicular to the viewing plane, and</span>
-<span class="sd">        :math:`\theta` is the angle the vectors are displayed at. A typical value is</span>
-<span class="sd">        ``(0.2, math.pi/6.0)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="n">projection</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Any: A projection object that defines how to project 3D coordinates to 2D.</span>
+<span class="sd">        Default uses :class:`~libcasm.project.plot.SinglePointProjection`.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">figure_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">figure_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">match_aspect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;title&quot;</span> <span class="ow">in</span> <span class="n">figure_params</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">figure_params</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">figure_params</span> <span class="o">=</span> <span class="n">figure_params</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: A dict of keyword arguments to pass to :func:`bokeh.plotting.figure` </span>
+<span class="sd">        when creating the figure. If None, default parameters are used.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">view_basis</span> <span class="o">=</span> <span class="n">make_cartesian_view_basis</span><span class="p">(</span><span class="n">v1</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="o">=</span><span class="n">v2</span><span class="p">)</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;np.ndarray: The inverse of the view basis, :math:`B`, a shape `(3, 3)` array </span>
@@ -879,7 +984,9 @@
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">new_marker_size_scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">new_marker_alpha_scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">new_cabinet</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">new_projection</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">new_lattice_segment_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">new_component_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
@@ -888,8 +995,27 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">marker_size_scale</span> <span class="o">=</span> <span class="n">new_marker_size_scale</span>
         <span class="k">if</span> <span class="n">new_marker_alpha_scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">marker_alpha_scale</span> <span class="o">=</span> <span class="n">new_marker_alpha_scale</span>
-        <span class="k">if</span> <span class="n">new_cabinet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cabinet</span> <span class="o">=</span> <span class="n">new_cabinet</span>
+        <span class="k">if</span> <span class="n">new_projection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="n">new_projection</span>
+        <span class="k">if</span> <span class="n">new_lattice_segment_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lattice_segment_params</span> <span class="o">=</span> <span class="n">new_lattice_segment_params</span>
+        <span class="k">if</span> <span class="n">new_component_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span> <span class="o">=</span> <span class="n">new_component_params</span>
+
+        <span class="c1"># make component_params_keys</span>
+        <span class="n">component_params_keys</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+                <span class="k">if</span> <span class="n">component_params_keys</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">component_params_keys</span> <span class="o">=</span> <span class="n">keys</span>
+                <span class="k">elif</span> <span class="n">keys</span> <span class="o">!=</span> <span class="n">component_params_keys</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;Error in ViewConfiguration2d: &quot;</span>
+                        <span class="s2">&quot;component_params must have the same keys for all components&quot;</span>
+                    <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">component_params_keys</span> <span class="o">=</span> <span class="n">component_params_keys</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[str]: The keys of the component_params dict, sorted alphabetically.&quot;&quot;&quot;</span>
 
         <span class="c1"># Create initial data:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -902,7 +1028,8 @@
 
         <span class="c1"># Add projected coordinates</span>
         <span class="n">coordinate_view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_basis_inv</span> <span class="o">@</span> <span class="n">coordinate_cart</span>
-        <span class="n">apply_cabinet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabinet</span><span class="p">,</span> <span class="n">coordinate_view</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">coordinate_view</span><span class="p">)</span>
         <span class="n">data</span><span class="p">[</span><span class="s2">&quot;px&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate_view</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
         <span class="n">data</span><span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate_view</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
         <span class="n">data</span><span class="p">[</span><span class="s2">&quot;pz&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate_view</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
@@ -910,13 +1037,21 @@
         <span class="c1"># Add component properties</span>
         <span class="n">atom_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">atom_type</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params_keys</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;radius_pm&quot;</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">atom_type</span><span class="p">:</span>
-                    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size_scale</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                        <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size_scale</span>
+                        <span class="o">/</span> <span class="mf">100.0</span>
+                        <span class="o">/</span> <span class="mf">2.0</span>
                     <span class="p">)</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">projected_radius</span><span class="p">(</span>
+                    <span class="n">radius</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">],</span>
+                    <span class="n">values</span><span class="o">=</span><span class="n">coordinate_view</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">atom_type</span><span class="p">:</span>
                     <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_alpha_scale</span>
                     <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
@@ -925,18 +1060,27 @@
                         <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">atom_type</span><span class="p">:</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">component_params</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">key</span><span class="p">])</span>
+
+        <span class="c1"># Get indices of `data[&quot;pz&quot;]` in sorted order (least to greatest):</span>
+        <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;pz&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Sort all data entries by `data[&quot;pz&quot;]`:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])[</span><span class="n">sorted_indices</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
         <span class="c1"># Add lattice vectors</span>
         <span class="n">lattice_cell_data</span> <span class="o">=</span> <span class="n">make_lattice_cell_data</span><span class="p">(</span>
             <span class="n">lattice</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
             <span class="n">view_basis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">view_basis</span><span class="p">,</span>
-            <span class="n">cabinet</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cabinet</span><span class="p">,</span>
+            <span class="n">projection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">,</span>
             <span class="n">center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">shift</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="nb">hex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice_segment_params</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -966,30 +1110,31 @@
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;(None)&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">figure_source</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure_source</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">figure_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-            <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
-            <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
-            <span class="n">match_aspect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="o">**</span><span class="n">figure_params</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">figure_params</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice_cell_source</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">scatter_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params_keys</span><span class="p">}</span>
             <span class="n">p</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span>
                 <span class="n">x0</span><span class="o">=</span><span class="s2">&quot;px0&quot;</span><span class="p">,</span>
                 <span class="n">y0</span><span class="o">=</span><span class="s2">&quot;py0&quot;</span><span class="p">,</span>
                 <span class="n">x1</span><span class="o">=</span><span class="s2">&quot;px1&quot;</span><span class="p">,</span>
                 <span class="n">y1</span><span class="o">=</span><span class="s2">&quot;py1&quot;</span><span class="p">,</span>
                 <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice_cell_source</span><span class="p">,</span>
-                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
-                <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;line_color&quot;</span><span class="p">,</span>
+                <span class="n">line_width</span><span class="o">=</span><span class="s2">&quot;line_width&quot;</span><span class="p">,</span>
+                <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;line_dash&quot;</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">scatter_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">component_params_keys</span><span class="p">}</span>
+            <span class="k">if</span> <span class="s2">&quot;size&quot;</span> <span class="ow">in</span> <span class="n">scatter_kwargs</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">scatter_kwargs</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;radius_pm&quot;</span> <span class="ow">in</span> <span class="n">scatter_kwargs</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">scatter_kwargs</span><span class="p">[</span><span class="s2">&quot;radius_pm&quot;</span><span class="p">]</span>
+
+            <span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span>
                 <span class="s2">&quot;px&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;py&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;radius&quot;</span><span class="p">,</span>
                 <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">scatter_kwargs</span><span class="p">,</span>
             <span class="p">)</span>
@@ -1051,7 +1196,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

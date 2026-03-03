@@ -293,7 +293,7 @@ The casm-project package makes it easier to construct, fit, and use a cluster ex
 - automatically writing the results to the standard location in a CASM project directory.
 
 
-Docs: `[2.0a1] <../../casm/project/2.0/>`_
+Docs: `[2.0a2] <../../casm/project/2.0/>`_
 
 Links: |GitHub_project|_ |PyPI_project|_
 

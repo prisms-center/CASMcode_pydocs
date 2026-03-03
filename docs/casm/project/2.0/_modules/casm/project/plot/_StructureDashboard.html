@@ -30,7 +30,10 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1038f348" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -39,8 +42,15 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/plot/_StructureDashboard';</script>
     <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -139,14 +149,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../usage.html">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
     Reference
   </a>
 </li>
@@ -265,14 +275,14 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../usage.html">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
     Usage
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
     Reference
   </a>
 </li>
@@ -390,15 +400,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for casm.project.plot._StructureDashboard</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.layouts</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bokeh.layouts</span><span class="w"> </span><span class="kn">import</span> <span class="n">column</span><span class="p">,</span> <span class="n">row</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bokeh.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">Spacer</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">casmconfig</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">._CopyToClipboardButton</span><span class="w"> </span><span class="kn">import</span> <span class="n">CopyToClipboardButton</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._DashboardStyles</span><span class="w"> </span><span class="kn">import</span> <span class="n">DashboardStyles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._OpenWithButton</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenWithButton</span><span class="p">,</span> <span class="n">vesta_installed</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._ProjectionView</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectionView</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._ViewControl</span><span class="w"> </span><span class="kn">import</span> <span class="n">ViewControl</span>
 
@@ -414,7 +427,9 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">structure</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
         <span class="n">structure_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">component_params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">views_dir</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -428,13 +443,21 @@
 <span class="sd">        structure_name: str</span>
 <span class="sd">            The name of the structure to visualize, used as a label in the view.</span>
 
+<span class="sd">        file_path:</span>
+<span class="sd">            The file path of the structure, used for the &quot;Copy Path&quot; button. If None,</span>
+<span class="sd">            the button will not be shown.</span>
+
 <span class="sd">        component_params: dict[str, dict]</span>
 <span class="sd">            The bokeh scatter plot parameters used to draw atoms, with</span>
 <span class="sd">            atom type name as key.</span>
 
-<span class="sd">            Must include &quot;color&quot;, &quot;size&quot;, and &quot;alpha&quot;. Additional bokeh plotting</span>
+<span class="sd">            Must include &quot;color&quot;, &quot;radius_pm&quot;, and &quot;alpha&quot;. Additional bokeh plotting</span>
 <span class="sd">            parameters like &quot;line_color&quot; and &quot;line_width&quot; may also be included. The</span>
 <span class="sd">            same attributes must be present for all components.</span>
+
+<span class="sd">        views_dir: typing.Optional[pathlib.Path] = None</span>
+<span class="sd">            The directory to save view files for use saving / loading state. If None,</span>
+<span class="sd">            views will not be saved.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">prim</span> <span class="o">=</span> <span class="n">casmconfig</span><span class="o">.</span><span class="n">Prim</span><span class="p">(</span>
@@ -442,6 +465,10 @@
         <span class="p">)</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.configuration.Prim: The primitive cell, constructed from the </span>
 <span class="sd">        structure being visualized.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">views_dir</span> <span class="o">=</span> <span class="n">views_dir</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pathlib.Path: The directory to save view files for use saving / loading</span>
+<span class="sd">        state. If None, views will not be saved.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">view_control</span> <span class="o">=</span> <span class="n">ViewControl</span><span class="p">(</span>
             <span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prim</span><span class="p">,</span>
@@ -457,7 +484,38 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The name of the selected structure, used as a label in </span>
 <span class="sd">        projection_view.&quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optional[pathlib.Path]: The file path of the structure, used for the </span>
+<span class="sd">        &quot;Copy Path&quot; button. If None, the button will not be shown.&quot;&quot;&quot;</span>
+
         <span class="c1">### Dashboard inputs - end ###</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">open_with_vesta_button</span> <span class="o">=</span> <span class="n">OpenWithButton</span><span class="p">(</span>
+            <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">text_to_copy</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">())])</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_path_button</span> <span class="o">=</span> <span class="n">CopyToClipboardButton</span><span class="p">(</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Path&quot;</span><span class="p">,</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_source</span><span class="p">,</span>
+                <span class="n">show_copy_icon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">snackbar_message</span><span class="o">=</span><span class="s2">&quot;Copied file path to clipboard!&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure_json_source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">text_to_copy</span><span class="o">=</span><span class="p">[</span><span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy_data_button</span> <span class="o">=</span> <span class="n">CopyToClipboardButton</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">,</span>
+            <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure_json_source</span><span class="p">,</span>
+            <span class="n">show_copy_icon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">snackbar_message</span><span class="o">=</span><span class="s2">&quot;Copied structure JSON to clipboard!&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="StructureDashboard.make_layout">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.plot.StructureDashboard.make_layout.html#casm.project.plot.StructureDashboard.make_layout">[docs]</a>
@@ -473,10 +531,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">projection_view</span> <span class="o">=</span> <span class="n">ProjectionView</span><span class="p">(</span><span class="n">view_control</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">superstructure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="o">.</span><span class="n">make_superstructure</span><span class="p">(</span>
+                <span class="n">init_structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">structure_json_source</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text_to_copy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">superstructure</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+            <span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">projection_view</span><span class="o">.</span><span class="n">set_structure</span><span class="p">(</span>
-                <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="o">.</span><span class="n">make_superstructure</span><span class="p">(</span>
-                    <span class="n">init_structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span><span class="p">,</span>
-                <span class="p">),</span>
+                <span class="n">structure</span><span class="o">=</span><span class="n">superstructure</span><span class="p">,</span>
                 <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure_name</span><span class="p">,</span>
             <span class="p">)</span>
 
@@ -492,10 +554,15 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">return</span>
 
+            <span class="n">superstructure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="o">.</span><span class="n">make_superstructure</span><span class="p">(</span>
+                <span class="n">init_structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">structure_json_source</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text_to_copy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">xtal</span><span class="o">.</span><span class="n">pretty_json</span><span class="p">(</span><span class="n">superstructure</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+            <span class="p">]</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">projection_view</span><span class="o">.</span><span class="n">set_structure</span><span class="p">(</span>
-                <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="o">.</span><span class="n">make_superstructure</span><span class="p">(</span>
-                    <span class="n">init_structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure</span><span class="p">,</span>
-                <span class="p">),</span>
+                <span class="n">structure</span><span class="o">=</span><span class="n">superstructure</span><span class="p">,</span>
                 <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">selected_structure_name</span><span class="p">,</span>
             <span class="p">)</span>
 
@@ -505,11 +572,11 @@
 
         <span class="c1">### Build and return the layout ###</span>
 
-        <span class="n">control_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="o">.</span><span class="n">make_controls_tabs_layout</span><span class="p">(</span>
+        <span class="n">control_layout</span><span class="p">,</span> <span class="n">settings_switch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_control</span><span class="o">.</span><span class="n">make_controls_tabs_layout</span><span class="p">(</span>
             <span class="n">select_control_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">,</span>
             <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-            <span class="n">view_cabinet</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection_view</span><span class="o">.</span><span class="n">view_cabinet</span><span class="p">,</span>
+            <span class="n">views_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">views_dir</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Figures grid</span>
@@ -517,8 +584,36 @@
             <span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">,</span>
         <span class="p">)</span>
 
+        <span class="c1"># Top row:</span>
+        <span class="n">row_elements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">vesta_installed</span><span class="p">():</span>
+            <span class="n">open_with_vesta_button_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_with_vesta_button</span><span class="o">.</span><span class="n">make_layout</span><span class="p">(</span>
+                <span class="n">styles</span><span class="o">=</span><span class="n">styles</span>
+            <span class="p">)</span>
+            <span class="n">row_elements</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">Spacer</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">&quot;stretch_width&quot;</span><span class="p">),</span>
+                <span class="n">open_with_vesta_button_layout</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">copy_path_button_layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy_path_button</span><span class="o">.</span><span class="n">make_layout</span><span class="p">(</span><span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">)</span>
+            <span class="n">row_elements</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">copy_path_button_layout</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="n">row_elements</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copy_data_button</span><span class="o">.</span><span class="n">make_layout</span><span class="p">(</span><span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">),</span>
+            <span class="n">column</span><span class="p">(</span>
+                <span class="n">settings_switch</span><span class="p">,</span>
+                <span class="n">margin</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">select_layout</span> <span class="o">=</span> <span class="n">row</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">row_elements</span><span class="p">,</span>
+            <span class="n">sizing_mode</span><span class="o">=</span><span class="s2">&quot;stretch_width&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
         <span class="c1"># Overall layout</span>
-        <span class="n">layout</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">column</span><span class="p">(</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">column</span><span class="p">(</span>
+            <span class="n">select_layout</span><span class="p">,</span>
             <span class="n">control_layout</span><span class="p">,</span>
             <span class="n">projection_view_layout</span><span class="p">,</span>
         <span class="p">)</span>
@@ -576,7 +671,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

@@ -13,39 +13,51 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1038f348" />
   
-  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
-    <link rel="icon" sizes="32x32" type="image/png" href="../../../../_static/favicon-32x32.png?v=f9ece728" />
-    <link rel="icon" sizes="16x16" type="image/png" href="../../../../_static/favicon-16x16.png?v=dad9ad5b" />
-    <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="../../../../_static/apple-touch-icon.png?v=16836a53" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=df8f2d03"></script>
-    <script src="../../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=644e031c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/casm/project/enum/_EnumData';</script>
+    <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.0" />
   </head>
   
   
@@ -53,32 +65,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../../search.html"
       method="get">
@@ -86,7 +82,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -94,20 +89,27 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../../../index.html">
@@ -122,7 +124,7 @@
     
     
     <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
-    <script>document.write(`<img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark" alt=""/>`);</script>
+    <img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
   
   
     <p class="title logo__title">casm-project</p>
@@ -136,42 +138,36 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../usage.html">
-                        Usage
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
+    Usage
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
-                        Bibliography
-                      </a>
-                    </li>
-                
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -183,31 +179,23 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -218,7 +206,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -230,7 +218,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -242,27 +230,29 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -271,45 +261,42 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item">
-<nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../installation.html">
-                        Installation
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../usage.html">
-                        Usage
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../reference/casm/index.html">
-                        Reference
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage/index.html">
+    Usage
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../../bibliography.html">
-                        Bibliography
-                      </a>
-                    </li>
-                
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -319,17 +306,13 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -340,7 +323,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+          <a href="https://github.com/prisms-center/casm_project/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
@@ -352,7 +335,7 @@ document.write(`
           
           
           
-          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i></span>
+          <a href="https://pypi.org/project/casm-project/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
             <span class="sr-only">PyPI</span></a>
         </li>
 </ul></div>
@@ -363,29 +346,32 @@ document.write(`
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
         <div class="header-article-item">
 
-
-
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -396,7 +382,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">casm.project...</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">casm.project.enum._EnumData</span></li>
   </ul>
 </nav>
 </div>
@@ -411,39 +397,40 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <h1>Source code for casm.project.enum._EnumData</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">casm.project.json_io</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.project</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ClexDescription</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.json_io</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">read_optional</span><span class="p">,</span>
     <span class="n">safe_dump</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.configuration</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Configuration</span><span class="p">,</span>
     <span class="n">ConfigurationSet</span><span class="p">,</span>
     <span class="n">SupercellRecord</span><span class="p">,</span>
     <span class="n">SupercellSet</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">libcasm.enumerate</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">ConfigEnumAllOccupations</span><span class="p">,</span>
-    <span class="n">ScelEnum</span><span class="p">,</span>
-<span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">._ConfigEnumRunner</span> <span class="kn">import</span> <span class="n">ConfigEnumRunner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._ConfigEnumRunner</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigEnumRunner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._ConfigSelection</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigSelection</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">casm.project</span> <span class="kn">import</span> <span class="n">Project</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">casm.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
 
 
 <div class="viewcode-block" id="EnumData">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.html#casm.project.enum.EnumData">[docs]</a>
-<span class="k">class</span> <span class="nc">EnumData</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data structure for enumeration data in a CASM project</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EnumData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;CASM project enumeration data</span>
 
 <span class="sd">    The CASM project enumeration directory structure:</span>
 
@@ -452,6 +439,11 @@ document.write(`
 <span class="sd">        &lt;project&gt;/</span>
 <span class="sd">        └── enumerations/</span>
 <span class="sd">            └── enum.&lt;id&gt;/</span>
+<span class="sd">                ├── kmc_events/</span>
+<span class="sd">                │   └── event.&lt;id&gt;/</span>
+<span class="sd">                │       ├── equivalents_info.json</span>
+<span class="sd">                │       ├── event.json</span>
+<span class="sd">                │       └── local_configuration_list.json</span>
 <span class="sd">                ├── training_data/</span>
 <span class="sd">                ├── meta.json</span>
 <span class="sd">                ├── scel_set.json</span>
@@ -481,29 +473,28 @@ document.write(`
 <span class="sd">    .. code-block:: none</span>
 
 <span class="sd">        training_data/</span>
-<span class="sd">        └── calctype.&lt;calctype_id&gt;/</span>
-<span class="sd">            └── &lt;supercell_name&gt;/</span>
-<span class="sd">                └── &lt;configuration_id&gt;/</span>
+<span class="sd">            └── calctype.&lt;calctype_id&gt;/</span>
+<span class="sd">                └── &lt;configname&gt;/</span>
 <span class="sd">                    ├── (calculation specific input &amp; output files)</span>
 <span class="sd">                    ├── POS</span>
 <span class="sd">                    ├── config.json</span>
 <span class="sd">                    ├── structure.json</span>
 <span class="sd">                    └── structure_with_properties.json</span>
 
-<span class="sd">    The `calculationg_settings` directory is a standard location for storing calculation</span>
+<span class="sd">    The `calculation_settings` directory is a standard location for storing calculation</span>
 <span class="sd">    settings for a particular calculation type inside a CASM project directory:</span>
 
 <span class="sd">    .. code-block:: none</span>
 
 <span class="sd">        &lt;project&gt;/</span>
 <span class="sd">        └── calculation_settings/</span>
-<span class="sd">            ├── calctype.&lt;calctype_id&gt;/</span>
+<span class="sd">            └── calctype.&lt;calctype_id&gt;/</span>
 
 
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">:</span> <span class="s2">&quot;Project&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        .. rubric:: Constructor</span>
@@ -538,37 +529,40 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: A description of the enumeration, saved as `meta.json`.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span> <span class="o">=</span> <span class="n">SupercellSet</span><span class="p">(</span><span class="n">prim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">prim</span><span class="p">)</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;SupercellSet: A SupercellSet, saved as `scel_set.json`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.configuration.SupercellSet: A SupercellSet, saved as `scel_set.json`.</span>
 
-<span class="sd">        When `load` is called all supercells in `scel_list.json`, `scel_list.json`, </span>
-<span class="sd">        `config_set.json`, and `config_list.json` are loaded into `supercell_set`. </span>
-<span class="sd">        Supercells in a SupercellSet are unique, but are not required to be in </span>
-<span class="sd">        canonical form so they may be symmetrically equivalent, depending on the use </span>
-<span class="sd">        case.</span>
+<span class="sd">        :class:`~libcasm.configuration.Supercell` in a </span>
+<span class="sd">        :class:`~libcasm.configuration.SupercellSet` are unique, but are not required </span>
+<span class="sd">        to be in canonical form so they may be symmetrically equivalent, depending on </span>
+<span class="sd">        the use case.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">supercell_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[Supercell]: A list of supercells, saved as `scel_list.json`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[libcasm.configuration.Supercell]: A list of Supercell, saved as </span>
+<span class="sd">        `scel_list.json`.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">configuration_set</span> <span class="o">=</span> <span class="n">ConfigurationSet</span><span class="p">()</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ConfigurationSet: A ConfigurationSet, saved as `config_set.json`</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;libcasm.configuration.ConfigurationSet: A ConfigurationSet, saved as </span>
+<span class="sd">        `config_set.json`</span>
 
-<span class="sd">        Configurations in a ConfigurationSet must be in the canonical supercell. </span>
-<span class="sd">        Configurations in a ConfigurationSet are unique, but may be </span>
+<span class="sd">        :class:`~libcasm.configuration.Configuration` in a </span>
+<span class="sd">        :class:`~libcasm.configuration.ConfigurationSet` must be in the canonical </span>
+<span class="sd">        supercell. Configurations in a ConfigurationSet are unique, but may be </span>
 <span class="sd">        non-primitive, non-canonical, or symmetrically equivalent, depending on the </span>
 <span class="sd">        use case.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">configuration_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[Configuration]: A list of configurations, saved as `config_list.json`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;list[libcasm.configuration.Configuration]: A list of Configuration, saved as </span>
+<span class="sd">        `config_list.json`.</span>
 
 <span class="sd">        Configurations in a list do not need to be in the canonical supercell.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">libcasm.xtal</span> <span class="kn">import</span> <span class="n">pretty_json</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="kn">import</span> <span class="n">pretty_json</span>
 
         <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;EnumData:</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;- id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -590,7 +584,7 @@ document.write(`
 
 <div class="viewcode-block" id="EnumData.load">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.load.html#casm.project.enum.EnumData.load">[docs]</a>
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read enumeration data from files in the enumeration directory.</span>
 
 <span class="sd">        This will replace the current contents of this EnumData object with the</span>
@@ -617,7 +611,7 @@ document.write(`
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="s2">&quot;scel_list.json&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">read_optional</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">libcasm.configuration.io</span> <span class="kn">import</span> <span class="n">supercell_list_from_data</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">supercell_list_from_data</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">supercell_list</span> <span class="o">=</span> <span class="n">supercell_list_from_data</span><span class="p">(</span>
                 <span class="n">data_list</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
@@ -642,7 +636,7 @@ document.write(`
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="s2">&quot;config_list.json&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">read_optional</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">libcasm.configuration.io</span> <span class="kn">import</span> <span class="n">configuration_list_from_data</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">configuration_list_from_data</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">configuration_list</span> <span class="o">=</span> <span class="n">configuration_list_from_data</span><span class="p">(</span>
                 <span class="n">data_list</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
@@ -655,7 +649,7 @@ document.write(`
 
 <div class="viewcode-block" id="EnumData.merge">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.merge.html#casm.project.enum.EnumData.merge">[docs]</a>
-    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_data</span><span class="p">:</span> <span class="s2">&quot;EnumData&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_data</span><span class="p">:</span> <span class="s2">&quot;EnumData&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge enumeration data from another EnumData object into this one&quot;&quot;&quot;</span>
 
         <span class="c1"># merge supercell set</span>
@@ -683,7 +677,7 @@ document.write(`
 
 <div class="viewcode-block" id="EnumData.commit">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.commit.html#casm.project.enum.EnumData.commit">[docs]</a>
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the enumeration data to files in the enumeration directory</span>
 
 <span class="sd">        If the data does not exist in this object, this will erase the associated</span>
@@ -720,7 +714,7 @@ document.write(`
 
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="s2">&quot;scel_list.json&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">libcasm.configuration.io</span> <span class="kn">import</span> <span class="n">supercell_list_to_data</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">supercell_list_to_data</span>
 
             <span class="n">safe_dump</span><span class="p">(</span>
                 <span class="n">data</span><span class="o">=</span><span class="n">supercell_list_to_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_list</span><span class="p">),</span>
@@ -744,7 +738,7 @@ document.write(`
 
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="s2">&quot;config_list.json&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">libcasm.configuration.io</span> <span class="kn">import</span> <span class="n">configuration_list_to_data</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.configuration.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">configuration_list_to_data</span>
 
             <span class="n">safe_dump</span><span class="p">(</span>
                 <span class="n">data</span><span class="o">=</span><span class="n">configuration_list_to_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration_list</span><span class="p">),</span>
@@ -758,7 +752,7 @@ document.write(`
 
 <div class="viewcode-block" id="EnumData.supercells_by_volume">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.supercells_by_volume.html#casm.project.enum.EnumData.supercells_by_volume">[docs]</a>
-    <span class="k">def</span> <span class="nf">supercells_by_volume</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supercells_by_volume</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="nb">min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -815,6 +809,7 @@ document.write(`
 <span class="sd">        dry_run: bool = False</span>
 <span class="sd">            If True, do not save the results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.enumerate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScelEnum</span>
 
         <span class="n">prim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">prim</span>
         <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -869,7 +864,7 @@ document.write(`
 
 <div class="viewcode-block" id="EnumData.occ_by_supercell">
 <a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell.html#casm.project.enum.EnumData.occ_by_supercell">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ_by_supercell</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">occ_by_supercell</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="nb">min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -948,9 +943,11 @@ document.write(`
 <span class="sd">            If True, do not save the results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="kn">from</span><span class="w"> </span><span class="nn">libcasm.enumerate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigEnumAllOccupations</span>
+
         <span class="k">if</span> <span class="n">continue_f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="k">def</span> <span class="nf">continue_f</span><span class="p">(</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">continue_f</span><span class="p">(</span>
                 <span class="n">config</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">enum</span><span class="p">:</span> <span class="s2">&quot;EnumData&quot;</span><span class="p">,</span> <span class="n">filter_f_value</span><span class="p">:</span> <span class="nb">bool</span>
             <span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
@@ -960,7 +957,7 @@ document.write(`
             <span class="n">supercell_set</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">supercell_set</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">print_steps_f</span><span class="p">(</span><span class="n">runner</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">print_steps_f</span><span class="p">(</span><span class="n">runner</span><span class="p">):</span>
             <span class="n">record</span> <span class="o">=</span> <span class="n">SupercellRecord</span><span class="p">(</span><span class="n">runner</span><span class="o">.</span><span class="n">config_enum</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="n">supercell</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enumerate configurations for: </span><span class="si">{</span><span class="n">record</span><span class="o">.</span><span class="n">supercell_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
@@ -992,26 +989,241 @@ document.write(`
         <span class="n">runner</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="EnumData.occ_by_supercell_list">
-<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_supercell_list.html#casm.project.enum.EnumData.occ_by_supercell_list">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ_by_supercell_list</span><span class="p">(</span>
+<div class="viewcode-block" id="EnumData.config_selection">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.config_selection.html#casm.project.enum.EnumData.config_selection">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">config_selection</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_by_supercell_list&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">clex</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ClexDescription</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gz</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">records</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ConfigSelection&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a ConfigSelection</span>
+
+<span class="sd">        A :class:`~casm.project.enum.ConfigSelection` is a selection of configurations</span>
+<span class="sd">        from the enumeration. It allows for easily iterating over all configurations</span>
+<span class="sd">        in the enumeration, including configurations saved in both the</span>
+<span class="sd">        :py:attr:`~EnumData.configuration_set` and</span>
+<span class="sd">        :py:attr:`~EnumData.configuration_list`. Iterating over a</span>
+<span class="sd">        :class:`~casm.project.enum.ConfigSelection` yields</span>
+<span class="sd">        :class:`~casm.project.enum.ConfigSelectionRecord` which can use project data</span>
+<span class="sd">        to give easy access to configuration properties such as the parametric</span>
+<span class="sd">        composition, correlations, and calculated properties.</span>
 
 
-<div class="viewcode-block" id="EnumData.occ_by_cluster">
-<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.occ_by_cluster.html#casm.project.enum.EnumData.occ_by_cluster">[docs]</a>
-    <span class="k">def</span> <span class="nf">occ_by_cluster</span><span class="p">(</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the configuration selection. This is used to save the selection</span>
+<span class="sd">            to a JSON file. For example, if `name` is &quot;main&quot;, the selection is</span>
+<span class="sd">            saved as in the enumeration directory as `config_selection.main.json`.</span>
+<span class="sd">            A newly created ConfigSelection is not saved to disk until</span>
+<span class="sd">            :func:`ConfigSelection.commit` is called.</span>
+
+<span class="sd">        clex : Union[str, ClexDescription, None] = None</span>
+<span class="sd">            Specifies the default cluster expansion settings to use when getting</span>
+<span class="sd">            properties, working with calculations, calculating basis functions, etc.</span>
+
+<span class="sd">            By default, the project&#39;s default cluster expansion is used. If a</span>
+<span class="sd">            string is provided, it should be the name of a cluster expansion included in</span>
+<span class="sd">            the :py:data:`ProjectSettings.cluster_expansions` dictionary of the</span>
+<span class="sd">            project&#39;s settings. Otherwise, a custom :class:`ClexDescription` can be</span>
+<span class="sd">            provided.</span>
+
+<span class="sd">        gz : bool = False</span>
+<span class="sd">            When constructing a new selection, if True, the selection is saved as a</span>
+<span class="sd">            gzipped JSON file. If False (default), it is saved as a regular JSON file.</span>
+<span class="sd">            If the selection already exists in files, this is ignored and detected from</span>
+<span class="sd">            the file extension.</span>
+
+<span class="sd">        records : Optional[list[dict]] = None</span>
+<span class="sd">            When constructing a new selection, this may be used to initialize the</span>
+<span class="sd">            selection. If the selection is already saved to a file, this is ignored and</span>
+<span class="sd">            the records are read from the file. By default, a new selection is</span>
+<span class="sd">            constructed with all configurations included and selected. If provided,</span>
+<span class="sd">            it should be a list of dict:</span>
+
+<span class="sd">            .. code-block:: Python</span>
+
+<span class="sd">                [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;source&quot;: &quot;config_set.json&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;SCEL1_1_1_1_0_0_0/0&quot;,</span>
+<span class="sd">                        &quot;selected&quot;: True,</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    },</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;source&quot;: &quot;config_list.json&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;config_list/0&quot;,</span>
+<span class="sd">                        &quot;selected&quot;: True,</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+
+<span class="sd">            The records require &quot;source&quot;, &quot;name&quot;, and &quot;selected&quot; keys. Additional</span>
+<span class="sd">            keys may be included.</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        selection: ConfigSelection</span>
+<span class="sd">            The ConfigSelection object.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ConfigSelection</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">clex</span><span class="o">=</span><span class="n">clex</span><span class="p">,</span> <span class="n">gz</span><span class="o">=</span><span class="n">gz</span><span class="p">,</span> <span class="n">records</span><span class="o">=</span><span class="n">records</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EnumData.all_config_selections">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.all_config_selections.html#casm.project.enum.EnumData.all_config_selections">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">all_config_selections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all configuration selections saved in the enumeration directory</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        selections: list[str]</span>
+<span class="sd">            A list of configuration selection names, e.g. [&quot;main&quot;, &quot;all&quot;, &quot;test&quot;].</span>
+<span class="sd">            These correspond to files in the enumeration directory with names like</span>
+<span class="sd">            `config_selection.main.json`, `config_selection.all.json`, etc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># list &lt;name&gt; for all files in the enumeration directory that match the</span>
+        <span class="c1"># pattern: config_selection.&lt;name&gt;.json or config_selection.&lt;name&gt;.json.gz</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+        <span class="n">selections</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^config_selection\.(.+?)\.json(\.gz)?$&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="n">filename</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="n">match</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">selections</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">selections</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="EnumData.calctype_dir">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.calctype_dir.html#casm.project.enum.EnumData.calctype_dir">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calctype_dir</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
+        <span class="n">calctype_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the directory for a specific calculation type in the enumeration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calctype_id: str</span>
+<span class="sd">            The calculation type identifier.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pathlib.Path</span>
+<span class="sd">            The path to the calculation type directory in the enumeration, e.g.</span>
+<span class="sd">            `&lt;project&gt;/enumerations/enum.&lt;id&gt;/training_data/calctype.&lt;calctype_id&gt;/`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">enum_calctype_dir</span><span class="p">(</span><span class="n">enum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">calctype</span><span class="o">=</span><span class="n">calctype_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EnumData.compress_training_data">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.compress_training_data.html#casm.project.enum.EnumData.compress_training_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compress_training_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">calctype_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">remove_dir</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;.tgz&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;occ_by_cluster&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compress training data into a tar gzipped archive file, if it exists</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calctype_id: Optional[str] = None</span>
+<span class="sd">            If provided, the training data directory for a particular calctype is</span>
+<span class="sd">            compressed into tar gzipped archive file named</span>
+<span class="sd">            `&lt;project&gt;/enumerations/enum.&lt;id&gt;/training_data/calctype.&lt;calctype_id&gt;.tgz`.</span>
+<span class="sd">            If not provided, all training data is compressed into a file</span>
+<span class="sd">            named `&lt;project&gt;/enumerations/enum.&lt;id&gt;/training_data.tgz`.</span>
+<span class="sd">        remove_dir: bool = True</span>
+<span class="sd">            If True, removes the original training data directory after compression.</span>
+<span class="sd">            If False, keeps the original directory.</span>
+<span class="sd">        extension: str = &quot;.tgz&quot;</span>
+<span class="sd">            The file extension for the compressed archive file. Default is &quot;.tgz&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">compress</span>
+
+        <span class="k">if</span> <span class="n">calctype_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="s2">&quot;training_data&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calctype_dir</span><span class="p">(</span><span class="n">calctype_id</span><span class="o">=</span><span class="n">calctype_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="n">compress</span><span class="p">(</span>
+            <span class="nb">dir</span><span class="o">=</span><span class="nb">dir</span><span class="p">,</span>
+            <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">remove_dir</span><span class="o">=</span><span class="n">remove_dir</span><span class="p">,</span>
+            <span class="n">extension</span><span class="o">=</span><span class="n">extension</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EnumData.uncompress_training_data">
+<a class="viewcode-back" href="../../../../reference/casm/_autosummary/casm.project.enum.EnumData.uncompress_training_data.html#casm.project.enum.EnumData.uncompress_training_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">uncompress_training_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">calctype_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">remove_tgz_file</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Uncompress training data from a tar gzipped archive file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        calctype_id: Optional[str] = None</span>
+<span class="sd">            If provided, the training data directory for a particular calctype is</span>
+<span class="sd">            uncompressed from a file named</span>
+<span class="sd">            `&lt;project&gt;/enumerations/enum.&lt;id&gt;/training_data/calctype.&lt;calctype_id&gt;.tgz`.</span>
+<span class="sd">            If not provided, all training data is uncompressed from a file</span>
+<span class="sd">            named `&lt;project&gt;/enumerations/enum.&lt;id&gt;/training_data.tgz`.</span>
+<span class="sd">        remove_tgz_file: bool = True</span>
+<span class="sd">            If True, removes the original tar gzipped archive file after uncompression.</span>
+<span class="sd">            If False, keeps the original file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">casm.tools.shared.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">uncompress</span>
+
+        <span class="k">if</span> <span class="n">calctype_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tgz_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_dir</span> <span class="o">/</span> <span class="s2">&quot;training_data.tgz&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tgz_file</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calctype_dir</span><span class="p">(</span><span class="n">calctype_id</span><span class="o">=</span><span class="n">calctype_id</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;.tgz&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">tgz_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="n">uncompress</span><span class="p">(</span>
+            <span class="n">tgz_file</span><span class="o">=</span><span class="n">tgz_file</span><span class="p">,</span>
+            <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">remove_tgz_file</span><span class="o">=</span><span class="n">remove_tgz_file</span><span class="p">,</span>
+        <span class="p">)</span></div>
 </div>
 
 
     <span class="c1"># TODO:</span>
+    <span class="c1"># def occ_by_supercell_list(</span>
+    <span class="c1">#         self,</span>
+    <span class="c1"># ):</span>
+    <span class="c1">#     print(&quot;occ_by_supercell_list&quot;)</span>
+    <span class="c1">#     return None</span>
+    <span class="c1">#</span>
+    <span class="c1"># def occ_by_cluster(</span>
+    <span class="c1">#         self,</span>
+    <span class="c1"># ):</span>
+    <span class="c1">#     print(&quot;occ_by_cluster&quot;)</span>
+    <span class="c1">#     return None</span>
+    <span class="c1">#</span>
     <span class="c1"># def strain_by_grid_coordinates(</span>
     <span class="c1">#     self,</span>
     <span class="c1"># ):</span>
@@ -1043,7 +1255,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
 </div>
@@ -1064,8 +1276,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1085,7 +1297,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>
@@ -1098,7 +1310,8 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
