@@ -189,7 +189,7 @@ Install:
     pip install libcasm-configuration
 
 
-Docs: `[2.3.1] <../../libcasm/configuration/2.0/>`_
+Docs: `[3.0a1] <../../libcasm/clexulator/3/>`_ `[2.3.1] <../../libcasm/configuration/2.0/>`_
 
 Links: |GitHub_configuration|_ |PyPI_configuration|_
 
