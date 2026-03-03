@@ -4,7 +4,7 @@ Hosts CASM Python documentation
 Includes:
 - libcasm overview: [[latest]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/overview/latest/)
 - libcasm-global: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/global/2.0/)
-- libcasm-xtal: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/)
+- libcasm-xtal: [[3]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/3/) [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/xtal/2.0/)
 - libcasm-composition: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/composition/2.0/)
 - libcasm-mapping: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/mapping/2.0/)
 - libcasm-clexulator: [[2]](https://prisms-center.github.io/CASMcode_pydocs/libcasm/clexulator/2.0/)

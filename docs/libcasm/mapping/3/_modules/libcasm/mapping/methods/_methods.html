@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>libcasm.mapping.methods._methods &#8212; libcasm-mapping 3.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=22ff1245"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/libcasm/mapping/methods/_methods';</script>
+    <link rel="icon" href="../../../../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="3.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../../../../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">libcasm-mapping</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/libcasm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_mapping/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-mapping/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/libcasm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_mapping/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-mapping/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">libcasm.mapping.methods._methods</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for libcasm.mapping.methods._methods</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.mapping.info</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mapinfo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+
+
+<div class="viewcode-block" id="map_lattices_without_reorientation">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.mapping.methods.map_lattices_without_reorientation.html#libcasm.mapping.methods.map_lattices_without_reorientation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_lattices_without_reorientation</span><span class="p">(</span>
+    <span class="n">lattice1</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">lattice2</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">,</span>
+    <span class="n">transformation_matrix_to_super</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">LatticeMapping</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map lattices without reorienting the child.</span>
+
+<span class="sd">    This function may be used to find the lattice mapping from an ideal lattice or</span>
+<span class="sd">    superlattice to a deformed lattice. The lattice mapping without reorientation has</span>
+<span class="sd">    the form</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        F L_1 T = L_2,</span>
+
+<span class="sd">    where:</span>
+
+<span class="sd">    - :math:`L_1` is a shape=(3,3) matrix with columns containing the</span>
+<span class="sd">      reference &quot;parent&quot; lattice vectors</span>
+<span class="sd">    - :math:`L_2` is a shape=(3,3) matrix with columns containing the</span>
+<span class="sd">      &quot;child&quot; lattice vectors</span>
+<span class="sd">    - :math:`F` is the parent-to-child deformation gradient tensor,</span>
+<span class="sd">      a shape=(3,3) matrix.</span>
+<span class="sd">    - :math:`T` is an integer transformation matrix that generates a</span>
+<span class="sd">      superlattice of :math:`L_1`.</span>
+
+<span class="sd">    This is equivalent to a lattice mapping with reorientation matrix, :math:`N`, equal</span>
+<span class="sd">    to the identity matrix, :math:`I` (see</span>
+<span class="sd">    :class:`~libcasm.mapping.info.LatticeMapping`).</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lattice1: libcasm.xtal.Lattice</span>
+<span class="sd">        The parent lattice, :math:`L_1`.</span>
+<span class="sd">    lattice2: libcasm.xtal.Lattice</span>
+<span class="sd">        The child lattice, :math:`L_2`.</span>
+<span class="sd">    transformation_matrix_to_super: Optional[np.ndarray] = None</span>
+<span class="sd">        A shape=(3,3) integer transformation matrix, :math:`T` that generates a</span>
+<span class="sd">        superlattice of `lattice1`. If None, :math:`T` is set to the identity matrix.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lattice_mapping: libcasm.mapping.info.LatticeMapping</span>
+<span class="sd">        The lattice mapping from the parent to the child, with :math:`N = I`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">T</span> <span class="o">=</span> <span class="n">transformation_matrix_to_super</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1"># calculate deformation gradient</span>
+    <span class="n">L1</span> <span class="o">=</span> <span class="n">lattice1</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span>
+    <span class="n">L2</span> <span class="o">=</span> <span class="n">lattice2</span><span class="o">.</span><span class="n">column_vector_matrix</span><span class="p">()</span>
+
+    <span class="c1"># F @ (L1 @ T) = L_2</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">L2</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">L1</span> <span class="o">@</span> <span class="n">T</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">LatticeMapping</span><span class="p">(</span>
+        <span class="n">deformation_gradient</span><span class="o">=</span><span class="n">F</span><span class="p">,</span>
+        <span class="n">transformation_matrix_to_super</span><span class="o">=</span><span class="n">T</span><span class="p">,</span>
+        <span class="n">reorientation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="direct_structure_mapping">
+<a class="viewcode-back" href="../../../../reference/libcasm/_autosummary/libcasm.mapping.methods.direct_structure_mapping.html#libcasm.mapping.methods.direct_structure_mapping">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">direct_structure_mapping</span><span class="p">(</span>
+    <span class="n">structure1</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">structure2</span><span class="p">:</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">,</span>
+    <span class="n">remove_mean_displacement</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map lattices and atoms without reorienting the lattice vectors or permuting atom</span>
+<span class="sd">    indices.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    structure1 : libcasm.xtal.Structure</span>
+<span class="sd">        The reference structure (parent).</span>
+<span class="sd">    structure2 : libcasm.xtal.Structure</span>
+<span class="sd">        The target structure (child).</span>
+<span class="sd">    remove_mean_displacement: bool = True</span>
+<span class="sd">       Displacements are first calculated under periodic boundary conditions. If True,</span>
+<span class="sd">       the mean displacement is removed and a corresponding translation added to the</span>
+<span class="sd">       atom mapping. If False, displacements are included as calculated and a</span>
+<span class="sd">       zero-valued translation is used.</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lmap: libcasm.mapping.info.LatticeMapping</span>
+<span class="sd">        The lattice mapping from parent to child.</span>
+<span class="sd">    amap: libcasm.mapping.info.AtomMapping</span>
+<span class="sd">        The atom mapping from parent to child.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Lattice mapping:</span>
+    <span class="n">lmap</span> <span class="o">=</span> <span class="n">map_lattices_without_reorientation</span><span class="p">(</span>
+        <span class="n">lattice1</span><span class="o">=</span><span class="n">structure1</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+        <span class="n">lattice2</span><span class="o">=</span><span class="n">structure2</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">lmap</span><span class="o">.</span><span class="n">deformation_gradient</span><span class="p">()</span>
+
+    <span class="c1"># The mapped structure is constructed as:</span>
+    <span class="c1"># F @ (r1 + d) = r2 + 0</span>
+    <span class="c1"># r1 + d = F_inv @ r2</span>
+    <span class="c1"># d = F_inv @ r2 - r1</span>
+    <span class="c1">#</span>
+    <span class="c1"># If removing mean displacement:</span>
+    <span class="c1"># d&#39; = F_inv @ r2 - r1 - d_mean</span>
+    <span class="c1"># =&gt;</span>
+    <span class="c1"># F @ (r1 + d&#39;) = r2 + translation</span>
+    <span class="c1"># F @ r1 + r2 - F @ r1 - F @ d_mean = r2 + translation</span>
+    <span class="c1"># translation = -F @ d_mean</span>
+    <span class="c1">#</span>
+
+    <span class="c1"># Atom mapping:</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">structure1</span><span class="o">.</span><span class="n">atom_coordinate_cart</span><span class="p">()</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">structure2</span><span class="o">.</span><span class="n">atom_coordinate_cart</span><span class="p">()</span>
+    <span class="n">F_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+    <span class="n">r2_ref</span> <span class="o">=</span> <span class="n">F_inv</span> <span class="o">@</span> <span class="n">r2</span>
+    <span class="n">d_direct</span> <span class="o">=</span> <span class="n">F_inv</span> <span class="o">@</span> <span class="n">r2</span> <span class="o">-</span> <span class="n">r1</span>
+    <span class="n">d_pbc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">d_direct</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">d_pbc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">min_periodic_displacement</span><span class="p">(</span>
+            <span class="n">lattice</span><span class="o">=</span><span class="n">structure1</span><span class="o">.</span><span class="n">lattice</span><span class="p">(),</span>
+            <span class="n">r1</span><span class="o">=</span><span class="n">r1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+            <span class="n">r2</span><span class="o">=</span><span class="n">r2_ref</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">remove_mean_displacement</span><span class="p">:</span>
+        <span class="n">mean_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d_pbc</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># shape (3,)</span>
+        <span class="n">d_pbc</span> <span class="o">-=</span> <span class="n">mean_d</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>  <span class="c1"># shape (3,1) for broadcasting</span>
+        <span class="n">translation</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span> <span class="o">@</span> <span class="n">mean_d</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">translation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">amap</span> <span class="o">=</span> <span class="n">mapinfo</span><span class="o">.</span><span class="n">AtomMapping</span><span class="p">(</span>
+        <span class="n">displacement</span><span class="o">=</span><span class="n">d_pbc</span><span class="p">,</span>
+        <span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])],</span>
+        <span class="n">translation</span><span class="o">=</span><span class="n">translation</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">lmap</span><span class="p">,</span> <span class="n">amap</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
