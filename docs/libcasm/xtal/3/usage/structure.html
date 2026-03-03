@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Structure construction and symmetry analysis &#8212; libcasm-xtal 3.0a1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=1d1c7082" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=22ff1245"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/structure';</script>
+    <link rel="icon" href="../_static/favicon-16x16.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Input and output" href="input_output.html" />
+    <link rel="prev" title="Superlattice enumeration" href="superlattice.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="3.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/small_logo.svg" class="logo__image only-light" alt=""/>
+    <img src="../_static/small_logo_dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">libcasm-xtal</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/prim/index.html">
+    Prim Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_crystallography/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-xtal/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/prim/index.html">
+    Prim Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/libcasm/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bibliography.html">
+    Bibliography
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/prisms-center/CASMcode_crystallography/" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/libcasm-xtal/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lattice.html">Lattice construction and symmetry analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prim.html">Primitive crystal structure construction and symmetry analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="superlattice.html">Superlattice enumeration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Structure construction and symmetry analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Structure construction and symmetry analysis</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="structure-construction-and-symmetry-analysis">
+<h1>Structure construction and symmetry analysis<a class="headerlink" href="#structure-construction-and-symmetry-analysis" title="Link to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="libcasm.xtal.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> class is used to represent a crystal of molecular and/or atomic occupants, and any additional properties.</p>
+<p>Both enumerated configurations and calculation results may be represented using this format.</p>
+<p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="libcasm.xtal.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> may specify atom and / or molecule coordinates and properties:</p>
+<ul class="simple">
+<li><p>lattice vectors</p></li>
+<li><p>atom coordinates</p></li>
+<li><p>atom type names</p></li>
+<li><p>continuous atom properties</p></li>
+<li><p>molecule coordinates</p></li>
+<li><p>molecule type names</p></li>
+<li><p>continuous molecule properties</p></li>
+<li><p>continuous global properties</p></li>
+</ul>
+<p>Atom representation is most widely supported in CASM methods. In some limited cases the molecule representation is used.</p>
+<section id="structure-construction">
+<h2>Structure construction<a class="headerlink" href="#structure-construction" title="Link to this heading">#</a></h2>
+<p>As an example, a Si-Ge ordering in the diamond cubic structure can be constructed as follows:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+
+<span class="c1"># Lattice vectors</span>
+<span class="n">lattice_column_vector_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span> <span class="mf">5.600000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">5.600000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">5.600000000000</span> <span class="p">]</span>
+<span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>  <span class="c1"># &lt;--- note transpose</span>
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">lattice_column_vector_matrix</span><span class="p">)</span>
+
+<span class="c1"># Atom coordinates, as columns of a matrix, in Cartesian coordinates</span>
+<span class="n">atom_coordinate_cart</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">2.800000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">2.800000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">0.000000000000</span><span class="p">,</span> <span class="mf">2.800000000000</span><span class="p">,</span> <span class="mf">2.800000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">2.800000000000</span><span class="p">,</span> <span class="mf">2.800000000000</span><span class="p">,</span> <span class="mf">0.000000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">1.400000000000</span><span class="p">,</span> <span class="mf">1.400000000000</span><span class="p">,</span> <span class="mf">1.400000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">4.200000000000</span><span class="p">,</span> <span class="mf">1.400000000000</span><span class="p">,</span> <span class="mf">4.200000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">1.400000000000</span><span class="p">,</span> <span class="mf">4.200000000000</span><span class="p">,</span> <span class="mf">4.200000000000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">4.200000000000</span><span class="p">,</span> <span class="mf">4.200000000000</span><span class="p">,</span> <span class="mf">1.400000000000</span> <span class="p">]</span>
+<span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="c1"># Atom coordinates, as columns of a matrix,</span>
+<span class="c1"># in fractional coordinates with respect to the lattice vectors</span>
+<span class="n">atom_coordinate_frac</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">cartesian_to_fractional</span><span class="p">(</span>
+  <span class="n">lattice</span><span class="p">,</span>
+  <span class="n">atom_coordinate_cart</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Atom types</span>
+<span class="n">atom_type</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span> <span class="p">]</span>
+
+<span class="c1"># Construct the structure</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+    <span class="n">atom_coordinate_frac</span><span class="o">=</span><span class="n">atom_coordinate_frac</span><span class="p">,</span>
+    <span class="n">atom_type</span><span class="o">=</span><span class="n">atom_type</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="structure-properties">
+<h2>Structure properties<a class="headerlink" href="#structure-properties" title="Link to this heading">#</a></h2>
+<p>Local or global properties of the structure obtained from calculations can be added to a structure:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal</span>
+
+<span class="c1"># Lattice vectors</span>
+<span class="n">lattice_column_vector_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mf">0.000801520000</span><span class="p">,</span> <span class="mf">5.528984430000</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000801520000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mf">0.000801520000</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000801520000</span><span class="p">,</span> <span class="mf">5.528984430000</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">5.528984430000</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000801520000</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000801520000</span> <span class="p">]</span>
+<span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>  <span class="c1"># &lt;--- note transpose</span>
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">lattice_column_vector_matrix</span><span class="p">)</span>
+
+<span class="c1"># Atom coordinates, as columns of a matrix, in Cartesian coordinates</span>
+<span class="n">atom_coordinate_cart</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span> <span class="mf">5.509869982471</span><span class="p">,</span> <span class="mf">5.509869982471</span><span class="p">,</span> <span class="mf">5.509869982471</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">2.779560277905</span><span class="p">,</span> <span class="mf">2.779560277905</span><span class="p">,</span> <span class="mf">5.511669529816</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">5.511669529816</span><span class="p">,</span> <span class="mf">2.779560277905</span><span class="p">,</span> <span class="mf">2.779560277905</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">2.779560277905</span><span class="p">,</span> <span class="mf">5.511669529816</span><span class="p">,</span> <span class="mf">2.779560277905</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">1.399356755029</span><span class="p">,</span> <span class="mf">1.399356755029</span><span class="p">,</span> <span class="mf">1.399356755029</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">4.129666459595</span><span class="p">,</span> <span class="mf">4.129666459595</span><span class="p">,</span> <span class="mf">1.397557207684</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">1.397557207684</span><span class="p">,</span> <span class="mf">4.129666459595</span><span class="p">,</span> <span class="mf">4.129666459595</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">4.129666459595</span><span class="p">,</span> <span class="mf">1.397557207684</span><span class="p">,</span> <span class="mf">4.129666459595</span> <span class="p">]</span>
+<span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="c1"># Atom coordinates, as columns of a matrix,</span>
+<span class="c1"># in fractional coordinates with respect to the lattice vectors</span>
+<span class="n">atom_coordinate_frac</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">cartesian_to_fractional</span><span class="p">(</span>
+  <span class="n">lattice</span><span class="p">,</span>
+  <span class="n">atom_coordinate_cart</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Atom types</span>
+<span class="n">atom_type</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span> <span class="p">]</span>
+
+<span class="c1"># Global properties</span>
+<span class="n">global_properties</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;energy&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">41.486033340000</span><span class="p">},</span>
+    <span class="s2">&quot;Ustrain&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.987318648214</span><span class="p">,</span> <span class="mf">0.987318648214</span><span class="p">,</span> <span class="mf">0.987318648214</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000202414367</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000202414367</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000202414367</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Construct the structure with properties</span>
+<span class="n">structure_with_properties</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+    <span class="n">atom_coordinate_frac</span><span class="o">=</span><span class="n">atom_coordinate_frac</span><span class="p">,</span>
+    <span class="n">atom_type</span><span class="o">=</span><span class="n">atom_type</span><span class="p">,</span>
+    <span class="n">atom_properties</span><span class="o">=</span><span class="n">atom_properties</span><span class="p">,</span>
+    <span class="n">global_properties</span><span class="o">=</span><span class="n">global_properties</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The positions of atoms or molecules in the crystal state is defined by the lattice and atom coordinates or molecule coordinates. If included, strain and displacement properties, which are defined in reference to an ideal state, should be interpreted as the strain and displacement that takes the crystal from the ideal state to the state specified by the structure lattice and atom or molecule coordinates. The convention used by CASM is that displacements are applied first, and then the displaced coordinates and lattice vectors are strained.</p>
+<p>See the <a class="reference external" href="https://prisms-center.github.io/CASMcode_docs/formats/dof_and_properties/">CASM Degrees of Freedom (DoF) and Properties documentation</a> for the full list of supported properties and their definitions.</p>
+</section>
+<section id="common-structures">
+<h2>Common structures<a class="headerlink" href="#common-structures" title="Link to this heading">#</a></h2>
+<p>Some common structures can be constructed using the convenience methods in <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.structures.html#module-libcasm.xtal.structures" title="libcasm.xtal.structures"><code class="xref py py-mod docutils literal notranslate"><span class="pre">libcasm.xtal.structures</span></code></a>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal.structures</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xtal_structures</span>
+
+<span class="c1"># Zr HCP structure, specified by conventional cubic lattice parameter `a`</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Zr_hcp</span> <span class="o">=</span> <span class="n">xtal_structures</span><span class="o">.</span><span class="n">HCP</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">3.23398686</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">5.16867834</span><span class="p">,</span> <span class="n">atom_type</span><span class="o">=</span><span class="s2">&quot;Zr&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">Zr_hcp</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+<span class="p">{</span>
+  <span class="s2">&quot;atom_coords&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.8671431841767125</span><span class="p">,</span> <span class="mf">1.292169585</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.6169934299999997</span><span class="p">,</span> <span class="mf">0.9335715920883563</span><span class="p">,</span> <span class="mf">3.8765087549999997</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;atom_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Zr&quot;</span><span class="p">,</span> <span class="s2">&quot;Zr&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;coordinate_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;Cartesian&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;lattice_vectors&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mf">3.23398686</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">1.61699343</span><span class="p">,</span> <span class="mf">2.800714776265069</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.16867834</span><span class="p">]</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="structure-factor-group-generation">
+<h2>Structure factor group generation<a class="headerlink" href="#structure-factor-group-generation" title="Link to this heading">#</a></h2>
+<p>The <cite>factor group</cite> of a structure is the set of transformations, with translation lying within the primitive unit cell, that leave the lattice vectors, basis site coordinates, and atom types invariant. It is found by creating a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Prim.html#libcasm.xtal.Prim" title="libcasm.xtal.Prim"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prim</span></code></a> with only the current atom types as allowed DoF and constructing the prim’s factor group. Currently this method only considers atom coordinates and types. Molecular coordinates and types are not considered.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">factor_group</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_factor_group</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">...</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">factor_group</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">syminfo</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymInfo</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">lattice</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">syminfo</span><span class="o">.</span><span class="n">brief_cart</span><span class="p">())</span>
+<span class="o">...</span>     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1: 1
+2: 3⁺ 0.5773503*x, 0.5773503*x, 0.5773503*x
+3: 3⁻ 0.5773503*x, 0.5773503*x, 0.5773503*x
+4: 2 0.7, 0.7+0.7071068*y, 0.7-0.7071068*y
+5: 2 0.7+0.7071068*x, 0.7-0.7071068*x, 0.7
+6: 2 0.7+0.7071068*x, 0.7, 0.7-0.7071068*x
+7: m x, 0.7071068*y, 0.7071068*y
+8: m 0.7071068*x, 0.7071068*x, z
+9: m 0.7071068*x, y, 0.7071068*x
+10: -3⁺ 0.7+0.5773503*x, 0.7+0.5773503*x, 0.7+0.5773503*x; 0.7000000 0.7000000 0.7000000
+11: -3⁻ 0.7+0.5773503*x, 0.7+0.5773503*x, 0.7+0.5773503*x; 0.7000000 0.7000000 0.7000000
+12: -1 0.7000000 0.7000000 0.7000000
+</pre></div>
+</div>
+</section>
+<section id="crystal-point-group">
+<h2>Crystal point group<a class="headerlink" href="#crystal-point-group" title="Link to this heading">#</a></h2>
+<p>The crystal point group of a structure can be generated using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_crystal_point_group.html#libcasm.xtal.make_structure_crystal_point_group" title="libcasm.xtal.make_structure_crystal_point_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_crystal_point_group()</span></code></a> method:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">crystal_point_group</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_crystal_point_group</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="structure-manipulation">
+<h2>Structure manipulation<a class="headerlink" href="#structure-manipulation" title="Link to this heading">#</a></h2>
+<section id="move-coordinates-within-the-unit-cell">
+<h3>Move coordinates within the unit cell<a class="headerlink" href="#move-coordinates-within-the-unit-cell" title="Link to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_within.html#libcasm.xtal.make_structure_within" title="libcasm.xtal.make_structure_within"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_within()</span></code></a> method returns an equivalent <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="libcasm.xtal.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> with all atom and mol site coordinates within the unit cell.</p>
+</section>
+<section id="make-a-superstructure">
+<h3>Make a superstructure<a class="headerlink" href="#make-a-superstructure" title="Link to this heading">#</a></h3>
+<p>The <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_superstructure.html#libcasm.xtal.make_superstructure" title="libcasm.xtal.make_superstructure"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_superstructure()</span></code></a> method can be used to create superstructures.</p>
+</section>
+<section id="apply-a-transformation-to-a-structure">
+<h3>Apply a transformation to a structure<a class="headerlink" href="#apply-a-transformation-to-a-structure" title="Link to this heading">#</a></h3>
+<p>Rotations and other transformations can be applied to a <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code> using the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymOp.html#libcasm.xtal.SymOp" title="libcasm.xtal.SymOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymOp</span></code></a> class. For example, to rotate a structure by 90 degrees counterclockwise about the z-axis, a <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.SymOp.html#libcasm.xtal.SymOp" title="libcasm.xtal.SymOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymOp</span></code></a> can be constructed with the rotation matrix and applied to the initial structure with the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">rotation_op</span> <span class="o">=</span> <span class="n">xtal</span><span class="o">.</span><span class="n">SymOp</span><span class="p">(</span><span class="n">rotation_matrix</span><span class="p">)</span>
+<span class="n">rotated_structure</span> <span class="o">=</span> <span class="n">rotation_op</span> <span class="o">*</span> <span class="n">structure</span>
+</pre></div>
+</div>
+</section>
+<section id="filter-or-sort-atoms-in-a-structure">
+<h3>Filter or sort atoms in a structure<a class="headerlink" href="#filter-or-sort-atoms-in-a-structure" title="Link to this heading">#</a></h3>
+<p>There are several methods provided in libcasm-xtal to help with filtering and sorting atoms in a <code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.filter_structure_by_atom_info.html#libcasm.xtal.filter_structure_by_atom_info" title="libcasm.xtal.filter_structure_by_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">filter_structure_by_atom_info()</span></code></a>: Filter atoms by atom type, coordinate, or properties.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_coordinate_cart.html#libcasm.xtal.sort_structure_by_atom_coordinate_cart" title="libcasm.xtal.sort_structure_by_atom_coordinate_cart"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_coordinate_cart()</span></code></a>: Sort atoms by Cartesian coordinates.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_coordinate_frac.html#libcasm.xtal.sort_structure_by_atom_coordinate_frac" title="libcasm.xtal.sort_structure_by_atom_coordinate_frac"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_coordinate_frac()</span></code></a>: Sort atoms by fractional coordinates.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_type.html#libcasm.xtal.sort_structure_by_atom_type" title="libcasm.xtal.sort_structure_by_atom_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_type()</span></code></a>: Sort atoms by type name.</p></li>
+<li><p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.sort_structure_by_atom_info.html#libcasm.xtal.sort_structure_by_atom_info" title="libcasm.xtal.sort_structure_by_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sort_structure_by_atom_info()</span></code></a>: Sort atoms by custom function of atom type, coordinate, or properties.</p></li>
+</ul>
+</section>
+<section id="substitute-species">
+<h3>Substitute species<a class="headerlink" href="#substitute-species" title="Link to this heading">#</a></h3>
+<p>The method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.substitute_structure_species.html#libcasm.xtal.substitute_structure_species" title="libcasm.xtal.substitute_structure_species"><code class="xref py py-func docutils literal notranslate"><span class="pre">substitute_structure_species()</span></code></a> can be used to quickly create a copy of a structure with atomic and molecular species renamed according to a dict containing the substitutions. For example, using <code class="docutils literal notranslate"><span class="pre">substitutions</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">&quot;A&quot;:</span> <span class="pre">&quot;Mg&quot;,</span> <span class="pre">&quot;B&quot;:</span> <span class="pre">&quot;Cd&quot;</span> <span class="pre">}</span></code> a generic A-B structure can be converted to a MgCd structure.</p>
+</section>
+<section id="combine-structures">
+<h3>Combine structures<a class="headerlink" href="#combine-structures" title="Link to this heading">#</a></h3>
+<p>The method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.combine_structures.html#libcasm.xtal.combine_structures" title="libcasm.xtal.combine_structures"><code class="xref py py-func docutils literal notranslate"><span class="pre">combine_structures()</span></code></a> can be used to make superstructures of two or more atomic substructures. The resulting structure contains the species of all input structures with Cartesian coordinates fixed to the same values as in the input structures. All atom or molecule properties remain the same as in the input structures.</p>
+</section>
+<section id="custom-manipulations">
+<h3>Custom manipulations<a class="headerlink" href="#custom-manipulations" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.Structure.html#libcasm.xtal.Structure" title="libcasm.xtal.Structure"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structure</span></code></a> objects are immutable, so manipulations are performed by creating a copy.
+For atomic structures</p>
+<p>For atomic structures, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_atom_info.html#libcasm.xtal.make_structure_atom_info" title="libcasm.xtal.make_structure_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_atom_info()</span></code></a> and <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_from_atom_info.html#libcasm.xtal.make_structure_from_atom_info" title="libcasm.xtal.make_structure_from_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_from_atom_info()</span></code></a> methods can be used to:</p>
+<ul class="simple">
+<li><p>iterate over the atoms in one or more structures,</p></li>
+<li><p>perform some operation, and</p></li>
+<li><p>create a new structure.</p></li>
+</ul>
+<p>The method <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_atom_info.html#libcasm.xtal.make_structure_atom_info" title="libcasm.xtal.make_structure_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_atom_info()</span></code></a> takes a structure and creates a list of <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.StructureAtomInfo.html#libcasm.xtal.StructureAtomInfo" title="libcasm.xtal.StructureAtomInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureAtomInfo</span></code></a> namedtuple which have atom type, coordinates, and properties. These can be iterated over, filterd, sorted, combined or otherwise manipulated and then passed to <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.make_structure_from_atom_info.html#libcasm.xtal.make_structure_from_atom_info" title="libcasm.xtal.make_structure_from_atom_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_structure_from_atom_info()</span></code></a> to create a new structure.</p>
+<p>For example, the <a class="reference internal" href="../reference/libcasm/_autosummary/libcasm.xtal.combine_structures.html#libcasm.xtal.combine_structures" title="libcasm.xtal.combine_structures"><code class="xref py py-func docutils literal notranslate"><span class="pre">combine_structures()</span></code></a> method can be implemented as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libcasm.xtal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">combine_structures</span><span class="p">(</span>
+    <span class="n">structures</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">],</span>
+    <span class="n">lattice</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Lattice</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">global_properties</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">Structure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combine `structures` into a new `combined_structure`</span>
+<span class="sd">    with given `lattice` and `global_properties`.</span>
+<span class="sd">    If `lattice` is None, use the lattice of the first structure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">structures</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lattice</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lattice</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="p">()</span>
+        <span class="n">atoms</span> <span class="o">+=</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_atom_info</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">libcasm</span><span class="o">.</span><span class="n">xtal</span><span class="o">.</span><span class="n">make_structure_from_atom_info</span><span class="p">(</span>
+        <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span>
+        <span class="n">global_properties</span><span class="o">=</span><span class="n">global_properties</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="superlattice.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Superlattice enumeration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="input_output.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Input and output</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-construction">Structure construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-properties">Structure properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-structures">Common structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-factor-group-generation">Structure factor group generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crystal-point-group">Crystal point group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-manipulation">Structure manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#move-coordinates-within-the-unit-cell">Move coordinates within the unit cell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-superstructure">Make a superstructure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-a-transformation-to-a-structure">Apply a transformation to a structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-or-sort-atoms-in-a-structure">Filter or sort atoms in a structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitute-species">Substitute species</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-structures">Combine structures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-manipulations">Custom manipulations</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, CASM Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
